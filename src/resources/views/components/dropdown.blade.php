@@ -6,7 +6,7 @@
     'caption' => 'Select One',
     'placeholder' => 'Select One',
 
-    // optional function to execute a dropdown item is selected
+    // optional function to execute when a dropdown item is selected
     // by default the value of a dropdown item is wriiten to an input field with the 
     // name dd_name. Where name is the name you provided for the dropdown
     // if you named your dropdown countries for example, whatever country is selected can 
@@ -147,4 +147,4 @@
 </div>
 
 <script>el_name = '{{ $name }}';</script>
-<script src="/assets/js/dropdown.js"></script>
+<script src="{{ asset('bladewind/js/dropdown.js') }}"></script>

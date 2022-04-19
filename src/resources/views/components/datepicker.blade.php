@@ -155,5 +155,4 @@
         thursday.substr(0,3), friday.substr(0,3), saturday.substr(0,3)
     ];
 </script>
-<script src="/assets/js/datepicker.js"></script>
-<!--script src="/assets/js/datepicker.bundle.js"></script-->
+<script src="{{ asset('bladewind/js/datepicker.js') }}"></script>

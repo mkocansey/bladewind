@@ -1,6 +1,6 @@
 @layer components {
     .bw-table>table.divided tr{
-        @apply  border-b border-gray-150
+        @apply  border-b border-gray-200/50
     }
     .bw-table>table.striped tr:nth-child(even){
         @apply bg-gray-50 hover:bg-yellow-50

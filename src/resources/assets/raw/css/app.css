@@ -1,0 +1,11 @@
+@import 'button.css';
+@import 'datepicker.css';
+@import 'dropdown.css';
+@import 'input.css';
+@import 'popup.min.css';
+@import 'side-nav.css';
+@import 'table.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

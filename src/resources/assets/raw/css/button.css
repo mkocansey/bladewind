@@ -1,51 +1,52 @@
 @layer components {
-    .bw-button {
+    .button {
         @apply 
-            pt-3 pb-2 
+            pt-3 
+            pb-2 
             px-7 
             focus:outline-none 
             text-xs 
             uppercase 
             tracking-widest
-            bg-gray-300
-            text-gray-800
-            hover:bg-gray-400 hover:text-white
-            active:bg-gray-500
+            bg-slate-300
+            text-slate-800
+            hover:bg-slate-400 hover:text-white
+            active:bg-slate-500
             rounded-full
     }
-    .bw-button.big {
+    .button.big {
         @apply 
             py-4
             px-10
     }
-    .bw-button.small {
+    .button.small {
         @apply 
             py-2
             px-4
             !text-xs
     }
-    .bw-button.tiny {
+    .button.tiny {
         @apply 
             py-[6px]
             px-4
             text-[10px]
     }
-    .bw-button.primary { 
+    .button.primary { 
         @apply 
             focus:ring 
             focus:ring-offset-2 
-            focus:ring-primary 
+            focus:ring-blue-500 
             focus:ring-opacity-40 
             active:translate-y-0.5 
             transform 
             transition 
-            bg-primary 
+            bg-blue-500 
             text-white 
             rounded-full 
-            hover:bg-primary-dark 
-            active:bg-primary-dark
+            hover:bg-blue-700 
+            active:bg-blue-700
     }
-    .bw-button.disabled {
+    .button.disabled {
         @apply
             disabled:opacity-50
             disabled:cursor-not-allowed
