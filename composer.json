@@ -1,0 +1,33 @@
+{
+    "name": "mkocansey/bladewind",
+    "description": "UI Components using TailwindCSS , Laravel Blade Templates and vanilla Javascript",
+    "keywords": ["laravel", "ui components", "tailwindcss", "blade components"],
+    "require": {
+        "php": "^7.3|^8.1"
+    },
+    "license": "MIT",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "kabutey@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\BladewindServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@php artisan vendor:publish --provider=\"Mkocansey\\Bladewind\\BladewindServiceProvider\" --tag=assets --force"
+        ]
+    }
+}
