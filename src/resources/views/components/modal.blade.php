@@ -1,32 +1,33 @@
 @props([
     // determines types of icon to display. Available options: info, success, error, warning
-    // only the blank type (type='') has no icon. useful if you want your modal to contain a form
+    // only the blank type (type='') has no icon. useful if you want your modal to contain a form 
+    // or other custom content
     'type' => '',
     // title text to display. example: Confirm your delete action
     'title' => '',
     // name of the modal. used to uniquely identify the modal in css and js
     'name' => 'default',
     // text to display on primary button. default is Okay
-    'okButtonLabel' => 'Okay',
+    'ok_button_label' => 'Okay',
     // text to display on secondary button. default is Cancel
-    'cancelButtonLabel' => 'Cancel',
+    'cancel_button_label' => 'Cancel',
     // action to perform when secondary button is clicked. default is close. 
     // provide a custom js function as string to execute that function. example "saveUser"
-    'okButtonAction' => 'close',
+    'ok_button_action' => 'close',
     // action to perform when primary button is clicked. default is close. 
     // provide a custom js function as a string to execute that function. example "confirmAction"
-    'cancelButtonAction' => 'close',
+    'cancel_button_action' => 'close',
     // close modal when either primary or close secondary buttons are clicked
     // the modal will be closed after your custom js function has been executed
-    'closeAfterAction' => 'true',
+    'close_after_action' => 'true',
     // determines if clicking on the backdrop can close the modal. default is true
     // when set to false, only the action buttons can close the modal.
     // in this case ensure you have set "close" as an action for one of your action buttons
-    'backdropCanClose' => 'true',
+    'backdrop_can_close' => 'true',
     // should the action buttons be displayed? default is true. false will hide the buttons
-    'showActionButtons' => 'true',
+    'show_action_buttons' => 'true',
     // should the action buttons be centered? default is false. right aligned
-    'centerActionButtons' => 'false',
+    'center_action_buttons' => 'false',
     // determines size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
     'size' => 'medium',
@@ -39,22 +40,22 @@
 ])
 @php
     $name = str_replace(' ', '-', $name);
-    $cancelCss = ($cancelButtonLabel == '') ? 'hidden' : '';
-    $okCss = ($okButtonLabel == '') ? 'hidden' : '';
+    $cancelCss = ($cancel_button_label == '') ? 'hidden' : '';
+    $okCss = ($ok_button_label == '') ? 'hidden' : '';
     $okAction = $cancelAction = "hideModal('{$name}')";
-    if($okButtonAction !== 'close') $okAction = $okButtonAction . (($closeAfterAction== 'true') ? ';'.$okAction : '');
-    if($cancelButtonAction !== 'close') $cancelAction = $cancelButtonAction . (($closeAfterAction== 'true') ? ';'.$cancelAction : '');
+    if($ok_button_action !== 'close') $okAction = $ok_button_action . (($close_after_action== 'true') ? ';'.$okAction : '');
+    if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action== 'true') ? ';'.$cancelAction : '');
 @endphp
 
 <span class="w-1/6 w-1/4 w-1/3 w-1/2" />
 <div 
-    class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex amodal ag-{{$name}}-modal hidden" 
-    aria-backdrop-can-close="{{$backdropCanClose}}">
-    <div class="bg-white {{ $sizes[$size] }} mx-auto my-auto rounded-lg drop-shadow-2xl ag-{{$name}}">
+    class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex amodal bw-{{$name}}-modal hidden" 
+    aria-backdrop-can-close="{{$backdrop_can_close}}">
+    <div class="bg-white {{ $sizes[$size] }} mx-auto my-auto rounded-lg drop-shadow-2xl bw-{{$name}}">
         <div class="flex">
             @if($type !== '')
                 <div class="modal-icon py-6 pl-6">
-                    <x-modal-icon type="{{ $type }}"></x-modal-icon>
+                    <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
                 </div>
             @endif
             <div class="modal-body p-6 flex-grow">
@@ -64,34 +65,34 @@
                 </div>
             </div>
         </div>
-        @if( $showActionButtons == 'true' )
-            <div class="modal-footer @if($centerActionButtons == 'true' || $size == 'small') text-center @else text-right @endif bg-gray-100 py-3 px-6 rounded-br-lg rounded-bl-lg">
-                <x-button 
+        @if( $show_action_buttons == 'true' )
+            <div class="modal-footer @if($center_action_buttons == 'true' || $size == 'small') text-center @else text-right @endif bg-gray-100 py-3 px-6 rounded-br-lg rounded-bl-lg">
+                <x-bladewind::button 
+                    type="secondary"  
                     size="small" 
-                    onClick="{!! $cancelAction !!}"
-                    css="cancel {{ $cancelCss }}">{{$cancelButtonLabel}}</x-button>
+                    onclick="{!! $cancelAction !!}"
+                    css="cancel {{ $cancelCss }}">{{$cancel_button_label}}</x-bladewind::button>
                     
-                <x-button 
-                    type="primary" 
+                <x-bladewind::button
                     size="small" 
-                    onClick="{!! $okAction !!}"
-                    css="okay ml-3 {{ $okCss }}">{{$okButtonLabel}}</x-button>
+                    onclick="{!! $okAction !!}"
+                    css="okay ml-3 {{ $okCss }}">{{$ok_button_label}}</x-bladewind::button>
             </div>
         @endif
     </div>    
 </div>
 
 <script>
-    dom_el('.ag-{{$name}}-modal').addEventListener('click', function (e){ 
+    dom_el('.bw-{{$name}}-modal').addEventListener('click', function (e){ 
         let backdrop_can_close = this.getAttribute('aria-backdrop-can-close');
-        if(backdrop_can_close == 'true') hide('.ag-{{$name}}-modal'); 
+        if(backdrop_can_close == 'true') hide('.bw-{{$name}}-modal'); 
     });
 
-    dom_el('.ag-{{$name}}').addEventListener('click', function (e){ 
+    dom_el('.bw-{{$name}}').addEventListener('click', function (e){ 
         e.stopImmediatePropagation(); 
     });
 
-    dom_els('.ag-{{$name}}-modal .modal-footer>button').forEach((el) => {
+    dom_els('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
         el.addEventListener('click', function (e){ e.stopImmediatePropagation(); });
     });
 

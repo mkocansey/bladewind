@@ -5,9 +5,9 @@
     'value' => '',
     'label' => '',
     'checked' => 'false',
-    'disabled' => false,
+    'disabled' => 'false',
 ])
-<x-checkbox 
+<x-bladewind::checkbox 
     name="{{$name}}" 
     label="{{$label}}" 
     value="{{$value}}"

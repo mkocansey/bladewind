@@ -18,7 +18,7 @@ class BladewindServiceProvider extends ServiceProvider
 
     $this->publishes([
         __DIR__.'/resources/views/components/' => resource_path('views/components/bladewind'),
-        __DIR__.'/resources/lang' => lang_path('bladewind'),
+        __DIR__.'/resources/lang' => lang_path(),
         __DIR__.'/resources/assets/compiled' => public_path('bladewind'),
     ], 'assets');
 

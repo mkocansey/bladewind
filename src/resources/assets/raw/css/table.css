@@ -1,11 +1,11 @@
 @layer components {
-    .bw-table>table.divided tr{
+    .bw-table.divided tr{
         @apply  border-b border-gray-200/50
     }
-    .bw-table>table.striped tr:nth-child(even){
+    .bw-table.striped tr:nth-child(even){
         @apply bg-gray-50 hover:bg-yellow-50
     }
-    .bw-table>thead>tr>th {
+    .bw-table th {
         @apply
         bg-white
         text-black/80
@@ -17,7 +17,7 @@
         px-5 py-4
         border-t border-b border-gray-200
     }
-    .bw-table>tr>td {
+    .bw-table>tbody>tr>td {
         @apply
         p-5
         align-top 

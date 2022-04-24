@@ -1,10 +1,10 @@
 @props([
-    // determines what type of datepicker to show. Available options: inline, popup, range
-    'type' => 'popup',
+    // determines what type of datepicker to show. Available options: single, range
+    'type' => 'single',
     // name of the datepicker. This name is used when posting the form with the datepicker
-    'name' => 'datepicker',
+    'name' => 'bw-datepicker',
     // default date to fill in to the datepicker. Defaults to today. Set to blank to display no default
-    'defaultDate' => '',
+    'default_date' => '',
     // text to display in the label that identifies the input field
     'label' => 'Date',
     // placeholder text to display if datepicker is empty
@@ -12,19 +12,22 @@
     // is the value of the date field required? used for form validation. default is false
     'required' => 'false',
     // used for range datepickers
-    'dateFrom' => '',
-    'dateTo' => '',
+    'date_from' => '',
+    'date_to' => '',
+    'has_label' => 'false',
+    'css' => '',
 ])
 @php
     $name = str_replace(' ', '_', $name);
     $name = str_replace('-', '_', $name);
-    $defaultDate = ($defaultDate != '') ? $defaultDate : '';
+    $default_date = ($default_date != '') ? $default_date : '';
+    $required_symbol = ($has_label == 'false' && $required == 'true') ? ' *' : '';
 @endphp
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
-@if($type == 'popup')
-    <div x-data="app('{{ $defaultDate }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
-    <div class="relative w-full">
+@if($type == 'single')
+    <div x-data="app('{{ $default_date }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
+    <div class="relative w-full {{$css}}">
         <div class="flex absolute inset-y-0 right-3 items-center pl-3 pointer-events-none">
             <svg class="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
@@ -35,7 +38,7 @@
             name="{{ $name }}" 
             x-ref="date" 
             :value="datepickerValue" 
-            value="{{ $defaultDate }}"   />
+            value="{{ $default_date }}"   />
         <input 
             x-on:click="showDatepicker = !showDatepicker" 
             x-model="datepickerValue" 
@@ -43,9 +46,11 @@
             type="text" 
             id="dtp-{{ $name }}"
             maxDate="today"
-            class="block w-full peer {{ $name}} @if($required == 'true') required @endif" 
-            placeholder="{{ $placeholder }}">
-        <label for="dtp-{{ $name }}" class="form-label">{{ $label }} @if($required == 'true')<span class="text-red-300">*</span>@endif</label>
+            class="bw-datepicker bw-input block w-full peer {{ $name}} @if($required == 'true') required @endif {{$css}}" 
+            placeholder="{{ $placeholder }}{{$required_symbol}}">
+        @if($has_label == 'true')
+            <label for="dtp-{{ $name }}" class="form-label">{{ $label }} @if($required == 'true')<span class="text-red-300">*</span>@endif</label>
+        @endif
 
         <div class="bg-white mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem" 
             x-show.transition="showDatepicker" @click.away="showDatepicker = false">
@@ -105,40 +110,40 @@
 @else
     <div class="grid grid-cols-2 gap-2">
         <div>
-            <x-datepicker 
-                name="from" type="popup" placeholder="{{ __('copy.FROM') }}" 
-                defaultDate="{{ $dateFrom??'' }}" required="{{ $required }}" 
-                label="{{ __('copy.FROM') }}"></x-datepicker>
+            <x-bladewind::datepicker 
+                name="{{ $name }}-1" type="single" placeholder="From" 
+                default_date="{{ $date_from??'' }}" required="{{ $required }}" 
+                label="From"></x-bladewind::datepicker>
         </div>
         <div>
-            <x-datepicker 
-                name="to" type="popup" placeholder="{{ __('copy.TO') }}" 
-                defaultDate="{{ $dateTo??'' }}" required="{{ $required }}" 
-                label="{{ __('copy.TO') }}"></x-datepicker>
+            <x-bladewind::datepicker 
+                name="{{ $name }}-2" type="single" placeholder="To" 
+                default_date="{{ $date_to??'' }}" required="{{ $required }}" 
+                label="To"></x-bladewind::datepicker>
         </div>
     </div>
 @endif
 <script>
-    const january = '{{ __('calendar.JAN') }}';
-    const february = '{{ __('calendar.FEB') }}';
-    const march = '{{ __('calendar.MAR') }}';
-    const april = '{{ __('calendar.APR') }}';
-    const may = '{{ __('calendar.MAY') }}';
-    const june = '{{ __('calendar.JUN') }}';
-    const july = '{{ __('calendar.JUL') }}';
-    const august = '{{ __('calendar.AUG') }}';
-    const september = '{{ __('calendar.SEP') }}';
-    const october = '{{ __('calendar.OCT') }}';
-    const november = '{{ __('calendar.NOV') }}';
-    const december = '{{ __('calendar.DEC') }}';
+    const january = '{{ __('datepicker.JAN') }}';
+    const february = '{{ __('datepicker.FEB') }}';
+    const march = '{{ __('datepicker.MAR') }}';
+    const april = '{{ __('datepicker.APR') }}';
+    const may = '{{ __('datepicker.MAY') }}';
+    const june = '{{ __('datepicker.JUN') }}';
+    const july = '{{ __('datepicker.JUL') }}';
+    const august = '{{ __('datepicker.AUG') }}';
+    const september = '{{ __('datepicker.SEP') }}';
+    const october = '{{ __('datepicker.OCT') }}';
+    const november = '{{ __('datepicker.NOV') }}';
+    const december = '{{ __('datepicker.DEC') }}';
 
-    const monday = '{{ __('calendar.MON') }}';
-    const tuesday = '{{ __('calendar.TUE') }}';
-    const wednesday = '{{ __('calendar.WED') }}';
-    const thursday = '{{ __('calendar.THU') }}';
-    const friday = '{{ __('calendar.FRI') }}';
-    const saturday = '{{ __('calendar.SAT') }}';
-    const sunday = '{{ __('calendar.SUN') }}';
+    const monday = '{{ __('datepicker.MON') }}';
+    const tuesday = '{{ __('datepicker.TUE') }}';
+    const wednesday = '{{ __('datepicker.WED') }}';
+    const thursday = '{{ __('datepicker.THU') }}';
+    const friday = '{{ __('datepicker.FRI') }}';
+    const saturday = '{{ __('datepicker.SAT') }}';
+    const sunday = '{{ __('datepicker.SUN') }}';
 
     const MONTH_NAMES = [ 
         january, february, march, april, may, june, july, august, 

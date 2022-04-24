@@ -135,9 +135,9 @@ changeCss = function(el, css, mode='add', elIsDomObject=false) {
     }
 }
 
-showModal = function(el) { unhide(`.ag-${el}-modal`); }
+showModal = function(el) { unhide(`.bw-${el}-modal`); }
 
-hideModal = function(el) { hide(`.ag-${el}-modal`); }
+hideModal = function(el) { hide(`.bw-${el}-modal`); }
 
 hide = function(el, elIsDomObject=false) { changeCss(el, 'hidden', 'add', elIsDomObject); }
 

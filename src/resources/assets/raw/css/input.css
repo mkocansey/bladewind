@@ -1,23 +1,16 @@
 @layer components {
-    input[type="text"], 
-    input[type="password"], 
-    input[type="email"], 
-    input[type="number"], 
-    input[type="tel"],
-    input[type="search"], 
-    textarea, 
+    .bw-textarea, 
+    .bw-input,
     select {
         @apply 
             border 
-            border-gray-400/30 
+            border-slate-300/50 
             py-3 px-4
             !outline-none
             !ring-0
             focus:outline-none 
             focus:border 
             focus:border-blue-300 
-            mb-2
-            rounded-md 
             peer-placeholder-shown:mt-2
     }
     input.no-label{
