@@ -1,12 +1,12 @@
 @props([
     // name of the input field for use in passing form submission data
-    // this is prefixed with fp- when used as a class name
-    'name' => '{{ $name }}',
+    // this is prefixed with bw- when used as a class name
+    'name' => 'bw-filepicker',
     // the default text to display in the file picker
     'placeholder' => 'Select a file',
     // by default all file audo, video, image and pdf file types can be selected
     // either restrict or allow more file types by modifying this value
-    'acceptedFileTypes' => 'audio/*,video/*,image/*, .pdf',
+    'accepted_file_types' => 'audio/*,video/*,image/*, .pdf',
     // should the user be forced to select a file. used in conjunction with validation scripts
     // default is false.
     'required' => 'false',
@@ -33,19 +33,19 @@
     <div class="w-0 h-0 overflow-hidden">
         <input 
             type="file" 
-            name="fp_{{ $name }}"
-            class="fp-{{ $name }} @if($required == 'true') required @endif" 
-            id="fp_{{ $name }}" 
-            accept="{{ $acceptedFileTypes }}" />
+            name="{{ $name }}"
+            class="bw-{{ $name }} @if($required == 'true') required @endif" 
+            id="bw_{{ $name }}" 
+            accept="{{ $accepted_file_types }}" />
             <textarea class="b64-{{ $name }}@if($required == 'true') required @endif" name="{{ $name }}"></textarea>
     </div>
 </div>
 
 <script>
     dom_el('.{{ $name }}').addEventListener('click', function (){
-        dom_el('.fp-{{ $name }}').click();
+        dom_el('.bw-{{ $name }}').click();
     });
-    dom_el('.fp-{{ $name }}').addEventListener('change', function (){
+    dom_el('.bw-{{ $name }}').addEventListener('change', function (){
         let selection = this.value;
         if ( selection != '' ) {
             const [file] = this.files
@@ -59,7 +59,7 @@
     });
     dom_el('.{{ $name }} .clear').addEventListener('click', function (e){
         dom_el('.{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
-        dom_el('.fp-{{ $name }}').value = dom_el('.b64-{{ $name }}').value = '';
+        dom_el('.bw-{{ $name }}').value = dom_el('.b64-{{ $name }}').value = '';
         changeCss('.{{ $name }} .clear', 'hidden');
         e.stopImmediatePropagation();
     });
