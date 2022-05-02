@@ -1,7 +1,29 @@
 @props([ 
-    'color' => 'green',
-    'css' => ''
+    'label' => '',
+    'color' => 'blue',
+    'css' => '',
+    'can_close' => 'false',
+    'shade' => 'faint',
+    'color_weight' => [
+        'faint' => 100,
+        'dark' => 500,
+    ],
+    'text_color_weight' => [
+        'faint' => 500,
+        'dark' => 50,
+    ],
+    'onclick' => '',
+    'id' => uniqid(),
+    'add_id_prefix' => 'true',
 ])
-<span class="bg-green-100/80 bg-red-100/80 bg-blue-100/80 bg-gray-100/80 bg-yellow-100/80 bg-orange-100/80"></span>
-<span class="text-green-500 text-red-500 text-blue-500 bg-gray-500 text-yellow-500 text-orange-500"></span>
-<label style="zoom:77%" class="text-xs uppercase px-[10px] py-[3px] tracking-widest whitespace-nowrap inline-block bg-{{$color}}-100/80 text-{{$color}}-500 {{$css}}">{{ $slot }}</label>
+<span class="bg-red-100/80 bg-yellow-100/80 bg-green-100/80 bg-pink-100/80 bg-cyan-100/80 bg-gray-100/80 bg-blue-100/80 bg-purple-100/80 bg-orange-100/80 bg-red-500/80 bg-yellow-500/80 bg-green-500/80 bg-pink-500/80 bg-gray-500/80 bg-cyan-500/80 bg-blue-500/80 bg-gray-500/80 bg-purple-500/80 bg-orange-500/80 text-red-500 text-yellow-500 text-green-500 bg-gray-500 text-pink-500 text-cyan-500 text-purple-500 text-orange-500 text-red-50 text-yellow-50 text-green-50 text-pink-50 text-cyan-50 text-purple-50 text-gray-50 text-blue-50 text-orange-50"></span>
+<label style="zoom:95%" id="@if($add_id_prefix=='true')bw-@endif{{$id}}" class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block bg-{{$color}}-{{$color_weight[$shade]}}/80 text-{{$color}}-{{$text_color_weight[$shade]}} {{$css}}">
+{{ $label }}
+@if($can_close == 'true')
+<a href="javascript:void(0)" onclick="@if($onclick=='')this.parentElement.remove()@else{!!$onclick!!}@endif">
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 p-1 opacity-70 hover:opacity-100 !-mr-2 inline text-{{$color}}-{{$text_color_weight[$shade]}}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+</svg>
+</a>
+@endif
+</label>

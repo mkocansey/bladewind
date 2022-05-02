@@ -5,8 +5,7 @@
     'for' => 'tab'
 ])
 @php 
-    $name = str_replace(' ', '_', $for);
-    $name = str_replace('-', '_', $name);
+    $name = preg_replace('/[\s-]/', '_', $for);
 @endphp
 <div class="{{ $name }}-tab-contents" data-name="{{ $name }}">
     {{ $slot }}

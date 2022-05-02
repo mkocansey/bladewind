@@ -1,4 +1,5 @@
-dom_el(`.${el_name} .dropdown`).addEventListener('click', function (e){
+var dropdownIsOpen = false;
+dom_el(`.${el_name} .bw-dropdown`).addEventListener('click', function (e){
     this.nextElementSibling.classList.toggle('hidden');
     dropdownIsOpen = true;
     e.stopImmediatePropagation();
@@ -9,15 +10,16 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
         let value = el.getAttribute('data-value');
         let label = el.getAttribute('data-label');
         let href = el.getAttribute('data-href');
+        let href_target = el.getAttribute('data-href-target');
         let parent_tag = el.getAttribute('aria-parent');
         let user_function = el.getAttribute('aria-user-function');
         if(parent_tag != null) {
-            dom_el(`.input-${parent_tag}`).value = value;
-            dom_el(`.${parent_tag}>button>label`).innerHTML = el.innerHTML;
+            dom_el(`.bw-${parent_tag}`).value = value;
+            dom_el(`.${parent_tag}>button>label`).innerHTML = `<div class="flex justify-center">${el.innerHTML}</div>`;
             el.parentElement.parentElement.classList.toggle('hidden');
 
             if(href !== '' && href !== null && href !== undefined) {
-                location.href = href;
+                (href_target == 'self') ? location.href = href : window.open(href, 'bladewind');
                 e.stopImmediatePropagation();
             }
             if(user_function !== '') callUserFunction(`${user_function}('${value}', '${label}')`);

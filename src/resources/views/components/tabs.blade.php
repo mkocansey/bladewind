@@ -1,7 +1,6 @@
 @props([ 'name' => '' ])
 @php 
-    $name = str_replace(' ', '_', $name);
-    $name = str_replace('-', '_', $name);
+    $name = preg_replace('/[\s-]/', '_', $name);
 @endphp
 <div class="border-b border-gray-200 dark:border-gray-700 ag-tab-{{ $name }}">
     <ul class="flex flex-wrap -mb-px tab">

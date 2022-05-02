@@ -1,11 +1,14 @@
 @layer components {
-    .bw-table.divided tr{
-        @apply  border-b border-gray-200/50
+    .bw-table.divided tr {
+        @apply  border-t border-gray-200 border-b-8 border-b-gray-200/40
     }
-    .bw-table.striped tr:nth-child(even){
-        @apply bg-gray-50 hover:bg-yellow-50
+    .bw-table.divided.thin tr {
+        @apply  border-t border-gray-200 border-b border-b-gray-200/60
     }
-    .bw-table th {
+    .bw-table.striped tr:nth-child(even)>td, .bw-table.striped tr:nth-child(even):hover>td{
+        @apply bg-gray-50
+    }
+    thead>tr>th {
         @apply
         bg-white
         text-black/80
@@ -15,17 +18,40 @@
         font-semibold
         tracking-widest
         px-5 py-4
-        border-t border-b border-gray-200
+        border-t border-gray-200/20
     }
-    .bw-table>tbody>tr>td {
+    tr>td {
         @apply
         p-5
-        align-top 
-        leading-8 text-gray-500
+        align-top
+        leading-8 text-gray-500 bg-white
     }
-    .bw-table>tr {
-        @apply
-        bg-white hover:bg-yellow-50
+    .bw-table td.double-underline {
+        @apply border-b-4 border-double border-black/30
+    }
+    table.with-hover-effect tr:hover>td:first-child {
+        @apply bg-white border-l-2 border-l-green-300
+    }
+    table.with-hover-effect tr:hover>td:last-child {
+        @apply bg-white border-r-2 border-r-green-300
+    }
+    table.with-hover-effect tr>td:first-child {
+        @apply bg-white border-l-2 border-l-white
+    }
+    table.with-hover-effect tr>td:last-child {
+        @apply bg-white border-r-2 border-r-white
+    }
+    table.with-hover-effect tr:nth-child(even)>td:first-child {
+        @apply border-l-2 border-l-gray-50
+    }
+    table.with-hover-effect tr:nth-child(even)>td:last-child {
+        @apply border-r-2 border-r-gray-50
+    }
+    table.with-hover-effect tr:nth-child(even):hover>td:first-child {
+        @apply border-l-2 border-l-green-300
+    }
+    table.with-hover-effect tr:nth-child(even):hover>td:last-child {
+        @apply border-r-2 border-r-green-300
     }
 
 }

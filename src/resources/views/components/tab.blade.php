@@ -17,8 +17,7 @@
     'parent' => '',
 ])
 @php 
-    $name = str_replace(' ', '_', $name);
-    $name = str_replace('-', '_', $name);
+    $name = preg_replace('/[\s-]/', '_', $name);
 @endphp
 
 <li class="mr-2 cursor-pointer atab atab-{{ $name }}">

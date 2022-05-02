@@ -12,8 +12,7 @@
     'required' => 'false',
 ])
 @php
-    $name = str_replace(' ', '_', $name);
-    $name = str_replace('-', '_', $name);
+    $name = preg_replace('/[\s-]/', '_', $name);
 @endphp
 
 <div class="relative px-2 py-3 border-2 border-dashed border-gray-300 text-center cursor-pointer mt-4 {{ $name }}">

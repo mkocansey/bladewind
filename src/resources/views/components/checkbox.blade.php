@@ -7,7 +7,7 @@
     'type' => 'checkbox',
     'css' => '',
 ])
-@php $name = str_replace(' ','_', str_replace('-', '_',$name)); @endphp
+@php $name = preg_replace('/[\s-]/', '_', $name); @endphp
 
 <label 
     class="inline-flex items-center cursor-pointer text-sm @if($disabled=='true') opacity-60 @endif {{$css}}">

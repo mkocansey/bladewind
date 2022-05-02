@@ -9,6 +9,7 @@
     // message to display when the process is running
     'message' => '',
 ])
+@php $name = preg_replace('/[\s-]/', '_', $name); @endphp
 <div class="{{ $name }} text-center text-sm @if($hide == 'true') hidden @endif mt-6">
     <x-spinner />
     <div class="my-3 text-gray-400">{{ $message }}</div>
