@@ -9,9 +9,9 @@ var     notification_timeout,
         delete_obj;
 var     dropdownIsOpen = false;
 
-dom_el = (element) => { return document.querySelector(element);  }
+dom_el = (element) => { return (document.querySelector(element) != null) ? document.querySelector(element) : false;  }
 
-dom_els = function(element) { return document.querySelectorAll(element);  }
+dom_els = function(element) { return (document.querySelectorAll(element).length>0) ? document.querySelectorAll(element) : false;  }
 
 validateForm = function(element) {
     let has_error = 0;
@@ -113,25 +113,31 @@ stringContains = function(str, keyword) {
 doNothing = function() { }
 
 changeCssForDomArray = function(els, css, mode='add') { 
-    dom_els(els).forEach((el) => { 
-        changeCss(el, css, mode, true);
-    });
+    if(dom_els(els).length > 0){
+        dom_els(els).forEach((el) => { 
+            changeCss(el, css, mode, true);
+        });
+    }
 }
 
 changeCss = function(el, css, mode='add', elIsDomObject=false) { 
     // css can be comma separated
     // if elIsDomObject dont run it through dom_el
-    if(css.indexOf(',') != -1 || css.indexOf(' ') != -1) {
-        css = css.replace(/\s+/g, '').split(',');
-        for(let classname of css) {
-            (mode == 'add') ?
-                ((elIsDomObject) ? el.classList.add(classname.trim()) : dom_el(el).classList.add(classname.trim())) :
-                ((elIsDomObject) ? el.classList.remove(classname.trim()) : dom_el(el).classList.remove(classname.trim()));
+    if( (! elIsDomObject && dom_el(el) != null) || (elIsDomObject && el != null)){
+        if(css.indexOf(',') != -1 || css.indexOf(' ') != -1) {
+            css = css.replace(/\s+/g, '').split(',');
+            for(let classname of css) {
+                (mode == 'add') ?
+                    ((elIsDomObject) ? el.classList.add(classname.trim()) : dom_el(el).classList.add(classname.trim())) :
+                    ((elIsDomObject) ? el.classList.remove(classname.trim()) : dom_el(el).classList.remove(classname.trim()));
+            }
+        } else {
+            if( (! elIsDomObject && dom_el(el).classList != undefined) || (elIsDomObject && el.classList != undefined)){
+                (mode == 'add') ?
+                    ((elIsDomObject) ? el.classList.add(css) : dom_el(el).classList.add(css)) : 
+                    ((elIsDomObject) ? el.classList.remove(css) : dom_el(el).classList.remove(css));
+            }
         }
-    } else {
-        (mode == 'add') ?
-            ((elIsDomObject) ? el.classList.add(css) : dom_el(el).classList.add(css)) : 
-            ((elIsDomObject) ? el.classList.remove(css) : dom_el(el).classList.remove(css))
     }
 }
 
@@ -139,9 +145,17 @@ showModal = function(el) { unhide(`.bw-${el}-modal`); }
 
 hideModal = function(el) { hide(`.bw-${el}-modal`); }
 
-hide = function(el, elIsDomObject=false) { changeCss(el, 'hidden', 'add', elIsDomObject); }
+hide = function(el, elIsDomObject=false) { 
+    if( (! elIsDomObject && dom_el(el) != null) || (elIsDomObject && el != null)){
+        changeCss(el, 'hidden', 'add', elIsDomObject); 
+    }
+}
 
-unhide = function(el, elIsDomObject=false) { changeCss(el, 'hidden', 'remove', elIsDomObject); }
+unhide = function(el, elIsDomObject=false) { 
+    if( (! elIsDomObject && dom_el(el) != null) || (elIsDomObject && el != null)){ 
+        changeCss(el, 'hidden', 'remove', elIsDomObject); 
+    }
+}
 
 animateCSS = (element, animation) =>
   new Promise((resolve, reject) => {
