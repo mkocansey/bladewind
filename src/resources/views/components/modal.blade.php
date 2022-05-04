@@ -6,7 +6,7 @@
     // title text to display. example: Confirm your delete action
     'title' => '',
     // name of the modal. used to uniquely identify the modal in css and js
-    'name' => 'default',
+    'name' => 'amodal',
     // text to display on primary button. default is Okay
     'ok_button_label' => 'Okay',
     // text to display on secondary button. default is Cancel
@@ -34,8 +34,10 @@
     'sizes' => [
         'small' => 'w-1/6',
         'medium' => 'w-1/5',
+        'big' => 'w-1/4',
         'large' => 'w-1/3',
-        'xl' => 'w-1/2'
+        'xl' => 'w-1/2',
+        'omg' => 'w-full !mx-6'
     ],
 ])
 @php
@@ -47,9 +49,9 @@
     if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action== 'true') ? ';'.$cancelAction : '');
 @endphp
 
-<span class="w-1/6 w-1/4 w-1/3 w-1/2" />
+<span class="w-1/6 w-1/4 w-1/3 w-1/2 w-1/4" />
 <div 
-    class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex amodal bw-{{$name}}-modal hidden" 
+    class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex bw-modal bw-{{$name}}-modal hidden" 
     aria-backdrop-can-close="{{$backdrop_can_close}}">
     <div class="bg-white {{ $sizes[$size] }} mx-auto my-auto rounded-lg drop-shadow-2xl bw-{{$name}}">
         <div class="flex">
@@ -98,7 +100,7 @@
 
     document.addEventListener('keyup', function(e){
         if(e.key === "Escape") {
-            dom_els('.amodal').forEach((el)=>  {
+            dom_els('.bw-modal').forEach((el)=>  {
                 if(el.getAttribute('aria-backdrop-can-close') == 'true') {
                     changeCss(el, 'hidden', 'add', true);
                 }

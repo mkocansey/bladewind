@@ -14,6 +14,7 @@
     // a javascript function that will be called when the button is clicked on
     'buttonAction' => ''
 ])
+@php $name = preg_replace('/[\s-]/', '_', $name); @endphp
 <div class="{{$name}} text-center mt-6 hidden">
     @if($processCompletedAs === 'passed')
         <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 block mx-auto bg-green-400 text-white rounded-full p-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

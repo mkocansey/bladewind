@@ -8,12 +8,11 @@
     'add_clearing' => 'true', // adds margin after the input field
     'placeholder' => '', // placeholder text
     'selected_value' => '', // selected value
-    'has_label' => 'false', // display label for the inpur
+    'has_label' => 'false', // display label for the input
     'css' => '',
 ])
 @php
-    $name = str_replace(' ', '_', $name);
-    $name = str_replace('-', '_', $name);
+    $name = preg_replace('/[\s-]/', '_', $name);
     $label = ucwords(str_replace('_', ' ',$name));
     $required_symbol = ($has_label == 'false' && $required == 'true') ? ' *' : '';
 @endphp

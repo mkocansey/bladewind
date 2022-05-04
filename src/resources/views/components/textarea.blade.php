@@ -10,8 +10,7 @@
     'css' => '',
 ])
 @php
-    $name = str_replace(' ', '_', $name);
-    $name = str_replace('-', '_', $name);
+    $name = preg_replace('/[\s-]/', '_', $name);
     $label = ucwords(str_replace('_', ' ',$name));
     $required_symbol = ($has_label == 'false' && $required == 'true') ? '*' : '';
 @endphp

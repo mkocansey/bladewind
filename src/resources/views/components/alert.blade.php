@@ -29,7 +29,7 @@
 ])
 
 <span class="!border-red-400 hidden"></span>
-<div class="w-full notification flex p-3 {{$color[$shade][$type]}} {{$color[$shade][$type.'_text']}} {{$css}}">
+<div class="w-full bw-alert flex p-3 {{$color[$shade][$type]}} {{$color[$shade][$type.'_text']}} {{$css}}">
     @if($show_icon == 'true')
         <div>
             @if($type == 'error')
@@ -54,7 +54,7 @@
     <div class="grow pl-2 pr-5">{{ $slot }}</div>
     @if($show_close_icon == 'true')
         <div class="text-right">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline cursor-pointer ml-3" viewBox="0 0 20 20" fill="currentColor" onclick="javascript:hide('.notification')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline cursor-pointer ml-3" viewBox="0 0 20 20" fill="currentColor" onclick="this.parentElement.parentElement.style.display='none'">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
             </svg>
         </div>
