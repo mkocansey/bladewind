@@ -1,10 +1,10 @@
 @props([
-    'size' => 'default',
+    'size' => 'xl',
     'width' => [
-        'xxl' => '7xl',
-        'default' => '6xl',
+        'omg' => '7xl',
+        'xxl' => '6xl',
         'xl' => '4xl',
-        'large' => '3xl',
+        'big' => '3xl',
         'medium' => '2xl',
         'small' => 'lg',
         'tiny' => 'md'
