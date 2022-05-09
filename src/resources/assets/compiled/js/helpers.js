@@ -11,9 +11,9 @@ var     dropdownIsOpen = false;
 
 dom_el = (element) => { return (document.querySelector(element) != null) ? document.querySelector(element) : false;  }
 
-dom_els = function(element) { return (document.querySelectorAll(element).length>0) ? document.querySelectorAll(element) : false;  }
+dom_els = (element) => { return (document.querySelectorAll(element).length>0) ? document.querySelectorAll(element) : false;  }
 
-validateForm = function(element) {
+validateForm = (element) => {
     let has_error = 0;
     let BreakException = {};
     try{
@@ -33,7 +33,7 @@ validateForm = function(element) {
     return has_error === 0;
 }
 
-isNumberKey = function(evt) {   // usage:  onkeypress="return isNumberKey(event)"
+isNumberKey = (evt) => {   // usage:  onkeypress="return isNumberKey(event)"
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode > 31 && (charCode != 46 && (charCode < 48 || charCode > 57))) {
         return false;
@@ -45,7 +45,7 @@ callUserFunction = (func) => {
     if (func !== '' && func !== undefined) eval(func); 
 };
 
-serialize = function(form){
+serialize = (form) => {
     let data = new FormData(dom_el(form));
     let obj = {};
     for (let [key, value] of data) {
@@ -62,7 +62,7 @@ serialize = function(form){
     }   return obj;
 }
 
-showMessage = function(message, type, dismissable=true) {
+showMessage = (message, type, dismissable=true) => {
     clearTimeout(notification_timeout);
     let notification_bar = dom_el('.bw-notification');
     let message_container = dom_el('.bw-notification .message-container');
@@ -95,7 +95,7 @@ showMessage = function(message, type, dismissable=true) {
     }
 }
 
-displayFormErrors = function(errors){
+displayFormErrors = (errors) => {
     if( errors) {
         let number_of_errors = Object.keys(errors).length;
         if ( number_of_errors > 0 ) {
@@ -105,14 +105,14 @@ displayFormErrors = function(errors){
     }
 }
 
-stringContains = function(str, keyword) { 
+stringContains = (str, keyword) => { 
     if(typeof(str) !== 'string') return false; 
     return (str.indexOf(keyword) != -1); 
 }
 
-doNothing = function() { }
+doNothing = () => { }
 
-changeCssForDomArray = function(els, css, mode='add') { 
+changeCssForDomArray = (els, css, mode='add') => { 
     if(dom_els(els).length > 0){
         dom_els(els).forEach((el) => { 
             changeCss(el, css, mode, true);
@@ -120,7 +120,7 @@ changeCssForDomArray = function(els, css, mode='add') {
     }
 }
 
-changeCss = function(el, css, mode='add', elIsDomObject=false) { 
+changeCss = (el, css, mode='add', elIsDomObject=false) => { 
     // css can be comma separated
     // if elIsDomObject dont run it through dom_el
     if( (! elIsDomObject && dom_el(el) != null) || (elIsDomObject && el != null)){
@@ -141,17 +141,17 @@ changeCss = function(el, css, mode='add', elIsDomObject=false) {
     }
 }
 
-showModal = function(el) { unhide(`.bw-${el}-modal`); }
+showModal = (el) => { unhide(`.bw-${el}-modal`); }
 
-hideModal = function(el) { hide(`.bw-${el}-modal`); }
+hideModal = (el) => { hide(`.bw-${el}-modal`); }
 
-hide = function(el, elIsDomObject=false) { 
+hide = (el, elIsDomObject=false) => { 
     if( (! elIsDomObject && dom_el(el) != null) || (elIsDomObject && el != null)){
         changeCss(el, 'hidden', 'add', elIsDomObject); 
     }
 }
 
-unhide = function(el, elIsDomObject=false) { 
+unhide = (el, elIsDomObject=false) => { 
     if( (! elIsDomObject && dom_el(el) != null) || (elIsDomObject && el != null)){ 
         changeCss(el, 'hidden', 'remove', elIsDomObject); 
     }
@@ -193,10 +193,10 @@ animateCSS = (element, animation) =>
       }
   }
 
-  removeCommas = function(amount) {
+  removeCommas = (amount) => {
     return amount.toString().replace(/,/g, '');
   }
 
-  toCurrency = function(amount) {
+  toCurrency = (amount) => {
     return ((parseFloat(amount).toFixed(2))*1).toLocaleString();
   }
