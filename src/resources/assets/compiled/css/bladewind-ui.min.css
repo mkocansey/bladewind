@@ -899,6 +899,16 @@ to{transform:rotate(360deg)}}
 .opacity-25{opacity:0.25}
 .opacity-75{opacity:0.75}
 .opacity-70{opacity:0.7}
+.opacity-80{opacity:0.8}
+.opacity-50{opacity:0.5}
+.opacity-100{opacity:1}
+.opacity-0{opacity:0}
+.opacity-5{opacity:0.05}
+.opacity-10{opacity:0.1}
+.opacity-20{opacity:0.2}
+.opacity-30{opacity:0.3}
+.opacity-90{opacity:0.9}
+.opacity-95{opacity:0.95}
 .shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}
 .shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}
 .shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}
