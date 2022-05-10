@@ -16,7 +16,7 @@
     'id' => uniqid(),
     'add_id_prefix' => 'true',
 ])
-<span class="bg-red-100/80 bg-yellow-100/80 bg-green-100/80 bg-pink-100/80 bg-cyan-100/80 bg-gray-100/80 bg-blue-100/80 bg-purple-100/80 bg-orange-100/80 bg-red-500/80 bg-yellow-500/80 bg-green-500/80 bg-pink-500/80 bg-gray-500/80 bg-cyan-500/80 bg-blue-500/80 bg-gray-500/80 bg-purple-500/80 bg-orange-500/80 text-red-500 text-yellow-500 text-green-500 bg-gray-500 text-pink-500 text-cyan-500 text-purple-500 text-orange-500 text-red-50 text-yellow-50 text-green-50 text-pink-50 text-cyan-50 text-purple-50 text-gray-50 text-blue-50 text-orange-50"></span>
+<span class="bg-red-100/80 bg-yellow-100/80 bg-green-100/80 bg-pink-100/80 bg-cyan-100/80 bg-gray-100/80 bg-blue-100/80 bg-purple-100/80 bg-orange-100/80 bg-red-500/80 bg-yellow-500/80 bg-green-500/80 bg-pink-500/80 bg-gray-500/80 bg-cyan-500/80 bg-blue-500/80 bg-gray-500/80 bg-purple-500/80 bg-orange-500/80 text-red-500 text-yellow-500 text-green-500 bg-gray-500 text-pink-500 text-cyan-500 text-purple-500 text-orange-500 text-red-50 text-yellow-50 text-green-50 text-pink-50 text-cyan-50 text-purple-50 text-gray-50 text-blue-50 text-orange-50 bg-red-200/80 bg-yellow-200/80 bg-green-200/80 bg-pink-200/80 bg-cyan-200/80 bg-gray-200/80 bg-blue-200/80 bg-purple-200/80 bg-orange-200/80"></span>
 <label style="zoom:95%" id="@if($add_id_prefix=='true')bw-@endif{{$id}}" class="text-xs uppercase px-[10px] py-[5px] tracking-widest whitespace-nowrap inline-block bg-{{$color}}-{{$color_weight[$shade]}}/80 text-{{$color}}-{{$text_color_weight[$shade]}} {{$css}}">
 {{ $label }}
 @if($can_close == 'true')

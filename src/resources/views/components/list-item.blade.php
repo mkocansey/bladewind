@@ -1,0 +1,1 @@
+<li class="flex px-4 py-4 first:pt-0 last:pb-0">{{$slot}}</li>

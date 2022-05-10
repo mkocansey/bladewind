@@ -11,7 +11,7 @@
     'css' => '',
 ])
 
-    <div class="bw-statistic bg-white p-6 rounded-sm relative animate__animated animate__fadeIn @if($has_shadow=='true')shadow-2xl shadow-gray-200/40 @endif{{$css}}">
+    <div class="bw-statistic bg-white p-6 rounded-sm relative @if($has_shadow=='true')shadow-2xl shadow-gray-200/40 @endif{{$css}}">
         <div class="flex space-x-4">
             @if($icon !== '' && $icon_position=='left')
             <div class="grow-0 icon">{!! $icon !!}</div>
