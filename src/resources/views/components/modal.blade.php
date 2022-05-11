@@ -94,9 +94,11 @@
         e.stopImmediatePropagation(); 
     });
 
-    dom_els('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
-        el.addEventListener('click', function (e){ e.stopImmediatePropagation(); });
-    });
+    if(dom_els('.bw-{{$name}}-modal .modal-footer>button')){
+        dom_els('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
+            el.addEventListener('click', function (e){ e.stopImmediatePropagation(); });
+        });
+    }
 
     document.addEventListener('keyup', function(e){
         if(e.key === "Escape") {
