@@ -200,3 +200,27 @@ animateCSS = (element, animation) =>
   toCurrency = (amount) => {
     return ((parseFloat(amount).toFixed(2))*1).toLocaleString();
   }
+
+  goToTab = (el, color) => {
+      let tab_content = dom_el('.bw-tc-'+el);
+      if( tab_content === null ) {
+          alert('no matching x-bladewind.tab-content div found for this tab');
+          return false;
+      }
+      changeCssForDomArray(
+          'li.atab span', 
+          `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`, 
+          'remove');
+      changeCssForDomArray(
+          'li.atab span', 
+          'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300');
+      changeCss(
+          `.atab-${el} span`, 
+          'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300', 'remove');
+      changeCss(
+          `.atab-${el} span`, 
+          `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`);
+      
+      dom_els('div.atab-content').forEach((el) => { hide(el, true); });
+      unhide(tab_content, true);
+  }
