@@ -512,6 +512,8 @@ table.with-hover-effect tr:nth-child(even):hover>td:last-child{border-right-widt
 .\!ml-\[2px\]{margin-left:2px !important}
 .-mb-px{margin-bottom:-1px}
 .\!-mr-2{margin-right:-0.5rem !important}
+.mb-10{margin-bottom:2.5rem}
+.mb-12{margin-bottom:3rem}
 .block{display:block}
 .inline-block{display:inline-block}
 .inline{display:inline}
@@ -831,6 +833,7 @@ to{transform:rotate(360deg)}}
 .pl-6{padding-left:1.5rem}
 .pb-1{padding-bottom:0.25rem}
 .pl-4{padding-left:1rem}
+.pt-4{padding-top:1rem}
 .text-left{text-align:left}
 .text-center{text-align:center}
 .text-right{text-align:right}
