@@ -15,7 +15,8 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
         let user_function = el.getAttribute('aria-user-function');
         if(parent_tag != null) {
             dom_el(`.bw-${parent_tag}`).value = value;
-            dom_el(`.${parent_tag}>button>label`).innerHTML = `<div class="flex justify-center">${el.innerHTML}</div>`;
+            console.log(el.innerHTML);
+            dom_el(`.${parent_tag}>button>label`).innerHTML = `<div class="flex items-center">${el.innerHTML}</div>`;
             el.parentElement.parentElement.classList.toggle('hidden');
 
             if(href !== '' && href !== null && href !== undefined) {
@@ -54,10 +55,11 @@ searchDropdown = (value, parent) => {
     });
 }
 
-dom_els('.search-dropdown').forEach((el) => {
-    el.addEventListener('click', function (e){
-        e.stopImmediatePropagation();
+if(dom_els('.search-dropdown')){
+    dom_els('.search-dropdown').forEach((el) => {
+        el.addEventListener('click', function (e){
+            e.stopImmediatePropagation();
+        });
     });
-});
-
+}
 window.onload = () => { selectSelectedValues(); }

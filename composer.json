@@ -1,9 +1,9 @@
 {
     "name": "mkocansey/bladewind",
-    "description": "UI Components using TailwindCSS , Laravel Blade Templates and vanilla Javascript",
+    "description": "Laravel UI Components using TailwindCSS, Blade Templates and vanilla Javascript",
     "keywords": ["laravel", "ui components", "tailwindcss", "blade components"],
     "require": {
-        "php": "^7.3|^8.1"
+        "php": ">=7.3"
     },
     "license": "MIT",
     "type": "library",

@@ -7,9 +7,9 @@
     'name' => 'tab'
 ])
 @php 
-    $name = preg_replace('/[\s-]/', '_', $name);
-    $activeCss = ($active == 'false') ? 'hidden' : '';
+    $name = preg_replace('/[\s]/', '-', $name);
+    $active_css = ($active == 'false') ? 'hidden' : '';
 @endphp
-<div {{ $attributes->merge([ 'class' => "atab-content ag-tc-$name $activeCss" ]) }}>
+<div class="atab-content bw-tc-{{$name}} {{$active_css}} p-4">
     {{ $slot }}
 </div>

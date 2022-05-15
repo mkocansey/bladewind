@@ -104,7 +104,7 @@
 @endphp
 
 <div class="relative {{ $name }}">
-    <button type="button" class="bw-dropdown bg-white cursor-pointer text-left w-full text-gray-400  flex justify-between">
+    <button type="button" class="bw-dropdown bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between">
         <label class="cursor-pointer">
             @if($show_filter_icon == 'true')
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -3,18 +3,33 @@
     .bw-input,
     select {
         @apply 
-            border 
-            border-slate-300/50 
             py-3 px-4
             !outline-none
             !ring-0
             focus:outline-none 
             focus:border 
-            focus:border-blue-300 
+            focus:border-blue-300
             peer-placeholder-shown:mt-2
+            rounded-md 
     }
     input.no-label{
         @apply placeholder-transparent
+    }
+    .form-label {
+        @apply 
+            absolute 
+            left-3.5 
+            -top-1.5 
+            text-xs 
+            px-1 
+            py-0 
+            font-semibold 
+            transition-all 
+            peer-placeholder-shown:top-3.5 
+            peer-placeholder-shown:text-sm  
+            peer-focus:-top-1.5 
+            peer-focus:text-xs
+            cursor-text
     }
     .form-tick:checked {
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
