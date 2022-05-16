@@ -6,10 +6,10 @@ BladewindUI is a collection of UI components written purely using TailwindCSS, L
 <br /><br />
 
 ### Installation
-The full installatioin guide is available at Check out the full documentation on https://bladewindui.com.
+The full installatioin guide is available on https://bladewindui.com.
 <br />
 
-BladewindUI is very specific to Laravel since all components are purely written using blade syntax. To install in your Laravel project simply run this command in the terminal at the root of your project.
+BladewindUI is very specific to Laravel since all components are written purely using blade syntax. To install in your Laravel project simply run this command in the terminal at the root of your project.
 <br /><br />
 
 ```
@@ -26,7 +26,7 @@ php artisan vendor:publish --provider="Mkocansey\Bladewind\BladewindServiceProvi
 ```
 <br />
 
-Now include the BladewindUI css file and initialize a few javascript variables in the <head> of your pages. This should ideally be done in the layouts file your app's pages extend from.
+Now include the BladewindUI css file in the &lt;head&gt; of your pages. This should ideally be done in the layouts file your app pages extend from.
 
 <br />
 
@@ -39,7 +39,7 @@ Now include the BladewindUI css file and initialize a few javascript variables i
 
 <br />
 
-Finally, include the BladewindUI javascript file anywhere before the closing of the </body> tag of your pages. Again, this should ideally be done in the layouts file your app's pages extend from.
+Finally, include the BladewindUI javascript file anywhere before the closing of the &lt;/body&gt; tag of your pages. Again, this should ideally be done in the layouts file your app's pages extend from.
 
 <br />
 
@@ -64,7 +64,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Avatar](https://bladewindui.com/component/avatar)**
 - **[Button](https://bladewindui.com/component/button)**
 - **[Card](https://bladewindui.com/component/card)**
-- **[Centered Element](https://bladewindui.com/component/centered-element)**
+- **[Centered Content](https://bladewindui.com/component/centered-content)**
 - **[Checkbox](https://bladewindui.com/component/checkbox)**
 - **[Datepicker](https://bladewindui.com/component/datepicker)**
 - **[Dropdown](https://bladewindui.com/component/dropdown)**
