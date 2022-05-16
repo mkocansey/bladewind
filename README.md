@@ -4,6 +4,60 @@
 
 BladewindUI is a collection of UI components written purely using TailwindCSS, Laravel blade templates and Vanilla Javascript. These components are super simple to use and come with different levels of customization.
 <br /><br />
+
+### Installation
+The full installatioin guide is available at Check out the full documentation on https://bladewindui.com.
+<br />
+
+BladewindUI is very specific to Laravel since all components are purely written using blade syntax. To install in your Laravel project simply run this command in the terminal at the root of your project.
+<br /><br />
+
+```
+composer require mkocansey/bladewind
+```
+<br />
+
+Next you need to **publish the package assets** by running this command, still in the terminal at the root of your Laravel project.
+
+<br />
+
+```
+php artisan vendor:publish --provider="Mkocansey\Bladewind\BladewindServiceProvider" --tag=assets --force
+```
+<br />
+
+Now include the BladewindUI css file and initialize a few javascript variables in the <head> of your pages. This should ideally be done in the layouts file your app's pages extend from.
+
+<br />
+
+```
+<link href="{{ asset('bladewind/css/animate.min.css') }}" rel="stylesheet" />
+```
+```
+<link href="{{ asset('bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
+```
+
+<br />
+
+Finally, include the BladewindUI javascript file anywhere before the closing of the </body> tag of your pages. Again, this should ideally be done in the layouts file your app's pages extend from.
+
+<br />
+
+```
+<script src="{{ asset('bladewind/js/helpers.js') }}" type="text/javascript"></script>
+```
+
+<br />
+
+You are now ready to start using any of the BladewindUI components in your application
+
+<br />
+
+```
+<x-bladewind.button> Save User </x-bladewind.button>
+```
+
+<br /><br />
 ### Components Include
 
 - **[Alert](https://bladewindui.com/component/alert)**
@@ -32,6 +86,10 @@ BladewindUI is a collection of UI components written purely using TailwindCSS, L
 - **[Textbox](https://bladewindui.com/component/textbox)**
 - **[Textarea](https://bladewindui.com/component/textarea)**
 - **[Toggle](https://bladewindui.com/component/toggle)**
+
+<br /><br />
+
+Check out the full documentation on https://bladewindui.com.
 
 <br /><br />
 
