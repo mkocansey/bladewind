@@ -49,11 +49,12 @@
     if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action== 'true') ? ';'.$cancelAction : '');
 @endphp
 
-<span class="w-1/6 w-1/4 w-1/3 w-1/2 w-1/4" />
+<span class="w-1/2 w-1/3 w-1/4 w-1/5 w-1/6" />
 <div 
     class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex bw-modal bw-{{$name}}-modal hidden" 
     aria-backdrop-can-close="{{$backdrop_can_close}}">
-    <div class="bg-white {{ $sizes[$size] }} mx-auto my-auto rounded-lg drop-shadow-2xl bw-{{$name}}">
+    <div class="bg-white w-[94%] sm:{{$sizes[$size]}} mx-auto my-auto rounded-lg drop-shadow-2xl bw-{{$name}}">
+    {{-- {{ $sizes[$size] }} --}}
         <div class="flex">
             @if($type !== '')
                 <div class="modal-icon py-6 pl-6">
