@@ -5,9 +5,7 @@
     'has_spinner' => 'false', // will show a spinner
     'show_spinner' => 'false', // will show a spinner
     'can_submit' => 'false', // will make this <button type="submit">
-    'onclick' => '', // a function to call onclick on the button
     'disabled' => 'false', // set to true to disable the button
-    'css' => '',
     'color' => 'blue', // red, yellow, green, blue, purple, orange, cyan, black
     'coloring' => [
         'bg' => [
@@ -48,11 +46,12 @@
 @php 
     $button_type = ($can_submit == 'false') ? 'button' : 'submit'; 
     $spinner_css = ($show_spinner == 'true') ? '' : 'hidden'; 
+    $primary_color = ($type=='primary') ? $coloring['bg'][$color]. ' '. $coloring['focus'][$color]. ' '. $coloring['hover_active'][$color] : '';
+    $is_disabled = ($disabled == 'true') ? 'disabled' : '';
 @endphp
 <button 
-    @if ($onclick !== '') onclick="{!! $onclick !!}" @endif 
+    {{ $attributes->merge(['class' => "bw-button $size $type $name $primary_color $is_disabled"]) }}
     @if ($disabled == 'true') disabled="true" @endif
-    type="{{$button_type}}"
-    class="bw-button {{$size}} {{$type}} {{$name}} {{$css}} @if($type=='primary'){{$coloring['bg'][$color]}} {{$coloring['focus'][$color]}} {{$coloring['hover_active'][$color]}}@endif @if ($disabled == 'true')disabled @endif">
+    type="{{$button_type}}">
     <span>{{ $slot }}</span> @if ($has_spinner == 'true') <x-bladewind::spinner css="{{$spinner_css}}"></x-bladewind::spinner> @endif
 </button>

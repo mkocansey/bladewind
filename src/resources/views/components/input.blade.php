@@ -13,10 +13,12 @@
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
     $required_symbol = ($label == '' && $required == 'true') ? ' *' : '';
+    $is_required = ($required == 'true') ? 'required' : '';
+    $placeholder_color = ($label !== '') ? 'placeholder-transparent' : '';
 @endphp
 <div class="relative w-full @if($add_clearing == 'true') mb-2 @endif">
     <input 
-        class="bw-input w-full border border-slate-300/50 dark:text-white/80 dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer @if($required == 'true') required @endif {{$name}} {{$css}} @if($label !== '')placeholder-transparent @endif"
+        {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white/80 dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $css $placeholder_color"]) }}
         type="{{ $type }}" 
         id="{{ $name }}"
         name="{{ $name }}" 
