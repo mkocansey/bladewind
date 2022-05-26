@@ -85,20 +85,20 @@
     $data = json_decode(str_replace('&quot;', '"', $data));
     $onselect = str_replace('&#039;', "'", $onselect);
     $input_name = preg_replace('/[\s-]/', '_', $name);
-    //if(! isset($data[0]->$label_key) || ! isset($data[0]->$value_key) ) {
-    if(! isset($data[0]->$label_key) ) {
+
+    if(! isset($data[0]->{$label_key}) ) {
         echo '<p style="color:red">
-            &lt;x-dropdown /&gt;: ensure the value you set as label_key 
+            &lt;x-bladewind.dropdown /&gt;: ensure the value you set as label_key 
             exists in your array data</p>';exit;
     }
     if( $url_key !== '' && ! isset($data[0]->{$url_key}) ) {
         echo '<p style="color:red">
-            &lt;x-dropdown /&gt;: ensure the value you set as url_key exists in your array</p>';exit;
+            &lt;x-bladewind.dropdown /&gt;: ensure the value you set as url_key exists in your array</p>';exit;
     }
 
     if( $flag_key !== '' && !isset($data[0]->{$flag_key}) ) {
         echo '<p style="color:red">
-            &lt;x-dropdown /&gt;: ensure the value you set as flag_key exists in your array</p>';exit;
+            &lt;x-bladewind.dropdown /&gt;: ensure the value you set as flag_key exists in your array</p>';exit;
     }
 
 @endphp

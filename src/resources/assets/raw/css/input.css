@@ -11,6 +11,7 @@
             focus:border-blue-300
             peer-placeholder-shown:mt-2
             rounded-md 
+            dark:text-white/70
     }
     input.no-label{
         @apply placeholder-transparent
@@ -22,8 +23,6 @@
             -top-1.5 
             text-xs 
             px-1 
-            py-0 
-            font-semibold 
             transition-all 
             peer-placeholder-shown:top-3.5 
             peer-placeholder-shown:text-sm  
