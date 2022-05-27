@@ -1,9 +1,17 @@
 @props([
-    'type' => 'info', // error, warning, success, info
-    'shade' => 'faint', // shades of the alert faint, dark
-    'show_icon' => 'true', // should the alert type icon be shown
-    'show_close_icon' => 'true', // should the close icon be shown
-    'css' => '', // additional css classes to add
+    // error, warning, success, info
+    'type' => 'info', 
+    // shades of the alert faint, dark
+    'shade' => 'faint', 
+    // should the alert type icon be shown
+    'show_icon' => 'true',
+    // for backward compatibility with laravel 8 
+    'showIcon' => 'true', 
+    // should the close icon be shown
+    'show_close_icon' => 'true', 
+    // for backward compatibility with laravel 8 
+    'showCloseIcon' => 'true', 
+    'class' => '', // additional css classes to add
     'color' => [
         'dark' => [
             'error' => 'bg-red-500',
@@ -27,9 +35,13 @@
         ],
     ]
 ])
-
+@php 
+    // reset variables for Laravel 8 support
+    $show_icon = $showIcon;
+    $show_close_icon = $showCloseIcon;
+@endphp
 <span class="!border-red-400 hidden"></span>
-<div class="w-full bw-alert flex p-3 {{$color[$shade][$type]}} {{$color[$shade][$type.'_text']}} {{$css}}">
+<div class="w-full bw-alert flex p-3 {{$color[$shade][$type]}} {{$color[$shade][$type.'_text']}} {{$class}}">
     @if($show_icon == 'true')
         <div>
             @if($type == 'error')

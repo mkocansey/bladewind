@@ -1,12 +1,26 @@
 @props([
-    'type' => 'primary', // primary, secondary
-    'size' => 'regular', // tiny, small, regular, big
-    'name' => '', // for use with css and js if you want to manipulate the button
-    'has_spinner' => 'false', // will show a spinner
-    'show_spinner' => 'false', // will show a spinner
-    'can_submit' => 'false', // will make this <button type="submit">
-    'disabled' => 'false', // set to true to disable the button
-    'color' => 'blue', // red, yellow, green, blue, purple, orange, cyan, black
+    // primary, secondary
+    'type' => 'primary',
+    // tiny, small, regular, big
+    'size' => 'regular',
+    // for use with css and js if you want to manipulate the button
+    'name' => '', 
+    // will show a spinner
+    'has_spinner' => 'false', 
+    // for backward compatibility with Laravel 8
+    'hasSpinner' => 'false',
+    // will show a spinner
+    'show_spinner' => 'false',
+    // for backward compatibility with Laravel 8 
+    'showSpinner' => 'false',
+    // will make this <button type="submit"> 
+    'can_submit' => 'false', 
+    // for backward compatibility with Laravel 8 
+    'canSubmit' => 'false',
+    // set to true to disable the button 
+    'disabled' => 'false', 
+    // red, yellow, green, blue, purple, orange, cyan, black
+    'color' => 'blue', 
     'coloring' => [
         'bg' => [
             'red' => 'bg-red-500',
@@ -44,6 +58,12 @@
     ]
 ])
 @php 
+    // reset variables for Laravel 8 support
+    $show_spinner = $showSpinner;
+    $has_spinner = $hasSpinner;
+    $can_submit = $canSubmit;
+    //------------------------------------------------------
+    
     $button_type = ($can_submit == 'false') ? 'button' : 'submit'; 
     $spinner_css = ($show_spinner == 'true') ? '' : 'hidden'; 
     $primary_color = ($type=='primary') ? $coloring['bg'][$color]. ' '. $coloring['focus'][$color]. ' '. $coloring['hover_active'][$color] : '';

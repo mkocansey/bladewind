@@ -6,19 +6,26 @@
     'numeric' => 'false',
     'required' => 'false',
     'add_clearing' => 'true', // adds margin after the input field
+    'addClearing' => 'true', 
     'placeholder' => '', // placeholder text
     'selected_value' => '', // selected value
-    'css' => '',
+    'selectedValue' => '',
 ])
 @php
+    // reset variables for Laravel 8 support
+    $add_clearing = $addClearing;
+    $selected_value = $selectedValue;
+    //--------------------------------------------------------------------
+
     $name = preg_replace('/[\s-]/', '_', $name);
     $required_symbol = ($label == '' && $required == 'true') ? ' *' : '';
     $is_required = ($required == 'true') ? 'required' : '';
     $placeholder_color = ($label !== '') ? 'placeholder-transparent' : '';
 @endphp
+
 <div class="relative w-full @if($add_clearing == 'true') mb-2 @endif">
     <input 
-        {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white/80 dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $css $placeholder_color"]) }}
+        {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white/80 dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }}
         type="{{ $type }}" 
         id="{{ $name }}"
         name="{{ $name }}" 
