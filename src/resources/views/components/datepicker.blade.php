@@ -25,7 +25,6 @@
     $default_date = ($default_date != '') ? $default_date : '';
     $required_symbol = ($has_label == 'false' && $required == 'true') ? ' *' : '';
 @endphp
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
 @if($type == 'single')
     <div x-data="app('{{ $default_date }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
