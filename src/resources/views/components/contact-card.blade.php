@@ -1,6 +1,7 @@
 @props([
     'css' => '',
     'has_shadow' => 'true',
+    'hasShadow' => 'true',
     'image' => asset('bladewind/images/avatar.png'),
     'name' => '',
     'mobile' => '',
@@ -9,7 +10,10 @@
     'position' => '',
     'birthday' => '',
 ])
-
+@php 
+    // reset variables for Laravel 8 support
+    $has_shadow = $hasShadow;
+@endphp
 <div class="bw-contact-card bg-white px-4 pb-4 pt-2 rounded-lg @if($has_shadow=='true') shadow-2xl shadow-gray-200/40 @endif {{$css}}">
     <div class="flex items-start">
         <div><x-bladewind::avatar url="{{$image}}" /></div>

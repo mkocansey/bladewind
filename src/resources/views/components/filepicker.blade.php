@@ -7,12 +7,14 @@
     // by default all file audo, video, image and pdf file types can be selected
     // either restrict or allow more file types by modifying this value
     'accepted_file_types' => 'audio/*,video/*,image/*, .pdf',
+    'acceptedFileTypes' => 'audio/*,video/*,image/*, .pdf',
     // should the user be forced to select a file. used in conjunction with validation scripts
     // default is false.
     'required' => 'false',
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
+    $accepted_file_types = $acceptedFileTypes;
 @endphp
 
 <div class="relative px-2 py-3 border-2 border-dashed border-gray-300 text-center cursor-pointer mt-4 {{ $name }}">

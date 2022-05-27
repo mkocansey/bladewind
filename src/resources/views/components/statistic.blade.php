@@ -1,17 +1,30 @@
 @props([
     'number' => '',
     'label_position' => 'top',
+    'labelPosition' => 'top',
     'icon_position' => 'left',
+    'iconPosition' => 'left',
     'currency_position' => 'left',
+    'currencyPosition' => 'left',
     'label' => '',
     'icon' => '',
     'currency' => '',
     'show_spinner' => 'false',
+    'showSpinner' => 'false',
     'has_shadow' => 'true',
-    'css' => '',
+    'hasShadow' => 'true',
+    'class' => '',
 ])
+@php 
+    // reset variables for Laravel 8 support
+    $label_position = $labelPosition;
+    $icon_position = $iconPosition;
+    $currency_position = $currencyPosition;
+    $show_spinner = $showSpinner;
+    $has_shadow = $hasShadow;
+@endphp
 
-    <div class="bw-statistic bg-white p-6 rounded-sm relative @if($has_shadow=='true')shadow-2xl shadow-gray-200/40 @endif{{$css}}">
+    <div class="bw-statistic bg-white p-6 rounded-sm relative @if($has_shadow=='true')shadow-2xl shadow-gray-200/40 @endif{{$class}}">
         <div class="flex space-x-4">
             @if($icon !== '' && $icon_position=='left')
             <div class="grow-0 icon">{!! $icon !!}</div>

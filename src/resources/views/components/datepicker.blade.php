@@ -5,32 +5,70 @@
     'name' => 'bw-datepicker',
     // default date to fill in to the datepicker. Defaults to today. Set to blank to display no default
     'default_date' => '',
+    'defaultDate' => '',
     // text to display in the label that identifies the input field
     'label' => 'Date',
     // placeholder text to display if datepicker is empty
     'placeholder' => 'Select a date',
     // is the value of the date field required? used for form validation. default is false
     'required' => 'false',
+    // should the datepicker include a timepicker. The timepicker is hidden by default
+    'with_time' => 'false',
+    'withTime' => 'false',
+    // when timepicker is included, what should the time hours be displayed as. Default is 12 hour format
+    // available options are 12, 24
+    'hours_as' => '12',
+    'hoursAs' => '12',
+    // what format should the time be displayed in
+    'time_format' => 'hh:mm',
+    'timeFormat' => 'hh:mm',
+    // when the timepicker is included, should the time be displayed with seconds. Default is false
+    'show_seconds' => 'false',
+    'showSeconds' => 'false',
 
-    // used for range datepickers
+    //----------- used for range datepickers ----------------------------------
+    // what should be the default date for the from date
     'default_date_from' => '',
+    'defaultDateFrom' => '',
+    // what should be the default date for the to date
     'default_date_to' => '',
+    'defaultDateTo' => '',
+    // what label should be displayed for the from date. Default is 'From'
     'date_from_label' => 'From',
+    'dateFromLabel' => 'From',
+    // what label should be displayed for the to date. Default is 'To'
     'date_to_label' => 'To',
+    'dateToLabel' => 'To',
+    // should labels be displayed for the datepicker
+    // By default only placeholders are displayed in the textbox(es)
     'has_label' => 'false',
-    'css' => '',
+    'hasLabel' => 'false',
 ])
 @php
+    // reset variables for Laravel 8 support
+    $default_date = $defaultDate;
+    $with_time = $withTime;
+    $hours_as = $hoursAs;
+    $time_format = $timeFormat;
+    $show_seconds = $showSeconds;
+    $default_date_from = $defaultDateFrom;
+    $default_date_to = $defaultDateTo;
+    $date_from_label = $dateFromLabel;
+    $date_to_label = $dateToLabel;
+    $has_label = $hasLabel;
+    //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
     $required_symbol = ($has_label == 'false' && $required == 'true') ? ' *' : '';
+    $is_required = ($required == 'true') ? 'required' : '';
 @endphp
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+{{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
 @if($type == 'single')
     <div x-data="app('{{ $default_date }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
-    <div class="relative w-full {{$css}}">
-        <div class="flex absolute inset-y-0 right-3 items-center pl-3 pointer-events-none">
+    <div class="relative w-full">
+        <div class="flex absolute inset-y-0 right-3 z-30 items-center pl-3 pointer-events-none">
             <svg class="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
             </svg>
@@ -41,18 +79,16 @@
             x-ref="date" 
             :value="datepickerValue" 
             value="{{ $default_date }}"   />
-        <input 
+        <x-bladewind::input
+            class="bw-datepicker bw-input block w-full peer {{$name}} {{$is_required}}"
             x-on:click="showDatepicker = !showDatepicker" 
             x-model="datepickerValue" 
             x-on:keydown.escape="showDatepicker = false"
             type="text" 
             id="dtp-{{ $name }}"
-            maxDate="today"
-            class="bw-datepicker bw-input block w-full peer {{ $name}} @if($required == 'true') required @endif {{$css}}" 
-            placeholder="{{ $placeholder }}{{$required_symbol}}">
-        @if($has_label == 'true')
-            <label for="dtp-{{ $name }}" class="form-label">{{ $label }} @if($required == 'true')<span class="text-red-300">*</span>@endif</label>
-        @endif
+            max_date="today" 
+            is_datepicker="true"
+            placeholder="{{ $placeholder }}{{$required_symbol}}" />
 
         <div class="bg-white mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem" 
             x-show.transition="showDatepicker" @click.away="showDatepicker = false">
@@ -84,28 +120,28 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap mb-3 -mx-1">
-            <template x-for="(day, index) in DAYS" :key="index">
-            <div style="width: 14.26%" class="px-0.5">
-                <div x-text="day" class="text-gray-800 font-medium text-center text-xs uppercase cursor-default"></div>
+            <div class="flex flex-wrap mb-3 -mx-1">
+                <template x-for="(day, index) in DAYS" :key="index">
+                    <div style="width: 14.26%" class="px-0.5">
+                        <div x-text="day" class="text-gray-800 font-medium text-center text-xs uppercase cursor-default"></div>
+                    </div>
+                </template>
             </div>
-            </template>
-        </div>
 
-        <div class="flex flex-wrap -mx-1">
-            <template x-for="blankday in blankdays">
-                <div style="width: 14.28%" class="text-center border p-1 border-transparent text-sm"></div>
-            </template>
-            <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
-            <div style="width: 14.28%" class=" mb-1">
-                <div @click="getDateValue(date)" x-text="date" class="cursor-pointer text-center text-sm leading-8 rounded-full transition ease-in-out duration-100" :class="{
-                    'bg-blue-200': isToday(date) == true, 
-                    'text-gray-600 hover:bg-blue-200': isToday(date) == false && isSelectedDate(date) == false,
-                    'bg-blue-500 text-white hover:bg-opacity-75': isSelectedDate(date) == true 
-                }"></div>
+            <div class="flex flex-wrap -mx-1">
+                <template x-for="blankday in blankdays">
+                    <div style="width: 14.28%" class="text-center border p-1 border-transparent text-sm"></div>
+                </template>
+                <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                    <div style="width: 14.28%" class=" mb-1">
+                        <div @click="getDateValue(date)" x-text="date" class="cursor-pointer text-center text-sm leading-8 rounded-full transition ease-in-out duration-100" :class="{
+                            'bg-blue-200': isToday(date) == true, 
+                            'text-gray-600 hover:bg-blue-200': isToday(date) == false && isSelectedDate(date) == false,
+                            'bg-blue-500 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
+                        </div>
+                    </div>
+                </template>
             </div>
-            </template>
-        </div>
         </div>
     </div>
   </div>
@@ -115,13 +151,13 @@
             <x-bladewind::datepicker 
                 name="{{ $name }}-1" type="single" placeholder="{{$date_from_label}}" 
                 default_date="{{ $default_date_from??'' }}" required="{{ $required }}" 
-                label="{{$date_from_label}}"></x-bladewind::datepicker>
+                label="{{$date_from_label}}" />
         </div>
         <div>
             <x-bladewind::datepicker 
                 name="{{ $name }}-2" type="single" placeholder="{{$date_to_label}}" 
                 default_date="{{ $default_date_to??'' }}" required="{{ $required }}" 
-                label="{{$date_to_label}}}"></x-bladewind::datepicker>
+                label="{{$date_to_label}}}" />
         </div>
     </div>
 @endif

@@ -5,21 +5,27 @@
     'label' => '',
     'required' => 'false',
     'add_clearing' => 'true',
+    'addClearing' => 'true',
     'placeholder' => '', // placeholder text
     'selected_value' => '', // selected value
-    'css' => '',
+    'selectedValue' => '',
 ])
 @php
+    // reset variables for Laravel 8 support
+    $add_clearing = $addClearing;
+    $selected_value = $selectedValue;
+    //----------------------------------------------------
+    
     $name = preg_replace('/[\s-]/', '_', $name);
     $required_symbol = ($label == '' && $required == 'true') ? ' *' : '';
     $is_required = ($required == 'true') ? 'required' : '';
     $placeholder_color = ($label !== '') ? 'placeholder-transparent' : '';
 @endphp
 <div class="relative w-full @if($add_clearing == 'true') mb-2 @endif">
-    <textarea {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:border-slate-700 dark:bg-gray-700/90 dark:focus:border-slate-900 peer $is_required $name $css $placeholder_color"]) }} 
+    <textarea {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:border-slate-700 dark:bg-gray-700/90 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }} 
         id="{{ $name }}" 
         name="{{ $name }}" 
-        placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{ $selected_value }}</textarea>
+        placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selected_value}}</textarea>
     @if($label !== '')
         <label for="{{ $name }}" class="form-label bg-white text-blue-900/40 dark:bg-gray-700/90 dark:text-gray-400" onclick="dom_el('.{{$name}}').focus()">{{ $label }} 
             @if($required == 'true') <span class="text-red-400/80" style="zoom:90%"><svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline-block -mt-1" viewBox="0 0 20 20" fill="currentColor">

@@ -27,22 +27,26 @@
     // by default a key of 'value' is used. If your data is something like [ {"id":"1","name":"Burkina Faso"}] 
     // your value_key will be 'id'
     'value_key' => 'value',
+    'valueKey' => 'value',
 
     // what key in your data array should be used to display the labels the user will see as dropdown items
     // the default key used for labels is 'label'. If your data is something like [ {"id":"1","name":"Burkina Faso"}] 
     // your label_key will be 'name'
     'label_key' => 'label',
+    'labelKey' => 'label',
 
     // what key in your data array should be used to display flag icons next to the labels
     // [ {"id":"1","name":"Burkina Faso", "flag":"/assets/images/bf-flag.png"}] 
     // your flag_key will be 'image'
     'flag_key' => '',
+    'flagKey' => '',
     
     // what key in your data array should be used to display images next to the labels
     // the default key used for images is '', meaning images will be ignored. If your data is something like 
     // [ {"id":"1","name":"Burkina Faso", "image":"/assets/images/bf-flag.png"}] 
     // your image_key will be 'image'
     'image_key' => '',
+    'imageKey' => '',
     
     // there are times you will want the dropdown items to go to a link when clicked on 
     // useful if you are using the dropdown as a navigation component for example
@@ -50,19 +54,23 @@
     // the default key used for urls is '', meaning urls will be ignored.
     // setting a urlKey overwrites whatever is defined in 'onselect'
     'url_key' => '',
+    'urlKey' => '',
 
     // if url_key is set, should the selected item's value be appended to the url
     'append_value_to_url' => 'false',
+    'appendValueToUrl' => 'false',
 
     // if url_key is set and append_value_to_url is 'true', what variable name should 
     // the value be appended to the url as. Default is 'value'
     // url will look like /user/settings/?value=devices
     'append_value_to_url_as' => 'value',
+    'appendValueToUrlAs' => 'value',
 
     // there are instances you want the name passed by the dropdown when you submit a form to be 
     // different from the name you gave the dropdown. Example. you may name the dropdown as country but 
     // want it to submit data as country_id. 
     'data_serialize_as' => '',
+    'dataSerializeAs' => '',
 
     // enforces validation if set to true
     'required' => 'false',
@@ -72,6 +80,7 @@
     // the value you specify should exist in your value_key. If your value_key is 'id', you
     // cannot set a selected_value of 'maize white'
     'selected_value' => '',
+    'selectedValue' => '',
     
     // setting this to true adds a search box above the dropdown items
     // this can be used to filter the contents of the dropdown items
@@ -80,8 +89,22 @@
     // this is just a hack to turn the dropdown into a filter component
     // setting to true shows a filter icon in the component
     'show_filter_icon' => 'false',
+    'showFilterIcon' => 'false',
 ])
 @php 
+    // reset variables for Laravel 8 support
+    $value_key = $valueKey;
+    $label_key = $labelKey;
+    $flag_key = $flagKey;
+    $url_key = $urlKey;
+    $image_key = $imageKey;
+    $append_value_to_url = $appendValueToUrl;
+    $append_value_to_url_as = $appendValueToUrlAs;
+    $data_serialize_as = $dataSerializeAs;
+    $selected_value = $selectedValue;
+    $show_filter_icon = $showFilterIcon;
+    //-------------------------------------------------------
+
     $data = json_decode(str_replace('&quot;', '"', $data));
     $onselect = str_replace('&#039;', "'", $onselect);
     $input_name = preg_replace('/[\s-]/', '_', $name);

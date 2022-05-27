@@ -2,9 +2,16 @@
     'heading' => 'Error!',
     'description' => 'Something went wrong',
     'button_text' => 'Go to homepage',
+    'buttonText' => 'Go to homepage',
     'button_url' => '/',
+    'buttonUrl' => '/',
     'image' => '',
 ])
+@php 
+    // reset variables for Laravel 8 support
+    $button_text = $buttonText;
+    $button_url = $buttonUrl;
+@endphp
 <div class="flex justify-center items-center">
     <div class="max-w-xl px-8">
         <div class="p-6">{!!$image!!}</div>

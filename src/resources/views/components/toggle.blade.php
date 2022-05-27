@@ -6,6 +6,7 @@
     'label' => '',
     // position of the label above.. left or right
     'label_position' => 'left',
+    'labelPosition' => 'left',
     // sets or unsets disabled="disabled" on the toggle element
     'disabled' => 'false',
     // sets or unsets checked="checked" on the toggle element
@@ -19,7 +20,12 @@
     // javascript function to run when toggle is clicked
     'onclick' => 'javascript:void(0)',
 ])
-@php $name = preg_replace('/[\s-]/', '_', $name); @endphp
+@php 
+    // reset variables for Laravel 8 support
+    $label_position = $labelPosition;
+    
+    $name = preg_replace('/[\s-]/', '_', $name); 
+@endphp
 
 <label class="relative @if($justified=='false')inline-flex @else flex @endif justify-between items-center group" onclick="{!!$onclick!!}">
     @if($label_position == 'left' && $label !== '')<span class="pr-4">{!!$label!!}</span>@endif

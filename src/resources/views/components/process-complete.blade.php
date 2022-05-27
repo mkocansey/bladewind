@@ -4,18 +4,28 @@
     // default is passed and it shows a green thumbsup icon
     // failed process shows a red thumbs down icon
     'process_completed_as' => 'passed',
+    'processCompletedAs' => 'passed',
 
     // message to display when process is complete
     'message' => '',
 
     // text to display on the button when process is complete
     'button_label' => '',
+    'buttonLabel' => '',
     
     // a javascript function that will be called when the button is clicked on
     'button_action' => '',
+    'buttonAction' => '',
     'hide' => 'true',
 ])
-@php $name = preg_replace('/[\s]/', '-', $name); @endphp
+@php 
+    // reset variables for Laravel 8 support
+    $process_completed_as = $processCompletedAs;
+    $button_label = $buttonLabel;
+    $button_action = $buttonAction;
+    //------------------------------------------------------
+    $name = preg_replace('/[\s]/', '-', $name); 
+@endphp
 <div class="{{$name}} text-center mt-6 {{$hide}}">
     @if($process_completed_as === 'passed')
         <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 block mx-auto bg-green-400 text-white rounded-full p-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

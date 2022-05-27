@@ -3,8 +3,7 @@
     "description": "Laravel UI Components using TailwindCSS, Blade Templates and vanilla Javascript",
     "keywords": ["laravel", "ui components", "tailwindcss", "blade components"],
     "require": {
-        "php": ">=7.3",
-        "laravel/framework": "^9.0"
+        "php": ">=7.3"
     },
     "license": "MIT",
     "type": "library",
