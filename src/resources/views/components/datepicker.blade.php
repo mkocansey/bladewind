@@ -62,8 +62,6 @@
     $required_symbol = ($has_label == 'false' && $required == 'true') ? ' *' : '';
     $is_required = ($required == 'true') ? 'required' : '';
 @endphp
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-{{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
 @if($type == 'single')
     <div x-data="app('{{ $default_date }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
@@ -90,11 +88,11 @@
             is_datepicker="true"
             placeholder="{{ $placeholder }}{{$required_symbol}}" />
 
-        <div class="bg-white mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem" 
+        <div class="bg-white dark:bg-slate-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem" 
             x-show.transition="showDatepicker" @click.away="showDatepicker = false">
         <div class="flex justify-between items-center mb-2">
             <div>
-            <span x-text="MONTH_NAMES[month]" class="text-lg font-bold text-gray-800 cursor-default"></span>
+            <span x-text="MONTH_NAMES[month]" class="text-lg font-bold text-gray-800 dark:text-gray-400 cursor-default"></span>
             <span x-text="year" class="ml-1 text-lg text-gray-600 font-normal cursor-default"></span>
             </div>
             <div>
@@ -123,7 +121,7 @@
             <div class="flex flex-wrap mb-3 -mx-1">
                 <template x-for="(day, index) in DAYS" :key="index">
                     <div style="width: 14.26%" class="px-0.5">
-                        <div x-text="day" class="text-gray-800 font-medium text-center text-xs uppercase cursor-default"></div>
+                        <div x-text="day" class="text-gray-800 dark:text-gray-400 font-medium text-center text-xs uppercase cursor-default"></div>
                     </div>
                 </template>
             </div>
@@ -135,9 +133,9 @@
                 <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
                     <div style="width: 14.28%" class=" mb-1">
                         <div @click="getDateValue(date)" x-text="date" class="cursor-pointer text-center text-sm leading-8 rounded-full transition ease-in-out duration-100" :class="{
-                            'bg-blue-200': isToday(date) == true, 
-                            'text-gray-600 hover:bg-blue-200': isToday(date) == false && isSelectedDate(date) == false,
-                            'bg-blue-500 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
+                            'bg-blue-200 dark:bg-slate-700': isToday(date) == true, 
+                            'text-gray-600 dark:text-gray-100 hover:bg-blue-200 hover:dark:bg-slate-500': isToday(date) == false && isSelectedDate(date) == false,
+                            'bg-blue-500 dark:bg-slate-700 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
                         </div>
                     </div>
                 </template>

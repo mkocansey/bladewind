@@ -25,7 +25,7 @@
 
 <div class="relative w-full @if($add_clearing == 'true') mb-2 @endif">
     <input 
-        {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white/80 dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }}
+        {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }}
         type="{{ $type }}" 
         id="{{ $name }}"
         name="{{ $name }}" 
