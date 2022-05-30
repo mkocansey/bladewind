@@ -6,6 +6,9 @@
     // default date to fill in to the datepicker. Defaults to today. Set to blank to display no default
     'default_date' => '',
     'defaultDate' => '',
+    // date format.. default is yyyy-mm-dd
+    // accepted formats are yyyy-mm-dd, mm-dd-yyyy, dd-mm-yyyy, D d M, Y
+    'format' => 'yyyy-mm-dd',
     // text to display in the label that identifies the input field
     'label' => 'Date',
     // placeholder text to display if datepicker is empty
@@ -64,7 +67,7 @@
 @endphp
 
 @if($type == 'single')
-    <div x-data="app('{{ $default_date }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
+    <div x-data="app('{{ $default_date }}', '{{ strtoupper($format) }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
     <div class="relative w-full">
         <div class="flex absolute inset-y-0 right-3 z-30 items-center pl-3 pointer-events-none">
             <svg class="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +135,7 @@
                 </template>
                 <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
                     <div style="width: 14.28%" class=" mb-1">
-                        <div @click="getDateValue(date)" x-text="date" class="cursor-pointer text-center text-sm leading-8 rounded-full transition ease-in-out duration-100" :class="{
+                        <div @click="getDateValue(date, '{{$format}}')" x-text="date" class="cursor-pointer text-center text-sm leading-8 rounded-full transition ease-in-out duration-100" :class="{
                             'bg-blue-200 dark:bg-slate-700': isToday(date) == true, 
                             'text-gray-600 dark:text-gray-100 hover:bg-blue-200 hover:dark:bg-slate-500': isToday(date) == false && isSelectedDate(date) == false,
                             'bg-blue-500 dark:bg-slate-700 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
@@ -149,49 +152,49 @@
             <x-bladewind::datepicker 
                 name="{{ $name }}-1" type="single" placeholder="{{$date_from_label}}" 
                 default_date="{{ $default_date_from??'' }}" required="{{ $required }}" 
-                label="{{$date_from_label}}" />
+                label="{{$date_from_label}}" format="{{$format}}" />
         </div>
         <div>
             <x-bladewind::datepicker 
                 name="{{ $name }}-2" type="single" placeholder="{{$date_to_label}}" 
                 default_date="{{ $default_date_to??'' }}" required="{{ $required }}" 
-                label="{{$date_to_label}}}" />
+                label="{{$date_to_label}}}" format="{{$format}}" />
         </div>
     </div>
 @endif
 <script>
-    const january = '{{ __('datepicker.JAN') }}';
-    const february = '{{ __('datepicker.FEB') }}';
-    const march = '{{ __('datepicker.MAR') }}';
-    const april = '{{ __('datepicker.APR') }}';
-    const may = '{{ __('datepicker.MAY') }}';
-    const june = '{{ __('datepicker.JUN') }}';
-    const july = '{{ __('datepicker.JUL') }}';
-    const august = '{{ __('datepicker.AUG') }}';
-    const september = '{{ __('datepicker.SEP') }}';
-    const october = '{{ __('datepicker.OCT') }}';
-    const november = '{{ __('datepicker.NOV') }}';
-    const december = '{{ __('datepicker.DEC') }}';
+    january = '{{ __('datepicker.JAN') }}';
+    february = '{{ __('datepicker.FEB') }}';
+    march = '{{ __('datepicker.MAR') }}';
+    april = '{{ __('datepicker.APR') }}';
+    may = '{{ __('datepicker.MAY') }}';
+    june = '{{ __('datepicker.JUN') }}';
+    july = '{{ __('datepicker.JUL') }}';
+    august = '{{ __('datepicker.AUG') }}';
+    september = '{{ __('datepicker.SEP') }}';
+    october = '{{ __('datepicker.OCT') }}';
+    november = '{{ __('datepicker.NOV') }}';
+    december = '{{ __('datepicker.DEC') }}';
 
-    const monday = '{{ __('datepicker.MON') }}';
-    const tuesday = '{{ __('datepicker.TUE') }}';
-    const wednesday = '{{ __('datepicker.WED') }}';
-    const thursday = '{{ __('datepicker.THU') }}';
-    const friday = '{{ __('datepicker.FRI') }}';
-    const saturday = '{{ __('datepicker.SAT') }}';
-    const sunday = '{{ __('datepicker.SUN') }}';
+    monday = '{{ __('datepicker.MON') }}';
+    tuesday = '{{ __('datepicker.TUE') }}';
+    wednesday = '{{ __('datepicker.WED') }}';
+    thursday = '{{ __('datepicker.THU') }}';
+    friday = '{{ __('datepicker.FRI') }}';
+    saturday = '{{ __('datepicker.SAT') }}';
+    sunday = '{{ __('datepicker.SUN') }}';
 
-    const MONTH_NAMES = [ 
+    MONTH_NAMES = [ 
         january, february, march, april, may, june, july, august, 
         september, october, november, december,
     ];
-    const MONTH_SHORT_NAMES = [ 
+    MONTH_SHORT_NAMES = [ 
         january.substr(0,3), february.substr(0,3), march.substr(0,3),
         april.substr(0,3), may.substr(0,3), june.substr(0,3), july.substr(0,3),
         august.substr(0,3), september.substr(0,3), october.substr(0,3),
         november.substr(0,3), december.substr(0,3)
     ];
-    const DAYS = [ 
+    DAYS = [ 
         sunday.substr(0,3), monday.substr(0,3), tuesday.substr(0,3), wednesday.substr(0,3), 
         thursday.substr(0,3), friday.substr(0,3), saturday.substr(0,3)
     ];
