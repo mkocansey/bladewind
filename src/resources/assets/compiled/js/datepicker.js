@@ -1,9 +1,9 @@
-    function app(selected_date='') {
+function app(selected_date='',date_format) {
       return {
         showDatepicker: false,
         datepickerValue: "",
         selectedDate: selected_date,
-        dateFormat: "YYYY-MM-DD",
+        dateFormat: date_format, //"YYYY-MM-DD",
         month: "",
         year: "",
         no_of_days: [],
@@ -40,13 +40,16 @@
           ).slice(-2);
           let formattedYear = date.getFullYear();
           if (this.dateFormat === "DD-MM-YYYY") {
-            return `${formattedDate}-${formattedMonthInNumber}-${formattedYear}`; // 02-04-2021
+            return `${formattedDate}-${formattedMonthInNumber}-${formattedYear}`; // 02-12-2021
+          }
+          if (this.dateFormat === "MM-DD-YYYY") {
+            return `${formattedMonthInNumber}-${formattedDate}-${formattedYear}`; // 12-02-2021
           }
           if (this.dateFormat === "YYYY-MM-DD") {
-            return `${formattedYear}-${formattedMonthInNumber}-${formattedDate}`; // 2021-04-02
+            return `${formattedYear}-${formattedMonthInNumber}-${formattedDate}`; // 2021-12-02
           }
           if (this.dateFormat === "D d M, Y") {
-            return `${formattedDay} ${formattedDate} ${formattedMonthShortName} ${formattedYear}`; // Tue 02 Mar 2021
+            return `${formattedDay} ${formattedDate} ${formattedMonthShortName} ${formattedYear}`; // Tue 02 Dec 2021
           }
           return `${formattedDay} ${formattedDate} ${formattedMonth} ${formattedYear}`;
         },
@@ -64,7 +67,7 @@
             true :
             false;
         },
-        getDateValue(date) {
+        getDateValue(date, format) {
           let selectedDate = new Date(
             this.year,
             this.month,
