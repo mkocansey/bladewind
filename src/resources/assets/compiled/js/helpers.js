@@ -4,9 +4,7 @@
 **/
 var     notification_timeout,
         user_function, 
-        el_name,
-        momo_obj,
-        delete_obj;
+        el_name;
 var     dropdownIsOpen = false;
 
 dom_el = (element) => { return (document.querySelector(element) != null) ? document.querySelector(element) : false;  }
@@ -20,10 +18,24 @@ validateForm = (element) => {
         dom_els(`${element} .required`).forEach((el) => {
             el.classList.remove('!border-red-400');
             if ( el.value === '' ) {
+                let el_name = el.getAttribute('name');
+                let error_message = el.getAttribute('data-error-message');
+                let show_error_inline = el.getAttribute('data-error-inline');
+                let error_heading = el.getAttribute('data-error-heading');
                 el.classList.add('!border-red-400');
                 el.focus();
+                if(error_message){
+                    (show_error_inline == 'true') ? unhide(`.${el_name}-inline-error`) : 
+                    showNotification(error_heading, error_message, 'error');
+                }
                 el.addEventListener('keyup', () => { 
-                    (el.value !== '') ? el.classList.remove('!border-red-400') : el.classList.add('!border-red-400'); 
+                    if(el.value !== '') {
+                        el.classList.remove('!border-red-400');
+                        (show_error_inline == 'true') ? hide(`.${el_name}-inline-error`) : '';
+                     } else {
+                        el.classList.add('!border-red-400'); 
+                        (show_error_inline == 'true') ? unhide(`.${el_name}-inline-error`) : '';
+                     }
                 });
                 has_error++;
                 throw BreakException;
@@ -60,49 +72,6 @@ serialize = (form) => {
         let serialize_as = dom_el(form).elements[key].getAttribute('data-serialize-as');
         obj[serialize_as ?? key] = value;
     }   return obj;
-}
-
-showMessage = (message, type, dismissable=true) => {
-    clearTimeout(notification_timeout);
-    let notification_bar = dom_el('.bw-notification');
-    let message_container = dom_el('.bw-notification .message-container');
-    message_container.classList.remove('bg-red-500', 'bg-green-500', 'bg-blue-600', 'bg-orange-400');
-    notification_bar.classList.remove('animate__animated', 'animate__slideOutUp');
-    dom_el('.bw-notification .message').innerHTML = message;
-
-    switch (type) {
-        case 'error': message_container.classList.add('bg-red-500'); break;
-        case 'info': message_container.classList.add('bg-blue-600'); break;
-        case 'warning': message_container.classList.add('bg-orange-400'); break;
-        default: message_container.classList.add('bg-green-500'); break;
-    }
-
-    notification_bar.classList.add('animate__animated', 'animate__slideInDown');
-    notification_bar.classList.remove('hidden');
-
-    if ( ! dismissable ){
-        dom_el('.notification .cursor-pointer').classList.add('hidden');
-    } else {    
-        var notification_timeout = setTimeout(() => {
-            notification_bar.classList.remove('animate__animated', 'animate__slideInDown');
-            notification_bar.classList.add('animate__animated', 'animate__slideOutUp');
-        }, 15000);
-        dom_el('.notification .cursor-pointer').classList.remove('hidden');
-        dom_el('.notification .cursor-pointer').addEventListener('click', function (e){
-            clearTimeout(notification_timeout);
-            notification_bar.classList.add('animate__animated', 'animate__slideOutUp');
-        });
-    }
-}
-
-displayFormErrors = (errors) => {
-    if( errors) {
-        let number_of_errors = Object.keys(errors).length;
-        if ( number_of_errors > 0 ) {
-            let message = errors[Object.keys(errors)[0]][0];
-            showMessage(message, 'error');
-        }
-    }
 }
 
 stringContains = (str, keyword) => { 
