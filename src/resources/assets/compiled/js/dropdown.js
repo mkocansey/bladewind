@@ -15,7 +15,6 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
         let user_function = el.getAttribute('data-user-function');
         if(parent_tag != null) {
             dom_el(`.bw-${parent_tag}`).value = value;
-            console.log(el.innerHTML);
             dom_el(`.${parent_tag}>button>label`).innerHTML = `<div class="flex items-center">${el.innerHTML}</div>`;
             el.parentElement.parentElement.classList.toggle('hidden');
 
