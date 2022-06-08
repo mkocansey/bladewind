@@ -18,7 +18,7 @@
         'center_bottom' => 'bottom-10',
     ]
 ])
-<div class="fixed {{ $position_css[str_replace(' ', '_', $position)] }} z-50 hidden border-2 bw-notification bg-white shadow-lg p-4 rounded-lg w-[84%] sm:w-1/3 md:w-1/4">
+<div class="fixed {{ $position_css[str_replace(' ', '_', $position)] }} z-50 hidden border-2 bw-notification bg-white shadow-lg p-4 rounded-lg w-[84%] sm:w-1/4 md:w-2/6">
     <div class="flex">
         <div class="flex-none pr-4">
             <x-bladewind::modal-icon />
