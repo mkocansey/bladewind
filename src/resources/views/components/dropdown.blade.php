@@ -127,7 +127,7 @@
 @endphp
 
 <div class="relative {{ $name }}">
-    <button type="button" class="bw-dropdown bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between">
+    <button type="button" class="bw-dropdown bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:text-gray-300">
         <label class="cursor-pointer">
             @if($show_filter_icon == 'true')
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -139,21 +139,21 @@
             <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
     </button>
-    <div class="w-full absolute z-50 bg-white -mt-1 shadow-md cursor-pointer hidden dropdown-items-parent" 
+    <div class="w-full absolute z-50 bg-white -mt-1 shadow-md cursor-pointer hidden dropdown-items-parent dark:text-white dark:border-slate-700 dark:bg-slate-600" 
         style="max-height: 270px; overflow: scroll;">
         <div 
             class="dropdown-items border border-gray-300 divide-y relative w-full">
             @if($searchable == 'true')
-                <div class="bg-gray-100 p-2 sticky top-0 min-w-full">
-                    <input type="text" class="bw-input search-dropdown rounded-full w-full !border-0 !focus:border-0 !placeholder-gray-400 !mb-0" 
+                <div class="bg-gray-100 dark:bg-slate-500 p-2 sticky top-0 min-w-full">
+                    <input type="text" class="bw-input search-dropdown rounded-full w-full !border-0 !focus:border-0 !placeholder-gray-400 dark:!text-slate-800 !mb-0" 
                         placeholder="Search" onkeyup="searchDropdown(this.value, '{{ $name }}')" />
                 </div>
             @endif
             <div 
                 data-value="" 
                 data-label="" 
-                aria-user-function=""
-                aria-parent="{{ $name }}" 
+                data-user-function=""
+                data-parent="{{ $name }}" 
                 class="dd-item p-3 cursor-pointer default hidden">{{ $placeholder }}
                 @if($required == 'true') &nbsp;<span class="text-red-300">*</span>@endif</div>
             @for ($x=0; $x < count($data); $x++)
@@ -167,15 +167,15 @@
                         $url_target = 'blank';
                     }
                 @endphp
-                <div    
+                <div 
+                    {{ $attributes->merge(['class' => "dd-item p-3 cursor-pointer hover:bg-gray-100 flex items-center dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:hover:bg-slate-700 dark:text-gray-300"]) }}
                     data-href="{{$url}}"
                     data-href-target="{{$url_target}}"
                     data-value="{{ $data[$x]->$value_key }}" 
                     data-selected-value="{{ $selected_value }}"
                     data-label="{{ $data[$x]->$label_key }}" 
-                    aria-parent="{{ $name }}" 
-                    aria-user-function="{{ $onselect }}"
-                    class="dd-item p-3 cursor-pointer hover:bg-gray-100 flex items-center">
+                    data-parent="{{ $name }}" 
+                    data-user-function="{{ $onselect }}">
                     @if ($flag_key != '' && $image_key == '')<i class="{{ $data[$x]->{$flag_key} }} flag"></i>@endif
                     @if ($image_key != '')<x-bladewind::avatar size="tiny" css="!mr-2" image="{{ $data[$x]->{$image_key} }}" />@endif
                     <div>{{ $data[$x]->$label_key }}</div>

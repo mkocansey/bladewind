@@ -23,12 +23,28 @@
     // useful if you dont want this overwriting
     'show_placeholder_always' => 'false',
     'showPlaceholderAlways' => 'false',
+    // message to display when validation fails for this field
+    // this is just attached to the input field as a data attribute
+    'error_message' => '',
+    'errorMessage' => '',
+    // this is an easy way to pass a translatable heading to the notification component
+    // since it is triggered from Javascript, it is hard to translate any text from within js
+    'error_heading' => 'Error',
+    'errorHeading' => 'Error',
+    // how should error messages be displayed for this input
+    // by default error messages are displayed in the Bladewind notification component
+    // the component should exist on the page
+    'show_error_inline' => 'false',
+    'showErrorInline' => 'false',
 ])
 @php
     // reset variables for Laravel 8 support
     $add_clearing = $addClearing;
     $selected_value = $selectedValue;
     $show_placeholder_always = $showPlaceholderAlways;
+    $error_message = $errorMessage;
+    $show_error_inline = $showErrorInline;
+    $error_heading = $errorHeading;
     //--------------------------------------------------------------------
 
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -38,7 +54,7 @@
     $placeholder_label = ($show_placeholder_always=='true') ? $placeholder : (($label !== '') ? $label : $placeholder);
 @endphp
 
-<div class="relative w-full @if($add_clearing == 'true') mb-2 @endif">
+<div class="relative w-full @if($add_clearing == 'true') mb-4 @endif">
     <input 
         {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }}
         type="{{ $type }}" 
@@ -47,7 +63,14 @@
         value="{{ $selected_value }}" 
         autocomplete="off"
         placeholder="{{ $placeholder_label }}{{$required_symbol}}" 
-        @if($numeric == 'true') onkeypress="return isNumberKey(event)" @endif />
+        @if($numeric == 'true') onkeypress="return isNumberKey(event)" @endif 
+        @if($error_message != '') 
+            data-error-message="{{$error_message}}" 
+            data-error-inline="{{$show_error_inline}}" 
+            data-error-heading="{{$error_heading}}" 
+        @endif 
+    />
+    @if($error_message != '')<div class="text-red-500 text-xs p-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>@endif
     @if($label !== '')
         <label for="{{ $name }}" class="form-label bg-white text-blue-900/40 dark:bg-slate-600 dark:text-gray-300 dark:rounded-sm dark:px-2 dark:peer-focus:pt-1" onclick="dom_el('.{{$name}}').focus()">{!! $label !!} 
             @if($required == 'true') <span class="text-red-300" style="zoom:90%"><svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline" viewBox="0 0 20 20" fill="currentColor">
