@@ -178,7 +178,7 @@
                     data-user-function="{{ $onselect }}">
                     @if ($flag_key != '' && $image_key == '')<i class="{{ $data[$x]->{$flag_key} }} flag"></i>@endif
                     @if ($image_key != '')<x-bladewind::avatar size="tiny" css="!mr-2" image="{{ $data[$x]->{$image_key} }}" />@endif
-                    <div>{{ $data[$x]->$label_key }}</div>
+                    <div>{!! $data[$x]->$label_key !!}</div>
                 </div>
             @endfor
             <input 
