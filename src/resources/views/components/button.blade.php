@@ -19,6 +19,9 @@
     'canSubmit' => 'false',
     // set to true to disable the button 
     'disabled' => 'false', 
+    // what tag to use for drawing the button <a> or <button>
+    // available options are a, button
+    'tag' => 'button',
     // red, yellow, green, blue, purple, orange, cyan, black
     'color' => 'blue', 
     'coloring' => [
@@ -67,11 +70,13 @@
     $button_type = ($can_submit == 'false') ? 'button' : 'submit'; 
     $spinner_css = ($show_spinner == 'true') ? '' : 'hidden'; 
     $primary_color = ($type=='primary') ? $coloring['bg'][$color]. ' '. $coloring['focus'][$color]. ' '. $coloring['hover_active'][$color] : '';
+    $button_text_color = ($type=='primary') ? 'text-white hover:text-white' : 'text-black hover:text-black';
     $is_disabled = ($disabled == 'true') ? 'disabled' : '';
+    $tag = ($tag != 'a' && $tag != 'button') ? 'button' : $tag;
 @endphp
-<button 
-    {{ $attributes->merge(['class' => "bw-button $size $type $name $primary_color $is_disabled"]) }}
+<{{$tag}} 
+    {{ $attributes->merge(['class' => "bw-button cursor-pointer $size $type $name $primary_color $is_disabled"]) }}
     @if ($disabled == 'true') disabled="true" @endif
     type="{{$button_type}}">
-    <span>{{ $slot }}</span> @if ($has_spinner == 'true') <x-bladewind::spinner css="{{$spinner_css}}"></x-bladewind::spinner> @endif
-</button>
+    <span class="{{$button_text_color}}">{{ $slot }}</span> @if ($has_spinner == 'true') <x-bladewind::spinner css="{{$spinner_css}}"></x-bladewind::spinner> @endif
+</{{$tag}}>
