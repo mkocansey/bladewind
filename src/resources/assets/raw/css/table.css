@@ -1,14 +1,14 @@
 @layer components {
     .bw-table.divided tr {
-        @apply  border-t border-gray-200 dark:border-gray-400 border-b-8 border-b-gray-200/40 dark:border-b-gray-400/40
+        @apply  border-t border-gray-200 dark:border-gray-300 border-b-8 border-b-gray-200/40 dark:border-b-gray-400/40
     }
     .bw-table.divided.thin tr {
-        @apply  border-t border-gray-200 dark:border-gray-400 border-b border-b-gray-200/60 dark:border-b-gray-400/60
+        @apply  border-t border-gray-200 dark:border-gray-300 border-b border-b-gray-200/60 dark:border-b-gray-400/50
     }
     .bw-table.striped tr:nth-child(even)>td, .bw-table.striped tr:nth-child(even):hover>td{
         @apply bg-gray-50 dark:bg-slate-300
     }
-    thead>tr>th {
+    .bw-table thead>tr>th {
         @apply
         bg-white dark:bg-slate-500
         text-black/80 dark:text-white/80
@@ -20,7 +20,7 @@
         px-5 py-4
         border-t border-gray-200/20
     }
-    tr>td {
+    .bw-table tr>td {
         @apply
         p-5
         align-top
@@ -30,28 +30,28 @@
         @apply border-b-4 border-double border-black
     }
     table.with-hover-effect tr:hover>td:first-child {
-        @apply border-l-2 border-l-green-300 dark:border-l-slate-800
+        @apply border-l-2 border-l-green-300
     }
     table.with-hover-effect tr:hover>td:last-child {
-        @apply border-r-2 border-r-green-300 dark:border-r-slate-800
+        @apply border-r-2 border-r-green-300
     }
     table.with-hover-effect tr>td:first-child {
-        @apply border-l-2 border-l-white
+        @apply border-l-2 border-l-white dark:border-l-transparent
     }
     table.with-hover-effect tr>td:last-child {
-        @apply border-r-2 border-r-white
+        @apply border-r-2 border-r-white dark:border-r-transparent
     }
     table.with-hover-effect tr:nth-child(even)>td:first-child {
-        @apply border-l-2 border-l-gray-50
+        @apply border-l-2 border-l-gray-50 dark:border-l-transparent
     }
     table.with-hover-effect tr:nth-child(even)>td:last-child {
-        @apply border-r-2 border-r-gray-50
+        @apply border-r-2 border-r-gray-50 dark:border-r-transparent
     }
     table.with-hover-effect tr:nth-child(even):hover>td:first-child {
-        @apply border-l-2 border-l-green-300 dark:border-l-slate-800
+        @apply border-l-2 border-l-green-300
     }
     table.with-hover-effect tr:nth-child(even):hover>td:last-child {
-        @apply border-r-2 border-r-green-300 dark:border-r-slate-800
+        @apply border-r-2 border-r-green-300
     }
 
 }
