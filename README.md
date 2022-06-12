@@ -1,6 +1,6 @@
 <p><img src="https://img.shields.io/github/license/mkocansey/bladewind" alt="License" /></p><br />
+<p><img src="https://user-images.githubusercontent.com/1946332/173253806-b5c9aef2-20ce-4820-81cc-a1c9e4c538a1.png" style="height: 60px" /></p>
 
-## About BladewindUI
 
 BladewindUI is a collection of UI components written purely using TailwindCSS, Laravel blade templates and Vanilla Javascript. These components are super simple to use and come with different levels of customization.
 <br /><br />
@@ -86,6 +86,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Textbox](https://bladewindui.com/component/textbox)**
 - **[Textarea](https://bladewindui.com/component/textarea)**
 - **[Toggle](https://bladewindui.com/component/toggle)**
+- **[Verification Code](https://bladewindui.com/component/verification-code)**
 
 <br /><br />
 
@@ -93,9 +94,9 @@ Check out the full documentation on https://bladewindui.com.
 
 <br /><br />
 
-## Security Vulnerabilities and General Info
+## Questions and General Info
 
-If you discover a security vulnerability, please e-mail Michael K. Ocansey at [mike@bladewindui.com](mailto:mike@bladewindui.com). You can also tweet [@bladewindui](https://twitter.com/bladewindui)
+If you want to ask anything at all or report a security vulnerability, please e-mail [mike@bladewindui.com](mailto:mike@bladewindui.com) or tweet [@bladewindui](https://twitter.com/bladewindui)
 
 <br />
 
