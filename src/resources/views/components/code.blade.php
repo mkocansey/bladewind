@@ -3,8 +3,8 @@
     'name' => 'pin-code-'.uniqid(),
     // what type of input box are you displaying
     // availalble options are text, password, email, search, tel
-    'total_digits' => 6, 
-    'totalDigits' => 6, 
+    'total_digits' => 4, 
+    'totalDigits' => 4, 
     // what function should be called when the user is done entering the verification code
     // this should just be the function name without parenthesis and parameters.
     // example: verifyPin ... when the user is done entering the code Bladewind will call verifyPin(code)
