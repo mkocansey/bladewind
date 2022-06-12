@@ -36,6 +36,9 @@
     // the component should exist on the page
     'show_error_inline' => 'false',
     'showErrorInline' => 'false',
+    // for numeric input only: should the numbers include dots
+    'with_dots' => 'true',
+    'withDots' => 'true',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -45,6 +48,7 @@
     $error_message = $errorMessage;
     $show_error_inline = $showErrorInline;
     $error_heading = $errorHeading;
+    $with_dots = $withDots;
     //--------------------------------------------------------------------
 
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -52,6 +56,7 @@
     $is_required = ($required == 'true') ? 'required' : '';
     $placeholder_color = ($show_placeholder_always=='true' || $label == '') ? '' : 'placeholder-transparent'; //($label !== '') ? 'placeholder-transparent' : '';
     $placeholder_label = ($show_placeholder_always=='true') ? $placeholder : (($label !== '') ? $label : $placeholder);
+    $with_dots = ($with_dots == 'true') ? 1 : 0;
 @endphp
 
 <div class="relative w-full @if($add_clearing == 'true') mb-4 @endif">
@@ -63,7 +68,7 @@
         value="{{ $selected_value }}" 
         autocomplete="off"
         placeholder="{{ $placeholder_label }}{{$required_symbol}}" 
-        @if($numeric == 'true') onkeypress="return isNumberKey(event)" @endif 
+        @if($numeric == 'true') onkeypress="return isNumberKey(event, {{$with_dots}})" @endif 
         @if($error_message != '') 
             data-error-message="{{$error_message}}" 
             data-error-inline="{{$show_error_inline}}" 

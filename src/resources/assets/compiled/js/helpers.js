@@ -47,8 +47,9 @@ validateForm = (form) => {
     return has_error === 0;
 }
 
-isNumberKey = (evt) => {   // usage:  onkeypress="return isNumberKey(event)"
+isNumberKey = (evt, with_dots=1) => {   // usage:  onkeypress="return isNumberKey(event)"
     var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (with_dots==0 && charCode == 46) return false;
     if (charCode > 31 && (charCode != 46 && (charCode < 48 || charCode > 57))) {
         return false;
     }
