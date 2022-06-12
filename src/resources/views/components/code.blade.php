@@ -75,12 +75,17 @@
     }
 
     showPinError = (name) => { unhide(`.bw-${name}-pin-error`); }
+    
     showSpinner = (name) => { 
         unhide(`.bw-${name}-pin-spinner`); 
         dom_el(`.${name}-pcode0`).focus(); 
         dom_el(`.${name}-pcode0`).blur(); 
     }
+    
     hidePinError = (name) => { hide(`.bw-${name}-pin-error`); }
+
     hideSpinner = (name) => { hide(`.bw-${name}-pin-spinner`); }
+    
+    setFocus = (name) => { dom_el(`.${$name}-pcode0`).focus(); }
 
 </script>
