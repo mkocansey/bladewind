@@ -183,7 +183,7 @@
             @endfor
             <input 
                 type="hidden" 
-                class="bw-{{ $input_name }} {{ ($required == 'true') ? ' required' : '' }}" 
+                class="bw-{{ $name }} {{ ($required == 'true') ? ' required' : '' }}" 
                 name="{{ ($data_serialize_as != '') ? $data_serialize_as : $input_name }}" />
         </div>
     </div>
