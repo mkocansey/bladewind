@@ -10,7 +10,7 @@
         'tiny' => 'md'
     ]
 ])
-<div class="max-w-7xl max-w-6xl max-w-2xl max-w-lg max-w-md"></div>
+<div class="max-w-md max-w-lg max-w-2xl max-w-3xl max-w-4xl max-w-6xl max-w-7xl "></div>
 <div class="max-w-{{$width[$size]}} mx-auto">
     {{ $slot }}
 </div>
