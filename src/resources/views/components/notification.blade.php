@@ -12,13 +12,13 @@
         'right_bottom' => 'right-4 bottom-10',
         'bottom_left' => 'left-4 bottom-10',
         'left_bottom' => 'right-4 bottom-10',
-        'top_center' => 'top-10', //FIXME::
+        'top_center' => 'top-10', //FIXME:: 
         'center_top' => 'top-10',
         'bottom_center' => 'bottom-10', //FIXME::
         'center_bottom' => 'bottom-10',
     ]
 ])
-<div class="fixed {{ $position_css[str_replace(' ', '_', $position)] }} z-50 hidden border-2 bw-notification bg-white shadow-lg p-4 rounded-lg w-4/5 sm:w-3/5 md:w-2/5 xl:w-1/6">
+<div class="fixed {{ $position_css[str_replace(' ', '_', $position)] }} z-50 hidden border-2 bw-notification bg-white shadow-lg p-4 rounded-lg w-11/12 sm:w-1/4">
     <div class="flex">
         <div class="flex-none pr-4">
             <x-bladewind::modal-icon />
