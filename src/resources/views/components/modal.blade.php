@@ -38,14 +38,15 @@
     'centerActionButtons' => 'false',
     // determines size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
-    'size' => 'medium',
+    'size' => 'small',
     'sizes' => [
-        'small' => 'w-1/6',
-        'medium' => 'w-1/5',
-        'big' => 'w-1/4',
-        'large' => 'w-1/3',
-        'xl' => 'w-1/2',
-        'omg' => 'w-[98%]'
+        'tiny' => 'w-1/6',
+        'small' => 'w-1/5',
+        'medium' => 'w-1/4',
+        'big' => 'w-1/3',
+        'large' => 'w-2/5',
+        'xl' => 'w-2/3',
+        'omg' => 'w-11/12'
     ],
 ])
 @php
@@ -68,39 +69,41 @@
     if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action== 'true') ? ';'.$cancelAction : '');
 @endphp
 
-<span class="w-1/2 w-1/3 w-1/4 w-1/5 w-1/6 w-[98%]"></span>
+<span class="sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12"></span>
 
 <div 
     class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex bw-modal bw-{{$name}}-modal hidden" 
     aria-backdrop-can-close="{{$backdrop_can_close}}">
-    <div class="bg-white {{$sizes[$size]}} mx-auto my-auto rounded-lg drop-shadow-2xl bw-{{$name}}">{{--w-[98%] md:--}}
-        <div class="flex">
-            @if($type !== '')
-                <div class="modal-icon py-6 pl-6">
-                    <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
+    <div class="sm:{{$sizes[$size]}} p-4 mx-auto my-auto bw-{{$name}}">
+        <div class="bg-white rounded-lg drop-shadow-2xl">
+            <div class="flex">
+                @if($type !== '')
+                    <div class="modal-icon py-6 pl-6 grow-0">
+                        <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
+                    </div>
+                @endif
+                <div class="modal-body p-6">
+                    <h1 class="text-lg text-gray-800 modal-title text-left">{{ $title }}</h1>
+                    <div class="modal-text text-gray-600 pt-2 text-base leading-6 tracking-wide text-left">
+                        {{ $slot }}
+                    </div>
+                </div>
+            </div>
+            @if( $show_action_buttons == 'true' )
+                <div class="modal-footer @if($center_action_buttons == 'true' || $size == 'small') text-center @else text-right @endif bg-gray-100 py-3 px-6 rounded-br-lg rounded-bl-lg">
+                    <x-bladewind::button 
+                        type="secondary"  
+                        size="small" 
+                        onclick="{!! $cancelAction !!}"
+                        class="cancel {{ $cancelCss }}">{{$cancel_button_label}}</x-bladewind::button>
+                        
+                    <x-bladewind::button
+                        size="small" 
+                        onclick="{!! $okAction !!}"
+                        class="okay ml-3 {{ $okCss }}">{{$ok_button_label}}</x-bladewind::button>
                 </div>
             @endif
-            <div class="modal-body p-6 flex-grow">
-                <h1 class="text-xl font-light text-gray-600 modal-title text-left">{{ $title }}</h1>
-                <div class="modal-text text-gray-500 pt-2 text-[14px] leading-5 text-left">
-                    {{ $slot }}
-                </div>
-            </div>
         </div>
-        @if( $show_action_buttons == 'true' )
-            <div class="modal-footer @if($center_action_buttons == 'true' || $size == 'small') text-center @else text-right @endif bg-gray-100 py-3 px-6 rounded-br-lg rounded-bl-lg">
-                <x-bladewind::button 
-                    type="secondary"  
-                    size="small" 
-                    onclick="{!! $cancelAction !!}"
-                    class="cancel {{ $cancelCss }}">{{$cancel_button_label}}</x-bladewind::button>
-                    
-                <x-bladewind::button
-                    size="small" 
-                    onclick="{!! $okAction !!}"
-                    class="okay ml-3 {{ $okCss }}">{{$ok_button_label}}</x-bladewind::button>
-            </div>
-        @endif
     </div>
 </div>
 
