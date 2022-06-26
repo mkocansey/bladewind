@@ -117,6 +117,10 @@ showModal = (element) => { unhide(`.bw-${element}-modal`); }
 
 hideModal = (element) => { hide(`.bw-${element}-modal`); }
 
+showButtonSpinner = (element) => { unhide(`${element} .bw-spinner`); }
+
+hideButtonSpinner = (element) => { hide(`${element} .bw-spinner`); }
+
 hide = (element, elementIsDomObject=false) => { 
     if( (! elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)){
         changeCss(element, 'hidden', 'add', elementIsDomObject); 
