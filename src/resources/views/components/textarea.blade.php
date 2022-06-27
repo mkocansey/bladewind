@@ -41,6 +41,7 @@
     <textarea {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }} 
         id="{{ $name }}" 
         name="{{ $name }}" 
+        rows="{{ $rows }}"
     @if($error_message != '') 
         data-error-message="{{$error_message}}" 
         data-error-inline="{{$show_error_inline}}" 

@@ -167,7 +167,7 @@
                 default_date="{{ $default_date_to??'' }}" 
                 required="{{ $required }}" 
                 has_label="{{$has_label}}"
-                label="{{$date_to_label}}}" 
+                label="{{$date_to_label}}" 
                 format="{{$format}}" />
         </div>
     </div>
