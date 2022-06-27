@@ -10,7 +10,7 @@
     // accepted formats are yyyy-mm-dd, mm-dd-yyyy, dd-mm-yyyy, D d M, Y
     'format' => 'yyyy-mm-dd',
     // text to display in the label that identifies the input field
-    'label' => 'Date',
+    'label' => '',
     // placeholder text to display if datepicker is empty
     'placeholder' => 'Select a date',
     // is the value of the date field required? used for form validation. default is false
@@ -88,7 +88,7 @@
             type="text" 
             id="dtp-{{ $name }}"
             max_date="today" 
-            is_datepicker="true"
+            label="{{ ($has_label == 'true') ? $label : '' }}"
             placeholder="{{ $placeholder }}{{$required_symbol}}" />
 
         <div class="bg-white dark:bg-slate-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem" 
@@ -109,11 +109,11 @@
                 </svg>
             </button>
             <button type="button" class="focus:outline-none focus:shadow-outline transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-100 p-1 rounded-full" @click="if (month == 11) {
-                                            month = 0; 
-                                            year++;
-                                        } else {
-                                            month++; 
-                                        } getNoOfDays()">
+                    month = 0; 
+                    year++;
+                } else {
+                    month++; 
+                } getNoOfDays()">
                 <svg class="h-6 w-6 text-gray-400 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
@@ -150,53 +150,65 @@
     <div class="grid grid-cols-2 gap-2">
         <div>
             <x-bladewind::datepicker 
-                name="{{ $name }}-1" type="single" placeholder="{{$date_from_label}}" 
-                default_date="{{ $default_date_from??'' }}" required="{{ $required }}" 
-                label="{{$date_from_label}}" format="{{$format}}" />
+                name="{{ $name }}-1" 
+                type="single" 
+                placeholder="{{$date_from_label}}" 
+                default_date="{{ $default_date_from??'' }}" 
+                required="{{ $required }}" 
+                has_label="{{$has_label}}"
+                label="{{$date_from_label}}" 
+                format="{{$format}}" />
         </div>
         <div>
             <x-bladewind::datepicker 
-                name="{{ $name }}-2" type="single" placeholder="{{$date_to_label}}" 
-                default_date="{{ $default_date_to??'' }}" required="{{ $required }}" 
-                label="{{$date_to_label}}}" format="{{$format}}" />
+                name="{{ $name }}-2" 
+                type="single" 
+                placeholder="{{$date_to_label}}" 
+                default_date="{{ $default_date_to??'' }}" 
+                required="{{ $required }}" 
+                has_label="{{$has_label}}"
+                label="{{$date_to_label}}}" 
+                format="{{$format}}" />
         </div>
     </div>
 @endif
+@once
 <script>
-    january = '{{ __('datepicker.JAN') }}';
-    february = '{{ __('datepicker.FEB') }}';
-    march = '{{ __('datepicker.MAR') }}';
-    april = '{{ __('datepicker.APR') }}';
-    may = '{{ __('datepicker.MAY') }}';
-    june = '{{ __('datepicker.JUN') }}';
-    july = '{{ __('datepicker.JUL') }}';
-    august = '{{ __('datepicker.AUG') }}';
-    september = '{{ __('datepicker.SEP') }}';
-    october = '{{ __('datepicker.OCT') }}';
-    november = '{{ __('datepicker.NOV') }}';
-    december = '{{ __('datepicker.DEC') }}';
+    const january = '{{ __('datepicker.JAN') }}';
+    const february = '{{ __('datepicker.FEB') }}';
+    const march = '{{ __('datepicker.MAR') }}';
+    const april = '{{ __('datepicker.APR') }}';
+    const may = '{{ __('datepicker.MAY') }}';
+    const june = '{{ __('datepicker.JUN') }}';
+    const july = '{{ __('datepicker.JUL') }}';
+    const august = '{{ __('datepicker.AUG') }}';
+    const september = '{{ __('datepicker.SEP') }}';
+    const october = '{{ __('datepicker.OCT') }}';
+    const november = '{{ __('datepicker.NOV') }}';
+    const december = '{{ __('datepicker.DEC') }}';
 
-    monday = '{{ __('datepicker.MON') }}';
-    tuesday = '{{ __('datepicker.TUE') }}';
-    wednesday = '{{ __('datepicker.WED') }}';
-    thursday = '{{ __('datepicker.THU') }}';
-    friday = '{{ __('datepicker.FRI') }}';
-    saturday = '{{ __('datepicker.SAT') }}';
-    sunday = '{{ __('datepicker.SUN') }}';
+    const monday = '{{ __('datepicker.MON') }}';
+    const tuesday = '{{ __('datepicker.TUE') }}';
+    const wednesday = '{{ __('datepicker.WED') }}';
+    const thursday = '{{ __('datepicker.THU') }}';
+    const friday = '{{ __('datepicker.FRI') }}';
+    const saturday = '{{ __('datepicker.SAT') }}';
+    const sunday = '{{ __('datepicker.SUN') }}';
 
-    MONTH_NAMES = [ 
+    const MONTH_NAMES = [ 
         january, february, march, april, may, june, july, august, 
         september, october, november, december,
     ];
-    MONTH_SHORT_NAMES = [ 
+    const MONTH_SHORT_NAMES = [ 
         january.substr(0,3), february.substr(0,3), march.substr(0,3),
         april.substr(0,3), may.substr(0,3), june.substr(0,3), july.substr(0,3),
         august.substr(0,3), september.substr(0,3), october.substr(0,3),
         november.substr(0,3), december.substr(0,3)
     ];
-    DAYS = [ 
+    const DAYS = [ 
         sunday.substr(0,3), monday.substr(0,3), tuesday.substr(0,3), wednesday.substr(0,3), 
         thursday.substr(0,3), friday.substr(0,3), saturday.substr(0,3)
     ];
 </script>
 <script src="{{ asset('bladewind/js/datepicker.js') }}"></script>
+@endonce

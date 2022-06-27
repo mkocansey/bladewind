@@ -37,7 +37,7 @@
     $is_required = ($required == 'true') ? 'required' : '';
     $placeholder_color = ($label !== '') ? 'placeholder-transparent' : '';
 @endphp
-<div class="relative w-full @if($add_clearing == 'true') mb-2 @endif">
+<div class="relative w-full @if($add_clearing == 'true') mb-3 @endif">
     <textarea {{ $attributes->merge(['class' => "bw-input w-full border border-slate-300/50 dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }} 
         id="{{ $name }}" 
         name="{{ $name }}" 
