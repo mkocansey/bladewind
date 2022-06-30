@@ -27,7 +27,7 @@
             {{$header}}
         </div>
     @endif
-    @if($title !== '' && $header == '')<div class="uppercase tracking-wide text-xs text-gray-400/90 mb-2">{{ $title}}</div>@endif
+    @if($title !== '' && $header == '')<div class="uppercase tracking-wide text-xs text-gray-500/90 mb-2">{{ $title}}</div>@endif
     <div @if($title !== '' && $header == '')class="mt-6"@endif>
         {{ $slot }}
     </div>
