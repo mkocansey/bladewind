@@ -82,7 +82,7 @@
                         <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
                     </div>
                 @endif
-                <div class="modal-body p-6">
+                <div class="modal-body grow p-6">
                     <h1 class="text-lg text-gray-800 modal-title text-left">{{ $title }}</h1>
                     <div class="modal-text text-gray-600 pt-2 text-base leading-6 tracking-wide text-left">
                         {{ $slot }}

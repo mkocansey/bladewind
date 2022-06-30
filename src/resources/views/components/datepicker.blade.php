@@ -88,6 +88,7 @@
             type="text" 
             id="dtp-{{ $name }}"
             max_date="today" 
+            required="{{$required}}"
             label="{{ ($has_label == 'true') ? $label : '' }}"
             placeholder="{{ $placeholder }}{{$required_symbol}}" />
 
@@ -167,7 +168,7 @@
                 default_date="{{ $default_date_to??'' }}" 
                 required="{{ $required }}" 
                 has_label="{{$has_label}}"
-                label="{{$date_to_label}}}" 
+                label="{{$date_to_label}}" 
                 format="{{$format}}" />
         </div>
     </div>

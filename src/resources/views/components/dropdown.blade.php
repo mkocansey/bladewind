@@ -190,4 +190,4 @@
 </div>
 
 <script>el_name = '{{ $name }}';</script>
-@once<script src="{{ asset('bladewind/js/dropdown.js') }}"></script>@endonce
+<script src="{{ asset('bladewind/js/dropdown.js') }}"></script>
