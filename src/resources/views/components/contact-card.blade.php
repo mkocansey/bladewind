@@ -19,7 +19,7 @@
         <div><x-bladewind::avatar image="{{$image}}" /></div>
         <div class="grow pl-2 pt-1">
             <b>{{$name}}</b>
-            <div class="text-sm mb-2 @if($department != '' || $position != '') border-b border-gray-100/80 pb-2 @endif">
+            <div class="text-sm mb-2">
                 {!!$position!!}
                 @if($department != '' && $position != '')
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
