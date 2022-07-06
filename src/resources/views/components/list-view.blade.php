@@ -1,7 +1,8 @@
 @props([
     'transparent' => 'false',
-    'class' => ''
+    'class' => '',
+    'compact' => 'false',
 ])
-<ul role="list" class="@if($transparent=='false')bg-white @endif py-4 divide-y divide-gray-200/70 {{$class}}">
+<ul role="list" class="@if($transparent=='false')bg-white @endif divide-y divide-slate-100 {{$class}}">
     {{ $slot }}
 </ul>
