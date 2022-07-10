@@ -1,1 +1,2 @@
-<li class="flex px-4 py-4 first:pt-0 last:pb-0">{{$slot}}</li>
+@aware([ 'compact' => 'false' ])
+<li class="flex @if($compact=='false') py-4 @else py-2 @endif first:pt-0 last:pb-0">{{$slot}}</li>

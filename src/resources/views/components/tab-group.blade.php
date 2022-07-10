@@ -15,6 +15,3 @@
  <x-bladewind::tab-body for="{{$name}}">
     {{$slot}}
 </x-bladewind::tab-body>
-
-<script>
-</script>
