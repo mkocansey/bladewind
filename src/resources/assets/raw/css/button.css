@@ -23,7 +23,7 @@
     .bw-button.tiny {
         @apply 
             py-[6px]
-            px-4
+            px-[12px]
             text-[10px]
     }
     .bw-button.primary { 
