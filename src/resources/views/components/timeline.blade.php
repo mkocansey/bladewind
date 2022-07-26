@@ -48,7 +48,7 @@
     <div class="z-20">
         <div class="h-8 w-8 @if($status=='pending') bg-white border-4 {{ $coloring['border'][$color] }}  @else {{$coloring['bg'][$color]}} @endif rounded-full"></div>
     </div>
-    <div class="@if($last!='true') border-l-4 {{ $coloring['border'][$color] }}@endif -ml-[16px] pl-8 pb-14 z-10 text-lg">
+    <div class="@if($last!='true') border-l-4 {{ $coloring['border'][$color] }}@endif pl-8 pb-14 z-10 text-lg" style="margin-left: -18px">
         @if($stacked == 'true') <div class="font-semibold {{ $coloring['text'][$color] }}">{!!$date!!}</div> @endif
         {!!$label!!}
     </div>
