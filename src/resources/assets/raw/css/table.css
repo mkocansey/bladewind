@@ -47,12 +47,13 @@
     table.with-hover-effect tr>td:last-child {
         @apply border-r-2 border-r-white dark:border-r-transparent
     }
+    /*
     table.with-hover-effect tr:nth-child(even)>td:first-child {
         @apply border-l-2 border-l-gray-50 dark:border-l-transparent
     }
     table.with-hover-effect tr:nth-child(even)>td:last-child {
         @apply border-r-2 border-r-gray-50 dark:border-r-transparent
-    }
+    }*/
     table.with-hover-effect tr:nth-child(even):hover>td:first-child {
         @apply border-l-2 border-l-green-300
     }
