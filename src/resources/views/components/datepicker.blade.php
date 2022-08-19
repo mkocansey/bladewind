@@ -42,6 +42,12 @@
     // what label should be displayed for the to date. Default is 'To'
     'date_to_label' => 'To',
     'dateToLabel' => 'To',
+    // what names should be used for the from date. Default is 'start_date'
+    'date_from_name' => 'start_date',
+    'dateFromName' => 'start_date',
+    // what name should be displayed for the to date. Default is 'end_date'
+    'date_to_name' => 'end_date',
+    'dateToName' => 'end_date',
     // should labels be displayed for the datepicker
     // By default only placeholders are displayed in the textbox(es)
     'has_label' => 'false',
@@ -58,12 +64,14 @@
     $default_date_to = $defaultDateTo;
     $date_from_label = $dateFromLabel;
     $date_to_label = $dateToLabel;
+    $date_from_name = $dateFromName;
+    $date_to_name = $dateToName;
     $has_label = $hasLabel;
     //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
     $required_symbol = ($has_label == 'false' && $required == 'true') ? ' *' : '';
-    $is_required = ($required == 'true') ? 'required' : '';
+    //$is_required = ($required == 'true') ? 'required' : '';
 @endphp
 
 @if($type == 'single')
@@ -81,13 +89,15 @@
             :value="datepickerValue" 
             value="{{ $default_date }}"   />
         <x-bladewind::input
-            class="bw-datepicker bw-input block w-full peer {{$name}} {{$is_required}}"
+            {{-- class="bw-datepicker bw-input block w-full peer {{$name}}" --}}
+            class="bw-datepicker"
             x-on:click="showDatepicker = !showDatepicker" 
             x-model="datepickerValue" 
             x-on:keydown.escape="showDatepicker = false"
             type="text" 
             id="dtp-{{ $name }}"
             max_date="today" 
+            name="{{$name}}"
             required="{{$required}}"
             label="{{ ($has_label == 'true') ? $label : '' }}"
             placeholder="{{ $placeholder }}{{$required_symbol}}" />
@@ -151,7 +161,7 @@
     <div class="grid grid-cols-2 gap-2">
         <div>
             <x-bladewind::datepicker 
-                name="{{ $name }}-1" 
+                name="{{ $date_from_name }}" 
                 type="single" 
                 placeholder="{{$date_from_label}}" 
                 default_date="{{ $default_date_from??'' }}" 
@@ -162,7 +172,7 @@
         </div>
         <div>
             <x-bladewind::datepicker 
-                name="{{ $name }}-2" 
+                name="{{ $date_to_name }}" 
                 type="single" 
                 placeholder="{{$date_to_label}}" 
                 default_date="{{ $default_date_to??'' }}" 
