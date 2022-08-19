@@ -8,6 +8,7 @@
         transform: translate(0) scale(1);
         visibility: visible;
         display: block;
+        tabindex: 0;
     }
 </style>
 @endonce
