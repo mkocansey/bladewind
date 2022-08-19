@@ -7,15 +7,16 @@
         opacity:1;
         transform: translate(0) scale(1);
         visibility: visible;
+        display: block;
     }
 </style>
 @endonce
-<div class="relative inline-block text-left bw-dropmenu">
+<div class="relative inline-block text-left bw-dropmenu !z-40" tabindex="0">
     <button class="text-sm transition duration-150 ease-in-out z-10">
         {!!$trigger!!}
     </button>
-    <div class="opacity-0 invisible bw-dropmenu-items bg-white transition-all duration-300 transform origin-top-right -translate-y-2 scale-95">
-        <div class="!z-50 absolute right-0  mt-1 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none">
+    <div class="opacity-0 hidden bw-dropmenu-items bg-white transition-all duration-300 transform origin-top-right -translate-y-2 scale-95 !z-50">
+        <div class="absolute right-0  mt-1 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none">
             {{$slot}}
         </div>
     </div>
