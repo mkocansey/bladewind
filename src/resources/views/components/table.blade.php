@@ -22,8 +22,8 @@
     $has_shadow = $hasShadow;
     $hover_effect = $hoverEffect;
 @endphp
-<div class="max-w-screen overflow-x-hidden md:w-full">
-    <div class="w-full overflow-x-scroll">
+<div class=" z-20"> {{--max-w-screen overflow-x-hidden md:w-full--}}
+    <div class="w-full">
         <table class="bw-table w-full @if($has_shadow == 'true') shadow-2xl shadow-gray-200 @endif  @if($divided == 'true') divided @if($divider=='thin') thin @endif @endif  @if($striped == 'true') striped @endif @if($hover_effect=='true') with-hover-effect @endif @if($compact=='true') compact @endif">
             <thead>
                 <tr class="text-gray-500 bg-gray-200">{{ $header }}</tr>

@@ -4,6 +4,7 @@
         @apply 
             border 
             border-gray-400/30 
+            rounded-md
             px-4 
             py-3 
             !outline-none
@@ -11,10 +12,8 @@
             focus:outline-none 
             focus:border 
             focus:border-gray-500 
-            mb-3 
             text-sm 
             placeholder-transparent
             peer-placeholder-shown:mt-2
-            mb-1
     }
 }

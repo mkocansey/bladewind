@@ -75,6 +75,10 @@
     // enforces validation if set to true
     'required' => 'false',
 
+    // adds margin after the input box
+    'add_clearing' => 'true',
+    'addClearing' => 'true', 
+    
     // determines if a value passed in the data array should automatically be selected
     // useful when using the component in edit mode or as part of filter options
     // the value you specify should exist in your value_key. If your value_key is 'id', you
@@ -103,6 +107,7 @@
     $data_serialize_as = $dataSerializeAs;
     $selected_value = $selectedValue;
     $show_filter_icon = $showFilterIcon;
+    $add_clearing = $addClearing;
     //-------------------------------------------------------
 
     $data = json_decode(str_replace('&quot;', '"', $data));
@@ -126,8 +131,8 @@
 
 @endphp
 
-<div class="relative {{ $name }}">
-    <button type="button" class="bw-dropdown bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:text-gray-300">
+<div class="relative {{ $name }}@if($add_clearing == 'true') mb-3 @endif">
+    <button type="button" class="bw-dropdown rounded-md bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:text-gray-300">
         <label class="cursor-pointer">
             @if($show_filter_icon == 'true')
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

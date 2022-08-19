@@ -8,9 +8,10 @@
     
     // message to display when the process is running
     'message' => '',
+    'class' => '',
 ])
 @php $name = preg_replace('/[\s]/', '-', $name); @endphp
-<div class="{{ $name }} text-center text-sm @if($hide == 'true') hidden @endif mt-6">
+<div class="{{ $name }} text-center text-sm @if($hide == 'true') hidden @endif mt-6 {{$class}}">
     <x-bladewind::spinner />
-    <div class="my-3 text-gray-400">{{ $message }}</div>
+    <div class="my-3 text-gray-400 process-message">{{ $message }}</div>
 </div>
