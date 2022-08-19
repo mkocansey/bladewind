@@ -13,16 +13,20 @@
     'required' => 'false',
     // maximum allowed filezie in MB
     'max_file_size' => 5,
-    'maxFileSize'   => 5
+    'maxFileSize'   => 5,
+    // adds margin after the input box
+    'add_clearing' => 'true',
+    'addClearing' => 'true', 
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
     $accepted_file_types = $acceptedFileTypes;
+    $add_clearing = $addClearing;
     $max_file_size = $maxFileSize;
     if (! is_numeric($max_file_size)) $max_file_size = 5;
 @endphp
 
-<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 text-center cursor-pointer mt-4 {{ $name }}">
+<div class="relative px-2 py-3 border border-dashed border-gray-300 text-center cursor-pointer rounded-md {{ $name }} @if($add_clearing == 'true') mb-3 @endif">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute z-20 left-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
     </svg>
