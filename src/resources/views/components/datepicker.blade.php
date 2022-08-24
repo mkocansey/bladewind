@@ -49,9 +49,11 @@
     'date_to_name' => 'end_date',
     'dateToName' => 'end_date',
     // should labels be displayed for the datepicker
-    // By default only placeholders are displayed in the textbox(es)
-    'has_label' => 'false',
-    'hasLabel' => 'false',
+    // By default only placeholders are displayed in the textbox(es) 
+    /*** deprecating this as of 1.4.1
+        'has_label' => 'false',
+        'hasLabel' => 'false', 
+    ***/
 ])
 @php
     // reset variables for Laravel 8 support
@@ -66,12 +68,9 @@
     $date_to_label = $dateToLabel;
     $date_from_name = $dateFromName;
     $date_to_name = $dateToName;
-    $has_label = $hasLabel;
     //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
-    $required_symbol = ($has_label == 'false' && $required == 'true') ? ' *' : '';
-    //$is_required = ($required == 'true') ? 'required' : '';
 @endphp
 
 @if($type == 'single')
@@ -81,10 +80,9 @@
             <svg class="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
             </svg>
-        </div>
+        </div>{{--name="{{ $name }}" --}}
         <input 
             type="hidden" 
-            name="{{ $name }}" 
             x-ref="date" 
             :value="datepickerValue" 
             value="{{ $default_date }}"   />
@@ -98,9 +96,9 @@
             id="dtp-{{ $name }}"
             max_date="today" 
             name="{{$name}}"
-            required="{{$required}}"
-            label="{{ ($has_label == 'true') ? $label : '' }}"
-            placeholder="{{ $placeholder }}{{$required_symbol}}" />
+            label="{{ $label }}"
+            placeholder="{{ $placeholder }}"
+            required="{{$required}}" />
 
         <div class="bg-white dark:bg-slate-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem" 
             x-show.transition="showDatepicker" @click.away="showDatepicker = false">
@@ -166,7 +164,6 @@
                 placeholder="{{$date_from_label}}" 
                 default_date="{{ $default_date_from??'' }}" 
                 required="{{ $required }}" 
-                has_label="{{$has_label}}"
                 label="{{$date_from_label}}" 
                 format="{{$format}}" />
         </div>
@@ -177,7 +174,6 @@
                 placeholder="{{$date_to_label}}" 
                 default_date="{{ $default_date_to??'' }}" 
                 required="{{ $required }}" 
-                has_label="{{$has_label}}"
                 label="{{$date_to_label}}" 
                 format="{{$format}}" />
         </div>
