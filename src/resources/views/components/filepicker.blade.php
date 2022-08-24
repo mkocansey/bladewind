@@ -26,7 +26,7 @@
     if (! is_numeric($max_file_size)) $max_file_size = 5;
 @endphp
 
-<div class="relative px-2 py-3 border border-dashed border-gray-300 text-center cursor-pointer rounded-md {{ $name }} @if($add_clearing == 'true') mb-3 @endif">
+<div class="relative px-2 py-3 border border-dashed border-gray-300 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing == 'true') mb-3 @endif">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute z-20 left-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
     </svg>
@@ -47,12 +47,12 @@
             class="bw-{{ $name }} @if($required == 'true') required @endif" 
             id="bw_{{ $name }}" 
             accept="{{ $accepted_file_types }}" />
-            <textarea class="b64-{{ $name }}@if($required == 'true') required @endif" name="{{ $name }}"></textarea>
+            <textarea class="b64-{{ $name }}@if($required == 'true') required @endif" name="b64_{{ $name }}"></textarea>
     </div>
 </div>
 
 <script>
-    dom_el('.{{ $name }}').addEventListener('click', function (){
+    dom_el('.bw-fp-{{ $name }}').addEventListener('click', function (){
         dom_el('.bw-{{ $name }}').click();
     });
     dom_el('.bw-{{ $name }}').addEventListener('change', function (){
@@ -62,20 +62,20 @@
 
             if (file) {
                 if(allowedFileSize(file.size, {{$max_file_size}})) {
-                    dom_el('.{{ $name }} .selection').innerHTML = 
+                    dom_el('.bw-fp-{{ $name }} .selection').innerHTML = 
                     ( file.type.indexOf('image') !== -1) ? '<img src="'+ URL.createObjectURL(file) + '" />' : file.name;
                     convertToBase64(file, '.b64-{{ $name }}');
                 } else {
-                    dom_el('.{{ $name }} .selection').innerHTML = '<span class="text-red-500">File must be {{$max_file_size}}mb or below</span>';
+                    dom_el('.bw-fp-{{ $name }} .selection').innerHTML = '<span class="text-red-500">File must be {{$max_file_size}}mb or below</span>';
                 }
             }
-            changeCss('.{{ $name }} .clear', 'hidden', 'remove');
+            changeCss('.bw-fp-{{ $name }} .clear', 'hidden', 'remove');
         }
     });
-    dom_el('.{{ $name }} .clear').addEventListener('click', function (e){
-        dom_el('.{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
+    dom_el('.bw-fp-{{ $name }} .clear').addEventListener('click', function (e){
+        dom_el('.bw-fp-{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
         dom_el('.bw-{{ $name }}').value = dom_el('.b64-{{ $name }}').value = '';
-        changeCss('.{{ $name }} .clear', 'hidden');
+        changeCss('.bw-fp-{{ $name }} .clear', 'hidden');
         e.stopImmediatePropagation();
     });
     
