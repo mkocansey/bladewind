@@ -72,7 +72,8 @@ serialize = (form) => {
         ** Laravel will display contact name field is required but contact_person : value 
         ** will be sent to the API
         **/
-        let serialize_as = dom_el(form).elements[key].getAttribute('data-serialize-as');
+        let this_element = document.getElementsByName(key);
+        let serialize_as = this_element[0].getAttribute('data-serialize-as');
         obj[serialize_as ?? key] = value;
     }   return obj;
 }
