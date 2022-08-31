@@ -86,6 +86,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Tag](https://bladewindui.com/component/tag)**
 - **[Textbox](https://bladewindui.com/component/textbox)**
 - **[Textarea](https://bladewindui.com/component/textarea)**
+- **[Timeline](https://bladewindui.com/component/timeline)**
 - **[Toggle](https://bladewindui.com/component/toggle)**
 - **[Verification Code](https://bladewindui.com/component/verification-code)**
 
