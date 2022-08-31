@@ -18,12 +18,11 @@
     .form-label {
         @apply 
             absolute 
-            left-3.5 
-            -top-1.5 
+            left-3.5  
             text-xs 
             px-1 
             transition-all 
-            peer-placeholder-shown:top-3.5 
+            peer-placeholder-shown:top-3 
             peer-placeholder-shown:text-sm  
             peer-focus:-top-1.5 
             peer-focus:text-xs
