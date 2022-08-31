@@ -68,6 +68,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Checkbox](https://bladewindui.com/component/checkbox)**
 - **[Datepicker](https://bladewindui.com/component/datepicker)**
 - **[Dropdown](https://bladewindui.com/component/dropdown)**
+- **[Dropmenu](https://bladewindui.com/component/dropmenu)**
 - **[Empty State](https://bladewindui.com/component/empty-state)**
 - **[Filepicker](https://bladewindui.com/component/filepicker)**
 - **[Horizontal Line Graph](https://bladewindui.com/component/horizontal-line-graph)**
