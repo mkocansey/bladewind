@@ -3,7 +3,6 @@
     .bw-input,
     select {
         @apply 
-            py-3 px-4
             !outline-none
             !ring-0
             focus:outline-none 
