@@ -1,5 +1,6 @@
 @php use Illuminate\Support\Str; @endphp
 @props([
+    'transparent' => 'false',
     'percentage' => 0,
     'color' => 'blue',
     'show_percentage_label' => 'false',
@@ -10,11 +11,11 @@
     'percentageLabelPosition' => 'top left',
     'shade' => 'faint',
     'color_weight' => [
-        'faint' => 200,
+        'faint' => 300,
         'dark' => 500,
     ],
     'text_color_weight' => [
-        'faint' => 500,
+        'faint' => 600,
         'dark' => 50,
     ],
     'percentage_prefix' => '',
@@ -23,6 +24,8 @@
     'percentageSuffix' => '',
     'class' => '',
     'css_override' => '',
+    'bar_class' => '',
+    'barClass' => '',
     'cssOverride' => '',
     'percentage_label_opacity' => '100',
     'percentageLabelOpacity' => '100'
@@ -37,6 +40,7 @@
     $percentage_prefix = $percentagePrefix;
     $percentage_suffix = $percentageSuffix;
     $css_override = $cssOverride;
+    $bar_class = $barClass;
     //-----------------------------------------------------------------------
 
     if ($color == 'gray' && $shade == 'faint') $css_override = '!bg-slate-300';
@@ -51,9 +55,11 @@
         {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
     </div>
     @endif
-    <div class="bg-slate-200/70 w-full mt-1 my-2 rounded-full">
-        <div class="w-[{{$percentage}}%] text-center py-1 bg-{{$color}}-{{$color_weight[$shade]}}/80 {{$css_override}} text-{{$color}} rounded-full bar-width animate__animated animate__fadeIn">
-            @if($show_percentage_label=='true' && $show_percentage_label_inline=='true')<span class="text-{{$color}}-{{$text_color_weight[$shade]}} px-2 text-xs">{{ $percentage}}%</span>@endif
+    <div class="@if($transparent == 'false') bg-slate-200/70 w-full @endif mt-1 my-2 rounded-full">
+        <div class="w-[{{$percentage}}%] text-center py-1 bg-{{$color}}-{{$color_weight[$shade]}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
+            @if($show_percentage_label=='true' && $show_percentage_label_inline=='true')<span class="text-{{$color}}-{{$text_color_weight[$shade]}} px-2 text-xs">
+            {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
+            </span>@endif
         </div>
     </div>
     @if($show_percentage_label == 'true' && 
