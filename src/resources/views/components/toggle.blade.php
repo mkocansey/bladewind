@@ -29,7 +29,7 @@
     $name = preg_replace('/[\s-]/', '_', $name); 
 @endphp
 
-<label class="relative @if($justified=='false')inline-flex @else flex @endif justify-between items-center group" onclick="{!!$onclick!!}">
+<label class="relative @if($justified=='false')inline-flex @else flex justify-between @endif items-center group" onclick="{!!$onclick!!}">
     @if($label_position == 'left' && $label !== '')<span class="pr-4 {{$class}}">{!!$label!!}</span>@endif
     <input type="checkbox" name="{{$name}}" @if($checked=='true')checked="checked"@endif @if($disabled=='true')disabled="disabled"@endif class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md" />
     <span style="zoom: 80%" class="w-20 @if($bar=='thick')h-10 @else h-5 @endif flex items-center flex-shrink-0 p-1 bg-gray-300 rounded-full duration-300 ease-in-out 
