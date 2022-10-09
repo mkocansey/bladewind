@@ -14,6 +14,7 @@
     'has_shadow' => 'true',
     'hasShadow' => 'true',
     'class' => '',
+    'number_css' => '',
 ])
 @php 
     // reset variables for Laravel 8 support
@@ -35,11 +36,12 @@
                 @endif
                 <div class="text-3xl text-gray-500/90 font-light">
                     @if($show_spinner=='true')<x-bladewind::spinner></x-bladewind::spinner>@endif 
-                    @if($currency!=='' && $currency_position == 'left') <span class="text-gray-300 text-2xl">{!!$currency!!}</span>@endif<span class="figure tracking-wider">{{ $number }}</span>@if($currency!=='' && $currency_position == 'right') <span class="text-gray-300 text-2xl">{!!$currency!!}</span>@endif
+                    @if($currency!=='' && $currency_position == 'left') <span class="text-gray-300 text-2xl">{!!$currency!!}</span>@endif<span class="figure tracking-wider {{$number_css}}">{{ $number }}</span>@if($currency!=='' && $currency_position == 'right') <span class="text-gray-300 text-2xl">{!!$currency!!}</span>@endif
                 </div>
                 @if($label_position=='bottom')
                 <div class="uppercase tracking-wide text-xs text-gray-500/90 mt-1 label">{!! $label!!}</div>
                 @endif
+                {{ $slot }}
             </div>
             @if($icon !== '' && $icon_position=='right')
             <div class="grow-0 icon">{!! $icon !!}</div>
