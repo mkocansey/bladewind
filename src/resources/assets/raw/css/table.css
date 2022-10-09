@@ -21,16 +21,18 @@
         border-t border-gray-200/20
     }
     .bw-table.compact thead>tr>th {
-        @apply !py-1
+        @apply !py-2
     }
     .bw-table tr>td {
         @apply
         p-5
-        align-top
-        leading-8 text-gray-500 dark:text-slate-800 bg-white dark:bg-slate-400
+        align-top 
+        text-slate-600/80
+        text-sm
+        dark:text-slate-800 bg-white dark:bg-slate-400 leading-6
     }
     .bw-table.compact tr>td {
-        @apply !py-1 !leading-6
+        @apply !py-2 /*!leading-6*/
     }
     .bw-table td.double-underline {
         @apply border-b-4 border-double border-black
@@ -47,13 +49,6 @@
     table.with-hover-effect tr>td:last-child {
         @apply border-r-2 border-r-white dark:border-r-transparent
     }
-    /*
-    table.with-hover-effect tr:nth-child(even)>td:first-child {
-        @apply border-l-2 border-l-gray-50 dark:border-l-transparent
-    }
-    table.with-hover-effect tr:nth-child(even)>td:last-child {
-        @apply border-r-2 border-r-gray-50 dark:border-r-transparent
-    }*/
     table.with-hover-effect tr:nth-child(even):hover>td:first-child {
         @apply border-l-2 border-l-green-300
     }

@@ -24,6 +24,10 @@
     'tag' => 'button',
     // red, yellow, green, blue, purple, orange, cyan, black
     'color' => 'blue', 
+    // overwrite the button text color
+    'button_text_css' => '',
+    'buttonTextCss' => '',
+
     'coloring' => [
         'bg' => [
             'red' => 'bg-red-500',
@@ -70,7 +74,8 @@
     $button_type = ($can_submit == 'false') ? 'button' : 'submit'; 
     $spinner_css = ($show_spinner == 'true') ? '' : 'hidden'; 
     $primary_color = ($type=='primary') ? $coloring['bg'][$color]. ' '. $coloring['focus'][$color]. ' '. $coloring['hover_active'][$color] : '';
-    $button_text_color = ($type=='primary') ? 'text-white hover:text-white' : 'text-black hover:text-black';
+    $button_text_css = $buttonTextCss;
+    $button_text_color = ($button_text_css !== '') ? $button_text_css : (($type=='primary') ? 'text-white hover:text-white' : 'text-black hover:text-black');
     $is_disabled = ($disabled == 'true') ? 'disabled' : '';
     $tag = ($tag != 'a' && $tag != 'button') ? 'button' : $tag;
 @endphp
