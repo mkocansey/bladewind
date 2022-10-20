@@ -13,7 +13,8 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
         let href_target = el.getAttribute('data-href-target');
         let parent_tag = el.getAttribute('data-parent');
         let user_function = el.getAttribute('data-user-function');
-        if(parent_tag != null) {
+
+        if(parent_tag !== null) {
             dom_el(`.bw-${parent_tag}`).value = value;
             dom_el(`.${parent_tag}>button>label`).innerHTML = `<div class="flex items-center">${el.innerHTML}</div>`;
             el.parentElement.parentElement.classList.toggle('hidden');
@@ -22,7 +23,7 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
                 (href_target == 'self') ? location.href = href : window.open(href, 'bladewind');
                 e.stopImmediatePropagation();
             }
-            if(user_function !== '') callUserFunction(`${user_function}('${value}', '${label}')`);
+            if(user_function !== '' && user_function !== null) callUserFunction(`${user_function}('${value}', '${label}')`);
             if (el.classList.contains('default')){
                 dom_el(`.${parent_tag} .dropdown-items>.default`).classList.add('hidden');
             } else {
@@ -36,10 +37,8 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
 });
 
 selectSelectedValues = () => {
-    dom_els('.dropdown-items>div').forEach((el) => {
-        let value = el.getAttribute('data-value');
-        let selected_value = el.getAttribute('data-selected-value');
-        if (value === selected_value) el.click();
+    dom_els('div[data-selected="true"]').forEach((el) => {
+        el.click();
     });
 }
 
@@ -61,4 +60,7 @@ if(dom_els('.search-dropdown')){
         });
     });
 }
-window.onload = () => { selectSelectedValues(); }
+
+window.onload = function () {
+    selectSelectedValues();
+}
