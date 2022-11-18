@@ -31,8 +31,8 @@
 
 <label class="relative @if($justified=='false')inline-flex @else flex justify-between @endif items-center group" onclick="{!!$onclick!!}">
     @if($label_position == 'left' && $label !== '')<span class="pr-4 {{$class}}">{!!$label!!}</span>@endif
-    <input type="checkbox" name="{{$name}}" @if($checked=='true')checked="checked"@endif @if($disabled=='true')disabled="disabled"@endif class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md" />
-    <span style="zoom: 80%" class="w-20 @if($bar=='thick')h-10 @else h-5 @endif flex items-center flex-shrink-0 p-1 bg-gray-300 rounded-full duration-300 ease-in-out 
+    <input type="checkbox" name="{{$name}}" @if($checked=='true')checked="checked"@endif @if($disabled=='true')disabled="disabled"@endif class="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md cursor-pointer" />
+    <span style="zoom: 80%" class="w-20 @if($bar=='thick')h-10 @else h-5 @endif flex items-center flex-shrink-0 p-1 bg-gray-300 rounded-full duration-300 ease-in-out cursor-pointer
                 peer-disabled:opacity-40 @if($color=='red')peer-checked:bg-red-500/80 @endif @if($color=='yellow')peer-checked:bg-yellow-500/80 @endif @if($color=='green')peer-checked:bg-green-500/80 @endif @if($color=='pink')peer-checked:bg-pink-500/80 @endif @if($color=='cyan')peer-checked:bg-cyan-500/80 @endif @if($color=='gray')peer-checked:bg-slate-500 @endif @if($color=='purple')peer-checked:bg-purple-500/80 @endif @if($color=='orange')peer-checked:bg-orange-500/80 @endif @if($color=='blue')peer-checked:bg-blue-500/80 @endif after:w-8 after:h-8 after:bg-white after:rounded-full after:shadow-md after:duration-300 
                 peer-checked:after:translate-x-10 group-hover:after:translate-x-0"></span>
     @if($label_position=='right' && $label !== '')<span class="pl-4 {{$class}}">{!!$label!!}</span>@endif
