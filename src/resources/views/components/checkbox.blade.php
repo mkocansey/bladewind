@@ -14,11 +14,11 @@
     <input 
         value="{{$value}}" 
         name="{{$name}}"
-        @if($disabled=='true') disabled="disabled" @endif
+        @if($disabled=='true') disabled @endif
         class="text-blue-500 
             w-5 h-5 mr-2 disabled:opacity-60
             focus:ring-blue-400 focus:ring-opacity-25 
             border border-gray-300 bw-checkbox 
             rounded" 
-        type="{{$type}}" @if($checked == 'true') checked="checked" @endif />{!! $label !!}
+        type="{{$type}}" @if($checked == 'true') checked @endif />{!! $label !!}
 </label>  &nbsp; &nbsp;
