@@ -20,9 +20,9 @@
     $name = preg_replace('/[\s]/', '-', $name);
 @endphp
 
-<li class="mr-2 cursor-pointer atab atab-{{ $name }}">
-    <span onclick="@if($disabled == 'false') @if($url == 'default')goToTab('{{$name}}', '{{$color}}') @else location.href='{{ $url }}' @endif @else javascript:void(0)@endif" 
-        class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 @if($disabled !== 'false') text-gray-300 hover:!text-gray-300 cursor-not-allowed @else
-        @if($active !== 'true' && $disabled == 'false') text-gray-500  border-transparent hover:text-gray-600 hover:border-gray-300
-        @else text-{{$color}}-500 border-{{$color}}-500 hover:text-{{$color}}-500 hover:border-{{$color}}-500 @endif @endif">{!! $label !!}</span>
+<li class="mr-2 cursor-pointer atab atab-{{ $name }}"
+    onclick="@if($disabled == 'false') @if($url == 'default')goToTab('{{$name}}', '{{$color}}', this.parentElement.getAttribute('data-name')) @else location.href='{{ $url }}' @endif @else javascript:void(0)@endif">
+    <span class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 @if($disabled !== 'false') text-gray-300 hover:!text-gray-300 cursor-not-allowed @else
+    @if($active !== 'true' && $disabled == 'false') text-gray-500  border-transparent hover:text-gray-600 hover:border-gray-300
+    @else text-{{$color}}-500 border-{{$color}}-500 hover:text-{{$color}}-500 hover:border-{{$color}}-500 @endif @endif">{!! $label !!}</span>
 </li>
