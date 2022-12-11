@@ -37,9 +37,11 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
 });
 
 selectSelectedValues = () => {
-    dom_els('div[data-selected="true"]').forEach((el) => {
-        el.click();
-    });
+    if(dom_els('div[data-selected="true"]')) {
+        dom_els('div[data-selected="true"]').forEach((el) => {
+            el.click();
+        });
+    }
 }
 
 searchDropdown = (value, parent) => {
