@@ -18,7 +18,7 @@ class BladewindServiceProvider extends ServiceProvider
         __DIR__.'/resources/views/components/' => resource_path('views/components/bladewind'),
         __DIR__.'/resources/lang' => function_exists('lang_path') ? lang_path() : resource_path('lang'),
         __DIR__.'/resources/assets/compiled' => public_path('bladewind'),
-    ], 'laravel-assets');
+    ], 'bladewind-assets'); // laravel-assets: changed to bladewind-assets to prevent automatic publishing on composer update
 
     $this->publishes([
         __DIR__.'/resources/assets/raw' => resource_path('bladewind'),
