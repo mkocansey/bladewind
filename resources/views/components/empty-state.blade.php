@@ -1,5 +1,5 @@
 @props([
-    'image' => asset('bladewind/images/empty-state.svg'), 
+    'image' => asset('vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
     'button_label' => '', // button will not be displayed if no text is passed
     'buttonLabel' => '',
@@ -9,7 +9,7 @@
     'onclick' => '',
     'class' => '',
 ])
-@php 
+@php
     // reset variables for Laravel 8 support
     $show_image = $showImage;
     $button_label = $buttonLabel;
@@ -20,7 +20,7 @@
     @if($message != '')<div class="text-slate-600/70 px-6">{!!$message!!}</div>@endif
     <div class="pt-2">{!! $slot !!}</div>
     @if($button_label != '')
-        <x-bladewind::button 
+        <x-bladewind::button
             onclick="{!!$onclick!!}" class="block mx-auto my-4"
             size="small">{{$button_label}}</x-bladewind::button>
     @endif
