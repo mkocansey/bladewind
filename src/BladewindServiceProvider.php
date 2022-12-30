@@ -17,7 +17,7 @@ class BladewindServiceProvider extends ServiceProvider
         ], 'bladewind-components');
 
         $this->publishes([
-            __DIR__ . '/../resources/assets' => public_path('vendor/bladewind'),
+            __DIR__ . '/../resources/assets' => public_path('vendor/bladewind/assets'),
         ], 'bladewind-assets');
 
         $this->publishes([
