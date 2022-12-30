@@ -181,26 +181,26 @@
 @endif
 @once
 <script>
-    const january = '{{ __('datepicker.JAN') }}';
-    const february = '{{ __('datepicker.FEB') }}';
-    const march = '{{ __('datepicker.MAR') }}';
-    const april = '{{ __('datepicker.APR') }}';
-    const may = '{{ __('datepicker.MAY') }}';
-    const june = '{{ __('datepicker.JUN') }}';
-    const july = '{{ __('datepicker.JUL') }}';
-    const august = '{{ __('datepicker.AUG') }}';
-    const september = '{{ __('datepicker.SEP') }}';
-    const october = '{{ __('datepicker.OCT') }}';
-    const november = '{{ __('datepicker.NOV') }}';
-    const december = '{{ __('datepicker.DEC') }}';
+    const january = '{{ __('bladewind::datepicker.JAN') }}';
+    const february = '{{ __('bladewind::datepicker.FEB') }}';
+    const march = '{{ __('bladewind::datepicker.MAR') }}';
+    const april = '{{ __('bladewind::datepicker.APR') }}';
+    const may = '{{ __('bladewind::datepicker.MAY') }}';
+    const june = '{{ __('bladewind::datepicker.JUN') }}';
+    const july = '{{ __('bladewind::datepicker.JUL') }}';
+    const august = '{{ __('bladewind::datepicker.AUG') }}';
+    const september = '{{ __('bladewind::datepicker.SEP') }}';
+    const october = '{{ __('bladewind::datepicker.OCT') }}';
+    const november = '{{ __('bladewind::datepicker.NOV') }}';
+    const december = '{{ __('bladewind::datepicker.DEC') }}';
 
-    const monday = '{{ __('datepicker.MON') }}';
-    const tuesday = '{{ __('datepicker.TUE') }}';
-    const wednesday = '{{ __('datepicker.WED') }}';
-    const thursday = '{{ __('datepicker.THU') }}';
-    const friday = '{{ __('datepicker.FRI') }}';
-    const saturday = '{{ __('datepicker.SAT') }}';
-    const sunday = '{{ __('datepicker.SUN') }}';
+    const monday = '{{ __('bladewind::datepicker.MON') }}';
+    const tuesday = '{{ __('bladewind::datepicker.TUE') }}';
+    const wednesday = '{{ __('bladewind::datepicker.WED') }}';
+    const thursday = '{{ __('bladewind::datepicker.THU') }}';
+    const friday = '{{ __('bladewind::datepicker.FRI') }}';
+    const saturday = '{{ __('bladewind::datepicker.SAT') }}';
+    const sunday = '{{ __('bladewind::datepicker.SUN') }}';
 
     const MONTH_NAMES = [
         january, february, march, april, may, june, july, august,
