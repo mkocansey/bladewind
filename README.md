@@ -53,7 +53,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 <br />
 
 ```
-<x-bladewind.button>Save User</x-bladewind.button>
+<x-bladewind::button>Save User</x-bladewind::button>
 ```
 
 <br /><br />
