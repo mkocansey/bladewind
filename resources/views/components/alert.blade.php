@@ -41,7 +41,7 @@
     $show_close_icon = $showCloseIcon;
 @endphp
 <span class="!border-red-400 hidden"></span>
-<div class="w-full bw-alert flex p-3 { {$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
+<div class="w-full bw-alert flex p-3 {{$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
     @if($show_icon === true)
         <div class="pt-1">
             @if($type === 'error')
