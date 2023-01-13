@@ -1,12 +1,11 @@
 <p><img src="https://img.shields.io/github/license/mkocansey/bladewind" alt="License" /></p><br />
 <p><img src="https://user-images.githubusercontent.com/1946332/173253806-b5c9aef2-20ce-4820-81cc-a1c9e4c538a1.png" style="height: 60px" /></p>
 
-
 BladewindUI is a collection of UI components written purely using TailwindCSS, Laravel blade templates and Vanilla Javascript. These components are super simple to use and come with different levels of customization.
 <br /><br />
 
 ### Installation
-The full installatioin guide is available on https://bladewindui.com.
+The full installation guide is available on https://bladewindui.com.
 <br />
 
 BladewindUI is very specific to Laravel since all components are written purely using blade syntax. To install in your Laravel project simply run this command in the terminal at the root of your project.
@@ -22,7 +21,7 @@ Next you need to **publish the package assets** by running this command, still i
 <br />
 
 ```
-php artisan vendor:publish --provider="Mkocansey\Bladewind\BladewindServiceProvider" --tag=assets --force
+php artisan vendor:publish --provider="Mkocansey\Bladewind\BladewindServiceProvider" --tag=bladewind-public --force
 ```
 <br />
 
@@ -31,10 +30,10 @@ Now include the BladewindUI css file in the &lt;head&gt; of your pages. This sho
 <br />
 
 ```
-<link href="{{ asset('bladewind/css/animate.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
 ```
 ```
-<link href="{{ asset('bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
 ```
 
 <br />
@@ -44,7 +43,7 @@ Finally, include the BladewindUI javascript file anywhere before the closing of 
 <br />
 
 ```
-<script src="{{ asset('bladewind/js/helpers.js') }}" type="text/javascript"></script>
+<script src="{{ asset('vendor/bladewind/js/helpers.js') }}" type="text/javascript"></script>
 ```
 
 <br />
@@ -54,7 +53,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 <br />
 
 ```
-<x-bladewind.button> Save User </x-bladewind.button>
+<x-bladewind::button>Save User</x-bladewind::button>
 ```
 
 <br /><br />
