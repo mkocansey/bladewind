@@ -14,7 +14,7 @@
     // reset variables for Laravel 8 support
     $has_shadow = $hasShadow;
 @endphp
-<div class="bw-contact-card bg-white px-4 pb-4 pt-2 rounded-lg @if($has_shadow) shadow-2xl shadow-gray-200/40 @endif {{ $css }}">
+<div class="bw-contact-card bg-white p-4 rounded-lg @if($has_shadow) shadow-2xl shadow-gray-200/40 @endif {{ $css }}">
     <div class="flex items-start">
         <div>
             <x-bladewind::avatar image="{{ $image }}" />

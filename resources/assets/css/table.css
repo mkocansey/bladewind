@@ -26,7 +26,7 @@
     .bw-table tr>td {
         @apply
         p-5
-        align-top 
+        align-top
         text-slate-600/80
         text-sm
         dark:text-slate-800 bg-white dark:bg-slate-400 leading-6
@@ -55,5 +55,4 @@
     table.with-hover-effect tr:nth-child(even):hover>td:last-child {
         @apply border-r-2 border-r-green-300
     }
-
 }

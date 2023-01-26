@@ -25,7 +25,7 @@
     $max_file_size = $maxFileSize;
     if (! is_numeric($max_file_size)) $max_file_size = 5;
 @endphp
-
+<div class="border-gray-500"></div>
 <div class="relative px-2 py-3 border border-dashed border-gray-300 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing == 'true') mb-3 @endif">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute z-20 left-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -52,9 +52,31 @@
 </div>
 
 <script>
+
+    dom_el('.bw-fp-{{ $name }}').addEventListener('drop', function (evt){
+        changeCss('.bw-fp-{{ $name }}','border-gray-500', 'remove');
+        changeCss('.bw-fp-{{ $name }}','border-gray-300');
+        evt.preventDefault();
+        dom_el('.bw-{{ $name }}').click();
+    });
+
+    ['dragleave', 'drop', 'mouseout'].forEach(evt =>
+        dom_el('.bw-fp-{{ $name }}').addEventListener(evt, () => {
+            changeCss('.bw-fp-{{ $name }}','border-gray-500', 'remove');
+            changeCss('.bw-fp-{{ $name }}','border-gray-300');
+        }, false)
+    );
+
+    ['dragenter', 'dragover', 'mouseover'].forEach(evt =>
+        dom_el('.bw-fp-{{ $name }}').addEventListener(evt, () => {
+            changeCss('.bw-fp-{{ $name }}','border-gray-500');
+        }, false)
+    );
+
     dom_el('.bw-fp-{{ $name }}').addEventListener('click', function (){
         dom_el('.bw-{{ $name }}').click();
     });
+
     dom_el('.bw-{{ $name }}').addEventListener('change', function (){
         let selection = this.value;
         if ( selection != '' ) {
