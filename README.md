@@ -61,6 +61,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 
 - **[Alert](https://bladewindui.com/component/alert)**
 - **[Avatar](https://bladewindui.com/component/avatar)**
+- **[Bell](https://bladewindui.com/component/bell)**
 - **[Button](https://bladewindui.com/component/button)**
 - **[Card](https://bladewindui.com/component/card)**
 - **[Centered Content](https://bladewindui.com/component/centered-content)**
