@@ -8,10 +8,9 @@ mix.options({
   },
 });
 
-mix.postCss(
-  'src/resources/assets/raw/css/app.css',
-  'src/resources/assets/compiled/css/bladewind-ui.min.css',
-  [require('tailwindcss')]
-);
+mix.postCss('resources/assets/css/app.css', 'public/css//bladewind-ui.min.css', [
+      require('tailwindcss')
+    ]);
 
 // run npx mix --production to generate compiled css
+// npx mix watch when in dev

@@ -1,8 +1,11 @@
-var dropdownIsOpen = false;
 dom_el(`.${el_name} .bw-dropdown`).addEventListener('click', function (e){
+    changeCssForDomArray('.dropdown-items-parent', 'hidden');
     this.nextElementSibling.classList.toggle('hidden');
-    dropdownIsOpen = true;
     e.stopImmediatePropagation();
+});
+
+document.addEventListener('click', function (e){
+    changeCssForDomArray('.dropdown-items-parent', 'hidden');
 });
 
 dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
@@ -30,7 +33,6 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
                 dom_el(`.${parent_tag} .dropdown-items>.default`).classList.remove('hidden');
             }
             hide(el.parentElement.parentElement, true);
-            dropdownIsOpen = false;
         }
 
     });

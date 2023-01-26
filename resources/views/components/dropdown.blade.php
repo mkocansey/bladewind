@@ -1,14 +1,14 @@
 
 @php use Illuminate\Support\Str; @endphp
 @props([
-    // name to uniquely identiy a dropdown
+    // name to uniquely identity a dropdown
     'name' => 'bw-dropdown',
 
     // the default text to display when the dropdown shows
     'placeholder' => 'Select One',
 
     // optional function to execute when a dropdown item is selected
-    // by default the value of a dropdown item is wriiten to an input field with the
+    // by default the value of a dropdown item is written to an input field with the
     // name dd_name. Where name is the name you provided for the dropdown
     // if you named your dropdown countries for example, whatever country is selected can
     // be found in the <input type="hidden" clas="input-countries" name="dd_countries" />
@@ -144,10 +144,8 @@
             <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
     </button>
-    <div class="w-full absolute z-50 bg-white -mt-1 shadow-md cursor-pointer hidden dropdown-items-parent dark:text-white dark:border-slate-700 dark:bg-slate-600"
-        style="max-height: 270px; overflow: scroll;">
-        <div
-            class="dropdown-items border border-gray-300 divide-y relative w-full">
+    <div class="w-full absolute z-50 bg-white -mt-1 shadow-md cursor-pointer dropdown-items-parent dark:text-white dark:border-slate-700 dark:bg-slate-600 hidden" style="max-height: 270px; overflow: scroll;">
+        <div class="dropdown-items border border-gray-300 divide-y relative w-full">
             @if($searchable == 'true')
                 <div class="bg-gray-100 dark:bg-slate-500 p-2 sticky top-0 min-w-full">
                     <x-bladewind::input
