@@ -1,11 +1,11 @@
-@import 'packages/bladewind/resources/assets/css/button.css';
-@import 'packages/bladewind/resources/assets/css/datepicker.css';
-@import 'packages/bladewind/resources/assets/css/dropdown.css';
-@import 'packages/bladewind/resources/assets/css/input.css';
-@import 'packages/bladewind/resources/assets/css/popup.min.css';
-@import 'packages/bladewind/resources/assets/css/side-nav.css';
-@import 'packages/bladewind/resources/assets/css/table.css';
+@import './button.css';
+@import './datepicker.css';
+@import './dropdown.css';
+@import './input.css';
+@import './popup.min.css';
+@import './side-nav.css';
+@import './table.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

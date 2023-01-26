@@ -1,17 +1,17 @@
 @layer components {
     button.bw-dropdown,
     select {
-        @apply 
-            border 
-            border-gray-400/30 
+        @apply
+            border
+            border-gray-400/30
             rounded-md
             p-4
             !outline-none
             !ring-0
-            focus:outline-none 
-            focus:border 
-            focus:border-gray-500 
-            text-sm 
+            focus:outline-none
+            focus:border
+            focus:border-gray-500
+            text-sm
             placeholder-transparent
             peer-placeholder-shown:mt-2
     }
