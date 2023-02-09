@@ -4,8 +4,8 @@
     'name' => 'radio',
     'value' => '',
     'label' => '',
-    'checked' => 'false',
-    'disabled' => 'false',
+    'checked' => false,
+    'disabled' => false,
 ])
 <x-bladewind::checkbox 
     name="{{$name}}" 
