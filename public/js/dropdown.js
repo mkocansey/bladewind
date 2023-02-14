@@ -57,9 +57,10 @@ searchDropdown = (value, parent) => {
     });
 }
 
-if(dom_els('.search-dropdown')){
-    dom_els('.search-dropdown').forEach((el) => {
+if(dom_els('.search_dropdown')){
+    dom_els('.search_dropdown').forEach((el) => {
         el.addEventListener('click', function (e){
+            e.preventDefault();
             e.stopImmediatePropagation();
         });
     });

@@ -5,11 +5,15 @@
     'checked' => false,
     'disabled' => false,
     'type' => 'checkbox',
-    'css' => null,
+    'class' => null,
 ])
-@php($name = preg_replace('/[\s-]/', '_', $name))
+@php
+    $name = preg_replace('/[\s-]/', '_', $name);
+    $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
+    $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
+@endphp
 
-<label class="inline-flex items-center cursor-pointer text-sm @if($disabled) opacity-60 @endif {{ $css }}">
+<label class="inline-flex items-center cursor-pointer text-sm @if($disabled) opacity-60 @endif {{ $class }}">
     <input
         type="{{ $type }}"
         name="{{ $name }}"

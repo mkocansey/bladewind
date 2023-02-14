@@ -18,8 +18,8 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $has_shadow = $hasShadow;
-    $reduce_padding = $reducePadding;
+    $has_shadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
+    $reduce_padding = filter_var($reducePadding, FILTER_VALIDATE_BOOLEAN);
 @endphp
 <div class="bw-card bg-white @if($header === null && ! $reduce_padding) p-8 @elseif($reduce_padding) p-4 @else @endif rounded-lg @if($has_shadow) shadow-2xl shadow-gray-200/40 @endif {{ $class }}">
     @if($header)

@@ -57,8 +57,8 @@
     'urlKey' => '',
 
     // if url_key is set, should the selected item's value be appended to the url
-    'append_value_to_url' => 'false',
-    'appendValueToUrl' => 'false',
+    'append_value_to_url' => false,
+    'appendValueToUrl' => false,
 
     // if url_key is set and append_value_to_url is 'true', what variable name should
     // the value be appended to the url as. Default is 'value'
@@ -76,8 +76,8 @@
     'required' => 'false',
 
     // adds margin after the input box
-    'add_clearing' => 'true',
-    'addClearing' => 'true',
+    'add_clearing' => true,
+    'addClearing' => true,
 
     // determines if a value passed in the data array should automatically be selected
     // useful when using the component in edit mode or as part of filter options
@@ -88,12 +88,12 @@
 
     // setting this to true adds a search box above the dropdown items
     // this can be used to filter the contents of the dropdown items
-    'searchable' => 'false',
+    'searchable' => false,
 
     // this is just a hack to turn the dropdown into a filter component
     // setting to true shows a filter icon in the component
-    'show_filter_icon' => 'false',
-    'showFilterIcon' => 'false',
+    'show_filter_icon' => false,
+    'showFilterIcon' => false,
 ])
 @php
     // reset variables for Laravel 8 support
@@ -102,12 +102,14 @@
     $flag_key = $flagKey;
     $url_key = $urlKey;
     $image_key = $imageKey;
-    $append_value_to_url = $appendValueToUrl;
+    $append_value_to_url = filter_var($appendValueToUrl, FILTER_VALIDATE_BOOLEAN);
     $append_value_to_url_as = $appendValueToUrlAs;
     $data_serialize_as = $dataSerializeAs;
     $selected_value = $selectedValue;
-    $show_filter_icon = $showFilterIcon;
-    $add_clearing = $addClearing;
+    $show_filter_icon = filter_var($showFilterIcon, FILTER_VALIDATE_BOOLEAN);
+    $add_clearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
+    $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
+    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     //-------------------------------------------------------
 
     $data = json_decode(str_replace('&quot;', '"', $data));
@@ -134,24 +136,24 @@
 <div class="relative {{ $name }}@if($add_clearing == 'true') mb-3 @endif">
     <button type="button" class="bw-dropdown rounded-md bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:text-gray-300">
         <label class="cursor-pointer">
-            @if($show_filter_icon == 'true')
+            @if($show_filter_icon)
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                 </svg>
             @endif
-            {{ $placeholder }}@if($required == 'true') &nbsp;<span class="text-red-300">*</span>@endif</label>
+            {{ $placeholder }}@if($required) &nbsp;<span class="text-red-300">*</span>@endif</label>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-40 mr-[-10px]" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
     </button>
     <div class="w-full absolute z-50 bg-white -mt-1 shadow-md cursor-pointer dropdown-items-parent dark:text-white dark:border-slate-700 dark:bg-slate-600 hidden" style="max-height: 270px; overflow: scroll;">
         <div class="dropdown-items border border-gray-300 divide-y relative w-full">
-            @if($searchable == 'true')
-                <div class="bg-gray-100 dark:bg-slate-500 p-2 sticky top-0 min-w-full">
+            @if($searchable)
+                <div class="bg-gray-100 dark:bg-slate-500 p-3 sticky top-0 min-w-full">
                     <x-bladewind::input
                         name="search-dropdown"
                         add_clearing="false"
-                        class="rounded-full w-full !border-0 !focus:border-0"
+                        class="rounded-2xl w-full !border-0 !focus:border-0"
                         onkeyup="searchDropdown(this.value, '{{ $name }}')"
                         placeholder="Search" />
                 </div>
@@ -162,12 +164,12 @@
                 data-user-function=""
                 data-parent="{{ $name }}"
                 class="dd-item p-4 cursor-pointer default hidden">{{ $placeholder }}
-                @if($required == 'true') &nbsp;<span class="text-red-300">*</span>@endif</div>
+                @if($required) &nbsp;<span class="text-red-300">*</span>@endif</div>
             @for ($x=0; $x < count($data); $x++)
                 @php
                     $url_target = 'self';
                     $url = (isset($data[$x]->$url_key) && $data[$x]->$url_key !== '') ?
-                        ($data[$x]->{$url_key} . (($append_value_to_url === 'true') ?
+                        ($data[$x]->{$url_key} . (($append_value_to_url) ?
                         "?{$append_value_to_url_as}=" . $data[$x]->$value_key : '')) : '';
 
                     if($url !== '' && ( Str::contains($url, 'http://') || Str::contains($url, 'https://')) && !Str::contains($url, request()->getHost()) ){
@@ -194,7 +196,7 @@
             @endfor
             <input
                 type="hidden"
-                class="bw-{{ $name }} {{ ($required == 'true') ? ' required' : '' }}"
+                class="bw-{{ $name }} {{ ($required) ? ' required' : '' }}"
                 name="{{ ($data_serialize_as != '') ? $data_serialize_as : $input_name }}" />
         </div>
     </div>
