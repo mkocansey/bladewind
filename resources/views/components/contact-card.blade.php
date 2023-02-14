@@ -12,7 +12,7 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $has_shadow = $hasShadow;
+    $has_shadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
 @endphp
 <div class="bw-contact-card bg-white p-4 rounded-lg @if($has_shadow) shadow-2xl shadow-gray-200/40 @endif {{ $css }}">
     <div class="flex items-start">

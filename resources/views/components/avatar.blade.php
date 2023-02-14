@@ -16,6 +16,7 @@
 ])
 @php
     $avatar = $image ?: asset('vendor/bladewind/images/avatar.png');
+    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);;
 @endphp
 
 <span class="w-6 w-8 w-10 w-12 w-16 w-20 w-28 h-6 h-8 h-10 h-12 h-16 h-20 h-28 hidden"></span>

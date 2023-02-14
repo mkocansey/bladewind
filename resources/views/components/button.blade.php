@@ -66,13 +66,13 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_spinner = $showSpinner;
-    $has_spinner = $hasSpinner;
-    $can_submit = $canSubmit;
+    $show_spinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
+    $has_spinner = filter_var($hasSpinner, FILTER_VALIDATE_BOOLEAN);
+    $can_submit = filter_var($canSubmit, FILTER_VALIDATE_BOOLEAN);
     //------------------------------------------------------
 
     $button_type = $can_submit ? 'submit' : 'button';
-    $spinner_css = $show_spinner ? '' : 'hidden';
+    $spinner_css = !$show_spinner ? 'hidden' : '';
     $primary_color = $type === 'primary' ? $coloring['bg'][$color]. ' '. $coloring['focus'][$color]. ' '. $coloring['hover_active'][$color] : '';
     $button_text_css = $buttonTextCss;
     $button_text_color = $button_text_css ?? ($type === 'primary' ? 'text-white hover:text-white' : 'text-black hover:text-black');
@@ -90,6 +90,6 @@
 >
     <span class="{{ $button_text_color }}">{{ $slot }}</span>
     @if ($has_spinner)
-        <x-bladewind::spinner class="{{ $spinner_css }} @if(!$show_spinner) hidden @endif"></x-bladewind::spinner>
+        <x-bladewind::spinner class="{{ $spinner_css }}"></x-bladewind::spinner>
     @endif
 </{{$tag}}>

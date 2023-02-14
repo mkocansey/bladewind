@@ -4,14 +4,14 @@
     'button_label' => '', // button will not be displayed if no text is passed
     'buttonLabel' => '',
     'message' => '',   // message to display
-    'show_image' => 'true', // true or false. set to false if you want to fully control the content
-    'showImage' => 'true',
+    'show_image' => true, // true or false. set to false if you want to fully control the content
+    'showImage' => true,
     'onclick' => '',
     'class' => '',
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_image = $showImage;
+    $show_image = (bool) $showImage;
     $button_label = $buttonLabel;
 @endphp
 <div class="text-center px-4 pb-10 bw-empty-state {{$class}}">

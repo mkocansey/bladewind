@@ -3,9 +3,9 @@
     'name' => 'textarea-'.uniqid(),
     'rows' => 3,
     'label' => '',
-    'required' => 'false',
-    'add_clearing' => 'true',
-    'addClearing' => 'true',
+    'required' => false,
+    'add_clearing' => true,
+    'addClearing' => true,
     'placeholder' => '', // placeholder text
     'selected_value' => '', // selected value
     'selectedValue' => '',
@@ -20,24 +20,25 @@
     // how should error messages be displayed for this input
     // by default error messages are displayed in the Bladewind notification component
     // the component should exist on the page
-    'show_error_inline' => 'false',
-    'showErrorInline' => 'false',
+    'show_error_inline' => false,
+    'showErrorInline' => false,
 ])
 @php
     // reset variables for Laravel 8 support
-    $add_clearing = $addClearing;
+    $add_clearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
     $selected_value = $selectedValue;
     $error_message = $errorMessage;
-    $show_error_inline = $showErrorInline;
+    $show_error_inline = filter_var($showErrorInline, FILTER_VALIDATE_BOOLEAN);
+    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     $error_heading = $errorHeading;
     //----------------------------------------------------
     
     $name = preg_replace('/[\s-]/', '_', $name);
-    $required_symbol = ($label == '' && $required == 'true') ? ' *' : '';
-    $is_required = ($required == 'true') ? 'required' : '';
+    $required_symbol = ($label == '' && $required) ? ' *' : '';
+    $is_required = ($required) ? 'required' : '';
     $placeholder_color = ($label !== '') ? 'placeholder-transparent' : '';
 @endphp
-<div class="relative w-full @if($add_clearing == 'true') mb-3 @endif">
+<div class="relative w-full @if($add_clearing) mb-3 @endif">
     <textarea {{ $attributes->merge(['class' => "bw-input w-full text-slate-600 border border-slate-300/50 dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 text-sm peer $is_required $name $placeholder_color"]) }} 
         id="{{ $name }}" 
         name="{{ $name }}" 

@@ -37,12 +37,12 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_icon = $showIcon;
-    $show_close_icon = $showCloseIcon;
+    $show_icon = filter_var($showIcon, FILTER_VALIDATE_BOOLEAN);
+    $show_close_icon = filter_var($showCloseIcon, FILTER_VALIDATE_BOOLEAN);
 @endphp
 <span class="!border-red-400 hidden"></span>
 <div class="w-full bw-alert flex p-3 {{$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
-    @if($show_icon === true)
+    @if($show_icon)
         <div>
             @if($type === 'error')
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -64,7 +64,7 @@
         </div>
     @endif
     <div class="grow pl-2 pr-5">{{ $slot }}</div>
-    @if($show_close_icon === true)
+    @if($show_close_icon)
         <div class="text-right">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline cursor-pointer ml-3" viewBox="0 0 20 20" fill="currentColor" onclick="this.parentElement.parentElement.style.display='none'">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />

@@ -44,10 +44,10 @@
     <div class="bw-{{ $name }}-pin-error text-center text-sm text-red-500 my-6 hidden">
         {!! $error_message !!}
     </div>
-    <div class="bg-white/90 absolute w-full text-center hidden top-0 py-4 bw-{{ $name }}-pin-spinner">
+    <div class="bg-white/10 absolute w-full text-center hidden top-0 py-4 bw-{{ $name }}-pin-spinner">
         <x-bladewind::spinner/>
     </div>
-    <div class="bg-white/90 absolute w-full text-center hidden top-0 py-1 bw-{{ $name }}-pin-valid">
+    <div class="bg-white/10 absolute w-full text-center hidden top-0 py-1 bw-{{ $name }}-pin-valid">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
         </svg>

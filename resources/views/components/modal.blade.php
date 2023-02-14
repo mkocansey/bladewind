@@ -23,19 +23,19 @@
     'cancelButtonAction' => 'close',
     // close modal when either primary or close secondary buttons are clicked
     // the modal will be closed after your custom js function has been executed
-    'close_after_action' => 'true',
-    'closeAfterAction' => 'true',
+    'close_after_action' => true,
+    'closeAfterAction' => true,
     // determines if clicking on the backdrop can close the modal. default is true
     // when set to false, only the action buttons can close the modal.
     // in this case ensure you have set "close" as an action for one of your action buttons
-    'backdrop_can_close' => 'true',
-    'backdropCanClose' => 'true',
+    'backdrop_can_close' => true,
+    'backdropCanClose' => true,
     // should the action buttons be displayed? default is true. false will hide the buttons
-    'show_action_buttons' => 'true',
-    'showActionButtons' => 'true',
+    'show_action_buttons' => true,
+    'showActionButtons' => true,
     // should the action buttons be centered? default is false. right aligned
-    'center_action_buttons' => 'false',
-    'centerActionButtons' => 'false',
+    'center_action_buttons' => false,
+    'centerActionButtons' => false,
     // determines size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
     'size' => 'small',
@@ -55,18 +55,18 @@
     $cancel_button_label = $cancelButtonLabel;
     $ok_button_action = $okButtonAction;
     $cancel_button_action = $cancelButtonAction;
-    $close_after_action = $closeAfterAction;
-    $backdrop_can_close = $backdropCanClose;
-    $show_action_buttons = $showActionButtons;
-    $center_action_buttons = $centerActionButtons;
+    $close_after_action = filter_var($closeAfterAction, FILTER_VALIDATE_BOOLEAN);
+    $backdrop_can_close = filter_var($backdropCanClose, FILTER_VALIDATE_BOOLEAN);
+    $show_action_buttons = filter_var($showActionButtons, FILTER_VALIDATE_BOOLEAN);
+    $center_action_buttons = filter_var($centerActionButtons, FILTER_VALIDATE_BOOLEAN);
     //-------------------------------------------------------------------
 
     $name = str_replace(' ', '-', $name);
     $cancelCss = ($cancel_button_label == '') ? 'hidden' : '';
     $okCss = ($ok_button_label == '') ? 'hidden' : '';
     $okAction = $cancelAction = "hideModal('{$name}')";
-    if($ok_button_action !== 'close') $okAction = $ok_button_action . (($close_after_action== 'true') ? ';'.$okAction : '');
-    if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action== 'true') ? ';'.$cancelAction : '');
+    if($ok_button_action !== 'close') $okAction = $ok_button_action . (($close_after_action) ? ';'.$okAction : '');
+    if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action) ? ';'.$cancelAction : '');
 @endphp
 
 <span class="sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12"></span>
@@ -89,8 +89,8 @@
                     </div>
                 </div>
             </div>
-            @if( $show_action_buttons == 'true' )
-                <div class="modal-footer @if($center_action_buttons == 'true' || $size == 'small') text-center @else text-right @endif bg-gray-100 py-3 px-6 rounded-br-lg rounded-bl-lg">
+            @if( $show_action_buttons )
+                <div class="modal-footer @if($center_action_buttons || $size == 'small') text-center @else text-right @endif bg-gray-100 py-3 px-6 rounded-br-lg rounded-bl-lg">
                     <x-bladewind::button 
                         type="secondary"  
                         size="small" 
@@ -110,7 +110,7 @@
 <script>
     dom_el('.bw-{{$name}}-modal').addEventListener('click', function (e){ 
         let backdrop_can_close = this.getAttribute('aria-backdrop-can-close');
-        if(backdrop_can_close == 'true') hide('.bw-{{$name}}-modal'); 
+        if(backdrop_can_close) hide('.bw-{{$name}}-modal');
     });
 
     dom_el('.bw-{{$name}}').addEventListener('click', function (e){ 
@@ -126,7 +126,7 @@
     document.addEventListener('keyup', function(e){
         if(e.key === "Escape") {
             dom_els('.bw-modal').forEach((el)=>  {
-                if(el.getAttribute('aria-backdrop-can-close') == 'true') {
+                if(el.getAttribute('aria-backdrop-can-close')) {
                     changeCss(el, 'hidden', 'add', true);
                 }
             });

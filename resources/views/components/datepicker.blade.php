@@ -14,10 +14,10 @@
     // placeholder text to display if datepicker is empty
     'placeholder' => 'Select a date',
     // is the value of the date field required? used for form validation. default is false
-    'required' => 'false',
+    'required' => false,
     // should the datepicker include a timepicker. The timepicker is hidden by default
-    'with_time' => 'false',
-    'withTime' => 'false',
+    'with_time' => false,
+    'withTime' => false,
     // when timepicker is included, what should the time hours be displayed as. Default is 12 hour format
     // available options are 12, 24
     'hours_as' => '12',
@@ -26,8 +26,8 @@
     'time_format' => 'hh:mm',
     'timeFormat' => 'hh:mm',
     // when the timepicker is included, should the time be displayed with seconds. Default is false
-    'show_seconds' => 'false',
-    'showSeconds' => 'false',
+    'show_seconds' => false,
+    'showSeconds' => false,
 
     //----------- used for range datepickers ----------------------------------
     // what should be the default date for the from date
@@ -58,16 +58,17 @@
 @php
     // reset variables for Laravel 8 support
     $default_date = $defaultDate;
-    $with_time = $withTime;
+    $with_time = filter_var($withTime, FILTER_VALIDATE_BOOLEAN);
     $hours_as = $hoursAs;
     $time_format = $timeFormat;
-    $show_seconds = $showSeconds;
+    $show_seconds = filter_var($showSeconds, FILTER_VALIDATE_BOOLEAN);
     $default_date_from = $defaultDateFrom;
     $default_date_to = $defaultDateTo;
     $date_from_label = $dateFromLabel;
     $date_to_label = $dateToLabel;
     $date_from_name = $dateFromName;
     $date_to_name = $dateToName;
+    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
