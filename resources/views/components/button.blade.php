@@ -89,7 +89,7 @@
     @endif
 >
     <span class="{{ $button_text_color }}">{{ $slot }}</span>
-    @if ($has_spinner == 'true')
-        <x-bladewind::spinner class="{{ $spinner_css }}"></x-bladewind::spinner>
+    @if ($has_spinner)
+        <x-bladewind::spinner class="{{ $spinner_css }} @if(!$show_spinner) hidden @endif"></x-bladewind::spinner>
     @endif
 </{{$tag}}>
