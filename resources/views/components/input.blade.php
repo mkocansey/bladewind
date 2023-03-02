@@ -47,17 +47,30 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $add_clearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
-    $selected_value = $selectedValue;
-    $show_placeholder_always = filter_var($showPlaceholderAlways, FILTER_VALIDATE_BOOLEAN);
-    $error_message = $errorMessage;
-    $show_error_inline = filter_var($showErrorInline, FILTER_VALIDATE_BOOLEAN);
-    $error_heading = $errorHeading;
-    $with_dots = filter_var($withDots, FILTER_VALIDATE_BOOLEAN);
-    $has_label = filter_var($hasLabel, FILTER_VALIDATE_BOOLEAN);
-    $is_datepicker = filter_var($isDatepicker, FILTER_VALIDATE_BOOLEAN);
+    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
+    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
+    $show_placeholder_always = filter_var($show_placeholder_always, FILTER_VALIDATE_BOOLEAN);
+    $showPlaceholderAlways = filter_var($showPlaceholderAlways, FILTER_VALIDATE_BOOLEAN);
+    $show_error_inline = filter_var($show_error_inline, FILTER_VALIDATE_BOOLEAN);
+    $showErrorInline = filter_var($showErrorInline, FILTER_VALIDATE_BOOLEAN);
+    $with_dots = filter_var($with_dots, FILTER_VALIDATE_BOOLEAN);
+    $withDots = filter_var($withDots, FILTER_VALIDATE_BOOLEAN);
+    $has_label = filter_var($has_label, FILTER_VALIDATE_BOOLEAN);
+    $hasLabel = filter_var($hasLabel, FILTER_VALIDATE_BOOLEAN);
+    $is_datepicker = filter_var($is_datepicker, FILTER_VALIDATE_BOOLEAN);
+    $isDatepicker = filter_var($isDatepicker, FILTER_VALIDATE_BOOLEAN);
     $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     $numeric = filter_var($numeric, FILTER_VALIDATE_BOOLEAN);
+
+    if (!$addClearing) $add_clearing = $addClearing;
+    if ($showPlaceholderAlways) $show_placeholder_always = $showPlaceholderAlways;
+    if ($showErrorInline) $show_error_inline = $showErrorInline;
+    if (!$withDots) $with_dots = $withDots;
+    if ($isDatepicker) $is_datepicker = $isDatepicker;
+
+    if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
+    if ($errorMessage !== $error_message) $error_message = $errorMessage;
+    if ($errorHeading !== $error_heading) $error_heading = $errorHeading;
     //--------------------------------------------------------------------
 
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -97,3 +110,4 @@
         </label>
     @endif
 </div>
+<input type="hidden" class="bw-raw-select" />

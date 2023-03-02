@@ -96,21 +96,26 @@
     'showFilterIcon' => false,
 ])
 @php
-    // reset variables for Laravel 8 support
-    $value_key = $valueKey;
-    $label_key = $labelKey;
-    $flag_key = $flagKey;
-    $url_key = $urlKey;
-    $image_key = $imageKey;
-    $append_value_to_url = filter_var($appendValueToUrl, FILTER_VALIDATE_BOOLEAN);
-    $append_value_to_url_as = $appendValueToUrlAs;
-    $data_serialize_as = $dataSerializeAs;
-    $selected_value = $selectedValue;
-    $show_filter_icon = filter_var($showFilterIcon, FILTER_VALIDATE_BOOLEAN);
-    $add_clearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
+    $append_value_to_url = filter_var($append_value_to_url, FILTER_VALIDATE_BOOLEAN);
+    $appendValueToUrl = filter_var($appendValueToUrl, FILTER_VALIDATE_BOOLEAN);
+    $show_filter_icon = filter_var($show_filter_icon, FILTER_VALIDATE_BOOLEAN);
+    $showFilterIcon = filter_var($showFilterIcon, FILTER_VALIDATE_BOOLEAN);
+    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
+    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
     $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
     $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    //-------------------------------------------------------
+
+    if($appendValueToUrl) $append_value_to_url = $appendValueToUrl;
+    if ($appendValueToUrlAs !== $append_value_to_url_as) $append_value_to_url_as = $appendValueToUrlAs;
+    if ($dataSerializeAs !== $data_serialize_as) $data_serialize_as = $dataSerializeAs;
+    if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
+    if ($valueKey !== $value_key) $value_key = $valueKey;
+    if ($labelKey !== $label_key) $label_key = $labelKey;
+    if ($flagKey !== $flag_key) $flag_key = $flagKey;
+    if ($urlKey !== $url_key) $url_key = $urlKey;
+    if ($imageKey !== $image_key) $image_key = $imageKey;
+    if ($showFilterIcon) $show_filter_icon = $showFilterIcon;
+    if (!$add_clearing) $add_clearing = $addClearing;
 
     $data = json_decode(str_replace('&quot;', '"', $data));
     $onselect = str_replace('&#039;', "'", $onselect);

@@ -18,11 +18,15 @@
 ])
 @php 
     // reset variables for Laravel 8 support
-    $label_position = $labelPosition;
-    $icon_position = $iconPosition;
-    $currency_position = $currencyPosition;
-    $show_spinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
-    $has_shadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
+    $show_spinner = filter_var($show_spinner, FILTER_VALIDATE_BOOLEAN);
+    $showSpinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
+    $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
+    $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
+    if ($labelPosition !== $label_position) $label_position = $labelPosition;
+    if ($iconPosition !== $icon_position) $icon_position = $iconPosition;
+    if ($currencyPosition !== $currency_position) $currency_position = $currencyPosition;
+    if ($showSpinner) $show_spinner = $showSpinner;
+    if (!$hasShadow) $has_shadow = $hasShadow;
 @endphp
 
     <div class="bw-statistic bg-white p-6 rounded-sm relative @if($has_shadow)shadow-2xl shadow-gray-200/40 @endif{{$class}}">

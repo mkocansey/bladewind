@@ -58,10 +58,14 @@
 @php
     // reset variables for Laravel 8 support
     $default_date = $defaultDate;
-    $with_time = filter_var($withTime, FILTER_VALIDATE_BOOLEAN);
+    $with_time = filter_var($with_time, FILTER_VALIDATE_BOOLEAN);
+    $withTime = filter_var($withTime, FILTER_VALIDATE_BOOLEAN);
+    if($withTime) $with_time = $withTime;
     $hours_as = $hoursAs;
     $time_format = $timeFormat;
-    $show_seconds = filter_var($showSeconds, FILTER_VALIDATE_BOOLEAN);
+    $show_seconds = filter_var($show_seconds, FILTER_VALIDATE_BOOLEAN);
+    $showSeconds = filter_var($showSeconds, FILTER_VALIDATE_BOOLEAN);
+    if($showSeconds) $show_seconds = $showSeconds;
     $default_date_from = $defaultDateFrom;
     $default_date_to = $defaultDateTo;
     $date_from_label = $dateFromLabel;

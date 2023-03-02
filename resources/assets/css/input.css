@@ -1,7 +1,7 @@
 @layer components {
     .bw-textarea,
-    .bw-input,
-    select {
+    .bw-input
+    {
         @apply
             !outline-none
             !ring-0

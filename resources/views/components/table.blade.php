@@ -21,11 +21,15 @@
 ])
 @php 
     // reset variables for Laravel 8 support
-    $has_shadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
-    $hover_effect = filter_var($hoverEffect, FILTER_VALIDATE_BOOLEAN);
+    $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
+    $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
+    $hover_effect = filter_var($hover_effect, FILTER_VALIDATE_BOOLEAN);
+    $hoverEffect = filter_var($hoverEffect, FILTER_VALIDATE_BOOLEAN);
     $striped = filter_var($striped, FILTER_VALIDATE_BOOLEAN);
     $compact = filter_var($compact, FILTER_VALIDATE_BOOLEAN);
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
+    if ($hasShadow) $has_shadow = $hasShadow;
+    if (!$hoverEffect) $hover_effect = $hoverEffect;
 @endphp
 <div class="z-20"> {{--max-w-screen overflow-x-hidden md:w-full--}}
     <div class="w-full">

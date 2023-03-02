@@ -9,8 +9,8 @@
 ])
 @php 
     // reset variables for Laravel 8 support
-    $button_text = $buttonText;
-    $button_url = $buttonUrl;
+    if ($buttonText !== $button_text) $button_text = $buttonText;
+    if ($buttonUrl !== $button_url) $button_url = $buttonUrl;
 @endphp
 <div class="flex justify-center items-center">
     <div class="max-w-xl px-8">
