@@ -24,7 +24,7 @@
 ])
 @php 
     // reset variables for Laravel 8 support
-    $label_position = $labelPosition;
+    if ($labelPosition !== $label_position) $label_position = $labelPosition;
     $name = preg_replace('/[\s-]/', '_', $name);
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
     $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);

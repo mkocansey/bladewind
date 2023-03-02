@@ -11,8 +11,10 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_image = (bool) $showImage;
-    $button_label = $buttonLabel;
+    $show_image = filter_var($show_image, FILTER_VALIDATE_BOOLEAN);
+    $showImage = filter_var($showImage, FILTER_VALIDATE_BOOLEAN);
+    if ($buttonLabel !== $button_label) $button_label = $buttonLabel;
+    if (! $showImage) $show_image = $showImage;
 @endphp
 <div class="text-center px-4 pb-10 bw-empty-state {{$class}}">
     @if($show_image == 'true')<img src="{{ $image }}" class="h-52 mx-auto mb-6" />@endif

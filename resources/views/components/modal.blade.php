@@ -38,7 +38,7 @@
     'centerActionButtons' => false,
     // determines size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
-    'size' => 'small',
+    'size' => 'medium',
     'sizes' => [
         'tiny' => 'w-1/6',
         'small' => 'w-1/5',
@@ -51,14 +51,23 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $ok_button_label = $okButtonLabel;
-    $cancel_button_label = $cancelButtonLabel;
-    $ok_button_action = $okButtonAction;
-    $cancel_button_action = $cancelButtonAction;
-    $close_after_action = filter_var($closeAfterAction, FILTER_VALIDATE_BOOLEAN);
-    $backdrop_can_close = filter_var($backdropCanClose, FILTER_VALIDATE_BOOLEAN);
-    $show_action_buttons = filter_var($showActionButtons, FILTER_VALIDATE_BOOLEAN);
-    $center_action_buttons = filter_var($centerActionButtons, FILTER_VALIDATE_BOOLEAN);
+    if ($okButtonLabel !== $ok_button_label) $ok_button_label = $okButtonLabel;
+    if ($okButtonAction !== $ok_button_action) $ok_button_action = $okButtonAction;
+    if ($cancelButtonLabel !== $cancel_button_label) $cancel_button_label = $cancelButtonLabel;
+    if ($cancelButtonAction !== $cancel_button_action) $cancel_button_action = $cancelButtonAction;
+    $close_after_action = filter_var($close_after_action, FILTER_VALIDATE_BOOLEAN);
+    $closeAfterAction = filter_var($closeAfterAction, FILTER_VALIDATE_BOOLEAN);
+    $backdrop_can_close = filter_var($backdrop_can_close, FILTER_VALIDATE_BOOLEAN);
+    $backdropCanClose = filter_var($backdropCanClose, FILTER_VALIDATE_BOOLEAN);
+    $show_action_buttons = filter_var($show_action_buttons, FILTER_VALIDATE_BOOLEAN);
+    $showActionButtons = filter_var($showActionButtons, FILTER_VALIDATE_BOOLEAN);
+    $center_action_buttons = filter_var($center_action_buttons, FILTER_VALIDATE_BOOLEAN);
+    $centerActionButtons = filter_var($centerActionButtons, FILTER_VALIDATE_BOOLEAN);
+
+    if (!$closeAfterAction) $close_after_action = $closeAfterAction;
+    if (!$backdropCanClose) $backdrop_can_close = $backdropCanClose;
+    if (!$showActionButtons) $show_action_buttons = $showActionButtons;
+    if ($centerActionButtons) $center_action_buttons = $centerActionButtons;
     //-------------------------------------------------------------------
 
     $name = str_replace(' ', '-', $name);

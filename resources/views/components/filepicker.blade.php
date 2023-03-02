@@ -20,11 +20,13 @@
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
-    $accepted_file_types = $acceptedFileTypes;
-    $add_clearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
-    $max_file_size = $maxFileSize;
-    if (! is_numeric($max_file_size)) $max_file_size = 5;
     $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
+    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
+    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
+    if (!$addClearing) $add_clearing = $addClearing;
+    if ($acceptedFileTypes !== $accepted_file_types) $accepted_file_types = $acceptedFileTypes;
+    if ($maxFileSize !== $max_file_size) $max_file_size = $maxFileSize;
+    if (! is_numeric($max_file_size)) $max_file_size = 5;
 @endphp
 <div class="border-gray-500"></div>
 <div class="relative px-2 py-3 border border-dashed border-gray-300 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">

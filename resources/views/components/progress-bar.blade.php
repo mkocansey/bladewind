@@ -33,15 +33,19 @@
 
 @php  
     // reset variables for Laravel 8 support
-    $show_percentage_label = filter_var($showPercentageLabel, FILTER_VALIDATE_BOOLEAN);
-    $show_percentage_label_inline = filter_var($showPercentageLabelInline, FILTER_VALIDATE_BOOLEAN);
+    $show_percentage_label = filter_var($show_percentage_label, FILTER_VALIDATE_BOOLEAN);
+    $showPercentageLabel = filter_var($showPercentageLabel, FILTER_VALIDATE_BOOLEAN);
+    $show_percentage_label_inline = filter_var($show_percentage_label_inline, FILTER_VALIDATE_BOOLEAN);
+    $showPercentageLabelInline = filter_var($showPercentageLabelInline, FILTER_VALIDATE_BOOLEAN);
     $transparent = filter_var($transparent, FILTER_VALIDATE_BOOLEAN);
-    $percentage_label_position = $percentageLabelPosition;
-    $percentage_label_opacity = $percentageLabelOpacity;
-    $percentage_prefix = $percentagePrefix;
-    $percentage_suffix = $percentageSuffix;
-    $css_override = $cssOverride;
-    $bar_class = $barClass;
+    if ($showPercentageLabel) $show_percentage_label = $showPercentageLabel;
+    if (!$showPercentageLabelInline) $show_percentage_label_inline = $showPercentageLabelInline;
+    if ($percentageLabelPosition !== $percentage_label_position) $percentage_label_position = $percentageLabelPosition;
+    if ($percentageLabelOpacity !== $percentage_label_opacity) $percentage_label_opacity = $percentageLabelOpacity;
+    if ($percentagePrefix !== $percentage_prefix) $percentage_prefix = $percentagePrefix;
+    if ($percentageSuffix !== $percentage_suffix) $percentage_suffix = $percentageSuffix;
+    if ($cssOverride !== $css_override) $css_override = $cssOverride;
+    if ($barClass !== $bar_class) $bar_class = $barClass;
     //-----------------------------------------------------------------------
 
     if ($color == 'gray' && $shade == 'faint') $css_override = '!bg-slate-300';

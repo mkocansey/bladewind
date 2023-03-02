@@ -65,11 +65,16 @@
     ]
 ])
 @php
-    // reset variables for Laravel 8 support
-    $show_spinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
-    $has_spinner = filter_var($hasSpinner, FILTER_VALIDATE_BOOLEAN);
-    $can_submit = filter_var($canSubmit, FILTER_VALIDATE_BOOLEAN);
-    //------------------------------------------------------
+    $show_spinner = filter_var($show_spinner, FILTER_VALIDATE_BOOLEAN);
+    $has_spinner = filter_var($has_spinner, FILTER_VALIDATE_BOOLEAN);
+    $can_submit = filter_var($can_submit, FILTER_VALIDATE_BOOLEAN);
+    $showSpinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
+    $hasSpinner = filter_var($hasSpinner, FILTER_VALIDATE_BOOLEAN);
+    $canSubmit = filter_var($canSubmit, FILTER_VALIDATE_BOOLEAN);
+
+    if($showSpinner) $show_spinner = $showSpinner;
+    if($hasSpinner) $has_spinner = $hasSpinner;
+    if($canSubmit) $can_submit = $canSubmit;
 
     $button_type = $can_submit ? 'submit' : 'button';
     $spinner_css = !$show_spinner ? 'hidden' : '';
