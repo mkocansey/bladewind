@@ -11,8 +11,9 @@
     'birthday' => null,
 ])
 @php
-    // reset variables for Laravel 8 support
-    $has_shadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
+    $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
+    $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
+    if(!$hasShadow) $has_shadow = $hasShadow;
 @endphp
 <div class="bw-contact-card bg-white p-4 rounded-lg @if($has_shadow) shadow-2xl shadow-gray-200/40 @endif {{ $css }}">
     <div class="flex items-start">

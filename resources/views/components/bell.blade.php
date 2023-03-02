@@ -43,9 +43,13 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_dot = filter_var($showDot, FILTER_VALIDATE_BOOLEAN);
-    $animate_dot = filter_var($animateDot, FILTER_VALIDATE_BOOLEAN);
+    $show_dot = filter_var($show_dot, FILTER_VALIDATE_BOOLEAN);
+    $showDot = filter_var($showDot, FILTER_VALIDATE_BOOLEAN);
+    $animate_dot = filter_var($animate_dot, FILTER_VALIDATE_BOOLEAN);
+    $animateDot = filter_var($animateDot, FILTER_VALIDATE_BOOLEAN);
     $invert = filter_var($invert, FILTER_VALIDATE_BOOLEAN);
+    if( !$showDot ) $show_dot = $showDot;
+    if( $animateDot ) $animate_dot = $animateDot;
     if(! in_array($size, ['small','big'])) $size = 'small';
     if(! in_array($color, ['blue','red','yellow','green','blue','orange','purple','cyan','pink', 'black'])) $color = 'blue';
 @endphp
