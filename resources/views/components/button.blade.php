@@ -66,10 +66,10 @@
 ])
 @php
     $show_spinner = filter_var($show_spinner, FILTER_VALIDATE_BOOLEAN);
-    $has_spinner = filter_var($has_spinner, FILTER_VALIDATE_BOOLEAN);
-    $can_submit = filter_var($can_submit, FILTER_VALIDATE_BOOLEAN);
     $showSpinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
+    $has_spinner = filter_var($has_spinner, FILTER_VALIDATE_BOOLEAN);
     $hasSpinner = filter_var($hasSpinner, FILTER_VALIDATE_BOOLEAN);
+    $can_submit = filter_var($can_submit, FILTER_VALIDATE_BOOLEAN);
     $canSubmit = filter_var($canSubmit, FILTER_VALIDATE_BOOLEAN);
 
     if($showSpinner) $show_spinner = $showSpinner;
@@ -79,7 +79,7 @@
     $button_type = $can_submit ? 'submit' : 'button';
     $spinner_css = !$show_spinner ? 'hidden' : '';
     $primary_color = $type === 'primary' ? $coloring['bg'][$color]. ' '. $coloring['focus'][$color]. ' '. $coloring['hover_active'][$color] : '';
-    $button_text_css = $buttonTextCss;
+    $button_text_css = (!empty($buttonTextCss)) ? $buttonTextCss : $button_text_css;
     $button_text_color = $button_text_css ?? ($type === 'primary' ? 'text-white hover:text-white' : 'text-black hover:text-black');
     $is_disabled = $disabled ? 'disabled' : '';
     $tag = ($tag !== 'a' && $tag !== 'button') ? 'button' : $tag;

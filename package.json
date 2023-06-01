@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.4",
     "mix-tailwindcss": "^1.3.0",
     "postcss": "^8.4.12",
