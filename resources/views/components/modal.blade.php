@@ -83,7 +83,7 @@
 <div 
     class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex bw-modal bw-{{$name}}-modal hidden" 
     aria-backdrop-can-close="{{$backdrop_can_close}}">
-    <div class="sm:{{$sizes[$size]}} p-4 mx-auto my-auto bw-{{$name}}">
+    <div class="sm:{{$sizes[$size]}} w-full p-4 mx-auto my-auto bw-{{$name}}">
         <div class="bg-white rounded-lg drop-shadow-2xl">
             <div class="flex">
                 @if($type !== '')

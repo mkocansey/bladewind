@@ -34,7 +34,7 @@
             focus:ring-opacity-40
             active:translate-y-0.5
             transition
-            text-white
+            text-white hover:text-white
             rounded-full
     }
     .bw-button.secondary {
