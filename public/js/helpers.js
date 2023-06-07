@@ -27,16 +27,17 @@ validateForm = (form) => {
                 el.classList.add('!border-red-400');
                 el.focus();
                 if(error_message){
-                    (show_error_inline == 'true') ? unhide(`.${el_name}-inline-error`) : 
+                    console.log(show_error_inline);
+                    (show_error_inline) ? unhide(`.${el_name}-inline-error`) : 
                     showNotification(error_heading, error_message, 'error');
                 }
                 el.addEventListener('keyup', () => { 
                     if(el.value !== '') {
                         el.classList.remove('!border-red-400');
-                        (show_error_inline == 'true') ? hide(`.${el_name}-inline-error`) : '';
+                        (show_error_inline) ? hide(`.${el_name}-inline-error`) : '';
                      } else {
                         el.classList.add('!border-red-400'); 
-                        (show_error_inline == 'true') ? unhide(`.${el_name}-inline-error`) : '';
+                        (show_error_inline) ? unhide(`.${el_name}-inline-error`) : '';
                      }
                 });
                 has_error++;
@@ -134,7 +135,7 @@ unhide = (element, elementIsDomObject=false) => {
     }
 }
 
-animateCSS = (element, animation) =>
+animateCSS = (element, animation) => 
   new Promise((resolve, reject) => {
     const animationName = `animate__${animation}`;
     const node = document.querySelector(element);
@@ -147,50 +148,90 @@ animateCSS = (element, animation) =>
       resolve('Animation ended');
     }
     node.addEventListener('animationend', handleAnimationEnd, {once: true});
-  });
+});
 
-  addToStorage = (key, val, storageType = 'localStorage') => {
-      if(window.localStorage || window.sessionStorage){
-        (storageType === 'localStorage') ? 
-            localStorage.setItem(key, val) : sessionStorage.setItem(key, val);
-      }
+addToStorage = (key, val, storageType = 'localStorage') => {
+    if(window.localStorage || window.sessionStorage){
+    (storageType === 'localStorage') ? 
+        localStorage.setItem(key, val) : sessionStorage.setItem(key, val);
+    }
+}
+
+getFromStorage = (key, storageType = 'localStorage') => {
+    if(window.localStorage || window.sessionStorage){
+    return (storageType === 'localStorage') ? 
+        localStorage.getItem(key) : sessionStorage.getItem(key);
+    }
+}
+
+removeFromStorage = (key, storageType = 'localStorage') => {
+    if(window.localStorage || window.sessionStorage){
+    (storageType === 'localStorage') ? 
+        localStorage.removeItem(key) : sessionStorage.removeItem(key);
+    }
+}
+
+goToTab = (el, color, context) => {
+    let context_ = context.replace(/-/g, '_');
+    let tab_content = dom_el('.bw-tc-'+el);
+    if( tab_content === null ) {
+        alert('no matching x-bladewind.tab-content div found for this tab');
+        return false;
+    }
+    changeCssForDomArray(
+        `.${context}-headings li.atab span`,
+        `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`, 
+        'remove');
+    changeCssForDomArray(
+        `.${context}-headings li.atab span`,
+        'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300');
+    changeCss(
+        `.atab-${el} span`, 
+        'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300', 'remove');
+    changeCss(
+        `.atab-${el} span`, 
+        `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`);
+    
+    dom_els(`.${context_}-tab-contents div.atab-content`).forEach((el) => { hide(el, true); });
+    unhide(tab_content, true);
   }
 
-  getFromStorage = (key, storageType = 'localStorage') => {
-      if(window.localStorage || window.sessionStorage){
-        return (storageType === 'localStorage') ? 
-            localStorage.getItem(key) : sessionStorage.getItem(key);
-      }
+  positionPrefix = (el, mode = 'blur') => {
+    let transparency = dom_el(`.dv-${el} .prefix`).getAttribute('data-transparency');
+    let offset = (transparency == '1') ? -5 : 7;
+    let prefix_width = ((dom_el(`.dv-${el} .prefix`).offsetWidth)+offset)*1;
+    let default_label_left_pos = '0.875rem';
+    let input_field = dom_el(`input.${el}`);
+    let label_field = dom_el(`.dv-${el} label`);
+
+    if(mode == 'blur') {
+        if(label_field) {
+            label_field.style.left = (input_field.value == '') ? `${prefix_width}px` : default_label_left_pos ;
+        }
+        dom_el(`input.${el}`).style.paddingLeft = `${prefix_width}px`;
+        input_field.addEventListener('focus', (event)=>{ positionPrefix(el, event.type) });
+    } else if(mode == 'focus') {
+        if(label_field) label_field.style.left = default_label_left_pos;
+        input_field.addEventListener('blur', (event)=>{ positionPrefix(el, event.type) });
+    }
   }
 
-  removeFromStorage = (key, storageType = 'localStorage') => {
-      if(window.localStorage || window.sessionStorage){
-        (storageType === 'localStorage') ? 
-            localStorage.removeItem(key) : sessionStorage.removeItem(key);
-      }
+  positionSuffix = (el) => {
+    let transparency = dom_el(`.dv-${el} .suffix`).getAttribute('data-transparency');
+    let offset = (transparency == '1') ? -5 : 7;
+    let suffix_width = ((dom_el(`.dv-${el} .suffix`).offsetWidth)+offset)*1;
+    dom_el(`input.${el}`).style.paddingRight = `${suffix_width}px`;
   }
 
-  goToTab = (el, color, context) => {
-      let context_ = context.replace(/-/g, '_');
-      let tab_content = dom_el('.bw-tc-'+el);
-      if( tab_content === null ) {
-          alert('no matching x-bladewind.tab-content div found for this tab');
-          return false;
-      }
-      changeCssForDomArray(
-          `.${context}-headings li.atab span`,
-          `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`, 
-          'remove');
-      changeCssForDomArray(
-          `.${context}-headings li.atab span`,
-          'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300');
-      changeCss(
-          `.atab-${el} span`, 
-          'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300', 'remove');
-      changeCss(
-          `.atab-${el} span`, 
-          `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`);
-      
-      dom_els(`.${context_}-tab-contents div.atab-content`).forEach((el) => { hide(el, true); });
-      unhide(tab_content, true);
+  togglePassword = (el, mode) => {
+    let input_field = dom_el(`input.${el}`);
+    if (mode == 'show'){
+        input_field.setAttribute('type', 'text');
+        unhide(`.dv-${el} .suffix svg.hide-pwd`);
+        hide(`.dv-${el} .suffix svg.show-pwd`);
+    }else {
+        input_field.setAttribute('type', 'password')
+        unhide(`.dv-${el} .suffix svg.show-pwd`);
+        hide(`.dv-${el} .suffix svg.hide-pwd`);
+    }
   }

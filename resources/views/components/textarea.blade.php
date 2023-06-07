@@ -48,13 +48,13 @@
         id="{{ $name }}" 
         name="{{ $name }}" 
         rows="{{ $rows }}"
-    @if($error_message != '') 
+    @if($error_message !== '') 
         data-error-message="{{$error_message}}" 
         data-error-inline="{{$show_error_inline}}" 
         data-error-heading="{{$error_heading}}" 
     @endif 
         placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selected_value}}</textarea>
-    @if($error_message != '')<div class="text-red-500 text-xs p-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>@endif
+    @if($error_message !== '')<div class="text-red-500 text-xs pt-2 px-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>@endif
     @if($label !== '')
         <label for="{{ $name }}" class="form-label bg-white text-blue-900/40 dark:bg-slate-600 dark:text-gray-300 dark:rounded-sm dark:px-2 dark:peer-focus:pt-1" onclick="dom_el('.{{$name}}').focus()">{{ $label }} 
             @if($required == 'true') <span class="text-red-400/80"><svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2 inline-block -mt-1" viewBox="0 0 20 20" fill="currentColor">

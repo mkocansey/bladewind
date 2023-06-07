@@ -24,7 +24,10 @@
             text-xs
             px-1
             transition-all
-            peer-placeholder-shown:top-[18px]
+            peer-placeholder-shown:top-[19px]
             peer-focus:-top-2
+    }
+    .prefix svg, .suffix svg {
+        @apply !mr-1 w-6 h-6
     }
 }
