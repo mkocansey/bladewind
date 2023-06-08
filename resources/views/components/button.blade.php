@@ -27,8 +27,11 @@
     // overwrite the button text color
     'button_text_css' => '',
     'buttonTextCss' => '',
+    'icon' => '',
+    'icon_right' => false,
+    'iconRight' => false,
 
-    'coloring' => [
+    'colouring' => [
         'bg' => [
             'red' => 'bg-red-500',
             'yellow' => 'bg-yellow-500',
@@ -78,14 +81,14 @@
 
     $button_type = $can_submit ? 'submit' : 'button';
     $spinner_css = !$show_spinner ? 'hidden' : '';
-    $primary_color = $type === 'primary' ? $coloring['bg'][$color]. ' '. $coloring['focus'][$color]. ' '. $coloring['hover_active'][$color] : '';
+    $primary_colour = $type === 'primary' ? $colouring['bg'][$color]. ' '. $colouring['focus'][$color]. ' '. $colouring['hover_active'][$color] : '';
     $button_text_css = (!empty($buttonTextCss)) ? $buttonTextCss : $button_text_css;
-    $button_text_color = $button_text_css ?? ($type === 'primary' ? 'text-white hover:text-white' : 'text-black hover:text-black');
+    $button_text_colour = $button_text_css ?? ($type === 'primary' ? 'text-white hover:text-white' : 'text-black hover:text-black');
     $is_disabled = $disabled ? 'disabled' : '';
     $tag = ($tag !== 'a' && $tag !== 'button') ? 'button' : $tag;
 @endphp
 <{{ $tag }}
-    {{ $attributes->merge(['class' => "bw-button cursor-pointer $size $type $name $primary_color $is_disabled"]) }}
+    {{ $attributes->merge(['class' => "bw-button cursor-pointer $size $type $name $primary_colour $is_disabled"]) }}
     @if($disabled)
         disabled
     @endif
@@ -93,8 +96,14 @@
         type="{{ $button_type }}"
     @endif
 >
-    <span class="{{ $button_text_color }}">{{ $slot }}</span>
-    @if ($has_spinner)
+    @if(!empty($icon) && !$icon_right)
+        <x-bladewind::icon name="{{$icon}}" class="h-5 w-5 !-ml-2 mr-1 dark:text-white/80" />
+    @endif
+    <span class="{{ $button_text_colour }}">{{ $slot }}</span>
+    @if(!empty($icon) && $icon_right && !$has_spinner)
+        <x-bladewind::icon name="{{$icon}}" class="h-5 w-5 !-mr-2 ml-2 dark:text-white/80" />
+    @endif
+    @if($has_spinner)
         <x-bladewind::spinner class="{{ $spinner_css }}"></x-bladewind::spinner>
     @endif
 </{{$tag}}>

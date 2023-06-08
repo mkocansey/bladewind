@@ -5,9 +5,11 @@
         @apply
             !outline-none
             !ring-0
+            border-2 
+            w-full text-slate-600 border-slate-300/50 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800
             focus:outline-none
-            focus:border
-            focus:border-blue-300
+            focus:border-2
+            focus:border-blue-400 dark:focus:border-slate-600 dark:placeholder-slate-500/70 transition-all
             rounded-md
             text-sm
             p-4
@@ -24,7 +26,10 @@
             text-xs
             px-1
             transition-all
-            peer-placeholder-shown:top-[18px]
-            peer-focus:-top-2
+            peer-placeholder-shown:top-[19px]
+            peer-focus:-top-2 bg-white text-blue-900/40 dark:text-slate-500 z-30 dark:bg-slate-800
+    }
+    .prefix svg, .suffix svg {
+        @apply !mr-1 w-6 h-6 dark:text-slate-500
     }
 }
