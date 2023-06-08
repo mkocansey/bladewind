@@ -60,7 +60,7 @@
         {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
     </div>
     @endif
-    <div class="@if(!$transparent) bg-slate-200/70 w-full @endif mt-1 my-2 rounded-full">
+    <div class="@if(!$transparent) bg-slate-200/70 dark:bg-slate-800 w-full @endif mt-1 my-2 rounded-full">
         <div style="width: {{$percentage}}%" class="text-center py-1 bg-{{$color}}-{{$color_weight[$shade]}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
             @if($show_percentage_label && $show_percentage_label_inline)<span class="text-{{$color}}-{{$text_color_weight[$shade]}} px-2 text-xs">
             {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}

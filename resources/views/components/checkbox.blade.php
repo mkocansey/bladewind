@@ -30,7 +30,7 @@
     <input
         type="{{ $type }}"
         name="{{ $name }}"
-        class="{{$text_color}} w-6 h-6 mr-2 disabled:opacity-50 focus:{{$ring_color}} border {{$border_color}} focus:ring-opacity-25 bw-checkbox {{$class}}"
+        class="{{$text_color}} w-6 h-6 mr-2 disabled:opacity-50 focus:{{$ring_color}} border-2 {{$border_color}} focus:ring-opacity-25 dark:bg-slate-700 bw-checkbox {{$class}}"
         @if($disabled) disabled @endif
         @if($checked) checked @endif
         value="{{ $value }}"

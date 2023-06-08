@@ -29,27 +29,21 @@
     }
     .bw-button.primary {
         @apply
-            focus:ring
-            focus:ring-offset-2
-            focus:ring-opacity-40
-            active:translate-y-0.5
-            transition
-            text-white hover:text-white
-            rounded-full
+            focus:ring focus:ring-offset-2 focus:ring-opacity-30 dark:focus:ring-opacity-10
+            transition text-white hover:text-white rounded-full active:translate-y-0.5 
     }
     .bw-button.secondary {
         @apply
             focus:ring
             focus:ring-offset-2
-            focus:ring-slate-500
-            focus:ring-opacity-40
+            focus:ring-slate-500/40
             active:translate-y-0.5
             transition
-            bg-slate-300
-            text-slate-800
+            bg-slate-300  dark:bg-slate-700
+            text-slate-800 dark:text-slate-400
             rounded-full
-            hover:bg-slate-400 hover:text-white
-            active:bg-slate-700
+            hover:bg-slate-400 hover:text-white hover:dark:bg-slate-400/50 hover:dark:text-slate-300
+            active:bg-slate-700 dark:focus:ring-slate-800
     }
     .bw-button.disabled {
         @apply

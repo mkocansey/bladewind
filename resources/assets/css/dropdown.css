@@ -1,18 +1,18 @@
 @layer components {
     button.bw-dropdown{
         @apply
-            border
+            border-2
             border-gray-400/30
             rounded-md
             p-4
             !outline-none
             !ring-0
             focus:outline-none
-            focus:border
-            focus:border-gray-500
+            focus:border-blue-400
             text-sm
             placeholder-transparent
             peer-placeholder-shown:mt-2
+            dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:focus:border-slate-600 transition-all
     }
 
     .bw-raw-select {
@@ -20,6 +20,6 @@
         background-position: right .5rem center;
         /*background-repeat: no-repeat !important;*/
         background-size: 1.5em 1.5em;
-        @apply bg-no-repeat appearance-none bg-white border border-slate-200 text-slate-400 text-sm rounded-md focus:border-gray-300 block w-full p-4 h-[54px]
+        @apply bg-no-repeat appearance-none bg-white border-2 border-gray-400/30 text-slate-400 text-sm rounded-md focus:border-blue-400 block w-full p-4 h-[54px] dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:focus:border-slate-600
     }
 }

@@ -123,7 +123,7 @@
     $name = preg_replace('/[\s-]/', '_', $name);
     $required_symbol = ($label == '' && $required) ? ' *' : '';
     $is_required = ($required) ? 'required' : '';
-    $placeholder_color = ($show_placeholder_always || $label == '') ? '' : 'placeholder-transparent';
+    $placeholder_color = ($show_placeholder_always || $label == '') ? '' : 'placeholder-transparent dark:placeholder-transparent';
     $placeholder_label = ($show_placeholder_always) ? $placeholder : (($label !== '') ? $label : $placeholder);
     $with_dots = ($with_dots) ? 1 : 0;
 
@@ -136,7 +136,7 @@
 
 <div class="relative w-full dv-{{$name}} @if($add_clearing) mb-3 @endif">
     <input 
-        {{ $attributes->merge(['class' => "bw-input w-full text-slate-600 border border-slate-300/50 dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:focus:border-slate-900 peer $is_required $name $placeholder_color"]) }}
+        {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
         type="{{ $type }}" 
         id="{{ $name }}"
         name="{{ $name }}" 
@@ -152,7 +152,7 @@
     />
     @if(!empty($error_message))<div class="text-red-500 text-xs p-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>@endif
     @if(!empty($label))
-        <label for="{{ $name }}" class="form-label bg-white text-blue-900/40 z-30 " onclick="dom_el('.{{$name}}').focus()">{!! $label !!} 
+        <label for="{{ $name }}" class="form-label" onclick="dom_el('.{{$name}}').focus()">{!! $label !!} 
             @if($required)
             <span class="text-red-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2 inline-block mt-[-2px]" viewBox="0 0 20 20" fill="currentColor">
@@ -163,12 +163,12 @@
         </label>
     @endif
     @if (!empty($prefix))
-        <div class="{{$name}}-prefix prefix text-sm select-none pl-3.5 pr-2 z-20 text-blue-900/50 absolute left-0 inset-y-0 inline-flex items-center @if(!$transparent_prefix) bg-slate-100 border border-slate-200 border-r-0 rounded-tl-md rounded-bl-md @endif" data-transparency="{{$transparent_prefix}}">
+        <div class="{{$name}}-prefix prefix text-sm select-none pl-3.5 pr-2 z-20 text-blue-900/50 dark:text-slate-400 absolute left-0 inset-y-0 inline-flex items-center @if(!$transparent_prefix) bg-slate-100 border-2 border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:border-r-0 border-r-0 rounded-tl-md rounded-bl-md @endif" data-transparency="{{$transparent_prefix}}">
         @if($prefix_is_icon) <x-bladewind::icon name='{!! $prefix !!}' type="{{ $prefix_icon_type }}" class="{{$prefix_icon_css}}" /> @else {!! $prefix !!} @endif</div>
         <script>positionPrefix('{{$name}}', 'blur', '{{$transparent_prefix}}');</script>
     @endif
     @if (!empty($suffix))
-        <div class="{{$name}}-suffix suffix text-sm select-none pl-3.5 pr-2 z-20 text-blue-900/50 absolute right-0 inset-y-0 inline-flex items-center @if(!$transparent_suffix) bg-slate-100 border border-slate-200 border-r-0 rounded-tr-md rounded-br-md @endif" data-transparency="{{$transparent_prefix}}">
+        <div class="{{$name}}-suffix suffix text-sm select-none pl-3.5 pr-2 z-20 text-blue-900/50 dark:text-slate-400 absolute right-0 inset-y-0 inline-flex items-center @if(!$transparent_suffix) bg-slate-100 border-2 border-slate-200 border-l-0 dark:border-slate-700 dark:bg-slate-900/50 dark:border-l-0 rounded-tr-md rounded-br-md @endif" data-transparency="{{$transparent_prefix}}">
         @if($suffix_is_icon) <x-bladewind::icon name='{!! $suffix !!}' type="{{ $suffix_icon_type }}" class="{{$suffix_icon_css}}" /> @else {!! $suffix !!} @endif</div>
         <script>positionSuffix('{{$name}}');</script>
     @endif
