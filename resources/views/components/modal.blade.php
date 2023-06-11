@@ -76,6 +76,7 @@
     $okAction = $cancelAction = "hideModal('{$name}')";
     if($ok_button_action !== 'close') $okAction = $ok_button_action . (($close_after_action) ? ';'.$okAction : '');
     if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action) ? ';'.$cancelAction : '');
+    $button_size = ($size == 'tiny') ? 'tiny' : 'small';
 @endphp
 
 <span class="sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12"></span>
@@ -83,8 +84,8 @@
 <div 
     class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex bw-modal bw-{{$name}}-modal hidden" 
     aria-backdrop-can-close="{{$backdrop_can_close}}">
-    <div class="sm:{{$sizes[$size]}} w-full p-4 mx-auto my-auto bw-{{$name}}">
-        <div class="bg-white rounded-lg drop-shadow-2xl">
+    <div class="sm:{{$sizes[$size]}} w-full p-4 m-auto bw-{{$name}}">
+        <div class="bg-white dark:bg-slate-900 dark:border dark:border-slate-800 rounded-lg drop-shadow-2xl">
             <div class="flex">
                 @if($type !== '')
                     <div class="modal-icon py-6 pl-6 grow-0">
@@ -92,22 +93,22 @@
                     </div>
                 @endif
                 <div class="modal-body grow p-6">
-                    <h1 class="text-lg text-gray-800 modal-title text-left">{{ $title }}</h1>
-                    <div class="modal-text text-gray-600 pt-2 text-base leading-6 tracking-wide text-left">
+                    <h1 class="text-lg text-gray-800 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
+                    <div class="modal-text text-gray-600 dark:text-gray-400 pt-2 text-base leading-6 tracking-wide text-left">
                         {{ $slot }}
                     </div>
                 </div>
             </div>
             @if( $show_action_buttons )
-                <div class="modal-footer @if($center_action_buttons || $size == 'small') text-center @else text-right @endif bg-gray-100 py-3 px-6 rounded-br-lg rounded-bl-lg">
+                <div class="modal-footer @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 dark:border-t dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg">
                     <x-bladewind::button 
                         type="secondary"  
-                        size="small" 
+                        size="{{$button_size}}" 
                         onclick="{!! $cancelAction !!}"
                         class="cancel {{ $cancelCss }}">{{$cancel_button_label}}</x-bladewind::button>
                         
                     <x-bladewind::button
-                        size="small" 
+                        size="{{$button_size}}" 
                         onclick="{!! $okAction !!}"
                         class="okay ml-3 {{ $okCss }}">{{$ok_button_label}}</x-bladewind::button>
                 </div>

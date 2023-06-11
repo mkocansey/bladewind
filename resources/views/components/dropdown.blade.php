@@ -139,7 +139,7 @@
 @endphp
 
 <div class="relative {{ $name }}@if($add_clearing == 'true') mb-3 @endif">
-    <button type="button" class="bw-dropdown rounded-md bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:text-gray-300">
+    <button type="button" class="bw-dropdown rounded-md bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800">
         <label class="cursor-pointer">
             @if($show_filter_icon)
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -151,16 +151,16 @@
             <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
     </button>
-    <div class="w-full absolute z-50 bg-white -mt-1 shadow-md cursor-pointer dropdown-items-parent dark:text-white dark:border-slate-700 dark:bg-slate-600 hidden" style="max-height: 270px; overflow: scroll;">
-        <div class="dropdown-items border border-gray-300 divide-y relative w-full">
+    <div class="w-full absolute z-50 bg-white -mt-1 shadow-md cursor-pointer dropdown-items-parent dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 hidden" style="max-height: 270px; overflow: scroll;">
+        <div class="dropdown-items border border-gray-300 dark:border-slate-700 divide-y relative w-full">
             @if($searchable)
-                <div class="bg-gray-100 dark:bg-slate-500 p-3 sticky top-0 min-w-full">
+                <div class="bg-slate-50 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-900 sticky top-0 min-w-full">
                     <x-bladewind::input
                         name="search-dropdown"
                         add_clearing="false"
-                        class="rounded-2xl w-full !border-0 !focus:border-0"
+                        class="w-full bg-transparent border-0 focus:border-0"
                         onkeyup="searchDropdown(this.value, '{{ $name }}')"
-                        placeholder="Search" />
+                        placeholder="Type here..." />
                 </div>
             @endif
             <div
@@ -183,7 +183,7 @@
                     $value = $data[$x]->$value_key;
                 @endphp
                 <div
-                    {{ $attributes->merge(['class' => "dd-item p-3 cursor-pointer hover:bg-gray-100 flex items-center dark:text-white dark:border-slate-700 dark:bg-slate-600 dark:hover:bg-slate-700 dark:text-gray-300"]) }}
+                    {{ $attributes->merge(['class' => "dd-item p-3 cursor-pointer hover:bg-gray-100 flex items-center dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-900 dark:hover:text-slate-300"]) }}
                     data-href="{{$url}}"
                     data-href-target="{{$url_target}}"
                     data-value="{{ $value }}"
@@ -195,7 +195,7 @@
                     data-label="{{ $data[$x]->$label_key }}"
                     data-parent="{{ $name }}">
                     @if ($flag_key != '' && $image_key == '')<i class="{{ $data[$x]->{$flag_key} }} flag"></i>@endif
-                    @if ($image_key != '')<x-bladewind::avatar size="tiny" css="!mr-2" image="{{ $data[$x]->{$image_key} }}" />@endif
+                    @if ($image_key != '')<x-bladewind::avatar size="tiny" css="!mr-3" image="{{ $data[$x]->{$image_key} }}" />@endif
                     <div>{!! $data[$x]->$label_key !!}</div>
                 </div>
             @endfor

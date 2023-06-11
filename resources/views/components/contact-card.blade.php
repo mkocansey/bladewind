@@ -15,12 +15,12 @@
     $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
     if(!$hasShadow) $has_shadow = $hasShadow;
 @endphp
-<div class="bw-contact-card bg-white p-4 rounded-lg @if($has_shadow) shadow-2xl shadow-gray-200/40 @endif {{ $css }}">
+<div class="bw-contact-card bg-white dark:bg-slate-900 dark:border dark:border-slate-800/50 py-4 pl-6 pr-4 rounded-lg @if($has_shadow) shadow-2xl shadow-gray-200/40 dark:shadow-xl dark:shadow-slate-900 @endif {{ $css }}">
     <div class="flex items-start">
         <div>
             <x-bladewind::avatar image="{{ $image }}" />
         </div>
-        <div class="grow pl-2 pt-1">
+        <div class="grow pl-3">
             <strong>{{ $name }}</strong>
             <div class="text-sm mb-2">
                 {!! $position !!}

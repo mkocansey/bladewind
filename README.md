@@ -5,7 +5,7 @@ BladewindUI is a collection of UI components written purely using TailwindCSS, L
 <br /><br />
 
 ### Installation
-The full installation guide is available on https://bladewindui.com.
+The full installation guide is available on https://bladewindui.com/#install.
 <br />
 
 BladewindUI is very specific to Laravel since all components are written purely using blade syntax. To install in your Laravel project simply run this command in the terminal at the root of your project.
@@ -72,6 +72,8 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Empty State](https://bladewindui.com/component/empty-state)**
 - **[Filepicker](https://bladewindui.com/component/filepicker)**
 - **[Horizontal Line Graph](https://bladewindui.com/component/horizontal-line-graph)**
+- **[Icon](https://bladewindui.com/component/icon)**
+- **[Input](https://bladewindui.com/component/input)**
 - **[List View](https://bladewindui.com/component/list-view)**
 - **[Modal](https://bladewindui.com/component/modal)**
 - **[Notification](https://bladewindui.com/component/notification)**
@@ -84,7 +86,6 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Tab](https://bladewindui.com/component/tab)**
 - **[Table](https://bladewindui.com/component/table)**
 - **[Tag](https://bladewindui.com/component/tag)**
-- **[Textbox](https://bladewindui.com/component/textbox)**
 - **[Textarea](https://bladewindui.com/component/textarea)**
 - **[Timeline](https://bladewindui.com/component/timeline)**
 - **[Toggle](https://bladewindui.com/component/toggle)**
@@ -104,4 +105,4 @@ If you want to ask anything at all or report a security vulnerability, please e-
 
 ## License
 
-BladewindUI components is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+BladewindUI is an open-sourced library licensed under the [MIT license](https://opensource.org/licenses/MIT).

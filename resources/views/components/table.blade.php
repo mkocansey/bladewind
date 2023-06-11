@@ -33,7 +33,7 @@
 @endphp
 <div class="z-20"> {{--max-w-screen overflow-x-hidden md:w-full--}}
     <div class="w-full">
-        <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 @endif  @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif">
+        <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-slate-900 @endif  @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif">
             <thead>
                 <tr class="bg-gray-200">{{ $header }}</tr>
             </thead>

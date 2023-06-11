@@ -29,16 +29,12 @@
     if (! is_numeric($max_file_size)) $max_file_size = 5;
 @endphp
 <div class="border-gray-500"></div>
-<div class="relative px-2 py-3 border border-dashed border-gray-300 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute z-20 left-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-    </svg>
+<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 hover:dark:border-slate-600 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
+    <x-bladewind::icon name="document-text" class="h-6 w-6 absolute z-20 left-4 text-gray-300" />
     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute z-10 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
     </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" class="absolute right-3 h-5 w-5 text-gray-300 clear cursor-pointer hidden" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-    </svg>
+    <x-bladewind::icon name="x-circle" class="absolute right-3 h-8 w-8 text-gray-600 hover:text-gray-800 clear cursor-pointer hidden" type="solid" />
     <span class="text-gray-400/80 px-6 pl-10 zoom-out inline-block selection">
         {{ $placeholder }}
         @if($required) <span class="text-red-300">*</span>@endif
