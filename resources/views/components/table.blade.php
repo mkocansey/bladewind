@@ -35,7 +35,7 @@
     <div class="w-full">
         <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-slate-900 @endif  @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif">
             <thead>
-                <tr class="bg-gray-200">{{ $header }}</tr>
+                <tr class="bg-gray-200 dark:bg-slate-800">{{ $header }}</tr>
             </thead>
             <tbody>{{ $slot }}</tbody>
         </table>

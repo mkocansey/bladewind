@@ -3,7 +3,7 @@
         @apply  border-t border-gray-200 border-b-8 border-b-gray-200/40 dark:border-b-slate-800/40
     }
     .bw-table.divided.thin tr {
-        @apply border-b border-t border-gray-200 border-b-gray-200/60 dark:border-b-slate-800
+        @apply border-b border-t border-gray-200 border-b-gray-200/60 dark:border-b-slate-800 dark:border-t-slate-900
     }
     .bw-table.striped tr:nth-child(even)>td, .bw-table.striped tr:nth-child(even):hover>td{
         @apply bg-gray-50 dark:bg-slate-900/60
@@ -18,7 +18,7 @@
         font-semibold
         tracking-widest
         px-5 py-4
-        border-t border-gray-200/20 
+        border-t border-gray-200/20 dark:border-slate-800
     }
     .bw-table.compact thead>tr>th {
         @apply !py-2
