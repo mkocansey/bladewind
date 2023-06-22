@@ -1,10 +1,12 @@
 @props([
     'status' => 'pending',
     'stacked' => false,
+    'completed' => false,
     'date' => '',
     'label' => '',
     'last' => false,
-    'color' => 'cyan',
+    'color' => 'blue',
+    'icon' => 'check',
     'coloring' => [
         'bg' => [
             'red' => 'bg-red-500',
@@ -43,16 +45,22 @@
 ])
 @php
     $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);
+    $completed = filter_var($completed, FILTER_VALIDATE_BOOLEAN);
+    $completed = ($status != 'pending') || $completed;
     $last = filter_var($last, FILTER_VALIDATE_BOOLEAN);
 @endphp
-<div class="flex text-slate-600">
+<div class="flex text-slate-600 dark:text-slate-400">
     @if(!$stacked)
-    <div class="pr-5 pt-1 w-[63px]  font-semibold whitespace-nowrap {{ $coloring['text'][$color] }}">{!!$date!!}</div>
+    <div class="pr-3 pt-2 w-[63px] text-right text-sm font-semibold whitespace-nowrap {{ $coloring['text'][$color] }}">{!!$date!!}</div>
     @endif
     <div class="z-20">
-        <div class="h-8 w-8 @if($status=='pending') bg-white border-4 {{ $coloring['border'][$color] }}  @else {{$coloring['bg'][$color]}} @endif rounded-full"></div>
+        @if($completed)
+        <x-bladewind::icon name="{!! $icon !!}" class="{{$coloring['bg'][$color]}} p-2 text-white dark:!text-white rounded-full !h-9 !w-9" />
+        @else
+        <div class="h-9 w-9 bg-white dark:bg-slate-700 border-2 {{ $coloring['border'][$color] }} rounded-full"></div>
+        @endif
     </div>
-    <div class="@if(!$last) border-l-4 {{ $coloring['border'][$color] }}@endif pl-8 pb-14 z-10 text-lg" style="margin-left: -18px">
+    <div class="@if(!$last) border-l-2 {{ $coloring['border'][$color] }}@endif pl-7 pb-8 pt-2 z-10 text-sm" style="margin-left: -18px; min-height: 70px">
         @if($stacked) <div class="font-semibold {{ $coloring['text'][$color] }}">{!!$date!!}</div> @endif
         {!!$label!!}
     </div>
