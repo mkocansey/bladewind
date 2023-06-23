@@ -80,7 +80,7 @@
     if($canSubmit) $can_submit = $canSubmit;
 
     $button_type = $can_submit ? 'submit' : 'button';
-    $spinner_css = !$show_spinner ? 'hidden' : '';
+    $spinner_css = !$show_spinner ? 'hidden' : '!-mr-2 ml-2';
     $primary_colour = $type === 'primary' ? $colouring['bg'][$color]. ' '. $colouring['focus'][$color]. ' '. $colouring['hover_active'][$color] : '';
     $button_text_css = (!empty($buttonTextCss)) ? $buttonTextCss : $button_text_css;
     $button_text_colour = $button_text_css ?? ($type === 'primary' ? 'text-white hover:text-white' : 'text-black hover:text-black');
@@ -97,9 +97,9 @@
     @endif
 >
     @if(!empty($icon) && !$icon_right)
-        <x-bladewind::icon name="{{$icon}}" class="h-5 w-5 !-ml-2 mr-1 dark:text-white/80" />
+        <x-bladewind::icon name="{{$icon}}" class="h-5 w-5 !-ml-2 mr-2 dark:text-white/80" />
     @endif
-    <span class="{{ $button_text_colour }}">{{ $slot }}</span>
+    <span class="grow {{ $button_text_colour }}">{{ $slot }}</span>
     @if(!empty($icon) && $icon_right && !$has_spinner)
         <x-bladewind::icon name="{{$icon}}" class="h-5 w-5 !-mr-2 ml-2 dark:text-white/80" />
     @endif

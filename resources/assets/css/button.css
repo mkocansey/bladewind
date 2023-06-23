@@ -8,7 +8,7 @@
             uppercase
             tracking-widest
             rounded-full
-            inline-block
+            inline-flex items-center
     }
     .bw-button.big {
         @apply
