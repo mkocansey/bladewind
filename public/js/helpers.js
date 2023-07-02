@@ -27,7 +27,6 @@ validateForm = (form) => {
                 el.classList.add('!border-red-400');
                 el.focus();
                 if(error_message){
-                    console.log(show_error_inline);
                     (show_error_inline) ? unhide(`.${el_name}-inline-error`) : 
                     showNotification(error_heading, error_message, 'error');
                 }
@@ -229,7 +228,7 @@ goToTab = (el, color, context) => {
         input_field.setAttribute('type', 'text');
         unhide(`.dv-${el} .suffix svg.hide-pwd`);
         hide(`.dv-${el} .suffix svg.show-pwd`);
-    }else {
+    } else {
         input_field.setAttribute('type', 'password')
         unhide(`.dv-${el} .suffix svg.show-pwd`);
         hide(`.dv-${el} .suffix svg.hide-pwd`);

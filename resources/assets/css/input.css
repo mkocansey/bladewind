@@ -27,7 +27,7 @@
             px-1
             transition-all
             peer-placeholder-shown:top-[19px]
-            peer-focus:-top-2 bg-white text-blue-900/40 dark:text-slate-500 z-30 dark:bg-slate-800
+            peer-focus:-top-2 bg-white text-blue-900/40 dark:text-slate-500 z-20 dark:bg-slate-800
     }
     .prefix svg, .suffix svg {
         @apply !mr-1 w-6 h-6 dark:text-slate-500
