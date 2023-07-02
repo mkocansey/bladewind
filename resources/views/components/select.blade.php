@@ -76,6 +76,8 @@
     // this can be used to filter the contents of the select items
     'searchable' => false,
 ])
+@aware([ 'onselect' => ''])
+
 @php
     //$multiple = filter_var($multiple, FILTER_VALIDATE_BOOLEAN);
     $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
@@ -93,19 +95,21 @@
     if ($imageKey !== $image_key) $image_key = $imageKey;
     if (!$add_clearing) $add_clearing = $addClearing;
 
-    $data = json_decode(str_replace('&quot;', '"', $data));
     $input_name = preg_replace('/[\s-]/', '_', $name);
     $selected_value = ($selected_value !== '') ? explode(',', str_replace(', ', ',', $selected_value)) : [];
 
-    if(! isset($data[0]->{$label_key}) ) {
-        echo '<p style="color:red">
-            &lt;x-bladewind.select /&gt;: ensure the value you set as label_key
-            exists in your array data</p>';exit;
-    }
+    if ($data !== 'manual') {
+        $data = json_decode(str_replace('&quot;', '"', $data));
+        if(! isset($data[0]->{$label_key}) ) {
+            echo '<p style="color:red">
+                &lt;x-bladewind.select /&gt;: ensure the value you set as label_key
+                exists in your array data</p>';exit;
+        }
 
-    if( $flag_key !== '' && !isset($data[0]->{$flag_key}) ) {
-        echo '<p style="color:red">
-            &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>';exit;
+        if( $flag_key !== '' && !isset($data[0]->{$flag_key}) ) {
+            echo '<p style="color:red">
+                &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>';exit;
+        }
     }
 
 @endphp
@@ -139,17 +143,18 @@
                 suffix_is_icon="true" />
         </div>
         <div class="divide-y divide-slate-100 bw-select-items mt-0">
-        @foreach ($data as $item)
-            <div class="py-3 pl-4 pr-3 flex items-center text-base cursor-pointer hover:bg-slate-100/90 bw-select-item"
-                data-label="{{ $item->{$label_key} }}" data-value="{{ $item->{$value_key} }}" 
-                @if(in_array($item->{$value_key}, $selected_value)) data-selected="true" @endif
-                @if($onselect !== '') data-user-function="{{ $onselect }}"@endif>
-                @if ($flag_key != '' && $image_key == '')<i class="{{ $item->{$flag_key} }} flag"></i>@endif
-                @if ($image_key != '')<x-bladewind::avatar size="small" class="!mt-0 !mr-4" image="{{ $item->{$image_key} }}" />@endif
-                <span class="grow text-left">{!! $item->{$label_key} !!}</span>
-                <x-bladewind::icon name="check-circle" class="text-slate-400 h-5 w-5 hidden svg-{{$item->{$value_key} }}" />
-            </div>
-        @endforeach
+        @if($data !== 'manual')
+            @foreach ($data as $item)
+                <x-bladewind::select-item label="{{ $item->{$label_key} }}"
+                    value="{{ $item->{$value_key} }}"
+                    onselect="{{ $onselect }}"
+                    flag="{{ ($flag_key !== '') ? $item->{$flag_key} : '' }}"
+                    image="{{ ($image_key !== '') ? $item->{$image_key} : '' }}"
+                    selected="{{ (in_array($item->{$value_key}, $selected_value)) ? 'true' : 'false' }}" />
+            @endforeach
+        @else
+            {!! $slot !!}
+        @endif
         </div>
     </div>
     <input type="hidden" name="{{ ($data_serialize_as !== '') ? $data_serialize_as : $input_name }}" class="bw-{{$input_name}}" />
