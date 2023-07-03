@@ -81,6 +81,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Progress Bar](https://bladewindui.com/component/progress-bar)**
 - **[Radio Button](https://bladewindui.com/component/radio-button)**
 - **[Rating](https://bladewindui.com/component/rating)**
+- **[Select](https://bladewindui.com/component/select)**
 - **[Statistic](https://bladewindui.com/component/statistic)**
 - **[Spinner](https://bladewindui.com/component/spinner)**
 - **[Tab](https://bladewindui.com/component/tab)**
