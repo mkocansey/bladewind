@@ -10,7 +10,7 @@ class BladewindSelect {
 
     constructor(name, placeholder) {
         this.name = name;
-        this.placeholder = placeholder;
+        this.placeholder = placeholder || 'Select One';
         this.rootElement = `.bw-select-${name}`;
         this.clickArea = `${this.rootElement} .clickable`;
         this.displayArea = `${this.rootElement} .display-area`;
@@ -51,8 +51,14 @@ class BladewindSelect {
     selectItem = () => {
         dom_els(this.selectItems).forEach((el) => {
             let selected = (el.getAttribute('data-selected') !== null);
+            let user_function = el.getAttribute('data-user-function');
             if(selected) this.setValue(el);
-            el.addEventListener('click', (e) => { this.setValue(el); });
+            el.addEventListener('click', (e) => { 
+                if(user_function !== null && user_function !== undefined) {
+                    callUserFunction(`${user_function}('${el.getAttribute('data-value')}', '${el.getAttribute('data-label')}')`);
+                }
+                this.setValue(el); 
+            });
         });
     }
 
@@ -142,5 +148,35 @@ class BladewindSelect {
             });
         });
     }
+
+    selectByValue = (value) => {
+        dom_els(this.selectItems).forEach( (el) => {
+            if (el.getAttribute('data-value') == value) this.setValue(el);
+        });
+    }
+
+    reset = () => {
+        dom_els(this.selectItems).forEach( (el) => { this.unsetValue(el); });
+        hide(this.displayArea);
+        unhide(this.placeholder);
+    }
+
+    disable = () => {
+        changeCss(this.clickArea, 'opacity-40, select-none, cursor-not-allowed');
+        changeCss(this.clickArea, 'focus:border-blue-400, cursor-pointer', 'remove');
+        hide(`${this.clickArea} .reset`);
+        dom_el(this.clickArea).addEventListener('click', (e) => {
+            hide(this.itemsContainer);
+        });
+    }
+
+    enable = () => {
+        changeCss(this.clickArea, 'opacity-40, select-none, cursor-not-allowed', 'remove');
+        changeCss(this.clickArea, 'focus:border-blue-400, cursor-pointer');
+        dom_el(this.clickArea).addEventListener('click', (e) => {
+            unhide(this.itemsContainer);
+        });
+    }
+
 
 }

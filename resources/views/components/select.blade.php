@@ -76,8 +76,6 @@
     // this can be used to filter the contents of the select items
     'searchable' => false,
 ])
-@aware([ 'onselect' => ''])
-
 @php
     //$multiple = filter_var($multiple, FILTER_VALIDATE_BOOLEAN);
     $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
@@ -162,5 +160,6 @@
 
 <script>
 @php include_once('vendor/bladewind/js/select.js'); @endphp
-const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}')@if(!$disabled && !$readonly).activate()@endif;
+const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
+@if(!$disabled && !$readonly) bw_{{ $input_name }}.activate(); @endif
 </script>
