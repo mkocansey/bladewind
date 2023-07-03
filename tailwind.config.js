@@ -1,5 +1,12 @@
 module.exports = {
-  content: ['./resources/**/*.{html,php,js}'],
+  content: [
+    "./public/**/*.js",
+    "./resources/**/*.{html,php,js}", 
+  ],
+  safelist: [
+    'bg-slate-200',
+    'hover:bg-slate-300',
+  ],
   darkMode: 'class',
   theme: {
     extend: {},
