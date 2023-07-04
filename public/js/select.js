@@ -74,11 +74,13 @@ class BladewindSelect {
             dom_el(this.displayArea).innerText = selectedLabel;
             dom_el(this.formInput).value = selectedValue;
             unhide(`${this.clickArea} .reset`);
+            unhide(svg, true);
             dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
                 this.unsetValue(item);
                 e.stopImmediatePropagation();
             });
         } else {
+            unhide(svg, true);
             if(dom_el(`input.bw-${this.name}`).value.indexOf(`,${selectedValue}`) !== -1){
                 this.unsetValue(item);
             } else {
@@ -88,13 +90,11 @@ class BladewindSelect {
             }
             this.scrollers();
         }
-        unhide(svg, true);
     }
     
     unsetValue = (item) => {
         let selectedValue = item.getAttribute('data-value');
         let svg = item.children[item.children.length-1];
-        hide(svg, true);
         if(! this.isMultiple) {
             unhide(`${this.rootElement} .placeholder`);
             changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
@@ -110,6 +110,7 @@ class BladewindSelect {
                 hide(this.displayArea);
             }
         }
+        hide(svg, true);
     }
 
     scrollers = () => {

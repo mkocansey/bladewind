@@ -131,16 +131,16 @@
     <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 border-2 
         border-blue-400 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 border-t-0 -mt-1.5 
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
-        <div class="sticky top-0 min-w-full bg-slate-100 py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
+        <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-slate-700 py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
             <x-bladewind::input 
                 name="bw-filter"
-                class="!border-0 !border-b !rounded-none focus:!border-slate-300 !w-full !text-sm" 
+                class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm" 
                 add_clearing="false" 
                 placeholder="Type here..." 
                 suffix="magnifying-glass" 
                 suffix_is_icon="true" />
         </div>
-        <div class="divide-y divide-slate-100 bw-select-items mt-0">
+        <div class="divide-y divide-slate-100 dark:divide-slate-700 bw-select-items mt-0">
         @if($data !== 'manual')
             @foreach ($data as $item)
                 <x-bladewind::select-item label="{{ $item->{$label_key} }}"
