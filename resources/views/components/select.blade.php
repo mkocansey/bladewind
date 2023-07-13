@@ -133,8 +133,7 @@
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
         <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-slate-700 py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
             <x-bladewind::input 
-                name="bw-filter"
-                class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm" 
+                class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_filter" 
                 add_clearing="false" 
                 placeholder="Type here..." 
                 suffix="magnifying-glass" 
