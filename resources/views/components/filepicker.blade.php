@@ -17,6 +17,9 @@
     // adds margin after the input box
     'add_clearing' => true,
     'addClearing' => true,
+    // display a selected value by default
+    'selected_value' => '',
+    'selectedValue' => '',
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -25,8 +28,10 @@
     $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
     if (!$addClearing) $add_clearing = $addClearing;
     if ($acceptedFileTypes !== $accepted_file_types) $accepted_file_types = $acceptedFileTypes;
+    if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
     if ($maxFileSize !== $max_file_size) $max_file_size = $maxFileSize;
     if (! is_numeric($max_file_size)) $max_file_size = 5;
+    $image_file_types = [ "png", "jpg", "jpeg", "gif" ];
 @endphp
 <div class="border-gray-500"></div>
 <div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 hover:dark:border-slate-600 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
@@ -78,7 +83,7 @@
 
     dom_el('.bw-{{ $name }}').addEventListener('change', function (){
         let selection = this.value;
-        if ( selection != '' ) {
+        if ( selection !== '' ) {
             const [file] = this.files
 
             if (file) {
@@ -100,7 +105,7 @@
         e.stopImmediatePropagation();
     });
     
-    convertToBase64 = function(file, el){
+    convertToBase64 = (file, el) => {
         const reader = new FileReader();
         reader.onloadend = () => {
             const base64String = reader.result;//.replace('data:', '').replace(/^.+,/, ''); 
@@ -108,6 +113,7 @@
         };
         reader.readAsDataURL(file);
     }
+
     allowedFileSize = (file_size, max_size) => {
         return ( file_size <= ((max_size)*1)*1000000 );
     }
