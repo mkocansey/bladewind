@@ -51,7 +51,7 @@
         dom_el('.bw-notification .message').innerHTML = message;
         changeCss('.bw-notification', `${border_color.success}, ${border_color.error}, ${border_color.info}, ${border_color.warning}`, 'remove');
         changeCss('.bw-notification', eval(`border_color.${type}`));
-        changeCssForDomArray('.modal-icon', 'hidden');  // hide all modal icons
+        changeCssForDomArray('.bw-notification .modal-icon', 'hidden');  // hide all modal icons
         unhide(`.bw-notification .modal-icon.${type}`); // show only the relevant modal icon
         animateCSS('.bw-notification','fadeInRight').then((message) => { 
             setTimeout(function(){
