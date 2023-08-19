@@ -47,13 +47,11 @@ validateForm = (form) => {
     return has_error === 0;
 }
 
-isNumberKey = (evt, with_dots=1) => {   // usage:  onkeypress="return isNumberKey(event)"
-    var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (with_dots==0 && charCode == 46) return false;
-    if (charCode > 31 && (charCode != 46 && (charCode < 48 || charCode > 57))) {
-        return false;
-    }
-    return true;
+// usage:  onkeypress="return isNumberKey(event)"
+isNumberKey = (evt, with_dots=1) => {
+    const charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (with_dots === 0 && charCode === 46) return false;
+    return !(charCode > 31 && (charCode !== 46 && (charCode < 48 || charCode > 57)));
 }
 
 callUserFunction = (func) => { 
@@ -80,7 +78,7 @@ serialize = (form) => {
 
 stringContains = (str, keyword) => { 
     if(typeof(str) !== 'string') return false; 
-    return (str.indexOf(keyword) != -1); 
+    return (str.indexOf(keyword) !== -1);
 }
 
 doNothing = () => { }
@@ -95,18 +93,18 @@ changeCssForDomArray = (elements, css, mode='add') => {
 
 changeCss = (element, css, mode='add', elementIsDomObject=false) => { 
     // css can be comma separated
-    // if elementIsDomObject dont run it through dom_el
+    // if elementIsDomObject don't run it through dom_el
     if( (! elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)){
-        if(css.indexOf(',') != -1 || css.indexOf(' ') != -1) {
+        if(css.indexOf(',') !== -1 || css.indexOf(' ') !== -1) {
             css = css.replace(/\s+/g, '').split(',');
             for(let classname of css) {
-                (mode == 'add') ?
+                (mode === 'add') ?
                     ((elementIsDomObject) ? element.classList.add(classname.trim()) : dom_el(element).classList.add(classname.trim())) :
                     ((elementIsDomObject) ? element.classList.remove(classname.trim()) : dom_el(element).classList.remove(classname.trim()));
             }
         } else {
-            if( (! elementIsDomObject && dom_el(element).classList != undefined) || (elementIsDomObject && element.classList != undefined)){
-                (mode == 'add') ?
+            if( (! elementIsDomObject && dom_el(element).classList !== undefined) || (elementIsDomObject && element.classList !== undefined)){
+                (mode === 'add') ?
                     ((elementIsDomObject) ? element.classList.add(css) : dom_el(element).classList.add(css)) : 
                     ((elementIsDomObject) ? element.classList.remove(css) : dom_el(element).classList.remove(css));
             }
@@ -197,19 +195,19 @@ goToTab = (el, color, context) => {
 
   positionPrefix = (el, mode = 'blur') => {
     let transparency = dom_el(`.dv-${el} .prefix`).getAttribute('data-transparency');
-    let offset = (transparency == '1') ? -5 : 7;
+    let offset = (transparency === '1') ? -5 : 7;
     let prefix_width = ((dom_el(`.dv-${el} .prefix`).offsetWidth)+offset)*1;
     let default_label_left_pos = '0.875rem';
     let input_field = dom_el(`input.${el}`);
     let label_field = dom_el(`.dv-${el} label`);
 
-    if(mode == 'blur') {
+    if(mode === 'blur') {
         if(label_field) {
-            label_field.style.left = (input_field.value == '') ? `${prefix_width}px` : default_label_left_pos ;
+            label_field.style.left = (input_field.value === '') ? `${prefix_width}px` : default_label_left_pos ;
         }
         dom_el(`input.${el}`).style.paddingLeft = `${prefix_width}px`;
         input_field.addEventListener('focus', (event)=>{ positionPrefix(el, event.type) });
-    } else if(mode == 'focus') {
+    } else if(mode === 'focus') {
         if(label_field) label_field.style.left = default_label_left_pos;
         input_field.addEventListener('blur', (event)=>{ positionPrefix(el, event.type) });
     }
@@ -217,14 +215,14 @@ goToTab = (el, color, context) => {
 
   positionSuffix = (el) => {
     let transparency = dom_el(`.dv-${el} .suffix`).getAttribute('data-transparency');
-    let offset = (transparency == '1') ? -5 : 7;
+    let offset = (transparency === '1') ? -5 : 7;
     let suffix_width = ((dom_el(`.dv-${el} .suffix`).offsetWidth)+offset)*1;
     dom_el(`input.${el}`).style.paddingRight = `${suffix_width}px`;
   }
 
   togglePassword = (el, mode) => {
     let input_field = dom_el(`input.${el}`);
-    if (mode == 'show'){
+    if (mode === 'show'){
         input_field.setAttribute('type', 'text');
         unhide(`.dv-${el} .suffix svg.hide-pwd`);
         hide(`.dv-${el} .suffix svg.show-pwd`);
