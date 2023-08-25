@@ -86,12 +86,12 @@
     aria-backdrop-can-close="{{$backdrop_can_close}}">
     <div class="sm:{{$sizes[$size]}} w-full p-4 m-auto bw-{{$name}}">
         <div class="bg-white dark:bg-slate-900 dark:border dark:border-slate-800 rounded-lg drop-shadow-2xl">
-            <div class="flex">
-                @if($type !== '')
-                    <div class="modal-icon py-6 pl-6 grow-0">
-                        <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
-                    </div>
-                @endif
+            <div class="flex-auto">
+                @if(!empty($type))
+                <div class="modal-icon py-6 pl-6 grow-0 basis-0">
+                    <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
+                </div>
+               @endif
                 <div class="modal-body grow p-6">
                     <h1 class="text-lg text-gray-800 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
                     <div class="modal-text text-gray-600 dark:text-gray-400 pt-2 text-base leading-6 tracking-wide text-left">

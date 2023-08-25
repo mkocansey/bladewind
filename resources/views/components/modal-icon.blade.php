@@ -9,8 +9,9 @@
     $error_css = ($type !== 'error') ? 'hidden' : '';
     $info_css = ($type !== 'info') ? 'hidden' : '';
     $warning_css = ($type !== 'warning') ? 'hidden' : '';
+    $class = sprintf( 'h-14 w-14 rounded-full modal-icon %s', $class);
 @endphp
-<x-bladewind::icon name="check-circle" class="h-14 w-14 rounded-full modal-icon success text-green-600 dark:text-green-600 {{$class}} {{$success_css}}" />
-<x-bladewind::icon name="hand-raised" class="h-14 w-14 rounded-full modal-icon error text-red-600 dark:text-red-600 {{$class}} {{$error_css}}" />
-<x-bladewind::icon name="exclamation-triangle" class="h-14 w-14 rounded-full modal-icon warning text-yellow-700 dark:text-yellow-700 {{$class}} {{$warning_css}}" />
-<x-bladewind::icon name="information-circle" class="h-14 w-14 rounded-full modal-icon info text-blue-600 dark:text-blue-600 {{$class}} {{$info_css}}" />
+<x-bladewind::icon name="check-circle" class="success text-green-600 dark:!text-green-600 {{$class}} {{$success_css}}" />
+<x-bladewind::icon name="hand-raised" class="error text-red-600 dark:!text-red-600 {{$class}} {{$error_css}}" />
+<x-bladewind::icon name="exclamation-triangle" class="warning text-amber-600 dark:!text-amber-600 {{$class}} {{$warning_css}}" />
+<x-bladewind::icon name="information-circle" class="info text-blue-600 dark:!text-blue-600 {{$class}} {{$info_css}}" />
