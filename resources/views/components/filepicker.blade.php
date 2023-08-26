@@ -20,6 +20,11 @@
     // display a selected value by default
     'selected_value' => '',
     'selectedValue' => '',
+    // the css to apply to the selected value
+    'selected_value_class' => 'h-52',
+    'selectedValueClass' => 'h-52',
+    // file to display in edit mode
+    'url' => '',
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -29,15 +34,19 @@
     if (!$addClearing) $add_clearing = $addClearing;
     if ($acceptedFileTypes !== $accepted_file_types) $accepted_file_types = $acceptedFileTypes;
     if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
+    if ($selectedValueClass !== $selected_value_class) $selected_value_class = $selectedValueClass;
     if ($maxFileSize !== $max_file_size) $max_file_size = $maxFileSize;
     if (! is_numeric($max_file_size)) $max_file_size = 5;
-    $image_file_types = [ "png", "jpg", "jpeg", "gif" ];
+    $image_file_types = [ "png", "jpg", "jpeg", "gif", "svg" ];
 @endphp
 <div class="border-gray-500"></div>
-<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 hover:dark:border-slate-600 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
+<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-slate-300 dark:border-slate-700
+    dark:bg-slate-800 hover:dark:border-slate-600 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
     <x-bladewind::icon name="document-text" class="h-6 w-6 absolute z-20 left-4 text-gray-300" />
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute z-10 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute z-10 text-gray-300"
+         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
     </svg>
     <x-bladewind::icon name="x-circle" class="absolute right-3 h-8 w-8 text-gray-600 hover:text-gray-800 clear cursor-pointer hidden" type="solid" />
     <span class="text-gray-400/80 px-6 pl-10 zoom-out inline-block selection">
@@ -52,6 +61,7 @@
             id="bw_{{ $name }}" 
             accept="{{ $accepted_file_types }}" />
             <textarea class="b64-{{ $name }}@if($required) required @endif" name="b64_{{ $name }}"></textarea>
+            @if(!empty($selected_value))<input type="hidden" class="selected_{{ $name }}" name="selected_{{ $name }}" value="{{$selected_value}}" />@endif
     </div>
 </div>
 
@@ -89,7 +99,7 @@
             if (file) {
                 if(allowedFileSize(file.size, {{$max_file_size}})) {
                     dom_el('.bw-fp-{{ $name }} .selection').innerHTML = 
-                    ( file.type.indexOf('image') !== -1) ? '<img src="'+ URL.createObjectURL(file) + '" />' : file.name;
+                    ( file.type.indexOf('image') !== -1) ? '<img src="'+ URL.createObjectURL(file) + '" class="rounded-md" />' : file.name;
                     convertToBase64(file, '.b64-{{ $name }}');
                 } else {
                     dom_el('.bw-fp-{{ $name }} .selection').innerHTML = '<span class="text-red-500">File must be {{$max_file_size}}mb or below</span>';
@@ -98,6 +108,7 @@
             changeCss('.bw-fp-{{ $name }} .clear', 'hidden', 'remove');
         }
     });
+
     dom_el('.bw-fp-{{ $name }} .clear').addEventListener('click', function (e){
         dom_el('.bw-fp-{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
         dom_el('.bw-{{ $name }}').value = dom_el('.b64-{{ $name }}').value = '';
@@ -117,4 +128,15 @@
     allowedFileSize = (file_size, max_size) => {
         return ( file_size <= ((max_size)*1)*1000000 );
     }
+
+    @if(!empty($url))
+    @if(in_array(pathinfo($url, PATHINFO_EXTENSION), $image_file_types))
+        file = '<img src="{{ $url }}" alt="{{ $url }}" class="rounded-md {{$selected_value_class}}" />';
+    @else
+        file = '{{ ($selected_value != '') ? $selected_value : $url }}';
+    @endif
+    dom_el('.bw-fp-{{ $name }} .selection').innerHTML = file;
+    changeCss('.bw-fp-{{ $name }} .clear', 'hidden', 'remove');
+    @endif
+
 </script>
