@@ -2,7 +2,7 @@
 @props([
     'label' => '',
     'percentage' => 0,
-    'color' => 'blue',
+    'color' => 'primary',
     'shade' => 'faint',
     'percentage_label_opacity' => '50',
     'percentageLabelOpacity' => '50',

@@ -40,13 +40,11 @@
     $image_file_types = [ "png", "jpg", "jpeg", "gif", "svg" ];
 @endphp
 <div class="border-gray-500"></div>
-<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-slate-300 dark:border-slate-700
-    dark:bg-slate-800 hover:dark:border-slate-600 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
+<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-dark-300 dark:border-dark-700
+    dark:bg-dark-800 hover:dark:border-dark-600 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
     <x-bladewind::icon name="document-text" class="h-6 w-6 absolute z-20 left-4 text-gray-300" />
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute z-10 text-gray-300"
-         fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute z-10 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
     </svg>
     <x-bladewind::icon name="x-circle" class="absolute right-3 h-8 w-8 text-gray-600 hover:text-gray-800 clear cursor-pointer hidden" type="solid" />
     <span class="text-gray-400/80 px-6 pl-10 zoom-out inline-block selection">

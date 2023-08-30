@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Calendar Language Lines
+    | Calendar Language Lines | German
     |--------------------------------------------------------------------------
     |
     | The following language lines contain the default strings used in the calendar

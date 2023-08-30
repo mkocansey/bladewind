@@ -105,7 +105,7 @@
             placeholder="{{ $placeholder }}"
             required="{{$required}}" />
 
-        <div class="bg-white dark:bg-slate-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem"
+        <div class="bg-white dark:bg-dark-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md" style="width: 17rem"
             x-show.transition="showDatepicker" @click.away="showDatepicker = false">
         <div class="flex justify-between items-center mb-2">
             <div>
@@ -150,9 +150,9 @@
                 <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
                     <div style="width: 14.28%" class=" mb-1">
                         <div @click="getDateValue(date, '{{$format}}')" x-text="date" class="cursor-pointer text-center text-sm leading-8 rounded-full transition ease-in-out duration-100" :class="{
-                            'bg-blue-200 dark:bg-slate-700': isToday(date) == true,
-                            'text-gray-600 dark:text-gray-100 hover:bg-blue-200 hover:dark:bg-slate-500': isToday(date) == false && isSelectedDate(date) == false,
-                            'bg-blue-500 dark:bg-slate-700 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
+                            'bg-blue-200 dark:bg-dark-700': isToday(date) == true,
+                            'text-gray-600 dark:text-gray-100 hover:bg-blue-200 hover:dark:bg-dark-500': isToday(date) == false && isSelectedDate(date) == false,
+                            'bg-blue-500 dark:bg-dark-700 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
                         </div>
                     </div>
                 </template>

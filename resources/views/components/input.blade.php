@@ -157,12 +157,12 @@
         </label>
     @endif
     @if (!empty($prefix))
-        <div class="{{$name}}-prefix prefix text-sm select-none pl-3.5 pr-2 z-20 text-blue-900/50 dark:text-slate-400 absolute left-0 inset-y-0 inline-flex items-center @if(!$transparent_prefix) bg-slate-100 border-2 border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 dark:border-r-0 border-r-0 rounded-tl-md rounded-bl-md @endif" data-transparency="{{$transparent_prefix}}">
+        <div class="{{$name}}-prefix prefix text-sm select-none pl-3.5 pr-2 z-20 text-blue-900/50 dark:text-dark-400 absolute left-0 inset-y-0 inline-flex items-center @if(!$transparent_prefix) bg-slate-100 border-2 border-slate-200 dark:border-dark-700 dark:bg-dark-900/50 dark:border-r-0 border-r-0 rounded-tl-md rounded-bl-md @endif" data-transparency="{{$transparent_prefix}}">
         @if($prefix_is_icon) <x-bladewind::icon name='{!! $prefix !!}' type="{{ $prefix_icon_type }}" class="{{$prefix_icon_css}}" /> @else {!! $prefix !!} @endif</div>
         <script>positionPrefix('{{$name}}', 'blur', '{{$transparent_prefix}}');</script>
     @endif
     @if (!empty($suffix))
-        <div class="{{$name}}-suffix suffix text-sm select-none pl-3.5 pr-2 z-20 text-blue-900/50 dark:text-slate-400 absolute right-0 inset-y-0 inline-flex items-center @if(!$transparent_suffix) bg-slate-100 border-2 border-slate-200 border-l-0 dark:border-slate-700 dark:bg-slate-900/50 dark:border-l-0 rounded-tr-md rounded-br-md @endif" data-transparency="{{$transparent_prefix}}">
+        <div class="{{$name}}-suffix suffix text-sm select-none pl-3.5 !pr-3 z-20 text-blue-900/50 dark:text-dark-400 absolute right-0 inset-y-0 inline-flex items-center @if(!$transparent_suffix) bg-slate-100 border-2 border-slate-200 border-l-0 dark:border-dark-700 dark:bg-dark-900/50 dark:border-l-0 rounded-tr-md rounded-br-md @endif" data-transparency="{{$transparent_prefix}}">
         @if($suffix_is_icon) <x-bladewind::icon name='{!! $suffix !!}' type="{{ $suffix_icon_type }}" class="{{$suffix_icon_css}}" /> @else {!! $suffix !!} @endif</div>
         <script>positionSuffix('{{$name}}');</script>
     @endif

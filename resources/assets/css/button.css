@@ -7,8 +7,6 @@
             text-xs
             uppercase
             tracking-widest
-            rounded-full
-            inline-flex items-center
     }
     .bw-button.big {
         @apply
@@ -27,25 +25,24 @@
             px-[12px]
             text-[10px]
     }
-    .bw-button.primary {
+    .bw-button.primary, .bw-button-circle.primary {
         @apply
             focus:ring focus:ring-offset-2 focus:ring-opacity-30 dark:focus:ring-opacity-10
-            transition text-white hover:text-white rounded-full active:translate-y-0.5 
+            transition text-white hover:text-white active:translate-y-0.5
     }
-    .bw-button.secondary {
+    .bw-button.secondary, .bw-button-circle.secondary {
         @apply
             focus:ring
             focus:ring-offset-2
-            focus:ring-slate-500/40
+            focus:ring-secondary-500/40
             active:translate-y-0.5
             transition
-            bg-slate-300  dark:bg-slate-700
-            text-slate-800 dark:text-slate-400
-            rounded-full
-            hover:bg-slate-400 hover:text-white hover:dark:bg-slate-400/50 hover:dark:text-slate-300
-            active:bg-slate-700 dark:focus:ring-slate-800
+            bg-secondary-300  dark:bg-dark-700
+            text-secondary-800 dark:text-dark-400
+            hover:bg-secondary-400 hover:text-white hover:dark:bg-dark-400/50 hover:dark:text-dark-300
+            active:bg-secondary-700 dark:focus:ring-dark-800
     }
-    .bw-button.disabled {
+    .bw-button.disabled, .bw-button-circle.disabled {
         @apply
             disabled:opacity-50
             disabled:cursor-not-allowed

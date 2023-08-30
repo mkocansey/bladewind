@@ -112,9 +112,16 @@ changeCss = (element, css, mode='add', elementIsDomObject=false) => {
     }
 }
 
-showModal = (element) => { unhide(`.bw-${element}-modal`); }
+showModal = (element) => {
+    unhide(`.bw-${element}-modal`);
+    animateCSS(`.bw-${element}`, 'zoomIn').then(() => { doNothing(); });
+}
 
-hideModal = (element) => { hide(`.bw-${element}-modal`); }
+hideModal = (element) => {
+    animateCSS(`.bw-${element}`, 'zoomOut').then(() => {
+        hide(`.bw-${element}-modal`);
+    });
+}
 
 showButtonSpinner = (element) => { unhide(`${element} .bw-spinner`); }
 
