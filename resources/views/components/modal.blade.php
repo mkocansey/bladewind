@@ -51,6 +51,10 @@
     'stretch_action_buttons' => false,
     'stretchActionButtons' => false,
 
+    // should the backdrop of the modal be blurred
+    'blur_backdrop' => true,
+    'blurBackdrop' => true,
+
     // determines size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
     'size' => 'big',
@@ -81,12 +85,15 @@
     $centerActionButtons = filter_var($centerActionButtons, FILTER_VALIDATE_BOOLEAN);
     $stretch_action_buttons = filter_var($stretch_action_buttons, FILTER_VALIDATE_BOOLEAN);
     $stretchActionButtons = filter_var($stretchActionButtons, FILTER_VALIDATE_BOOLEAN);
+    $blur_backdrop = filter_var($blur_backdrop, FILTER_VALIDATE_BOOLEAN);
+    $blurBackdrop = filter_var($blurBackdrop, FILTER_VALIDATE_BOOLEAN);
 
     if (!$closeAfterAction) $close_after_action = $closeAfterAction;
     if (!$backdropCanClose) $backdrop_can_close = $backdropCanClose;
     if (!$showActionButtons) $show_action_buttons = $showActionButtons;
     if ($centerActionButtons) $center_action_buttons = $centerActionButtons;
     if ($stretchActionButtons) $stretch_action_buttons = $stretchActionButtons;
+    if ($blurBackdrop) $blur_backdrop = $blurBackdrop;
     //-------------------------------------------------------------------
 
     $name = str_replace(' ', '-', $name);
@@ -101,7 +108,7 @@
 <span class="sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12"></span>
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
-    class="w-full h-full bg-black/40 fixed left-0 top-0 backdrop-blur-md z-40 flex bw-modal bw-{{$name}}-modal hidden">
+    class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
     <div class="sm:{{$sizes[$size]}} w-full p-4 m-auto bw-{{$name}}  animate__faster">
         <div class="bg-white dark:bg-slate-900 dark:border dark:border-slate-800 rounded-lg drop-shadow-2xl">
             <div class="flex">

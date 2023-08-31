@@ -2,7 +2,7 @@
     // name of the input field for use in forms
     'name' => 'input-'.uniqid(),
     // what type of input box are you displaying
-    // availalble options are text, password, email, search, tel
+    // available options are text, password, email, search, tel
     'type' => 'text', 
     // label to display on the input box
     'label' => '',

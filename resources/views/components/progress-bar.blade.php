@@ -53,12 +53,6 @@
 @endphp
 
 <span class=" bg-primary-300 bg-primary-600 hidden"></span>
-<style>
-    @keyframes fill {
-        from {top: 0;}
-        to {top: {{$percentage}}%; background-color: bg-{{$color}}-{{$color_weight[$shade]}};}
-    }
-</style>
 <div class="bw-progress-bar {{$class}}">
     @if($show_percentage_label &&
         !$show_percentage_label_inline &&
@@ -68,7 +62,7 @@
     </div>
     @endif
     <div class="@if(!$transparent) bg-slate-200/70 dark:bg-dark-800 w-full @endif mt-1 my-2 rounded-full">
-        <div style="width: {{$percentage}}%; animation: fill 3s; animation-fill-mode: forwards;" class="text-center py-1 bg-{{$color}}-{{$color_weight[$shade]}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
+        <div style="width: {{$percentage}}%" class="text-center py-1 bg-{{$color}}-{{$color_weight[$shade]}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
             @if($show_percentage_label && $show_percentage_label_inline)<span class="text-{{$color}}-{{$text_color_weight[$shade]}} px-2 text-xs">
             {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
             </span>@endif
