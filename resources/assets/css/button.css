@@ -4,6 +4,7 @@
             py-5
             px-7
             focus:outline-none
+            focus:ring
             text-xs
             uppercase
             tracking-widest
@@ -22,17 +23,16 @@
     .bw-button.tiny {
         @apply
             py-[6px]
-            px-[12px]
+            px-[15px]
             text-[10px]
     }
     .bw-button.primary, .bw-button-circle.primary {
         @apply
-            focus:ring focus:ring-offset-2 focus:ring-opacity-30 dark:focus:ring-opacity-10
+            focus:ring-offset-2 focus:ring-opacity-30 dark:focus:ring-opacity-10
             transition text-white hover:text-white active:translate-y-0.5
     }
     .bw-button.secondary, .bw-button-circle.secondary {
         @apply
-            focus:ring
             focus:ring-offset-2
             focus:ring-secondary-500/40
             active:translate-y-0.5
