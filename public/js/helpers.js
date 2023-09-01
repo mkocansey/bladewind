@@ -2,10 +2,8 @@
 ** helper functions for BladeWind UI components using vanilla JS
 ** September 2021 by @mkocansey <@mkocansey>
 **/
-var     notification_timeout,
-        user_function, 
-        el_name;
-var     dropdownIsOpen = false;
+let current_modal = [];
+let el_name;
 
 domEl = (element) => { return dom_el(element); }
 dom_el = (element) => { return (document.querySelector(element) != null) ? document.querySelector(element) : false;  }
@@ -114,18 +112,24 @@ changeCss = (element, css, mode='add', elementIsDomObject=false) => {
 
 showModal = (element) => {
     unhide(`.bw-${element}-modal`);
-    animateCSS(`.bw-${element}`, 'zoomIn').then(() => { doNothing(); });
+    let current_index = (current_modal.length === 0) ? 0 : current_modal.length+1;
+    animateCSS(`.bw-${element}`, 'zoomIn').then(() => { current_modal[current_index] = element; });
 }
 
 hideModal = (element) => {
     animateCSS(`.bw-${element}`, 'zoomOut').then(() => {
         hide(`.bw-${element}-modal`);
+        current_modal.pop();
     });
 }
 
 showButtonSpinner = (element) => { unhide(`${element} .bw-spinner`); }
 
 hideButtonSpinner = (element) => { hide(`${element} .bw-spinner`); }
+
+showModalActionButtons = (element) => { unhide(`.bw-${element} .modal-footer`); }
+
+hideModalActionButtons = (element) => { hide(`.bw-${element} .modal-footer`); }
 
 hide = (element, elementIsDomObject=false) => { 
     if( (! elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)){

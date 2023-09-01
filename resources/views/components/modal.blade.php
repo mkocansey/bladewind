@@ -160,14 +160,10 @@
 
     document.addEventListener('keyup', function(e){
         if(e.key === "Escape") {
-            dom_els('.bw-modal').forEach((el) =>  {
-                if(el.getAttribute('data-backdrop-can-close')) {
-                    let modal_name = el.getAttribute('data-name')
-                    console.log(modal_name);
-                    hideModal(modal_name);
-
-                }
-            });
+            if(current_modal !== undefined && current_modal.length > 0) {
+                let modal_name = current_modal[current_modal.length];
+                if(dom_el(modal_name).getAttribute('data-backdrop-can-close')) hideModal(modal_name);
+            }
         }
     })
 </script>
