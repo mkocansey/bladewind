@@ -23,6 +23,7 @@
     // should a ring be shown around the button
     'show_focus_ring' => true,
     'showFocusRing' => true,
+    'tooltip' => '',
 
     // css for the various colours
     'colours'       => [
@@ -62,7 +63,7 @@
     $tag = ($tag !== 'a' && $tag !== 'button') ? 'button' : $tag;
     $merged_attributes = $attributes->merge(['class' => "bw-button-circle $size $type $name $primary_colour_css $disabled_css $radius_css"]);
 @endphp
-<{{ $tag }} {{ $merged_attributes }} @if($disabled) disabled @endif @if($tag == 'button') type="{{ $button_type }}" @endif>
+<{{ $tag }} title="{{$tooltip}}" {{ $merged_attributes }} @if($disabled) disabled @endif @if($tag == 'button') type="{{ $button_type }}" @endif>
     @if(!empty($icon))
         <x-bladewind::icon name="{{$icon}}" class="{{$icon_size[$size]}} {{$button_text_colour}} !-m-0" />
     @endif
