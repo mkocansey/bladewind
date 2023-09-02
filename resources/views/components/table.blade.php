@@ -18,8 +18,12 @@
     'compact' => false,
     // provide a table name you can access via css
     'name' => '',
+    'data' => null,
+    'exclude_columns' => null,
+    'include_columns' => null,
+    'action_icons' => null,
 ])
-@php 
+@php
     // reset variables for Laravel 8 support
     $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
     $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
@@ -30,14 +34,88 @@
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
+    $exclude_columns = !empty($exclude_columns) ? explode(',', str_replace(' ','', $exclude_columns)) : [];
+    $action_icons = !empty($action_icons) ? json_decode(str_replace('&quot;', '"', $action_icons)) : [];
+    $icons_array = [];
+
+    if (!empty($data)) {
+        $data = json_decode(str_replace('&quot;', '"', $data));
+        $total_records = count($data);
+        $table_headings = ($total_records > 1) ? array_keys((array) $data[0]) : [];
+        if(!empty($exclude_columns)) {
+            $table_headings = array_filter($table_headings,
+            function($column) use ( $exclude_columns) {
+                if(!in_array($column, $exclude_columns)) return $column;
+            });
+        }
+        if( !empty($include_columns) ) {
+            $table_headings = explode(',', str_replace(' ','', $include_columns));
+        }
+
+        // build action icons
+        foreach ($action_icons as $action) {
+            $action_array = explode('|',$action);
+            $temp = [];
+            foreach($action_array as $array){
+                $hmm = explode(':', $array);
+                $temp[trim($hmm[0])] = trim($hmm[1]);
+            }
+            $icons_array[] = $temp;
+        }
+
+        if(!function_exists('build_click')){
+            function build_click($click){
+                dump($click);
+            }
+        }
+    }
 @endphp
 <div class="z-20"> {{--max-w-screen overflow-x-hidden md:w-full--}}
     <div class="w-full">
         <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-slate-900 @endif  @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif">
-            <thead>
+            @if(empty($data))
+                <thead>
                 <tr class="bg-gray-200 dark:bg-slate-800">{{ $header }}</tr>
-            </thead>
-            <tbody>{{ $slot }}</tbody>
+                </thead>
+                <tbody>{{ $slot }}</tbody>
+            @else
+                @if($total_records > 0)
+                    <thead>
+                    <tr class="bg-gray-200 dark:bg-slate-800">
+                        @foreach($table_headings as $heading)
+                            <th>{{ str_replace('_',' ', $heading) }}</th>
+                        @endforeach
+                        @if( !empty($action_icons)) <th></th> @endif
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($data as $row)
+                        <tr>
+                            @foreach($table_headings as $heading)
+                                <td>{!! $row->$heading !!}</td>
+                            @endforeach
+                            @if( !empty($icons_array) )
+                                <td class="text-right space-x-2">
+                                    @foreach($icons_array as $icon)
+                                        @if(isset($icon['icon']))
+                                            <x-bladewind::button.circle
+                                                size="tiny"
+                                                icon="{{ $icon['icon'] }}"
+                                                color="{{ $icon['color'] ?? '' }}"
+                                                tooltip="{{$icon['tip']??''}}"
+                                                onclick="{{ build_click($icon['click']) ??'void(0)'}}"
+                                                type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}" />
+                                        @endif
+                                    @endforeach
+                                </td>
+                            @endif
+                        </tr>
+                    @endforeach
+                    </tbody>
+                @else
+                    nothing to display
+                @endif
+            @endif
         </table>
     </div>
 </div>
