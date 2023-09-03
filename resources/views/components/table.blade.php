@@ -22,6 +22,7 @@
     'exclude_columns' => null,
     'include_columns' => null,
     'action_icons' => null,
+    'actions_title' => 'actions',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -64,8 +65,12 @@
         }
 
         if(!function_exists('build_click')){
-            function build_click($click){
-                dump($click);
+            function build_click($click, $row_data){
+                return preg_replace_callback('/{\w+}/', function ($matches) use ($row_data) {
+                    foreach($matches as $match) {
+                        return $row_data->{str_replace('}', '', str_replace('{', '', $match))};
+                    }
+                }, $click);
             }
         }
     }
@@ -85,7 +90,7 @@
                         @foreach($table_headings as $heading)
                             <th>{{ str_replace('_',' ', $heading) }}</th>
                         @endforeach
-                        @if( !empty($action_icons)) <th></th> @endif
+                        @if( !empty($action_icons)) <th class="!text-right">{{$actions_title}}</th> @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -103,7 +108,7 @@
                                                 icon="{{ $icon['icon'] }}"
                                                 color="{{ $icon['color'] ?? '' }}"
                                                 tooltip="{{$icon['tip']??''}}"
-                                                onclick="{{ build_click($icon['click']) ??'void(0)'}}"
+                                                onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
                                                 type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}" />
                                         @endif
                                     @endforeach

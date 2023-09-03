@@ -118,7 +118,7 @@
                 </div>
                @endif
                 <div class="modal-body grow p-6 justify-self-start">
-                    <h1 class="text-lg text-gray-800 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
+                    <h1 class="text-2xl font-medium text-gray-800 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
                     <div class="modal-text text-gray-600 dark:text-gray-400 pt-2 text-base leading-6 tracking-wide text-left">
                         {{ $slot }}
                     </div>
