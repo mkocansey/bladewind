@@ -41,12 +41,16 @@
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
     $exclude_columns = !empty($exclude_columns) ? explode(',', str_replace(' ','', $exclude_columns)) : [];
-    $action_icons = !empty($action_icons) ? json_decode(str_replace('&quot;', '"', $action_icons)) : [];
-    $column_aliases = !empty($column_aliases) ? json_decode(str_replace('&quot;', '"', $column_aliases)) : [];
+    $action_icons = (!empty($action_icons)) ? ((is_array($action_icons)) ?
+        $action_icons : json_decode(str_replace('&quot;', '"', $action_icons), true)) : [];
+    $column_aliases = (!empty($column_aliases)) ? ((is_array($column_aliases)) ?
+        $column_aliases : json_decode(str_replace('&quot;', '"', $column_aliases), true)) : [];
+//    $action_icons = !empty($action_icons) ? json_decode(str_replace('&quot;', '"', $action_icons)) : [];
+//    $column_aliases = !empty($column_aliases) ? json_decode(str_replace('&quot;', '"', $column_aliases)) : [];
     $icons_array = [];
 
     if (!empty($data)) {
-        $data = json_decode(str_replace('&quot;', '"', $data));
+        $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
         $total_records = count($data);
         $table_headings = ($total_records > 1) ? array_keys((array) $data[0]) : [];
 
@@ -76,7 +80,7 @@
             function build_click($click, $row_data){
                 return preg_replace_callback('/{\w+}/', function ($matches) use ($row_data) {
                     foreach($matches as $match) {
-                        return $row_data->{str_replace('}', '', str_replace('{', '', $match))};
+                        return $row_data[str_replace('}', '', str_replace('{', '', $match))];
                     }
                 }, $click);
             }
@@ -105,7 +109,7 @@
                     <thead>
                     <tr class="bg-gray-200 dark:bg-slate-800">
                         @foreach($table_headings as $heading)
-                            <th>{{ str_replace('_',' ', $column_aliases->$heading ?? $heading ) }}</th>
+                            <th>{{ str_replace('_',' ', $column_aliases[$heading] ?? $heading ) }}</th>
                         @endforeach
                         @if( !empty($action_icons)) <th class="!text-right">{{$actions_title}}</th> @endif
                     </tr>
@@ -114,7 +118,7 @@
                     @foreach($data as $row)
                         <tr>
                             @foreach($table_headings as $heading)
-                                <td>{!! $row->$heading !!}</td>
+                                <td>{!! $row[$heading] !!}</td>
                             @endforeach
                             @if( !empty($icons_array) )
                                 <td class="text-right space-x-2 actions">
@@ -135,7 +139,7 @@
                     @endforeach
                     </tbody>
                 @else
-                    nothing to display
+                    <tr><td>nothing to display</td></tr>
                 @endif
             @endif
         </table>

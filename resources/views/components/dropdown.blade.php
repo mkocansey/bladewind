@@ -38,23 +38,23 @@
     // what key in your data array should be used to display flag icons next to the labels
     // [ {"id":"1","name":"Burkina Faso", "flag":"/assets/images/bf-flag.png"}]
     // your flag_key will be 'image'
-    'flag_key' => '',
-    'flagKey' => '',
+    'flag_key' => null,
+    'flagKey' => null,
 
     // what key in your data array should be used to display images next to the labels
-    // the default key used for images is '', meaning images will be ignored. If your data is something like
+    // the default key used for images is null, meaning images will be ignored. If your data is something like
     // [ {"id":"1","name":"Burkina Faso", "image":"/assets/images/bf-flag.png"}]
     // your image_key will be 'image'
-    'image_key' => '',
-    'imageKey' => '',
+    'image_key' => null,
+    'imageKey' => null,
 
     // there are times you will want the dropdown items to go to a link when clicked on
     // useful if you are using the dropdown as a navigation component for example
     // the url_key defines which key in your data array to be use as urls
-    // the default key used for urls is '', meaning urls will be ignored.
+    // the default key used for urls is null, meaning urls will be ignored.
     // setting a urlKey overwrites whatever is defined in 'onselect'
-    'url_key' => '',
-    'urlKey' => '',
+    'url_key' => null,
+    'urlKey' => null,
 
     // if url_key is set, should the selected item's value be appended to the url
     'append_value_to_url' => false,
@@ -117,28 +117,24 @@
     if ($showFilterIcon) $show_filter_icon = $showFilterIcon;
     if (!$add_clearing) $add_clearing = $addClearing;
 
-    $data = json_decode(str_replace('&quot;', '"', $data));
+    $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
     $onselect = str_replace('&#039;', "'", $onselect);
     $input_name = preg_replace('/[\s-]/', '_', $name);
 
-    if(! isset($data[0]->{$label_key}) ) {
-        echo '<p style="color:red">
-            &lt;x-bladewind.dropdown /&gt;: ensure the value you set as label_key
-            exists in your array data</p>';exit;
+    if(! isset($data[0][$label_key]) ) {
+        die('<p style="color:red">&lt;x-bladewind.dropdown /&gt;: ensure the value you set as label_key exists in your array data</p>');
     }
-    if( $url_key !== '' && ! isset($data[0]->{$url_key}) ) {
-        echo '<p style="color:red">
-            &lt;x-bladewind.dropdown /&gt;: ensure the value you set as url_key exists in your array</p>';exit;
+    if( !empty($url_key) && ! isset($data[0][$url_key]) ) {
+        die('<p style="color:red">&lt;x-bladewind.dropdown /&gt;: ensure the value you set as url_key exists in your array</p>');
     }
 
-    if( $flag_key !== '' && !isset($data[0]->{$flag_key}) ) {
-        echo '<p style="color:red">
-            &lt;x-bladewind.dropdown /&gt;: ensure the value you set as flag_key exists in your array</p>';exit;
+    if( !empty($flag_key) && !isset($data[0][$flag_key]) ) {
+        die('<p style="color:red">&lt;x-bladewind.dropdown /&gt;: ensure the value you set as flag_key exists in your array</p>');
     }
 
 @endphp
 
-<div class="relative {{ $name }}@if($add_clearing == 'true') mb-3 @endif">
+<div class="relative {{ $name }} @if($add_clearing == 'true') mb-3 @endif ">
     <button type="button" class="bw-dropdown rounded-md bg-white cursor-pointer text-left w-full text-gray-400 flex justify-between dark:text-dark-300 dark:border-dark-700 dark:bg-dark-800">
         <label class="cursor-pointer">
             @if($show_filter_icon)
@@ -173,14 +169,14 @@
             @for ($x=0; $x < count($data); $x++)
                 @php
                     $url_target = 'self';
-                    $url = (isset($data[$x]->$url_key) && $data[$x]->$url_key !== '') ?
-                        ($data[$x]->{$url_key} . (($append_value_to_url) ?
-                        "?{$append_value_to_url_as}=" . $data[$x]->$value_key : '')) : '';
+                    $url = (isset($data[$x][$url_key]) && $data[$x][$url_key] !== '') ?
+                        ($data[$x][$url_key] . (($append_value_to_url) ?
+                        "?{$append_value_to_url_as}=" . $data[$x][$value_key] : '')) : '';
 
                     if($url !== '' && ( Str::contains($url, 'http://') || Str::contains($url, 'https://')) && !Str::contains($url, request()->getHost()) ){
                         $url_target = 'blank';
                     }
-                    $value = $data[$x]->$value_key;
+                    $value = $data[$x][$value_key];
                 @endphp
                 <div
                     {{ $attributes->merge(['class' => "dd-item p-3 cursor-pointer hover:bg-gray-100 flex items-center dark:text-dark-300 dark:border-dark-700 dark:bg-dark-800 dark:hover:bg-dark-900 dark:hover:text-dark-300"]) }}
@@ -192,11 +188,11 @@
                     @else
                         data-user-function="{{ $onselect }}"
                     @endif
-                    data-label="{{ $data[$x]->$label_key }}"
+                    data-label="{{ $data[$x][$label_key] }}"
                     data-parent="{{ $name }}">
-                    @if ($flag_key != '' && $image_key == '')<i class="{{ $data[$x]->{$flag_key} }} flag"></i>@endif
-                    @if ($image_key != '')<x-bladewind::avatar size="tiny" css="!mr-3" image="{{ $data[$x]->{$image_key} }}" />@endif
-                    <div>{!! $data[$x]->$label_key !!}</div>
+                    @if (!empty($flag_key) && empty($image_key))<i class="{{ $data[$x][$flag_key] }} flag"></i>@endif
+                    @if (!empty($image_key))<x-bladewind::avatar size="tiny" css="!mr-3" image="{{ $data[$x][$image_key] }}" />@endif
+                    <div>{!! $data[$x][$label_key] !!}</div>
                 </div>
             @endfor
             <input

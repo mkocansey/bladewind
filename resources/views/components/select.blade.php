@@ -36,15 +36,15 @@
     // what key in your data array should be used to display flag icons next to the labels
     // [ {"id":"1","name":"Burkina Faso", "flag":"/assets/images/bf-flag.png"}]
     // your flag_key will be 'image'
-    'flag_key' => '',
-    'flagKey' => '',
+    'flag_key' => null,
+    'flagKey' => null,
 
     // what key in your data array should be used to display images next to the labels
     // the default key used for images is '', meaning images will be ignored. If your data is something like
     // [ {"id":"1","name":"Burkina Faso", "image":"/assets/images/bf-flag.png"}]
     // your image_key will be 'image'
-    'image_key' => '',
-    'imageKey' => '',
+    'image_key' => null,
+    'imageKey' => null,
 
     // there are instances when you want the name passed by the select when you submit a form to be
     // different from the name you gave the select. Example. you may name the select as country but
@@ -97,18 +97,20 @@
     $selected_value = ($selected_value != '') ? explode(',', str_replace(', ', ',', $selected_value)) : [];
 
     if ($data !== 'manual') {
-        $data = json_decode(str_replace('&quot;', '"', $data));
-        if(! isset($data[0]->{$label_key}) ) {
-            echo '<p style="color:red">
+        $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
+
+        if(! isset($data[0][$label_key]) ) {
+            die('<p style="color:red">
                 &lt;x-bladewind.select /&gt;: ensure the value you set as label_key
-                exists in your array data</p>';exit;
+                exists in your array data</p>');
         }
 
-        if( $flag_key !== '' && !isset($data[0]->{$flag_key}) ) {
-            echo '<p style="color:red">
-                &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>';exit;
+        if( !empty($flag_key) && !isset($data[0][$flag_key]) ) {
+            die('<p style="color:red">
+                &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>');
         }
     }
+
 
 @endphp
 <style>
@@ -144,12 +146,13 @@
         <div class="divide-y divide-slate-100 dark:divide-slate-700 bw-select-items mt-0">
         @if($data !== 'manual')
             @foreach ($data as $item)
-                <x-bladewind::select-item label="{{ $item->{$label_key} }}"
-                    value="{{ $item->{$value_key} }}"
+{{--                @dd($item[$flag_key])--}}
+                <x-bladewind::select-item label="{{ $item[$label_key] }}"
+                    value="{{ $item[$value_key] }}"
                     onselect="{{ $onselect }}"
-                    flag="{{ ($flag_key !== '') ? $item->{$flag_key} : '' }}"
-                    image="{{ ($image_key !== '') ? $item->{$image_key} : '' }}"
-                    selected="{{ (in_array($item->{$value_key}, $selected_value)) ? 'true' : 'false' }}" />
+                    flag="{{ $item[$flag_key] ?? '' }}"
+                    image="{{ $item[$image_key] ?? '' }}"
+                    selected="{{ (in_array($item[$value_key], $selected_value)) ? 'true' : 'false' }}" />
             @endforeach
         @else
             {!! $slot !!}
