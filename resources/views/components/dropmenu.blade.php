@@ -16,8 +16,8 @@
     <button class="text-sm transition duration-150 ease-in-out z-10">
         {!!$trigger!!}
     </button>
-    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-slate-800 transition-all duration-300 transform origin-top-right -translate-y-2 scale-95 !z-50">
-        <div class="absolute right-0  mt-1 origin-top-right bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-900 divide-y divide-gray-100 dark:divide-slate-700 rounded-md shadow-lg outline-none">
+    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-dark-800 transition-all duration-300 transform origin-top-right -translate-y-2 scale-95 !z-50">
+        <div class="absolute right-0  mt-1 origin-top-right bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-900 divide-y divide-gray-100 dark:divide-dark-700 rounded-md shadow-lg outline-none">
             {{$slot}}
         </div>
     </div>

@@ -2,10 +2,8 @@
 ** helper functions for BladeWind UI components using vanilla JS
 ** September 2021 by @mkocansey <@mkocansey>
 **/
-var     notification_timeout,
-        user_function, 
-        el_name;
-var     dropdownIsOpen = false;
+let current_modal = [];
+let el_name;
 
 domEl = (element) => { return dom_el(element); }
 dom_el = (element) => { return (document.querySelector(element) != null) ? document.querySelector(element) : false;  }
@@ -18,33 +16,54 @@ validateForm = (form) => {
     let BreakException = {};
     try{
         dom_els(`${form} .required`).forEach((el) => {
-            el.classList.remove('!border-red-400');
+            el.classList.remove('!border-error-400');
             if ( el.value === '' ) {
                 let el_name = el.getAttribute('name');
+                let el_parent = el.getAttribute('data-parent');
                 let error_message = el.getAttribute('data-error-message');
                 let show_error_inline = el.getAttribute('data-error-inline');
                 let error_heading = el.getAttribute('data-error-heading');
-                el.classList.add('!border-red-400');
+                // el.classList.add('!border-error-400');
+                // this will highlight select fields whose hidden inputs are required but empty
+                (el_parent !== null) ? dom_el(`.${el_parent} .clickable`).classList.add('!border-error-400') : el.classList.add('!border-error-400');
                 el.focus();
                 if(error_message){
                     (show_error_inline) ? unhide(`.${el_name}-inline-error`) : 
                     showNotification(error_heading, error_message, 'error');
                 }
-                el.addEventListener('keyup', () => { 
-                    if(el.value !== '') {
-                        el.classList.remove('!border-red-400');
-                        (show_error_inline) ? hide(`.${el_name}-inline-error`) : '';
-                     } else {
-                        el.classList.add('!border-red-400'); 
-                        (show_error_inline) ? unhide(`.${el_name}-inline-error`) : '';
-                     }
-                });
+
+                let listenerObj = {
+                    'el': el,
+                    'el_parent': el_parent,
+                    'show_error_inline': show_error_inline
+                };
+
+                el.addEventListener('keyup', clearErrors.bind(null, listenerObj), false);
+
                 has_error++;
                 throw BreakException;
             }
         });
     } catch(e) {}
     return has_error === 0;
+}
+
+clearErrors = (obj) => {
+    let el = obj.el;
+    let el_parent = obj.el_parent;
+    let el_name = obj.el_name;
+    let show_error_inline = obj.show_error_inline;
+    if(el.value !== '') {
+        (el_parent !== null) ?
+            dom_el(`.${el_parent} .clickable`).classList.remove('!border-error-400') :
+            el.classList.remove('!border-error-400');
+        (show_error_inline) ? hide(`.${el_name}-inline-error`) : '';
+    } else {
+        (el_parent !== null) ?
+            dom_el(`.${el_parent} .clickable`).classList.add('!border-error-400') :
+            el.classList.add('!border-error-400');
+        (show_error_inline) ? unhide(`.${el_name}-inline-error`) : '';
+    }
 }
 
 // usage:  onkeypress="return isNumberKey(event)"
@@ -112,13 +131,26 @@ changeCss = (element, css, mode='add', elementIsDomObject=false) => {
     }
 }
 
-showModal = (element) => { unhide(`.bw-${element}-modal`); }
+showModal = (element) => {
+    unhide(`.bw-${element}-modal`);
+    let current_index = (current_modal.length === 0) ? 0 : current_modal.length+1;
+    animateCSS(`.bw-${element}`, 'zoomIn').then(() => { current_modal[current_index] = element; });
+}
 
-hideModal = (element) => { hide(`.bw-${element}-modal`); }
+hideModal = (element) => {
+    animateCSS(`.bw-${element}`, 'zoomOut').then(() => {
+        hide(`.bw-${element}-modal`);
+        current_modal.pop();
+    });
+}
 
 showButtonSpinner = (element) => { unhide(`${element} .bw-spinner`); }
 
 hideButtonSpinner = (element) => { hide(`${element} .bw-spinner`); }
+
+showModalActionButtons = (element) => { unhide(`.bw-${element} .modal-footer`); }
+
+hideModalActionButtons = (element) => { hide(`.bw-${element} .modal-footer`); }
 
 hide = (element, elementIsDomObject=false) => { 
     if( (! elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)){
@@ -231,4 +263,11 @@ goToTab = (el, color, context) => {
         unhide(`.dv-${el} .suffix svg.show-pwd`);
         hide(`.dv-${el} .suffix svg.hide-pwd`);
     }
+  }
+
+  filterTable = (keyword, table) => {
+      domEls(`${table} tbody tr`).forEach((tr) => {
+          (tr.innerText.toLowerCase().includes(keyword.toLowerCase())) ?
+              unhide(tr, true) : hide(tr, true);
+      });
   }

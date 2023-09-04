@@ -28,6 +28,7 @@ class BladewindSelect {
         });
         this.hide();
         this.filter();
+        this.manualModePreSelection();
         this.selectItem();
     }
 
@@ -48,16 +49,32 @@ class BladewindSelect {
         });
     }
 
+    /**
+     * When using non-dynamic selects, ensure select_value=<value>
+     * works the same way as for dynamic selects. This saves the use from
+     * manually checking if each select-item should be selected or not.
+     */
+    manualModePreSelection = () => {
+        let select_mode = dom_el(`${this.rootElement}`).getAttribute('data-type');
+        let selected_value = dom_el(`${this.rootElement}`).getAttribute('data-selected-value');
+        if(select_mode === 'manual' && selected_value !== null) {
+            dom_els(this.selectItems).forEach((el) => {
+                let item_value = el.getAttribute('data-value');
+                if (item_value === selected_value) el.setAttribute('data-selected', true);
+            });
+        }
+    }
+
     selectItem = () => {
         dom_els(this.selectItems).forEach((el) => {
             let selected = (el.getAttribute('data-selected') !== null);
             let user_function = el.getAttribute('data-user-function');
             if(selected) this.setValue(el);
-            el.addEventListener('click', (e) => { 
+            el.addEventListener('click', (e) => {
                 if(user_function !== null && user_function !== undefined) {
                     callUserFunction(`${user_function}('${el.getAttribute('data-value')}', '${el.getAttribute('data-label')}')`);
                 }
-                this.setValue(el); 
+                this.setValue(el);
             });
         });
     }
@@ -90,6 +107,7 @@ class BladewindSelect {
             }
             this.scrollers();
         }
+        changeCss(`${this.clickArea}`, '!border-error-400', 'remove');
     }
     
     unsetValue = (item) => {

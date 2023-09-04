@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Calendar Arabic Language Lines
+    | Calendar Arabic Language Lines | Arabic
     |--------------------------------------------------------------------------
     |
     | The following language lines contain the default strings used in the calendar
