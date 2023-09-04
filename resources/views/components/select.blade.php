@@ -119,7 +119,7 @@
      data-multiple="{{$multiple}}" data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
     <div class="flex text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50 
-        dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 py-3.5 pl-4 pr-2 clickable 
+        dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 py-3.5 pl-4 pr-2 clickable
         @if(!$disabled)focus:border-blue-400 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif" tabindex="0">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left" />
         <div class="text-left grow basis-0 placeholder text-blue-900/40 dark:text-slate-500">{{ $placeholder }}
@@ -156,7 +156,8 @@
         @endif
         </div>
     </div>
-    <input type="hidden" name="{{ ($data_serialize_as !== '') ? $data_serialize_as : $input_name }}" class="bw-{{$input_name}}" />
+    <input type="hidden" name="{{ ($data_serialize_as !== '') ? $data_serialize_as : $input_name }}"
+       class="bw-{{$input_name}} @if($required) required @endif" @if($required) data-parent="bw-select-{{$input_name}}" @endif />
 </div>
 
 <script>

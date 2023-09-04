@@ -107,6 +107,7 @@ class BladewindSelect {
             }
             this.scrollers();
         }
+        changeCss(`${this.clickArea}`, '!border-error-400', 'remove');
     }
     
     unsetValue = (item) => {
