@@ -120,17 +120,19 @@
 <div class="relative bw-select bw-select-{{$input_name}} @if($add_clearing) mb-3 @endif"
      data-multiple="{{$multiple}}" data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
-    <div class="flex text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50 
+    <div class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
         dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 py-3.5 pl-4 pr-2 clickable
         @if(!$disabled)focus:border-blue-400 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif" tabindex="0">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left" />
-        <div class="text-left grow basis-0 placeholder text-blue-900/40 dark:text-slate-500">{{ $placeholder }}
+        <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">{{ $placeholder }}
             @if($required) <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid" /> @endif
         </div>
-        <div class="text-left grow basis-0 display-area hidden whitespace-nowrap overflow-x-scroll p-0 m-0"></div>
-        <x-bladewind::icon name="chevron-right" class="scroll-right !-mr-1 hidden" />
-        <x-bladewind::icon name="x-circle" class="reset w-6 h-6 fill-slate-300 hover:fill-slate-500 text-white hidden" />
-        <x-bladewind::icon name="chevron-up-down" class="opacity-40 !ml-2" />
+        <div class="text-left grow display-area hidden whitespace-nowrap overflow-x-scroll p-0 m-0"></div>
+        <div class="whitespace-nowrap inline-flex">
+            <x-bladewind::icon name="chevron-right" class="scroll-right !-mr-1 hidden" />
+            <x-bladewind::icon name="x-circle" type="solid" class="reset w-6 h-6 fill-slate-300 hover:fill-slate-500 text-white dark:!text-dark-200 hidden dark:!fill-dark-700 dark:hover:!fill-dark-900" />
+            <x-bladewind::icon name="chevron-up-down" class="opacity-40 !ml-2" />
+        </div>
     </div>
     <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 border-2 
         border-blue-400 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 border-t-0 -mt-1.5 
@@ -146,7 +148,6 @@
         <div class="divide-y divide-slate-100 dark:divide-slate-700 bw-select-items mt-0">
         @if($data !== 'manual')
             @foreach ($data as $item)
-{{--                @dd($item[$flag_key])--}}
                 <x-bladewind::select-item label="{{ $item[$label_key] }}"
                     value="{{ $item[$value_key] }}"
                     onselect="{{ $onselect }}"

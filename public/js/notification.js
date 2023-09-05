@@ -9,8 +9,8 @@ class BladewindNotification {
     borderColors;
 
     constructor(title, message, type, dismissInMinutes) {
-        this.title = title || 'Congratulations!';
-        this.message = message || 'Your notification message goes here';
+        this.title = title || '';
+        this.message = message || '';
         this.type = type || 'success';
         this.dismissInMinutes = dismissInMinutes || 15;
         this.dismissInSeconds = this.dismissInMinutes * 1000;
