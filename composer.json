@@ -27,7 +27,7 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "@php artisan vendor:publish --provider=\"Mkocansey\\Bladewind\\BladewindServiceProvider\" --tag=assets --force"
+            "@php artisan vendor:publish --provider=\"Mkocansey\\Bladewind\\BladewindServiceProvider\" --tag=bladewind-public --force"
         ]
     }
 }
