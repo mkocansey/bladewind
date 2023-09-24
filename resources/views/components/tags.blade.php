@@ -17,7 +17,6 @@
 <div class="bw-tags-{{$name}}" xmlns:x-bladewind="http://www.w3.org/1999/html">
     <x-bladewind::input
             :name="$name"
-            :selected_value="$selected_value"
             :error_message="$error_message"
             :error_heading="$error_heading"
             data-max-selection="{{$max_selection}}"
@@ -25,3 +24,7 @@
             class="{{ ($required) ? 'required':''}}"/>
     {{ $slot }}
 </div>
+
+@if($selected_value !== '')
+    <script>highlightSelectedTags('{{$selected_value}}', '{{$name}}'); </script>
+@endif

@@ -302,18 +302,6 @@ filterTable = (keyword, table) => {
 }
 
 selectTag = (value, name) => {
-    /*
-    if(! domEl(`input[name="${name}"]`) ){
-        let input = document.createElement("input");
-        input.setAttribute('name', name);
-        input.setAttribute('class', '!w-0 !h-0  !bg-transparent !border-0 !outline-none focus:!outline-none focus:!border-0');
-        const prependTo = domEl('label.selectable:last-of-type');
-        prependTo.insertAdjacentElement('afterend', input);
-        input.addEventListener('blur', () => {
-            stripComma(input);
-        }, { once: false, });
-    }
-*/
     let input = domEl(`input[name="${name}"]`);
     let max_selection = input.getAttribute('data-max-selection');
     let tag = domEl(`.bw-${name}-${value}`);
@@ -327,7 +315,6 @@ selectTag = (value, name) => {
         changeCss(tag, (css.match(/text-[\w]+-50/)[0]).replace('50', '500'), 'add', true);
     } else { // add
         let total_selected = (input.value === '') ? 0 : input.value.split(',').length;
-        console.log(total_selected);
         if (total_selected < max_selection) {
             input.value += ',' + value;
             changeCss(tag, css.match(/bg-[\w]+-200/)[0], 'remove', true);
@@ -344,5 +331,14 @@ selectTag = (value, name) => {
 stripComma = (el) => {
     if (el.value.startsWith(',')) {
         el.value = el.value.replace(/^,/, '');
+    }
+}
+
+highlightSelectedTags = (values, name) => {
+    if (values !== '') {
+        let values_array = values.split(',');
+        for (let x = 0; x < values_array.length; x++) {
+            selectTag(values_array[x].trim(), name);
+        }
     }
 }
