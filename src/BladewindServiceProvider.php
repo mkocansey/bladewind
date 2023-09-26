@@ -8,24 +8,24 @@ class BladewindServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'bladewind');
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'bladewind');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bladewind');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'bladewind');
 
         $this->publishes([
-            __DIR__ . '/../resources/views/components/' => resource_path('views/components/bladewind'),
+            __DIR__.'/../resources/views/components/' => resource_path('views/components/bladewind'),
         ], 'bladewind-components');
 
         $this->publishes([
-            __DIR__ . '/../resources/assets' => public_path('vendor/bladewind/assets'),
+            __DIR__.'/../resources/assets' => public_path('vendor/bladewind/assets'),
         ], 'bladewind-assets');
 
         $this->publishes([
-            __DIR__ . '/../public' => public_path('vendor/bladewind'),
+            __DIR__.'/../public' => public_path('vendor/bladewind'),
         ], 'bladewind-public');
 
         $this->publishes([
-            __DIR__ . '/../lang' => lang_path('vendor/bladewind'),
+            __DIR__.'/../lang' => lang_path('vendor/bladewind'),
         ], 'bladewind-lang');
     }
 }
