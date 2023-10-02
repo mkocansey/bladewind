@@ -45,8 +45,6 @@
         $action_icons : json_decode(str_replace('&quot;', '"', $action_icons), true)) : [];
     $column_aliases = (!empty($column_aliases)) ? ((is_array($column_aliases)) ?
         $column_aliases : json_decode(str_replace('&quot;', '"', $column_aliases), true)) : [];
-//    $action_icons = !empty($action_icons) ? json_decode(str_replace('&quot;', '"', $action_icons)) : [];
-//    $column_aliases = !empty($column_aliases) ? json_decode(str_replace('&quot;', '"', $column_aliases)) : [];
     $icons_array = [];
 
     if (!empty($data)) {
@@ -90,10 +88,11 @@
 <div class="z-20"> {{--max-w-screen overflow-x-hidden md:w-full--}}
     <div class="w-full">
         @if($searchable)
-            <div class="bg-slate-200/70 p-2">
+            <div class="bw-table-filter-bar bg-slate-100 p-2">
                 <x-bladewind::input name="bw-search-{{$name}}" placeholder="{{$search_placeholder}}"
-                    onkeyup="filterTable(this.value, 'table.{{$name}}')"
-                    prefix_is_icon="true" add_clearing="false" class="!mb-0 focus:!border-slate-300" prefix="magnifying-glass" />
+                                    onkeyup="filterTable(this.value, 'table.{{$name}}')"
+                                    prefix_is_icon="true" add_clearing="false" class="!mb-0 focus:!border-slate-300"
+                                    prefix="magnifying-glass"/>
             </div>
         @endif
         <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-slate-900 @endif
@@ -111,7 +110,9 @@
                         @foreach($table_headings as $heading)
                             <th>{{ str_replace('_',' ', $column_aliases[$heading] ?? $heading ) }}</th>
                         @endforeach
-                        @if( !empty($action_icons)) <th class="!text-right">{{$actions_title}}</th> @endif
+                        @if( !empty($action_icons))
+                            <th class="!text-right">{{$actions_title}}</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -125,12 +126,12 @@
                                     @foreach($icons_array as $icon)
                                         @if(isset($icon['icon']))
                                             <x-bladewind::button.circle
-                                                size="tiny"
-                                                icon="{{ $icon['icon'] }}"
-                                                color="{{ $icon['color'] ?? '' }}"
-                                                tooltip="{{$icon['tip']??''}}"
-                                                onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
-                                                type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}" />
+                                                    size="tiny"
+                                                    icon="{{ $icon['icon'] }}"
+                                                    color="{{ $icon['color'] ?? '' }}"
+                                                    tooltip="{{$icon['tip']??''}}"
+                                                    onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
+                                                    type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}"/>
                                         @endif
                                     @endforeach
                                 </td>
@@ -139,7 +140,9 @@
                     @endforeach
                     </tbody>
                 @else
-                    <tr><td>nothing to display</td></tr>
+                    <tr>
+                        <td>nothing to display</td>
+                    </tr>
                 @endif
             @endif
         </table>

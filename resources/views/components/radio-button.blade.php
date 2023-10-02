@@ -5,8 +5,10 @@
     'value' => '',
     'label' => '',
     'label_css' => 'mr-6',
+    'labelCss' => 'mr-6',
     'color' => 'blue',
     'checked' => false,
+    'class' => '',
     'disabled' => false,
 ])
 @php
@@ -14,12 +16,13 @@
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
     $label_css = (!empty($labelCss)) ? $labelCss : $label_css;
 @endphp
-<x-bladewind::checkbox 
-    name="{{$name}}" 
-    label="{{$label}}" 
-    value="{{$value}}"
-    color="{{$color}}"
-    class="rounded-full"
-    disabled="{{$disabled}}"
-    checked="{{$checked}}"
-    type="radio" />
+<x-bladewind::checkbox
+        name="{{$name}}"
+        label="{{$label}}"
+        value="{{$value}}"
+        color="{{$color}}"
+        class="rounded-full {{$class}}"
+        label_css="{{$label_css}}"
+        disabled="{{$disabled}}"
+        checked="{{$checked}}"
+        type="radio"/>

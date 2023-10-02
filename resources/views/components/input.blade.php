@@ -142,7 +142,6 @@
             value="{{ $selected_value }}"
             autocomplete="off"
             placeholder="{{ $placeholder_label }}{{$required_symbol}}"
-            @if($numeric) onkeypress="return isNumberKey(event, {{$with_dots}})" @endif
             @if($error_message != '')
                 data-error-message="{{$error_message}}"
             data-error-inline="{{$show_error_inline}}"
@@ -182,3 +181,9 @@
     @endif
 </div>
 <input type="hidden" class="bw-raw-select"/>
+@if($numeric)
+    <script>dom_el('input.{{$name}}').addEventListener('keydown', (event) => {
+            isNumberKey(event, {{$with_dots}});
+        });
+    </script>
+@endif
