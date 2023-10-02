@@ -76,10 +76,11 @@ clearErrors = (obj) => {
 }
 
 // usage:  onkeypress="return isNumberKey(event)"
-isNumberKey = (evt, with_dots = 1) => {
-    const charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (with_dots === 0 && charCode === 46) return false;
-    return !(charCode > 31 && (charCode !== 46 && (charCode < 48 || charCode > 57)));
+isNumberKey = (event, with_dots = 1) => {
+    let accepted_keys = (with_dots === 1) ? /[\d\b\\.]/ : /\d\b/;
+    if (!event.key.toString().match(accepted_keys) && event.keyCode !== 8 && event.keyCode !== 9) {
+        event.preventDefault();
+    }
 }
 
 callUserFunction = (func) => {

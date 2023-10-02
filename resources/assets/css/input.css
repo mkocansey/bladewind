@@ -1,34 +1,36 @@
 @layer components {
     .bw-textarea,
-    .bw-input
-    {
+    .bw-input {
         @apply
-            !outline-none
-            !ring-0
-            border-2 
-            w-full text-slate-600 border-slate-300/50 dark:text-dark-300 dark:border-dark-700 dark:bg-dark-800
-            focus:outline-none
-            focus:border-2
-            focus:border-primary-400 dark:focus:border-dark-600 dark:placeholder-dark-500/70 transition-all
-            rounded-md
-            text-sm
-            p-4
+        !outline-none
+        !ring-0
+        border-2
+        w-full text-slate-600 border-slate-300/50 dark:text-dark-300 dark:border-dark-700 dark:bg-dark-800
+        focus:outline-none
+        focus:border-2
+        focus:border-primary-400 dark:focus:border-dark-600 dark:placeholder-dark-500/70 transition-all
+        rounded-md
+        text-sm
+        p-4
     }
+
     input.no-label, .bw-input.no-label, .bw-textarea.bw-input.no-label {
         @apply placeholder-transparent
     }
+
     .form-label {
         @apply
-            absolute
-            cursor-text
-            left-3.5
-            -top-2
-            text-xs
-            px-1
-            transition-all
-            peer-placeholder-shown:top-[19px]
-            peer-focus:-top-2 bg-white text-primary-900/40 dark:text-dark-500 z-20 dark:bg-dark-800
+        absolute
+        cursor-text
+        left-3.5
+        -top-2
+        text-xs
+        px-1
+        transition-all
+        peer-placeholder-shown:top-[19px]
+        peer-focus:-top-2 bg-white text-primary-900/40 dark:text-dark-500 z-20 dark:bg-dark-800
     }
+
     .prefix svg, .suffix svg {
         @apply !mr-1 w-6 h-6 dark:text-dark-500
     }
