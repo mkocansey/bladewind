@@ -68,13 +68,10 @@ class BladewindSelect {
     selectItem = () => {
         dom_els(this.selectItems).forEach((el) => {
             let selected = (el.getAttribute('data-selected') !== null);
-            let user_function = el.getAttribute('data-user-function');
             if (selected) this.setValue(el);
-            el.addEventListener('click', (e) => {
-                if (user_function !== null && user_function !== undefined) {
-                    callUserFunction(`${user_function}('${el.getAttribute('data-value')}', '${el.getAttribute('data-label')}')`);
-                }
+            el.addEventListener('click', () => {
                 this.setValue(el);
+                this.callUserFunction(el);
             });
         });
     }
@@ -91,16 +88,16 @@ class BladewindSelect {
             dom_el(this.displayArea).innerText = selectedLabel;
             dom_el(this.formInput).value = selectedValue;
             unhide(`${this.clickArea} .reset`);
-            unhide(svg, true);
+            changeCss(svg, '!hidden', 'remove', true);
             dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
                 this.unsetValue(item);
                 e.stopImmediatePropagation();
             });
         } else {
-            unhide(svg, true);
             if (dom_el(`input.bw-${this.name}`).value.indexOf(`,${selectedValue}`) !== -1) {
                 this.unsetValue(item);
             } else {
+                unhide(svg, true);
                 dom_el(this.formInput).value += `,${selectedValue}`;
                 dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, selectedValue);
                 this.removeLabel(selectedValue);
@@ -126,13 +123,14 @@ class BladewindSelect {
                 if (dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`)) {
                     dom_el(this.formInput).value = dom_el(this.formInput).value.replace(`,${selectedValue}`, '');
                     dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`).remove();
+                    hide(svg, true);
                     if (dom_el(this.displayArea).innerText === '') {
                         unhide(`${this.rootElement} .placeholder`);
                         hide(this.displayArea);
                     }
                 }
             }
-            hide(svg, true);
+            this.callUserFunction(item);
         }
     }
 
@@ -208,6 +206,18 @@ class BladewindSelect {
         dom_el(this.clickArea).addEventListener('click', (e) => {
             unhide(this.itemsContainer);
         });
+    }
+
+    callUserFunction = (item) => {
+        let user_function = item.getAttribute('data-user-function');
+        if (user_function !== null && user_function !== undefined) {
+            callUserFunction(
+                `${user_function}(
+                '${item.getAttribute('data-value')}', 
+                '${item.getAttribute('data-label')}',
+                '${dom_el(this.formInput).value}')`
+            );
+        }
     }
 
 
