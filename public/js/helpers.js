@@ -317,7 +317,7 @@ selectTag = (value, name) => {
     } else { // add
         let total_selected = (input.value === '') ? 0 : input.value.split(',').length;
         if (total_selected < max_selection) {
-            input.value += ',' + value;
+            input.value += `,${value}`;
             changeCss(tag, css.match(/bg-[\w]+-200/)[0], 'remove', true);
             changeCss(tag, (css.match(/bg-[\w]+-200/)[0]).replace('200', '500'), 'add', true);
             changeCss(tag, css.match(/text-[\w]+-500/)[0], 'remove', true);

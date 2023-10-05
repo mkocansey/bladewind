@@ -173,7 +173,7 @@
             @endif
         </div>
     </div>
-    <input type="text" name="{{ ($data_serialize_as !== '') ? $data_serialize_as : $input_name }}"
+    <input type="hidden" name="{{ ($data_serialize_as !== '') ? $data_serialize_as : $input_name }}"
            class="bw-{{$input_name}} @if($required) required @endif"
            @if($required) data-parent="bw-select-{{$input_name}}" @endif />
 </div>

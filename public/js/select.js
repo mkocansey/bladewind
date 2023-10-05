@@ -79,57 +79,62 @@ class BladewindSelect {
     setValue = (item) => {
         let selectedValue = item.getAttribute('data-value');
         let selectedLabel = item.getAttribute('data-label');
-        let svg = item.children[item.children.length - 1];
+        let svg = dom_el(`${this.rootElement} div[data-value="${selectedValue}"] svg`);
+        let input = dom_el(this.formInput);
         hide(`${this.rootElement} .placeholder`);
         unhide(this.displayArea);
 
         if (!this.isMultiple) {
             changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
             dom_el(this.displayArea).innerText = selectedLabel;
-            dom_el(this.formInput).value = selectedValue;
+            input.value = selectedValue;
             unhide(`${this.clickArea} .reset`);
-            changeCss(svg, '!hidden', 'remove', true);
+            unhide(svg, true);
             dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
                 this.unsetValue(item);
                 e.stopImmediatePropagation();
             });
         } else {
-            if (dom_el(`input.bw-${this.name}`).value.indexOf(`,${selectedValue}`) !== -1) {
+            if (input.value.includes(selectedValue)) {
                 this.unsetValue(item);
             } else {
                 unhide(svg, true);
-                dom_el(this.formInput).value += `,${selectedValue}`;
+                input.value += `,${selectedValue}`;
                 dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, selectedValue);
                 this.removeLabel(selectedValue);
             }
             this.scrollers();
         }
+        stripComma(input);
         changeCss(`${this.clickArea}`, '!border-error-400', 'remove');
     }
 
     unsetValue = (item) => {
         let selectedValue = item.getAttribute('data-value');
-        let svg = item.children[item.children.length - 1];
+        let svg = dom_el(`${this.rootElement} div[data-value="${selectedValue}"] svg`);
+        let input = dom_el(this.formInput);
         // only unset values if the Select component is not disabled
         if (!dom_el(this.clickArea).classList.contains('cursor-not-allowed')) {
             if (!this.isMultiple) {
                 unhide(`${this.rootElement} .placeholder`);
                 changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
                 dom_el(this.displayArea).innerText = '';
-                dom_el(this.formInput).value = '';
+                input.value = '';
                 hide(this.displayArea);
                 hide(`${this.clickArea} .reset`);
             } else {
                 if (dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`)) {
-                    dom_el(this.formInput).value = dom_el(this.formInput).value.replace(`,${selectedValue}`, '');
-                    dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`).remove();
+                    let keyword = `(,?)${selectedValue}`;
+                    input.value = input.value.replace(input.value.match(keyword)[0], '');
                     hide(svg, true);
+                    dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`).remove();
                     if (dom_el(this.displayArea).innerText === '') {
                         unhide(`${this.rootElement} .placeholder`);
                         hide(this.displayArea);
                     }
                 }
             }
+            stripComma(input);
             this.callUserFunction(item);
         }
     }
