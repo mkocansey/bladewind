@@ -68,13 +68,10 @@ class BladewindSelect {
     selectItem = () => {
         dom_els(this.selectItems).forEach((el) => {
             let selected = (el.getAttribute('data-selected') !== null);
-            let user_function = el.getAttribute('data-user-function');
             if (selected) this.setValue(el);
-            el.addEventListener('click', (e) => {
-                if (user_function !== null && user_function !== undefined) {
-                    callUserFunction(`${user_function}('${el.getAttribute('data-value')}', '${el.getAttribute('data-label')}')`);
-                }
+            el.addEventListener('click', () => {
                 this.setValue(el);
+                this.callUserFunction(el);
             });
         });
     }
@@ -82,14 +79,15 @@ class BladewindSelect {
     setValue = (item) => {
         let selectedValue = item.getAttribute('data-value');
         let selectedLabel = item.getAttribute('data-label');
-        let svg = item.children[item.children.length - 1];
+        let svg = dom_el(`${this.rootElement} div[data-value="${selectedValue}"] svg`);
+        let input = dom_el(this.formInput);
         hide(`${this.rootElement} .placeholder`);
         unhide(this.displayArea);
 
         if (!this.isMultiple) {
             changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
             dom_el(this.displayArea).innerText = selectedLabel;
-            dom_el(this.formInput).value = selectedValue;
+            input.value = selectedValue;
             unhide(`${this.clickArea} .reset`);
             unhide(svg, true);
             dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
@@ -97,34 +95,38 @@ class BladewindSelect {
                 e.stopImmediatePropagation();
             });
         } else {
-            unhide(svg, true);
-            if (dom_el(`input.bw-${this.name}`).value.indexOf(`,${selectedValue}`) !== -1) {
+            if (input.value.includes(selectedValue)) {
                 this.unsetValue(item);
             } else {
-                dom_el(this.formInput).value += `,${selectedValue}`;
+                unhide(svg, true);
+                input.value += `,${selectedValue}`;
                 dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, selectedValue);
                 this.removeLabel(selectedValue);
             }
             this.scrollers();
         }
+        stripComma(input);
         changeCss(`${this.clickArea}`, '!border-error-400', 'remove');
     }
 
     unsetValue = (item) => {
         let selectedValue = item.getAttribute('data-value');
-        let svg = item.children[item.children.length - 1];
+        let svg = dom_el(`${this.rootElement} div[data-value="${selectedValue}"] svg`);
+        let input = dom_el(this.formInput);
         // only unset values if the Select component is not disabled
         if (!dom_el(this.clickArea).classList.contains('cursor-not-allowed')) {
             if (!this.isMultiple) {
                 unhide(`${this.rootElement} .placeholder`);
                 changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
                 dom_el(this.displayArea).innerText = '';
-                dom_el(this.formInput).value = '';
+                input.value = '';
                 hide(this.displayArea);
                 hide(`${this.clickArea} .reset`);
             } else {
                 if (dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`)) {
-                    dom_el(this.formInput).value = dom_el(this.formInput).value.replace(`,${selectedValue}`, '');
+                    let keyword = `(,?)${selectedValue}`;
+                    input.value = input.value.replace(input.value.match(keyword)[0], '');
+                    hide(svg, true);
                     dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`).remove();
                     if (dom_el(this.displayArea).innerText === '') {
                         unhide(`${this.rootElement} .placeholder`);
@@ -132,7 +134,8 @@ class BladewindSelect {
                     }
                 }
             }
-            hide(svg, true);
+            stripComma(input);
+            this.callUserFunction(item);
         }
     }
 
@@ -208,6 +211,18 @@ class BladewindSelect {
         dom_el(this.clickArea).addEventListener('click', (e) => {
             unhide(this.itemsContainer);
         });
+    }
+
+    callUserFunction = (item) => {
+        let user_function = item.getAttribute('data-user-function');
+        if (user_function !== null && user_function !== undefined) {
+            callUserFunction(
+                `${user_function}(
+                '${item.getAttribute('data-value')}', 
+                '${item.getAttribute('data-label')}',
+                '${dom_el(this.formInput).value}')`
+            );
+        }
     }
 
 
