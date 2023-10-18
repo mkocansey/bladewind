@@ -22,7 +22,7 @@
         @apply
         absolute
         cursor-text
-        left-3.5
+        ltr:left-3.5  rtl:right-3.5
         -top-2
         text-xs
         px-1
@@ -32,6 +32,6 @@
     }
 
     .prefix svg, .suffix svg {
-        @apply !mr-1 w-6 h-6 dark:text-dark-500
+        @apply ltr:!mr-1 rtl:!ml-1 w-6 h-6 dark:text-dark-500
     }
 }

@@ -1,50 +1,31 @@
 @layer components {
     .bw-button {
-        @apply
-            py-5
-            px-7
-            focus:outline-none
-            focus:ring
-            text-xs
-            uppercase
-            tracking-widest
+        @apply py-5 px-7 focus:outline-none focus:ring text-xs uppercase tracking-widest rtl:inline-flex rtl:items-center
     }
+
     .bw-button.big {
-        @apply
-            py-7
-            px-12
+        @apply py-7 px-12
     }
+
     .bw-button.small {
-        @apply
-            py-3
-            px-6
-            !text-[11px]
+        @apply py-3 px-6 !text-[11px]
     }
+
     .bw-button.tiny {
-        @apply
-            py-[6px]
-            px-[15px]
-            text-[10px]
+        @apply py-[6px] px-[15px] text-[10px]
     }
+
     .bw-button.primary, .bw-button-circle.primary {
-        @apply
-            focus:ring-offset-2 focus:ring-opacity-30 dark:focus:ring-opacity-10
-            transition text-white hover:text-white active:translate-y-0.5
+        @apply focus:ring-offset-2 focus:ring-opacity-30 dark:focus:ring-opacity-10 transition text-white hover:text-white active:translate-y-0.5
     }
+
     .bw-button.secondary, .bw-button-circle.secondary {
-        @apply
-            focus:ring-offset-2
-            focus:ring-secondary-500/40
-            active:translate-y-0.5
-            transition
-            bg-secondary-300  dark:bg-dark-700
-            text-secondary-800 dark:text-dark-400
-            hover:bg-secondary-400 hover:text-white hover:dark:bg-dark-400/50 hover:dark:text-dark-300
-            active:bg-secondary-700 dark:focus:ring-dark-800
+        @apply focus:ring-offset-2 focus:ring-secondary-500/40 active:translate-y-0.5 transition bg-secondary-300
+        dark:bg-dark-700 text-secondary-800 dark:text-dark-400 hover:bg-secondary-400 hover:text-white
+        hover:dark:bg-dark-400/50 hover:dark:text-dark-300 active:bg-secondary-700 dark:focus:ring-dark-800
     }
+
     .bw-button.disabled, .bw-button-circle.disabled {
-        @apply
-            disabled:opacity-50
-            disabled:cursor-not-allowed
+        @apply disabled:opacity-50 disabled:cursor-not-allowed
     }
 }

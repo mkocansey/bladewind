@@ -28,12 +28,12 @@
 <div class="hidden border-red-300 border-yellow-300 border-pink-300 border-purple-300 border-cyan-300 border-orange-300 border-green-300 border-black border-blue-300"></div>
 <label class="inline-flex items-center cursor-pointer text-sm @if($disabled) opacity-60 @endif @if($add_clearing) mb-3 @endif {{ $label_css }}">
     <input
-        type="{{ $type }}"
-        name="{{ $name }}"
-        class="{{$text_color}} w-6 h-6 mr-2 disabled:opacity-50 focus:{{$ring_color}} border-2 {{$border_color}} focus:ring-opacity-25 dark:bg-dark-700 bw-checkbox {{$class}}"
-        @if($disabled) disabled @endif
-        @if($checked) checked @endif
-        value="{{ $value }}"
+            type="{{ $type }}"
+            name="{{ $name }}"
+            class="{{$text_color}} w-6 h-6 mr-2 rtl:ml-2 disabled:opacity-50 focus:{{$ring_color}} border-2 {{$border_color}} focus:ring-opacity-25 dark:bg-dark-700 bw-checkbox {{$class}}"
+            @if($disabled) disabled @endif
+            @if($checked) checked @endif
+            value="{{ $value }}"
     />
     {!! $label !!}
 </label>

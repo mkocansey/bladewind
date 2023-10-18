@@ -2,7 +2,7 @@
     'image'     => null,
     'alt'       => 'image',
     'size'      => 'regular',
-    'class'     => 'mr-2 mt-2',
+    'class'     => 'ltr:mr-2 rtl:ml-2 mt-2',
     'stacked'   => false,
     'show_ring' => true,
     'show_dot'  => false,
@@ -12,10 +12,10 @@
         'tiny'      => [ 'size_css' => 'w-6 h-6', 'dot_css' => 'left-5' ],
         'small'     => [ 'size_css' => 'w-8 h-8', 'dot_css' => 'left-6' ],
         'medium'    => [ 'size_css' => 'w-10 h-10', 'dot_css' => 'left-8' ],
-        'regular'   => [ 'size_css' => 'w-12 h-12', 'dot_css' => 'left-[34px]' ],
-        'big'       => [ 'size_css' => 'w-16 h-16', 'dot_css' => 'left-[46px]' ],
-        'huge'      => [ 'size_css' => 'w-20 h-20', 'dot_css' => 'left-[58px]' ],
-        'omg'       => [ 'size_css' => 'w-28 h-28', 'dot_css' => 'left-[79px]' ]
+        'regular'   => [ 'size_css' => 'w-12 h-12', 'dot_css' => 'left-[34px] rtl:right-[34px]' ],
+        'big'       => [ 'size_css' => 'w-16 h-16', 'dot_css' => 'left-[46px] rtl:right-[46px]' ],
+        'huge'      => [ 'size_css' => 'w-20 h-20', 'dot_css' => 'left-[58px] rtl:right-[58px]' ],
+        'omg'       => [ 'size_css' => 'w-28 h-28', 'dot_css' => 'left-[79px] rtl:right-[79px]' ]
     ]
 ])
 @php
@@ -32,9 +32,10 @@
 <span class="top-0 bottom-0 hidden"></span>
 <div class="relative inline-block {{$stacked_css}} {{$class}}">
     <div>
-    <img class="{{ $image_size }} object-cover rounded-full @if($show_ring) ring-2 ring-white dark:ring-dark-900 ring-offset-2 @endif" src="{{$avatar}}" alt="{{$avatar}}" />
+        <img class="{{ $image_size }} object-cover rounded-full @if($show_ring) ring-2 ring-white dark:ring-dark-900 ring-offset-2 @endif"
+             src="{{$avatar}}" alt="{{$avatar}}"/>
     </div>
     @if($show_dot)
-    <span class="{{$dot_placement}}-0 {{$dot_position_css}} absolute w-3 h-3 bg-{{$dot_color}}-500 border-2 border-white dark:border-dark-800 rounded-full"></span>
+        <span class="{{$dot_placement}}-0 {{$dot_position_css}} absolute w-3 h-3 bg-{{$dot_color}}-500 border-2 border-white dark:border-dark-800 rounded-full"></span>
     @endif
 </div>
