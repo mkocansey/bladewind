@@ -26,6 +26,8 @@ validateForm = (form) => {
         dom_els(`${form} .required`).forEach((el) => {
             el.classList.remove('!border-error-400');
             if (el.value === '') {
+                has_error++;
+
                 let el_name = el.getAttribute('name');
                 let el_parent = el.getAttribute('data-parent');
                 let error_message = el.getAttribute('data-error-message');
@@ -48,7 +50,6 @@ validateForm = (form) => {
 
                 el.addEventListener('keyup', clearErrors.bind(null, listenerObj), false);
 
-                has_error++;
                 throw BreakException;
             }
         });
@@ -87,24 +88,20 @@ callUserFunction = (func) => {
     if (func !== '' && func !== undefined) eval(func);
 };
 
-serialize = (form) => {
-    let data = new FormData(dom_el(form));
+const serialize = (form) => {
+    let data = new FormData(form);
     let obj = {};
+
     for (let [key, value] of data) {
-        /**
-         ** in some cases the form field name and api parameter differ, and you want to
-         ** display a more meaningful error message from Laravels $errors.. set an attr
-         ** data-serialize-as on the form field. that value will be used instead of [key]
-         ** example: input name="contact_name" data-serialize-as="contact_person"
-         ** Laravel will display contact name field is required but contact_person : value
-         ** will be sent to the API
-         **/
         let this_element = document.getElementsByName(key);
         let serialize_as = this_element[0].getAttribute('data-serialize-as');
-        obj[serialize_as ?? key] = value;
+        
+        
     }
+
     return obj;
-}
+};
+
 
 stringContains = (str, keyword) => {
     if (typeof (str) !== 'string') return false;
