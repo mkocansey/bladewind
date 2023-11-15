@@ -265,13 +265,17 @@ positionPrefix = (el, mode = 'blur') => {
         }
         dom_el(`input.${el}`).style.paddingLeft = `${prefix_width}px`;
         input_field.addEventListener('focus', (event) => {
-            positionPrefix(el, event.type)
-        });
+            positionPrefix(el, event.type);
+            // for backward compatibility where {once:true} is not supported
+            input_field.removeEventListener('focus', positionPrefix);
+        }, {once: true});
     } else if (mode === 'focus') {
         if (label_field) label_field.style.left = default_label_left_pos;
         input_field.addEventListener('blur', (event) => {
-            positionPrefix(el, event.type)
-        });
+            positionPrefix(el, event.type);
+            // for backward compatibility where {once:true} is not supported
+            input_field.removeEventListener('blur', positionPrefix);
+        }, {once: true});
     }
 }
 
