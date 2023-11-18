@@ -22,7 +22,7 @@
         @apply
         absolute
         cursor-text
-        ltr:left-3.5  rtl:right-3.5
+        left-3.5  rtl:!right-3.5
         -top-2
         text-xs
         px-1
