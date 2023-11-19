@@ -350,17 +350,21 @@ highlightSelectedTags = (values, name) => {
     }
 }
 
-compareDates = (el1, el2) => {
+compareDates = (el1, el2, message, inline) => {
     let date1_el = dom_el(el1);
     let date2_el = dom_el(el2);
     let start_date = new Date(date1_el.value).getTime();
     let end_date = new Date(date2_el.value).getTime();
-    if (start_date > end_date) {
-        changeCss(date2_el, '!border-error-400', 'add', true);
-        showNotification('', date2_el.getAttribute('data-date-comparison-error'), 'error');
-        return false;
-    } else {
-        changeCss(date2_el, '!border-error-400', 'remove', true);
-        return true;
+    if (date1_el.value !== '' && date2_el.value !== '') {
+        console.log('values not empty');
+        if (start_date > end_date) {
+            console.log('error in date');
+            changeCss(date2_el, '!border-error-400', 'add', true);
+            (inline) ? showNotification('', message, 'error') : dom_el(`.error-${el1}${el2}`).innerHTML = message;
+            return false;
+        } else {
+            changeCss(date2_el, '!border-error-400', 'remove', true);
+            return true;
+        }
     }
 }

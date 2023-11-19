@@ -48,6 +48,10 @@
     // what name should be displayed for the to date. Default is 'end_date'
     'date_to_name' => 'end_date',
     'dateToName' => 'end_date',
+    // should validation be turned on for the range picker
+    'validate' => false,
+    'show_error_inline' => false,
+    'validation_message' => 'Your end date cannot be less than your start date',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -67,6 +71,8 @@
     $date_from_name = $dateFromName;
     $date_to_name = $dateToName;
     $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
+    $validate = filter_var($validate, FILTER_VALIDATE_BOOLEAN);
+    $show_error_inline = filter_var($show_error_inline, FILTER_VALIDATE_BOOLEAN);
     //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
@@ -186,10 +192,18 @@
                     label="{{$date_to_label}}"
                     format="{{$format}}"/>
         </div>
-        <script>
-            compareDates('', '');
-        </script>
+        <div class="text-red-500 text-sm -mt-2 mb-3 col-span-2 error-{{ $date_from_name.$date_to_name }}"></div>
     </div>
+    @if($validate)
+        <script>
+            [".{{ $date_from_name }}", ".{{ $date_to_name }}"].forEach((el) => {
+                console.log(el);
+                dom_el(el).addEventListener('blur', () => {
+                    compareDates('{{ $date_from_name }}', '{{ $date_to_name }}', '{{ $validation_message }}', '{{ $show_error_inline }}');
+                });
+            });
+        </script>
+    @endif
 @endif
 @once
     <script>
