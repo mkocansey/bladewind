@@ -88,14 +88,6 @@
 @if($type == 'single')
     <div x-data="app('{{ $default_date }}', '{{ strtoupper($format) }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
         <div class="relative w-full">
-            <div class="flex absolute inset-y-0 right-3 z-30 items-center pl-3 pointer-events-none">
-                <svg class="w-5 h-5 text-gray-200" fill="currentColor" viewBox="0 0 20 20"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                          clip-rule="evenodd"></path>
-                </svg>
-            </div>{{--name="{{ $name }}" --}}
             <input
                     type="hidden"
                     x-ref="date"
@@ -116,6 +108,10 @@
                     placeholder="{{ $placeholder }}"
                     onblur="{!! $onblur !!}"
                     tabindex="{!! $tabindex !!}"
+                    suffix="calendar-days"
+                    suffix_is_icon="true"
+                    suffix_icon_div_css="rtl:!right-[unset] rtl:!left-0"
+                    suffix_icon_css="text-slate-300"
                     required="{{$required}}"/>
 
             <div class="bg-white dark:bg-dark-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md rounded-lg"
@@ -130,7 +126,7 @@
                     month = 12;
                 } month--; getNoOfDays()">
                             <x-bladewind::icon name="arrow-left"
-                                               class="h-5 w-5 text-white/50 hover:text-white inline-flex"/>
+                                               class="h-5 w-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
                         </button>
                     </div>
                     <div class="text-lg text-white/90 dark:text-gray-400 cursor-default">
@@ -147,7 +143,7 @@
                     month++;
                 } getNoOfDays()">
                             <x-bladewind::icon name="arrow-right"
-                                               class="h-5 w-5 text-white/50 hover:text-white inline-flex"/>
+                                               class="h-5 w-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
                         </button>
                     </div>
                 </div>

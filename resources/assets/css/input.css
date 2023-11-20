@@ -22,7 +22,10 @@
         @apply
         absolute
         cursor-text
-        left-3.5  rtl:!right-3.5
+        left-3.5
+        rtl:!right-3.5
+        rtl:left-[unset]
+        !inline-block
         -top-2
         text-xs
         px-1
