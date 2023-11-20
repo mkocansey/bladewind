@@ -11,8 +11,30 @@
     'percentageLabelPosition' => 'top left',
     'shade' => 'faint',
     'color_weight' => [
-        'faint' => 300,
-        'dark' => 500,
+        'faint' => [
+            'primary' => 'bg-primary-300',
+            'red' => 'bg-red-300',
+            'yellow' => 'bg-yellow-300',
+            'green' => 'bg-green-300',
+            'blue' => 'bg-blue-300',
+            'cyan' => 'bg-cyan-300',
+            'purple' => 'bg-purple-300',
+            'gray' => 'bg-slate-300',
+            'pink' => 'bg-pink-300',
+            'orange' => 'bg-orange-300',
+        ],
+        'dark' => [
+            'primary' => 'bg-primary-500',
+            'red' => 'bg-red-500',
+            'yellow' => 'bg-yellow-500',
+            'green' => 'bg-green-500',
+            'blue' => 'bg-blue-500',
+            'cyan' => 'bg-cyan-500',
+            'purple' => 'bg-purple-500',
+            'gray' => 'bg-slate-500',
+            'pink' => 'bg-pink-500',
+            'orange' => 'bg-orange-500',
+]   ,
     ],
     'text_color_weight' => [
         'faint' => 600,
@@ -31,7 +53,7 @@
     'percentageLabelOpacity' => '100'
 ])
 
-@php  
+@php
     // reset variables for Laravel 8 support
     $show_percentage_label = filter_var($show_percentage_label, FILTER_VALIDATE_BOOLEAN);
     $showPercentageLabel = filter_var($showPercentageLabel, FILTER_VALIDATE_BOOLEAN);
@@ -48,31 +70,35 @@
     if ($barClass !== $bar_class) $bar_class = $barClass;
     //-----------------------------------------------------------------------
 
-    if ($color == 'gray' && $shade == 'faint') $css_override = '!bg-slate-300';
     if(! is_numeric($percentage_label_opacity*1)) $percentage_label_opacity = '100';
+    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange'])) ? 'primary' : $color;
 @endphp
 
-<span class=" bg-primary-300 bg-primary-600 hidden"></span>
 <div class="bw-progress-bar {{$class}}">
     @if($show_percentage_label &&
         !$show_percentage_label_inline &&
         Str::contains($percentage_label_position, 'top'))
-    <div class="text-xs tracking-wider {{str_replace('top ','text-', $percentage_label_position)}}">
-        {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
-    </div>
+        <div class="text-xs tracking-wider {{str_replace('top ','text-', $percentage_label_position)}}">
+            {{$percentage_prefix}} <span
+                    class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
+        </div>
     @endif
     <div class="@if(!$transparent) bg-slate-200/70 dark:bg-dark-800 w-full @endif mt-1 my-2 rounded-full">
-        <div style="width: {{$percentage}}%" class="text-center py-1 bg-{{$color}}-{{$color_weight[$shade]}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
-            @if($show_percentage_label && $show_percentage_label_inline)<span class="text-{{$color}}-{{$text_color_weight[$shade]}} px-2 text-xs">
+        <div style="width: {{$percentage}}%"
+             class="text-center py-1 {{$color_weight[$shade][$color]}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
+            @if($show_percentage_label && $show_percentage_label_inline)
+                <span class="text-{{$color}}-{{$text_color_weight[$shade]}} px-2 text-xs">
             {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
-            </span>@endif
+            </span>
+            @endif
         </div>
     </div>
     @if($show_percentage_label &&
         !$show_percentage_label_inline &&
         Str::contains($percentage_label_position, 'bottom'))
-    <div class="text-xs tracking-wider {{str_replace('bottom ','text-', $percentage_label_position)}}">
-        {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
-    </div>
+        <div class="text-xs tracking-wider {{str_replace('bottom ','text-', $percentage_label_position)}}">
+            {{$percentage_prefix}} <span
+                    class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
+        </div>
     @endif
 </div>

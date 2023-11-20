@@ -75,6 +75,15 @@
     // setting this to true adds a search box above the select items
     // this can be used to filter the contents of the select items
     'searchable' => false,
+
+    // specify the maximum number of items that can be selected
+    'max_selectable' => -1,
+    'maxSelectable' => -1,
+
+    // error message to display when max_selectable is exceeded
+    'max_error_message' => 'Please select only %s items',
+    'maxErrorMessage' => 'Please select only %s items',
+
 ])
 @php
     //$multiple = filter_var($multiple, FILTER_VALIDATE_BOOLEAN);
@@ -84,6 +93,8 @@
     $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     $readonly = filter_var($readonly, FILTER_VALIDATE_BOOLEAN);
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
+    $max_selectable = (int) $max_selectable;
+    $maxSelectable = (int) $maxSelectable;
 
     if ($dataSerializeAs !== $data_serialize_as) $data_serialize_as = $dataSerializeAs;
     if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
@@ -92,6 +103,9 @@
     if ($flagKey !== $flag_key) $flag_key = $flagKey;
     if ($imageKey !== $image_key) $image_key = $imageKey;
     if (!$add_clearing) $add_clearing = $addClearing;
+    if ($maxSelectable !== $max_selectable) $max_selectable = $maxSelectable;
+    $max_error_message = ($maxErrorMessage != $max_error_message) ? addslashes($maxErrorMessage) : addslashes($max_error_message);
+    if($max_error_message == '') $max_error_message = 'Please select only %s items';
 
     $input_name = preg_replace('/[\s-]/', '_', $name);
     $selected_value = ($selected_value != '') ? explode(',', str_replace(', ', ',', $selected_value)) : [];
@@ -110,7 +124,6 @@
                 &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>');
         }
     }
-
 
 @endphp
 <style>
@@ -181,5 +194,6 @@
 <script>
     @php include_once('vendor/bladewind/js/select.js'); @endphp
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
-    @if(!$disabled && !$readonly) bw_{{ $input_name }}.activate(); @endif
+    @if(!$disabled && !$readonly) bw_{{ $input_name }}.activate();
+    bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}'); @endif
 </script>

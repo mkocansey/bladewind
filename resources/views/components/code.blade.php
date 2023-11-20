@@ -30,13 +30,13 @@
         <div class="flex space-x-3 mx-auto">
             @for ($x = 0; $x < $total_digits; $x++)
                 <x-bladewind::input
-                    numeric="true"
-                    with_dots="false"
-                    add_clearing="false"
-                    onkeydown="hidePinError('{{ $name }}')"
-                    onkeyup="movePinNext('{{ $name }}', {{ $x }}, {{ $total_digits }}, '{{ $on_verify }}', event)"
-                    class="w-14 shadow-sm text-center text-xl font-light text-black dark:text-white {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
-                    maxlength="1"
+                        numeric="true"
+                        with_dots="false"
+                        add_clearing="false"
+                        onkeydown="hidePinError('{{ $name }}')"
+                        onkeyup="movePinNext('{{ $name }}', {{ $x }}, {{ $total_digits }}, '{{ $on_verify }}', event)"
+                        class="w-14 shadow-sm text-center text-xl font-light text-black dark:text-white focus:!border-primary-600 {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
+                        maxlength="1"
                 />
             @endfor
         </div>
@@ -48,13 +48,13 @@
         <x-bladewind::spinner/>
     </div>
     <div class="bg-white/10 absolute w-full text-center hidden top-0 py-1 bw-{{ $name }}-pin-valid">
-        <x-bladewind::icon name="check-circle" type="solid" class="h-10 w-10 text-green-500 mx-auto" />
+        <x-bladewind::icon name="check-circle" type="solid" class="h-10 w-10 text-green-500 mx-auto"/>
     </div>
 </div>
 <x-bladewind::input type="hidden" name="{{ $name }}"/>
 
 <script>
-    movePinNext = (name , index , total_digits , user_function , evt) => {
+    movePinNext = (name, index, total_digits, user_function, evt) => {
         if (evt.key === 'Backspace') {
             if (index > 0) {
                 dom_el(`.${name}-pcode${index}`).value = '';
@@ -66,10 +66,10 @@
             }
         }
 
-        (index < total_digits) ? dom_el(`.${name}-pcode${index}`).focus() : setPin(name , user_function);
+        (index < total_digits) ? dom_el(`.${name}-pcode${index}`).focus() : setPin(name, user_function);
     }
 
-    setPin = (name , user_function) => {
+    setPin = (name, user_function) => {
         dom_el(`.${name}`).value = '';
         dom_els(`.${name}-pin-code`).forEach((el) => {
             dom_el(`.${name}`).value += el.value;

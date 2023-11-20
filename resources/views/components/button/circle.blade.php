@@ -63,8 +63,12 @@
     $tag = ($tag !== 'a' && $tag !== 'button') ? 'button' : $tag;
     $merged_attributes = $attributes->merge(['class' => "bw-button-circle $size $type $name $primary_colour_css $disabled_css $radius_css"]);
 @endphp
-<{{ $tag }} title="{{$tooltip}}" {{ $merged_attributes }} @if($disabled) disabled @endif @if($tag == 'button') type="{{ $button_type }}" @endif>
-    @if(!empty($icon))
-        <x-bladewind::icon name="{{$icon}}" class="{{$icon_size[$size]}} {{$button_text_colour}} !-m-0" />
-    @endif
+<{{ $tag }} title="{{$tooltip}}" {{ $merged_attributes }} @if($disabled)
+    disabled
+@endif @if($tag == 'button')
+    type="{{ $button_type }}"
+@endif>
+@if(!empty($icon))
+    <x-bladewind::icon name="{{$icon}}" class="{{$icon_size[$size]}} {{$button_text_colour}} !-m-0"/>
+@endif
 </{{$tag}}>
