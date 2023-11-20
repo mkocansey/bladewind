@@ -52,6 +52,8 @@
     'validate' => false,
     'show_error_inline' => false,
     'validation_message' => 'Your end date cannot be less than your start date',
+    'onblur' => '',
+    'tabindex' => -1,
 ])
 @php
     // reset variables for Laravel 8 support
@@ -76,8 +78,13 @@
     //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
+    $js_function = ($validate) ? "compareDates('$date_from_name', '$date_to_name', '$validation_message', '$show_error_inline')" : '';
 @endphp
-
+<style>
+    [x-cloak] {
+        display: none !important;
+    }
+</style>
 @if($type == 'single')
     <div x-data="app('{{ $default_date }}', '{{ strtoupper($format) }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
         <div class="relative w-full">
@@ -94,10 +101,11 @@
                     x-ref="date"
                     :value="datepickerValue"
                     value="{{ $default_date }}"/>
+
             <x-bladewind::input
                     {{-- class="bw-datepicker bw-input block w-full peer {{$name}}" --}}
                     class="bw-datepicker"
-                    x-on:click="showDatepicker = !showDatepicker"
+                    x-on:click="showDatepicker = !showDatepicker;"
                     x-model="datepickerValue"
                     x-on:keydown.escape="showDatepicker = false"
                     type="text"
@@ -106,6 +114,8 @@
                     name="{{$name}}"
                     label="{{ $label }}"
                     placeholder="{{ $placeholder }}"
+                    onblur="{!! $onblur !!}"
+                    tabindex="{!! $tabindex !!}"
                     required="{{$required}}"/>
 
             <div class="bg-white dark:bg-dark-600 mt-12 p-4 absolute top-0 left-0 z-50 shadow-md rounded-lg"
@@ -180,6 +190,7 @@
                     default_date="{{ $default_date_from??'' }}"
                     required="{{ $required }}"
                     label="{{$date_from_label}}"
+                    onblur="{{ $js_function }}"
                     format="{{$format}}"/>
         </div>
         <div>
@@ -190,20 +201,11 @@
                     default_date="{{ $default_date_to??'' }}"
                     required="{{ $required }}"
                     label="{{$date_to_label}}"
+                    onblur="{{ $js_function }}"
                     format="{{$format}}"/>
         </div>
         <div class="text-red-500 text-sm -mt-2 mb-3 col-span-2 error-{{ $date_from_name.$date_to_name }}"></div>
     </div>
-    @if($validate)
-        <script>
-            [".{{ $date_from_name }}", ".{{ $date_to_name }}"].forEach((el) => {
-                console.log(el);
-                dom_el(el).addEventListener('blur', () => {
-                    compareDates('{{ $date_from_name }}', '{{ $date_to_name }}', '{{ $validation_message }}', '{{ $show_error_inline }}');
-                });
-            });
-        </script>
-    @endif
 @endif
 @once
     <script>
