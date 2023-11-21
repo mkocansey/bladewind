@@ -49,16 +49,17 @@
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
 @endphp
 {{--<span class="!border-red-400 hidden"></span>--}}
-<div class="w-full bw-alert rounded-md flex p-3 {{$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
+<div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3 {{$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
     @if($show_icon)
         <div class="pt-[1px]">
-            <x-bladewind::modal-icon type="{{$type}}" class="!h-6 !w-6 {{ $color[$shade][$type.'_icon_color']??'' }}" />
+            <x-bladewind::modal-icon type="{{$type}}" class="!h-6 !w-6 {{ $color[$shade][$type.'_icon_color']??'' }}"/>
         </div>
     @endif
     <div class="grow pl-2 pr-5">{{ $slot }}</div>
     @if($show_close_icon)
-        <div class="text-right">
-            <x-bladewind::icon name="x-circle" class="h-5 w-5 inline cursor-pointer ml-3 opacity-60 hover:opacity-100 pt-[1px] dark:text-dark-100" />
+        <div class="text-right" onclick="this.parentElement.style.display='none'">
+            <x-bladewind::icon name="x-circle"
+                               class="h-5 w-5 inline cursor-pointer ml-3 opacity-60 hover:opacity-100 pt-[1px] dark:text-dark-100"/>
         </div>
     @endif
 </div>

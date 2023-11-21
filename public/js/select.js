@@ -7,6 +7,7 @@ class BladewindSelect {
     isMultiple;
     displayArea;
     formInput;
+    maxSelection;
 
     constructor(name, placeholder) {
         this.name = name;
@@ -20,6 +21,7 @@ class BladewindSelect {
         this.isMultiple = (dom_el(this.rootElement).getAttribute('data-multiple') === 'true');
         this.formInput = `input.bw-${this.name}`;
         dom_el(this.displayArea).style.width = `${(dom_el(this.rootElement).offsetWidth - 40)}px`;
+        this.maxSelection = -1;
     }
 
     activate = () => {
@@ -98,10 +100,14 @@ class BladewindSelect {
             if (input.value.includes(selectedValue)) {
                 this.unsetValue(item);
             } else {
-                unhide(svg, true);
-                input.value += `,${selectedValue}`;
-                dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, selectedValue);
-                this.removeLabel(selectedValue);
+                if (!this.maxSelectableExceeded()) {
+                    unhide(svg, true);
+                    input.value += `,${selectedValue}`;
+                    dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, selectedValue);
+                    this.removeLabel(selectedValue);
+                } else {
+                    showNotification('', this.maxSelectionError, 'error');
+                }
             }
             this.scrollers();
         }
@@ -223,6 +229,17 @@ class BladewindSelect {
                 '${dom_el(this.formInput).value}')`
             );
         }
+    }
+
+    maxSelectable = (max_number, error_message) => {
+        this.maxSelection = (this.isMultiple) ? max_number : false;
+        this.maxSelectionError = error_message;
+    }
+
+    maxSelectableExceeded = () => {
+        let input = dom_el(this.formInput);
+        let total_selected = (input.value.split(',')).length;
+        return ((this.maxSelection !== -1) && total_selected === this.maxSelection);
     }
 
 

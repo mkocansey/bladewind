@@ -62,8 +62,8 @@
 @endphp
 
 <div {{ $attributes->merge(['class' => "bw-bell relative inline-block"]) }}>
-    <x-bladewind::icon name="bell" class="{{ $sizing[$size]['bell'] }} cursor-pointer {{$invert_css}}" />
-@if($show_dot)
-    <div class="{{ $sizing[$size]['dot'] }} rounded-full {{ $coloring['bg'][$color] }} absolute top-0 right-[2.5px] @if($animate_dot) animate-ping @endif"></div>
+    <x-bladewind::icon name="bell" class="{{ $sizing[$size]['bell'] }} cursor-pointer {{$invert_css}}"/>
+    @if($show_dot)
+        <div class="{{ $sizing[$size]['dot'] }} rounded-full {{ $coloring['bg'][$color] }} absolute top-0 ltr:right-[2.5px] rtl:left-[2.5px] @if($animate_dot) animate-ping @endif"></div>
     @endif
 </div>
