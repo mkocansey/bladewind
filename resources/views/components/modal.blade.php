@@ -69,9 +69,9 @@
     ],
 
     // add extra css to the modal body
-    'modal_body_css' => '',
+    'body_css' => '',
     // add extra css to the modal footer
-    'modal_footer_css' => '',
+    'footer_css' => '',
 
 ])
 @php
@@ -124,7 +124,7 @@
                         <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
                     </div>
                 @endif
-                <div class="modal-body grow p-6 {{ $modal_body_css  }}">
+                <div class="modal-body grow p-6 {{ $body_css  }}">
                     <h1 class="text-2xl font-medium text-gray-800 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
                     <div class="modal-text text-gray-600 dark:text-gray-400 pt-2 text-base leading-6 tracking-wide text-left">
                         {{ $slot }}
@@ -132,7 +132,7 @@
                 </div>
             </div>
             @if( $show_action_buttons )
-                <div class="modal-footer @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 dark:border-t dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $modal_footer_css }}">
+                <div class="modal-footer @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 dark:border-t dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
