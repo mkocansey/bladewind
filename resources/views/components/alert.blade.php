@@ -52,14 +52,15 @@
 <div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3 {{$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
     @if($show_icon)
         <div class="pt-[1px]">
-            <x-bladewind::modal-icon type="{{$type}}" class="!h-6 !w-6 {{ $color[$shade][$type.'_icon_color']??'' }}"/>
+            <x-bladewind::modal-icon type="{{$type}}"
+                                     class="!h-6 !w-6 -mt-1.5 {{ $color[$shade][$type.'_icon_color']??'' }}"/>
         </div>
     @endif
     <div class="grow pl-2 pr-5">{{ $slot }}</div>
     @if($show_close_icon)
         <div class="text-right" onclick="this.parentElement.style.display='none'">
-            <x-bladewind::icon name="x-circle"
-                               class="h-5 w-5 inline cursor-pointer ml-3 opacity-60 hover:opacity-100 pt-[1px] dark:text-dark-100"/>
+            <x-bladewind::icon name="x-mark"
+                               class="h-6 w-6 p-1 cursor-pointer text-gray-400 hover:bg-white hover:rounded-full dark:hover:bg-slate-800 "/>
         </div>
     @endif
 </div>

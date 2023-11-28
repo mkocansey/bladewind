@@ -17,24 +17,26 @@ class BladewindNotification {
         this.name = `notification-${Math.floor((Math.random() * 100) + 1)}`;
         this.timeoutName = this.name.replace('notification-', 'timeout_');
         this.borderColors = {
-            "success" : "border-green-400/80",
-            "error" : "border-red-400/80",
-            "warning" : "border-orange-400/80",
-            "info" : "border-blue-400/80",
+            "success": "border-green-400/80",
+            "error": "border-red-400/80",
+            "warning": "border-orange-400/80",
+            "info": "border-blue-400/80",
         };
     }
 
     show = () => {
         // dom_el('.bw-notification-container').innerHTML += this.template();
         dom_el('.bw-notification-container').insertAdjacentHTML('beforeend', this.template());
-        animateCSS(`.${this.name}`,'fadeInRight').then(() => {
-            this.timeoutName = setTimeout(() => { this.hide(); }, this.dismissInSeconds);
+        animateCSS(`.${this.name}`, 'fadeInRight').then(() => {
+            this.timeoutName = setTimeout(() => {
+                this.hide();
+            }, this.dismissInSeconds);
             this.closable();
         });
     }
 
     hide = () => {
-        animateCSS(`.${this.name}`,'fadeOutRight').then(() => {
+        animateCSS(`.${this.name}`, 'fadeOutRight').then(() => {
             dom_el(`.${this.name}`).remove();
             clearTimeout(this.timeoutName);
         });
@@ -46,7 +48,7 @@ class BladewindNotification {
         });
     }
 
-    modalIcon = function (){
+    modalIcon = function () {
         return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replace('hidden', '');
     }
 
@@ -64,7 +66,7 @@ class BladewindNotification {
 
     closeIcon = () => {
         return `<svg xmlns="http://www.w3.org/2000/svg" class="close h-5 w-5 absolute -right-1 cursor-pointer 
-                    -top-1 text-gray-400 hover:bg-gray-200 dark:hover:bg-slate-800 p-1" fill="none" 
+                    -top-1 text-gray-400 hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-800 p-1" fill="none" 
                     viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" 
                     stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>`;
     }

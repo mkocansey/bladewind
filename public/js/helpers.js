@@ -2,7 +2,7 @@
  ** helper functions for BladeWind UI components using vanilla JS
  ** September 2021 by @mkocansey <@mkocansey>
  **/
-let current_modal = [];
+const current_modal = [];
 let el_name;
 
 domEl = (element) => {
