@@ -8,9 +8,9 @@
     'title' => '',
 
     // name of the modal. used to uniquely identify the modal in css and js
-    'name' => 'amodal',
+    'name' => 'bw-modal-'.uniqid(),
 
-    // text to display on primary button. default is Okay
+    // text to display on the primary button. default is Okay
     'ok_button_label' => 'Okay',
     'okButtonLabel' => 'Okay',
 
@@ -55,7 +55,7 @@
     'blur_backdrop' => true,
     'blurBackdrop' => true,
 
-    // determines size of the modal. available options are small, medium, large and xl
+    // determines the size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
     'size' => 'big',
     'sizes' => [
@@ -67,6 +67,14 @@
         'xl' => 'w-2/3',
         'omg' => 'w-11/12'
     ],
+
+    // add extra css to the modal body
+    'body_css' => '',
+    // add extra css to the modal footer
+    'footer_css' => '',
+    // show close icon. By default, the close or cancel button closes the modal
+    'show_close_icon' => false,
+    'showCloseIcon' => false,
 ])
 @php
     // reset variables for Laravel 8 support
@@ -87,6 +95,8 @@
     $stretchActionButtons = filter_var($stretchActionButtons, FILTER_VALIDATE_BOOLEAN);
     $blur_backdrop = filter_var($blur_backdrop, FILTER_VALIDATE_BOOLEAN);
     $blurBackdrop = filter_var($blurBackdrop, FILTER_VALIDATE_BOOLEAN);
+    $show_close_icon = filter_var($show_close_icon, FILTER_VALIDATE_BOOLEAN);
+    $showCloseIcon = filter_var($showCloseIcon, FILTER_VALIDATE_BOOLEAN);
 
     if (!$closeAfterAction) $close_after_action = $closeAfterAction;
     if (!$backdropCanClose) $backdrop_can_close = $backdropCanClose;
@@ -94,6 +104,7 @@
     if ($centerActionButtons) $center_action_buttons = $centerActionButtons;
     if ($stretchActionButtons) $stretch_action_buttons = $stretchActionButtons;
     if ($blurBackdrop) $blur_backdrop = $blurBackdrop;
+    if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
     //-------------------------------------------------------------------
 
     $name = str_replace(' ', '-', $name);
@@ -105,37 +116,44 @@
     $button_size = ($size == 'tiny') ? 'tiny' : 'small';
 @endphp
 
+@php //this is intentional // required, so tailwindCSS will compile the styles in @endphp
 <span class="sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12"></span>
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
-    class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
+     class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
     <div class="sm:{{$sizes[$size]}} w-full p-4 m-auto bw-{{$name}} animate__faster">
         <div class="bg-white dark:bg-slate-900 dark:border dark:border-slate-800 rounded-lg drop-shadow-2xl">
+            @if( $show_action_buttons && $show_close_icon)
+                <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
+                    <x-bladewind::icon name="x-mark"
+                                       class="text-gray-400 hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-800 p-1 absolute right-3 top-3 modal-close-icon"/>
+                </a>
+            @endif
             <div class="{{(!empty($type))?'flex':'flex-initial'}}">
                 @if(!empty($type))
-                <div class="modal-icon py-6 pl-6 grow-0">
-                    <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
-                </div>
-               @endif
-                <div class="modal-body grow p-6">
-                    <h1 class="text-2xl font-medium text-gray-800 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
+                    <div class="modal-icon py-7 pl-5 grow-0">
+                        <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
+                    </div>
+                @endif
+                <div class="modal-body grow p-7 @if(!empty($type)) !pl-3 @endif {{ $body_css  }}">
+                    <h1 class="text-[22px] font-bold text-slate-900/80 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
                     <div class="modal-text text-gray-600 dark:text-gray-400 pt-2 text-base leading-6 tracking-wide text-left">
                         {{ $slot }}
                     </div>
                 </div>
             </div>
             @if( $show_action_buttons )
-                <div class="modal-footer @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 dark:border-t dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg">
+                <div class="modal-footer @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
-                        type="secondary"  
-                        size="{{$button_size}}" 
-                        onclick="{!! $cancelAction !!}"
-                        class="cancel {{ (($stretch_action_buttons) ? 'block w-full mb-3' : '') }} {{ $cancelCss }}">{{$cancel_button_label}}</x-bladewind::button>
-                        
+                            type="secondary"
+                            size="{{$button_size}}"
+                            onclick="{!! $cancelAction !!}"
+                            class="cancel {{ (($stretch_action_buttons) ? 'block w-full mb-3' : '') }} {{ $cancelCss }}">{{$cancel_button_label}}</x-bladewind::button>
+
                     <x-bladewind::button
-                        size="{{$button_size}}" 
-                        onclick="{!! $okAction !!}"
-                        class="okay {{ (($stretch_action_buttons) ? 'block w-full mb-3 !ml-0' : 'ml-3') }} {{ $okCss }}">{{$ok_button_label}}</x-bladewind::button>
+                            size="{{$button_size}}"
+                            onclick="{!! $okAction !!}"
+                            class="okay {{ (($stretch_action_buttons) ? 'block w-full mb-3 !ml-0' : 'ml-3') }} {{ $okCss }}">{{$ok_button_label}}</x-bladewind::button>
                 </div>
             @endif
         </div>
@@ -143,26 +161,31 @@
 </div>
 
 <script>
-    dom_el('.bw-{{$name}}-modal').addEventListener('click', function (e){ 
+    dom_el('.bw-{{$name}}-modal').addEventListener('click', function (e) {
         let backdrop_can_close = this.getAttribute('data-backdrop-can-close');
-        if(backdrop_can_close) hideModal('{{$name}}');
+        if (backdrop_can_close) hideModal('{{$name}}');
     });
 
-    dom_el('.bw-{{$name}}').addEventListener('click', function (e){ 
-        e.stopImmediatePropagation(); 
+    dom_el('.bw-{{$name}}').addEventListener('click', function (e) {
+        e.stopImmediatePropagation();
     });
 
-    if(dom_els('.bw-{{$name}}-modal .modal-footer>button')){
+    if (dom_els('.bw-{{$name}}-modal .modal-footer>button')) {
         dom_els('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
-            el.addEventListener('click', function (e){ e.stopImmediatePropagation(); });
+            el.addEventListener('click', function (e) {
+                e.stopImmediatePropagation();
+            });
         });
     }
 
-    document.addEventListener('keyup', function(e){
-        if(e.key === "Escape") {
-            if(current_modal !== undefined && current_modal.length > 0) {
-                let modal_name = current_modal[current_modal.length];
-                if(dom_el(modal_name).getAttribute('data-backdrop-can-close')) hideModal(modal_name);
+    document.addEventListener('keyup', function (e) {
+        if (e.key === "Escape") {
+            if (current_modal !== undefined && current_modal.length > 0) {
+                let modal_name = current_modal[(current_modal.length - 1)];
+                if (dom_el(`.bw-${modal_name}-modal`).getAttribute('data-backdrop-can-close') === '1') {
+                    hideModal(modal_name);
+                    e.stopImmediatePropagation();
+                }
             }
         }
     })
