@@ -17,10 +17,10 @@ class BladewindNotification {
         this.name = `notification-${Math.floor((Math.random() * 100) + 1)}`;
         this.timeoutName = this.name.replace('notification-', 'timeout_');
         this.borderColors = {
-            "success": "border-green-400/80",
-            "error": "border-red-400/80",
-            "warning": "border-orange-400/80",
-            "info": "border-blue-400/80",
+            "success": "border-green-500",
+            "error": "border-red-500",
+            "warning": "border-amber-500",
+            "info": "border-blue-500",
         };
     }
 
@@ -54,7 +54,7 @@ class BladewindNotification {
 
     template = () => {
         let border_color = eval(`this.borderColors.${this.type}`);
-        return `<div class="flex border-2 ${this.name} ${border_color} bg-white dark:bg-slate-700 dark:border-0 dark:shadow-xl dark:shadow-slack-900 shadow-lg p-4 rounded-lg mb-3">
+        return `<div class="flex border-2 ${this.name} ${border_color} bg-white dark:bg-slate-700 dark:border-0 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
             <div class="pr-4 grow-0">${this.modalIcon()}</div>
             <div class="pb-1 pr-4 relative grow">
                 <h1 class="font-semibold text-gray-700 dark:text-slate-300">${this.title}</h1>

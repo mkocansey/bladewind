@@ -39,6 +39,7 @@
         ],
     ]
 ])
+
 @php
     // reset variables for Laravel 8 support
     $show_icon = filter_var($show_icon, FILTER_VALIDATE_BOOLEAN);
@@ -47,20 +48,22 @@
     $showCloseIcon = filter_var($showCloseIcon, FILTER_VALIDATE_BOOLEAN);
     if(!$showIcon) $show_icon = $showIcon;
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
+    $close_icon_css =  ($shade == 'dark') ? 'text-white hover:text-gray-500' : 'text-gray-500';
 @endphp
+
 {{--<span class="!border-red-400 hidden"></span>--}}
 <div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3 {{$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
     @if($show_icon)
         <div class="pt-[1px]">
             <x-bladewind::modal-icon type="{{$type}}"
-                                     class="!h-6 !w-6 -mt-1.5 {{ $color[$shade][$type.'_icon_color']??'' }}"/>
+                                     class="!h-6 !w-6 -mt-1 {{ $color[$shade][$type.'_icon_color']??'' }}"/>
         </div>
     @endif
     <div class="grow pl-2 pr-5">{{ $slot }}</div>
     @if($show_close_icon)
         <div class="text-right" onclick="this.parentElement.style.display='none'">
             <x-bladewind::icon name="x-mark"
-                               class="h-6 w-6 p-1 cursor-pointer text-gray-400 hover:bg-white hover:rounded-full dark:hover:bg-slate-800 "/>
+                               class="h-6 w-6 p-1 cursor-pointer {{$close_icon_css}} hover:bg-white hover:rounded-full dark:hover:bg-slate-800 "/>
         </div>
     @endif
 </div>
