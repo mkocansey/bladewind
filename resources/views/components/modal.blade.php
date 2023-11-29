@@ -113,7 +113,7 @@
     $okAction = $cancelAction = "hideModal('{$name}')";
     if($ok_button_action !== 'close') $okAction = $ok_button_action . (($close_after_action) ? ';'.$okAction : '');
     if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action) ? ';'.$cancelAction : '');
-    $button_size = ($size == 'tiny') ? 'tiny' : 'small';
+    $button_size = ($stretch_action_buttons) ? 'medium' : (($size == 'tiny') ? 'tiny' : 'small');
 @endphp
 
 @php //this is intentional // required, so tailwindCSS will compile the styles in @endphp
@@ -143,7 +143,7 @@
                 </div>
             </div>
             @if( $show_action_buttons )
-                <div class="modal-footer @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
+                <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
