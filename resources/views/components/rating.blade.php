@@ -17,7 +17,7 @@
     $size_adjustment = ($size == 'big') ? 2 : 1;
     $clickable = filter_var($clickable, FILTER_VALIDATE_BOOLEAN);
 @endphp
-@if($clickable)<x-bladewind::input type="hidden" css="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
+@if($clickable)<x-bladewind::input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
 <div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block">
 @for ($x = 1; $x < 6; $x++) 
     <div data-rating="{{$x}}" class="inline bw-rating-{{$x}} {{$name}}@if($rating!= 0 && $x <= $rating*1) rated @endif"
