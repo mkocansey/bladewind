@@ -159,6 +159,7 @@
         </div>
     </div>
 </div>
+<span class="overflow-hidden"></span>
 
 <script>
     dom_el('.bw-{{$name}}-modal').addEventListener('click', function (e) {
@@ -189,4 +190,7 @@
             }
         }
     })
+
+    document.addEventListener('keydown', trapFocusInModal);
+
 </script>
