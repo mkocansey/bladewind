@@ -24,7 +24,6 @@ validateForm = (form) => {
     let BreakException = {};
     try {
         dom_els(`${form} .required`).forEach((el) => {
-            // el.classList.remove('!border-error-400');
             changeCss(el, '!border-error-400', 'remove', true);
             if (el.value === '') {
                 let el_name = el.getAttribute('name');
@@ -32,10 +31,10 @@ validateForm = (form) => {
                 let error_message = el.getAttribute('data-error-message');
                 let show_error_inline = el.getAttribute('data-error-inline');
                 let error_heading = el.getAttribute('data-error-heading');
-                // el.classList.add('!border-error-400');
-                // this will highlight select fields whose hidden inputs are required but empty
-                // (el_parent !== null) ? dom_el(`.${el_parent} .clickable`).classList.add('!border-error-400') : el.classList.add('!border-error-400');
-                (el_parent !== null) ? changeCss(dom_el(`.${el_parent} .clickable`), '!border-error-400') : changeCss(el, '!border-error-400', 'add', true);
+                
+                (el_parent !== null) ?
+                    changeCss(`.${el_parent} .clickable`, '!border-error-400') :
+                    changeCss(el, '!border-error-400', 'add', true);
                 el.focus();
                 if (error_message) {
                     (show_error_inline) ? unhide(`.${el_name}-inline-error`) :
