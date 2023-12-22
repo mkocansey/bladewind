@@ -2,12 +2,15 @@ class BladewindSelect {
     clickArea;
     rootElement;
     itemsContainer;
-    filterInput;
+    searchInput;
     selectItems;
     isMultiple;
     displayArea;
     formInput;
     maxSelection;
+    toFilter;
+    selectedValue;
+
 
     constructor(name, placeholder) {
         this.name = name;
@@ -16,11 +19,11 @@ class BladewindSelect {
         this.clickArea = `${this.rootElement} .clickable`;
         this.displayArea = `${this.rootElement} .display-area`;
         this.itemsContainer = `${this.rootElement} .bw-select-items-container`;
-        this.filterInput = `${this.itemsContainer} .bw_filter`;
+        this.searchInput = `${this.itemsContainer} .bw_search`;
         this.selectItems = `${this.itemsContainer} .bw-select-items .bw-select-item`;
         this.isMultiple = (dom_el(this.rootElement).getAttribute('data-multiple') === 'true');
         this.formInput = `input.bw-${this.name}`;
-        dom_el(this.displayArea).style.width = `${(dom_el(this.rootElement).offsetWidth - 40)}px`;
+        dom_el(this.displayArea).style.maxWidth = `${(dom_el(this.rootElement).offsetWidth - 40)}px`;
         this.maxSelection = -1;
     }
 
@@ -29,22 +32,22 @@ class BladewindSelect {
             unhide(this.itemsContainer);
         });
         this.hide();
-        this.filter();
+        this.search();
         this.manualModePreSelection();
         this.selectItem();
     }
 
     hide = () => {
         document.addEventListener('mouseup', (e) => {
-            let searchArea = dom_el(this.filterInput);
+            let searchArea = dom_el(this.searchInput);
             let container = dom_el((this.isMultiple) ? this.itemsContainer : this.clickArea);
             if (searchArea !== null && !searchArea.contains(e.target) && !container.contains(e.target)) hide(this.itemsContainer);
         });
     }
 
-    filter = () => {
-        dom_el(this.filterInput).addEventListener('keyup', (e) => {
-            let value = (dom_el(this.filterInput).value);
+    search = () => {
+        dom_el(this.searchInput).addEventListener('keyup', (e) => {
+            let value = (dom_el(this.searchInput).value);
             dom_els(this.selectItems).forEach((el) => {
                 (el.innerText.toLowerCase().indexOf(value.toLowerCase()) !== -1) ? unhide(el, true) : hide(el, true);
             });
@@ -53,7 +56,7 @@ class BladewindSelect {
 
     /**
      * When using non-dynamic selects, ensure select_value=<value>
-     * works the same way as for dynamic selects. This saves the use from
+     * works the same way as for dynamic selects. This saves the user from
      * manually checking if each select-item should be selected or not.
      */
     manualModePreSelection = () => {
@@ -79,17 +82,23 @@ class BladewindSelect {
     }
 
     setValue = (item) => {
-        let selectedValue = item.getAttribute('data-value');
+        this.selectedValue = item.getAttribute('data-value');
+        // let selectedValue = item.getAttribute('data-value');
         let selectedLabel = item.getAttribute('data-label');
-        let svg = dom_el(`${this.rootElement} div[data-value="${selectedValue}"] svg`);
+        let svg = dom_el(`${this.rootElement} div[data-value="${this.selectedValue}"] svg`);
         let input = dom_el(this.formInput);
+
         hide(`${this.rootElement} .placeholder`);
         unhide(this.displayArea);
+
+        if (this.toFilter) {
+            this.filter(this.toFilter, this.selectedValue);
+        }
 
         if (!this.isMultiple) {
             changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
             dom_el(this.displayArea).innerText = selectedLabel;
-            input.value = selectedValue;
+            input.value = this.selectedValue;
             unhide(`${this.clickArea} .reset`);
             unhide(svg, true);
             dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
@@ -97,27 +106,28 @@ class BladewindSelect {
                 e.stopImmediatePropagation();
             });
         } else {
-            if (input.value.includes(selectedValue)) {
+            if (input.value.includes(this.selectedValue)) {
                 this.unsetValue(item);
             } else {
                 if (!this.maxSelectableExceeded()) {
                     unhide(svg, true);
-                    input.value += `,${selectedValue}`;
-                    dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, selectedValue);
-                    this.removeLabel(selectedValue);
+                    input.value += `,${this.selectedValue}`;
+                    dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, this.selectedValue);
+                    this.removeLabel(this.selectedValue);
                 } else {
                     showNotification('', this.maxSelectionError, 'error');
                 }
             }
-            this.scrollers();
+            this.scrollbars();
         }
         stripComma(input);
         changeCss(`${this.clickArea}`, '!border-error-400', 'remove');
     }
 
     unsetValue = (item) => {
-        let selectedValue = item.getAttribute('data-value');
-        let svg = dom_el(`${this.rootElement} div[data-value="${selectedValue}"] svg`);
+        this.selectedValue = item.getAttribute('data-value');
+        // let selectedValue = item.getAttribute('data-value');
+        let svg = dom_el(`${this.rootElement} div[data-value="${this.selectedValue}"] svg`);
         let input = dom_el(this.formInput);
         // only unset values if the Select component is not disabled
         if (!dom_el(this.clickArea).classList.contains('cursor-not-allowed')) {
@@ -129,11 +139,11 @@ class BladewindSelect {
                 hide(this.displayArea);
                 hide(`${this.clickArea} .reset`);
             } else {
-                if (dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`)) {
-                    let keyword = `(,?)${selectedValue}`;
+                if (dom_el(`${this.displayArea} span.bw-sp-${this.selectedValue}`)) {
+                    let keyword = `(,?)${this.selectedValue}`;
                     input.value = input.value.replace(input.value.match(keyword)[0], '');
                     hide(svg, true);
-                    dom_el(`${this.displayArea} span.bw-sp-${selectedValue}`).remove();
+                    dom_el(`${this.displayArea} span.bw-sp-${this.selectedValue}`).remove();
                     if (dom_el(this.displayArea).innerText === '') {
                         unhide(`${this.rootElement} .placeholder`);
                         hide(this.displayArea);
@@ -142,10 +152,11 @@ class BladewindSelect {
             }
             stripComma(input);
             this.callUserFunction(item);
+            this.clearFilter(this.toFilter);
         }
     }
 
-    scrollers = () => {
+    scrollbars = () => {
         if (dom_el(this.displayArea).scrollWidth > dom_el(this.rootElement).clientWidth) {
             unhide(`${this.clickArea} .scroll-left`);
             unhide(`${this.clickArea} .scroll-right`);
@@ -165,9 +176,12 @@ class BladewindSelect {
 
     scroll = (amount) => {
         dom_el(this.displayArea).scrollBy(amount, 0);
-        ((dom_el(this.displayArea).clientWidth + dom_el(this.displayArea).scrollLeft) >=
-            dom_el(this.displayArea).scrollWidth) ? hide(`${this.clickArea} .scroll-right`) : unhide(`${this.clickArea} .scroll-right`);
-        (dom_el(this.displayArea).scrollLeft === 0) ? hide(`${this.clickArea} .scroll-left`) : unhide(`${this.clickArea} .scroll-left`);
+        ((dom_el(this.displayArea).clientWidth + dom_el(this.displayArea).scrollLeft) >= dom_el(this.displayArea).scrollWidth) ?
+            hide(`${this.clickArea} .scroll-right`) :
+            unhide(`${this.clickArea} .scroll-right`);
+        (dom_el(this.displayArea).scrollLeft === 0) ?
+            hide(`${this.clickArea} .scroll-left`) :
+            unhide(`${this.clickArea} .scroll-left`);
     }
 
     labelTemplate = (label, value) => {
@@ -242,5 +256,29 @@ class BladewindSelect {
         return ((this.maxSelection !== -1) && total_selected === this.maxSelection);
     }
 
+    filter = (element, by = '') => {
+        this.toFilter = element;
+        if (by !== '') { //this.selectedValue
+            dom_els(`.bw-select-${element}  .bw-select-items .bw-select-item`).forEach((el) => {
+                const filter_value = el.getAttribute('data-filter-value');
+                (filter_value === by) ? unhide(el, true) : hide(el, true);
+            });
+        }
+    }
 
+    clearFilter = (element, by = '') => {
+        if (element) {
+            const element_items = `.bw-select-${element}  .bw-select-items .bw-select-item`;
+            if (by === '') { // clear all filters
+                dom_els(element_items).forEach((el) => {
+                    unhide(el, true);
+                });
+            } else { // clear specific values' filters
+                dom_els(element_items).forEach((el) => {
+                    const filter_value = el.getAttribute('data-filter-value');
+                    (filter_value === this.selectedValue) ? hide(el, true) : unhide(el, true);
+                });
+            }
+        }
+    }
 }

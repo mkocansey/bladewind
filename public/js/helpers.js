@@ -24,7 +24,6 @@ validateForm = (form) => {
     let BreakException = {};
     try {
         dom_els(`${form} .required`).forEach((el) => {
-            // el.classList.remove('!border-error-400');
             changeCss(el, '!border-error-400', 'remove', true);
             if (el.value === '') {
                 let el_name = el.getAttribute('name');
@@ -32,10 +31,10 @@ validateForm = (form) => {
                 let error_message = el.getAttribute('data-error-message');
                 let show_error_inline = el.getAttribute('data-error-inline');
                 let error_heading = el.getAttribute('data-error-heading');
-                // el.classList.add('!border-error-400');
-                // this will highlight select fields whose hidden inputs are required but empty
-                // (el_parent !== null) ? dom_el(`.${el_parent} .clickable`).classList.add('!border-error-400') : el.classList.add('!border-error-400');
-                (el_parent !== null) ? changeCss(dom_el(`.${el_parent} .clickable`), '!border-error-400') : changeCss(el, '!border-error-400', 'add', true);
+                
+                (el_parent !== null) ?
+                    changeCss(`.${el_parent} .clickable`, '!border-error-400') :
+                    changeCss(el, '!border-error-400', 'add', true);
                 el.focus();
                 if (error_message) {
                     (show_error_inline) ? unhide(`.${el_name}-inline-error`) :
@@ -147,6 +146,8 @@ changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
 
 showModal = (element) => {
     unhide(`.bw-${element}-modal`);
+    document.body.classList.add('overflow-hidden');
+    dom_el(`.bw-${element}-modal`).focus();
     let current_index = (current_modal.length === 0) ? 0 : current_modal.length + 1;
     animateCSS(`.bw-${element}`, 'zoomIn').then(() => {
         current_modal[current_index] = element;
@@ -157,6 +158,8 @@ hideModal = (element) => {
     animateCSS(`.bw-${element}`, 'zoomOut').then(() => {
         hide(`.bw-${element}-modal`);
         current_modal.pop();
+        document.body.classList.remove('overflow-hidden');
+        dom_el(`.bw-${element}-modal`).removeEventListener('keydown', trapFocusInModal);
     });
 }
 
@@ -369,5 +372,23 @@ compareDates = (el1, el2, message, inline) => {
             }
         }
     }, 100);
+}
 
+
+trapFocusInModal = (event) => {
+    let modal_name = current_modal[(current_modal.length - 1)];
+    if (modal_name !== undefined) {
+        const focusableElements = dom_els(`.bw-${modal_name}-modal input:not([type='hidden']):not([class*='hidden']), .bw-${modal_name}-modal button:not([class*="hidden"]),  .bw-${modal_name}-modal a:not([class*="hidden"])`);
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        if (event.key === 'Tab') {
+            if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        }
+    }
 }

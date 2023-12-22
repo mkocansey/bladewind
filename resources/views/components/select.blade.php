@@ -5,50 +5,61 @@
     // the default text to display when the select shows
     'placeholder' => 'Select One',
 
-    // optional function to execute when a select item is selected
-    // by default the value of a select item is written to an input field with the
-    // name dd_name. Where name is the name you provided for the select
-    // if you named your select countries for example, whatever country is selected can
-    // be found in the <input type="hidden" clas="input-countries" name="dd_countries" />
+    /**
+     * Optional function to execute when a select item is selected.
+     * By default, the value of a select item is written to an input field with the name dd_name.
+     * Where name is the name you provided for the select. If you named your select <countries> for example,
+     * whatever country is selected can be found in the <input type="hidden" clas="input-countries" name="dd_countries" />
+     */
     'onselect' => '',
 
-    // data to pass to the select
-    // your data must be a json string (not object) with the keys value and label
-    // value is whatever value will be passed to your code when an item is selected
-    // label is what will be displayed to the user
-    // if you want to display icons for each item your json can contain the optional 'icon' key
-    // where icons are required, they must be in the semantic UI icon format
-    // [{"label":"Burkina Faso","icon":"bf flag","value":"+226"},{"label":"Ghana","icon":"gh flag","value":"+233"},{"label":"Ivory Coast","icon":"ivc flag","value":"+228"}]
+    /**
+    * Data to pass to the select.
+    * Your data must be a json string (not object) with the keys <value> and <label>
+    * <value> is whatever value will be passed to your code when an item is selected
+    * <label> is what will be displayed to the user
+    * If you want to display icons for each item your json can contain the optional 'icon' key.
+    * Where icons are required, they must be in the semantic UI icon format
+    * [{"label":"Burkina Faso","icon":"bf flag","value":"+226"},{"label":"Ghana","icon":"gh flag","value":"+233"},{"label":"Ivory Coast","icon":"ivc flag","value":"+228"}]
+ * */
     'data' => [],
 
-    // what key in your data array should be used to populate 'value' of the select when an item is selected
-    // by default a key of 'value' is used. If your data is something like [ {"id":"1","name":"Burkina Faso"}]
-    // your value_key will be 'id'
+    /**
+     * What key in your data array should be used to populate 'value' of the select when an item is selected
+     * By default, a key of 'value' is used. If your data is something like
+     *  [ {"id": 1,"name": "Burkina Faso"} ], your value_key will be 'id'
+    */
     'value_key' => 'value',
     'valueKey' => 'value',
 
-    // what key in your data array should be used to display the labels the user will see as select items
-    // the default key used for labels is 'label'. If your data is something like [ {"id":"1","name":"Burkina Faso"}]
-    // your label_key will be 'name'
+    /**
+     * What key in your data array should be used to display the labels the user will see as select items
+     * The default key used for labels is 'label'. If your data is something like
+     * [ {"id": 1,"name": "Burkina Faso"} ] your label_key will be 'name'
+    */
     'label_key' => 'label',
     'labelKey' => 'label',
 
-    // what key in your data array should be used to display flag icons next to the labels
-    // [ {"id":"1","name":"Burkina Faso", "flag":"/assets/images/bf-flag.png"}]
-    // your flag_key will be 'image'
+    /**
+     * What key in your data array should be used to display flag icons next to the labels
+     * [ {"id": 1, "name": "Burkina Faso", "flag": "/assets/images/bf-flag.png"} ] your flag_key will be 'flag'
+     */
     'flag_key' => null,
     'flagKey' => null,
 
-    // what key in your data array should be used to display images next to the labels
-    // the default key used for images is '', meaning images will be ignored. If your data is something like
-    // [ {"id":"1","name":"Burkina Faso", "image":"/assets/images/bf-flag.png"}]
-    // your image_key will be 'image'
+    /**
+     * What key in your data array should be used to display images next to the labels
+     * The default key used for images is '', meaning images will be ignored. If your data is something like
+     * [ {"id":"1","name":"Burkina Faso", "image":"/assets/images/bf-flag.png"}] your image_key will be 'image'
+    */
     'image_key' => null,
     'imageKey' => null,
 
-    // there are instances when you want the name passed by the select when you submit a form to be
-    // different from the name you gave the select. Example. you may name the select as country but
-    // want it to submit data as country_id.
+    /**
+     * There are instances when you want the name passed during form submission to be
+     * different from the name you gave the component. Example. you may name the select as country but
+     * want the data to be submitted as country_id.
+    */
     'data_serialize_as' => '',
     'dataSerializeAs' => '',
 
@@ -65,10 +76,12 @@
     'add_clearing' => true,
     'addClearing' => true,
 
-    // determines if a value passed in the data array should automatically be selected
-    // useful when using the component in edit mode or as part of filter options
-    // the value you specify should exist in your value_key. If your value_key is 'id', you
-    // cannot set a selected_value of 'maize white'
+    /**
+     * Determines if a value passed in the data array should automatically be selected
+     * Helpful when using the component in edit mode or as part of filter options
+     * The value you specify should exist in your value_key. If your value_key is 'id', you
+     * cannot set a selected_value of 'Burkina Faso'
+    */
     'selected_value' => '',
     'selectedValue' => '',
 
@@ -84,9 +97,12 @@
     'max_error_message' => 'Please select only %s items',
     'maxErrorMessage' => 'Please select only %s items',
 
+    'filter' => '',
+
+    'filter_by' => '',
+
 ])
 @php
-    //$multiple = filter_var($multiple, FILTER_VALIDATE_BOOLEAN);
     $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
     $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
     $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
@@ -108,6 +124,7 @@
     if($max_error_message == '') $max_error_message = 'Please select only %s items';
 
     $input_name = preg_replace('/[\s-]/', '_', $name);
+    $filter = preg_replace('/[\s-]/', '_', $filter);
     $selected_value = ($selected_value != '') ? explode(',', str_replace(', ', ',', $selected_value)) : [];
 
     if ($data !== 'manual') {
@@ -124,7 +141,6 @@
                 &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>');
         }
     }
-
 @endphp
 <style>
     .display-area::-webkit-scrollbar {
@@ -140,6 +156,7 @@
 </style>
 <div class="relative bw-select bw-select-{{$input_name}} @if($add_clearing) mb-3 @endif"
      data-multiple="{{$multiple}}" data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
+     @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
     <div class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
         dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 py-3.5 pl-4 pr-2 clickable
@@ -153,7 +170,7 @@
         </div>
         <div class="text-left grow display-area hidden whitespace-nowrap overflow-x-scroll p-0 m-0"></div>
         <div class="whitespace-nowrap inline-flex">
-            <x-bladewind::icon name="chevron-right" class="scroll-right !-mr-1 hidden"/>
+            <x-bladewind::icon name="chevron-right" class="scroll-right !-mr-2 !mt-0.5 !w-5 !h-5 hidden"/>
             <x-bladewind::icon name="x-circle" type="solid"
                                class="reset w-6 h-6 fill-slate-300 hover:fill-slate-500 text-white dark:!text-dark-200 hidden dark:!fill-dark-700 dark:hover:!fill-dark-900"/>
             <x-bladewind::icon name="chevron-up-down" class="opacity-40 !ml-2"/>
@@ -164,7 +181,7 @@
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
         <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-slate-700 py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
             <x-bladewind::input
-                    class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_filter"
+                    class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_search"
                     add_clearing="false"
                     placeholder="Type here..."
                     suffix="magnifying-glass"
@@ -176,6 +193,7 @@
                     <x-bladewind::select-item
                             label="{{ $item[$label_key] }}"
                             value="{{ $item[$value_key] }}"
+                            filter_by="{{ ($filter_by != '') ? $item[$filter_by] : '' }}"
                             onselect="{{ $onselect }}"
                             flag="{{ $item[$flag_key] ?? '' }}"
                             image="{{ $item[$image_key] ?? '' }}"
@@ -195,5 +213,6 @@
     @php include_once('vendor/bladewind/js/select.js'); @endphp
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     @if(!$disabled && !$readonly) bw_{{ $input_name }}.activate();
-    bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}'); @endif
+    bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');
+    @endif @if(!empty($filter)) bw_{{ $input_name }}.filter('{{ $filter }}');@endif
 </script>
