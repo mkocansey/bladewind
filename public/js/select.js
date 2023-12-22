@@ -261,7 +261,7 @@ class BladewindSelect {
         if (by !== '') { //this.selectedValue
             dom_els(`.bw-select-${element}  .bw-select-items .bw-select-item`).forEach((el) => {
                 const filter_value = el.getAttribute('data-filter-value');
-                (filter_value !== by) ? hide(el, true) : unhide(el, true);
+                (filter_value === by) ? unhide(el, true) : hide(el, true);
             });
         }
     }
