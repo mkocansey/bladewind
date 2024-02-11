@@ -38,7 +38,7 @@ dom_els(`.${el_name} .dropdown-items>div.dd-item`).forEach((el) => {
     });
 });
 
-selectSelectedValues = () => {
+var selectSelectedValues = () => {
     if(dom_els('div[data-selected="true"]')) {
         dom_els('div[data-selected="true"]').forEach((el) => {
             el.click();
@@ -46,7 +46,7 @@ selectSelectedValues = () => {
     }
 }
 
-searchDropdown = (value, parent) => {
+var searchDropdown = (value, parent) => {
     dom_els(`.${parent} .dropdown-items>div.dd-item`).forEach((el) => {
         let text = el.innerText.toLowerCase();
         if(text.indexOf(value.toLowerCase()) !== -1) {
