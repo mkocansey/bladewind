@@ -5,21 +5,21 @@
 const current_modal = [];
 let el_name;
 
-domEl = (element) => {
+var domEl = (element) => {
     return dom_el(element);
 }
-dom_el = (element) => {
+var dom_el = (element) => {
     return (document.querySelector(element) != null) ? document.querySelector(element) : false;
 }
 
-domEls = (element) => {
+var domEls = (element) => {
     return dom_els(element);
 }
-dom_els = (element) => {
+var dom_els = (element) => {
     return (document.querySelectorAll(element).length > 0) ? document.querySelectorAll(element) : false;
 }
 
-validateForm = (form) => {
+var validateForm = (form) => {
     let has_error = 0;
     let BreakException = {};
     try {
@@ -58,7 +58,7 @@ validateForm = (form) => {
     return has_error === 0;
 }
 
-clearErrors = (obj) => {
+var clearErrors = (obj) => {
     let el = obj.el;
     let el_parent = obj.el_parent;
     let el_name = obj.el_name;
@@ -77,18 +77,18 @@ clearErrors = (obj) => {
 }
 
 // usage:  onkeypress="return isNumberKey(event)"
-isNumberKey = (event, with_dots = 1) => {
+var isNumberKey = (event, with_dots = 1) => {
     let accepted_keys = (with_dots === 1) ? /[\d\b\\.]/ : /\d\b/;
     if (!event.key.toString().match(accepted_keys) && event.keyCode !== 8 && event.keyCode !== 9) {
         event.preventDefault();
     }
 }
 
-callUserFunction = (func) => {
+var callUserFunction = (func) => {
     if (func !== '' && func !== undefined) eval(func);
 };
 
-serialize = (form) => {
+var serialize = (form) => {
     let data = new FormData(dom_el(form));
     let obj = {};
     for (let [key, value] of data) {
@@ -107,15 +107,15 @@ serialize = (form) => {
     return obj;
 }
 
-stringContains = (str, keyword) => {
+var stringContains = (str, keyword) => {
     if (typeof (str) !== 'string') return false;
     return (str.indexOf(keyword) !== -1);
 }
 
-doNothing = () => {
+var doNothing = () => {
 }
 
-changeCssForDomArray = (elements, css, mode = 'add') => {
+var changeCssForDomArray = (elements, css, mode = 'add') => {
     if (dom_els(elements).length > 0) {
         dom_els(elements).forEach((el) => {
             changeCss(el, css, mode, true);
@@ -123,7 +123,7 @@ changeCssForDomArray = (elements, css, mode = 'add') => {
     }
 }
 
-changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
+var changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
     // css can be comma separated
     // if elementIsDomObject don't run it through dom_el
     if ((!elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)) {
@@ -144,7 +144,7 @@ changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
     }
 }
 
-showModal = (element) => {
+var showModal = (element) => {
     unhide(`.bw-${element}-modal`);
     document.body.classList.add('overflow-hidden');
     dom_el(`.bw-${element}-modal`).focus();
@@ -154,7 +154,7 @@ showModal = (element) => {
     });
 }
 
-hideModal = (element) => {
+var hideModal = (element) => {
     animateCSS(`.bw-${element}`, 'zoomOut').then(() => {
         hide(`.bw-${element}-modal`);
         current_modal.pop();
@@ -163,35 +163,35 @@ hideModal = (element) => {
     });
 }
 
-showButtonSpinner = (element) => {
+var showButtonSpinner = (element) => {
     unhide(`${element} .bw-spinner`);
 }
 
-hideButtonSpinner = (element) => {
+var hideButtonSpinner = (element) => {
     hide(`${element} .bw-spinner`);
 }
 
-showModalActionButtons = (element) => {
+var showModalActionButtons = (element) => {
     unhide(`.bw-${element} .modal-footer`);
 }
 
-hideModalActionButtons = (element) => {
+var hideModalActionButtons = (element) => {
     hide(`.bw-${element} .modal-footer`);
 }
 
-hide = (element, elementIsDomObject = false) => {
+var hide = (element, elementIsDomObject = false) => {
     if ((!elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)) {
         changeCss(element, 'hidden', 'add', elementIsDomObject);
     }
 }
 
-unhide = (element, elementIsDomObject = false) => {
+var unhide = (element, elementIsDomObject = false) => {
     if ((!elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)) {
         changeCss(element, 'hidden', 'remove', elementIsDomObject);
     }
 }
 
-animateCSS = (element, animation) =>
+var animateCSS = (element, animation) =>
     new Promise((resolve, reject) => {
         const animationName = `animate__${animation}`;
         const node = document.querySelector(element);
@@ -208,28 +208,28 @@ animateCSS = (element, animation) =>
         node.addEventListener('animationend', handleAnimationEnd, {once: true});
     });
 
-addToStorage = (key, val, storageType = 'localStorage') => {
+var addToStorage = (key, val, storageType = 'localStorage') => {
     if (window.localStorage || window.sessionStorage) {
         (storageType === 'localStorage') ?
             localStorage.setItem(key, val) : sessionStorage.setItem(key, val);
     }
 }
 
-getFromStorage = (key, storageType = 'localStorage') => {
+var getFromStorage = (key, storageType = 'localStorage') => {
     if (window.localStorage || window.sessionStorage) {
         return (storageType === 'localStorage') ?
             localStorage.getItem(key) : sessionStorage.getItem(key);
     }
 }
 
-removeFromStorage = (key, storageType = 'localStorage') => {
+var removeFromStorage = (key, storageType = 'localStorage') => {
     if (window.localStorage || window.sessionStorage) {
         (storageType === 'localStorage') ?
             localStorage.removeItem(key) : sessionStorage.removeItem(key);
     }
 }
 
-goToTab = (el, color, context) => {
+var goToTab = (el, color, context) => {
     let context_ = context.replace(/-/g, '_');
     let tab_content = dom_el('.bw-tc-' + el);
     if (tab_content === null) {
@@ -256,7 +256,7 @@ goToTab = (el, color, context) => {
     unhide(tab_content, true);
 }
 
-positionPrefix = (el, mode = 'blur') => {
+var positionPrefix = (el, mode = 'blur') => {
     let transparency = dom_el(`.dv-${el} .prefix`).getAttribute('data-transparency');
     let offset = (transparency === '1') ? -5 : 7;
     let prefix_width = ((dom_el(`.dv-${el} .prefix`).offsetWidth) + offset) * 1;
@@ -284,14 +284,14 @@ positionPrefix = (el, mode = 'blur') => {
     }
 }
 
-positionSuffix = (el) => {
+var positionSuffix = (el) => {
     let transparency = dom_el(`.dv-${el} .suffix`).getAttribute('data-transparency');
     let offset = (transparency === '1') ? -5 : 7;
     let suffix_width = ((dom_el(`.dv-${el} .suffix`).offsetWidth) + offset) * 1;
     dom_el(`input.${el}`).style.paddingRight = `${suffix_width}px`;
 }
 
-togglePassword = (el, mode) => {
+var togglePassword = (el, mode) => {
     let input_field = dom_el(`input.${el}`);
     if (mode === 'show') {
         input_field.setAttribute('type', 'text');
@@ -304,14 +304,14 @@ togglePassword = (el, mode) => {
     }
 }
 
-filterTable = (keyword, table) => {
+var filterTable = (keyword, table) => {
     domEls(`${table} tbody tr`).forEach((tr) => {
         (tr.innerText.toLowerCase().includes(keyword.toLowerCase())) ?
             unhide(tr, true) : hide(tr, true);
     });
 }
 
-selectTag = (value, name) => {
+var selectTag = (value, name) => {
     let input = domEl(`input[name="${name}"]`);
     let max_selection = input.getAttribute('data-max-selection');
     let tag = domEl(`.bw-${name}-${value}`);
@@ -338,13 +338,13 @@ selectTag = (value, name) => {
     stripComma(input)
 }
 
-stripComma = (el) => {
+var stripComma = (el) => {
     if (el.value.startsWith(',')) {
         el.value = el.value.replace(/^,/, '');
     }
 }
 
-highlightSelectedTags = (values, name) => {
+var highlightSelectedTags = (values, name) => {
     if (values !== '') {
         let values_array = values.split(',');
         for (let x = 0; x < values_array.length; x++) {
@@ -353,7 +353,7 @@ highlightSelectedTags = (values, name) => {
     }
 }
 
-compareDates = (el1, el2, message, inline) => {
+var compareDates = (el1, el2, message, inline) => {
     let date1_el = dom_el(`.${el1}`);
     let date2_el = dom_el(`.${el2}`);
 
@@ -375,7 +375,7 @@ compareDates = (el1, el2, message, inline) => {
 }
 
 
-trapFocusInModal = (event) => {
+var trapFocusInModal = (event) => {
     let modal_name = current_modal[(current_modal.length - 1)];
     if (modal_name !== undefined) {
         const focusableElements = dom_els(`.bw-${modal_name}-modal input:not([type='hidden']):not([class*='hidden']), .bw-${modal_name}-modal button:not([class*="hidden"]),  .bw-${modal_name}-modal a:not([class*="hidden"])`);
