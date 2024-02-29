@@ -1,53 +1,74 @@
 @layer components {
     .bw-table.divided tr {
-        @apply  border-t border-gray-200 border-b-8 border-b-gray-200/40 dark:border-b-slate-800/40
+        @apply border-t border-gray-200 border-b-8 border-b-gray-200/40 dark:border-b-dark-800/40
     }
+
     .bw-table.divided.thin tr {
-        @apply border-b border-t border-gray-200 border-b-gray-200/60 dark:border-b-slate-800 dark:border-t-slate-900
+        @apply border-b border-t border-gray-200 border-b-gray-200/60 dark:border-b-dark-800 dark:border-t-dark-900
     }
-    .bw-table.striped tr:nth-child(even)>td, .bw-table.striped tr:nth-child(even):hover>td{
-        @apply bg-gray-50 dark:bg-slate-900/60
+
+    .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
+        @apply bg-gray-50 dark:bg-dark-900/40
     }
-    .bw-table thead>tr>th {
+
+    .bw-table thead > tr > th {
         @apply
-        bg-white dark:bg-slate-800
-        text-black/80 dark:text-slate-400
+        bg-white dark:bg-dark-800
+        text-black/80 dark:text-dark-400
         text-left
         text-xs
         uppercase
         font-semibold
         tracking-widest
         px-5 py-4
-        border-t border-gray-200/20 dark:border-slate-800
+        border-t border-gray-200/20 dark:border-dark-800
     }
-    .bw-table.compact thead>tr>th {
+
+    .bw-table-filter-bar {
+        @apply bg-slate-100 p-2 dark:bg-dark-900
+    }
+
+    .bw-table-filter-bar input {
+        @apply dark:border-0 dark:bg-transparent dark:focus:outline-0 dark:focus:border-0
+    }
+
+    .bw-table.compact thead > tr > th {
         @apply !py-2
     }
-    .bw-table tr>td {
-        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-slate-400 dark:bg-slate-900
+
+    .bw-table tr > td {
+        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-dark-400 dark:bg-dark-900/60
     }
-    .bw-table.compact tr>td {
-        @apply !py-2 /*!leading-6*/
+
+    .bw-table.compact tr > td {
+        @apply !py-2
     }
+
     .bw-table td.double-underline {
-        @apply border-b-4 border-double border-black dark:border-slate-700 border-separate
+        @apply border-b-4 border-double border-black dark:border-dark-700 border-separate
     }
-    table.with-hover-effect tr>td:first-child {
+
+    table.with-hover-effect tr > td:first-child {
         @apply border-l-2 border-l-white dark:border-l-transparent
     }
-    table.with-hover-effect tr:hover>td:first-child {
-        @apply border-l-2 border-l-green-300 dark:border-l-slate-700
+
+    table.with-hover-effect tr:hover > td:first-child {
+        @apply border-l-2 border-l-green-300 dark:border-l-dark-700
     }
-    table.with-hover-effect tr>td:last-child {
+
+    table.with-hover-effect tr > td:last-child {
         @apply border-r-2 border-r-white dark:border-r-transparent
     }
-    table.with-hover-effect tr:hover>td:last-child {
-        @apply border-r-2 border-r-green-300 dark:border-r-slate-700
+
+    table.with-hover-effect tr:hover > td:last-child {
+        @apply border-r-2 border-r-green-300 dark:border-r-dark-700
     }
-    table.with-hover-effect tr:nth-child(even):hover>td:first-child {
-        @apply border-l-2 border-l-green-300 dark:border-l-slate-700
+
+    table.with-hover-effect tr:nth-child(even):hover > td:first-child {
+        @apply border-l-2 border-l-green-300 dark:border-l-dark-700
     }
-    table.with-hover-effect tr:nth-child(even):hover>td:last-child {
-        @apply border-r-2 border-r-green-300 dark:border-r-slate-700
+
+    table.with-hover-effect tr:nth-child(even):hover > td:last-child {
+        @apply border-r-2 border-r-green-300 dark:border-r-dark-700
     }
 }

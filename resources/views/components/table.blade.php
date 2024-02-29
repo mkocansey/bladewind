@@ -88,25 +88,25 @@
 <div class="z-20"> {{--max-w-screen overflow-x-hidden md:w-full--}}
     <div class="w-full">
         @if($searchable)
-            <div class="bw-table-filter-bar bg-slate-100 p-2">
+            <div class="bw-table-filter-bar">
                 <x-bladewind::input name="bw-search-{{$name}}" placeholder="{{$search_placeholder}}"
                                     onkeyup="filterTable(this.value, 'table.{{$name}}')"
                                     prefix_is_icon="true" add_clearing="false" class="!mb-0 focus:!border-slate-300"
                                     prefix="magnifying-glass"/>
             </div>
         @endif
-        <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-slate-900 @endif
+        <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-dark-900 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif
             @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif">
             @if(empty($data))
                 <thead>
-                <tr class="bg-gray-200 dark:bg-slate-800">{{ $header }}</tr>
+                <tr class="bg-gray-200 dark:bg-dark-800">{{ $header }}</tr>
                 </thead>
                 <tbody>{{ $slot }}</tbody>
             @else
                 @if($total_records > 0)
                     <thead>
-                    <tr class="bg-gray-200 dark:bg-slate-800">
+                    <tr class="bg-gray-200 dark:bg-dark-800">
                         @foreach($table_headings as $heading)
                             <th>{{ str_replace('_',' ', $column_aliases[$heading] ?? $heading ) }}</th>
                         @endforeach
