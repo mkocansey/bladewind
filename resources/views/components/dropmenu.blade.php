@@ -1,24 +1,53 @@
-@props([ 'trigger' => '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>', ])
-@once
-<style>
-    .bw-dropmenu:focus-within .bw-dropmenu-items {
-        opacity:1;
-        transform: translate(0) scale(1);
-        visibility: visible;
-        display: block;
-        tabindex: 0;
+@props([
+    'trigger' => 'ellipsis-horizontal icon',
+    'trigger_css' => '',
+    'trigger_on' => 'click',
+    'name' => uniqid('bw-dropmenu-'),
+    'divided' => false,
+    'scrollable' => false,
+    'hide_after_click' => true,
+    'height' => 200,
+    'class' => '',
+    'position' => 'right'
+])
+@php
+    $name = preg_replace('/[\s-]/', '_', $name);
+    $height = !is_numeric($height) ? 200 : $height;
+    $trigger_on = (!in_array($trigger_on, ['click', 'mouseover'])) ? 'click' : $trigger_on;
+    $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
+    $scrollable = filter_var($scrollable, FILTER_VALIDATE_BOOLEAN);
+    $hide_after_click = filter_var($hide_after_click, FILTER_VALIDATE_BOOLEAN);
+
+    // TODO: Remove in 3.0.0 when Php < 8 support is dropped
+    if (!function_exists('str_ends_with')) {
+      function str_ends_with($str, $end): bool {
+        return (@substr_compare($str, $end, -strlen($end))==0);
+      }
     }
-</style>
-@endonce
-<div class="relative inline-block text-left bw-dropmenu !z-40" tabindex="0">
-    <button class="text-sm transition duration-150 ease-in-out z-10">
-        {!!$trigger!!}
-    </button>
-    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-dark-800 transition-all duration-300 transform origin-top-right -translate-y-2 scale-95 !z-50">
-        <div class="absolute right-0  mt-1 origin-top-right bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-900 divide-y divide-gray-100 dark:divide-dark-700 rounded-md shadow-lg outline-none">
+@endphp
+<div class="relative inline-block text-left bw-dropmenu !z-40 {{$name}}" tabindex="0">
+    <div class="bw-trigger cursor-pointer inline-block">
+        @if(str_ends_with($trigger, 'icon'))
+            <x-bladewind::icon name="{{ trim(str_replace('icon','', $trigger)) }}"
+                               class="h-6 w-6 text-gray-500 transition duration-150 ease-in-out z-10 {{$trigger_css}}"/>
+        @else
+            {!!$trigger!!}
+        @endif
+    </div>
+    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-dark-800 !z-50 animate__animated animate__fadeIn animate__faster"
+         data-open="0">
+        <div class="absolute @if($position=='right') -right-1  @endif mt-2 bg-white dark:bg-dark-800 rounded-lg {{$class}}
+            shadow-md py-2 border border-slate-100/80 bw-items-list @if($divided) divide-y divide-slate-100 @endif"
+             @if($scrollable) style="height: {{$height}}px; overflow-y: scroll" @endif>
             {{$slot}}
         </div>
     </div>
 </div>
+
+<script>
+    @php include_once('vendor/bladewind/js/dropmenu.js'); @endphp
+    const {{ $name }} = new BladewindDropmenu('{{ $name }}', {
+        triggerOn: '{{$trigger_on}}',
+        hideAfterClick: '{{$hide_after_click}}'
+    });
+</script>
