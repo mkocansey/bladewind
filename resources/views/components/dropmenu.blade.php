@@ -1,14 +1,14 @@
 @props([
-    'trigger' => 'ellipsis-horizontal icon',
+    'name' => uniqid('bw-dropmenu-'),
+    'trigger' => 'ellipsis-horizontal-icon',
     'trigger_css' => '',
     'trigger_on' => 'click',
-    'name' => uniqid('bw-dropmenu-'),
     'divided' => false,
     'scrollable' => false,
-    'hide_after_click' => true,
     'height' => 200,
+    'hide_after_click' => true,
+    'position' => 'right',
     'class' => '',
-    'position' => 'right'
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -27,8 +27,8 @@
 @endphp
 <div class="relative inline-block text-left bw-dropmenu !z-40 {{$name}}" tabindex="0">
     <div class="bw-trigger cursor-pointer inline-block">
-        @if(str_ends_with($trigger, 'icon'))
-            <x-bladewind::icon name="{{ trim(str_replace('icon','', $trigger)) }}"
+        @if(str_ends_with($trigger, '-icon'))
+            <x-bladewind::icon name="{{ trim(str_replace('-icon','', $trigger)) }}"
                                class="h-6 w-6 text-gray-500 transition duration-150 ease-in-out z-10 {{$trigger_css}}"/>
         @else
             {!!$trigger!!}
