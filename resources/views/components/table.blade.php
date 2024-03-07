@@ -26,6 +26,7 @@
     'column_aliases' => [],
     'searchable' => false,
     'search_placeholder' => 'Search table below...',
+    'uppercasing' => true,
 
 ])
 @php
@@ -38,6 +39,7 @@
     $compact = filter_var($compact, FILTER_VALIDATE_BOOLEAN);
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
     $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
+    $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
     $exclude_columns = !empty($exclude_columns) ? explode(',', str_replace(' ','', $exclude_columns)) : [];
@@ -97,7 +99,7 @@
         @endif
         <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-dark-900 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif
-            @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif">
+            @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif">
             @if(empty($data))
                 <thead>
                 <tr class="bg-gray-200 dark:bg-dark-800">{{ $header }}</tr>
