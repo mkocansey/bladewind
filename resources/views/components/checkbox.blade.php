@@ -17,6 +17,9 @@
     $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
     $label_css = (!empty($labelCss)) ? $labelCss : $label_css;
+    if(! in_array($color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
+        $color = 'primary';
+    }
     $text_color = ($color == 'black') ? 'text-black' : "text-{$color}-500";
     $ring_color = ($color == 'black') ? 'ring-black' : "ring-{$color}-500";
     $border_color = ($color == 'black') ? 'border-slate-500' : "border-{$color}-300";
@@ -25,7 +28,7 @@
     if (!$addClearing) $add_clearing = $addClearing;
 @endphp
 
-<div class="hidden border-red-300 border-yellow-300 border-pink-300 border-purple-300 border-cyan-300 border-orange-300 border-green-300 border-black border-blue-300"></div>
+<div class="hidden border-red-300 border-yellow-300 border-pink-300 border-purple-300 border-cyan-300 border-orange-300 border-green-300 border-black border-blue-300 border-indigo-300 border-violet-300 border-fuchsia-300"></div>
 <label class="inline-flex items-center cursor-pointer text-sm @if($disabled) opacity-60 @endif @if($add_clearing) mb-3 @endif {{ $label_css }}">
     <input
             type="{{ $type }}"

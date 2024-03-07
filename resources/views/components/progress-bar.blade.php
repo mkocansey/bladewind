@@ -21,6 +21,9 @@
             'purple' => 'bg-purple-300',
             'gray' => 'bg-slate-300',
             'pink' => 'bg-pink-300',
+            'violet' => 'bg-violet-300',
+            'indigo' => 'bg-indigo-300',
+            'fuchsia' => 'bg-fuchsia-300',
             'orange' => 'bg-orange-300',
         ],
         'dark' => [
@@ -33,6 +36,9 @@
             'purple' => 'bg-purple-500',
             'gray' => 'bg-slate-500',
             'pink' => 'bg-pink-500',
+            'violet' => 'bg-violet-500',
+            'indigo' => 'bg-indigo-500',
+            'fuchsia' => 'bg-fuchsia-500',
             'orange' => 'bg-orange-500',
 ]   ,
     ],
@@ -71,7 +77,7 @@
     //-----------------------------------------------------------------------
 
     if(! is_numeric($percentage_label_opacity*1)) $percentage_label_opacity = '100';
-    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange'])) ? 'primary' : $color;
+    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'violet', 'fuchsia', 'indigo'])) ? 'primary' : $color;
 @endphp
 
 <div class="bw-progress-bar {{$class}}">

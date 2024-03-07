@@ -845,6 +845,9 @@ to{transform:rotate(360deg);}}
 .\!border-fuchsia-600{--tw-border-opacity:1 !important;border-color:rgb(192 38 211 / var(--tw-border-opacity)) !important;}
 .\!border-indigo-600{--tw-border-opacity:1 !important;border-color:rgb(79 70 229 / var(--tw-border-opacity)) !important;}
 .\!border-violet-600{--tw-border-opacity:1 !important;border-color:rgb(124 58 237 / var(--tw-border-opacity)) !important;}
+.border-fuchsia-300{--tw-border-opacity:1;border-color:rgb(240 171 252 / var(--tw-border-opacity));}
+.border-indigo-300{--tw-border-opacity:1;border-color:rgb(165 180 252 / var(--tw-border-opacity));}
+.border-violet-300{--tw-border-opacity:1;border-color:rgb(196 181 253 / var(--tw-border-opacity));}
 .\!border-b-white{--tw-border-opacity:1 !important;border-bottom-color:rgb(255 255 255 / var(--tw-border-opacity)) !important;}
 .\!border-t-slate-200\/75{border-top-color:rgb(226 232 240 / 0.75) !important;}
 .border-b-slate-200\/75{border-bottom-color:rgb(226 232 240 / 0.75);}
@@ -921,6 +924,12 @@ to{transform:rotate(360deg);}}
 .\!bg-indigo-600{--tw-bg-opacity:1 !important;background-color:rgb(79 70 229 / var(--tw-bg-opacity)) !important;}
 .\!bg-fuchsia-600{--tw-bg-opacity:1 !important;background-color:rgb(192 38 211 / var(--tw-bg-opacity)) !important;}
 .\!bg-violet-600{--tw-bg-opacity:1 !important;background-color:rgb(124 58 237 / var(--tw-bg-opacity)) !important;}
+.bg-fuchsia-500{--tw-bg-opacity:1;background-color:rgb(217 70 239 / var(--tw-bg-opacity));}
+.bg-indigo-500{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity));}
+.bg-violet-500{--tw-bg-opacity:1;background-color:rgb(139 92 246 / var(--tw-bg-opacity));}
+.bg-fuchsia-300{--tw-bg-opacity:1;background-color:rgb(240 171 252 / var(--tw-bg-opacity));}
+.bg-indigo-300{--tw-bg-opacity:1;background-color:rgb(165 180 252 / var(--tw-bg-opacity));}
+.bg-violet-300{--tw-bg-opacity:1;background-color:rgb(196 181 253 / var(--tw-bg-opacity));}
 .bg-opacity-75{--tw-bg-opacity:0.75;}
 .fill-slate-300{fill:#cbd5e1;}
 .fill-slate-400{fill:#94a3b8;}
@@ -1117,6 +1126,9 @@ to{transform:rotate(360deg);}}
 .ring-red-500{--tw-ring-opacity:1;--tw-ring-color:rgb(239 68 68 / var(--tw-ring-opacity));}
 .ring-white{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255 / var(--tw-ring-opacity));}
 .ring-yellow-500{--tw-ring-opacity:1;--tw-ring-color:rgb(234 179 8 / var(--tw-ring-opacity));}
+.ring-fuchsia-500{--tw-ring-opacity:1;--tw-ring-color:rgb(217 70 239 / var(--tw-ring-opacity));}
+.ring-indigo-500{--tw-ring-opacity:1;--tw-ring-color:rgb(99 102 241 / var(--tw-ring-opacity));}
+.ring-violet-500{--tw-ring-opacity:1;--tw-ring-color:rgb(139 92 246 / var(--tw-ring-opacity));}
 .ring-offset-1{--tw-ring-offset-width:1px;}
 .ring-offset-2{--tw-ring-offset-width:2px;}
 .blur{--tw-blur:blur(8px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}
