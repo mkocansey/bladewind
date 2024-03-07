@@ -25,7 +25,7 @@
       }
     }
 @endphp
-<div class="relative inline-block text-left bw-dropmenu !z-40 {{$name}}" tabindex="0">
+<div class="relative inline-block text-left bw-dropmenu !z-20 {{$name}}" tabindex="0">
     <div class="bw-trigger cursor-pointer inline-block">
         @if(str_ends_with($trigger, '-icon'))
             <x-bladewind::icon name="{{ trim(str_replace('-icon','', $trigger)) }}"
@@ -34,7 +34,7 @@
             {!!$trigger!!}
         @endif
     </div>
-    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-dark-800 !z-50 animate__animated animate__fadeIn animate__faster"
+    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-dark-800 !z-20 animate__animated animate__fadeIn animate__faster"
          data-open="0">
         <div class="absolute @if($position=='right') -right-1  @endif mt-2 bg-white dark:bg-dark-800 rounded-lg {{$class}}
             shadow-md py-2 border border-slate-100/80 bw-items-list @if($divided) divide-y divide-slate-100 @endif"
