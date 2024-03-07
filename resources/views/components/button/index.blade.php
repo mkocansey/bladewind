@@ -59,6 +59,9 @@
     // is this a circular button
     'circular' => false,
 
+    // display button text as uppercase or as user entered
+    'uppercasing' => true,
+
     // css fpr various radii
     'roundness'     => [
         'none'      => 'rounded-none',
@@ -117,6 +120,7 @@
     $can_submit = filter_var($can_submit, FILTER_VALIDATE_BOOLEAN);
     $canSubmit = filter_var($canSubmit, FILTER_VALIDATE_BOOLEAN);
     $outline = filter_var($outline, FILTER_VALIDATE_BOOLEAN);
+    $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
     $show_focus_ring = filter_var($show_focus_ring, FILTER_VALIDATE_BOOLEAN);
     $showFocusRing = filter_var($showFocusRing, FILTER_VALIDATE_BOOLEAN);
 
@@ -139,7 +143,7 @@
     $disabled_css = $disabled ? 'disabled' : 'cursor-pointer';
     $outline_css = ($outline && $type == 'secondary') ? 'outlined '.$border_width : '';
     $tag = ($tag !== 'a' && $tag !== 'button') ? 'button' : $tag;
-    $base_button_css = ($circular) ? 'bw-button-circle' : 'bw-button';
+    $base_button_css = ($circular) ? 'bw-button-circle' : 'bw-button '.(($uppercasing) ? 'uppercase ' : '');
     $merged_attributes = $attributes->merge(['class' => "$base_button_css $size $type $name $primary_colour_css $disabled_css $radius_css $outline_css"]);
     $icon_css = ($circular) ? $icon_size[$size] : ((!$icon_right) ? 'h-5 w-5 !-ml-2 rtl:!-mr-2 !mr-2 rtl:!ml-2 dark:text-white/80' : 'h-5 w-5 !-mr-2 rtl:!-ml-2 !ml-2 rtl:!mr-2 dark:text-white/80');
 @endphp

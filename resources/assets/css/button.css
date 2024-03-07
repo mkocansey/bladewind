@@ -1,6 +1,6 @@
 @layer components {
     .bw-button {
-        @apply py-5 px-7 focus:outline-none focus:ring text-xs uppercase tracking-widest rtl:inline-flex rtl:items-center
+        @apply py-5 px-7 focus:outline-none focus:ring text-xs tracking-widest rtl:inline-flex rtl:items-center
     }
 
     .bw-button.big {
