@@ -31,8 +31,8 @@
     // available options are a, button
     'tag' => 'button',
 
-    // red, yellow, green, blue, purple, orange, cyan, black
-    'color' => 'primary',
+    // primary, secondary, red, yellow, green, blue, purple, orange, cyan, black
+    'color' => '',
 
     // overwrite the button text color
     'button_text_css' => '',
@@ -61,6 +61,7 @@
     // css for the various colours
     'colours'       => [
         'primary'   => '!bg-primary-500 focus:ring-primary-500/70 hover:!bg-primary-700 active:!bg-primary-700 %s',
+        'secondary' => '!bg-secondary-500 focus:ring-secondary-500/70 hover:!bg-secondary-700 active:!bg-secondary-700 %s',
         'red'       => '!bg-red-500 focus:ring-red-500 hover:!bg-red-700 active:!bg-red-700 %s',
         'yellow'    => '!bg-yellow-500 focus:ring-yellow-500 hover:!bg-yellow-700 active:!bg-yellow-700 %s',
         'green'     => '!bg-green-500 focus:ring-green-500 hover:!bg-green-700 active:!bg-green-700 %s',
@@ -88,13 +89,14 @@
     if($canSubmit) $can_submit = $canSubmit;
     if(!$showFocusRing) $show_focus_ring = $showFocusRing;
 
+	$color = (!empty($color)) ? $color : $type;
     $button_type = ($can_submit) ? 'submit' : 'button';
     $spinner_css = (!$show_spinner) ? 'hidden' : '';
     $focus_ring_css = (!$show_focus_ring) ? 'focus:!ring-0' : 'focus:!ring';
-    $primary_colour_css = ($type == 'primary') ? sprintf($colours[$color],$focus_ring_css) : '';
+    $primary_colour_css = sprintf($colours[$color],$focus_ring_css);
     $radius_css = $roundness[$radius] ?? 'rounded-full';
     $button_text_css = (!empty($buttonTextCss)) ? $buttonTextCss : $button_text_css;
-    $button_text_colour = $button_text_css ?? ($type === 'primary' ? 'text-white hover:text-white' : 'text-black hover:text-black');
+    $button_text_colour = (!empty($button_text_css)) ? $button_text_css : 'text-white hover:text-white';
     $disabled_css = $disabled ? 'disabled' : 'cursor-pointer';
     $tag = ($tag !== 'a' && $tag !== 'button') ? 'button' : $tag;
     $merged_attributes = $attributes->merge(['class' => "bw-button $size $type $name $primary_colour_css $disabled_css $radius_css"]);
