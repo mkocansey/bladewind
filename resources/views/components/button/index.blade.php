@@ -31,8 +31,8 @@
     // available options are a, button
     'tag' => 'button',
 
-    // red, yellow, green, blue, purple, orange, cyan, black
-    'color' => 'primary',
+    // primary, secondary, red, yellow, green, blue, purple, orange, cyan, black
+    'color' => '',
 
     // overwrite the button text color
     'button_text_css' => '',
@@ -73,6 +73,7 @@
     // css for the various colours
     'colours'       => [
         'primary'   => '!bg-primary-500 focus:ring-primary-500/70 hover:!bg-primary-700 active:!bg-primary-700 %s',
+        'secondary' => '!bg-secondary-500 focus:ring-secondary-500/70 hover:!bg-secondary-700 active:!bg-secondary-700 %s',
         'red'       => '!bg-red-500 focus:ring-red-500 hover:!bg-red-700 active:!bg-red-700 %s',
         'yellow'    => '!bg-yellow-500 focus:ring-yellow-500 hover:!bg-yellow-700 active:!bg-yellow-700 %s',
         'green'     => '!bg-green-500 focus:ring-green-500 hover:!bg-green-700 active:!bg-green-700 %s',
@@ -90,6 +91,7 @@
     // css for the various colours
     'outlining'       => [
         'primary'   => 'border-primary-500 focus:ring-primary-500/70 hover:!border-primary-700 active:!border-primary-700 !text-primary-700 %s',
+        'secondary' => 'border-secondary-500 focus:ring-secondary-500/70 hover:!border-secondary-700 active:!border-secondary-700 !text-secondary-700 %s',
         'red'       => '!border-red-500 focus:ring-red-500 hover:!border-red-700 active:!border-red-700 !text-red-700 %s',
         'yellow'    => '!border-yellow-500 focus:ring-yellow-500 hover:!border-yellow-700 active:!border-yellow-700 !text-yellow-700 %s',
         'green'     => '!border-green-500 focus:ring-green-500 hover:!border-green-700 active:!border-green-700 !text-green-700 %s',
@@ -129,17 +131,16 @@
     if($canSubmit) $can_submit = $canSubmit;
     if(!$showFocusRing) $show_focus_ring = $showFocusRing;
 
+	$color = (!empty($color)) ? $color : $type;
     $button_type = ($can_submit) ? 'submit' : 'button';
     $spinner_css = (!$show_spinner) ? 'hidden' : '';
     $focus_ring_css = (!$show_focus_ring) ? 'focus:!ring-0' : 'focus:!ring';
     $border_width = ' border-'.$border_width;
-    $primary_colour_css = ($type == 'primary') ?
-        (($outline) ? sprintf($outlining[$color],$focus_ring_css.$border_width) :
-        sprintf($colours[$color],$focus_ring_css))
-        : '';
+    $primary_colour_css = (($outline) ? sprintf($outlining[$color],$focus_ring_css.$border_width) :
+        sprintf($colours[$color],$focus_ring_css));
     $radius_css = $roundness[$radius] ?? 'rounded-full';
     $button_text_css = (!empty($buttonTextCss)) ? $buttonTextCss : $button_text_css;
-    $button_text_colour = $button_text_css ?? ($type === 'primary' ? 'text-white hover:text-white' : 'text-black hover:text-black');
+    $button_text_colour = (!empty($button_text_css)) ? $button_text_css : 'text-white hover:text-white';
     $disabled_css = $disabled ? 'disabled' : 'cursor-pointer';
     $outline_css = ($outline && $type == 'secondary') ? 'outlined '.$border_width : '';
     $tag = ($tag !== 'a' && $tag !== 'button') ? 'button' : $tag;
