@@ -17,11 +17,14 @@
         text-black/80 dark:text-dark-400
         text-left
         text-xs
-        uppercase
         font-semibold
         tracking-widest
         px-5 py-4
         border-t border-gray-200/20 dark:border-dark-800
+    }
+
+    .bw-table.uppercase-headers thead > tr > th {
+        @apply uppercase
     }
 
     .bw-table-filter-bar {

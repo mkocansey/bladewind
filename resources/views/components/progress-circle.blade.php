@@ -14,10 +14,12 @@
     'dark' => [
       'blue' => '#3b82f6', 'red' => '#e11d48', 'yellow' => '#fbbf24', 'green' => '#16a34a', 'pink' => '#ec4899',
       'cyan' => '#06b6d4', 'orange' => '#f97316', 'gray' => '#64748b', 'purple' => '#a855f7',
+      'violet' => '#7c3aed', 'indigo' => '#4f46e5', 'fuchsia' => '#c026d3',
     ],
     'faint' => [
       'blue' => '#60a5fa', 'red' => '#fb7185', 'yellow' => '#fcd34d', 'green' => '#4ade80', 'pink' => '#f472b6',
       'cyan' => '#22d3ee', 'orange' => '#fb923c', 'gray' => '#9ca3af', 'purple' => '#c084fc',
+      'violet' => '#a78bfa', 'indigo' => '#818cf8', 'fuchsia' => '#e879f9',
     ],
     'tiny' => [
       'width' => 50, 'circle_width' => 5,
@@ -64,7 +66,7 @@
     'valign' => null,
 ])
 
-@php  
+@php
     if ($showPercent) $show_percent = $showPercent;
     if ($showLabel) $show_label = $showLabel;
     $animate = filter_var($animate, FILTER_VALIDATE_BOOLEAN);
@@ -85,34 +87,36 @@
     $dashoffset = round($dasharray*((100-$percentage)/100)) . "px";
 @endphp
 
-<!-- https://nikitahl.github.io/svg-circle-progress-generator/ -->
-  <svg width="{{$width}}" height="{{$width}}" 
-    viewBox="-{{$width*0.125}} -{{$width*0.125}} {{$width*1.25}} {{$width*1.25}}" 
-    version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)" 
-    class="inline-block @if($animate) animate__animated animate__heartBeat @endif">
-    <circle stroke-dashoffset="0" fill="transparent" stroke="#e5e7eb"  
-      r="{{($width/2 - 10)}}" 
-      cx="{{$width/2}}" 
-      cy="{{$width/2}}" 
-      stroke-width="{{$circle_width}}" 
-      stroke-dasharray="{{$dasharray}}"></circle>
-    <circle 
-      fill="transparent" 
-      r="{{($width/2 - 10)}}" 
-      cx="{{$width/2}}" 
-      cy="{{$width/2}}" 
-      stroke="{{$this_shade[$color]}}" 
-      stroke-width="{{$circle_width}}" 
-      stroke-linecap="{{$shape}}" 
-      stroke-dashoffset="{{$dashoffset}}" 
-      stroke-dasharray="{{$dasharray}}"></circle>
+        <!-- https://nikitahl.github.io/svg-circle-progress-generator/ -->
+<svg width="{{$width}}" height="{{$width}}"
+     viewBox="-{{$width*0.125}} -{{$width*0.125}} {{$width*1.25}} {{$width*1.25}}"
+     version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)"
+     class="inline-block @if($animate) animate__animated animate__heartBeat @endif">
+    <circle stroke-dashoffset="0" fill="transparent" stroke="#e5e7eb"
+            r="{{($width/2 - 10)}}"
+            cx="{{$width/2}}"
+            cy="{{$width/2}}"
+            stroke-width="{{$circle_width}}"
+            stroke-dasharray="{{$dasharray}}"></circle>
+    <circle
+            fill="transparent"
+            r="{{($width/2 - 10)}}"
+            cx="{{$width/2}}"
+            cy="{{$width/2}}"
+            stroke="{{$this_shade[$color]}}"
+            stroke-width="{{$circle_width}}"
+            stroke-linecap="{{$shape}}"
+            stroke-dashoffset="{{$dashoffset}}"
+            stroke-dasharray="{{$dasharray}}"></circle>
     @if($show_label)
-    <text 
-      x="{{ round(($width/2)- $this_text['width']/1.75)}}px" 
-      y="{{ round(($width/2)+ ($this_text['height']/3.25)) }}px" 
-      fill="{{$this_shade[$color]}}" 
-      font-size="{{$this_text['size']}}px" 
-      font-weight="bold" 
-      style="transform:rotate(90deg) translate(0px, -{{$width-4}}px)">{{$percentage}}@if($show_percent)%@endif</text>
+        <text
+                x="{{ round(($width/2)- $this_text['width']/1.75)}}px"
+                y="{{ round(($width/2)+ ($this_text['height']/3.25)) }}px"
+                fill="{{$this_shade[$color]}}"
+                font-size="{{$this_text['size']}}px"
+                font-weight="bold"
+                style="transform:rotate(90deg) translate(0px, -{{$width-4}}px)">{{$percentage}}@if($show_percent)
+                %
+            @endif</text>
     @endif
-  </svg>
+</svg>

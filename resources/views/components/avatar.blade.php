@@ -31,8 +31,8 @@
 
 <span class="top-0 bottom-0 hidden"></span>
 <div class="relative inline-block {{$stacked_css}} {{$class}}">
-    <div>
-        <img class="{{ $image_size }} object-cover rounded-full @if($show_ring) ring-2 ring-white dark:ring-dark-900 ring-offset-2 @endif"
+    <div class="{{ $image_size }}">
+        <img class="{{ $image_size }} object-cover rounded-full @if($show_ring) border-4 border-white/60 dark:border-dark-900/50 @endif"
              src="{{$avatar}}" alt="{{$avatar}}"/>
     </div>
     @if($show_dot)

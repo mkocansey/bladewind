@@ -4,6 +4,8 @@
     'max' => null,
     'name' => null,
     'required' => false,
+    'size' => true,
+    'uppercasing' => true,
     'selected_value' => '',
     'error_message' => '',
     'error_heading' => '',
@@ -14,7 +16,7 @@
     $max_selection = (!empty($max) && is_numeric($max)) ? $max : 9999999;
 @endphp
 
-<div class="bw-tags-{{$name}}" xmlns:x-bladewind="http://www.w3.org/1999/html">
+<div class="bw-tags-{{$name}}">
     <x-bladewind::input
             :name="$name"
             :error_message="$error_message"

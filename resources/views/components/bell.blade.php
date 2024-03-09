@@ -12,8 +12,8 @@
             'dot' => 'w-[9px] h-[9px]'
         ],
         'big' => [
-            'bell' => 'w-10 h-10',
-            'dot' => 'w-4 h-4'
+            'bell' => '!w-10 !h-10',
+            'dot' => '!w-4 !h-4'
         ],
     ],
     'coloring' => [
@@ -27,6 +27,9 @@
             'purple'    => 'bg-purple-500',
             'cyan'      => 'bg-cyan-500',
             'pink'      => 'bg-pink-500',
+            'violet'    => 'bg-violet-500',
+            'indigo'    => 'bg-indigo-500',
+            'fuchsia'   => 'bg-fuchsia-500',
             'black'     => 'bg-black',
         ],
         'ring' => [
@@ -39,6 +42,9 @@
             'purple'    => 'ring-purple-500',
             'cyan'      => 'ring-cyan-500',
             'pink'      => 'ring-pink-500',
+            'indigo'    => 'ring-indigo-500',
+            'violet'    => 'ring-violet-500',
+            'fuchsia'   => 'ring-fuchsia-500',
             'black'     => 'ring-black',
         ]
     ]
@@ -56,7 +62,7 @@
     if(! in_array($size, ['small','big'])) {
         $size = 'small';
     }
-    if(! in_array($color, ['primary','blue','red','yellow','green','blue','orange','purple','cyan','pink', 'black'])) {
+    if(! in_array($color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
         $color = 'primary';
     }
 @endphp

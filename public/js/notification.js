@@ -25,7 +25,6 @@ class BladewindNotification {
     }
 
     show = () => {
-        // dom_el('.bw-notification-container').innerHTML += this.template();
         dom_el('.bw-notification-container').insertAdjacentHTML('beforeend', this.template());
         animateCSS(`.${this.name}`, 'fadeInRight').then(() => {
             this.timeoutName = setTimeout(() => {
