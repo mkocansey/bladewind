@@ -15,6 +15,8 @@
     // error message to display when pin is wrong
     'error_message' => 'Verification code is invalid',
     'errorMessage' => 'Verification code is invalid',
+    // should input text be masked
+    'mask' => false,
 ])
 @php
     // reset variables for Laravel 8 support
@@ -23,6 +25,7 @@
     //--------------------------------------------------------------------
 
     $name = preg_replace('/[\s-]/', '_', $name);
+    $mask = filter_var($mask, FILTER_VALIDATE_BOOLEAN);
 @endphp
 
 <div class="dv-{{ $name }} relative">
@@ -31,6 +34,7 @@
             @for ($x = 0; $x < $total_digits; $x++)
                 <x-bladewind::input
                         numeric="true"
+                        type="{{ ($mask) ? 'password' : 'text' }}"
                         with_dots="false"
                         add_clearing="false"
                         onkeydown="hidePinError('{{ $name }}')"
