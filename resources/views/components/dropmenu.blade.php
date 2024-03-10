@@ -9,6 +9,7 @@
     'hide_after_click' => true,
     'position' => 'right',
     'class' => '',
+    'icon_right' => false,
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -17,6 +18,7 @@
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
     $scrollable = filter_var($scrollable, FILTER_VALIDATE_BOOLEAN);
     $hide_after_click = filter_var($hide_after_click, FILTER_VALIDATE_BOOLEAN);
+    $icon_right = filter_var($icon_right, FILTER_VALIDATE_BOOLEAN);
 
     // TODO: Remove in 3.0.0 when Php < 8 support is dropped
     if (!function_exists('str_ends_with')) {
