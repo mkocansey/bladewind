@@ -36,13 +36,25 @@
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
     $close_icon_css =  ($shade == 'dark') ? (($color =='transparent') ? 'text-gray-400 hover:text-gray-700' : 'text-white hover:text-gray-500')  : 'text-gray-500';
     $type = (!empty($color)) ? $color : $type;
+    // colors to use of user has not defined colors in tailwind.config.js
+    $alternate_colour = function() use ($type, $shade) {
+        $bg_suffix = ($shade == 'dark') ? '500' : '200/70';
+        $text_suffix = ($shade == 'dark') ? '50' : '700';
+      switch ($type){
+          case 'warning': return "bg-yellow-$bg_suffix text-yellow-$text_suffix"; break;
+          case 'error': return "bg-red-$bg_suffix text-red-$text_suffix"; break;
+          case 'success': return "bg-green-$bg_suffix text-green-$text_suffix"; break;
+          case 'info': return "bg-blue-$bg_suffix text-blue-$text_suffix"; break;
+      }
+    };
+    $alternate_colour = $alternate_colour();
     $presets = (in_array($type, ['error','warning', 'info', 'success'])) ? [
-        'faint' => "bg-$type-100/80 text-$type-600",
-        'dark' => "bg-$type-500 text-white",
-        'icon' => [ 'faint' => "text-$type-600", 'dark' => "!text-$type-200" ]
+        'faint' => "$alternate_colour bg-$type-100/80 text-$type-600",
+        'dark' => "$alternate_colour bg-$type-500 text-white",
+        'icon' => [ 'faint' => "text-$type-600", 'dark' => "!text-$type-100" ]
     ] : [   // not error, warning, info, success
-        'faint' => "bg-$type-200/70 text-$type-700",
-        'dark' => "bg-$type-500 text-$type-100",
+        'faint' => "$alternate_colour bg-$type-200/70 text-$type-700",
+        'dark' => "$alternate_colour bg-$type-500 text-$type-100",
         'icon' => [ 'faint' => "text-$type-700", 'dark' => "!text-$type-100" ]
     ];
     $colours = [
@@ -65,7 +77,7 @@
                                      class="{{ $icon_avatar_css}}"/>
             @else
                 <x-bladewind::modal-icon type="{{$type}}"
-                                         class="!h-6 !w-6 -mt-1 {{ $colors[$shade][$type]['icon_color'] ??'' }}"/>
+                                         class="!h-6 !w-6 -mt-1 {{ $colours['icon'][$shade] ??'' }}"/>
             @endif
         </div>
     @endif

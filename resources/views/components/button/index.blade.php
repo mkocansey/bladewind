@@ -96,7 +96,7 @@
     if(!$showFocusRing) $show_focus_ring = $showFocusRing;
 
 	$color = (!empty($color)) ? $color : $type;
-    $outline_colour = "!border-$color-500 focus:!ring-$color-500 hover:!border-$color-600 active:!border-$color-700 text-$color-500 %s";
+    $outline_colour = "border-$color-500 focus:ring-$color-500 hover:border-$color-600 active:!border-$color-700 text-$color-500 hover:text-$color-700 %s";
     $button_colour = "!bg-$color-500 focus:ring-$color-500 hover:!bg-$color-700 active:!bg-$color-700 %s";
     if($color == 'black') {
         $outline_colour = preg_replace('/-\d+/', '', $outline_colour);
