@@ -16,7 +16,7 @@
     'url' => 'default',
 ])
 @aware(['color' => 'blue'])
-@php 
+@php
     $name = preg_replace('/[\s]/', '-', $name);
     $active = filter_var($active, FILTER_VALIDATE_BOOLEAN);
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);

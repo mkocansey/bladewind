@@ -49,6 +49,7 @@
     $justified = filter_var($justified, FILTER_VALIDATE_BOOLEAN);
     $bar = (!in_array($bar, ['thin', 'thick', 'thicker'])) ? 'thick' : $bar;
     $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange'])) ? 'primary' : $color;
+    $bar_colour = "peer-checked:bg-$color-500/80 after:border-$color-100";
 @endphp
 
 <label class="relative @if(!$justified)inline-flex @else flex justify-between @endif items-center group bw-tgl-{{$name}}">
@@ -61,7 +62,7 @@
     <span class="flex items-center flex-shrink-0 p-1 bg-gray-900/10 dark:bg-slate-700 rounded-full cursor-pointer
     peer-disabled:opacity-40 rtl:peer-checked:after:-translate-x-full peer-checked:after:translate-x-full transition
     duration-200 ease-in-out after:transition after:duration-200 after:ease-in-out after:bg-white after:shadow-sm after:ring-1 after:ring-slate-700/10
-    after:rounded-full bw-tgl-sp-{{$name}} {{$bar_circle_size[$bar]}} {{$bar_colours[$color]}} {{$class}}"></span>
+    after:rounded-full bw-tgl-sp-{{$name}} {{$bar_circle_size[$bar]}} {{$bar_colour}} {{$class}}"></span>
     @if($label_position=='right' && $label !== '')
         <span class="pl-4 rtl:pr-4 {{$class}}">{!!$label!!}</span>
     @endif

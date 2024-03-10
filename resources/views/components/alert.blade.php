@@ -11,33 +11,19 @@
     'show_close_icon' => true,
     // for backward compatibility with laravel 8
     'showCloseIcon' => true,
-    'class' => '', // additional css classes to add
-    'color' => [
-        'dark' => [
-            'error'                 => 'bg-error-500',
-            'success'               => 'bg-success-500',
-            'warning'               => 'bg-warning-500',
-            'info'                  => 'bg-info-500',
-            'error_text'            => 'text-white',
-            'success_text'          => 'text-white',
-            'warning_text'          => 'text-white',
-            'info_text'             => 'text-white',
-            'error_icon_color'      => '!text-error-200',
-            'success_icon_color'    => '!text-success-200',
-            'warning_icon_color'    => '!text-warning-100',
-            'info_icon_color'       => '!text-info-200'
-        ],
-        'faint' => [
-            'error'             => 'bg-error-100/80',
-            'success'           => 'bg-success-100/80',
-            'warning'           => 'bg-warning-100/80',
-            'info'              => 'bg-info-100/80',
-            'error_text'        => 'text-error-600',
-            'success_text'      => 'text-success-600',
-            'warning_text'      => 'text-warning-700',
-            'info_text'         => 'text-info-700'
-        ],
-    ]
+    // additional css classes to add
+    'class' => '',
+    // additional colors to display
+    'color' => null,
+    // any Heroicons icon to use
+    'icon' => '',
+    // additional css to apply to $icon
+    'icon_avatar_css' => '',
+    // use avatar in place of an icon
+    'avatar' => '',
+    // size of the avatar
+    'size' => 'tiny',
+    'show_ring' => false,
 ])
 
 @php
@@ -48,15 +34,39 @@
     $showCloseIcon = filter_var($showCloseIcon, FILTER_VALIDATE_BOOLEAN);
     if(!$showIcon) $show_icon = $showIcon;
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
-    $close_icon_css =  ($shade == 'dark') ? 'text-white hover:text-gray-500' : 'text-gray-500';
+    $close_icon_css =  ($shade == 'dark') ? (($color =='transparent') ? 'text-gray-400 hover:text-gray-700' : 'text-white hover:text-gray-500')  : 'text-gray-500';
+    $type = (!empty($color)) ? $color : $type;
+    $presets = (in_array($type, ['error','warning', 'info', 'success'])) ? [
+        'faint' => "bg-$type-100/80 text-$type-600",
+        'dark' => "bg-$type-500 text-white",
+        'icon' => [ 'faint' => "text-$type-600", 'dark' => "!text-$type-200" ]
+    ] : [   // not error, warning, info, success
+        'faint' => "bg-$type-200/70 text-$type-700",
+        'dark' => "bg-$type-500 text-$type-100",
+        'icon' => [ 'faint' => "text-$type-700", 'dark' => "!text-$type-100" ]
+    ];
+    $colours = [
+        'faint' => ($type=='transparent') ? "bg-transparent border border-slate-300/80 text-slate-700" : $presets['faint'],
+        'dark' => ($type=='transparent') ? "bg-transparent border border-slate-400 text-slate-700" : $presets['dark'],
+        'icon' => [
+            'faint' => ($type=='transparent') ? "text-slate-400" : $presets['icon']['faint'],
+            'dark' => ($type=='transparent') ? "text-slate-400" : $presets['icon']['dark'],
+        ]
+    ];
 @endphp
 
-{{--<span class="!border-red-400 hidden"></span>--}}
-<div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3 {{$color[$shade][$type] }} {{ $color[$shade][$type.'_text'] }} {{ $class }}">
+<div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3  {{$colours[$shade] }} {{ $class }}">
     @if($show_icon)
         <div class="pt-[1px]">
-            <x-bladewind::modal-icon type="{{$type}}"
-                                     class="!h-6 !w-6 -mt-1 {{ $color[$shade][$type.'_icon_color']??'' }}"/>
+            @if($icon !== '')
+                <x-bladewind::icon :name="$icon" class="-mt-1 {{ $icon_avatar_css}}"/>
+            @elseif($avatar !== '')
+                <x-bladewind::avatar :image="$avatar" :show_ring="$show_ring" :size="$size"
+                                     class="{{ $icon_avatar_css}}"/>
+            @else
+                <x-bladewind::modal-icon type="{{$type}}"
+                                         class="!h-6 !w-6 -mt-1 {{ $colors[$shade][$type]['icon_color'] ??'' }}"/>
+            @endif
         </div>
     @endif
     <div class="grow pl-2 pr-5">{{ $slot }}</div>

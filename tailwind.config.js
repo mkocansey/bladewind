@@ -1,5 +1,6 @@
 const colors = require("tailwindcss/colors");
 module.exports = {
+    darkMode: 'selector',
     content: [
         "./public/**/*.js",
         "./resources/**/*.{html,php,js}",
@@ -8,7 +9,6 @@ module.exports = {
         'bg-slate-200',
         'hover:bg-slate-300',
     ],
-    darkMode: 'media',
     theme: {
         extend: {
             colors: {
