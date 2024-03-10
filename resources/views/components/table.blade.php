@@ -69,8 +69,8 @@
         foreach ($action_icons as $action) {
             $action_array = explode('|',$action);
             $temp = [];
-            foreach($action_array as $array){
-                $hmm = explode(':', $array);
+            foreach($action_array as $action){
+                $hmm = explode(':', $action);
                 $temp[trim($hmm[0])] = trim($hmm[1]);
             }
             $icons_array[] = $temp;
@@ -80,6 +80,7 @@
             function build_click($click, $row_data){
                 return preg_replace_callback('/{\w+}/', function ($matches) use ($row_data) {
                     foreach($matches as $match) {
+//                        echo $row_data[str_replace('}', '', str_replace('{', '', $match))];
                         return $row_data[str_replace('}', '', str_replace('{', '', $match))];
                     }
                 }, $click);
@@ -131,7 +132,7 @@
                                                     size="tiny"
                                                     icon="{{ $icon['icon'] }}"
                                                     color="{{ $icon['color'] ?? '' }}"
-                                                    tooltip="{{$icon['tip']??''}}"
+                                                    title="{{$icon['tip']??''}}"
                                                     onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
                                                     type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}"/>
                                         @endif
