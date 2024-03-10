@@ -1,6 +1,6 @@
 @layer components {
     .bw-button {
-        @apply py-5 px-7 focus:outline-none focus:ring text-xs tracking-widest rtl:inline-flex rtl:items-center
+        @apply py-5 px-7 focus:outline-none focus:ring focus:ring-offset-2 focus:!ring-opacity-20 dark:focus:ring-opacity-10 text-xs tracking-widest rtl:inline-flex rtl:items-center transition
     }
 
     .bw-button.big {
@@ -15,18 +15,17 @@
         @apply py-[6px] px-[15px] text-[10px]
     }
 
-    .bw-button.primary, .bw-button-circle.primary {
-        @apply focus:ring-offset-2 focus:ring-opacity-30 dark:focus:ring-opacity-10 transition text-white hover:text-white active:translate-y-0.5
+    .bw-button.primary:not(.outlined), .bw-button-circle.primary:not(.outlined) {
+        @apply hover:text-white active:translate-y-0.5 bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-700 text-white
     }
 
-    .bw-button.secondary, .bw-button-circle.secondary {
-        @apply focus:ring-offset-2 focus:ring-secondary-300/40 active:translate-y-0.5 transition bg-secondary-300
-        dark:bg-dark-700 text-secondary-800 dark:text-dark-400 hover:bg-secondary-400 hover:text-white
-        hover:dark:bg-dark-400/50 hover:dark:text-dark-300 active:bg-secondary-700 dark:focus:ring-dark-800
+    .bw-button.secondary:not(.outlined), .bw-button-circle.secondary:not(.outlined) {
+        @apply focus:ring-secondary-400 active:translate-y-0.5 transition bg-slate-400 hover:bg-slate-500 text-white
+        dark:bg-dark-600 hover:dark:bg-dark-700 active:bg-secondary-700 dark:focus:ring-dark-800
     }
 
-    .bw-button.secondary.outlined, .bw-button-circle.secondary.outlined {
-        @apply !bg-transparent border-secondary-300 hover:border-secondary-400 text-secondary-700 hover:text-secondary-800
+    .bw-button.primary.outlined, .bw-button-circle.primary.outlined, .bw-button.secondary.outlined, .bw-button-circle.secondary.outlined {
+        @apply !bg-transparent
     }
 
     .bw-button.disabled, .bw-button-circle.disabled {

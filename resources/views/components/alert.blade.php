@@ -24,47 +24,6 @@
     // size of the avatar
     'size' => 'tiny',
     'show_ring' => false,
-
-    'colors' => [
-        'dark' => [
-            'error'   => [ 'css' => 'bg-error-500 text-white', 'icon_color' => '!text-error-200' ],
-            'success' => [ 'css' => 'bg-success-500 text-white', 'icon_color' => '!text-success-200' ],
-            'warning' => [ 'css' => 'bg-warning-500 text-white', 'icon_color' => '!text-warning-100' ],
-            'info' => [ 'css' => 'bg-info-500 text-white', 'icon_color' => '!text-info-100' ],
-            'red' => [ 'css' => 'bg-red-500', 'icon_color' => 'text-red-100' ],
-            'yellow' => [ 'css' => 'bg-yellow-500 text-yellow-100', 'icon_color' => 'text-yellow-100' ],
-            'green' => [ 'css' => 'bg-green-500 text-green-100', 'icon_color' => 'text-green-100' ],
-            'blue' => [ 'css' => 'bg-blue-500 text-blue-100', 'icon_color' => 'text-blue-100' ],
-            'cyan' => [ 'css' => 'bg-cyan-500 text-cyan-100', 'icon_color' => 'text-cyan-100' ],
-            'purple' => [ 'css' => 'bg-purple-500 text-purple-100', 'icon_color' => 'text-purple-100' ],
-            'gray' => [ 'css' => 'bg-slate-500 text-slate-100', 'icon_color' => 'text-slate-100' ],
-            'pink' => [ 'css' => 'bg-pink-500 text-pink-100', 'icon_color' => 'text-pink-100' ],
-            'violet' => [ 'css' => 'bg-violet-500 text-violet-100', 'icon_color' => 'text-violet-100' ],
-            'indigo' => [ 'css' => 'bg-indigo-500 text-indigo-100', 'icon_color' => 'text-indigo-100' ],
-            'fuchsia' => [ 'css' => 'bg-fuchsia-500 text-fuchsia-100', 'icon_color' => 'text-fuchsia-100' ],
-            'orange' => [ 'css' => 'bg-orange-500 text-orange-100', 'icon_color' => 'text-orange-100' ],
-            'transparent' => [ 'css' => 'bg-transparent border border border-slate-400 text-slate-700', 'icon_color' => 'text-slate-400' ],
-        ],
-        'faint' => [
-            'error'    => [ 'css' => 'bg-error-100/80 text-error-600', 'icon_color' => 'text-error-600' ],
-            'success'  => [ 'css' => 'bg-success-100/80 text-success-600', 'icon_color' => 'text-success-600' ],
-            'warning'  => [ 'css' => 'bg-warning-100/80 text-warning-700', 'icon_color' => 'text-warning-700' ],
-            'info'     => [ 'css' => 'bg-info-100/80 text-info-700', 'icon_color' => 'text-info-700' ],
-            'red' => [ 'css' => 'bg-red-200/70 text-red-700', 'icon_color' => 'text-red-700' ],
-            'yellow' => [ 'css' => 'bg-yellow-200/70 text-yellow-700', 'icon_color' => 'text-yellow-700' ],
-            'green' => [ 'css' => 'bg-green-200/70 text-green-700', 'icon_color' => 'text-green-700' ],
-            'blue' => [ 'css' => 'bg-blue-200/70 text-blue-700', 'icon_color' => 'text-blue-700' ],
-            'cyan' => [ 'css' => 'bg-cyan-200/70 text-cyan-700', 'icon_color' => 'text-cyan-700' ],
-            'purple' => [ 'css' => 'bg-purple-200/70 text-purple-700', 'icon_color' => 'text-purple-700' ],
-            'gray' => [ 'css' => 'bg-slate-200/70 text-slate-700', 'icon_color' => 'text-slate-700' ],
-            'pink' => [ 'css' => 'bg-pink-200/70 text-pink-700', 'icon_color' => 'text-pink-700' ],
-            'violet' => [ 'css' => 'bg-violet-200/70 text-violet-700', 'icon_color' => 'text-violet-700' ],
-            'indigo' => [ 'css' => 'bg-indigo-200/70 text-indigo-700', 'icon_color' => 'text-indigo-700' ],
-            'fuchsia' => [ 'css' => 'bg-fuchsia-200/70 text-fuchsia-700', 'icon_color' => 'text-fuchsia-700' ],
-            'orange' => [ 'css' => 'bg-orange-200/70 text-orange-700', 'icon_color' => 'text-orange-700' ],
-            'transparent' => [ 'css' => 'bg-transparent border border border-slate-300/80 text-slate-700', 'icon_color' => 'text-slate-400' ],
-        ],
-    ]
 ])
 
 @php
@@ -77,10 +36,26 @@
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
     $close_icon_css =  ($shade == 'dark') ? (($color =='transparent') ? 'text-gray-400 hover:text-gray-700' : 'text-white hover:text-gray-500')  : 'text-gray-500';
     $type = (!empty($color)) ? $color : $type;
+    $presets = (in_array($type, ['error','warning', 'info', 'success'])) ? [
+        'faint' => "bg-$type-100/80 text-$type-600",
+        'dark' => "bg-$type-500 text-white",
+        'icon' => [ 'faint' => "text-$type-600", 'dark' => "!text-$type-200" ]
+    ] : [   // not error, warning, info, success
+        'faint' => "bg-$type-200/70 text-$type-700",
+        'dark' => "bg-$type-500 text-$type-100",
+        'icon' => [ 'faint' => "text-$type-700", 'dark' => "!text-$type-100" ]
+    ];
+    $colours = [
+        'faint' => ($type=='transparent') ? "bg-transparent border border-slate-300/80 text-slate-700" : $presets['faint'],
+        'dark' => ($type=='transparent') ? "bg-transparent border border-slate-400 text-slate-700" : $presets['dark'],
+        'icon' => [
+            'faint' => ($type=='transparent') ? "text-slate-400" : $presets['icon']['faint'],
+            'dark' => ($type=='transparent') ? "text-slate-400" : $presets['icon']['dark'],
+        ]
+    ];
 @endphp
 
-{{--<span class="!border-red-400 hidden"></span>--}}
-<div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3  {{$colors[$shade][$type]['css'] }} {{ $class }}">
+<div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3  {{$colours[$shade] }} {{ $class }}">
     @if($show_icon)
         <div class="pt-[1px]">
             @if($icon !== '')
