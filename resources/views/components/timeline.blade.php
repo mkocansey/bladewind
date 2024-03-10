@@ -56,7 +56,7 @@
             @endif
         </div>
         @if(!$last)
-            <div class="bg-{{$color}}-500 @if(!$completed) opacity-40 @endif grow w-[2px] my-1.5"></div>
+            <div class="bg-{{$color}}-500 @if(!$completed) opacity-30 @endif grow w-[2px] my-1.5"></div>
         @endif
     </div>
 
