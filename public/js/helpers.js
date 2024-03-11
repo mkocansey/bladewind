@@ -31,7 +31,7 @@ var validateForm = (form) => {
                 let error_message = el.getAttribute('data-error-message');
                 let show_error_inline = el.getAttribute('data-error-inline');
                 let error_heading = el.getAttribute('data-error-heading');
-                
+
                 (el_parent !== null) ?
                     changeCss(`.${el_parent} .clickable`, '!border-error-400') :
                     changeCss(el, '!border-error-400', 'add', true);
@@ -391,4 +391,10 @@ var trapFocusInModal = (event) => {
             }
         }
     }
+}
+
+var checkMinMax = (min, max, el) => {
+    let field = dom_el(el);
+    console.log(min);
+    console.log(max);
 }
