@@ -394,7 +394,21 @@ var trapFocusInModal = (event) => {
 }
 
 var checkMinMax = (min, max, el) => {
-    let field = dom_el(el);
-    console.log(min);
-    console.log(max);
+    let field = dom_el(`.${el}`);
+    let minimum = parseInt(min);
+    let maximum = parseInt(max);
+    let error_message = field.getAttribute('data-error-message');
+    let show_error_inline = field.getAttribute('data-error-inline');
+    let error_heading = field.getAttribute('data-error-heading');
+
+    if (field.value !== '' && ((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
+        changeCss(field, '!border-error-400', 'add', true);
+        if (error_message) {
+            (show_error_inline) ? unhide(`.${el_name}-inline-error`) :
+                showNotification(error_heading, error_message, 'error');
+        }
+    } else {
+        if (error_message) hide(`.${el_name}-inline-error`);
+        changeCss(field, '!border-error-400', 'remove', true);
+    }
 }

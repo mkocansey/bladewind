@@ -86,6 +86,9 @@
     // display any Heroicon icon in the modal
     'icon' => '',
     'icon_css' => '',
+
+    // change positions of the action buttons .. text-right, text-left, text-center
+    'align_buttons' => 'right',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -116,6 +119,7 @@
     if ($stretchActionButtons) $stretch_action_buttons = $stretchActionButtons;
     if ($blurBackdrop) $blur_backdrop = $blurBackdrop;
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
+    if(!in_array($align_buttons, ['right', 'center', 'left'])) $align_buttons = 'right';
     //-------------------------------------------------------------------
 
     $name = str_replace(' ', '-', $name);
@@ -134,7 +138,7 @@
             @if( $show_action_buttons && $show_close_icon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon name="x-mark"
-                                       class="!h-5 !w-5 text-gray-400 hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-800 p-1 absolute right-3 top-3 modal-close-icon"/>
+                                       class="!h-7 !w-7 text-gray-400 hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-800 p-1 absolute right-3 top-3 modal-close-icon"/>
                 </a>
             @endif
             <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-6">
@@ -157,7 +161,7 @@
                 </div>
             </div>
             @if( $show_action_buttons )
-                <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-right @endif bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
+                <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-{{$align_buttons}} @endif bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
