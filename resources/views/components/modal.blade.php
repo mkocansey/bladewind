@@ -67,6 +67,13 @@
         'xl' => 'w-2/3',
         'omg' => 'w-11/12'
     ],
+    // background colours for the various icons
+    'colours' => [
+        'success' => 'bg-green-100',
+        'error' => 'bg-red-100',
+        'warning' => 'bg-warning-100',
+        'info' => 'bg-blue-100',
+    ],
 
     // add extra css to the modal body
     'body_css' => '',
@@ -75,6 +82,10 @@
     // show close icon. By default, the close or cancel button closes the modal
     'show_close_icon' => false,
     'showCloseIcon' => false,
+
+    // display any Heroicon icon in the modal
+    'icon' => '',
+    'icon_css' => '',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -116,9 +127,6 @@
     $button_size = ($stretch_action_buttons) ? 'medium' : (($size == 'tiny') ? 'tiny' : 'small');
 @endphp
 
-@php //this is intentional // required, so tailwindCSS will compile the styles in @endphp
-<span class="sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12"></span>
-
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
      class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
     <div class="sm:{{$sizes[$size]}} w-full p-4 m-auto bw-{{$name}} animate__faster">
@@ -126,18 +134,24 @@
             @if( $show_action_buttons && $show_close_icon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon name="x-mark"
-                                       class="text-gray-400 hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-800 p-1 absolute right-3 top-3 modal-close-icon"/>
+                                       class="!h-5 !w-5 text-gray-400 hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-800 p-1 absolute right-3 top-3 modal-close-icon"/>
                 </a>
             @endif
-            <div class="{{(!empty($type))?'flex':'flex-initial'}}">
-                @if(!empty($type))
-                    <div class="modal-icon py-7 pl-5 grow-0">
-                        <x-bladewind::modal-icon type="{{ $type }}"></x-bladewind::modal-icon>
+            <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-6">
+                @if(!empty($type) || !empty($icon))
+                    <div class="modal-icon grow-0 pr-1">
+                        @if(!empty($type) )
+                            <x-bladewind::modal-icon type="{{ $type }}" icon="{{$icon}}"
+                                                     class="!h-14 !w-14 p-2 rounded-full {{$colours[$type]}}"/>
+                        @endif
+                        @if(!empty($icon) && empty($type))
+                            <x-bladewind::icon name="{{ $icon }}" class="!h-14 !w-14 modal-icon {{$icon_css}}"/>
+                        @endif
                     </div>
                 @endif
-                <div class="modal-body grow p-7 @if(!empty($type)) !pl-3 @endif {{ $body_css  }}">
-                    <h1 class="text-[22px] font-bold text-slate-900/80 dark:text-slate-300 modal-title text-left">{{ $title }}</h1>
-                    <div class="modal-text text-gray-600 dark:text-gray-400 pt-2 text-base leading-6 tracking-wide text-left">
+                <div class="modal-body grow px-2 @if(!empty($type) || !empty($icon)) @endif {{ $body_css  }}">
+                    <h1 class="text-base font-semibold leading-5 text-gray-900 modal-title text-left">{{ $title }}</h1>
+                    <div class="modal-text text-gray-500 dark:text-gray-400 pt-2 text-sm text-left">
                         {{ $slot }}
                     </div>
                 </div>
