@@ -10,7 +10,7 @@
  */
 [data-tooltip]{position:relative;}
 [data-tooltip]:before{pointer-events:none;position:absolute;content:'';font-size:1rem;width:.71428571em;height:.71428571em;background:#fff;transform:rotate(45deg);z-index:2;box-shadow:1px 1px 0 0 #bababc}
-[data-tooltip]:after{pointer-events:none;content:attr(data-tooltip);position:absolute;text-transform:none;text-align:left;white-space:nowrap;font-size:1rem;border:1px solid #d4d4d5;line-height:1.4285em;max-width:none;background:#fff;padding:.533em .833em;font-weight:400;font-style:normal;color:rgba(0,0,0,.87);border-radius:.28571429rem;box-shadow:0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.15);z-index:1}
+[data-tooltip]:after{pointer-events:none;content:attr(data-tooltip);position:absolute;text-transform:none;text-align:left;white-space:nowrap;font-size:0.9rem;border:1px solid #d4d4d5;line-height:1.4285em;max-width:none;background:#fff;padding:.433em .533em;font-weight:400;font-style:normal;color:rgba(0,0,0,.87);border-radius:.28571429rem;box-shadow:0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.15);z-index:1}
 [data-tooltip]:not([data-position]):before{top:auto;right:auto;bottom:100%;left:50%;background:#fff;margin-left:-.07142857rem;margin-bottom:.14285714rem}
 [data-tooltip]:not([data-position]):after{left:50%;transform:translateX(-50%);bottom:100%;margin-bottom:.5em}
 [data-tooltip]:after,[data-tooltip]:before{pointer-events:none;visibility:hidden}
@@ -524,23 +524,16 @@ input.no-label::placeholder, .bw-input.no-label::placeholder, .bw-textarea.bw-in
 .bw-table-filter-bar input:where(.dark, .dark *){border-width:0px;background-color:transparent;}
 .bw-table-filter-bar input:focus:where(.dark, .dark *){border-width:0px;outline-width:0px;}
 .bw-table.compact thead > tr > th{padding-top:0.5rem !important;padding-bottom:0.5rem !important;}
-.bw-table tr > td{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity));padding:1.25rem;vertical-align:top;font-size:0.875rem;line-height:1.5rem;color:rgb(71 85 105 / 0.8);}
+.bw-table tr > td{border-left-width:2px;border-right-width:2px;border-color:rgb(249 250 251 / 0.1);--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity));padding:1.25rem;vertical-align:top;font-size:0.875rem;line-height:1.5rem;color:rgb(71 85 105 / 0.8);}
 .bw-table tr > td:where(.dark, .dark *){background-color:rgb(15 23 42 / 0.6);--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity));}
 .bw-table.compact tr > td{padding-top:0.5rem !important;padding-bottom:0.5rem !important;}
-.bw-table td.double-underline{border-collapse:separate;border-bottom-width:4px;border-style:double;--tw-border-opacity:1;border-color:rgb(0 0 0 / var(--tw-border-opacity));}
+.bw-table td.double-underline{border-collapse:separate;border-left-width:0px;border-right-width:0px;border-top-width:0px;border-bottom-width:4px;border-style:double;--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity));}
 .bw-table td.double-underline:where(.dark, .dark *){--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity));}
-table.with-hover-effect tr > td:first-child{border-left-width:2px;--tw-border-opacity:1;border-left-color:rgb(255 255 255 / var(--tw-border-opacity));}
-table.with-hover-effect tr > td:first-child:where(.dark, .dark *){border-left-color:transparent;}
-table.with-hover-effect tr:hover > td:first-child{border-left-width:2px;--tw-border-opacity:1;border-left-color:rgb(110 231 183 / var(--tw-border-opacity));}
-table.with-hover-effect tr:hover > td:first-child:where(.dark, .dark *){--tw-border-opacity:1;border-left-color:rgb(51 65 85 / var(--tw-border-opacity));}
-table.with-hover-effect tr > td:last-child{border-right-width:2px;--tw-border-opacity:1;border-right-color:rgb(255 255 255 / var(--tw-border-opacity));}
-table.with-hover-effect tr > td:last-child:where(.dark, .dark *){border-right-color:transparent;}
-table.with-hover-effect tr:hover > td:last-child{border-right-width:2px;--tw-border-opacity:1;border-right-color:rgb(110 231 183 / var(--tw-border-opacity));}
-table.with-hover-effect tr:hover > td:last-child:where(.dark, .dark *){--tw-border-opacity:1;border-right-color:rgb(51 65 85 / var(--tw-border-opacity));}
-table.with-hover-effect tr:nth-child(even):hover > td:first-child{border-left-width:2px;--tw-border-opacity:1;border-left-color:rgb(110 231 183 / var(--tw-border-opacity));}
-table.with-hover-effect tr:nth-child(even):hover > td:first-child:where(.dark, .dark *){--tw-border-opacity:1;border-left-color:rgb(51 65 85 / var(--tw-border-opacity));}
-table.with-hover-effect tr:nth-child(even):hover > td:last-child{border-right-width:2px;--tw-border-opacity:1;border-right-color:rgb(110 231 183 / var(--tw-border-opacity));}
-table.with-hover-effect tr:nth-child(even):hover > td:last-child:where(.dark, .dark *){--tw-border-opacity:1;border-right-color:rgb(51 65 85 / var(--tw-border-opacity));}
+.bw-table.with-hover-effect tr:hover > td{background-color:rgb(243 244 246 / 0.4);}
+.bw-table.with-hover-effect tr:hover > td:first-child{border-left-width:2px;--tw-border-opacity:1;border-left-color:rgb(110 231 183 / var(--tw-border-opacity));}
+.bw-table.with-hover-effect tr:hover > td:first-child:where(.dark, .dark *){--tw-border-opacity:1;border-left-color:rgb(51 65 85 / var(--tw-border-opacity));}
+.bw-table.with-hover-effect tr:hover > td:last-child{border-right-width:2px;--tw-border-opacity:1;border-right-color:rgb(110 231 183 / var(--tw-border-opacity));}
+.bw-table.with-hover-effect tr:hover > td:last-child:where(.dark, .dark *){--tw-border-opacity:1;border-right-color:rgb(51 65 85 / var(--tw-border-opacity));}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0;}
 .visible{visibility:visible;}
 .fixed{position:fixed;}
@@ -1374,7 +1367,8 @@ to{transform:rotate(360deg);}}
 .sm\:w-1\/6{width:16.666667%;}
 .sm\:w-11\/12{width:91.666667%;}
 .sm\:w-2\/3{width:66.666667%;}
-.sm\:w-2\/5{width:40%;}}
+.sm\:w-2\/5{width:40%;}
+.sm\:overflow-x-hidden{overflow-x:hidden;}}
 .ltr\:right-\[2\.5px\]:where([dir="ltr"], [dir="ltr"] *){right:2.5px;}
 .ltr\:mr-2:where([dir="ltr"], [dir="ltr"] *){margin-right:0.5rem;}
 .rtl\:\!left-0:where([dir="rtl"], [dir="rtl"] *){left:0px !important;}

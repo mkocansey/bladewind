@@ -6,6 +6,8 @@
     // should the table with displayed with a drop-shadow effect
     'has_shadow' => false,
     'hasShadow' => false,
+    // should the table have a border on all four sides
+    'has_border' => false,
     // should the table have row dividers
     'divided' => true,
     // if table has row dividers, how wide should they be
@@ -80,7 +82,6 @@
             function build_click($click, $row_data){
                 return preg_replace_callback('/{\w+}/', function ($matches) use ($row_data) {
                     foreach($matches as $match) {
-//                        echo $row_data[str_replace('}', '', str_replace('{', '', $match))];
                         return $row_data[str_replace('}', '', str_replace('{', '', $match))];
                     }
                 }, $click);
@@ -88,8 +89,8 @@
         }
     }
 @endphp
-<div class="z-20"> {{--max-w-screen overflow-x-hidden md:w-full--}}
-    <div class="w-full">
+<div class="@if($has_border) border border-gray-200 @endif max-w-screen overflow-x-scroll w-full sm:overflow-x-hidden">
+    <div class="w-full overflow-x-hidden">
         @if($searchable)
             <div class="bw-table-filter-bar">
                 <x-bladewind::input name="bw-search-{{$name}}" placeholder="{{$search_placeholder}}"
@@ -128,13 +129,19 @@
                                 <td class="text-right space-x-2 actions">
                                     @foreach($icons_array as $icon)
                                         @if(isset($icon['icon']))
-                                            <x-bladewind::button.circle
-                                                    size="tiny"
-                                                    icon="{{ $icon['icon'] }}"
-                                                    color="{{ $icon['color'] ?? '' }}"
-                                                    title="{{$icon['tip']??''}}"
-                                                    onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
-                                                    type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}"/>
+                                            @if(!empty($icon['tip']))
+                                                <a data-tooltip="{{ $icon['tip'] }}" data-inverted=""
+                                                   data-position="top center"> @endif
+                                                    <x-bladewind::button.circle
+                                                            size="tiny"
+                                                            icon="{{ $icon['icon'] }}"
+                                                            color="{{ $icon['color'] ?? '' }}"
+                                                            {{--title="{{$icon['tip']??''}}"--}}
+                                                            onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
+                                                            type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}"/>
+                                                    @if(!empty($icon['tip']))
+                                                </a>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </td>
