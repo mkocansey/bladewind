@@ -40,7 +40,7 @@
     }
 
     .bw-table tr > td {
-        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-dark-400 dark:bg-dark-900/60
+        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-dark-400 dark:bg-dark-900/60 border-x-2 border-gray-50/10
     }
 
     .bw-table.compact tr > td {
@@ -48,30 +48,18 @@
     }
 
     .bw-table td.double-underline {
-        @apply border-b-4 border-double border-black dark:border-dark-700 border-separate
+        @apply border-x-0 border-t-0 border-b-4 border-double border-gray-700 dark:border-dark-700 border-separate
     }
 
-    table.with-hover-effect tr > td:first-child {
-        @apply border-l-2 border-l-white dark:border-l-transparent
+    .bw-table.with-hover-effect tr:hover > td {
+        @apply bg-gray-100/40
     }
 
-    table.with-hover-effect tr:hover > td:first-child {
+    .bw-table.with-hover-effect tr:hover > td:first-child {
         @apply border-l-2 border-l-green-300 dark:border-l-dark-700
     }
 
-    table.with-hover-effect tr > td:last-child {
-        @apply border-r-2 border-r-white dark:border-r-transparent
-    }
-
-    table.with-hover-effect tr:hover > td:last-child {
-        @apply border-r-2 border-r-green-300 dark:border-r-dark-700
-    }
-
-    table.with-hover-effect tr:nth-child(even):hover > td:first-child {
-        @apply border-l-2 border-l-green-300 dark:border-l-dark-700
-    }
-
-    table.with-hover-effect tr:nth-child(even):hover > td:last-child {
+    .bw-table.with-hover-effect tr:hover > td:last-child {
         @apply border-r-2 border-r-green-300 dark:border-r-dark-700
     }
 }

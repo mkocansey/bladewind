@@ -8,6 +8,10 @@
     'label' => '',
     // should the input accept numbers only. Default is false
     'numeric' => false,
+    // minimum number a user can enter when numeric=true
+    'min' => null,
+    // maximum number a user can enter when numeric=true
+    'max' => null,
     // is this a required field. Default is false
     'required' => false,
     // adds margin after the input box
@@ -191,5 +195,10 @@
             isNumberKey(event, {{$with_dots}});
         });
         dom_el('input.{{$name}}').setAttribute('inputmode', 'numeric');
+        @if($min || $max)
+        dom_el('input.{{$name}}').addEventListener('keyup', (event) => {
+            checkMinMax('{{$min}}', '{{$max}}', '{{$name}}');
+        });
+        @endif
     </script>
 @endif
