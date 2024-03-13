@@ -7,6 +7,7 @@ class BladewindNotification {
     name;
     timeoutName;
     borderColors;
+    colors;
 
     constructor(title, message, type, dismissInMinutes) {
         this.title = title || '';
@@ -16,11 +17,11 @@ class BladewindNotification {
         this.dismissInSeconds = this.dismissInMinutes * 1000;
         this.name = `notification-${Math.floor((Math.random() * 100) + 1)}`;
         this.timeoutName = this.name.replace('notification-', 'timeout_');
-        this.borderColors = {
-            "success": "border-green-500",
-            "error": "border-red-500",
-            "warning": "border-amber-500",
-            "info": "border-blue-500",
+        this.colors = {
+            "success": {"border": "border-green-500", "bg": "bg-green-100"},
+            "error": {"border": "border-red-500", "bg": "bg-red-100"},
+            "warning": {"border": "border-amber-500", "bg": "bg-amber-100"},
+            "info": {"border": "border-blue-500", "bg": "bg-blue-100"},
         };
     }
 
@@ -48,11 +49,15 @@ class BladewindNotification {
     }
 
     modalIcon = function () {
-        return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replace('hidden', '');
+        let bg_color = eval(`this.colors.${this.type}.bg`);
+        // info is never hidden so replacing hidden will fail
+        let to_find = (this.type === 'info') ? 'modal-icon' : 'hidden';
+        let replace_with = ((this.type === 'info') ? 'modal-icon' : '') + ` !h-14 !w-14 p-2 rounded-full ${bg_color}`;
+        return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replace(to_find, replace_with);
     }
 
     template = () => {
-        let border_color = eval(`this.borderColors.${this.type}`);
+        let border_color = eval(`this.colors.${this.type}.border`);
         return `<div class="flex border-2 ${this.name} ${border_color} bg-white dark:bg-slate-700 dark:border-0 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
             <div class="pr-4 grow-0">${this.modalIcon()}</div>
             <div class="pb-1 pr-4 relative grow">
