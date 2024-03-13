@@ -19,4 +19,4 @@
 <x-bladewind::icon name="{{ $icon ?: 'exclamation-triangle'}}"
                    class="warning text-amber-500 dark:!text-amber-500 {{$class}} {{$warning_css}}"/>
 <x-bladewind::icon name="{{ $icon ?: 'information-circle'}}"
-                   class="info text-blue-600 dark:!text-blue-600 {{$class}} {{$info_css}}"/>
+                   class="info text-blue-500 dark:!text-blue-600 {{$class}} {{$info_css}}"/>
