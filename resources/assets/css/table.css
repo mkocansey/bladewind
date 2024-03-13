@@ -62,4 +62,5 @@
     .bw-table.with-hover-effect tr:hover > td:last-child {
         @apply border-r-2 border-r-green-300 dark:border-r-dark-700
     }
+    
 }
