@@ -40,12 +40,12 @@
     $image_file_types = [ "png", "jpg", "jpeg", "gif", "svg" ];
 @endphp
 <div class="border-gray-500"></div>
-<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-dark-300 dark:border-dark-700
-    dark:bg-dark-800 hover:dark:border-dark-600 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
+<div class="relative px-2 py-3 border-2 border-dotted border-gray-300 dark:text-dark-300 dark:border-dark-600
+    dark:bg-dark-800 hover:dark:border-dark-700 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
     <x-bladewind::icon name="document-text"
-                       class="h-6 w-6 absolute z-20 left-4 rtl:!right-4 rtl:!left-[unset] text-gray-300"/>
+                       class="h-6 w-6 absolute z-20 left-4 rtl:!right-4 rtl:!left-[unset] text-gray-300 dark:text-dark-500"/>
     <x-bladewind::icon name="x-circle"
-                       class="absolute right-3 rtl:!left-3 rtl:!right-[unset] h-8 w-8 text-gray-600 hover:text-gray-800 clear cursor-pointer hidden"
+                       class="absolute right-3 rtl:!left-3 rtl:!right-[unset] h-8 w-8 text-gray-600 hover:text-gray-700 clear cursor-pointer hidden"
                        type="solid"/>
     <span class="text-gray-400/80 px-6 pl-10 zoom-out inline-block selection">
         {{ $placeholder }}

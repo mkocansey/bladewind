@@ -62,7 +62,7 @@
         <div style="width: {{$percentage}}%"
              class="text-center py-1 {{$bar_color}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
             @if($show_percentage_label && $show_percentage_label_inline)
-                <span class="text-{{$color}}-{{$text_color_weight[$shade]}} px-2 text-xs">
+                <span class="text-{{$color}}-{{$text_color_weight[$shade]}} dark:text-dark-600 px-2 text-xs">
             {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
             </span>
             @endif

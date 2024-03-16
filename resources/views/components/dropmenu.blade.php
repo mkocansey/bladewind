@@ -36,10 +36,10 @@
             {!!$trigger!!}
         @endif
     </div>
-    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-dark-800 !z-20 animate__animated animate__fadeIn animate__faster"
+    <div class="opacity-0 hidden bw-dropmenu-items bg-white dark:bg-dark-800 !z-20 animate__animated animate__fadeIn animate__faster sticky"
          data-open="0">
-        <div class="absolute @if($position=='right') -right-1  @endif mt-2 bg-white dark:bg-dark-800 rounded-lg {{$class}}
-            shadow-md py-2 border border-slate-100/80 bw-items-list @if($divided) divide-y divide-slate-100 @endif"
+        <div class="absolute @if($position=='right') -right-1  @endif mt-2 bg-white dark:bg-dark-800 rounded-md {{$class}}
+            shadow-md py-2 border border-slate-100/80 dark:border-dark-700 bw-items-list @if($divided) divide-y divide-slate-100 dark:divide-dark-700 @endif"
              @if($scrollable) style="height: {{$height}}px; overflow-y: scroll" @endif>
             {{$slot}}
         </div>

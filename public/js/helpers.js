@@ -412,3 +412,14 @@ var checkMinMax = (min, max, el) => {
         changeCss(field, '!border-error-400', 'remove', true);
     }
 }
+
+var makeClearable = (el) => {
+    let field = dom_el(`.${el}`);
+    let suffix_element = dom_el(`.${el}-suffix svg`);
+    let table_element = el.replace('bw_search_', 'table.').replace('_', '-');
+    let clearing_function = (dom_el(table_element)) ? ` filterTable('',\'${table_element}\')` : '';
+    if (!suffix_element.getAttribute('onclick')) {
+        suffix_element.setAttribute('onclick', `dom_el(\'.${el}\').value=''; hide(this, true); ${clearing_function}`);
+    }
+    (field.value !== '') ? unhide(suffix_element, true) : hide(suffix_element, true);
+}

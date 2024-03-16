@@ -13,7 +13,7 @@
 
     .bw-table thead > tr > th {
         @apply
-        bg-white dark:bg-dark-800
+        bg-white dark:bg-dark-900
         text-black/80 dark:text-dark-400
         text-left
         text-xs
@@ -28,7 +28,7 @@
     }
 
     .bw-table-filter-bar {
-        @apply bg-slate-100 p-2 dark:bg-dark-900
+        @apply bg-slate-100 p-1 dark:bg-dark-900
     }
 
     .bw-table-filter-bar input {
@@ -40,7 +40,7 @@
     }
 
     .bw-table tr > td {
-        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-dark-400 dark:bg-dark-900/60 border-x-2 border-gray-50/10
+        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-dark-400 dark:bg-dark-900/60 border-x-2 border-gray-50/10 dark:border-dark-900/50
     }
 
     .bw-table.compact tr > td {
@@ -52,15 +52,15 @@
     }
 
     .bw-table.with-hover-effect tr:hover > td {
-        @apply bg-gray-100/40
+        @apply bg-gray-100/40 dark:bg-dark-900
     }
 
     .bw-table.with-hover-effect tr:hover > td:first-child {
-        @apply border-l-2 border-l-green-300 dark:border-l-dark-700
+        @apply border-l-2 border-l-green-300 dark:border-l-dark-500
     }
 
     .bw-table.with-hover-effect tr:hover > td:last-child {
-        @apply border-r-2 border-r-green-300 dark:border-r-dark-700
+        @apply border-r-2 border-r-green-300 dark:border-r-dark-500
     }
-    
+
 }

@@ -67,13 +67,6 @@
         'xl' => 'w-2/3',
         'omg' => 'w-11/12'
     ],
-    // background colours for the various icons
-    'colours' => [
-        'success' => 'bg-green-100',
-        'error' => 'bg-red-100',
-        'warning' => 'bg-warning-100',
-        'info' => 'bg-blue-100',
-    ],
 
     // add extra css to the modal body
     'body_css' => '',
@@ -145,23 +138,27 @@
                 @if(!empty($type) || !empty($icon))
                     <div class="modal-icon grow-0 pr-1">
                         @if(!empty($type) )
-                            <x-bladewind::modal-icon type="{{ $type }}" icon="{{$icon}}"
-                                                     class="!h-14 !w-14 p-2 rounded-full {{$colours[$type]}}"/>
+                            <x-bladewind::modal-icon
+                                    type="{{ $type }}"
+                                    icon="{{$icon}}"
+                                    class="!h-14 !w-14 p-2 rounded-full bg-{{$type}}-100/80 dark:bg-{{$type}}-600 text-{{$type}}-700 dark:text-{{$type}}-100"/>
                         @endif
                         @if(!empty($icon) && empty($type))
-                            <x-bladewind::icon name="{{ $icon }}" class="!h-14 !w-14 modal-icon {{$icon_css}}"/>
+                            <x-bladewind::icon name="{{ $icon }}" class="!h-14 !w-14 {{$icon_css}}"/>
                         @endif
                     </div>
                 @endif
                 <div class="modal-body grow px-2 @if(!empty($type) || !empty($icon)) @endif {{ $body_css  }}">
-                    <h1 class="text-base font-semibold leading-5 text-gray-900 modal-title text-left">{{ $title }}</h1>
+                    <h1 class="text-base font-semibold leading-5 text-gray-900 dark:text-gray-100 modal-title text-left">{{ $title }}</h1>
                     <div class="modal-text text-gray-500 dark:text-gray-400 pt-2 text-sm text-left">
                         {{ $slot }}
                     </div>
                 </div>
             </div>
             @if( $show_action_buttons )
-                <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-{{$align_buttons}} @endif bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
+                <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif
+                @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-{{$align_buttons}} @endif
+                bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
