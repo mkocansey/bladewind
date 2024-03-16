@@ -236,20 +236,11 @@ var goToTab = (el, color, context) => {
         alert('no matching x-bladewind.tab-content div found for this tab');
         return false;
     }
-    changeCssForDomArray(
-        `.${context}-headings li.atab span`,
-        `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`,
-        'remove');
-    changeCssForDomArray(
-        `.${context}-headings li.atab span`,
-        'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300');
-    changeCss(
-        `.atab-${el} span`,
-        'text-gray-500,border-transparent,hover:text-gray-600,hover:border-gray-300', 'remove');
-    changeCss(
-        `.atab-${el} span`,
-        `text-${color}-500,border-${color}-500,hover:text-${color}-500,hover:border-${color}-500`);
-
+    
+    changeCssForDomArray(`.${context}-headings li.atab span`, `${color}, is-active`, 'remove');
+    changeCssForDomArray(`.${context}-headings li.atab span`, 'is-inactive');
+    changeCss(`.atab-${el} span`, 'is-inactive', 'remove');
+    changeCss(`.atab-${el} span`, `is-active, ${color}`);
     dom_els(`.${context_}-tab-contents div.atab-content`).forEach((el) => {
         hide(el, true);
     });
