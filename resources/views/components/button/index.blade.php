@@ -51,7 +51,10 @@
     'outline' => false,
 
     // thickness of outline border
-    'border_width' => 4, //border-2, border-4, border-8
+    'border_width' => 2, //border-2, border-4, border-8
+
+    // thickness of the ring shown on focus
+    'ring_width' => '', // ring, ring-1, ring-2, ring-4, ring-8
 
     // determines how rounded the button should be
     'radius' => 'full',
@@ -103,8 +106,9 @@
         $button_colour = preg_replace('/-\d+/', '', $button_colour);
     }
     $button_type = ($can_submit) ? 'submit' : 'button';
-    $spinner_css = (!$show_spinner) ? 'hidden' : 'text-white';
-    $focus_ring_css = (!$show_focus_ring) ? 'focus:!ring-0' : 'focus:!ring';
+    $spinner_css =  sprintf(($outline ? 'text-gray-600 dark:text-white %s' : 'text-white %s'), (!$show_spinner) ?  'hidden' : '');
+    $focus_ring_width = ($ring_width !== '' && in_array((int)$ring_width, [1,2,4,8])) ? '-'.$ring_width : '';
+    $focus_ring_css = (!$show_focus_ring) ? 'focus:ring-0 focus:outline-' : 'focus:ring'.$focus_ring_width;
     $border_width = ' border-'.$border_width;
     $primary_colour_css = (($outline) ?
         sprintf($outline_colour,$focus_ring_css.$border_width) :

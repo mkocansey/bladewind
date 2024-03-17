@@ -1,6 +1,10 @@
 @layer components {
     .bw-button {
-        @apply py-5 px-7 focus:outline-none focus:ring focus:ring-offset-2 focus:!ring-opacity-20 dark:focus:ring-opacity-10 text-xs tracking-widest rtl:inline-flex rtl:items-center transition
+        @apply py-5 px-7 text-xs tracking-widest rtl:inline-flex rtl:items-center transition focus:outline-none focus:!ring-opacity-25 focus:ring-offset-0
+    }
+
+    .bw-button-circle {
+        @apply focus:outline-none focus:!ring-opacity-25 focus:ring-offset-0
     }
 
     .bw-button.big {
