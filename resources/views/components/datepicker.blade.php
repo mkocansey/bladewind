@@ -54,6 +54,7 @@
     'validation_message' => 'Your end date cannot be less than your start date',
     'onblur' => '',
     'tabindex' => -1,
+    'week_starts' => 'sunday',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -79,6 +80,7 @@
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
     $js_function = ($validate) ? "compareDates('$date_from_name', '$date_to_name', '$validation_message', '$show_error_inline')" : '';
+    $week_starts = str_replace('day', '', ((in_array($week_starts, ['sun','sunday','mon','monday'])) ? $week_starts : 'sunday'));
 @endphp
 <style>
     [x-cloak] {
@@ -86,7 +88,8 @@
     }
 </style>
 @if($type == 'single')
-    <div x-data="app('{{ $default_date }}', '{{ strtoupper($format) }}')" x-init="[initDate(), getNoOfDays()]" x-cloak>
+    <div x-data="app('{{ $default_date }}', '{{ strtoupper($format) }}', '{{$week_starts}}')"
+         x-init="[initDate(), getNoOfDays()]" x-cloak>
         <div class="relative w-full">
             <input
                     type="hidden"
@@ -186,6 +189,7 @@
                     default_date="{{ $default_date_from??'' }}"
                     required="{{ $required }}"
                     label="{{$date_from_label}}"
+                    week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     format="{{$format}}"/>
         </div>
@@ -197,6 +201,7 @@
                     default_date="{{ $default_date_to??'' }}"
                     required="{{ $required }}"
                     label="{{$date_to_label}}"
+                    week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     format="{{$format}}"/>
         </div>
@@ -236,9 +241,9 @@
             august.substring(0, 3), september.substring(0, 3), october.substring(0, 3),
             november.substring(0, 3), december.substring(0, 3)
         ];
-        const DAYS = [
-            sunday.substring(0, 3), monday.substring(0, 3), tuesday.substring(0, 3), wednesday.substring(0, 3),
-            thursday.substring(0, 3), friday.substring(0, 3), saturday.substring(0, 3)
+        const DAYS = [@if($week_starts == 'sun') sunday.substring(0, 3), @endif
+        monday.substring(0, 3), tuesday.substring(0, 3), wednesday.substring(0, 3),
+            thursday.substring(0, 3), friday.substring(0, 3), saturday.substring(0, 3) @if($week_starts == 'mon') , sunday.substring(0, 3) @endif
         ];
     </script>
     <script src="{{ asset('vendor/bladewind/js/datepicker.js') }}"></script>

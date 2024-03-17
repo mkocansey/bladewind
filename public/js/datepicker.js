@@ -1,4 +1,4 @@
-function app(selected_date = '', date_format) {
+function app(selected_date = '', date_format, first_weekday = 'sun') {
     return {
         showDatepicker: false,
         datepickerValue: "",
@@ -91,6 +91,7 @@ function app(selected_date = '', date_format) {
                 this.month
             ).getDay();
             let blankdaysArray = [];
+            dayOfWeek = (first_weekday === 'sun') ? dayOfWeek : (dayOfWeek - 1);
             for (var i = 1; i <= dayOfWeek; i++) {
                 blankdaysArray.push(i);
             }
