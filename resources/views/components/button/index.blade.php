@@ -106,7 +106,7 @@
         $button_colour = preg_replace('/-\d+/', '', $button_colour);
     }
     $button_type = ($can_submit) ? 'submit' : 'button';
-    $spinner_css = (!$show_spinner) ? 'hidden' : 'text-white';
+    $spinner_css =  sprintf(($outline ? 'text-gray-600 dark:text-white %s' : 'text-white %s'), (!$show_spinner) ?  'hidden' : '');
     $focus_ring_width = ($ring_width !== '' && in_array((int)$ring_width, [1,2,4,8])) ? '-'.$ring_width : '';
     $focus_ring_css = (!$show_focus_ring) ? 'focus:ring-0 focus:outline-' : 'focus:ring'.$focus_ring_width;
     $border_width = ' border-'.$border_width;

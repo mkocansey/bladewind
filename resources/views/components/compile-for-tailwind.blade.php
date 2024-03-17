@@ -7,7 +7,7 @@
         'primary'   => [
             'bg'        => 'bg-primary-200 bg-primary-300 peer-checked:bg-primary-500/80 !bg-primary-500 hover:!bg-primary-500 hover:!bg-primary-700 active:bg-primary-700',
             'text'      => 'text-primary-50 text-primary-500 hover:text-red-50 hover:text-primary-700',
-            'borders'   => 'after:border-primary-100 border-primary-300 border-primary-200 border-primary-500 border-primary-500/50 hover:border-primary-600 active:border-primary-700',
+            'borders'   => 'after:border-primary-100 border-primary-300 border-primary-200 border-primary-500 border-primary-500/50 hover:border-primary-600 active:border-primary-700 border-4 border-8 border-2',
             'pseudo'    => 'focus:ring-primary-500  dark:focus:ring-primary-500 focus:ring-1 focus:ring-2 focus:ring-4 focus:ring-8'
         ],
         'secondary'   => [
