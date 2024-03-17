@@ -31,4 +31,4 @@
         :title="$title"
         circular="true"
         :onclick="$onclick"
-        :href="$href/>
+        :href="$href"/>
