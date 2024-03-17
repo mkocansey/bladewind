@@ -17,13 +17,21 @@
         'center_bottom' => 'bottom-10',
     ]
 ])
-
+@php
+    // [type] is repalced with the type of notification in notification.js
+    $css = "!h-14 !w-14 p-2 rounded-full bg-[type]-100/80 dark:bg-[type]-600 text-[type]-700 dark:text-[type]-100";
+@endphp
 <div class="fixed flex flex-col-reverse {{ $position_css[str_replace(' ', '_', $position)] }} z-50 bw-notification-container w-11/12 sm:w-1/4"></div>
-<div class="hidden bw-notification-icons"><x-bladewind::modal-icon /></div>
+<div class="bw-notification-icons hidden">
+    <x-bladewind::modal-icon class="hidden {{$css}}"/>
+    <x-bladewind::modal-icon class="hidden {{$css}}" type="error"/>
+    <x-bladewind::modal-icon class="hidden {{$css}}" type="warning"/>
+    <x-bladewind::modal-icon class="hidden {{$css}}" type="success"/>
+</div>
 
 <script>
     @php include_once('vendor/bladewind/js/notification.js'); @endphp
-    showNotification = (title, message, type, dismiss_in) => {
+        showNotification = (title, message, type, dismiss_in) => {
         new BladewindNotification(title, message, type, dismiss_in).show();
     }
 </script>

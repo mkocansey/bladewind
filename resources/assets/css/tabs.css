@@ -1,0 +1,211 @@
+@layer components {
+
+    .bw-tab {
+        @apply border-b border-gray-200 dark:border-gray-700
+    }
+
+    .bw-tab.simple {
+        @apply pb-[1px]
+    }
+
+    .bw-tab.simple .atab {
+        @apply bg-white dark:bg-dark-800
+    }
+
+    .bw-tab.simple .atab span {
+        @apply inline-block p-4 text-sm font-medium text-center
+    }
+
+    .bw-tab.simple .atab span.is-disabled {
+        @apply text-gray-300 hover:!text-gray-300 dark:opacity-20 cursor-not-allowed
+    }
+
+    .bw-tab.simple .atab span.is-active {
+        @apply border-b-2
+    }
+
+    .bw-tab .atab span.primary {
+        @apply text-primary-500 border-primary-500 hover:text-primary-500 hover:border-primary-500
+    }
+
+    .bw-tab .atab span.blue {
+        @apply text-blue-500 border-blue-500 hover:text-blue-500 hover:border-blue-500
+    }
+
+    .bw-tab .atab span.red {
+        @apply text-red-500 border-red-500 hover:text-red-500 hover:border-red-500
+    }
+
+    .bw-tab .atab span.yellow {
+        @apply text-yellow-500 border-yellow-500 hover:text-yellow-500 hover:border-yellow-500
+    }
+
+    .bw-tab .atab span.green {
+        @apply text-green-500 border-green-500 hover:text-green-500 hover:border-green-500
+    }
+
+    .bw-tab .atab span.gray {
+        @apply text-gray-500 border-gray-500 hover:text-gray-500 hover:border-gray-500
+    }
+
+    .bw-tab .atab span.purple {
+        @apply text-purple-500 border-purple-500 hover:text-purple-500 hover:border-purple-500
+    }
+
+    .bw-tab .atab span.pink {
+        @apply text-pink-500 border-pink-500 hover:text-pink-500 hover:border-pink-500
+    }
+
+    .bw-tab .atab span.cyan {
+        @apply text-cyan-500 border-cyan-500 hover:text-cyan-500 hover:border-cyan-500
+    }
+
+    .bw-tab .atab span.indigo {
+        @apply text-indigo-500 border-indigo-500 hover:text-indigo-500 hover:border-indigo-500
+    }
+
+    .bw-tab .atab span.violet {
+        @apply text-violet-500 border-violet-500 hover:text-violet-500 hover:border-violet-500
+    }
+
+    .bw-tab .atab span.fuchsia {
+        @apply text-fuchsia-500 border-fuchsia-500 hover:text-fuchsia-500 hover:border-fuchsia-500
+    }
+
+    .bw-tab .atab span.orange {
+        @apply text-orange-500 border-orange-500 hover:text-orange-500 hover:border-orange-500
+    }
+
+    .bw-tab.system {
+        @apply pl-8
+    }
+
+    .bw-tab.system .atab span.is-inactive {
+        @apply py-3 px-4 mt-1.5 border-x border-t border-gray-300 dark:border-gray-600
+    }
+
+    .bw-tab.system .atab span {
+        @apply inline-block p-3.5 text-sm font-medium text-center !border-x !border-t rounded-t-lg
+    }
+
+    .bw-tab.system .atab span.is-active {
+        @apply !border-b-4 !border-b-white dark:!border-b-dark-800
+    }
+
+    .bw-tab.system.primary {
+        @apply border-b border-primary-500 dark:border-primary-700
+    }
+
+    .bw-tab.system.blue {
+        @apply border-b border-blue-500 dark:border-blue-700
+    }
+
+    .bw-tab.system.red {
+        @apply border-b border-red-500 dark:border-red-700
+    }
+
+    .bw-tab.system.yellow {
+        @apply border-b border-yellow-500 dark:border-yellow-700
+    }
+
+    .bw-tab.system.green {
+        @apply border-b border-green-500 dark:border-green-700
+    }
+
+    .bw-tab.system.orange {
+        @apply border-b border-orange-500 dark:border-orange-700
+    }
+
+    .bw-tab.system.violet {
+        @apply border-b border-violet-500 dark:border-violet-700
+    }
+
+    .bw-tab.system.gray {
+        @apply border-b border-gray-500 dark:border-gray-700
+    }
+
+    .bw-tab.system.pink {
+        @apply border-b border-pink-500 dark:border-pink-700
+    }
+
+    .bw-tab.system.indigo {
+        @apply border-b border-indigo-500 dark:border-indigo-700
+    }
+
+    .bw-tab.system.cyan {
+        @apply border-b border-cyan-500 dark:border-cyan-700
+    }
+
+    .bw-tab.system.fuchsia {
+        @apply border-b border-fuchsia-500 dark:border-fuchsia-700
+    }
+
+    .bw-tab.system.purple {
+        @apply border-b border-purple-500 dark:border-purple-700
+    }
+
+    .bw-tab.pills {
+        @apply border-b-0
+    }
+
+    .bw-tab.pills .atab span {
+        @apply inline-block px-4 py-2 text-sm font-medium rounded-xl bg-gray-100
+    }
+
+    .bw-tab.pills .atab span.is-active {
+        @apply border-2 border-gray-300
+    }
+
+    .bw-tab.pills.primary span.is-active {
+        @apply border-primary-500
+    }
+
+    .bw-tab.pills.pink span.is-active {
+        @apply border-pink-500
+    }
+
+    .bw-tab.pills.red span.is-active {
+        @apply border-red-500
+    }
+
+    .bw-tab.pills.yellow span.is-active {
+        @apply border-yellow-500
+    }
+
+    .bw-tab.pills.cyan span.is-active {
+        @apply border-cyan-500
+    }
+
+    .bw-tab.pills.orange span.is-active {
+        @apply border-orange-500
+    }
+
+    .bw-tab.pills.gray span.is-active {
+        @apply border-gray-500
+    }
+
+    .bw-tab.pills.violet span.is-active {
+        @apply border-violet-500
+    }
+
+    .bw-tab.pills.indigo span.is-active {
+        @apply border-indigo-500
+    }
+
+    .bw-tab.pills.fuchsia span.is-active {
+        @apply border-fuchsia-500
+    }
+
+    .bw-tab.pills.purple span.is-active {
+        @apply border-purple-500
+    }
+
+    .bw-tab.pills.blue span.is-active {
+        @apply border-blue-500
+    }
+
+    .bw-tab.pills.green span.is-active {
+        @apply border-green-500
+    }
+
+}

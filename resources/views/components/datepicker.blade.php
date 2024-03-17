@@ -129,7 +129,7 @@
                                                class="h-5 w-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
                         </button>
                     </div>
-                    <div class="text-lg text-white/90 dark:text-gray-400 cursor-default">
+                    <div class="text-lg text-white/90 dark:text-gray-100 cursor-default">
                         <span x-text="MONTH_NAMES[month]"></span>
                         <span x-text="year" class="ml-1"></span>
                     </div>

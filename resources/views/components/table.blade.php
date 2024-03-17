@@ -98,14 +98,19 @@
         }
     }
 @endphp
-<div class="@if($has_border) border border-gray-200 @endif max-w-screen overflow-x-scroll w-full sm:overflow-x-hidden">
-    <div class="w-full overflow-x-hidden">
+<div class="@if($has_border) border border-gray-200 dark:border-dark-700/60 dark:px-[1px] @endif max-w-full">
+    <div class="w-full">
         @if($searchable)
             <div class="bw-table-filter-bar">
-                <x-bladewind::input name="bw-search-{{$name}}" placeholder="{{$search_placeholder}}"
-                                    onkeyup="filterTable(this.value, 'table.{{$name}}')"
-                                    prefix_is_icon="true" add_clearing="false" class="!mb-0 focus:!border-slate-300"
-                                    prefix="magnifying-glass"/>
+                <x-bladewind::input
+                        name="bw-search-{{$name}}"
+                        placeholder="{{$search_placeholder}}"
+                        onkeyup="filterTable(this.value, 'table.{{$name}}')"
+                        add_clearing="false"
+                        class="!mb-0 focus:!border-slate-300 !pl-11"
+                        clearable="true"
+                        prefix_is_icon="true"
+                        prefix="magnifying-glass"/>
             </div>
         @endif
 

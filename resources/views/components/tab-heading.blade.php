@@ -11,11 +11,11 @@
     // if url => 'default'
     'name' => 'tab',
     // the default action of a tab is to switch to its corresponding tab content div 
-    // to enable switching, the tab content div needs to have the same name as the tab
+    // to enable switching; the tab content div needs to have the same name as the tab
     // the alternative action is to pass a url. clicking on the tab will open the url
     'url' => 'default',
 ])
-@aware(['color' => 'blue'])
+@aware(['color' => 'blue', 'style' => 'linear'])
 @php
     $name = preg_replace('/[\s]/', '-', $name);
     $active = filter_var($active, FILTER_VALIDATE_BOOLEAN);
@@ -24,7 +24,5 @@
 
 <li class="mr-2 cursor-pointer atab atab-{{ $name }}"
     onclick="@if(!$disabled) @if($url == 'default')goToTab('{{$name}}', '{{$color}}', this.parentElement.getAttribute('data-name')) @else location.href='{{ $url }}' @endif @else javascript:void(0)@endif">
-    <span class="inline-block py-4 px-4 text-sm font-medium text-center border-b-2 @if($disabled) text-gray-300 hover:!text-gray-300 cursor-not-allowed
-    @else @if(!$active && !$disabled) text-gray-500  border-transparent hover:text-gray-600 hover:border-gray-300
-    @else text-{{$color}}-500 border-{{$color}}-500 hover:text-{{$color}}-500 hover:border-{{$color}}-500 @endif @endif">{!! $label !!}</span>
+    <span class="@if($disabled) is-disabled @else @if(!$active && !$disabled) is-inactive @else is-active {{$color}} @endif @endif">{!! $label !!}</span>
 </li>
