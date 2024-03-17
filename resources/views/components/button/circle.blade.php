@@ -1,6 +1,7 @@
 @props([
     'onclick' => '',
     'title' => '',
+    'href' => '',
 ])
 @aware([
     'type' => 'primary',
@@ -29,4 +30,5 @@
         :button_text_css="$button_text_css"
         :title="$title"
         circular="true"
-        :onclick="$onclick"/>
+        :onclick="$onclick"
+        :href="$href/>

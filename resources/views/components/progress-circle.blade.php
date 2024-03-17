@@ -11,62 +11,135 @@
     'showPercent' => false,
     'size' => 'medium',
     'animate' => true,
-    'dark' => [
-      'blue' => '#3b82f6', 'red' => '#e11d48', 'yellow' => '#fbbf24', 'green' => '#16a34a', 'pink' => '#ec4899',
-      'cyan' => '#06b6d4', 'orange' => '#f97316', 'gray' => '#64748b', 'purple' => '#a855f7',
-      'violet' => '#7c3aed', 'indigo' => '#4f46e5', 'fuchsia' => '#c026d3',
-    ],
-    'faint' => [
-      'blue' => '#60a5fa', 'red' => '#fb7185', 'yellow' => '#fcd34d', 'green' => '#4ade80', 'pink' => '#f472b6',
-      'cyan' => '#22d3ee', 'orange' => '#fb923c', 'gray' => '#9ca3af', 'purple' => '#c084fc',
-      'violet' => '#a78bfa', 'indigo' => '#818cf8', 'fuchsia' => '#e879f9',
-    ],
-    'tiny' => [
-      'width' => 50, 'circle_width' => 5,
-      'text' => [ 
-          'weight' => 'normal', 'translate' => -70,
-          'with_percent' => [ 'size' => 11, 'width' => 15, 'height' => 0],
-          'without__percent' => [ 'size' => 11, 'width' => 15, 'height' => 0],
-      ] 
-    ],
-    'small' => [
-        'width' => 80, 'circle_width' => 8,
-      'text' => [ 
-          'weight' => 'normal', 'translate' => -70,
-          'with_percent' => [ 'size' => 16, 'width' => 20, 'height' => 0 ],
-          'without__percent' => [ 'size' => 16, 'width' => 20, 'height' => 0 ],
-      ] 
-    ],
-    'medium' => [
-      'width' => 120, 'circle_width' => 12,
-      'text' => [ 
-          'weight' => 'normal', 'translate' => -70,
-          'with_percent' => [ 'size' => 18, 'width' => 36, 'height' => 0],
-          'without__percent' => [ 'size' => 24, 'width' => 30, 'height' => 0 ],
-      ] 
-    ],
-    'big' => [
-      'width' => 200, 'circle_width' => 25,
-      'text' => [ 
-          'weight' => 'normal', 'translate' => -70,
-          'with_percent' => [ 'size' => 14, 'width' => 20, 'height' => 40],
-          'without__percent' => [ 'size' => 32, 'width' => 40, 'height' => 0],
-      ] 
-    ],
-    'large' => [
-      'width' => 300, 'circle_width' => 30,
-      'text' => [ 
-          'weight' => 'normal', 'translate' => -70,
-          'with_percent' => [ 'size' => 14, 'width' => 20, 'height' => 40 ],
-          'without__percent' => [ 'size' => 40, 'width' => 50, 'height' => 0],
-      ] 
-    ],
     'text_size' => null,
     'align' => null,
     'valign' => null,
 ])
-
 @php
+    $dark = [
+        'blue'      => '#3b82f6',
+        'red'       => '#e11d48',
+        'yellow'    => '#fbbf24',
+        'green'     => '#16a34a',
+        'pink'      => '#ec4899',
+        'cyan'      => '#06b6d4',
+        'orange'    => '#f97316',
+        'gray'      => '#64748b',
+        'purple'    => '#a855f7',
+        'violet'    => '#7c3aed',
+         'indigo'   => '#4f46e5',
+         'fuchsia'  => '#c026d3',
+    ];
+    $faint = [
+        'blue'      => '#60a5fa',
+        'red'       => '#fb7185',
+        'yellow'    => '#fcd34d',
+        'green'     => '#4ade80',
+        'pink'      => '#f472b6',
+        'cyan'      => '#22d3ee',
+        'orange'    => '#fb923c',
+        'gray'      => '#9ca3af',
+        'purple'    => '#c084fc',
+        'violet'    => '#a78bfa',
+        'indigo'    => '#818cf8',
+        'fuchsia'   => '#e879f9',
+    ];
+
+    $tiny = [
+        'width'         => 50,
+        'circle_width'  => 5,
+        'text'          => [
+            'weight'        => 'normal',
+            'translate'     => -70,
+            'with_percent'  => [
+                'size'      => 11,
+                'width'     => 15,
+                'height'    => 0
+            ],
+            'without__percent' => [
+                'size'      => 11,
+                'width'     => 15,
+                'height'    => 0
+            ],
+        ]
+    ];
+
+    $small = [
+        'width'         => 80,
+        'circle_width'  => 8,
+        'text'          => [
+            'weight'        => 'normal', '
+            translate'      => -70,
+            'with_percent'  => [
+                'size' => 16,
+                'width' => 20,
+                'height' => 0
+            ],
+            'without__percent' => [
+                'size' => 16,
+                'width' => 20,
+                'height' => 0
+            ],
+        ]
+    ];
+
+    $medium = [
+        'width'         => 120,
+        'circle_width'  => 12,
+        'text'           => [
+            'weight' => 'normal',
+            'translate' => -70,
+            'with_percent' => [
+                'size' => 18,
+                'width' => 36,
+                'height' => 0
+            ],
+            'without__percent' => [
+                'size' => 24,
+                'width' => 30,
+                'height' => 0 ]
+            ,
+        ]
+    ];
+
+    $big = [
+        'width'         => 200,
+        'circle_width'  => 25,
+        'text'           => [
+            'weight' => 'normal',
+            'translate' => -70,
+            'with_percent' => [
+                'size' => 14,
+                'width' => 20,
+                'height' => 40
+            ],
+            'without__percent' => [
+                'size' => 32,
+                'width' => 40,
+                'height' => 0]
+            ,
+        ]
+    ];
+
+    $large = [
+        'width'         => 300,
+        'circle_width'  => 30,
+        'text'           => [
+            'weight' => 'normal',
+            'translate' => -70,
+            'with_percent' => [
+                'size' => 14,
+                'width' => 20,
+                'height' => 40
+            ],
+            'without__percent' => [
+                'size' => 40,
+                'width' => 50,
+                'height' => 0]
+            ,
+        ]
+    ];
+
     if ($showPercent) $show_percent = $showPercent;
     if ($showLabel) $show_label = $showLabel;
     $animate = filter_var($animate, FILTER_VALIDATE_BOOLEAN);

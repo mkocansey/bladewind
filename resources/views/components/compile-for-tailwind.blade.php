@@ -17,27 +17,27 @@
             'pseudo'    => 'focus:ring-secondary-500 '
         ],
         'red'       => [
-            'bg'        => 'bg-error-100/80 bg-red-200 bg-red-300 peer-checked:bg-red-500/80 !bg-red-500 hover:!bg-red-500 hover:!bg-red-700 active:bg-red-700 bg-error-500',
-            'text'      => 'text-red-50 text-red-500 text-error-600 text-red-700 hover:text-red-50 text-red-100 !text-error-100 hover:text-red-700',
-            'borders'   => 'after:border-red-100 border-red-300 border-red-200 !border-red-400 border-red-500 border-red-500/50 hover:border-red-600 active:border-red-700',
+            'bg'        => 'bg-error-100/80 bg-red-200 bg-red-300 peer-checked:bg-red-500/80 !bg-red-500 dark:bg-error-600 hover:!bg-red-500 hover:!bg-red-700 active:bg-red-700 bg-error-500',
+            'text'      => 'text-red-50 hover:text-red-50 text-red-100 !text-error-100 dark:text-error-100 text-red-500 text-error-700 text-red-700  hover:text-red-700',
+            'borders'   => 'after:border-red-100 border-red-300 border-red-200 !border-red-400 border-red-500 border-error-500 border-red-500/50 hover:border-red-600 active:border-red-700',
             'pseudo'    => 'focus:ring-red-500 '
         ],
         'yellow'    => [
-            'bg'        => 'bg-warning-100/80 bg-yellow-200 bg-yellow-200/70 bg-yellow-300 peer-checked:bg-yellow-500/80 !bg-yellow-500 hover:!bg-yellow-500 hover:!bg-yellow-700 active:bg-yellow-70 bg-warning-5000',
-            'text'      => 'text-yellow-50 text-yellow-100 text-yellow-500 text-yellow-700 text-warning-700 hover:text-yellow-50 !text-warning-100 !text-warning-200 hover:text-yellow-700',
-            'borders'   => 'after:border-yellow-100 border-yellow-300 border-yellow-200 border-yellow-500 border-yellow-500/50 hover:border-yellow-600 active:border-yellow-700',
+            'bg'        => 'bg-warning-100/80 bg-yellow-200 bg-yellow-200/70 bg-yellow-300 peer-checked:bg-yellow-500/80 !bg-yellow-500 dark:bg-warning-600 hover:!bg-yellow-500 hover:!bg-yellow-700 active:bg-yellow-70 bg-warning-5000',
+            'text'      => 'text-yellow-50 text-yellow-100 dark:text-warning-100 text-yellow-500 text-yellow-700 text-warning-700 hover:text-yellow-50 !text-warning-100 !text-warning-200 hover:text-yellow-700',
+            'borders'   => 'after:border-yellow-100 border-yellow-300 border-yellow-200 border-yellow-500 border-warning-500 border-yellow-500/50 hover:border-yellow-600 active:border-yellow-700',
             'pseudo'    => 'focus:ring-yellow-500 '
         ],
         'green'    => [
-            'bg'        => 'bg-success-100/80 bg-green-200 bg-green-300 peer-checked:bg-green-500/80 !bg-green-500 hover:!bg-green-500 hover:!bg-green-700 active:bg-green-700 bg-success-500',
-            'text'      => 'text-green-50 text-green-100 text-green-500 text-success-600 hover:text-green-50 !text-success-100 hover:text-green-700',
-            'borders'   => 'after:border-green-100 border-green-300 border-green-200 border-green-500 border-green-500/50 hover:border-green-600 active:border-green-700',
+            'bg'        => 'bg-success-100/80 bg-green-200 bg-green-300 peer-checked:bg-green-500/80 !bg-green-500 dark:bg-success-600 hover:!bg-green-500 hover:!bg-green-700 active:bg-green-700 bg-success-500',
+            'text'      => 'text-green-50 text-green-100 dark:text-success-100 text-green-500 text-success-700 hover:text-green-50 !text-success-100 hover:text-green-700',
+            'borders'   => 'after:border-green-100 border-green-300 border-green-200 border-green-500 border-success-500 border-green-500/50 hover:border-green-600 active:border-green-700',
             'pseudo'    => 'focus:ring-green-500 '
         ],
         'blue'    => [
-            'bg'        => 'bg-info-100/80 bg-blue-200 bg-blue-300 peer-checked:bg-blue-500/80 !bg-blue-500 hover:!bg-blue-500 hover:!bg-blue-700 active:bg-blue-700 bg-info-500',
-            'text'      => 'text-blue-50 text-blue-100 text-blue-500 text-blue-700 text-info-700 hover:text-blue-50 !text-info-100 !text-info-100 hover:text-blue-700',
-            'borders'   => 'after:border-blue-100 border-blue-300 border-blue-200 border-blue-500 border-blue-500/50 hover:border-blue-600 active:border-blue-700',
+            'bg'        => 'bg-info-100/80 bg-blue-200 bg-blue-300 peer-checked:bg-blue-500/80 !bg-blue-500 hover:!bg-blue-500 dark:bg-info-600 dark:text-[type]-100 hover:!bg-blue-700 active:bg-blue-700 bg-info-500',
+            'text'      => 'text-blue-50 text-blue-100 dark:text-info-100 text-blue-500 text-blue-700 text-info-700 hover:text-blue-50 !text-info-100 !text-info-100 hover:text-blue-700',
+            'borders'   => 'after:border-blue-100 border-blue-300 border-blue-200 border-blue-500 border-info-500 border-blue-500/50 hover:border-blue-600 active:border-blue-700',
             'pseudo'    => 'focus:ring-blue-500 '
         ],
         'orange'    => [

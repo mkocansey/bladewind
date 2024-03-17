@@ -6,7 +6,6 @@ class BladewindNotification {
     dismissInSeconds;
     name;
     timeoutName;
-    borderColors;
     colors;
 
     constructor(title, message, type, dismissInMinutes) {
@@ -49,16 +48,12 @@ class BladewindNotification {
     }
 
     modalIcon = function () {
-        let bg_color = eval(`this.colors.${this.type}.bg`);
-        // info is never hidden so replacing hidden will fail
-        let to_find = (this.type === 'info') ? 'modal-icon' : 'hidden';
-        let replace_with = ((this.type === 'info') ? 'modal-icon' : '') + ` !h-14 !w-14 p-2 rounded-full ${bg_color}`;
-        return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replace(to_find, replace_with);
+        changeCss(`.bw-notification-icons .${this.type}`, 'hidden', 'remove');
+        return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replaceAll('[type]', this.type);
     }
 
     template = () => {
-        let border_color = eval(`this.colors.${this.type}.border`);
-        return `<div class="flex border-2 ${this.name} ${border_color} bg-white dark:bg-slate-700 dark:border-0 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
+        return `<div class="flex border-l-4 border-opacity-50 ${this.name} border-${this.type}-500 bg-white dark:bg-slate-700 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
             <div class="pr-4 grow-0">${this.modalIcon()}</div>
             <div class="pb-1 pr-4 relative grow">
                 <h1 class="font-semibold text-gray-700 dark:text-slate-300">${this.title}</h1>
