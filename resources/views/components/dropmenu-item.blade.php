@@ -1,6 +1,7 @@
 @props([
     'class' => '',
     'icon' => '',
+    'dir' => '',
     'icon_css' => '',
     'divider' => false,
     'header' => false,
@@ -29,7 +30,7 @@
                     @if($hover) hover:dark:text-dark-100 hover:bg-slate-200/75 dark:hover:bg-dark-900/75 @endif
                 @else !cursor-default border-b border-b-slate-200/75 dark:border-b-dark-700/70 0 mb-1 @endif ">
     @if(!empty($icon) && !$header)
-        <x-bladewind::icon name="{{ $icon }}"
+        <x-bladewind::icon name="{!! $icon !!}" :dir="$dir"
                            class="!h-[17px] !w-[17px] !-ml-1 !mt-0.5 !text-gray-400  {{$icon_css}}"/>
     @endif
     {{ $slot }}
