@@ -1,28 +1,17 @@
 @props([ 
     'label' => '',
-//    'color' => 'blue',
     'class' => '',
     'can_close' => false,
     'canClose' => false,
-//    'rounded' => false,
     'outline' => false,
     'add_clearing' => true,
     'addClearing' => true,
     'shade' => 'faint',
-    'color_weight' => [
-        'faint' => 200,
-        'dark' => 500,
-    ],
-    'text_color_weight' => [
-        'faint' => 500,
-        'dark' => 50,
-    ],
     'onclick' => '',
     'id' => uniqid(),
     'add_id_prefix' => true,
     'addIdPrefix' => true,
     'value' => null,
-//    'name' => null,
     'selectable' => false,
 ])
 @aware([
@@ -49,15 +38,26 @@
     if ($canClose) $can_close = $canClose;
     if (!$addIdPrefix) $add_id_prefix = $addIdPrefix;
 
+
+    $color_weight = [
+        'faint' => 200,
+        'dark' => 500,
+    ];
+
+    $text_color_weight = [
+        'faint' => 700,
+        'dark' => 50,
+    ];
+
     $rounded_class = ($rounded) ? 'rounded-full' : 'rounded-md';
     $clearing_css = ($add_clearing) ? 'mb-3' : '';
-    $bg_border_color_css = ($outline) ? "border border-$color-$color_weight[$shade] text-$color-500" : "bg-$color-$color_weight[$shade] text-$color-$text_color_weight[$shade]";
-    $text_color_css = ($outline) ? "text-$color-500" : "text-$color-$text_color_weight[$shade]";
+    $bg_border_color_css = ($outline) ? "border border-$color-$color_weight[$shade]" : "bg-$color-$color_weight[$shade] text-$color-$text_color_weight[$shade]";
+    $text_color_css = ($outline) ? "text-$color-700 dark:!text-$color-300" : "text-$color-$text_color_weight[$shade]";
 
     if( (!empty($name) && !empty($value)) ) {
         $can_close = false;
         $bg_border_color_css = "bg-$color-200 hover:bg-$color-500 cursor-pointer selectable bw-$name-$value";
-        $text_color_css = "text-$color-500 hover:text-$color-50";
+        $text_color_css = "text-$color-700 hover:text-$color-50";
         $selectable = true;
     }
 @endphp

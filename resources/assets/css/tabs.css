@@ -9,7 +9,7 @@
     }
 
     .bw-tab.simple .atab {
-        @apply bg-white dark:bg-dark-800
+        @apply bg-transparent
     }
 
     .bw-tab.simple .atab span {

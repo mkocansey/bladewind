@@ -35,4 +35,5 @@
     .bw-button.disabled, .bw-button-circle.disabled {
         @apply disabled:opacity-50 disabled:cursor-not-allowed
     }
+
 }
