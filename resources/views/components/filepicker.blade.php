@@ -40,7 +40,7 @@
     $image_file_types = [ "png", "jpg", "jpeg", "gif", "svg" ];
 @endphp
 <div class="border-gray-500"></div>
-<div class="relative px-2 py-3 border-2 border-dotted border-gray-300 dark:text-dark-300 dark:border-dark-600
+<div class="relative px-2 py-3 border-2 border-dashed border-gray-300 dark:text-dark-300 dark:border-dark-600
     dark:bg-dark-800 hover:dark:border-dark-700 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
     <x-bladewind::icon name="document-text"
                        class="h-6 w-6 absolute z-20 left-4 rtl:!right-4 rtl:!left-[unset] text-gray-300 dark:text-dark-500"/>

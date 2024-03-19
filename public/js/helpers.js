@@ -236,7 +236,7 @@ var goToTab = (el, color, context) => {
         alert('no matching x-bladewind.tab-content div found for this tab');
         return false;
     }
-    
+
     changeCssForDomArray(`.${context}-headings li.atab span`, `${color}, is-active`, 'remove');
     changeCssForDomArray(`.${context}-headings li.atab span`, 'is-inactive');
     changeCss(`.atab-${el} span`, 'is-inactive', 'remove');
@@ -313,15 +313,15 @@ var selectTag = (value, name) => {
         changeCss(tag, css.match(/bg-[\w]+-500/)[0], 'remove', true);
         changeCss(tag, (css.match(/bg-[\w]+-500/)[0]).replace('500', '200'), 'add', true);
         changeCss(tag, css.match(/text-[\w]+-50/)[0], 'remove', true);
-        changeCss(tag, (css.match(/text-[\w]+-50/)[0]).replace('50', '500'), 'add', true);
+        changeCss(tag, (css.match(/text-[\w]+-50/)[0]).replace('50', '700'), 'add', true);
     } else { // add
         let total_selected = (input.value === '') ? 0 : input.value.split(',').length;
         if (total_selected < max_selection) {
             input.value += `,${value}`;
             changeCss(tag, css.match(/bg-[\w]+-200/)[0], 'remove', true);
             changeCss(tag, (css.match(/bg-[\w]+-200/)[0]).replace('200', '500'), 'add', true);
-            changeCss(tag, css.match(/text-[\w]+-500/)[0], 'remove', true);
-            changeCss(tag, (css.match(/text-[\w]+-500/)[0]).replace('500', '50'), 'add', true);
+            changeCss(tag, css.match(/text-[\w]+-700/)[0], 'remove', true);
+            changeCss(tag, (css.match(/text-[\w]+-700/)[0]).replace('700', '50'), 'add', true);
         } else {
             showNotification(input.getAttribute('data-error-heading'), input.getAttribute('data-error-message'), 'error');
         }
