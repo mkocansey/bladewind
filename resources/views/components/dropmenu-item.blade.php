@@ -19,12 +19,12 @@
     $icon_css .= ($icon_right) ? ' !ml-2 !-mr-1' : ' !mr-2 -ml-0.5 ';
 @endphp
 <div {{$attributes->merge(['data-item' => "true"])}}
-     class="flex align-middle text-gray-600 cursor-pointer dark:text-slate-300 w-full text-sm !text-left whitespace-nowrap bw-item {{$class}}
+     class="flex align-middle text-gray-600 cursor-pointer dark:text-slate-300 w-full text-sm !text-left bw-item {{$class}}
     @if($divider && !$header)
         @if(!$divided)
             border-y border-t-slate-200/75 border-b-white dark:!border-t-gray-800/40 dark:border-b-gray-100/10 my-1
         @else hidden @endif
-    @else py-1.5 px-2.5  @endif
+    @else py-2 px-2.5  @endif
     @if($icon_right && !empty($icon)) !flex-row-reverse !justify-between @endif
     @if(!$header )
         @if($hover) hover:rounded-md hover:dark:text-dark-100 hover:bg-slate-200/75 hover:dark:!bg-dark-800 @endif
@@ -32,5 +32,5 @@
     @if(!empty($icon) && !$header)
         <x-bladewind::icon name="{!! $icon !!}" :dir="$dir" class="!h-4 !w-4 !mt-0.5 !text-gray-400  {{$icon_css}}"/>
     @endif
-    {{ $slot }}
+    {!! $slot !!}
 </div>

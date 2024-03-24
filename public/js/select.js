@@ -41,7 +41,7 @@ class BladewindSelect {
         document.addEventListener('mouseup', (e) => {
             let searchArea = dom_el(this.searchInput);
             let container = dom_el((this.isMultiple) ? this.itemsContainer : this.clickArea);
-            if (searchArea !== null && !searchArea.contains(e.target) && !container.contains(e.target)) hide(this.itemsContainer);
+            if (searchArea && container && !searchArea.contains(e.target) && !container.contains(e.target)) hide(this.itemsContainer);
         });
     }
 

@@ -4,13 +4,16 @@
     'active' => false,
     // unique way to identify this tab content using css or javascript
     // this name is used for switching to this content when the tab header is clicked
-    'name' => 'tab'
+    'name' => 'tab',
+    // additional css to add to the tab content
+    // prodbably you'd want to reduce the paddings
+    'class' => '',
 ])
 @php 
     $name = preg_replace('/[\s]/', '-', $name);
     $active = filter_var($active, FILTER_VALIDATE_BOOLEAN);
-    $active_css = (!$active) ? 'hidden' : '';
+    $active_css = sprintf(((!$active) ? 'hidden %s' : '%s'), $class);
 @endphp
-<div class="atab-content bw-tc-{{$name}} {{$active_css}} p-4">
+<div class="atab-content bw-tc-{{$name}} {{$active_css}}">
     {{ $slot }}
 </div>

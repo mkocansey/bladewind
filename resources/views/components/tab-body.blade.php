@@ -1,5 +1,6 @@
+@props([ 'class' => ''])
 @aware([ 'name' => 'tab'])
 @php $name = preg_replace('/[\s-]/', '_', $name); @endphp
-<div class="{{ $name }}-tab-contents" data-name="{{ $name }}">
+<div class="{{ $name }}-tab-contents p-4 {{$class}}" data-name="{{ $name }}">
     {{ $slot }}
 </div>

@@ -22,7 +22,7 @@
         <div>
             <x-bladewind::avatar image="{{ $image }}"/>
         </div>
-        <div class="grow pl-3">
+        <div class="grow pl-3 dark:text-dark-300">
             <strong class="tracking-wide">{{ $name }}</strong>
             <div class="text-xs mb-2 opacity-75">
                 {{ $department }}
@@ -34,7 +34,8 @@
             <div class="space-y-1">
                 @if($mobile)
                     <div class="text-sm mb-1">
-                        <x-bladewind::icon name="phone" class="!h-4 !w-4 inline-block mr-1.5 opacity-60"/>
+                        <x-bladewind::icon name="phone"
+                                           class="inline-block mr-1.5 opacity-60 rounded-full !border !border-gray-300 dark:!border-dark-500 p-1"/>
                         {{ $mobile }}
                     </div>
                 @endif

@@ -75,19 +75,6 @@
         dom_el('.bw-{{ $name }}').click();
     });
 
-    ['dragleave', 'drop', 'mouseout'].forEach(evt =>
-        dom_el('.bw-fp-{{ $name }}').addEventListener(evt, () => {
-            changeCss('.bw-fp-{{ $name }}', 'border-gray-500', 'remove');
-            changeCss('.bw-fp-{{ $name }}', 'border-gray-300');
-        }, false)
-    );
-
-    ['dragenter', 'dragover', 'mouseover'].forEach(evt =>
-        dom_el('.bw-fp-{{ $name }}').addEventListener(evt, () => {
-            changeCss('.bw-fp-{{ $name }}', 'border-gray-500');
-        }, false)
-    );
-
     dom_el('.bw-fp-{{ $name }}').addEventListener('click', function () {
         dom_el('.bw-{{ $name }}').click();
     });
@@ -116,19 +103,6 @@
         changeCss('.bw-fp-{{ $name }} .clear', 'hidden');
         e.stopImmediatePropagation();
     });
-
-    convertToBase64 = (file, el) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const base64String = reader.result;//.replace('data:', '').replace(/^.+,/, ''); 
-            dom_el(el).value = base64String;
-        };
-        reader.readAsDataURL(file);
-    }
-
-    allowedFileSize = (file_size, max_size) => {
-        return (file_size <= ((max_size) * 1) * 1000000);
-    }
 
     @if(!empty($url))
             @if(in_array(pathinfo($url, PATHINFO_EXTENSION), $image_file_types))

@@ -209,8 +209,10 @@
            @if($required) data-parent="bw-select-{{$input_name}}" @endif />
 </div>
 
-<script>
+<script type="module">
     @php include_once('vendor/bladewind/js/select.js'); @endphp
+</script>
+<script type="module">
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     @if(!$disabled && !$readonly) bw_{{ $input_name }}.activate();
     bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');

@@ -89,7 +89,7 @@
     }
 
     .bw-tab.system .atab span.is-active {
-        @apply !border-b-4 !border-b-white dark:!border-b-dark-800
+        @apply !border-b-2 !border-b-white dark:!border-b-dark-800 mb-[-2px]
     }
 
     .bw-tab.system.primary {

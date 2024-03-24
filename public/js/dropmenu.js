@@ -11,19 +11,22 @@ class BladewindDropmenu {
     }
 
     show = () => {
-        changeCss(this.items, 'opacity-0,hidden', 'remove');
-        dom_el(this.items).setAttribute('data-open', '1');
-        if (this.options.hideAfterClick) {
-            dom_els(`${this.items} .bw-item`).forEach((item) => {
-                item.addEventListener('click', () => {
-                    this.hide();
+        // do this is only there are items
+        if (this.hasItems()) {
+            changeCss(this.items, 'opacity-0,hidden', 'remove');
+            dom_el(this.items).setAttribute('data-open', '1');
+            if (this.options.hideAfterClick) {
+                dom_els(`${this.items} .bw-item`).forEach((item) => {
+                    item.addEventListener('click', () => {
+                        this.hide();
+                    });
                 });
+            }
+            document.addEventListener('mouseup', (e) => {
+                let container = dom_el(`.${this.name}`);
+                if (container && !container.contains(e.target)) this.hide();
             });
         }
-        document.addEventListener('mouseup', (e) => {
-            let container = dom_el(`.${this.name}`);
-            if (!container.contains(e.target)) this.hide();
-        });
     }
 
     hide = () => {
@@ -49,6 +52,10 @@ class BladewindDropmenu {
         dom_el(`.${this.name} .bw-trigger`).addEventListener(this.options.triggerOn, () => {
             this.toggle();
         });
+    }
+
+    hasItems = () => {
+        return dom_els(`${this.items} .bw-item`);
     }
 
 

@@ -22,7 +22,15 @@
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
 @endphp
 
-<li class="mr-2 cursor-pointer atab atab-{{ $name }}"
-    onclick="@if(!$disabled) @if($url == 'default')goToTab('{{$name}}', '{{$color}}', this.parentElement.getAttribute('data-name')) @else location.href='{{ $url }}' @endif @else javascript:void(0)@endif">
-    <span class="@if($disabled) is-disabled @else @if(!$active && !$disabled) is-inactive @else is-active {{$color}} @endif @endif">{!! $label !!}</span>
+<li class="mr-2 cursor-pointer atab atab-{{ $name }} relative "
+    onclick="@if(!$disabled) @if($url == 'default') goToTab('{{$name}}', '{{$color}}', this.parentElement.getAttribute('data-name')) @else location.href='{{ $url }}' @endif @endif">
+    <span class="@if($disabled)
+                    is-disabled
+                @else
+                    @if(!$active)
+                        is-inactive
+                    @else
+                        is-active {{$color}}
+                    @endif
+              @endif">{!! $label !!}</span>
 </li>
