@@ -27,18 +27,6 @@
         'thick' => 'w-12 h-7 after:w-5 after:h-5',
         'thicker' => 'w-[4.5rem] h-10 after:w-8 after:h-8',
     ],
-    'bar_colours' => [
-        'primary' => 'peer-checked:bg-primary-500/80 after:border-primary-100',
-        'red' => 'peer-checked:bg-red-500/80 after:border-red-100',
-        'yellow' => 'peer-checked:bg-yellow-500/80 after:border-yellow-100',
-        'green' => 'peer-checked:bg-green-500/80 after:border-green-100',
-        'pink' => 'peer-checked:bg-pink-500/80 after:border-pink-100',
-        'cyan' => 'peer-checked:bg-cyan-500/80 after:border-cyan-100',
-        'gray' => 'peer-checked:bg-slate-500 after:border-slate-100',
-        'purple' => 'peer-checked:bg-purple-500/80 after:border-purple-100',
-        'orange' => 'peer-checked:bg-orange-500/80 after:border-orange-100',
-        'blue' => 'peer-checked:bg-blue-500/80 after:border-blue-100',
-    ],
 ])
 @php
     // reset variables for Laravel 8 support
@@ -48,7 +36,7 @@
     $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
     $justified = filter_var($justified, FILTER_VALIDATE_BOOLEAN);
     $bar = (!in_array($bar, ['thin', 'thick', 'thicker'])) ? 'thick' : $bar;
-    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange'])) ? 'primary' : $color;
+    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'fuchsia', 'indigo', 'violet'])) ? 'primary' : $color;
     $bar_colour = "peer-checked:bg-$color-500/80 after:border-$color-100";
 @endphp
 

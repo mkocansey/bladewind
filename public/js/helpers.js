@@ -125,20 +125,17 @@ var changeCssForDomArray = (elements, css, mode = 'add') => {
 
 var changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
     // css can be comma separated
-    // if elementIsDomObject don't run it through dom_el
-    if ((!elementIsDomObject && dom_el(element) != null) || (elementIsDomObject && element != null)) {
+    // if !elementIsDomObject run it through dom_el
+    if (!elementIsDomObject) element = dom_el(element);
+    if (element) {
         if (css.indexOf(',') !== -1 || css.indexOf(' ') !== -1) {
             css = css.replace(/\s+/g, '').split(',');
             for (let classname of css) {
-                (mode === 'add') ?
-                    ((elementIsDomObject) ? element.classList.add(classname.trim()) : dom_el(element).classList.add(classname.trim())) :
-                    ((elementIsDomObject) ? element.classList.remove(classname.trim()) : dom_el(element).classList.remove(classname.trim()));
+                (mode === 'add') ? element.classList.add(classname.trim()) : element.classList.remove(classname.trim());
             }
         } else {
-            if ((!elementIsDomObject && dom_el(element).classList !== undefined) || (elementIsDomObject && element.classList !== undefined)) {
-                (mode === 'add') ?
-                    ((elementIsDomObject) ? element.classList.add(css) : dom_el(element).classList.add(css)) :
-                    ((elementIsDomObject) ? element.classList.remove(css) : dom_el(element).classList.remove(css));
+            if (element.classList !== undefined) {
+                (mode === 'add') ? element.classList.add(css) : element.classList.remove(css);
             }
         }
     }
@@ -413,4 +410,17 @@ var makeClearable = (el) => {
         suffix_element.setAttribute('onclick', `dom_el(\'.${el}\').value=''; hide(this, true); ${clearing_function}`);
     }
     (field.value !== '') ? unhide(suffix_element, true) : hide(suffix_element, true);
+}
+
+var convertToBase64 = (file, el) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+        const base64String = reader.result;//.replace('data:', '').replace(/^.+,/, '');
+        dom_el(el).value = base64String;
+    };
+    reader.readAsDataURL(file);
+}
+
+var allowedFileSize = (file_size, max_size) => {
+    return (file_size <= ((max_size) * 1) * 1000000);
 }

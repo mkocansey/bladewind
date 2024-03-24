@@ -38,8 +38,8 @@
     </div>
     <div class="opacity-0 hidden bw-dropmenu-items !z-20 animate__animated animate__fadeIn animate__faster"
          data-open="0">
-        <div class="absolute bg-white dark:bg-dark-700 @if($position=='right') -right-1  @endif mt-1 rounded-md {{$class}} drop-shadow
-             p-2 border border-slate-200/80 dark:border-dark-700 bw-items-list @if($divided) divide-y divide-slate-100 dark:divide-dark-700 @endif"
+        <div class="absolute bg-white dark:bg-dark-700 @if($position=='right') -right-1  @endif mt-1 rounded-md {{$class}} drop-shadow whitespace-nowrap
+             p-2 border border-slate-200/80 dark:border-dark-700 bw-items-list @if($divided) divide-y divide-slate-100 dark:divide-dark-600/90 @endif"
              @if($scrollable) style="height: {{$height}}px; overflow-y: scroll" @endif>
             {{$slot}}
         </div>
@@ -48,6 +48,8 @@
 
 <script>
     @php include_once('vendor/bladewind/js/dropmenu.js'); @endphp
+</script>
+<script type="module">
     const {{ $name }} = new BladewindDropmenu('{{ $name }}', {
         triggerOn: '{{$trigger_on}}',
         hideAfterClick: '{{$hide_after_click}}'
