@@ -53,7 +53,7 @@ class BladewindNotification {
     }
 
     template = () => {
-        return `<div class="flex border-l-4 border-opacity-50 ${this.name} border-${this.type}-500 bg-white dark:bg-slate-700 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
+        return `<div class="flex border-l-[6px] border-opacity-80 ${this.name} border-${this.type}-500 bg-white dark:bg-slate-700 dark:shadow-xl dark:shadow-slack-900 shadow-xl  p-4 rounded-lg mb-3">
             <div class="pr-4 grow-0">${this.modalIcon()}</div>
             <div class="pb-1 pr-4 relative grow">
                 <h1 class="font-semibold text-gray-700 dark:text-slate-300">${this.title}</h1>
