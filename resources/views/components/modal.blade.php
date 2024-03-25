@@ -57,7 +57,7 @@
 
     // determines the size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
-    'size' => 'big',
+    'size' => 'medium',
     'sizes' => [
         'tiny' => 'w-1/6',
         'small' => 'w-1/5',
@@ -126,7 +126,7 @@
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
      class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
-    <div class="sm:{{$sizes[$size]}} w-full p-4 m-auto bw-{{$name}} animate__faster">
+    <div class="sm:{{$sizes[$size]}} lg:{{$sizes[$size]}} p-4 m-auto bw-{{$name}} animate__faster">
         <div class="bg-white relative dark:bg-slate-900 dark:border dark:border-slate-800 rounded-lg drop-shadow-2xl">
             @if( $show_action_buttons && $show_close_icon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">

@@ -209,7 +209,7 @@
            @if($required) data-parent="bw-select-{{$input_name}}" @endif />
 </div>
 
-<script type="module">
+<script>
     @php include_once('vendor/bladewind/js/select.js'); @endphp
 </script>
 <script type="module">

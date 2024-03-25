@@ -7,7 +7,7 @@
         'primary'   => [
             'bg'        => 'bg-primary-200 bg-primary-300 peer-checked:bg-primary-500/80 bg-primary-500 !bg-primary-500 hover:!bg-primary-500 hover:bg-primary-500 hover:!bg-primary-700 active:bg-primary-700 bg-dark-800 bg-dark-700',
             'text'      => 'text-primary-50 text-primary-500 text-primary-700 hover:text-red-50 hover:text-primary-700',
-            'borders'   => 'after:border-primary-100 border-primary-300 border-primary-200 border-primary-500 border-primary-500/50 hover:border-primary-600 active:border-primary-700 border-4 border-8 border-2',
+            'borders'   => 'after:border-primary-100 border-primary-300 border-primary-200 border-primary-500 border-primary-500/50 hover:border-primary-600 active:border-primary-700 border-4 border-2 border-[6px]',
             'pseudo'    => 'focus:ring-primary-500  dark:focus:ring-primary-500 focus:ring-1 focus:ring-2 focus:ring-4 focus:ring-8'
         ],
         'secondary'   => [
@@ -89,5 +89,5 @@
             'pseudo'    => 'focus:ring-gray-500  dark:focus:ring-gray-500'
         ],
     ],
-    'sizes' => 'w-6 w-10 w-14 w-24 w-36 h-6 h-10 h-14 h-24 h-36 sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12',
+    'sizes' => 'w-6 w-10 w-14 w-24 w-36 h-6 h-10 h-14 h-24 h-36 sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12 lg:w-1/6 lg:w-1/5 lg:w-1/4 lg:w-1/3 lg:w-2/5 lg:w-2/3 lg:w-11/12',
 ])
