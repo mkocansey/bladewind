@@ -10,6 +10,8 @@
     'position' => 'right',
     'class' => '',
     'icon_right' => false,
+    // append type="module" to script tags
+    'modular' => false,
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -49,7 +51,7 @@
 <script>
     @php include_once('vendor/bladewind/js/dropmenu.js'); @endphp
 </script>
-<script type="module">
+<script @if($modular) type="module" @endif>
     const {{ $name }} = new BladewindDropmenu('{{ $name }}', {
         triggerOn: '{{$trigger_on}}',
         hideAfterClick: '{{$hide_after_click}}'

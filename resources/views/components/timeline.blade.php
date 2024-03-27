@@ -38,7 +38,7 @@
 <div class="flex">
     <div class="@if($position!=='left') grow w-1/2 @else @if(!$stacked) min-w-28 @else !pr-0 @endif @endif text-right pr-5 text-sm">
         @if(!$stacked || ($stacked && $align_left))
-            <div class="font-semibold text-slate-600 min-w-28 {{$date_css}}">{!! $date !!}</div>
+            <div class="font-semibold text-slate-600 dark:text-dark-500 min-w-28 {{$date_css}}">{!! $date !!}</div>
             @if($align_left)
                 <div class="leading-6 {{$content_css}}">
                     {!! $content !!}
@@ -63,7 +63,7 @@
     <div class="grow w-1/2 pl-5 space-y-1 text-sm">
         @if(!$align_left)
             @if($stacked)
-                <div class="font-bold text-slate-700 {{$date_css}}">{!! $date !!}</div>
+                <div class="font-bold text-slate-600 dark:text-dark-500 {{$date_css}}">{!! $date !!}</div>
             @endif
             <div class="leading-6 {{$content_css}}">
                 {!! $content !!}

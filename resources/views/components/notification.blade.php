@@ -21,7 +21,8 @@
     // [type] is repalced with the type of notification in notification.js
     $css = "!h-14 !w-14 p-2 rounded-full bg-[type]-100/80 dark:bg-[type]-600 text-[type]-700 dark:text-[type]-100";
 @endphp
-<div class="fixed flex flex-col-reverse {{ $position_css[str_replace(' ', '_', $position)] }} z-50 bw-notification-container w-11/12 sm:w-1/4"></div>
+<div class="fixed flex flex-col-reverse {{ $position_css[str_replace(' ', '_', $position)] }} z-50 bw-notification-container w-11/12 sm:!max-w-[450px]"></div>
+{{--sm:w-1/4 sm:w-96 md:w-96  w-11/12--}}
 <div class="bw-notification-icons hidden">
     <x-bladewind::modal-icon class="hidden {{$css}}"/>
     <x-bladewind::modal-icon class="hidden {{$css}}" type="error"/>

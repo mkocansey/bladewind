@@ -101,6 +101,9 @@
 
     'filter_by' => '',
 
+    // append type="module" to script tags
+    'modular' => false,
+
 ])
 @php
     $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
@@ -212,7 +215,7 @@
 <script>
     @php include_once('vendor/bladewind/js/select.js'); @endphp
 </script>
-<script type="module">
+<script @if($modular) type="module" @endif>
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     @if(!$disabled && !$readonly) bw_{{ $input_name }}.activate();
     bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');
