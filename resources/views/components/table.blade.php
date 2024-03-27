@@ -114,7 +114,7 @@
             </div>
         @endif
 
-        <table class="bw-table w-full {{$name}} @if($has_shadow) shadow-2xl shadow-gray-200 dark:shadow-xl dark:shadow-dark-900 @endif
+        <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow-gray-200 dark:shadow-dark-900 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif
             @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif">
             @if(is_null($data))
@@ -182,7 +182,10 @@
                                 @else
                                     {{ $no_data_message }}
                                 @endif
-                                <script>changeCss('.{{$name}}', 'with-hover-effect', 'remove');</script>
+                                <script>
+                                    changeCss('.{{$name}}', 'with-hover-effect', 'remove');
+                                    changeCss('.{{$name}}', 'has-no-data');
+                                </script>
                             </td>
                         </tr>
                     @endif

@@ -23,6 +23,10 @@
         border-t border-gray-200/20 dark:border-dark-800
     }
 
+    .bw-table.has-no-data thead > tr {
+        @apply !border-transparent
+    }
+
     .bw-table.uppercase-headers thead > tr > th {
         @apply uppercase
     }
