@@ -25,6 +25,9 @@
 
     // after how many seconds should the link to resend a code be displayed
     'timer' => null,
+
+    // boxes can either be big or regular
+    'size' => '',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -34,11 +37,13 @@
 
     $name = preg_replace('/[\s-]/', '_', $name);
     $mask = filter_var($mask, FILTER_VALIDATE_BOOLEAN);
+
+    $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[88px] text-5xl";
 @endphp
 
 <div class="dv-{{ $name }} relative">
     <div class="flex {{ $name }}-boxes">
-        <div class="flex space-x-3 mx-auto">
+        <div class="flex space-x-2 mx-auto">
             @for ($x = 0; $x < $total_digits; $x++)
                 <x-bladewind::input
                         numeric="true"
@@ -47,7 +52,7 @@
                         add_clearing="false"
                         onkeydown="hidePinError('{{ $name }}')"
                         onkeyup="movePinNext('{{ $name }}', {{ $x }}, {{ $total_digits }}, '{{ $on_verify }}', event)"
-                        class="w-14 shadow-sm text-center text-xl font-light text-black dark:text-white focus:!border-primary-600 {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
+                        class="shadow-sm text-center font-light text-black dark:text-dark-400 focus:!border-primary-600 {{$input_css}} {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
                         maxlength="1"
                 />
             @endfor
