@@ -13,7 +13,6 @@ class BladewindDropmenu {
     show = () => {
         // do this is only there are items
         if (this.hasItems()) {
-            console.log('has items');
             changeCss(this.items, 'opacity-0,hidden', 'remove');
             dom_el(this.items).setAttribute('data-open', '1');
             if (this.options.hideAfterClick && dom_els(`${this.items} .bw-item`)) {
