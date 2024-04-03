@@ -20,6 +20,7 @@
 @endphp
 <div {{$attributes->merge(['data-item' => "true"])}}
      class="flex align-middle text-gray-600 cursor-pointer dark:text-slate-300 w-full text-sm !text-left bw-item {{$class}}
+    @if($divided && $header) !border-0 @endif
     @if($divider && !$header)
         @if(!$divided)
             border-y border-t-slate-200/75 border-b-white dark:!border-t-gray-800/40 dark:border-b-gray-100/10 my-1

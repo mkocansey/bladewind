@@ -15,7 +15,7 @@ class BladewindDropmenu {
         if (this.hasItems()) {
             changeCss(this.items, 'opacity-0,hidden', 'remove');
             dom_el(this.items).setAttribute('data-open', '1');
-            if (this.options.hideAfterClick) {
+            if (this.options.hideAfterClick && dom_els(`${this.items} .bw-item`)) {
                 dom_els(`${this.items} .bw-item`).forEach((item) => {
                     item.addEventListener('click', () => {
                         this.hide();

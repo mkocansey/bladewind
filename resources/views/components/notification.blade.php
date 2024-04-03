@@ -32,7 +32,4 @@
 
 <script>
     @php include_once('vendor/bladewind/js/notification.js'); @endphp
-        showNotification = (title, message, type, dismiss_in) => {
-        new BladewindNotification(title, message, type, dismiss_in).show();
-    }
 </script>

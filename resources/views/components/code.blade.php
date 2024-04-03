@@ -25,6 +25,9 @@
 
     // after how many seconds should the link to resend a code be displayed
     'timer' => null,
+
+    // boxes can either be big or regular
+    'size' => '',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -34,11 +37,14 @@
 
     $name = preg_replace('/[\s-]/', '_', $name);
     $mask = filter_var($mask, FILTER_VALIDATE_BOOLEAN);
+
+    $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[88px] text-5xl";
+    $icons_css = ($size !== 'big') ? " py-5" : "py-9";
 @endphp
 
 <div class="dv-{{ $name }} relative">
     <div class="flex {{ $name }}-boxes">
-        <div class="flex space-x-3 mx-auto">
+        <div class="flex space-x-2 mx-auto">
             @for ($x = 0; $x < $total_digits; $x++)
                 <x-bladewind::input
                         numeric="true"
@@ -46,8 +52,8 @@
                         with_dots="false"
                         add_clearing="false"
                         onkeydown="hidePinError('{{ $name }}')"
-                        onkeyup="movePinNext('{{ $name }}', {{ $x }}, {{ $total_digits }}, '{{ $on_verify }}', event)"
-                        class="w-14 shadow-sm text-center text-xl font-light text-black dark:text-white focus:!border-primary-600 {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
+                        onkeyup="moveCursorNext('{{ $name }}', {{ $x }}, {{ $total_digits }}, '{{ $on_verify }}', event)"
+                        class="shadow-sm text-center font-light text-black dark:text-dark-400 focus:!border-primary-600 {{$input_css}} {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
                         maxlength="1"
                 />
             @endfor
@@ -60,10 +66,10 @@
         <div class="countdown hidden"><span class="minutes"></span>:<span class="seconds"></span></div>
         <div class="done"></div>
     </div>
-    <div class="bg-transparent absolute w-full text-center hidden top-0 py-5 bw-{{ $name }}-pin-spinner">
+    <div class="bg-transparent absolute w-full text-center z-40 hidden top-0 {{$icons_css}} bw-{{ $name }}-pin-spinner">
         <x-bladewind::spinner/>
     </div>
-    <div class="bg-transparent hidden w-full text-center absolute top-0 py-3.5 bw-{{ $name }}-pin-valid">
+    <div class="bg-transparent hidden w-full text-center absolute top-0 z-40 {{$icons_css}} bw-{{ $name }}-pin-valid">
         <x-bladewind::icon name="check-circle" type="solid" class="!h-9 !w-9 text-green-500 mx-auto"/>
     </div>
     <div class="bg-transparent hidden w-full absolute top-0 h-16 bw-{{ $name }}-pin-cloak"></div>
@@ -71,35 +77,35 @@
 <x-bladewind::input type="hidden" name="{{ $name }}"/>
 
 <script>
-    var movePinNext = (name, index, total_digits, user_function, evt) => {
+    var moveCursorNext = (name, index, total_digits, user_function, evt) => {
         if (evt.key === 'Backspace') {
             if (index > 0) {
-                dom_el(`.${name}-pcode${index}`).value = '';
+                domEl(`.${name}-pcode${index}`).value = '';
                 index--;
             }
         } else {
-            if (dom_el(`.${name}-pcode${index}`).value) {
+            if (domEl(`.${name}-pcode${index}`).value) {
                 index++
             }
         }
 
-        (index < total_digits) ? dom_el(`.${name}-pcode${index}`).focus() : setPin(name, user_function);
+        (index < total_digits) ? domEl(`.${name}-pcode${index}`).focus() : setPin(name, user_function);
     }
 
     var setPin = (name, user_function) => {
-        dom_el(`.${name}`).value = '';
-        dom_els(`.${name}-pin-code`).forEach((el) => {
-            dom_el(`.${name}`).value += el.value;
+        domEl(`.${name}`).value = '';
+        domEls(`.${name}-pin-code`).forEach((el) => {
+            domEl(`.${name}`).value += el.value;
         });
-        let pin_code = dom_el(`.${name}`).value;
+        let pin_code = domEl(`.${name}`).value;
         (user_function) ? callUserFunction(`${user_function}('${pin_code}','${name}')`) : doNothing();
     }
 
     var clearPin = (name) => {
-        dom_els(`.${name}-pin-code`).forEach((el) => {
+        domEls(`.${name}-pin-code`).forEach((el) => {
             el.value = '';
         });
-        dom_el(`.${name}-pcode0`).focus();
+        domEl(`.${name}-pcode0`).focus();
     }
 
     var showPinError = (name, autoHide = true) => {
@@ -116,8 +122,8 @@
     var showSpinner = (name) => {
         hide(`.bw-${name}-pin-valid`);
         unhide(`.bw-${name}-pin-spinner`);
-        dom_el(`.${name}-pcode0`).focus();
-        dom_el(`.${name}-pcode0`).blur();
+        domEl(`.${name}-pcode0`).focus();
+        domEl(`.${name}-pcode0`).blur();
     }
 
     var hideSpinner = (name) => {
@@ -131,12 +137,12 @@
     }
 
     var loseFocus = (name) => {
-        dom_el(`.${name}-pcode0`).focus();
-        dom_el(`.${name}-pcode0`).blur();
+        domEl(`.${name}-pcode0`).focus();
+        domEl(`.${name}-pcode0`).blur();
     }
 
     var setFocus = (name) => {
-        dom_el(`.${name}-pcode0`).focus();
+        domEl(`.${name}-pcode0`).focus();
     }
 
     var disablePin = (name) => {
@@ -153,10 +159,10 @@
     var showTimer = (name, duration = 60) => {
         let minutes_ = Math.floor(duration / 60);
         let seconds_ = (duration % 60);
-        let countdown_div = dom_el(`.bw-${name}-pin-timer .countdown`);
-        let minutes_span = dom_el(`.bw-${name}-pin-timer .minutes`);
-        let seconds_span = dom_el(`.bw-${name}-pin-timer .seconds`);
-        let done_div = dom_el(`.bw-${name}-pin-timer .done`);
+        let countdown_div = domEl(`.bw-${name}-pin-timer .countdown`);
+        let minutes_span = domEl(`.bw-${name}-pin-timer .minutes`);
+        let seconds_span = domEl(`.bw-${name}-pin-timer .seconds`);
+        let done_div = domEl(`.bw-${name}-pin-timer .done`);
         unhide(`.bw-${name}-pin-timer .countdown`);
         disablePin(name);
         countdown({
@@ -189,9 +195,9 @@
                 } else {
                     clearInterval(bw_timer_interval);
                     options.secondsSpan.innerHTML = options.minutesSpan.innerHTML = '';
-                    if (dom_el('.bw-code-timer-done')) {
+                    if (domEl('.bw-code-timer-done')) {
                         hide(options.countdownDiv, true);
-                        options.doneDiv.innerHTML = dom_el('.bw-code-timer-done').innerHTML;
+                        options.doneDiv.innerHTML = domEl('.bw-code-timer-done').innerHTML;
                         enablePin(name);
                     }
                 }

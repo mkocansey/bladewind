@@ -32,7 +32,7 @@
         $compact = $reduce_padding;
     }
 @endphp
-<div class="bw-card bg-white dark:bg-dark-900/50 border dark:border-dark-700/50 border-gray-100 @if($header === null && ! $compact) p-8 @elseif($compact) py-3 px-5 @else @endif rounded-lg @if($has_shadow) shadow-lg dark:shadow-dark-900/80 shadow-gray-300/40 @if($hover_effect) hover:shadow-xl cursor-pointer dark:hover:!border-dark-600/50 hover:!border-gray-300/80 @endif  @endif {{ $class }}">
+<div class="bw-card bg-white dark:bg-dark-900/50 border dark:border-dark-700/50 border-slate-100 @if($header === null && ! $compact) p-8 @elseif($compact) py-3 px-5 @else @endif rounded-lg @if($has_shadow) shadow dark:shadow-dark-900/80 @if($hover_effect) hover:shadow-md cursor-pointer dark:hover:!border-dark-600/50 hover:!border-gray-300/20 @endif  @endif {{ $class }}">
     @if($header)
         <div class="border-b border-gray-100/30 dark:border-dark-800/50">
             {{ $header }}

@@ -71,3 +71,7 @@ class BladewindNotification {
     }
 
 }
+
+var showNotification = (title, message, type, dismiss_in) => {
+    new BladewindNotification(title, message, type, dismiss_in).show();
+}
