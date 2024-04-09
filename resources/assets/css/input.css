@@ -5,7 +5,7 @@
         !outline-none
         !ring-0
         border-2
-        w-full text-slate-600 border-slate-300/50 dark:text-dark-300 dark:border-dark-700 dark:bg-dark-800
+        w-full text-slate-600 border-slate-300/50 dark:text-dark-300 dark:border-dark-700 dark:bg-transparent /*dark-800*/
         focus:outline-none
         focus:border-2
         focus:border-primary-400 dark:focus:border-dark-600 dark:placeholder-dark-500/70 transition-all
@@ -31,7 +31,8 @@
         px-1
         transition-all
         peer-placeholder-shown:top-[19px]
-        peer-focus:-top-2 bg-white text-primary-900/40 dark:text-dark-500 z-20 dark:bg-dark-800
+        peer-focus:-top-2 bg-white text-primary-900/40 dark:text-dark-500 z-20 dark:bg-dark-800 dark:px-2 dark:rounded-md dark:py-0.5
+        /*dark-800*/
     }
 
     .prefix svg, .suffix svg {
