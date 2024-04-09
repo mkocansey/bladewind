@@ -41,8 +41,11 @@
     <div class="opacity-0 hidden bw-dropmenu-items !z-20 animate__animated animate__fadeIn animate__faster"
          data-open="0">
         <div class="absolute bg-white dark:bg-dark-700 @if($position=='right') -right-1  @endif mt-1 rounded-md {{$class}} drop-shadow whitespace-nowrap
-             p-2 border border-slate-200/80 dark:border-dark-700 bw-items-list @if($divided) divide-y divide-slate-100 dark:divide-dark-600/90 @endif"
-             @if($scrollable) style="height: {{$height}}px; overflow-y: scroll" @endif>
+             p-2 border border-transparent dark:border-dark-700 bw-items-list ring-1 ring-slate-800 ring-opacity-5 @if($divided) divide-y divide-slate-100 dark:divide-dark-600/90 @endif"
+             {{--        border-slate-200/80--}}
+             @if($scrollable)
+                 style="height: {{$height}}px; overflow-y: scroll"
+                @endif>
             {{$slot}}
         </div>
     </div>

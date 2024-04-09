@@ -90,4 +90,5 @@
         ],
     ],
     'sizes' => 'w-6 w-10 w-14 w-24 w-36 h-6 h-10 h-14 h-24 h-36 sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12 lg:w-1/6 lg:w-1/5 lg:w-1/4 lg:w-1/3 lg:w-2/5 lg:w-2/3 lg:w-11/12',
+    'positions' => '-bottom-1 -top-1'
 ])

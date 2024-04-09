@@ -26,10 +26,10 @@
     $dot_placement = (in_array($dot_placement, ['top','bottom'])) ? $dot_placement : 'bottom';
     $image_size = $sizes[$size]['size_css'];
     $dot_position_css = $sizes[$size]['dot_css'];
-    $stacked_css = ($stacked) ? 'mb-5 !-mr-5' : '';
+    $stacked_css = ($stacked) ? 'mb-3 !-mr-3' : '';
 @endphp
 <div class="relative inline-block {{ $image_size }} {{$stacked_css}} {{$class}}">
-    <img class="{{ $image_size }} object-cover rounded-full @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-gray-200/50 dark:ring-0 dark:ring-offset-0  @endif"
+    <img class="{{ $image_size }} object-cover rounded-full @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-gray-200/50 dark:ring-0 dark:ring-offset-dark-700/50  @endif"
          src="{{$avatar}}" alt="{{$avatar}}"/>
     @if($show_dot)
         <span class="-{{$dot_placement}}-1 {{$dot_position_css}} absolute w-3 h-3 bg-{{$dot_color}}-500 border-2 border-white dark:border-dark-800 rounded-full"></span>
