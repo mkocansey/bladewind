@@ -127,16 +127,17 @@
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
      class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
     <div class="sm:{{$sizes[$size]}} lg:{{$sizes[$size]}} p-4 m-auto bw-{{$name}} animate__faster">
-        <div class="bg-white relative dark:bg-slate-900 dark:border dark:border-slate-800 rounded-lg drop-shadow-2xl">
+        <div class="bg-white relative dark:bg-slate-800 dark:border dark:border-slate-700 rounded-lg drop-shadow-2xl">
             @if( $show_action_buttons && $show_close_icon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
-                    <x-bladewind::icon name="x-mark"
-                                       class="!h-7 !w-7 right-2 top-2 absolute text-gray-400 hover:bg-gray-200 hover:!rounded-full dark:hover:bg-slate-800 p-1 modal-close-icon"/>
+                    <x-bladewind::icon
+                            name="x-mark"
+                            class="p-1 modal-close-icon right-2 top-2 absolute rounded-full text-gray-400 hover:text-gray-500 dark:text-dark-600 hover:dark:text-dark-500 bg-gray-200 hover:bg-gray-300 dark:bg-dark-900/50 dark:hover:bg-dark-900"/>
                 </a>
             @endif
-            <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-6">
+            <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-5">
                 @if(!empty($type) || !empty($icon))
-                    <div class="modal-icon grow-0 pr-1">
+                    <div class="modal-icon grow-0 pr-2">
                         @if(!empty($type) )
                             <x-bladewind::modal-icon
                                     type="{{ $type }}"
@@ -149,8 +150,8 @@
                     </div>
                 @endif
                 <div class="modal-body grow px-2 {{ $body_css  }}">
-                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-gray-100 modal-title text-left">{{ $title }}</h1>
-                    <div class="modal-text text-gray-500 dark:text-gray-400 pt-2 text-sm text-left">
+                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-slate-300 tracking-wide modal-title text-left">{{ $title }}</h1>
+                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-sm text-left">
                         {{ $slot }}
                     </div>
                 </div>
@@ -158,7 +159,7 @@
             @if( $show_action_buttons )
                 <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif
                 @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-{{$align_buttons}} @endif
-                bg-gray-100 dark:bg-slate-800/50 border-t border-t-gray-200/60 dark:border-slate-800 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
+                bg-gray-100 dark:bg-slate-700/50 border-t border-t-gray-200/60 dark:border-t-slate-700 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
