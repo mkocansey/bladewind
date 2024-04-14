@@ -1,44 +1,53 @@
 <p><img src="https://img.shields.io/github/license/mkocansey/bladewind" alt="License" /></p><br />
 <p><img src="https://github.com/mkocansey/bladewind-docs/blob/development/public/assets/images/bladewind-logo.png" style="height: 30px; margin-bottom:10px" /></p>
 
-BladewindUI is a collection of UI components written purely using TailwindCSS, Laravel blade templates and Vanilla Javascript. These components are super simple to use and come with different levels of customization.
+BladewindUI is a collection of UI components written purely using TailwindCSS, Laravel blade templates and Vanilla
+Javascript. These components are super simple to use and come with different levels of customization.
 <br /><br />
 
 ### Installation
-The full installation guide is available on https://bladewindui.com/#install.
+
+The full installation guide is available on https://bladewindui.com/install.
 <br />
 
-BladewindUI is very specific to Laravel since all components are written purely using blade syntax. To install in your Laravel project simply run this command in the terminal at the root of your project.
+BladewindUI is very specific to Laravel since all components are written purely using blade syntax. To install in your
+Laravel project simply run this command in the terminal at the root of your project.
 <br /><br />
 
 ```
 composer require mkocansey/bladewind
 ```
+
 <br />
 
-Next you need to **publish the package assets** by running this command, still in the terminal at the root of your Laravel project.
+Next you need to **publish the package assets** by running this command, still in the terminal at the root of your
+Laravel project.
 
 <br />
 
 ```
 php artisan vendor:publish --provider="Mkocansey\Bladewind\BladewindServiceProvider" --tag=bladewind-public --force
 ```
+
 <br />
 
-Now include the BladewindUI css file in the &lt;head&gt; of your pages. This should ideally be done in the layouts file your app pages extend from.
+Now include the BladewindUI css file in the &lt;head&gt; of your pages. This should ideally be done in the layouts file
+your app pages extend from. You will also need to include the css used for animating the modals and other elements.
 
 <br />
 
 ```
 <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
 ```
+
 ```
 <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
 ```
 
 <br />
 
-Finally, include the BladewindUI javascript file anywhere before the closing of the &lt;/body&gt; tag of your pages. Again, this should ideally be done in the layouts file your app's pages extend from.
+Finally, include the BladewindUI javascript file anywhere before the closing of the &lt;/body&gt; tag of your pages.
+Again, this should ideally be done in the layouts file your app's pages extend from.
 
 <br />
 
@@ -57,6 +66,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 ```
 
 <br /><br />
+
 ### Components Include
 
 - **[Alert](https://bladewindui.com/component/alert)**
@@ -100,7 +110,8 @@ Check out the full documentation on https://bladewindui.com.
 
 ## Questions and General Info
 
-If you want to ask anything at all or report a security vulnerability, please e-mail [mike@bladewindui.com](mailto:mike@bladewindui.com) or tweet [@bladewindui](https://twitter.com/bladewindui)
+If you want to ask anything at all or report a security vulnerability, please
+e-mail [mike@bladewindui.com](mailto:mike@bladewindui.com) or tweet [@bladewindui](https://twitter.com/bladewindui)
 
 <br />
 
