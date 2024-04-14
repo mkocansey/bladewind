@@ -27,8 +27,8 @@
         'gray'      => '#64748b',
         'purple'    => '#a855f7',
         'violet'    => '#7c3aed',
-         'indigo'   => '#4f46e5',
-         'fuchsia'  => '#c026d3',
+        'indigo'   => '#4f46e5',
+        'fuchsia'  => '#c026d3',
     ];
     $faint = [
         'blue'      => '#60a5fa',
@@ -65,11 +65,11 @@
     ];
 
     $small = [
-        'width'         => 80,
-        'circle_width'  => 8,
-        'text'          => [
-            'weight'        => 'normal', '
-            translate'      => -70,
+        'width' => 80,
+        'circle_width' => 8,
+        'text' => [
+            'weight' => 'normal', '
+            translate' => -70,
             'with_percent'  => [
                 'size' => 16,
                 'width' => 20,
@@ -84,9 +84,9 @@
     ];
 
     $medium = [
-        'width'         => 120,
+        'width' => 120,
         'circle_width'  => 12,
-        'text'           => [
+        'text' => [
             'weight' => 'normal',
             'translate' => -70,
             'with_percent' => [
@@ -103,9 +103,9 @@
     ];
 
     $big = [
-        'width'         => 200,
+        'width' => 200,
         'circle_width'  => 25,
-        'text'           => [
+        'text' => [
             'weight' => 'normal',
             'translate' => -70,
             'with_percent' => [
@@ -122,9 +122,9 @@
     ];
 
     $large = [
-        'width'         => 300,
+        'width' => 300,
         'circle_width'  => 30,
-        'text'           => [
+        'text' => [
             'weight' => 'normal',
             'translate' => -70,
             'with_percent' => [
@@ -165,7 +165,7 @@
      viewBox="-{{$width*0.125}} -{{$width*0.125}} {{$width*1.25}} {{$width*1.25}}"
      version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)"
      class="inline-block @if($animate) animate__animated animate__heartBeat @endif">
-    <circle stroke-dashoffset="0" fill="transparent" stroke="#e5e7eb"
+    <circle stroke-dashoffset="0" fill="transparent" stroke="transparent"
             r="{{($width/2 - 10)}}"
             cx="{{$width/2}}"
             cy="{{$width/2}}"

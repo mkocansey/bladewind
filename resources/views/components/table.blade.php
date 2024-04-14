@@ -79,12 +79,12 @@
         // build action icons
         foreach ($action_icons as $action) {
             $action_array = explode('|',$action);
-            $temp = [];
-            foreach($action_array as $action){
-                $hmm = explode(':', $action);
-                $temp[trim($hmm[0])] = trim($hmm[1]);
+            $temp_actions_arr = [];
+            foreach($action_array as $this_action){
+                $action_str_to_arr = explode(':', $this_action);
+                $temp_actions_arr[trim($action_str_to_arr[0])] = trim($action_str_to_arr[1]);
             }
-            $icons_array[] = $temp;
+            $icons_array[] = $temp_actions_arr;
         }
 
         if(!function_exists('build_click')){
@@ -98,7 +98,7 @@
         }
     }
 @endphp
-<div class="@if($has_border) border border-gray-200 dark:border-dark-700/60 dark:px-[1px] @endif max-w-full">
+<div class="@if($has_border) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
     <div class="w-full">
         @if($searchable)
             <div class="bw-table-filter-bar">
@@ -114,7 +114,7 @@
             </div>
         @endif
 
-        <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow-gray-200 dark:shadow-dark-900 @endif
+        <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-lg dark:shadow-dark-950/20 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif
             @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif">
             @if(is_null($data))
