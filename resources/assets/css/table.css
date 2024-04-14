@@ -1,26 +1,30 @@
 @layer components {
-    .bw-table.divided tr {
-        @apply border-t border-gray-200 border-b-8 border-b-gray-200/40 dark:border-b-dark-800/40
+    .bw-table.divided tr:not(:has(th),:last-child) {
+        @apply border-b-8 border-gray-200/30 dark:border-dark-900 border-t border-t-gray-200/40 dark:border-b-dark-900
     }
 
     .bw-table.divided.thin tr {
-        @apply border-b border-t border-gray-200 border-b-gray-200/60 dark:border-b-dark-800 dark:border-t-dark-900
+        @apply border-y border-t-gray-200 border-b-gray-200/60 dark:border-t-dark-800 dark:border-b-dark-600/30
+    }
+
+    .bw-table tr > td {
+        @apply p-4 align-top text-sm text-slate-600/80 dark:text-dark-400 leading-6 bg-white dark:bg-dark-800 border-x-2 border-gray-50/10 dark:border-dark-800/10
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
-        @apply bg-gray-50 dark:bg-dark-900/40
+        @apply bg-slate-50 dark:bg-dark-800/60
     }
 
     .bw-table thead > tr > th {
         @apply
-        bg-white dark:bg-dark-900
+        bg-white dark:bg-dark-900/50
         text-black/80 dark:text-dark-400
-        text-left
         text-xs
+        text-left
         font-semibold
         tracking-widest
-        px-5 py-4
-        border-t border-gray-200/20 dark:border-dark-800
+        p-4
+        border-t border-t-gray-200/20 dark:border-t-dark-800
     }
 
     .bw-table.has-no-data thead > tr {
@@ -32,7 +36,7 @@
     }
 
     .bw-table-filter-bar {
-        @apply bg-slate-100 p-1 dark:bg-dark-900
+        @apply bg-slate-100 p-1 dark:bg-dark-800/30
     }
 
     .bw-table-filter-bar input {
@@ -43,28 +47,24 @@
         @apply !py-2
     }
 
-    .bw-table tr > td {
-        @apply p-5 align-top text-slate-600/80 text-sm leading-6 bg-white dark:text-dark-400 dark:bg-dark-900/60 border-x-2 border-gray-50/10 dark:border-dark-900/50
-    }
-
     .bw-table.compact tr > td {
         @apply !py-2
     }
 
     .bw-table td.double-underline {
-        @apply border-x-0 border-t-0 border-b-4 border-double border-gray-700 dark:border-dark-700 border-separate
+        @apply border-x-0 border-t-0 border-b-4 border-double border-gray-300 dark:border-dark-700 border-separate
     }
 
     .bw-table.with-hover-effect tr:hover > td {
-        @apply bg-gray-100/40 dark:bg-dark-900
+        @apply bg-gray-100/40 dark:bg-dark-800/60
     }
 
     .bw-table.with-hover-effect tr:hover > td:first-child {
-        @apply border-l-2 border-l-green-300 dark:border-l-dark-500
+        @apply border-l-2 border-l-slate-400 dark:border-l-dark-600
     }
 
     .bw-table.with-hover-effect tr:hover > td:last-child {
-        @apply border-r-2 border-r-green-300 dark:border-r-dark-500
+        @apply border-r-2 border-r-slate-400 dark:border-r-dark-600
     }
 
 }
