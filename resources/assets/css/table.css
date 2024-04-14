@@ -36,7 +36,7 @@
     }
 
     .bw-table-filter-bar {
-        @apply bg-slate-100 p-1 dark:bg-dark-800/30
+        @apply bg-slate-200/50 p-1 dark:bg-dark-800/30
     }
 
     .bw-table-filter-bar input {
