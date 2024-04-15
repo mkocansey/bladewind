@@ -1,51 +1,52 @@
 /**
+ * ----------------------------------------------
  * Helper functions for BladeWindUI components
- * September 2021 by @mkocansey <@mkocansey>
- **/
+ * ----------------------------------------------
+ */
 
 const current_modal = [];
 let el_name;
 
-/*
-* Shortcut for document.querySelector.
-* @param {string} element - The element to find in the DOM.
-* @return {(DOM element|null)} The matching DOM element.
-* @see {@link https://bladewindui.com/extra/helper-functions#domel}
+/**
+ * Shortcut for document.querySelector.
+ * @param {string} element - The element to find in the DOM.
+ * @return {(DOM element|null)} The matching DOM element.
+ * @see {@link https://bladewindui.com/extra/helper-functions#domel}
  */
 var domEl = (element) => {
     return (document.querySelector(element) != null) ? document.querySelector(element) : false;
 }
 
-/*
-* Alias for domEl(element)
+/**
+ * Alias for domEl(element)
  */
 var dom_el = (element) => {
     return domEl(element);
 }
 
-/*
-* Shortcut for document.querySelectorAll.
-* @param {string} element - The element(s) to find in the DOM.
-* @return {(DOM element(s)|null)} The collection of DOM elements.
-* @see {@link https://bladewindui.com/extra/helper-functions#domels}
+/**
+ * Shortcut for document.querySelectorAll.
+ * @param {string} element - The element(s) to find in the DOM.
+ * @return {(DOM element(s)|null)} The collection of DOM elements.
+ * @see {@link https://bladewindui.com/extra/helper-functions#domels}
  */
 var domEls = (element) => {
     return (document.querySelectorAll(element).length > 0) ? document.querySelectorAll(element) : false;
 }
 
-/*
-* Alias for domEls(element)
+/**
+ * Alias for domEls(element)
  */
 var dom_els = (element) => {
     return domEls(element);
 }
 
-/*
-* Validate a form and highlight each field that fails validation.
-* @param {string} element - The class name or ID of the element containing the fields to validate.
-*   element does not need to be a <form> tag. Can be any element containing form fields.
-* @return {boolean} True if validation passes and False if validation fails.
-* @see {@link https://bladewindui.com/extra/helper-functions#validateform}
+/**
+ * Validate a form and highlight each field that fails validation.
+ * @param {string} element - The class name or ID of the element containing the fields to validate.
+ *   element does not need to be a <form> tag. Can be any element containing form fields.
+ * @return {boolean} True if validation passes and False if validation fails.
+ * @see {@link https://bladewindui.com/extra/helper-functions#validateform}
  */
 var validateForm = (form) => {
     let has_error = 0;
@@ -86,11 +87,11 @@ var validateForm = (form) => {
     return has_error === 0;
 }
 
-/*
-* Clear validation errors. Used together with validateForm().
-* If the user provides a value for a form field, that was earlier marked as an error, clear it.
-* @param {DOM element} obj - The DOM element to target for clearing.
-* @return {void}
+/**
+ * Clear validation errors. Used together with validateForm().
+ * If the user provides a value for a form field, that was earlier marked as an error, clear it.
+ * @param {DOM element} obj - The DOM element to target for clearing.
+ * @return {void}
  */
 var clearErrors = (obj) => {
     let el = obj.el;
@@ -110,14 +111,14 @@ var clearErrors = (obj) => {
     }
 }
 
-/*
-* Allow only numeric input in a text input field.
-* @param {event} event - The event object. Key events.
-* @param {boolean} with_dots - Should dots be allowed in the input. Useful when entering decimals.
-* @return {void}
-* @see {@link https://bladewindui.com/extra/helper-functions#isnumberkey}
-* @example
-* onkeypress="return isNumberKey(event)"
+/**
+ * Allow only numeric input in a text input field.
+ * @param {event} event - The event object. Key events.
+ * @param {boolean} with_dots - Should dots be allowed in the input. Useful when entering decimals.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#isnumberkey}
+ * @example
+ * onkeypress="return isNumberKey(event)"
  */
 var isNumberKey = (event, with_dots = 1) => {
     let accepted_keys = (with_dots === 1) ? /[\d\b\\.]/ : /\d\b/;
@@ -126,25 +127,26 @@ var isNumberKey = (event, with_dots = 1) => {
     }
 }
 
-/*
-* Execute a user-defined function.
-* @param {string} func - The function to execute, with or without parameters.
-* @return {void}
+/**
+ * Execute a user-defined function.
+ * @param {string} func - The function to execute, with or without parameters.
+ * @return {void}
  */
 var callUserFunction = (func) => {
     if (func !== '' && func !== undefined) eval(func);
 };
 
-/*
-* Serialize a form into key/value pairs for ajax submission.
-* @param {string} form - The form to serialize.
-* @return {object} The serialized object.
+/**
+ * Serialize a form into key/value pairs for ajax submission.
+ * @param {string} form - The form to serialize.
+ * @return {object} The serialized object.
+ * @see {@link https://bladewindui.com/extra/helper-functions#serialize}
  */
 var serialize = (form) => {
     let data = new FormData(domEl(form));
     let obj = {};
     for (let [key, value] of data) {
-        /**
+        /***
          ** in some cases the form field name and api parameter differ, and you want to
          ** display a more meaningful error message from Laravels $errors.. set an attr
          ** data-serialize-as on the form field. that value will be used instead of [key]
@@ -159,11 +161,12 @@ var serialize = (form) => {
     return obj;
 }
 
-/*
-* Check if string contains a keyword.
-* @param {string} str - The string to check for keyword existence.
-* @param {string} keyword - The keyword to check for.
-* @return {boolean} True if string contains keyword. False if it does not.
+/**
+ * Check if string contains a keyword.
+ * @param {string} str - The string to check for keyword existence.
+ * @param {string} keyword - The keyword to check for.
+ * @return {boolean} True if string contains keyword. False if it does not.
+ * @see {@link https://bladewindui.com/extra/helper-functions#stringcontains}
  */
 var stringContains = (str, keyword) => {
     if (typeof (str) !== 'string') return false;
@@ -173,12 +176,13 @@ var stringContains = (str, keyword) => {
 var doNothing = () => {
 }
 
-/*
-* Modify the css for DOM elements of the same type.
-* @param {string} elements - The class name of ID of the DOM elements to modify.
-* @param {string} css - Comma separated list of css classes to apply to <elements>.
-* @param {string} mode - Add|Remove. Determines if <css> should be added or removed from <elements>.
-* @return {void}
+/**
+ * Modify the css for DOM elements of the same type.
+ * @param {string} elements - The class name of ID of the DOM elements to modify.
+ * @param {string} css - Comma separated list of css classes to apply to <elements>.
+ * @param {string} mode - Add|Remove. Determines if <css> should be added or removed from <elements>.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#changecssfordomarray}
  */
 var changeCssForDomArray = (elements, css, mode = 'add') => {
     if (domEls(elements).length > 0) {
@@ -188,17 +192,18 @@ var changeCssForDomArray = (elements, css, mode = 'add') => {
     }
 }
 
-/*
-* Modify the css for a DOM element.
-* @param {string} element - The class name of ID of the DOM element to modify.
-* @param {string} css - Comma separated list of css classes to apply to <element>.
-* @param {string} mode - Add|Remove. Determines if <css> should be added or removed from <element>.
-* @param {boolean} elemntIsDomObject - If true, <element> will not be treated as a string but DOM element.
-* @return {void}
-* @example
-* changeCss('.email', 'border-2, border-red-500');
-* changeCss('.email', 'border-2, border-red-500', 'remove');
-* changeCss(domEl('.email'), 'border-2, border-red-500', 'remove', true);
+/**
+ * Modify the css for a DOM element.
+ * @param {string} element - The class name of ID of the DOM element to modify.
+ * @param {string} css - Comma separated list of css classes to apply to <element>.
+ * @param {string} mode - Add|Remove. Determines if <css> should be added or removed from <element>.
+ * @param {boolean} elemntIsDomObject - If true, <element> will not be treated as a string but DOM element.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#changecss}
+ * @example
+ * changeCss('.email', 'border-2, border-red-500');
+ * changeCss('.email', 'border-2, border-red-500', 'remove');
+ * changeCss(domEl('.email'), 'border-2, border-red-500', 'remove', true);
  */
 var changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
     // css can be comma separated
@@ -218,10 +223,11 @@ var changeCss = (element, css, mode = 'add', elementIsDomObject = false) => {
     }
 }
 
-/*
-* Display a modal.
-* @param {string} element - The css class (name) of the modal.
-* @return {void}
+/**
+ * Display a modal.
+ * @param {string} element - The css class (name) of the modal.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#showmodal}
  */
 var showModal = (element) => {
     unhide(`.bw-${element}-modal`);
@@ -233,10 +239,11 @@ var showModal = (element) => {
     });
 }
 
-/*
-* Hide a modal.
-* @param {string} element - The css class (name) of the modal.
-* @return {void}
+/**
+ * Hide a modal.
+ * @param {string} element - The css class (name) of the modal.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#hidemodal}
  */
 var hideModal = (element) => {
     animateCSS(`.bw-${element}`, 'zoomOut').then(() => {
@@ -247,42 +254,52 @@ var hideModal = (element) => {
     });
 }
 
-/*
-* Display the spinning icon on a button.
-* @param {string} element - The css class (name) of the button.
-* @return {void}
+/**
+ * Display the spinning icon on a button.
+ * @param {string} element - The css class (name) of the button.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#showbuttonspinner}
  */
 var showButtonSpinner = (element) => {
     unhide(`${element} .bw-spinner`);
 }
 
+/**
+ * Hide the spinning icon on a button.
+ * @param {string} element - The css class (name) of the button.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#hidebuttonspinner}
+ */
 var hideButtonSpinner = (element) => {
     hide(`${element} .bw-spinner`);
 }
 
-/*
-* Hide the spinning icon on a button.
-* @param {string} element - The css class (name) of the button.
-* @return {void}
+/**
+ * Show the action buttons on a modal.
+ * @param {string} element - The css class (name) of the modal.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#showmodalactionbuttons}
  */
 var showModalActionButtons = (element) => {
     unhide(`.bw-${element} .modal-footer`);
 }
 
-/*
-* Hide the action buttons on a modal.
-* @param {string} element - The css class (name) of the modal.
-* @return {void}
+/**
+ * Hide the action buttons on a modal.
+ * @param {string} element - The css class (name) of the modal.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#hidemodalactionbuttons}
  */
 var hideModalActionButtons = (element) => {
     hide(`.bw-${element} .modal-footer`);
 }
 
-/*
-* Hide an element.
-* @param {string} element - The css class (name) of the element to hide.
-* @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
-* @return {void}
+/**
+ * Hide an element.
+ * @param {string} element - The css class (name) of the element to hide.
+ * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#hide}
  */
 var hide = (element, elementIsDomObject = false) => {
     if ((!elementIsDomObject && domEl(element) != null) || (elementIsDomObject && element != null)) {
@@ -290,11 +307,12 @@ var hide = (element, elementIsDomObject = false) => {
     }
 }
 
-/*
-* Display an element.
-* @param {string} element - The css class (name) of the element to hide.
-* @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
-* @return {void}
+/**
+ * Display an element.
+ * @param {string} element - The css class (name) of the element to hide.
+ * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#unhide}
  */
 var unhide = (element, elementIsDomObject = false) => {
     if ((!elementIsDomObject && domEl(element) != null) || (elementIsDomObject && element != null)) {
@@ -302,18 +320,20 @@ var unhide = (element, elementIsDomObject = false) => {
     }
 }
 
-/*
-* Alias for unhide().
+/**
+ * Alias for unhide().
+ * @see {@link https://bladewindui.com/extra/helper-functions#show}
  */
 var show = (element, elementIsDomObject = false) => {
     unhide(element, elementIsDomObject);
 }
 
-/*
-* Animate an element.
-* @param {string} element - The css class (name) of the element to animate.
-* @param {string} animation - The css animation class to be applied.
-* @return {void}
+/**
+ * Animate an element.
+ * @param {string} element - The css class (name) of the element to animate.
+ * @param {string} animation - The css animation class to be applied.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#animatecss}
  */
 var animateCSS = (element, animation) =>
     new Promise((resolve, reject) => {
@@ -332,12 +352,13 @@ var animateCSS = (element, animation) =>
         node.addEventListener('animationend', handleAnimationEnd, {once: true});
     });
 
-/*
-* Add a key/value pair to client's storage.
-* @param {string} key - The key.
-* @param {string} val - The value corresponding to key.
-* @param {string} storageType - The storage key/val should be added to. sessionStorage | localStorage.
-* @return {void}
+/**
+ * Add a key/value pair to client's storage.
+ * @param {string} key - The key.
+ * @param {string} val - The value corresponding to key.
+ * @param {string} storageType - The storage key/val should be added to. sessionStorage | localStorage.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#addtostorage}
  */
 var addToStorage = (key, val, storageType = 'localStorage') => {
     if (window.localStorage || window.sessionStorage) {
@@ -346,11 +367,12 @@ var addToStorage = (key, val, storageType = 'localStorage') => {
     }
 }
 
-/*
-* Retrieve a value from client's storage based on its key.
-* @param {string} key - The key.
-* @param {string} storageType - The storage to retrieve value from. sessionStorage | localStorage.
-* @return {string} The value of <key>
+/**
+ * Retrieve a value from client's storage based on its key.
+ * @param {string} key - The key.
+ * @param {string} storageType - The storage to retrieve value from. sessionStorage | localStorage.
+ * @return {string} The value of <key>
+ * @see {@link https://bladewindui.com/extra/helper-functions#getfromstorage}
  */
 var getFromStorage = (key, storageType = 'localStorage') => {
     if (window.localStorage || window.sessionStorage) {
@@ -358,11 +380,12 @@ var getFromStorage = (key, storageType = 'localStorage') => {
             localStorage.getItem(key) : sessionStorage.getItem(key);
     }
 }
-/*
-* Delete a key/value pair from client's storage.
-* @param {string} key - The key.
-* @param {string} storageType - The storage to remove key/val from. sessionStorage | localStorage.
-* @return {void}
+/**
+ * Delete a key/value pair from client's storage.
+ * @param {string} key - The key.
+ * @param {string} storageType - The storage to remove key/val from. sessionStorage | localStorage.
+ * @return {void}
+ * @see {@link https://bladewindui.com/extra/helper-functions#removefromstorage}
  */
 var removeFromStorage = (key, storageType = 'localStorage') => {
     if (window.localStorage || window.sessionStorage) {
@@ -371,12 +394,12 @@ var removeFromStorage = (key, storageType = 'localStorage') => {
     }
 }
 
-/*
-* Navigate to a tab.
-* @param {string} element - The css class (name) of the tab to navigate to.
-* @param {string} colour - The colour of the tab.
-* @param {string} context - The context within which to find <element>. More like a parent element.
-* @return {(void|boolean)}
+/**
+ * Navigate to a tab.
+ * @param {string} element - The css class (name) of the tab to navigate to.
+ * @param {string} colour - The colour of the tab.
+ * @param {string} context - The context within which to find <element>. More like a parent element.
+ * @return {(void|boolean)}
  */
 var goToTab = (element, colour, context) => {
     let context_ = context.replace(/-/g, '_');
@@ -396,11 +419,11 @@ var goToTab = (element, colour, context) => {
     unhide(tab_content, true);
 }
 
-/*
-* Position a prefix in an input field.
-* @param {string} element - The css class (name) of the input field.
-* @param {string} mode - Event to trigger the positioning.
-* @return {void}
+/**
+ * Position a prefix in an input field.
+ * @param {string} element - The css class (name) of the input field.
+ * @param {string} mode - Event to trigger the positioning.
+ * @return {void}
  */
 var positionPrefix = (element, mode = 'blur') => {
     let transparency = domEl(`.dv-${element} .prefix`).getAttribute('data-transparency');
@@ -430,11 +453,11 @@ var positionPrefix = (element, mode = 'blur') => {
     }
 }
 
-/*
-* Position a suffix in an input field.
-* @param {string} element - The css class (name) of the input field.
-* @param {string} mode - Event to trigger the positioning.
-* @return {void}
+/**
+ * Position a suffix in an input field.
+ * @param {string} element - The css class (name) of the input field.
+ * @param {string} mode - Event to trigger the positioning.
+ * @return {void}
  */
 var positionSuffix = (element) => {
     let transparency = domEl(`.dv-${element} .suffix`).getAttribute('data-transparency');
@@ -443,11 +466,11 @@ var positionSuffix = (element) => {
     domEl(`input.${element}`).style.paddingRight = `${suffix_width}px`;
 }
 
-/*
-* Show or hide password in a password input fiield.
-* @param {string} element - The css class (name) of the input field.
-* @param {string} mode - Show or hide.
-* @return {void}
+/**
+ * Show or hide password in a password input fiield.
+ * @param {string} element - The css class (name) of the input field.
+ * @param {string} mode - Show or hide.
+ * @return {void}
  */
 var togglePassword = (element, mode) => {
     let input_field = domEl(`input.${element}`);
@@ -462,11 +485,11 @@ var togglePassword = (element, mode) => {
     }
 }
 
-/*
-* Filter a table based on keyword.
-* @param {string} keyword - The keyword to filter table by.
-* @param {string} table - The css class (name) of the table to filter.
-* @return {void}
+/**
+ * Filter a table based on keyword.
+ * @param {string} keyword - The keyword to filter table by.
+ * @param {string} table - The css class (name) of the table to filter.
+ * @return {void}
  */
 var filterTable = (keyword, table) => {
     domEls(`${table} tbody tr`).forEach((tr) => {
@@ -475,11 +498,11 @@ var filterTable = (keyword, table) => {
     });
 }
 
-/*
-* Select a tag.
-* @param {string} value - The value or uuiq to pass when tag is selected.
-* @param {string} name - The name of the tag.
-* @return {void}
+/**
+ * Select a tag.
+ * @param {string} value - The value or uuiq to pass when tag is selected.
+ * @param {string} name - The name of the tag.
+ * @return {void}
  */
 var selectTag = (value, name) => {
     let input = domEl(`input[name="${name}"]`);
@@ -508,10 +531,10 @@ var selectTag = (value, name) => {
     stripComma(input)
 }
 
-/*
-* Remove trailing comma from string.
-* @param {string} element - The input field to remove trailing comma from.
-* @return {void}
+/**
+ * Remove trailing comma from string.
+ * @param {string} element - The input field to remove trailing comma from.
+ * @return {void}
  */
 var stripComma = (element) => {
     if (element.value.startsWith(',')) {
@@ -519,11 +542,11 @@ var stripComma = (element) => {
     }
 }
 
-/*
-* Highlight selected tags.
-* @param {string} values - Comma separated list of values corresponding to tags to highlight.
-* @param {string} name - The name of the tags.
-* @return {void}
+/**
+ * Highlight selected tags.
+ * @param {string} values - Comma separated list of values corresponding to tags to highlight.
+ * @param {string} name - The name of the tags.
+ * @return {void}
  */
 var highlightSelectedTags = (values, name) => {
     if (values !== '') {
@@ -534,14 +557,15 @@ var highlightSelectedTags = (values, name) => {
     }
 }
 
-/*
-* Compare two dates and display an error if second date is less than first date.
-* This is used in the range Datepicker component to ensure dates make sense.
-* @param {string} element1 - The first date input field.
-* @param {string} element2 - The second date input field.
-* @param {string} message - Error message to display if validation fails.
-* @param {boolean} inline - Display error inline or in a notification component.
-* @return {boolean} True if date 2 is greater than date 1.
+/**
+ * Compare two dates and display an error if second date is less than first date.
+ * This is used in the range Datepicker component to ensure dates make sense.
+ * @param {string} element1 - The first date input field.
+ * @param {string} element2 - The second date input field.
+ * @param {string} message - Error message to display if validation fails.
+ * @param {boolean} inline - Display error inline or in a notification component.
+ * @return {boolean} True if date 2 is greater than date 1.
+ * @see {@link https://bladewindui.com/extra/helper-functions#comparedates}
  */
 var compareDates = (element1, element2, message, inline) => {
     let date1_el = domEl(`.${element1}`);
@@ -565,10 +589,10 @@ var compareDates = (element1, element2, message, inline) => {
 }
 
 
-/*
-* Trap focus within an open modal to prevent scrolling behind the modal.
-* @param {Event} event - The event object.
-* @return {void}
+/**
+ * Trap focus within an open modal to prevent scrolling behind the modal.
+ * @param {Event} event - The event object.
+ * @return {void}
  */
 var trapFocusInModal = (event) => {
     let modal_name = current_modal[(current_modal.length - 1)];
@@ -588,12 +612,12 @@ var trapFocusInModal = (event) => {
     }
 }
 
-/*
-* Validate for mininum and maximum values of an input field
-* @param {number} min - The minimum value.
-* @param {number} max - The maximum value.
-* @param {string} element - The input field to validate.
-* @return {void}
+/**
+ * Validate for mininum and maximum values of an input field
+ * @param {number} min - The minimum value.
+ * @param {number} max - The maximum value.
+ * @param {string} element - The input field to validate.
+ * @return {void}
  */
 var checkMinMax = (min, max, element) => {
     let field = domEl(`.${element}`);
@@ -615,10 +639,10 @@ var checkMinMax = (min, max, element) => {
     }
 }
 
-/*
-* Display a clear button in an input field that has text.
-* @param {string} element - The css class (name) of the input field.
-* @return {void}
+/**
+ * Display a clear button in an input field that has text.
+ * @param {string} element - The css class (name) of the input field.
+ * @return {void}
  */
 var makeClearable = (element) => {
     let field = domEl(`.${element}`);
@@ -631,11 +655,11 @@ var makeClearable = (element) => {
     (field.value !== '') ? unhide(suffix_element, true) : hide(suffix_element, true);
 }
 
-/*
-* Convert a selected file to base64.
-* @param {string} file - Url of selected file.
-* @param {string} element - The input field to write the base64 string to.
-* @return {void}
+/**
+ * Convert a selected file to base64.
+ * @param {string} file - Url of selected file.
+ * @param {string} element - The input field to write the base64 string to.
+ * @return {void}
  */
 var convertToBase64 = (file, element) => {
     const reader = new FileReader();
@@ -646,11 +670,11 @@ var convertToBase64 = (file, element) => {
     reader.readAsDataURL(file);
 }
 
-/*
-* Check if selected file size falls within allowed file size.
-* @param {number} file_size - The selected file size.
-* @param {number} max_size - THe maximum file size.
-* @return {boolean} True if <file_size> if less than <max_size>
+/**
+ * Check if selected file size falls within allowed file size.
+ * @param {number} file_size - The selected file size.
+ * @param {number} max_size - THe maximum file size.
+ * @return {boolean} True if <file_size> if less than <max_size>
  */
 var allowedFileSize = (file_size, max_size) => {
     return (file_size <= ((max_size) * 1) * 1000000);
