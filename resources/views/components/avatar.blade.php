@@ -1,24 +1,40 @@
 @props([
-    'image'     => null,
-    'alt'       => 'image',
-    'size'      => 'regular',
-    'class'     => 'ltr:mr-2 rtl:ml-2 mt-2',
-    'stacked'   => false,
+    /*
+    |----------------------------------------------------------------------------
+    | AVATAR COMPONENT (https://bladewindui.com/component/avatar
+    |----------------------------------------------------------------------------
+    |
+    | Display either a single avatar or a group of stacked avatars with the
+    | option to display +xxx. Avatars can be displayed in different sizes and
+    | have dot indicators that can be placed in two positions.
+    |
+     * */
+
+     // image to display
+    'image' => null,
+    // alt text to display for the image
+    'alt' => 'image',
+    // additional css to display for the image
+    'class' => 'ltr:mr-2 rtl:ml-2 mt-2',
+])
+@aware([
+    'size' => 'regular',
+    'stacked' => false,
     'show_ring' => true,
-    'show_dot'  => false,
+    'show_dot' => false,
     'dot_placement' => 'bottom',
     'dot_color' => 'green',
-    'sizes'    => [
-        'tiny'      => [ 'size_css' => 'w-6 h-6', 'dot_css' => 'left-5' ],
-        'small'     => [ 'size_css' => 'w-8 h-8', 'dot_css' => 'left-6' ],
-        'medium'    => [ 'size_css' => 'w-10 h-10', 'dot_css' => 'left-8' ],
-        'regular'   => [ 'size_css' => 'w-12 h-12', 'dot_css' => 'left-[31px] rtl:right-[31px]' ],
-        'big'       => [ 'size_css' => 'w-16 h-16', 'dot_css' => 'left-[46px] rtl:right-[46px]' ],
-        'huge'      => [ 'size_css' => 'w-20 h-20', 'dot_css' => 'left-[58px] rtl:right-[58px]' ],
-        'omg'       => [ 'size_css' => 'w-28 h-28', 'dot_css' => 'left-[79px] rtl:right-[79px]' ]
-    ]
 ])
 @php
+    $sizes = [
+        'tiny' => [ 'size_css' => 'w-6 h-6', 'dot_css' => 'left-5' ],
+        'small' => [ 'size_css' => 'w-8 h-8', 'dot_css' => 'left-6' ],
+        'medium' => [ 'size_css' => 'w-10 h-10', 'dot_css' => 'left-8' ],
+        'regular' => [ 'size_css' => 'w-12 h-12', 'dot_css' => 'left-[31px] rtl:right-[31px]' ],
+        'big' => [ 'size_css' => 'w-16 h-16', 'dot_css' => 'left-[46px] rtl:right-[46px]' ],
+        'huge' => [ 'size_css' => 'w-20 h-20', 'dot_css' => 'left-[58px] rtl:right-[58px]' ],
+        'omg' => [ 'size_css' => 'w-28 h-28', 'dot_css' => 'left-[79px] rtl:right-[79px]' ]
+    ];
     $avatar = $image ?: asset('vendor/bladewind/images/avatar.png');
     $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);;
     $show_dot = filter_var($show_dot, FILTER_VALIDATE_BOOLEAN);;
