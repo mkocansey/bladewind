@@ -1,4 +1,4 @@
-@props([
+@php
     /*
     |----------------------------------------------------------------------------
     | AVATAR COMPONENT (https://bladewindui.com/component/avatar
@@ -9,45 +9,62 @@
     | have dot indicators that can be placed in two positions.
     |
      * */
-
-     // image to display
+@endphp
+@props([
     'image' => null,
-    // alt text to display for the image
     'alt' => 'image',
-    // additional css to display for the image
     'class' => 'ltr:mr-2 rtl:ml-2 mt-2',
+    'dot_position' => 'bottom',
+    'dot_color' => 'green',
+    'dotted' => false,
+//    'size' => 'regular',
+//    'stacked' => false,
+//    'show_ring' => true,
 ])
 @aware([
+    // these attributes could be passed from the x-bladewind::avatars component also
+    'dotted' => $dotted ?? false,
     'size' => 'regular',
     'stacked' => false,
     'show_ring' => true,
-    'show_dot' => false,
-    'dot_placement' => 'bottom',
-    'dot_color' => 'green',
+    'dot_position' => $dot_position ?? 'bottom',
+    'dot_color' => $dot_color ?? 'green',
+    'plus' => '',
 ])
 @php
     $sizes = [
-        'tiny' => [ 'size_css' => 'w-6 h-6', 'dot_css' => 'left-5' ],
-        'small' => [ 'size_css' => 'w-8 h-8', 'dot_css' => 'left-6' ],
-        'medium' => [ 'size_css' => 'w-10 h-10', 'dot_css' => 'left-8' ],
-        'regular' => [ 'size_css' => 'w-12 h-12', 'dot_css' => 'left-[31px] rtl:right-[31px]' ],
-        'big' => [ 'size_css' => 'w-16 h-16', 'dot_css' => 'left-[46px] rtl:right-[46px]' ],
-        'huge' => [ 'size_css' => 'w-20 h-20', 'dot_css' => 'left-[58px] rtl:right-[58px]' ],
-        'omg' => [ 'size_css' => 'w-28 h-28', 'dot_css' => 'left-[79px] rtl:right-[79px]' ]
+        'tiny' => [ 'size_css' => 'w-6 h-6', 'dot_css' => 'left-5', 'plus_text_size' => 'text-xs' ],
+        'small' => [ 'size_css' => 'w-8 h-8', 'dot_css' => 'left-6', 'plus_text_size' => 'text-sm' ],
+        'medium' => [ 'size_css' => 'w-10 h-10', 'dot_css' => 'left-8', 'plus_text_size' => 'text-base' ],
+        'regular' => [ 'size_css' => 'w-12 h-12', 'dot_css' => 'left-[31px] rtl:right-[31px]', 'plus_text_size' => 'text-lg' ],
+        'big' => [ 'size_css' => 'w-16 h-16', 'dot_css' => 'left-[46px] rtl:right-[46px]', 'plus_text_size' => 'text-xl tracking-tighter' ],
+        'huge' => [ 'size_css' => 'w-20 h-20', 'dot_css' => 'left-[58px] rtl:right-[58px]', 'plus_text_size' => 'text-2xl' ],
+        'omg' => [ 'size_css' => 'w-28 h-28', 'dot_css' => 'left-[79px] rtl:right-[79px]', 'plus_text_size' => 'text-3xl' ]
     ];
+
+    $dotted = filter_var($dotted, FILTER_VALIDATE_BOOLEAN);
+    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);
+    $show_ring = filter_var($show_ring, FILTER_VALIDATE_BOOLEAN);
+    $dot_position = (in_array($dot_position, ['top','bottom'])) ? $dot_position : 'bottom';
     $avatar = $image ?: asset('vendor/bladewind/images/avatar.png');
-    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);;
-    $show_dot = filter_var($show_dot, FILTER_VALIDATE_BOOLEAN);;
-    $show_ring = filter_var($show_ring, FILTER_VALIDATE_BOOLEAN);;
-    $dot_placement = (in_array($dot_placement, ['top','bottom'])) ? $dot_placement : 'bottom';
+    $show_plus = (substr($avatar, 0, 1) == '+');
     $image_size = $sizes[$size]['size_css'];
+    $plus_text_size = $sizes[$size]['plus_text_size'];
     $dot_position_css = $sizes[$size]['dot_css'];
+    $stacked = (is_numeric($plus) && $plus > 0) ? true : $stacked;
     $stacked_css = ($stacked) ? 'mb-3 !-mr-3' : '';
 @endphp
-<div class="relative inline-block {{ $image_size }} {{$stacked_css}} {{$class}}">
-    <img class="{{ $image_size }} object-cover rounded-full @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-gray-200/50 dark:ring-0 dark:ring-offset-dark-700/50  @endif"
-         src="{{$avatar}}" alt="{{$avatar}}"/>
-    @if($show_dot)
-        <span class="-{{$dot_placement}}-1 {{$dot_position_css}} absolute w-3 h-3 bg-{{$dot_color}}-500 border-2 border-white dark:border-dark-800 rounded-full"></span>
+
+<div class="relative inline-block rounded-full {{ $image_size }} {{$stacked_css}} {{$class}} @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-gray-200/50 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
+    @if($show_plus)
+        <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold bg-white dark:bg-dark-600 dark:text-dark-300">
+            {{$avatar}}
+        </div>
+    @else
+        <img class="{{ $image_size }} absolute object-cover object-center rounded-full" src="{{$avatar}}"
+             alt="{{$avatar}}"/>
+        @if($dotted)
+            <span class="-{{$dot_position}}-1 {{$dot_position_css}} z-20 absolute w-3 h-3 bg-{{$dot_color}}-500 border-2 border-white dark:border-dark-800 rounded-full"></span>
+        @endif
     @endif
 </div>
