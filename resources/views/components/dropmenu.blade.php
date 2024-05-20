@@ -9,9 +9,9 @@
     'hide_after_click' => true,
     'position' => 'right',
     'class' => '',
+    'modular' => false, // append type="module" to script tags
+    'pickerColour' => 'pink',
     'icon_right' => false,
-    // append type="module" to script tags
-    'modular' => false,
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -32,8 +32,9 @@
 <div class="relative inline-block text-left bw-dropmenu !z-20 {{$name}}" tabindex="0">
     <div class="bw-trigger cursor-pointer inline-block">
         @if(str_ends_with($trigger, '-icon'))
-            <x-bladewind::icon name="{{ trim(str_replace('-icon','', $trigger)) }}"
-                               class="h-6 w-6 text-gray-500 transition duration-150 ease-in-out z-10 {{$trigger_css}}"/>
+            <x-bladewind::icon
+                    name="{{ trim(str_replace('-icon','', $trigger)) }}"
+                    class="h-6 w-6 text-gray-500 transition duration-150 ease-in-out z-10 {{$trigger_css}}"/>
         @else
             {!!$trigger!!}
         @endif
@@ -46,7 +47,7 @@
              @if($scrollable)
                  style="height: {{$height}}px; overflow-y: scroll"
                 @endif>
-            {{$slot}}
+            {{ $slot }}
         </div>
     </div>
 </div>
