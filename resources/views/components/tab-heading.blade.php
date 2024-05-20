@@ -14,6 +14,11 @@
     // to enable switching; the tab content div needs to have the same name as the tab
     // the alternative action is to pass a url. clicking on the tab will open the url
     'url' => 'default',
+    // display optional icon prefix
+    'icon' => null,
+    'icon_css' => '',
+    'icon_type' => 'outline',
+    'icon_dir' => '',
 ])
 @aware(['color' => 'blue', 'style' => 'linear'])
 @php
@@ -32,5 +37,9 @@
                     @else
                         is-active {{$color}}
                     @endif
-              @endif">{!! $label !!}</span>
+              @endif">
+        @if(!empty($icon))
+            <x-bladewind::icon :name="$icon" class="{{$icon_css}}" :type="$icon_type" :dir="$icon_dir"/>
+        @endif
+        {!! $label !!}</span>
 </li>
