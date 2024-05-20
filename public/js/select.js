@@ -10,9 +10,10 @@ class BladewindSelect {
     maxSelection;
     toFilter;
     selectedValue;
+    canClear;
 
 
-    constructor(name, placeholder) {
+    constructor(name, placeholder, required) {
         this.name = name;
         this.placeholder = placeholder || 'Select One';
         this.rootElement = `.bw-select-${name}`;
@@ -25,6 +26,7 @@ class BladewindSelect {
         this.formInput = `input.bw-${this.name}`;
         dom_el(this.displayArea).style.maxWidth = `${(dom_el(this.rootElement).offsetWidth - 40)}px`;
         this.maxSelection = -1;
+        this.canClear = false;
     }
 
     activate = () => {
@@ -35,6 +37,10 @@ class BladewindSelect {
         this.search();
         this.manualModePreSelection();
         this.selectItem();
+    }
+
+    clearable = () => {
+        this.canClear = true;
     }
 
     hide = () => {
@@ -99,12 +105,14 @@ class BladewindSelect {
             changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
             dom_el(this.displayArea).innerText = selectedLabel;
             input.value = this.selectedValue;
-            unhide(`${this.clickArea} .reset`);
             unhide(svg, true);
-            dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
-                this.unsetValue(item);
-                e.stopImmediatePropagation();
-            });
+            if (this.canClear) {
+                unhide(`${this.clickArea} .reset`);
+                dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
+                    this.unsetValue(item);
+                    e.stopImmediatePropagation();
+                });
+            }
         } else {
             if (input.value.includes(this.selectedValue)) {
                 this.unsetValue(item);
