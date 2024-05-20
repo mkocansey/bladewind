@@ -17,9 +17,8 @@
     'dot_position' => 'bottom',
     'dot_color' => 'green',
     'dotted' => false,
-//    'size' => 'regular',
-//    'stacked' => false,
-//    'show_ring' => true,
+    'label' => null,
+    'plus_action' => null,
 ])
 @aware([
     // these attributes could be passed from the x-bladewind::avatars component also
@@ -53,18 +52,34 @@
     $dot_position_css = $sizes[$size]['dot_css'];
     $stacked = (is_numeric($plus) && $plus > 0) ? true : $stacked;
     $stacked_css = ($stacked) ? 'mb-3 !-mr-3' : '';
+    $label = (!empty($label)) ? substr($label, 0, 2) : $label;
+
+    if(!function_exists("urlExists")){
+        function urlExists($url): bool
+        {
+            $headers = @get_headers($url);
+            if(!$headers || $headers[0] == 'HTTP/1.1 404 Not Found') {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    $use_label = (!urlExists($avatar) && $label);
+    if($use_label) $avatar = $label;
 @endphp
 
-<div class="relative inline-block rounded-full {{ $image_size }} {{$stacked_css}} {{$class}} @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-gray-200/50 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
-    @if($show_plus)
-        <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold bg-white dark:bg-dark-600 dark:text-dark-300">
+<div class="relative inline-block rounded-full bw-avatar {{ $image_size }} {{$stacked_css}} {{$class}} @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-gray-200/50 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
+    @if($show_plus || $use_label)
+        <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold bg-white dark:bg-dark-600 dark:text-dark-300 @if($show_plus && !empty($plus_action)) plus-more cursor-pointer @endif"
+             @if($show_plus && !empty($plus_action)) onclick="{!! $plus_action !!}" @endif>
             {{$avatar}}
         </div>
     @else
         <img class="{{ $image_size }} absolute object-cover object-center rounded-full" src="{{$avatar}}"
              alt="{{$avatar}}"/>
-        @if($dotted)
-            <span class="-{{$dot_position}}-1 {{$dot_position_css}} z-20 absolute w-3 h-3 bg-{{$dot_color}}-500 border-2 border-white dark:border-dark-800 rounded-full"></span>
-        @endif
+    @endif
+    @if($dotted && !$show_plus)
+        <span class="-{{$dot_position}}-1 {{$dot_position_css}} z-20 absolute w-3 h-3 bg-{{$dot_color}}-500 border-2 border-white dark:border-dark-800 rounded-full"></span>
     @endif
 </div>

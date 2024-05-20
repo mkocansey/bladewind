@@ -32,7 +32,7 @@
     'dot_color' => 'green',
 
     // indicate how many more avatars are there but hidden +23
-    'plus' => '',
+    'plus' => null,
 
     // should the avatars be stacked
     'stacked' => true,
@@ -45,12 +45,12 @@
     // what happens when user clicks on +23? the default action
     // is to expand to show all avatars ONLY if there are more avatars to display
     // accepts a JS function as a string
-    'plus_action' => 'expand',
+    'plus_action' => null,
 ])
 
 <div class="bw-avatars {{$class}}">
     {{$slot}}
     @if(is_numeric($plus) && $plus > 0)
-        <x-bladewind::avatar :size="$size" image="+{{$plus}}"/>
+        <x-bladewind::avatar :size="$size" image="+{{$plus}}" plus_action="{!! $plus_action !!}"/>
     @endif
 </div>
