@@ -174,8 +174,9 @@
         <div class="text-left grow display-area hidden whitespace-nowrap overflow-x-scroll p-0 m-0"></div>
         <div class="whitespace-nowrap inline-flex">
             <x-bladewind::icon name="chevron-right" class="scroll-right !-mr-2 !mt-0.5 !w-5 !h-5 hidden"/>
-            <x-bladewind::icon name="x-circle" type="solid"
-                               class="reset w-6 h-6 fill-slate-300 hover:fill-slate-500 text-white dark:!text-dark-200 hidden dark:!fill-dark-700 dark:hover:!fill-dark-900"/>
+            <x-bladewind::icon
+                    name="x-circle" type="solid"
+                    class="hidden reset size-6 text-white fill-gray-400/70 hover:fill-gray-400 dark:fill-white/40 dark:hover:fill-white/60"/>
             <x-bladewind::icon name="chevron-up-down" class="opacity-40 !ml-2"/>
         </div>
     </div>
@@ -219,5 +220,8 @@
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     @if(!$disabled && !$readonly) bw_{{ $input_name }}.activate();
     bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');
-    @endif @if(!empty($filter)) bw_{{ $input_name }}.filter('{{ $filter }}');@endif
+    @endif
+    @if(!empty($filter)) bw_{{ $input_name }}.filter('{{ $filter }}');
+    @endif @if(!($required && $multiple == 'false')) bw_{{ $input_name }}.clearable();
+    @endif
 </script>

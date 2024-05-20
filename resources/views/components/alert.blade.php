@@ -1,4 +1,14 @@
 @props([
+     /*
+    |----------------------------------------------------------------------------
+    | ALERT COMPONENT (https://bladewindui.com/component/alert
+    |----------------------------------------------------------------------------
+    |
+    | Display inline alerts in four prebuilt colours and additional colours.
+    | You can dismiss the alerts and display icons or avatars in the alert.
+    |
+     * */
+
     // error, warning, success, info
     'type' => 'info',
     // shades of the alert faint, dark
@@ -7,7 +17,7 @@
     'show_icon' => true,
     // for backward compatibility with laravel 8
     'showIcon'  => true,
-    // should the close icon be shown
+    // should the close icon be shown?
     'show_close_icon' => true,
     // for backward compatibility with laravel 8
     'showCloseIcon' => true,
@@ -22,10 +32,11 @@
     // use avatar in place of an icon
     'avatar' => '',
     // size of the avatar
+    // available sizes are: tiny | small | medium | regular | big | huge | omg
     'size' => 'tiny',
+    // display a ring around the avatar
     'show_ring' => false,
 ])
-
 @php
     // reset variables for Laravel 8 support
     $show_icon = filter_var($show_icon, FILTER_VALIDATE_BOOLEAN);
@@ -39,7 +50,8 @@
         (($color =='transparent') ? 'text-gray-400 hover:text-gray-700 dark:text-gray-200' :
         'text-gray-100 hover:text-gray-500')  : 'text-gray-500 dark:text-gray-200';
     $type = (!empty($color)) ? $color : $type;
-    // colours to use of user has not defined colors in tailwind.config.js
+
+    // colours to use if user has not defined colors in tailwind.config.js
     $alternate_colour = function() use ($type, $shade) {
         $bg_suffix = ($shade == 'dark') ? '500' : '200/70';
         $text_suffix = ($shade == 'dark') ? '50' : '700';
@@ -61,8 +73,12 @@
         'icon' => [ 'faint' => "text-$type-700", 'dark' => "!text-$type-100" ]
     ];
     $colours = [
-        'faint' => ($type=='transparent') ? "bg-transparent border border-slate-300/80 dark:border-slate-600 text-slate-700 dark:text-dark-400" : $presets['faint'],
-        'dark' => ($type=='transparent') ? "bg-transparent border border-slate-400 dark:border-slate-500 text-slate-700 dark:text-dark-400" : $presets['dark'],
+        'faint' => ($type=='transparent') ?
+            "bg-transparent border border-slate-300/80 dark:border-slate-600 text-slate-700 dark:text-dark-400" :
+            $presets['faint'],
+        'dark' => ($type=='transparent') ?
+            "bg-transparent border border-slate-400 dark:border-slate-500 text-slate-700 dark:text-dark-400" :
+            $presets['dark'],
         'icon' => [
             'faint' => ($type=='transparent') ? "text-slate-400" : $presets['icon']['faint'],
             'dark' => ($type=='transparent') ? "text-slate-400" : $presets['icon']['dark'],

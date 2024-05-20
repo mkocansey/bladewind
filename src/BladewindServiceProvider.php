@@ -27,5 +27,9 @@ class BladewindServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../lang' => lang_path('vendor/bladewind'),
         ], 'bladewind-lang');
+
+        $this->publishes([
+            __DIR__.'/../config/bladewind.php' => config_path('bladewind.php'),
+        ], 'bladewind-config');
     }
 }
