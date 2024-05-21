@@ -8,11 +8,15 @@
     }
 
     .bw-table tr > td {
-        @apply p-4 align-top text-sm text-slate-600/80 dark:text-dark-400 leading-6 bg-white dark:bg-dark-800 border-x-2 border-gray-50/10 dark:border-dark-800/10
+        @apply py-4 px-6 align-top text-sm text-slate-600/80 dark:text-dark-400 leading-6 bg-white dark:bg-dark-800 border-x-2 border-gray-50/10 dark:border-dark-800/10
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
         @apply bg-slate-50 dark:bg-dark-800/60
+    }
+
+    .bw-table.celled th, .bw-table.celled td {
+        @apply border-x-0 border-r border-gray-300/50 dark:border-dark-700/60 !border-collapse
     }
 
     .bw-table thead > tr > th {
@@ -23,8 +27,12 @@
         text-left
         font-semibold
         tracking-widest
-        p-4
-        border-t border-t-gray-200/20 dark:border-t-dark-800
+        px-6 py-4
+        border-t border-t-gray-200/30 dark:border-t-dark-800
+    }
+
+    .bw-table.celled th:first-child, .bw-table.celled td:first-child {
+        @apply border-x border-gray-300/50 dark:border-dark-700/60 !border-collapse
     }
 
     .bw-table.has-no-data thead > tr {
@@ -36,7 +44,7 @@
     }
 
     .bw-table-filter-bar {
-        @apply bg-slate-200/50 p-1 dark:bg-dark-800/30
+        @apply bg-slate-200/50 p-1.5 dark:bg-dark-800/30 rounded-md
     }
 
     .bw-table-filter-bar input {
@@ -44,7 +52,7 @@
     }
 
     .bw-table.compact thead > tr > th {
-        @apply !py-2
+        @apply !py-3
     }
 
     .bw-table.compact tr > td {

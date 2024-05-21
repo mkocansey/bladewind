@@ -28,6 +28,7 @@
     'column_aliases' => [],
     'searchable' => false,
     'search_placeholder' => 'Search table below...',
+    'celled' => false,
     'uppercasing' => true,
     'no_data_message' => 'No records to display',
     'message_as_empty_state' => false,
@@ -50,6 +51,7 @@
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
     $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
     $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
+    $celled = filter_var($celled, FILTER_VALIDATE_BOOLEAN);
     $message_as_empty_state = filter_var($message_as_empty_state, FILTER_VALIDATE_BOOLEAN);
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
@@ -98,7 +100,7 @@
         }
     }
 @endphp
-<div class="@if($has_border) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
+<div class="@if($has_border && !$celled) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
     <div class="w-full">
         @if($searchable)
             <div class="bw-table-filter-bar">
@@ -107,7 +109,7 @@
                         placeholder="{{$search_placeholder}}"
                         onkeyup="filterTable(this.value, 'table.{{$name}}')"
                         add_clearing="false"
-                        class="!mb-0 focus:!border-slate-300 !pl-11"
+                        class="!mb-0 focus:!border-slate-300 !pl-9 !py-3"
                         clearable="true"
                         prefix_is_icon="true"
                         prefix="magnifying-glass"/>
@@ -115,15 +117,14 @@
         @endif
 
         <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-lg dark:shadow-dark-950/20 @endif
-            @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif
+            @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif  @if($celled) celled @endif
             @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif">
             @if(is_null($data))
                 <thead>
-                <tr class="bg-gray-200 dark:bg-dark-800">{{ $header }}</tr>
+                <tr>{{ $header }}</tr> {{--  class="bg-gray-200 dark:bg-dark-800" --}}
                 </thead>
                 <tbody>{{ $slot }}</tbody>
             @else
-
                 <thead>
                 <tr class="bg-gray-200 dark:bg-dark-800">
                     @php
