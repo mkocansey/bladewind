@@ -86,6 +86,7 @@
     'suffix_icon_div_css' => 'rtl:!right-[unset] rtl:!left-0',
     // javascript to execute when suffix icon is clicked
     'action' => null,
+    'size' => 'medium',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -150,13 +151,13 @@
     if($clearable) {
         $suffix = 'x-mark';
         $suffix_is_icon = true;
-        $suffix_icon_css = 'hidden cursor-pointer dark:!bg-dark-900/60 dark:hover:!bg-dark-900 !rounded-full !p-1 bg-gray-100 hover:bg-gray-200 !size-5';
+        $suffix_icon_css = 'hidden cursor-pointer dark:!bg-dark-900/60 dark:hover:!bg-dark-900 !p-0.5 !rounded-full bg-gray-400 !stroke-2 hover:bg-gray-600 text-white';
     }
 @endphp
 
 <div class="relative w-full dv-{{$name}} @if($add_clearing) mb-4 @endif">
     <input
-            {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
+            {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color $size"]) }}
             type="{{ $type }}"
             id="{{ $name }}"
             name="{{ $name }}"
@@ -173,7 +174,7 @@
         <div class="text-red-500 text-xs p-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>
     @endif
     @if(!empty($label))
-        <label for="{{ $name }}" class="form-label" onclick="dom_el('.{{$name}}').focus()">{!! $label !!}
+        <label for="{{ $name }}" class="form-label {{$size}}" onclick="dom_el('.{{$name}}').focus()">{!! $label !!}
             @if($required)
                 <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
             @endif
@@ -184,7 +185,7 @@
              data-transparency="{{$transparent_prefix}}">
             @if($prefix_is_icon)
                 <x-bladewind::icon name='{!! $prefix !!}' type="{{ $prefix_icon_type }}"
-                                   class="!size-5 {{$prefix_icon_css}}"/>
+                                   class="!size-4 !stroke-2 !opacity-70 hover:!opacity-100 {{$prefix_icon_css}}"/>
             @else
                 {!! $prefix !!}
             @endif</div>
@@ -197,7 +198,7 @@
                 <x-bladewind::icon
                         name='{!! $suffix !!}'
                         type="{{ $suffix_icon_type }}"
-                        class="!size-5 {{$suffix_icon_css}}"
+                        class="!size-4 !stroke-2 !opacity-85 hover:!opacity-100 {{$suffix_icon_css}}"
                         action="{!! $action !!}"/>
 
                 {{-- this will be shown when user clicks to reveal password // so they can hide the password --}}
@@ -205,7 +206,7 @@
                     <x-bladewind::icon
                             name='eye-slash'
                             type="{{ $suffix_icon_type }}"
-                            class="!size-5 hide-pwd hidden"
+                            class="!size-4 !stroke-2 !opacity-85 hover:!opacity-100 hide-pwd hidden"
                             action="togglePassword('{{$name}}', 'hide')"/>
                 @endif
             @else
