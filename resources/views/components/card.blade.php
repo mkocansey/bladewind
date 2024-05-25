@@ -2,18 +2,19 @@
     // title of the card
     'title' => null,
     // should the card be displayed with a shadow
-    'has_shadow' => true,
+    'has_shadow' => config('bladewind.card.has_shadow', true),
     // for backward compatibility with Laravel 8
-    'hasShadow' => true,
+    'hasShadow' => config('bladewind.card.has_shadow', true),
     // display a border around the card. useful on white backgrounds
-    'has_border' => true,
+    'has_border' => config('bladewind.card.has_border', true),
     // display a thicker shadow on hover
-    'hover_effect' => false,
+    'hover_effect' => config('bladewind.card.hover_effect', false),
     // reduce padding within the card
-    'compact' => false,
-    'reduce_padding' => false, // TODO: depreceate this
+    'compact' => config('bladewind.card.compact', false),
+    // TODO: deprecate this
+    'reduce_padding' => config('bladewind.card.reduce_padding', false),
     // for backward compatibility with Laravel 8
-    'reducePadding' => false,
+    'reducePadding' => config('bladewind.card.reduce_padding', false),
     // content to display as card header
     'header' => null,
     // content to display as card footer

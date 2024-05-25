@@ -1,6 +1,6 @@
 @props([
-    'hover_effect' => false,
-    'has_shadow' => true,
+    'hover_effect' => config('bladewind.contact_card.hover_effect', false),
+    'has_shadow' => config('bladewind.contact_card.has_shadow', true),
     'hasShadow' => true,
     'image' => asset('vendor/bladewind/images/avatar.png'),
     'name' => null,

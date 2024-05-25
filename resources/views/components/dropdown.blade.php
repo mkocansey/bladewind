@@ -57,8 +57,8 @@
     'urlKey' => null,
 
     // if url_key is set, should the selected item's value be appended to the url
-    'append_value_to_url' => false,
-    'appendValueToUrl' => false,
+    'append_value_to_url' => config('bladewind.dropdown.append_value_to_url', false),
+    'appendValueToUrl' => config('bladewind.dropdown.append_value_to_url', false),
 
     // if url_key is set and append_value_to_url is 'true', what variable name should
     // the value be appended to the url as. Default is 'value'

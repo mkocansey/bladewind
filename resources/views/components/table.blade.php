@@ -2,22 +2,22 @@
     // your table headers in <th></th> tags
     'header' => '',
     // setting to true will result in a striped table
-    'striped' => false,
+    'striped' => config('bladewind.table.striped', false),
     // should the table with displayed with a drop-shadow effect
-    'has_shadow' => false,
-    'hasShadow' => false,
+    'has_shadow' => config('bladewind.table.has_shadow', false),
+    'hasShadow' => config('bladewind.table.has_shadow', false),
     // should the table have a border on all four sides
-    'has_border' => false,
+    'has_border' => config('bladewind.table.has_border', false),
     // should the table have row dividers
-    'divided' => true,
+    'divided' => config('bladewind.table.divided', true),
     // if table has row dividers, how wide should they be
     // available value are regular, thin
-    'divider' => 'regular',
+    'divider' => config('bladewind.table.divider', 'regular'),
     // should rows light up on hover
-    'hover_effect' => true,
-    'hoverEffect' => true,
+    'hover_effect' => config('bladewind.table.hover_effect', true),
+    'hoverEffect' => config('bladewind.table.hover_effect', true),
     // should the rows be tighter together
-    'compact' => false,
+    'compact' => config('bladewind.table.compact', false),
     // provide a table name you can access via css
     'name' => 'tbl-'.uniqid(),
     'data' => null,
@@ -26,17 +26,17 @@
     'action_icons' => null,
     'actions_title' => 'actions',
     'column_aliases' => [],
-    'searchable' => false,
-    'search_placeholder' => 'Search table below...',
-    'celled' => false,
-    'uppercasing' => true,
-    'no_data_message' => 'No records to display',
-    'message_as_empty_state' => false,
+    'searchable' => config('bladewind.table.searchable', false),
+    'search_placeholder' => config('bladewind.table.search_placeholder', 'Search table below...'),
+    'celled' => config('bladewind.table.celled', false),
+    'uppercasing' => config('bladewind.table.uppercasing', true),
+    'no_data_message' => config('bladewind.table.no_data_message', 'No records to display'),
+    'message_as_empty_state' => config('bladewind.table.message_as_empty_state', false),
     // parameters expected by the empty state component ---------------
     'image' => asset('vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
     'button_label' => '',
-    'show_image' => true,
+    'show_image' => config('bladewind.table.show_image', true),
     'onclick' => '',
     //------------------ end empty state parameters -------------------
 ])

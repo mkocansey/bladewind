@@ -1,7 +1,7 @@
 @props([
-    'size' => 'small',
+    'size' => config('bladewind.spinner.size','small'),
     'class' => '',
-    'color' => 'gray',
+    'color' => config('bladewind.spinner.color', 'gray'),
     'sizing' => [
         'small' => 6,
         'medium' => 10,

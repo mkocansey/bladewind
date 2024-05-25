@@ -3,8 +3,8 @@
     'name' => 'pin-code-'.uniqid(),
 
     // total number of boxes to display
-    'total_digits' => 4,
-    'totalDigits' => 4,
+    'total_digits' => config('bladewind.code.total_digits', 4),
+    'totalDigits' => config('bladewind.code.total_digits', 4),
 
     /*
     what function should be called when the user is done entering the verification code.
@@ -21,13 +21,13 @@
     'errorMessage' => 'You entered a wrong code',
 
     // should input text be masked to hide code
-    'mask' => false,
+    'mask' => config('bladewind.code.mask', false),
 
     // after how many seconds should the link to resend a code be displayed
     'timer' => null,
 
     // boxes can either be big or regular
-    'size' => '',
+    'size' => config('bladewind.code.size', 'regular'),
 ])
 @php
     // reset variables for Laravel 8 support

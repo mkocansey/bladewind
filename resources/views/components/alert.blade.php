@@ -13,11 +13,11 @@
    // error, warning, success, info
    'type' => 'info',
    // shades of the alert faint, dark
-   'shade' => 'faint',
+   'shade' => config('bladewind.alert.shade', 'faint'),
    // should the alert type icon be shown
-   'show_icon' => true,
+   'show_icon' => config('bladewind.alert.show_icon', true),
    // for backward compatibility with laravel 8
-   'showIcon'  => true,
+   'showIcon'  => config('bladewind.alert.show_icon', true),
    // should the close icon be shown?
    'show_close_icon' => true,
    // for backward compatibility with laravel 8
@@ -25,7 +25,7 @@
    // additional css classes to add
    'class' => '',
    // additional colors to display
-   'color' => null,
+   'color' => config('bladewind.alert.color', null),
    // any Heroicons icon to use
    'icon' => '',
    // additional css to apply to $icon
@@ -34,9 +34,9 @@
    'avatar' => '',
    // size of the avatar
    // available sizes are: tiny | small | medium | regular | big | huge | omg
-   'size' => 'tiny',
+   'size' => config('bladewind.alert.size', 'tiny'),
    // display a ring around the avatar
-   'show_ring' => false,
+   'show_ring' => config('bladewind.alert.show_ring', false),
 ])
 @php
     // reset variables for Laravel 8 support

@@ -4,7 +4,7 @@
     'type' => 'primary',
 
     // tiny, small, regular, big
-    'size' => 'regular',
+    'size' => config('bladewind.button.size', 'regular'),
 
     // for use with css and js if you want to manipulate the button
     'name' => null,
@@ -29,7 +29,7 @@
 
     // what tags to use for drawing the button <a> or <button>
     // available options are a, button
-    'tag' => 'button',
+    'tag' => config('bladewind.button.tag', 'button'),
 
     // button colour
     'color' => 'primary',
@@ -40,30 +40,35 @@
 
     // icon to display to the left of the button
     'icon' => '',
-    'icon_right' => false,
-    'iconRight' => false,
+    'icon_right' => config('bladewind.button.icon_right', false),
+    'iconRight' => config('bladewind.button.icon_right', false),
 
-    // should a ring be shown around the button
-    'show_focus_ring' => true,
-    'showFocusRing' => true,
+    // should a ring be shown around the button?
+    'show_focus_ring' => config('bladewind.button.show_focus_ring', true),
+    'showFocusRing' => config('bladewind.button.show_focus_ring', true),
 
     // should the button be only an outline
-    'outline' => false,
+    'outline' => config('bladewind.button.outline', false),
 
-    // thickness of outline border
-    'border_width' => 2, //border-2, border-4, border-8
+    // thickness of outline
+    // 2, 4, 8
+    // becomes border-2, border-4, border-8
+    'border_width' => config('bladewind.button.border_width', 2),
 
     // thickness of the ring shown on focus
-    'ring_width' => '', // ring, ring-1, ring-2, ring-4, ring-8
+    // 1, 2, 4, 8
+    // becomes ring, ring-1, ring-2, ring-4, ring-8
+    'ring_width' => config('bladewind.button.ring_width', ''),
 
     // determines how rounded the button should be
-    'radius' => 'small', // none, small, medium, full
+    // none, small, medium, full
+    'radius' => config('bladewind.button.radius', 'small'),
 
     // is this a circular button
     'circular' => false,
 
     // display button text as uppercase or as user entered
-    'uppercasing' => true,
+    'uppercasing' => config('bladewind.button.uppercasing', true),
 
     // css fpr various radii
     'roundness'     => [

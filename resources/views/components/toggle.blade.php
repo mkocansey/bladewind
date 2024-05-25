@@ -5,8 +5,8 @@
     // label to display next to the toggle element
     'label' => '',
     // the position of the label above. left or right
-    'label_position' => 'left',
-    'labelPosition' => 'left',
+    'label_position' => config('bladewind.toggle.label_position', 'left'),
+    'labelPosition' => config('bladewind.toggle.label_position', 'left'),
     // sets or unsets disabled on the toggle element
     'disabled' => false,
     // sets or unsets checked on the toggle element
@@ -14,9 +14,9 @@
     // background color to display when toggle is active
     'color' => 'primary',
     // should the label and toggle element be justified in their parent element?
-    'justified' => false,
+    'justified' => config('bladewind.toggle.justified', false),
     // how big should the toggle bar be. Options available are thin, thick, thicker
-    'bar' => 'thick',
+    'bar' => config('bladewind.toggle.bar', 'thick'),
     // javascript function to run when toggle is clicked
     'onclick' => 'javascript:void(0)',
     // css for label

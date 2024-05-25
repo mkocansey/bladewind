@@ -6,7 +6,7 @@
 @aware([
     'type' => 'primary',
     'color' => 'primary',
-    'size' => 'regular',
+    'size' => config('bladewind.button.circle.size', 'regular'),
     'name' => null,
     'can_submit' => false,
     'canSubmit' => false,

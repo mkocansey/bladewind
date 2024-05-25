@@ -1,19 +1,19 @@
 @props([
-    'size'          => 'small',
-    'show_dot'      => true,
-    'showDot'       => true,
-    'animate_dot'   => false,
-    'animateDot'    => false,
+    'size'          => config('bladewind.bell.size', 'small'),
+    'show_dot'      => config('bladewind.bell.show_dot', true),
+    'showDot'       => config('bladewind.bell.show_dot', true),
+    'animate_dot'   => config('bladewind.bell.animate_dot', false),
+    'animateDot'    => config('bladewind.bell.animate_dot', false),
     'invert'        => false,
-    'color'         => 'primary',
+    'color'         => config('bladewind.bell.color', 'primary'),
     'sizing' => [
         'small' => [
-            'bell' => 'w-6 h-6',
-            'dot' => 'w-[9px] h-[9px]'
+            'bell' => 'size-6',
+            'dot' => 'size-[9px]'
         ],
         'big' => [
-            'bell' => '!w-10 !h-10',
-            'dot' => '!w-4 !h-4'
+            'bell' => '!size-10',
+            'dot' => '!size-4'
         ],
     ],
 ])

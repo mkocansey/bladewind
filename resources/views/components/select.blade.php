@@ -3,7 +3,7 @@
     'name' => 'bw-select',
 
     // the default text to display when the select shows
-    'placeholder' => 'Select One',
+    'placeholder' => config('bladewind.select.placeholder', 'Select One'),
 
     /**
      * Optional function to execute when a select item is selected.
@@ -73,8 +73,8 @@
     'multiple' => 'false',
 
     // adds margin after the input box
-    'add_clearing' => true,
-    'addClearing' => true,
+    'add_clearing' => config('bladewind.select.add_clearing', true),
+    'addClearing' => config('bladewind.select.add_clearing', true),
 
     /**
      * Determines if a value passed in the data array should automatically be selected
@@ -94,17 +94,17 @@
     'maxSelectable' => -1,
 
     // error message to display when max_selectable is exceeded
-    'max_error_message' => 'Please select only %s items',
-    'maxErrorMessage' => 'Please select only %s items',
+    'max_error_message' => config('bladewind.select.max_error_message', 'Please select only %s items'),
+    'maxErrorMessage' => config('bladewind.select.max_error_message', 'Please select only %s items'),
 
     'filter' => '',
 
     'filter_by' => '',
 
     // append type="module" to script tags
-    'modular' => false,
+    'modular' => config('bladewind.select.modular', false),
 
-    'size' => 'medium',
+    'size' => config('bladewind.select.size', 'medium'),
 
 ])
 @php

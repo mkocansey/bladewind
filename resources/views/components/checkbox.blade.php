@@ -8,9 +8,9 @@
     'class' => 'rounded-md',
     'label_css' => 'mr-6',
     'labelCss' => '',
-    'color' => 'primary',
-    'add_clearing' => true,
-    'addClearing' => true,
+    'color' => config('bladewind.checkbox.color', 'primary'),
+    'add_clearing' => config('bladewind.checkbox.add_clearing', true),
+    'addClearing' => config('bladewind.checkbox.add_clearing', true),
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);

@@ -11,7 +11,7 @@
 
     // date format.. default is yyyy-mm-dd
     // accepted formats are yyyy-mm-dd, mm-dd-yyyy, dd-mm-yyyy, D d M, Y
-    'format' => 'yyyy-mm-dd',
+    'format' => config('bladewind.datepicker.format', 'yyyy-mm-dd'),
 
     // text to display in the label that identifies the input field
     'label' => '',
@@ -23,13 +23,13 @@
     'required' => false,
 
     // should the datepicker include a timepicker. The timepicker is hidden by default
-    'with_time' => false,
-    'withTime' => false,
+    'with_time' => config('bladewind.datepicker.with_time', false),
+    'withTime' => config('bladewind.datepicker.with_time', false),
 
-    // when timepicker is included, what should the time hours be displayed as. Default is 12 hour format
+    // when timepicker is included, what should the time hours be displayed as. Default is 12-hour format
     // available options are 12, 24
-    'hours_as' => '12',
-    'hoursAs' => '12',
+    'hours_as' => config('bladewind.datepicker.hours_as', 12),
+    'hoursAs' => config('bladewind.datepicker.hours_as', 12),
 
     // what format should the time be displayed in
     'time_format' => 'hh:mm',

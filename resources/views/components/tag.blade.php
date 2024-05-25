@@ -1,12 +1,10 @@
 @props([ 
     'label' => '',
     'class' => '',
-    'can_close' => false,
-    'canClose' => false,
-    'outline' => false,
-    'add_clearing' => true,
-    'addClearing' => true,
-    'shade' => 'faint',
+    'can_close' => config('bladewind.tag.can_close', false),
+    'canClose' => config('bladewind.tag.can_close', false),
+    'add_clearing' => config('bladewind.tag.add_clearing', true),
+    'addClearing' => config('bladewind.tag.add_clearing', true),
     'onclick' => '',
     'id' => uniqid(),
     'add_id_prefix' => true,
@@ -15,12 +13,14 @@
     'selectable' => false,
 ])
 @aware([
-    'color' => 'blue',
-    'rounded' => false,
+    'shade' => config('bladewind.tag.shade', 'faint'),
+    'color' => config('bladewind.tag.color', 'primary'),
+    'rounded' => config('bladewind.tag.rounded', false),
+    'outline' => config('bladewind.tag.outline', false),
     'max' => null,
     'name' => null,
     'required' => false,
-    'uppercasing' => true,
+    'uppercasing' => config('bladewind.tag.uppercasing', true),
     'tiny' => false,
 ])
 @php

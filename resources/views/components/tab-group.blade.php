@@ -1,8 +1,8 @@
 @props([ 
     'name' => '' ,
     'headings' => '',
-    'color' => 'blue',
-    'style' => 'simple'
+    'color' => config('bladewind.tab.group.color', 'primary'),
+    'style' => config('bladewind.tab.group.style', 'simple'),
 ])
 @php
     $name = preg_replace('/[\s]/', '-', $name);

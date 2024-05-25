@@ -15,8 +15,8 @@
     // is this a required field. Default is false
     'required' => false,
     // adds margin after the input box
-    'add_clearing' => true,
-    'addClearing' => true,
+    'add_clearing' => config('bladewind.input.add_clearing', true),
+    'addClearing' => config('bladewind.input.add_clearing', true),
     // placeholder text
     'placeholder' => '',
     // value to set when in edit mode or if you want to load the input with default text
@@ -25,8 +25,8 @@
     // should the placeholder always be visible even if a label is set
     // by default the label overwrites the placeholder
     // useful if you dont want this overwriting
-    'show_placeholder_always' => false,
-    'showPlaceholderAlways' => false,
+    'show_placeholder_always' => config('bladewind.input.show_placeholder_always', false),
+    'showPlaceholderAlways' => config('bladewind.input.show_placeholder_always', false),
     // message to display when validation fails for this field
     // this is just attached to the input field as a data attribute
     'error_message' => '',
@@ -38,8 +38,8 @@
     // how should error messages be displayed for this input
     // by default error messages are displayed in the Bladewind notification component
     // the component should exist on the page
-    'show_error_inline' => false,
-    'showErrorInline' => false,
+    'show_error_inline' => config('bladewind.input.show_error_inline', false),
+    'showErrorInline' => config('bladewind.input.show_error_inline', false),
     // for numeric input only: should the numbers include dots
     'with_dots' => true,
     'withDots' => true,
@@ -53,11 +53,11 @@
     // set the suffix for the input field
     'suffix' => '',
     // define if prefix background is transparent
-    'transparent_prefix' => true,
-    'transparentPrefix' => true,
+    'transparent_prefix' => config('bladewind.input.transparent_prefix', true),
+    'transparentPrefix' => config('bladewind.input.transparent_prefix', true),
     // define if suffix background is transparent
-    'transparent_suffix' => true,
-    'transparentSuffix' => true,
+    'transparent_suffix' => config('bladewind.input.transparent_suffix', true),
+    'transparentSuffix' => config('bladewind.input.transparent_suffix', true),
     // force (or not) prefix to be an icon
     'prefix_is_icon' => false,
     'prefixIsIcon' => false,
@@ -73,7 +73,7 @@
     // should password be viewable
     'viewable' => false,
     // should field be clearable
-    'clearable' => false,
+    'clearable' => config('bladewind.input.clearable', false),
     // additional css for prefix
     'prefix_icon_css' => '',
     'prefixIconCss' => '',
@@ -86,7 +86,7 @@
     'suffix_icon_div_css' => 'rtl:!right-[unset] rtl:!left-0',
     // javascript to execute when suffix icon is clicked
     'action' => null,
-    'size' => 'medium',
+    'size' => config('bladewind.input.size', 'medium'),
 ])
 @php
     // reset variables for Laravel 8 support

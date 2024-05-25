@@ -1,11 +1,11 @@
 @props([
     'name' => 'rating',
     'rating' => 0,
-    'size' => 'small',
+    'size' => config('bladewind.rating.size', 'small'),
     'color' => 'orange',
     'onclick' => 'javascript:void(0)',
-    'type' => 'star',
-    'clickable' => true,
+    'type' => config('bladewind.rating.type', 'star'),
+    'clickable' => config('bladewind.rating.clickable', true),
     'sizing' => [
         'small' => 6,
         'medium' => 10,

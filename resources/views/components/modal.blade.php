@@ -11,12 +11,12 @@
     'name' => 'bw-modal-'.uniqid(),
 
     // text to display on the primary button. default is Okay
-    'ok_button_label' => 'Okay',
-    'okButtonLabel' => 'Okay',
+    'ok_button_label' => config('bladewind.modal.ok_button_label', 'Okay'),
+    'okButtonLabel' => config('bladewind.modal.ok_button_label', 'Okay'),
 
     // text to display on secondary button. default is Cancel
-    'cancel_button_label' => 'Cancel',
-    'cancelButtonLabel' => 'Cancel',
+    'cancel_button_label' => config('bladewind.modal.cancel_button_label', 'Cancel'),
+    'cancelButtonLabel' => config('bladewind.modal.cancel_button_label', 'Cancel'),
 
     // action to perform when secondary button is clicked. default is close. 
     // provide a custom js function as string to execute that function. example "saveUser"
@@ -30,34 +30,34 @@
 
     // close modal when either primary or close secondary buttons are clicked
     // the modal will be closed after your custom js function has been executed
-    'close_after_action' => true,
-    'closeAfterAction' => true,
+    'close_after_action' => config('bladewind.modal.close_after_action', true),
+    'closeAfterAction' => config('bladewind.modal.close_after_action', true),
 
     // determines if clicking on the backdrop can close the modal. default is true
     // when set to false, only the action buttons can close the modal.
     // in this case ensure you have set "close" as an action for one of your action buttons
-    'backdrop_can_close' => true,
-    'backdropCanClose' => true,
+    'backdrop_can_close' => config('bladewind.modal.backdrop_can_close', true),
+    'backdropCanClose' => config('bladewind.modal.backdrop_can_close', true),
 
     // should the action buttons be displayed? default is true. false will hide the buttons
     'show_action_buttons' => true,
     'showActionButtons' => true,
 
     // should the action buttons be centered? default is false. right aligned
-    'center_action_buttons' => false,
-    'centerActionButtons' => false,
+    'center_action_buttons' => config('bladewind.modal.center_action_buttons', false),
+    'centerActionButtons' => config('bladewind.modal.center_action_buttons', false),
 
     // should the action buttons stretch the entire width of the modal
-    'stretch_action_buttons' => false,
-    'stretchActionButtons' => false,
+    'stretch_action_buttons' => config('bladewind.modal.stretch_action_buttons', false),
+    'stretchActionButtons' => config('bladewind.modal.stretch_action_buttons', false),
 
     // should the backdrop of the modal be blurred
-    'blur_backdrop' => true,
-    'blurBackdrop' => true,
+    'blur_backdrop' => config('bladewind.modal.blur_backdrop', true),
+    'blurBackdrop' => config('bladewind.modal.blur_backdrop', true),
 
     // determines the size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
-    'size' => 'medium',
+    'size' => config('bladewind.modal.size', 'medium'),
     'sizes' => [
         'tiny' => 'w-1/6',
         'small' => 'w-1/5',
@@ -73,15 +73,15 @@
     // add extra css to the modal footer
     'footer_css' => '',
     // show close icon. By default, the close or cancel button closes the modal
-    'show_close_icon' => false,
-    'showCloseIcon' => false,
+    'show_close_icon' => config('bladewind.modal.show_close_icon', false),
+    'showCloseIcon' => config('bladewind.modal.show_close_icon', false),
 
     // display any Heroicon icon in the modal
     'icon' => '',
     'icon_css' => '',
 
-    // change positions of the action buttons .. text-right, text-left, text-center
-    'align_buttons' => 'right',
+    // change positions of the action buttons .. left, center, right
+    'align_buttons' => config('bladewind.modal.align_buttons', 'right'),
 ])
 @php
     // reset variables for Laravel 8 support
