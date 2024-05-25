@@ -1,39 +1,106 @@
 @layer components {
     .bw-button {
-        @apply py-5 px-7 text-xs tracking-widest rtl:inline-flex rtl:items-center transition focus:outline-none focus:!ring-opacity-25 focus:ring-offset-0
+        @apply py-3 px-5 tracking-wider text-xs font-medium inline-block items-center transition
     }
 
     .bw-button-circle {
-        @apply focus:outline-none focus:!ring-opacity-25 focus:ring-offset-0
-    }
-
-    .bw-button.big {
-        @apply py-7 px-12
-    }
-
-    .bw-button.small {
-        @apply py-3 px-6 !text-[11px]
+        @apply focus:outline-none focus:!ring-opacity-25 focus:ring-offset-0 inline-block place-items-center align-top
     }
 
     .bw-button.tiny {
         @apply py-[6px] px-[15px] text-[10px]
     }
 
+    .bw-button.small {
+        @apply py-[11px] px-4 !text-[11px]
+    }
+
+    .bw-button.medium {
+        @apply py-4 px-6
+    }
+
+    .bw-button.medium.has-icon {
+        @apply py-[15px] px-6
+    }
+
+    .bw-button.big {
+        @apply py-6 px-9 !text-[14px]
+    }
+
+    .bw-button.big.has-icon {
+        @apply pt-[19px] pb-[20px] px-8 !text-[16px]
+    }
+
     .bw-button.primary:not(.outlined), .bw-button-circle.primary:not(.outlined) {
-        @apply hover:text-white active:translate-y-0.5 bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-700 text-white
+        @apply active:translate-y-0.5 text-white text-opacity-90 hover:text-opacity-100
     }
 
     .bw-button.secondary:not(.outlined), .bw-button-circle.secondary:not(.outlined) {
-        @apply focus:ring-secondary-400 active:translate-y-0.5 transition bg-slate-400 hover:bg-slate-500 text-white
-        dark:bg-dark-600 hover:dark:bg-dark-700 active:bg-secondary-700 dark:focus:ring-dark-800
+        @apply active:translate-y-0.5 transition text-white text-opacity-90 hover:text-opacity-100
     }
 
     .bw-button.primary.outlined, .bw-button-circle.primary.outlined, .bw-button.secondary.outlined, .bw-button-circle.secondary.outlined {
-        @apply !bg-transparent
+        @apply bg-transparent
     }
 
     .bw-button.disabled, .bw-button-circle.disabled {
         @apply disabled:opacity-50 disabled:cursor-not-allowed
+    }
+
+    .bw-button.outlined {
+        @apply py-2.5
+    }
+
+    .bw-button.tiny.outlined {
+        @apply py-[5px]
+    }
+
+    .bw-button.small.outlined {
+        @apply py-[8.5px]
+    }
+
+    .bw-button.medium.outlined {
+        @apply py-[14px]
+    }
+
+    .bw-button.big.outlined {
+        @apply py-[22px]
+    }
+
+    .bw-button-circle.tiny {
+        @apply size-[31px]
+    }
+
+    .bw-button-circle.small {
+        @apply p-0.5 size-10
+    }
+
+    .bw-button-circle.regular {
+        @apply p-1 size-[42px]
+    }
+
+    .bw-button-circle.medium {
+        @apply p-1 size-[50px]
+    }
+
+    .bw-button-circle.big {
+        @apply p-3 size-[65px]
+    }
+
+    .bw-button-circle.tiny.outlined {
+        @apply size-[32px]
+    }
+
+    .bw-button-circle.small.outlined {
+        @apply p-0.5
+    }
+
+    .bw-button-circle.medium.outlined {
+        @apply p-1 size-[50px]
+    }
+
+    .bw-button-circle.big.outlined {
+        @apply p-3 size-[66px]
     }
 
 }
