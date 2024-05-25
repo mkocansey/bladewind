@@ -32,7 +32,7 @@
     'tag' => config('bladewind.button.tag', 'button'),
 
     // button colour
-    'color' => 'primary',
+    'color' => '',
 
     // overwrite the button text color
     'button_text_css' => null,

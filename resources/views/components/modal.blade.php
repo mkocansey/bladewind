@@ -173,7 +173,7 @@
             </div>
             @if( $show_action_buttons )
                 <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif
-                @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-{{$align_buttons}} @endif
+                @if($center_action_buttons || $size == 'tiny') text-center @else text-{{$align_buttons}} @endif
                 bg-gray-100 dark:bg-slate-800/80 border-t border-t-gray-200/60 dark:border-t-slate-700 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
