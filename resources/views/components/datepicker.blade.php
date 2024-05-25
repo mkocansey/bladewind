@@ -91,6 +91,9 @@
 
     // show the range pickers be stacked vertically
     'stacked' => false,
+
+    // size of the input field
+    'size' => 'medium'
 ])
 @php
     // reset variables for Laravel 8 support
@@ -139,8 +142,8 @@
                     {{-- class="bw-datepicker bw-input block w-full peer {{$name}}" --}}
                     class="bw-datepicker {{$class}}"
                     x-on:click="showDatepicker = !showDatepicker;"
-                    x-model="datepickerValue"
                     x-on:keydown.escape="showDatepicker = false"
+                    x-model="datepickerValue"
                     type="text"
                     id="dtp-{{ $name }}"
                     max_date="today"
@@ -149,6 +152,7 @@
                     placeholder="{{ $placeholder }}"
                     onblur="{!! $onblur !!}"
                     tabindex="{!! $tabindex !!}"
+                    size="{{$size}}"
                     suffix="calendar-days"
                     suffix_is_icon="true"
                     suffix_icon_div_css="rtl:!right-[unset] rtl:!left-0"
@@ -232,6 +236,7 @@
                     week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     class="{{$class}}"
+                    size="{{$size}}"
                     format="{{$format}}"/>
         </div>
         <div>
@@ -247,6 +252,7 @@
                     week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     class="{{$class}}"
+                    size="{{$size}}"
                     format="{{$format}}"/>
         </div>
         <div class="text-red-500 text-sm -mt-2 mb-3 col-span-2 error-{{ $date_from_name.$date_to_name }}"></div>
