@@ -53,7 +53,7 @@ var validateForm = (form) => {
     let BreakException = {};
     try {
         domEls(`${form} .required`).forEach((el) => {
-            changeCss(el, '!border-error-400', 'remove', true);
+            changeCss(el, '!border-red-400', 'remove', true);
             if (el.value === '') {
                 let el_name = el.getAttribute('name');
                 let el_parent = el.getAttribute('data-parent');
@@ -62,8 +62,8 @@ var validateForm = (form) => {
                 let error_heading = el.getAttribute('data-error-heading');
 
                 (el_parent !== null) ?
-                    changeCss(`.${el_parent} .clickable`, '!border-error-400') :
-                    changeCss(el, '!border-error-400', 'add', true);
+                    changeCss(`.${el_parent} .clickable`, '!border-red-400') :
+                    changeCss(el, '!border-red-400', 'add', true);
                 el.focus();
                 if (error_message) {
                     (show_error_inline) ? unhide(`.${el_name}-inline-error`) :
@@ -100,13 +100,13 @@ var clearErrors = (obj) => {
     let show_error_inline = obj.show_error_inline;
     if (el.value !== '') {
         (el_parent !== null) ?
-            domEl(`.${el_parent} .clickable`).classList.remove('!border-error-400') :
-            el.classList.remove('!border-error-400');
+            domEl(`.${el_parent} .clickable`).classList.remove('!border-red-400') :
+            el.classList.remove('!border-red-400');
         (show_error_inline) ? hide(`.${el_name}-inline-error`) : '';
     } else {
         (el_parent !== null) ?
-            domEl(`.${el_parent} .clickable`).classList.add('!border-error-400') :
-            el.classList.add('!border-error-400');
+            domEl(`.${el_parent} .clickable`).classList.add('!border-red-400') :
+            el.classList.add('!border-red-400');
         (show_error_inline) ? unhide(`.${el_name}-inline-error`) : '';
     }
 }
@@ -513,17 +513,17 @@ var selectTag = (value, name) => {
         let keyword = `(,?)${value}`;
         input.value = input.value.replace(input.value.match(keyword)[0], '');
         changeCss(tag, css.match(/bg-[\w]+-500/)[0], 'remove', true);
-        changeCss(tag, (css.match(/bg-[\w]+-500/)[0]).replace('500', '200'), 'add', true);
+        changeCss(tag, (css.match(/bg-[\w]+-500/)[0]).replace('500', '200/80'), 'add', true);
         changeCss(tag, css.match(/text-[\w]+-50/)[0], 'remove', true);
-        changeCss(tag, (css.match(/text-[\w]+-50/)[0]).replace('50', '700'), 'add', true);
+        changeCss(tag, (css.match(/text-[\w]+-50/)[0]).replace('50', '600'), 'add', true);
     } else { // add
         let total_selected = (input.value === '') ? 0 : input.value.split(',').length;
         if (total_selected < max_selection) {
             input.value += `,${value}`;
-            changeCss(tag, css.match(/bg-[\w]+-200/)[0], 'remove', true);
-            changeCss(tag, (css.match(/bg-[\w]+-200/)[0]).replace('200', '500'), 'add', true);
-            changeCss(tag, css.match(/text-[\w]+-700/)[0], 'remove', true);
-            changeCss(tag, (css.match(/text-[\w]+-700/)[0]).replace('700', '50'), 'add', true);
+            changeCss(tag, css.match(/bg-[\w]+-200\/80/)[0], 'remove', true);
+            changeCss(tag, (css.match(/bg-[\w]+-200\/80/)[0]).replace('200/80', '500'), 'add', true);
+            changeCss(tag, css.match(/text-[\w]+-600/)[0], 'remove', true);
+            changeCss(tag, (css.match(/text-[\w]+-600/)[0]).replace('600', '50'), 'add', true);
         } else {
             showNotification(input.getAttribute('data-error-heading'), input.getAttribute('data-error-message'), 'error');
         }
@@ -577,11 +577,11 @@ var compareDates = (element1, element2, message, inline) => {
 
         if (start_date !== '' && end_date !== '') {
             if (start_date > end_date) {
-                changeCss(date2_el, '!border-error-400', 'add', true);
+                changeCss(date2_el, '!border-red-400', 'add', true);
                 (inline !== 1) ? showNotification('', message, 'error') : domEl(`.error-${element1}${element2}`).innerHTML = message;
                 return false;
             } else {
-                changeCss(date2_el, '!border-error-400', 'remove', true);
+                changeCss(date2_el, '!border-red-400', 'remove', true);
                 return true;
             }
         }
@@ -628,14 +628,14 @@ var checkMinMax = (min, max, element) => {
     let error_heading = field.getAttribute('data-error-heading');
 
     if (field.value !== '' && ((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
-        changeCss(field, '!border-error-400', 'add', true);
+        changeCss(field, '!border-red-400', 'add', true);
         if (error_message) {
             (show_error_inline) ? unhide(`.${el_name}-inline-error`) :
                 showNotification(error_heading, error_message, 'error');
         }
     } else {
         if (error_message) hide(`.${el_name}-inline-error`);
-        changeCss(field, '!border-error-400', 'remove', true);
+        changeCss(field, '!border-red-400', 'remove', true);
     }
 }
 
@@ -647,7 +647,7 @@ var checkMinMax = (min, max, element) => {
 var makeClearable = (element) => {
     let field = domEl(`.${element}`);
     let suffix_element = domEl(`.${element}-suffix svg`);
-    let table_element = el.replace('bw_search_', 'table.').replace('_', '-');
+    let table_element = element.replace('bw_search_', 'table.').replace('_', '-');
     let clearing_function = (domEl(table_element)) ? ` filterTable('',\'${table_element}\')` : '';
     if (!suffix_element.getAttribute('onclick')) {
         suffix_element.setAttribute('onclick', `domEl(\'.${element}\').value=''; hide(this, true); ${clearing_function}`);
