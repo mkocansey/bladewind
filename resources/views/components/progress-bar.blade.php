@@ -46,7 +46,7 @@
     //-----------------------------------------------------------------------
 
     if(! is_numeric($percentage_label_opacity*1)) $percentage_label_opacity = '100';
-    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'violet', 'fuchsia', 'indigo'])) ? 'primary' : $color;
+    $color = (!in_array($color, ['primary', 'red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'violet', 'fuchsia', 'indigo'])) ? 'primary' : $color;
 @endphp
 
 <div class="bw-progress-bar {{$class}}">

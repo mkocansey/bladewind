@@ -54,6 +54,10 @@
     $stacked_css = ($stacked) ? 'mb-3 !-mr-3' : '';
     $label = (!empty($label)) ? substr($label, 0, 2) : $label;
 
+    if(! in_array($dot_color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
+        $dot_color = 'primary';
+    }
+
     if(!function_exists("urlExists")){
         function urlExists($url): bool
         {
