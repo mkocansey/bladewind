@@ -104,6 +104,8 @@
     // append type="module" to script tags
     'modular' => false,
 
+    'size' => 'medium',
+
 ])
 @php
     $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
@@ -144,6 +146,9 @@
                 &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>');
         }
     }
+
+    $size = (!in_array($size, ['small','medium', 'regular', 'big'])) ? 'medium' : $size;
+    $sizes = [ 'small' => 'py-[6px]', 'medium' => 'py-[10px]', 'regular' => 'py-[6.5px]', 'big' => 'py-[18.5px]' ];
 @endphp
 <style>
     .display-area::-webkit-scrollbar {
@@ -162,7 +167,7 @@
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
     <div class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
-        dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 py-3.5 pl-4 pr-2 clickable
+        dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 {{$sizes[$size]}} pl-4 pr-2 clickable
         @if(!$disabled)focus:border-blue-400 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif"
          tabindex="0">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
