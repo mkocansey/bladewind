@@ -38,11 +38,11 @@
         $compact = $reduce_padding;
     }
 @endphp
-<div class="@if($is_contact_card) bw-contact-card @else bw-card @endif bg-white dark:bg-dark-800 rounded-md {{ $class }}
-@if($has_border) border border-slate-200 border-opacity-95 dark:border-dark-700/50 focus:outline-none @endif
+<div class="@if($is_contact_card) bw-contact-card @else bw-card @endif bg-white dark:bg-dark-800/50 rounded-md {{ $class }}
+@if($has_border) border border-slate-200 border-opacity-95 dark:border-dark-600/30 focus:outline-none @endif
 @if(!$header && ! $compact) p-8 @elseif($compact) py-3 px-5 @endif
-@if($has_shadow) shadow-md shadow-slate-200/50 dark:shadow-dark-900/50
-    @if($hover_effect) hover:shadow-md hover:dark:shadow-dark-900 cursor-pointer @endif
+@if($has_shadow) shadow-md shadow-slate-200/50 dark:shadow-dark-800
+    @if($hover_effect) hover:shadow-md dark:hover:shadow-xl hover:dark:shadow-dark-800 cursor-pointer @endif
 @endif">
     @if($header)
         <div class="border-b border-gray-100/30 dark:border-dark-800/50">

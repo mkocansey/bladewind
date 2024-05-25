@@ -38,8 +38,8 @@
     $name = preg_replace('/[\s-]/', '_', $name);
     $mask = filter_var($mask, FILTER_VALIDATE_BOOLEAN);
 
-    $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[88px] text-5xl";
-    $icons_css = ($size !== 'big') ? " py-5" : "py-9";
+    $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[83px] text-5xl";
+    $cloak_size = ($size == 'big') ? " h-24" : "h-16";
 @endphp
 
 <div class="dv-{{ $name }} relative">
@@ -66,13 +66,13 @@
         <div class="countdown hidden"><span class="minutes"></span>:<span class="seconds"></span></div>
         <div class="done"></div>
     </div>
-    <div class="bg-transparent absolute w-full text-center z-40 hidden top-0 {{$icons_css}} bw-{{ $name }}-pin-spinner">
+    <div class="bg-transparent hidden absolute w-full z-40 flex items-center justify-center top-0 {{$cloak_size}} bw-{{ $name }}-pin-spinner">
         <x-bladewind::spinner/>
     </div>
-    <div class="bg-transparent hidden w-full text-center absolute top-0 z-40 {{$icons_css}} bw-{{ $name }}-pin-valid">
-        <x-bladewind::icon name="check-circle" type="solid" class="!h-9 !w-9 text-green-500 mx-auto"/>
+    <div class="bg-transparent flex items-center justify-center w-full text-center hidden absolute top-0 z-40 {{$cloak_size}} bw-{{ $name }}-pin-valid">
+        <x-bladewind::icon name="check-circle" type="solid" class="!size-9 text-green-500 mx-auto"/>
     </div>
-    <div class="bg-transparent hidden w-full absolute top-0 h-16 bw-{{ $name }}-pin-cloak"></div>
+    <div class="bg-transparent hidden w-full absolute top-0 {{$cloak_size}} bw-{{ $name }}-pin-cloak"></div>
 </div>
 <x-bladewind::input type="hidden" name="{{ $name }}"/>
 

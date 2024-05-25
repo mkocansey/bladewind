@@ -20,7 +20,7 @@
     if(!$hasShadow) $has_shadow = $hasShadow;
 @endphp
 <x-bladewind::card
-        class="{{$class}}"
+        class="!p-5 {{$class}}"
         :hover_effect="$hover_effect"
         :has_shadow="$has_shadow"
         :has_border="$has_border"
@@ -69,8 +69,8 @@
                         {{ $birthday }}
                     </div>
                 @endif
-                {{ $slot }}
             </div>
         </div>
     </div>
+    {{ $slot }}
 </x-bladewind::card>

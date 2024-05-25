@@ -1,6 +1,6 @@
 @layer components {
     .bw-table.divided tr:not(:has(th),:last-child) {
-        @apply border-b-8 border-gray-200/30 dark:border-dark-900 border-t border-t-gray-200/40 dark:border-b-dark-900
+        @apply border-b-8 border-gray-200/30 dark:border-dark-700 border-t border-t-gray-200/40 dark:border-b-dark-700
     }
 
     .bw-table.divided.thin tr {
