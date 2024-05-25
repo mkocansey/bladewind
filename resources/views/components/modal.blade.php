@@ -122,17 +122,31 @@
     if($ok_button_action !== 'close') $okAction = $ok_button_action . (($close_after_action) ? ';'.$okAction : '');
     if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action) ? ';'.$cancelAction : '');
     $button_size = ($stretch_action_buttons) ? 'medium' : (($size == 'tiny') ? 'tiny' : 'small');
+
+    // get colours that match the various types
+   $type_colour = function() use ($type) {
+      switch ($type){
+          case 'warning': return "yellow"; break;
+          case 'error': return "red"; break;
+          case 'success': return "green"; break;
+          case 'info': return "blue"; break;
+      }
+    };
+    $type_colour = $type_colour();
 @endphp
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
-     class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
+     class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md dark:backdrop-blur-lg @endif
+     z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
     <div class="sm:{{$sizes[$size]}} lg:{{$sizes[$size]}} p-4 m-auto bw-{{$name}} animate__faster">
-        <div class="bg-white relative dark:bg-slate-800 dark:border dark:border-slate-700 rounded-lg drop-shadow-2xl">
+        <div class="bg-white relative dark:bg-dark-800/60 dark:border dark:border-dark-600/60 rounded-lg drop-shadow-2xl">
             @if( $show_action_buttons && $show_close_icon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
                             name="x-mark"
-                            class="p-1 modal-close-icon right-2 top-2 absolute rounded-full text-gray-400 hover:text-gray-500 dark:text-dark-600 hover:dark:text-dark-500 bg-gray-200 hover:bg-gray-300 dark:bg-dark-900/50 dark:hover:bg-dark-900"/>
+                            class="p-1 !size-5 stroke-2 modal-close-icon right-3 top-3.5 absolute rounded-full
+                            text-gray-400 hover:text-gray-500 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-200
+                            hover:bg-gray-300 dark:bg-dark-700/80 dark:hover:bg-dark-700"/>
                 </a>
             @endif
             <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-5">
@@ -142,7 +156,8 @@
                             <x-bladewind::modal-icon
                                     type="{{ $type }}"
                                     icon="{{$icon}}"
-                                    class="!h-14 !w-14 p-2 rounded-full bg-{{$type}}-100/80 dark:bg-{{$type}}-600 text-{{$type}}-700 dark:text-{{$type}}-100"/>
+                                    class="!size-14 p-2 rounded-full bg-{{$type_colour}}-200/80 dark:bg-{{$type_colour}}-600
+                                    text-{{$type_colour}}-600 dark:text-{{$type_colour}}-100"/>
                         @endif
                         @if(!empty($icon) && empty($type))
                             <x-bladewind::icon name="{{ $icon }}" class="!h-14 !w-14 {{$icon_css}}"/>
@@ -150,7 +165,7 @@
                     </div>
                 @endif
                 <div class="modal-body grow px-2 {{ $body_css  }}">
-                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-slate-300 tracking-wide modal-title text-left">{{ $title }}</h1>
+                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-slate-300 tracking-wide modal-title text-left pb-0.5">{{ $title }}</h1>
                     <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-sm text-left">
                         {{ $slot }}
                     </div>
@@ -159,7 +174,7 @@
             @if( $show_action_buttons )
                 <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif
                 @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-{{$align_buttons}} @endif
-                bg-gray-100 dark:bg-slate-700/50 border-t border-t-gray-200/60 dark:border-t-slate-700 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
+                bg-gray-100 dark:bg-slate-800/80 border-t border-t-gray-200/60 dark:border-t-slate-700 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
