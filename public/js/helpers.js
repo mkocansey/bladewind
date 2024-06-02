@@ -677,5 +677,44 @@ var convertToBase64 = (file, element) => {
  * @return {boolean} True if <file_size> if less than <max_size>
  */
 var allowedFileSize = (file_size, max_size) => {
-    return (file_size <= ((max_size) * 1) * 1000000);
+    return (file_size <= max_size * 1000000);
+}
+
+/**
+ * Prepend checkboxes to tables that have selectable rows
+ * @param {string} el - The class of the table to target in the DOM.
+ * @param {string} checkboxHtml - The checkbox html to insert
+ * @return {void}
+ */
+var addCheckboxesToTable = (el, checkboxHtml) => {
+    let table = domEl(el);
+
+    for (let row of table.rows) {
+        const checkboxCell = document.createElement('td');
+        checkboxCell.innerHTML = checkboxHtml;
+        checkboxCell.setAttribute('class', '!size-0 !pr-0');
+        row.insertBefore(checkboxCell, row.firstChild);
+    }
+}
+
+/**
+ * Set the value of a datepicker
+ * @return {void}
+ * @param {string} el_name - name of the input field to update
+ * @param {string} date - new value to set
+ */
+var setDatepickerValue = (el_name, date) => {
+    let newValue = date;
+    let input = domEl(`.${el_name}`);
+    if (!input) {
+        console.error(`No datepicker found with the name ${el_name}`);
+        return;
+    }
+    // let alpineComponent = document.querySelector('[x-data]').__x.$data;
+    if (!input._x_model) {
+        console.error(`Alpine.js component not found for element ${el_name}`);
+        return;
+    }
+    input._x_model.set(date);
+    // input.dispatchEvent(new Event('input', {bubbles: true}));
 }

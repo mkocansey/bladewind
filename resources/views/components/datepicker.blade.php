@@ -148,6 +148,7 @@
                     id="dtp-{{ $name }}"
                     max_date="today"
                     name="{{$name}}"
+                    x-ref="{{$name}}"
                     label="{{ ($use_placeholder) ? '' : $label }}"
                     placeholder="{{ $placeholder }}"
                     onblur="{!! $onblur !!}"

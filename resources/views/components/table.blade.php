@@ -39,6 +39,9 @@
     'show_image' => config('bladewind.table.show_image', true),
     'onclick' => '',
     //------------------ end empty state parameters -------------------
+    'selectable' => false,
+    'checkable' => false,
+    'checkbox_name' => '',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -52,6 +55,8 @@
     $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
     $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
     $celled = filter_var($celled, FILTER_VALIDATE_BOOLEAN);
+    $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
+    $checkable = filter_var($checkable, FILTER_VALIDATE_BOOLEAN);
     $message_as_empty_state = filter_var($message_as_empty_state, FILTER_VALIDATE_BOOLEAN);
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
@@ -118,7 +123,8 @@
 
         <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-lg dark:shadow-dark-950/20 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif  @if($celled) celled @endif
-            @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif">
+            @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif
+            @if($selectable) selectable @endif @if($checkable) checkable @endif">
             @if(is_null($data))
                 <thead>
                 <tr>{{ $header }}</tr> {{--  class="bg-gray-200 dark:bg-dark-800" --}}
@@ -195,3 +201,20 @@
         </table>
     </div>
 </div>
+@if($selectable)
+    <script>
+        dom_els('.bw-table.{{$name}}.selectable tbody tr').forEach((el) => {
+            el.addEventListener('click', (e) => {
+                el.classList.toggle('selected');
+            });
+        });
+    </script>
+@endif
+@if($checkable)
+    <div class="hidden size-0 checkbox-template-{{$name}}">
+        <x-bladewind::checkbox label_css="mr-0" add_clearing="false" name="{{$checkbox_name ?? ''}}"/>
+    </div>
+    <script>
+        addCheckboxesToTable('.bw-table.{{$name}}', domEl('.checkbox-template-{{$name}}').innerHTML);
+    </script>
+@endif

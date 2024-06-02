@@ -8,7 +8,7 @@
     }
 
     .bw-table tr > td {
-        @apply py-4 px-6 align-top text-sm text-slate-600/80 dark:text-dark-400 leading-6 bg-white dark:bg-dark-800 border-x-2 border-gray-50/10 dark:border-dark-800/10
+        @apply py-4 px-3 align-top text-sm text-slate-600/80 dark:text-dark-400 bg-white dark:bg-dark-800 border-x-2 border-gray-50/10 dark:border-dark-800/10
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
@@ -27,7 +27,7 @@
         text-left
         font-semibold
         tracking-widest
-        px-6 py-4
+        px-3 py-4
         border-t border-t-gray-200/30 dark:border-t-dark-800
     }
 
@@ -52,7 +52,7 @@
     }
 
     .bw-table.compact thead > tr > th {
-        @apply !py-3
+        @apply !py-2.5
     }
 
     .bw-table.compact tr > td {
@@ -73,6 +73,18 @@
 
     .bw-table.with-hover-effect tr:hover > td:last-child {
         @apply border-r-2 border-r-slate-400 dark:border-r-dark-600
+    }
+
+    .bw-table.selectable > tbody > tr {
+        @apply cursor-pointer
+    }
+
+    .bw-table.selectable > tbody > tr.selected {
+        @apply border-y border-primary-200 hover:bg-primary-100/60
+    }
+
+    .bw-table.selectable > tbody > tr.selected > td {
+        @apply bg-primary-100/80 hover:bg-primary-100/60
     }
 
 }
