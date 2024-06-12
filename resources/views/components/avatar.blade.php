@@ -14,16 +14,16 @@
     'image' => null,
     'alt' => 'image',
     'class' => 'ltr:mr-2 rtl:ml-2 mt-2',
-    'dot_position' => 'bottom',
-    'dot_color' => 'green',
-    'dotted' => false,
+    'dot_position' => config('bladewind.avatar.dot_position', 'bottom'),
+    'dot_color' => config('bladewind.avatar.dot_color', 'primary'),
+    'dotted' => config('bladewind.avatar.dotted', false),
     'label' => null,
     'plus_action' => null,
 ])
 @aware([
     // these attributes could be passed from the x-bladewind::avatars component also
     'dotted' => $dotted ?? false,
-    'size' => 'regular',
+    'size' => config('bladewind.avatar.size', 'regular'),
     'stacked' => false,
     'show_ring' => true,
     'dot_position' => $dot_position ?? 'bottom',
@@ -32,13 +32,13 @@
 ])
 @php
     $sizes = [
-        'tiny' => [ 'size_css' => 'w-6 h-6', 'dot_css' => 'left-5', 'plus_text_size' => 'text-xs' ],
-        'small' => [ 'size_css' => 'w-8 h-8', 'dot_css' => 'left-6', 'plus_text_size' => 'text-sm' ],
-        'medium' => [ 'size_css' => 'w-10 h-10', 'dot_css' => 'left-8', 'plus_text_size' => 'text-base' ],
-        'regular' => [ 'size_css' => 'w-12 h-12', 'dot_css' => 'left-[31px] rtl:right-[31px]', 'plus_text_size' => 'text-lg' ],
-        'big' => [ 'size_css' => 'w-16 h-16', 'dot_css' => 'left-[46px] rtl:right-[46px]', 'plus_text_size' => 'text-xl tracking-tighter' ],
-        'huge' => [ 'size_css' => 'w-20 h-20', 'dot_css' => 'left-[58px] rtl:right-[58px]', 'plus_text_size' => 'text-2xl' ],
-        'omg' => [ 'size_css' => 'w-28 h-28', 'dot_css' => 'left-[79px] rtl:right-[79px]', 'plus_text_size' => 'text-3xl' ]
+        'tiny' => [ 'size_css' => 'size-6', 'dot_css' => 'left-5', 'plus_text_size' => 'text-xs' ],
+        'small' => [ 'size_css' => 'size-8', 'dot_css' => 'left-6', 'plus_text_size' => 'text-sm' ],
+        'medium' => [ 'size_css' => 'size-10', 'dot_css' => 'left-8', 'plus_text_size' => 'text-base' ],
+        'regular' => [ 'size_css' => 'size-12', 'dot_css' => 'left-[31px] rtl:right-[31px]', 'plus_text_size' => 'text-lg' ],
+        'big' => [ 'size_css' => 'size-16', 'dot_css' => 'left-[46px] rtl:right-[46px]', 'plus_text_size' => 'text-xl tracking-tighter' ],
+        'huge' => [ 'size_css' => 'size-20', 'dot_css' => 'left-[58px] rtl:right-[58px]', 'plus_text_size' => 'text-2xl' ],
+        'omg' => [ 'size_css' => 'size-28', 'dot_css' => 'left-[79px] rtl:right-[79px]', 'plus_text_size' => 'text-3xl' ]
     ];
 
     $dotted = filter_var($dotted, FILTER_VALIDATE_BOOLEAN);
@@ -53,6 +53,10 @@
     $stacked = (is_numeric($plus) && $plus > 0) ? true : $stacked;
     $stacked_css = ($stacked) ? 'mb-3 !-mr-3' : '';
     $label = (!empty($label)) ? substr($label, 0, 2) : $label;
+
+    if(! in_array($dot_color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
+        $dot_color = 'primary';
+    }
 
     if(!function_exists("urlExists")){
         function urlExists($url): bool

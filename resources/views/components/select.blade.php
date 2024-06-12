@@ -3,7 +3,7 @@
     'name' => 'bw-select',
 
     // the default text to display when the select shows
-    'placeholder' => 'Select One',
+    'placeholder' => config('bladewind.select.placeholder', 'Select One'),
 
     /**
      * Optional function to execute when a select item is selected.
@@ -73,8 +73,8 @@
     'multiple' => 'false',
 
     // adds margin after the input box
-    'add_clearing' => true,
-    'addClearing' => true,
+    'add_clearing' => config('bladewind.select.add_clearing', true),
+    'addClearing' => config('bladewind.select.add_clearing', true),
 
     /**
      * Determines if a value passed in the data array should automatically be selected
@@ -94,15 +94,17 @@
     'maxSelectable' => -1,
 
     // error message to display when max_selectable is exceeded
-    'max_error_message' => 'Please select only %s items',
-    'maxErrorMessage' => 'Please select only %s items',
+    'max_error_message' => config('bladewind.select.max_error_message', 'Please select only %s items'),
+    'maxErrorMessage' => config('bladewind.select.max_error_message', 'Please select only %s items'),
 
     'filter' => '',
 
     'filter_by' => '',
 
     // append type="module" to script tags
-    'modular' => false,
+    'modular' => config('bladewind.select.modular', false),
+
+    'size' => config('bladewind.select.size', 'medium'),
 
 ])
 @php
@@ -144,6 +146,9 @@
                 &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>');
         }
     }
+
+    $size = (!in_array($size, ['small','medium', 'regular', 'big'])) ? 'medium' : $size;
+    $sizes = [ 'small' => 'py-[6px]', 'medium' => 'py-[10px]', 'regular' => 'py-[6.5px]', 'big' => 'py-[18.5px]' ];
 @endphp
 <style>
     .display-area::-webkit-scrollbar {
@@ -162,7 +167,7 @@
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
     <div class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
-        dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 py-3.5 pl-4 pr-2 clickable
+        dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 {{$sizes[$size]}} pl-4 pr-2 clickable
         @if(!$disabled)focus:border-blue-400 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif"
          tabindex="0">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>

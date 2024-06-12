@@ -15,8 +15,8 @@
     // is this a required field. Default is false
     'required' => false,
     // adds margin after the input box
-    'add_clearing' => true,
-    'addClearing' => true,
+    'add_clearing' => config('bladewind.input.add_clearing', true),
+    'addClearing' => config('bladewind.input.add_clearing', true),
     // placeholder text
     'placeholder' => '',
     // value to set when in edit mode or if you want to load the input with default text
@@ -25,8 +25,8 @@
     // should the placeholder always be visible even if a label is set
     // by default the label overwrites the placeholder
     // useful if you dont want this overwriting
-    'show_placeholder_always' => false,
-    'showPlaceholderAlways' => false,
+    'show_placeholder_always' => config('bladewind.input.show_placeholder_always', false),
+    'showPlaceholderAlways' => config('bladewind.input.show_placeholder_always', false),
     // message to display when validation fails for this field
     // this is just attached to the input field as a data attribute
     'error_message' => '',
@@ -38,8 +38,8 @@
     // how should error messages be displayed for this input
     // by default error messages are displayed in the Bladewind notification component
     // the component should exist on the page
-    'show_error_inline' => false,
-    'showErrorInline' => false,
+    'show_error_inline' => config('bladewind.input.show_error_inline', false),
+    'showErrorInline' => config('bladewind.input.show_error_inline', false),
     // for numeric input only: should the numbers include dots
     'with_dots' => true,
     'withDots' => true,
@@ -53,11 +53,11 @@
     // set the suffix for the input field
     'suffix' => '',
     // define if prefix background is transparent
-    'transparent_prefix' => true,
-    'transparentPrefix' => true,
+    'transparent_prefix' => config('bladewind.input.transparent_prefix', true),
+    'transparentPrefix' => config('bladewind.input.transparent_prefix', true),
     // define if suffix background is transparent
-    'transparent_suffix' => true,
-    'transparentSuffix' => true,
+    'transparent_suffix' => config('bladewind.input.transparent_suffix', true),
+    'transparentSuffix' => config('bladewind.input.transparent_suffix', true),
     // force (or not) prefix to be an icon
     'prefix_is_icon' => false,
     'prefixIsIcon' => false,
@@ -73,7 +73,7 @@
     // should password be viewable
     'viewable' => false,
     // should field be clearable
-    'clearable' => false,
+    'clearable' => config('bladewind.input.clearable', false),
     // additional css for prefix
     'prefix_icon_css' => '',
     'prefixIconCss' => '',
@@ -86,6 +86,7 @@
     'suffix_icon_div_css' => 'rtl:!right-[unset] rtl:!left-0',
     // javascript to execute when suffix icon is clicked
     'action' => null,
+    'size' => config('bladewind.input.size', 'medium'),
 ])
 @php
     // reset variables for Laravel 8 support
@@ -150,18 +151,18 @@
     if($clearable) {
         $suffix = 'x-mark';
         $suffix_is_icon = true;
-        $suffix_icon_css = 'hidden cursor-pointer dark:!bg-dark-900/60 dark:hover:!bg-dark-900 !rounded-full !p-1 bg-gray-100 hover:bg-gray-200 !size-5';
+        $suffix_icon_css = 'hidden cursor-pointer dark:!bg-dark-900/60 dark:hover:!bg-dark-900 !p-0.5 !rounded-full bg-gray-400 !stroke-2 hover:bg-gray-600 text-white';
     }
 @endphp
 
 <div class="relative w-full dv-{{$name}} @if($add_clearing) mb-4 @endif">
     <input
-            {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
+            {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color $size"]) }}
             type="{{ $type }}"
             id="{{ $name }}"
             name="{{ $name }}"
             value="{{ $selected_value }}"
-            autocomplete="off"
+            autocomplete="new-password"
             placeholder="{{ $placeholder_label }}{{$required_symbol}}"
             @if($error_message != '')
                 data-error-message="{{$error_message}}"
@@ -173,7 +174,7 @@
         <div class="text-red-500 text-xs p-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>
     @endif
     @if(!empty($label))
-        <label for="{{ $name }}" class="form-label" onclick="dom_el('.{{$name}}').focus()">{!! $label !!}
+        <label for="{{ $name }}" class="form-label {{$size}}" onclick="dom_el('.{{$name}}').focus()">{!! $label !!}
             @if($required)
                 <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
             @endif
@@ -184,7 +185,7 @@
              data-transparency="{{$transparent_prefix}}">
             @if($prefix_is_icon)
                 <x-bladewind::icon name='{!! $prefix !!}' type="{{ $prefix_icon_type }}"
-                                   class="!size-5 {{$prefix_icon_css}}"/>
+                                   class="!size-4 !stroke-2 !opacity-70 hover:!opacity-100 {{$prefix_icon_css}}"/>
             @else
                 {!! $prefix !!}
             @endif</div>
@@ -197,7 +198,7 @@
                 <x-bladewind::icon
                         name='{!! $suffix !!}'
                         type="{{ $suffix_icon_type }}"
-                        class="!size-5 {{$suffix_icon_css}}"
+                        class="!size-4 !stroke-2 !opacity-85 hover:!opacity-100 {{$suffix_icon_css}}"
                         action="{!! $action !!}"/>
 
                 {{-- this will be shown when user clicks to reveal password // so they can hide the password --}}
@@ -205,7 +206,7 @@
                     <x-bladewind::icon
                             name='eye-slash'
                             type="{{ $suffix_icon_type }}"
-                            class="!size-5 hide-pwd hidden"
+                            class="!size-4 !stroke-2 !opacity-85 hover:!opacity-100 hide-pwd hidden"
                             action="togglePassword('{{$name}}', 'hide')"/>
                 @endif
             @else

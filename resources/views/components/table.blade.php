@@ -2,22 +2,22 @@
     // your table headers in <th></th> tags
     'header' => '',
     // setting to true will result in a striped table
-    'striped' => false,
+    'striped' => config('bladewind.table.striped', false),
     // should the table with displayed with a drop-shadow effect
-    'has_shadow' => false,
-    'hasShadow' => false,
+    'has_shadow' => config('bladewind.table.has_shadow', false),
+    'hasShadow' => config('bladewind.table.has_shadow', false),
     // should the table have a border on all four sides
-    'has_border' => false,
+    'has_border' => config('bladewind.table.has_border', false),
     // should the table have row dividers
-    'divided' => true,
+    'divided' => config('bladewind.table.divided', true),
     // if table has row dividers, how wide should they be
     // available value are regular, thin
-    'divider' => 'regular',
+    'divider' => config('bladewind.table.divider', 'regular'),
     // should rows light up on hover
-    'hover_effect' => true,
-    'hoverEffect' => true,
+    'hover_effect' => config('bladewind.table.hover_effect', true),
+    'hoverEffect' => config('bladewind.table.hover_effect', true),
     // should the rows be tighter together
-    'compact' => false,
+    'compact' => config('bladewind.table.compact', false),
     // provide a table name you can access via css
     'name' => 'tbl-'.uniqid(),
     'data' => null,
@@ -26,18 +26,21 @@
     'action_icons' => null,
     'actions_title' => 'actions',
     'column_aliases' => [],
-    'searchable' => false,
-    'search_placeholder' => 'Search table below...',
-    'uppercasing' => true,
-    'no_data_message' => 'No records to display',
-    'message_as_empty_state' => false,
+    'searchable' => config('bladewind.table.searchable', false),
+    'search_placeholder' => config('bladewind.table.search_placeholder', 'Search table below...'),
+    'celled' => config('bladewind.table.celled', false),
+    'uppercasing' => config('bladewind.table.uppercasing', true),
+    'no_data_message' => config('bladewind.table.no_data_message', 'No records to display'),
+    'message_as_empty_state' => config('bladewind.table.message_as_empty_state', false),
     // parameters expected by the empty state component ---------------
     'image' => asset('vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
     'button_label' => '',
-    'show_image' => true,
+    'show_image' => config('bladewind.table.show_image', true),
     'onclick' => '',
     //------------------ end empty state parameters -------------------
+    'selectable' => config('bladewind.table.selectable', false),
+    'checkable' => config('bladewind.table.checkable', false),
 ])
 @php
     // reset variables for Laravel 8 support
@@ -50,6 +53,9 @@
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
     $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
     $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
+    $celled = filter_var($celled, FILTER_VALIDATE_BOOLEAN);
+    $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
+    $checkable = filter_var($checkable, FILTER_VALIDATE_BOOLEAN);
     $message_as_empty_state = filter_var($message_as_empty_state, FILTER_VALIDATE_BOOLEAN);
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
@@ -98,7 +104,7 @@
         }
     }
 @endphp
-<div class="@if($has_border) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
+<div class="@if($has_border && !$celled) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
     <div class="w-full">
         @if($searchable)
             <div class="bw-table-filter-bar">
@@ -107,7 +113,7 @@
                         placeholder="{{$search_placeholder}}"
                         onkeyup="filterTable(this.value, 'table.{{$name}}')"
                         add_clearing="false"
-                        class="!mb-0 focus:!border-slate-300 !pl-11"
+                        class="!mb-0 focus:!border-slate-300 !pl-9 !py-3"
                         clearable="true"
                         prefix_is_icon="true"
                         prefix="magnifying-glass"/>
@@ -115,15 +121,15 @@
         @endif
 
         <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-lg dark:shadow-dark-950/20 @endif
-            @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif
-            @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif">
+            @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif  @if($celled) celled @endif
+            @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif
+            @if($selectable) selectable @endif @if($checkable) checkable @endif">
             @if(is_null($data))
                 <thead>
-                <tr class="bg-gray-200 dark:bg-dark-800">{{ $header }}</tr>
+                <tr>{{ $header }}</tr> {{--  class="bg-gray-200 dark:bg-dark-800" --}}
                 </thead>
                 <tbody>{{ $slot }}</tbody>
             @else
-
                 <thead>
                 <tr class="bg-gray-200 dark:bg-dark-800">
                     @php
@@ -141,7 +147,7 @@
                 @if($total_records > 0)
                     <tbody>
                     @foreach($data as $row)
-                        <tr>
+                        <tr data-id="{{ $row['id'] ?? uniqid() }}">
                             @foreach($table_headings as $th)
                                 <td>{!! $row[$th] !!}</td>
                             @endforeach
@@ -194,3 +200,105 @@
         </table>
     </div>
 </div>
+@if($selectable)
+    @once
+        <script>
+            const addRemoveRowValue = (value, name) => {
+                const input = domEl(`input[type="hidden"][name="${name}"]`);
+                const table = domEl(`.bw-table.${name}.selectable`);
+                const checkAllBox = table.querySelector('th:first-child input[type="checkbox"]');
+                const partiallyCheckedBox = table.querySelector('th:first-child .check-icon');
+                const totalRows = table.getAttribute('data-total-rows') * 1;
+                let totalChecked = table.getAttribute('data-total-checked') * 1;
+                if (value) {
+                    if (input.value.includes(value)) { // remove
+                        const keyword = `(,?)${value}`;
+                        input.value = input.value.replace(input.value.match(keyword)[0], '');
+                        totalChecked--;
+                    } else { // add
+                        input.value += `,${value}`;
+                        totalChecked++;
+                    }
+                    table.setAttribute('data-total-checked', `${totalChecked}`);
+                    if (totalChecked > 0 && totalChecked < totalRows) {
+                        hide(checkAllBox, true);
+                        unhide(partiallyCheckedBox, true);
+                        if (!partiallyCheckedBox.getAttribute('onclick')) {
+                            partiallyCheckedBox.setAttribute('onclick', `checkAllFromPartiallyChecked('${name}')`);
+                        }
+                    } else {
+                        unhide(checkAllBox, true);
+                        hide(partiallyCheckedBox, true);
+                        checkAllBox.checked = (totalChecked === totalRows);
+                    }
+                    stripComma(input);
+                }
+            }
+
+            const checkAllFromPartiallyChecked = (name) => {
+                const table = domEl(`.bw-table.${name}.selectable`);
+                const checkAllBox = table.querySelector('th:first-child input[type="checkbox"]')
+                checkAllBox.checked = true;
+                toggleAll(checkAllBox, `.bw-table.${name}`);
+            }
+        </script>
+    @endonce
+    <script>
+        dom_els('.bw-table.{{$name}}.selectable tr').forEach((el) => {
+            el.addEventListener('click', (e) => {
+                el.classList.toggle('selected');
+                let id = el.getAttribute('data-id');
+                let checkbox = el.querySelector('td:first-child input[type="checkbox"]');
+                if (checkbox) checkbox.checked = el.classList.contains('selected');
+                addRemoveRowValue(id, '{{$name}}');
+            });
+        });
+    </script>
+    <input type="hidden" name="{{$name}}" class="{{$name}}"/>
+@endif
+
+@if($checkable)
+    @once
+        <div class="hidden size-0 checkbox-template">
+            <x-bladewind::checkbox class="!size-5 !mr-0 rounded-md" label_css="mr-0" add_clearing="false"/>
+        </div>
+        <div class="hidden size-0 partial-check-template">
+            <x-bladewind::icon name="minus" type="solid"
+                               class="hidden stroke-2 rounded-md bg-primary-500 text-white check-icon !size-5 !mb-1 !mt-[4px] !-ml-1"/>
+        </div>
+        <script>
+            const addCheckboxesToTable = (el) => {
+                let table = domEl(el);
+                let checkboxHtml = domEl('.checkbox-template').innerHTML;
+                let partialCheckHtml = domEl('.partial-check-template').innerHTML;
+
+                for (let row of table.rows) {
+                    let cellTag = (row.parentElement.tagName.toLowerCase() === 'thead') ? 'th' : 'td';
+                    let checkboxCell = document.createElement(cellTag);
+                    checkboxCell.innerHTML = (cellTag === 'th') ?
+                        checkboxHtml.replace('type="checkbox"', `type="checkbox" onclick="toggleAll(this,'${el}')"`) + partialCheckHtml :
+                        checkboxHtml;
+                    checkboxCell.setAttribute('class', '!size-0 !pr-0');
+                    row.insertBefore(checkboxCell, row.firstChild);
+                }
+                table.setAttribute('data-total-rows', (table.rows.length - 1)); // minus heading
+                table.setAttribute('data-total-checked', 0);
+            }
+
+            const toggleAll = (srcEl, table) => {
+                dom_els(`${table}.selectable tr`).forEach((el) => {
+                    const checkbox = el.querySelector('td:first-child input[type="checkbox"]');
+                    if (checkbox) {
+                        // to properly take advantage of the logic for adding and removing IDs
+                        // already defined in addRemoveRowValue(), simply simulate a click of the checkbox
+                        if (srcEl.checked && !checkbox.checked || (!srcEl.checked && checkbox.checked)) el.click();
+                    }
+                });
+            }
+
+        </script>
+    @endonce
+    <script>
+        addCheckboxesToTable('.bw-table.{{$name}}');
+    </script>
+@endif

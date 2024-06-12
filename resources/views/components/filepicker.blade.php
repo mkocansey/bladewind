@@ -6,23 +6,23 @@
     'placeholder' => 'Select a file',
     // by default all file audo, video, image and pdf file types can be selected
     // either restrict or allow more file types by modifying this value
-    'accepted_file_types' => 'audio/*,video/*,image/*, .pdf',
-    'acceptedFileTypes' => 'audio/*,video/*,image/*, .pdf',
+    'accepted_file_types' => config('bladewind.filepicker.accepted_file_types', 'audio/*,video/*,image/*, .pdf'),
+    'acceptedFileTypes' => config('bladewind.filepicker.accepted_file_types', 'audio/*,video/*,image/*, .pdf'),
     // should the user be forced to select a file. used in conjunction with validation scripts
     // default is false.
     'required' => false,
     // maximum allowed filezie in MB
-    'max_file_size' => 5,
-    'maxFileSize'   => 5,
+    'max_file_size' => config('bladewind.filepicker.max_file_size', 5),
+    'maxFileSize'   => config('bladewind.filepicker.max_file_size', 5),
     // adds margin after the input box
-    'add_clearing' => true,
-    'addClearing' => true,
+    'add_clearing' => config('bladewind.filepicker.max_file_size', true),
+    'addClearing' => config('bladewind.filepicker.max_file_size', true),
     // display a selected value by default
     'selected_value' => '',
     'selectedValue' => '',
     // the css to apply to the selected value
-    'selected_value_class' => 'h-52',
-    'selectedValueClass' => 'h-52',
+    'selected_value_class' => config('bladewind.filepicker.selected_value_class', 'h-52'),
+    'selectedValueClass' => config('bladewind.filepicker.selected_value_class', 'h-52'),
     // file to display in edit mode
     'url' => '',
 ])

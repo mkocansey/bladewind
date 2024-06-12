@@ -3,13 +3,13 @@
     'transparent' => false,
     'percentage' => 0,
     'color' => 'primary',
-    'show_percentage_label' => false,
-    'showPercentageLabel' => false,
-    'show_percentage_label_inline' => true,
-    'showPercentageLabelInline' => true,
-    'percentage_label_position' => 'top left',
-    'percentageLabelPosition' => 'top left',
-    'shade' => 'faint',
+    'show_percentage_label' => config('bladewind.progress_bar.show_percentage_label', false),
+    'showPercentageLabel' => config('bladewind.progress_bar.show_percentage_label', false),
+    'show_percentage_label_inline' => config('bladewind.progress_bar.show_percentage_label_inline', true),
+    'showPercentageLabelInline' => config('bladewind.progress_bar.show_percentage_label_inline', true),
+    'percentage_label_position' => 'top-left',
+    'percentageLabelPosition' => 'top-left',
+    'shade' => config('bladewind.progress_bar.shade', 'faint'),
     'text_color_weight' => [
         'faint' => 600,
         'dark' => 50,
@@ -23,8 +23,8 @@
     'bar_class' => '',
     'barClass' => '',
     'cssOverride' => '',
-    'percentage_label_opacity' => '100',
-    'percentageLabelOpacity' => '100'
+    'percentage_label_opacity' => config('bladewind.progress_bar.percentage_label_opacity', 100),
+    'percentageLabelOpacity' => config('bladewind.progress_bar.percentage_label_opacity', 100),
 ])
 
 @php
@@ -46,14 +46,15 @@
     //-----------------------------------------------------------------------
 
     if(! is_numeric($percentage_label_opacity*1)) $percentage_label_opacity = '100';
-    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'violet', 'fuchsia', 'indigo'])) ? 'primary' : $color;
+    $color = (!in_array($color, ['primary', 'red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'violet', 'fuchsia', 'indigo'])) ? 'primary' : $color;
+    $percentage_label_position = str_replace(' ', '_', $percentage_label_position);
 @endphp
 
 <div class="bw-progress-bar {{$class}}">
     @if($show_percentage_label &&
         !$show_percentage_label_inline &&
         Str::contains($percentage_label_position, 'top'))
-        <div class="text-xs tracking-wider {{str_replace('top ','text-', $percentage_label_position)}}">
+        <div class="text-xs tracking-wider {{str_replace('top-','text-', $percentage_label_position)}}">
             {{$percentage_prefix}} <span
                     class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
         </div>
@@ -71,7 +72,7 @@
     @if($show_percentage_label &&
         !$show_percentage_label_inline &&
         Str::contains($percentage_label_position, 'bottom'))
-        <div class="text-xs tracking-wider {{str_replace('bottom ','text-', $percentage_label_position)}}">
+        <div class="text-xs tracking-wider {{str_replace('bottom-','text-', $percentage_label_position)}}">
             {{$percentage_prefix}} <span
                     class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
         </div>
