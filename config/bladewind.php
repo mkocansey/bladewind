@@ -316,6 +316,7 @@ return [
     */
     'select' => [
         'placeholder' => 'Select One',
+        'label' => null,
         'add_clearing' => true,
         'max_error_message' => 'Please select only %s items',
         'modular' => false,

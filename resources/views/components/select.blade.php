@@ -4,6 +4,7 @@
 
     // the default text to display when the select shows
     'placeholder' => config('bladewind.select.placeholder', 'Select One'),
+    'label' => config('bladewind.select.label', null),
 
     /**
      * Optional function to execute when a select item is selected.
@@ -171,9 +172,16 @@
         @if(!$disabled)focus:border-blue-400 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif"
          tabindex="0">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
-        <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">{{ $placeholder }}
-            @if($required)
-                <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
+        <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">
+            @if(!empty($label))
+                <span class="form-label !top-4">{{$label}} @if($required)
+                        <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
+                    @endif</span>
+            @else
+                {{ $placeholder }}
+                @if($required)
+                    <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
+                @endif
             @endif
         </div>
         <div class="text-left grow display-area hidden whitespace-nowrap overflow-x-scroll p-0 m-0"></div>
