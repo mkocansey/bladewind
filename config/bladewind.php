@@ -175,7 +175,7 @@ return [
     'empty_state' => [
         // the public directory is the starting point
         // the default below is public/vendor/bladewind/images...
-        'image' => 'vendor/bladewind/images/empty-state.svg',
+        'image' => '/vendor/bladewind/images/empty-state.svg',
         'show_image' => true,
     ],
 
