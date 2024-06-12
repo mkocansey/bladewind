@@ -1,5 +1,5 @@
 @props([
-    'image' => config('bladewind.empty_state.image', asset('vendor/bladewind/images/empty-state.svg')),
+    'image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
     'button_label' => '', // button will not be displayed if no text is passed
     'buttonLabel' => '',
