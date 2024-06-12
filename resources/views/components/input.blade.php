@@ -162,7 +162,7 @@
             id="{{ $name }}"
             name="{{ $name }}"
             value="{{ $selected_value }}"
-            autocomplete="off"
+            autocomplete="new-password"
             placeholder="{{ $placeholder_label }}{{$required_symbol}}"
             @if($error_message != '')
                 data-error-message="{{$error_message}}"

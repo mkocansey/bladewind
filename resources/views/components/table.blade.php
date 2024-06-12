@@ -39,9 +39,8 @@
     'show_image' => config('bladewind.table.show_image', true),
     'onclick' => '',
     //------------------ end empty state parameters -------------------
-    'selectable' => false,
-    'checkable' => false,
-    'checkbox_name' => '',
+    'selectable' => config('bladewind.table.selectable', false),
+    'checkable' => config('bladewind.table.checkable', false),
 ])
 @php
     // reset variables for Laravel 8 support
@@ -148,7 +147,7 @@
                 @if($total_records > 0)
                     <tbody>
                     @foreach($data as $row)
-                        <tr>
+                        <tr data-id="{{ $row['id'] ?? uniqid() }}">
                             @foreach($table_headings as $th)
                                 <td>{!! $row[$th] !!}</td>
                             @endforeach
@@ -202,19 +201,104 @@
     </div>
 </div>
 @if($selectable)
+    @once
+        <script>
+            const addRemoveRowValue = (value, name) => {
+                const input = domEl(`input[type="hidden"][name="${name}"]`);
+                const table = domEl(`.bw-table.${name}.selectable`);
+                const checkAllBox = table.querySelector('th:first-child input[type="checkbox"]');
+                const partiallyCheckedBox = table.querySelector('th:first-child .check-icon');
+                const totalRows = table.getAttribute('data-total-rows') * 1;
+                let totalChecked = table.getAttribute('data-total-checked') * 1;
+                if (value) {
+                    if (input.value.includes(value)) { // remove
+                        const keyword = `(,?)${value}`;
+                        input.value = input.value.replace(input.value.match(keyword)[0], '');
+                        totalChecked--;
+                    } else { // add
+                        input.value += `,${value}`;
+                        totalChecked++;
+                    }
+                    table.setAttribute('data-total-checked', `${totalChecked}`);
+                    if (totalChecked > 0 && totalChecked < totalRows) {
+                        hide(checkAllBox, true);
+                        unhide(partiallyCheckedBox, true);
+                        if (!partiallyCheckedBox.getAttribute('onclick')) {
+                            partiallyCheckedBox.setAttribute('onclick', `checkAllFromPartiallyChecked('${name}')`);
+                        }
+                    } else {
+                        unhide(checkAllBox, true);
+                        hide(partiallyCheckedBox, true);
+                        checkAllBox.checked = (totalChecked === totalRows);
+                    }
+                    stripComma(input);
+                }
+            }
+
+            const checkAllFromPartiallyChecked = (name) => {
+                const table = domEl(`.bw-table.${name}.selectable`);
+                const checkAllBox = table.querySelector('th:first-child input[type="checkbox"]')
+                checkAllBox.checked = true;
+                toggleAll(checkAllBox, `.bw-table.${name}`);
+            }
+        </script>
+    @endonce
     <script>
-        dom_els('.bw-table.{{$name}}.selectable tbody tr').forEach((el) => {
+        dom_els('.bw-table.{{$name}}.selectable tr').forEach((el) => {
             el.addEventListener('click', (e) => {
                 el.classList.toggle('selected');
+                let id = el.getAttribute('data-id');
+                let checkbox = el.querySelector('td:first-child input[type="checkbox"]');
+                if (checkbox) checkbox.checked = el.classList.contains('selected');
+                addRemoveRowValue(id, '{{$name}}');
             });
         });
     </script>
+    <input type="hidden" name="{{$name}}" class="{{$name}}"/>
 @endif
+
 @if($checkable)
-    <div class="hidden size-0 checkbox-template-{{$name}}">
-        <x-bladewind::checkbox label_css="mr-0" add_clearing="false" name="{{$checkbox_name ?? ''}}"/>
-    </div>
+    @once
+        <div class="hidden size-0 checkbox-template">
+            <x-bladewind::checkbox class="!size-5 !mr-0 rounded-md" label_css="mr-0" add_clearing="false"/>
+        </div>
+        <div class="hidden size-0 partial-check-template">
+            <x-bladewind::icon name="minus" type="solid"
+                               class="hidden stroke-2 rounded-md bg-primary-500 text-white check-icon !size-5 !mb-1 !mt-[4px] !-ml-1"/>
+        </div>
+        <script>
+            const addCheckboxesToTable = (el) => {
+                let table = domEl(el);
+                let checkboxHtml = domEl('.checkbox-template').innerHTML;
+                let partialCheckHtml = domEl('.partial-check-template').innerHTML;
+
+                for (let row of table.rows) {
+                    let cellTag = (row.parentElement.tagName.toLowerCase() === 'thead') ? 'th' : 'td';
+                    let checkboxCell = document.createElement(cellTag);
+                    checkboxCell.innerHTML = (cellTag === 'th') ?
+                        checkboxHtml.replace('type="checkbox"', `type="checkbox" onclick="toggleAll(this,'${el}')"`) + partialCheckHtml :
+                        checkboxHtml;
+                    checkboxCell.setAttribute('class', '!size-0 !pr-0');
+                    row.insertBefore(checkboxCell, row.firstChild);
+                }
+                table.setAttribute('data-total-rows', (table.rows.length - 1)); // minus heading
+                table.setAttribute('data-total-checked', 0);
+            }
+
+            const toggleAll = (srcEl, table) => {
+                dom_els(`${table}.selectable tr`).forEach((el) => {
+                    const checkbox = el.querySelector('td:first-child input[type="checkbox"]');
+                    if (checkbox) {
+                        // to properly take advantage of the logic for adding and removing IDs
+                        // already defined in addRemoveRowValue(), simply simulate a click of the checkbox
+                        if (srcEl.checked && !checkbox.checked || (!srcEl.checked && checkbox.checked)) el.click();
+                    }
+                });
+            }
+
+        </script>
+    @endonce
     <script>
-        addCheckboxesToTable('.bw-table.{{$name}}', domEl('.checkbox-template-{{$name}}').innerHTML);
+        addCheckboxesToTable('.bw-table.{{$name}}');
     </script>
 @endif

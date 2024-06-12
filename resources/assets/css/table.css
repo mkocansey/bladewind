@@ -80,11 +80,19 @@
     }
 
     .bw-table.selectable > tbody > tr.selected {
-        @apply border-y border-primary-200 hover:bg-primary-100/60
+        @apply border-y border-primary-200 dark:border-dark-600
     }
 
     .bw-table.selectable > tbody > tr.selected > td {
-        @apply bg-primary-100/80 hover:bg-primary-100/60
+        @apply bg-primary-100/80 dark:bg-dark-800/60
+    }
+
+    .bw-table th:first-child input[type="checkbox"] {
+        @apply !mt-1
+    }
+
+    .bw-table td:first-child input[type="checkbox"] {
+        @apply !mt-0.5
     }
 
 }

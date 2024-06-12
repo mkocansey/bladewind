@@ -383,6 +383,8 @@ return [
         'uppercasing' => true,
         'celled' => false,
         'searchable' => false,
+        'selectable' => false,
+        'checkable' => false,
         'search_placeholder' => 'Search table below...',
         'no_data_message' => 'No records to display',
         'message_as_empty_state' => false,

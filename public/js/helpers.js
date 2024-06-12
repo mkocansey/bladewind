@@ -296,7 +296,7 @@ var hideModalActionButtons = (element) => {
 
 /**
  * Hide an element.
- * @param {string} element - The css class (name) of the element to hide.
+ * @param {Element} element - The css class (name) of the element to hide.
  * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#hide}
@@ -309,7 +309,7 @@ var hide = (element, elementIsDomObject = false) => {
 
 /**
  * Display an element.
- * @param {string} element - The css class (name) of the element to hide.
+ * @param {Element} element - The css class (name) of the element to hide.
  * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#unhide}
@@ -500,7 +500,7 @@ var filterTable = (keyword, table) => {
 
 /**
  * Select a tag.
- * @param {string} value - The value or uuiq to pass when tag is selected.
+ * @param {string} value - The value or uuid to pass when tag is selected.
  * @param {string} name - The name of the tag.
  * @return {void}
  */
@@ -540,6 +540,11 @@ var stripComma = (element) => {
     if (element.value.startsWith(',')) {
         element.value = element.value.replace(/^,/, '');
     }
+    const event = new Event('change', {
+        bubbles: true,
+        cancelable: true
+    });
+    element.dispatchEvent(event);
 }
 
 /**
@@ -678,23 +683,6 @@ var convertToBase64 = (file, element) => {
  */
 var allowedFileSize = (file_size, max_size) => {
     return (file_size <= max_size * 1000000);
-}
-
-/**
- * Prepend checkboxes to tables that have selectable rows
- * @param {string} el - The class of the table to target in the DOM.
- * @param {string} checkboxHtml - The checkbox html to insert
- * @return {void}
- */
-var addCheckboxesToTable = (el, checkboxHtml) => {
-    let table = domEl(el);
-
-    for (let row of table.rows) {
-        const checkboxCell = document.createElement('td');
-        checkboxCell.innerHTML = checkboxHtml;
-        checkboxCell.setAttribute('class', '!size-0 !pr-0');
-        row.insertBefore(checkboxCell, row.firstChild);
-    }
 }
 
 /**

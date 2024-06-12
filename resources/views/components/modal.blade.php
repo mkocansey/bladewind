@@ -220,7 +220,7 @@
                 }
             }
         }
-    })
+    });
 
     document.addEventListener('keydown', trapFocusInModal);
 
