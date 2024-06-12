@@ -1,21 +1,21 @@
 @php use Illuminate\Support\Str; @endphp
 @props([
-    'shape' => 'round',
     'percentage' => 0,
     'circle_width' => 0,
-    'shade' => 'faint',
+    'shade' => config('bladewind.progress_circle.shade', 'faint'),
     'color' => 'blue',
-    'show_label' => false,
-    'showLabel' => false,
-    'show_percent' => false,
-    'showPercent' => false,
-    'size' => 'medium',
-    'animate' => true,
+    'show_label' => config('bladewind.progress_circle.show_label', false),
+    'showLabel' => config('bladewind.progress_circle.show_label', false),
+    'show_percent' => config('bladewind.progress_circle.show_percent', false),
+    'showPercent' => config('bladewind.progress_circle.show_percent', false),
+    'size' => config('bladewind.progress_circle.size', 'medium'),
+    'animate' => config('bladewind.progress_circle.animate', true),
     'text_size' => null,
     'align' => null,
     'valign' => null,
 ])
 @php
+    $shape = 'round';
     $dark = [
         'blue'      => '#3b82f6',
         'red'       => '#e11d48',

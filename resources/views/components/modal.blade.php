@@ -11,12 +11,12 @@
     'name' => 'bw-modal-'.uniqid(),
 
     // text to display on the primary button. default is Okay
-    'ok_button_label' => 'Okay',
-    'okButtonLabel' => 'Okay',
+    'ok_button_label' => config('bladewind.modal.ok_button_label', 'Okay'),
+    'okButtonLabel' => config('bladewind.modal.ok_button_label', 'Okay'),
 
     // text to display on secondary button. default is Cancel
-    'cancel_button_label' => 'Cancel',
-    'cancelButtonLabel' => 'Cancel',
+    'cancel_button_label' => config('bladewind.modal.cancel_button_label', 'Cancel'),
+    'cancelButtonLabel' => config('bladewind.modal.cancel_button_label', 'Cancel'),
 
     // action to perform when secondary button is clicked. default is close. 
     // provide a custom js function as string to execute that function. example "saveUser"
@@ -30,34 +30,34 @@
 
     // close modal when either primary or close secondary buttons are clicked
     // the modal will be closed after your custom js function has been executed
-    'close_after_action' => true,
-    'closeAfterAction' => true,
+    'close_after_action' => config('bladewind.modal.close_after_action', true),
+    'closeAfterAction' => config('bladewind.modal.close_after_action', true),
 
     // determines if clicking on the backdrop can close the modal. default is true
     // when set to false, only the action buttons can close the modal.
     // in this case ensure you have set "close" as an action for one of your action buttons
-    'backdrop_can_close' => true,
-    'backdropCanClose' => true,
+    'backdrop_can_close' => config('bladewind.modal.backdrop_can_close', true),
+    'backdropCanClose' => config('bladewind.modal.backdrop_can_close', true),
 
     // should the action buttons be displayed? default is true. false will hide the buttons
     'show_action_buttons' => true,
     'showActionButtons' => true,
 
     // should the action buttons be centered? default is false. right aligned
-    'center_action_buttons' => false,
-    'centerActionButtons' => false,
+    'center_action_buttons' => config('bladewind.modal.center_action_buttons', false),
+    'centerActionButtons' => config('bladewind.modal.center_action_buttons', false),
 
     // should the action buttons stretch the entire width of the modal
-    'stretch_action_buttons' => false,
-    'stretchActionButtons' => false,
+    'stretch_action_buttons' => config('bladewind.modal.stretch_action_buttons', false),
+    'stretchActionButtons' => config('bladewind.modal.stretch_action_buttons', false),
 
     // should the backdrop of the modal be blurred
-    'blur_backdrop' => true,
-    'blurBackdrop' => true,
+    'blur_backdrop' => config('bladewind.modal.blur_backdrop', true),
+    'blurBackdrop' => config('bladewind.modal.blur_backdrop', true),
 
     // determines the size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
-    'size' => 'medium',
+    'size' => config('bladewind.modal.size', 'medium'),
     'sizes' => [
         'tiny' => 'w-1/6',
         'small' => 'w-1/5',
@@ -73,15 +73,15 @@
     // add extra css to the modal footer
     'footer_css' => '',
     // show close icon. By default, the close or cancel button closes the modal
-    'show_close_icon' => false,
-    'showCloseIcon' => false,
+    'show_close_icon' => config('bladewind.modal.show_close_icon', false),
+    'showCloseIcon' => config('bladewind.modal.show_close_icon', false),
 
     // display any Heroicon icon in the modal
     'icon' => '',
     'icon_css' => '',
 
-    // change positions of the action buttons .. text-right, text-left, text-center
-    'align_buttons' => 'right',
+    // change positions of the action buttons .. left, center, right
+    'align_buttons' => config('bladewind.modal.align_buttons', 'right'),
 ])
 @php
     // reset variables for Laravel 8 support
@@ -122,17 +122,31 @@
     if($ok_button_action !== 'close') $okAction = $ok_button_action . (($close_after_action) ? ';'.$okAction : '');
     if($cancel_button_action !== 'close') $cancelAction = $cancel_button_action . (($close_after_action) ? ';'.$cancelAction : '');
     $button_size = ($stretch_action_buttons) ? 'medium' : (($size == 'tiny') ? 'tiny' : 'small');
+
+    // get colours that match the various types
+   $type_colour = function() use ($type) {
+      switch ($type){
+          case 'warning': return "yellow"; break;
+          case 'error': return "red"; break;
+          case 'success': return "green"; break;
+          case 'info': return "blue"; break;
+      }
+    };
+    $type_colour = $type_colour();
 @endphp
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
-     class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md @endif z-40 flex bw-modal bw-{{$name}}-modal hidden">
+     class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md dark:backdrop-blur-lg @endif
+     z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
     <div class="sm:{{$sizes[$size]}} lg:{{$sizes[$size]}} p-4 m-auto bw-{{$name}} animate__faster">
-        <div class="bg-white relative dark:bg-slate-800 dark:border dark:border-slate-700 rounded-lg drop-shadow-2xl">
+        <div class="bg-white relative dark:bg-dark-800/60 dark:border dark:border-dark-600/60 rounded-lg drop-shadow-2xl">
             @if( $show_action_buttons && $show_close_icon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
                             name="x-mark"
-                            class="p-1 modal-close-icon right-2 top-2 absolute rounded-full text-gray-400 hover:text-gray-500 dark:text-dark-600 hover:dark:text-dark-500 bg-gray-200 hover:bg-gray-300 dark:bg-dark-900/50 dark:hover:bg-dark-900"/>
+                            class="p-1 !size-5 stroke-2 modal-close-icon right-3 top-3.5 absolute rounded-full
+                            text-gray-400 hover:text-gray-500 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-200
+                            hover:bg-gray-300 dark:bg-dark-700/80 dark:hover:bg-dark-700"/>
                 </a>
             @endif
             <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-5">
@@ -142,7 +156,8 @@
                             <x-bladewind::modal-icon
                                     type="{{ $type }}"
                                     icon="{{$icon}}"
-                                    class="!h-14 !w-14 p-2 rounded-full bg-{{$type}}-100/80 dark:bg-{{$type}}-600 text-{{$type}}-700 dark:text-{{$type}}-100"/>
+                                    class="!size-14 p-2 rounded-full bg-{{$type_colour}}-200/80 dark:bg-{{$type_colour}}-600
+                                    text-{{$type_colour}}-600 dark:text-{{$type_colour}}-100"/>
                         @endif
                         @if(!empty($icon) && empty($type))
                             <x-bladewind::icon name="{{ $icon }}" class="!h-14 !w-14 {{$icon_css}}"/>
@@ -150,7 +165,7 @@
                     </div>
                 @endif
                 <div class="modal-body grow px-2 {{ $body_css  }}">
-                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-slate-300 tracking-wide modal-title text-left">{{ $title }}</h1>
+                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-slate-300 tracking-wide modal-title text-left pb-0.5">{{ $title }}</h1>
                     <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-sm text-left">
                         {{ $slot }}
                     </div>
@@ -158,8 +173,8 @@
             </div>
             @if( $show_action_buttons )
                 <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif
-                @if($center_action_buttons || in_array($size, ['tiny', 'small', 'medium'])) text-center @else text-{{$align_buttons}} @endif
-                bg-gray-100 dark:bg-slate-700/50 border-t border-t-gray-200/60 dark:border-t-slate-700 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
+                @if($center_action_buttons || $size == 'tiny') text-center @else text-{{$align_buttons}} @endif
+                bg-gray-100 dark:bg-slate-800/80 border-t border-t-gray-200/60 dark:border-t-slate-700 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
@@ -205,7 +220,7 @@
                 }
             }
         }
-    })
+    });
 
     document.addEventListener('keydown', trapFocusInModal);
 

@@ -11,7 +11,7 @@
 
     // date format.. default is yyyy-mm-dd
     // accepted formats are yyyy-mm-dd, mm-dd-yyyy, dd-mm-yyyy, D d M, Y
-    'format' => 'yyyy-mm-dd',
+    'format' => config('bladewind.datepicker.format', 'yyyy-mm-dd'),
 
     // text to display in the label that identifies the input field
     'label' => '',
@@ -23,13 +23,13 @@
     'required' => false,
 
     // should the datepicker include a timepicker. The timepicker is hidden by default
-    'with_time' => false,
-    'withTime' => false,
+    'with_time' => config('bladewind.datepicker.with_time', false),
+    'withTime' => config('bladewind.datepicker.with_time', false),
 
-    // when timepicker is included, what should the time hours be displayed as. Default is 12 hour format
+    // when timepicker is included, what should the time hours be displayed as. Default is 12-hour format
     // available options are 12, 24
-    'hours_as' => '12',
-    'hoursAs' => '12',
+    'hours_as' => config('bladewind.datepicker.hours_as', 12),
+    'hoursAs' => config('bladewind.datepicker.hours_as', 12),
 
     // what format should the time be displayed in
     'time_format' => 'hh:mm',
@@ -91,6 +91,9 @@
 
     // show the range pickers be stacked vertically
     'stacked' => false,
+
+    // size of the input field
+    'size' => 'medium'
 ])
 @php
     // reset variables for Laravel 8 support
@@ -139,16 +142,18 @@
                     {{-- class="bw-datepicker bw-input block w-full peer {{$name}}" --}}
                     class="bw-datepicker {{$class}}"
                     x-on:click="showDatepicker = !showDatepicker;"
-                    x-model="datepickerValue"
                     x-on:keydown.escape="showDatepicker = false"
+                    x-model="datepickerValue"
                     type="text"
                     id="dtp-{{ $name }}"
                     max_date="today"
                     name="{{$name}}"
+                    x-ref="{{$name}}"
                     label="{{ ($use_placeholder) ? '' : $label }}"
                     placeholder="{{ $placeholder }}"
                     onblur="{!! $onblur !!}"
                     tabindex="{!! $tabindex !!}"
+                    size="{{$size}}"
                     suffix="calendar-days"
                     suffix_is_icon="true"
                     suffix_icon_div_css="rtl:!right-[unset] rtl:!left-0"
@@ -232,6 +237,7 @@
                     week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     class="{{$class}}"
+                    size="{{$size}}"
                     format="{{$format}}"/>
         </div>
         <div>
@@ -247,6 +253,7 @@
                     week_starts="{{$week_starts}}"
                     onblur="{{ $js_function }}"
                     class="{{$class}}"
+                    size="{{$size}}"
                     format="{{$format}}"/>
         </div>
         <div class="text-red-500 text-sm -mt-2 mb-3 col-span-2 error-{{ $date_from_name.$date_to_name }}"></div>

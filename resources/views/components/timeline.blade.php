@@ -10,7 +10,7 @@
     'align_left' => false,
 ])
 @aware([
-    'stacked' => false,
+    'stacked' => config('bladewind.timeline.stacked', false),
     'completed' => false,
     'color' => 'gray',
     'anchor' => 'small',

@@ -11,6 +11,7 @@ class BladewindSelect {
     toFilter;
     selectedValue;
     canClear;
+    enabled;
 
 
     constructor(name, placeholder, required) {
@@ -27,6 +28,7 @@ class BladewindSelect {
         dom_el(this.displayArea).style.maxWidth = `${(dom_el(this.rootElement).offsetWidth - 40)}px`;
         this.maxSelection = -1;
         this.canClear = false;
+        this.enabled = true;
     }
 
     activate = () => {
@@ -129,7 +131,7 @@ class BladewindSelect {
             this.scrollbars();
         }
         stripComma(input);
-        changeCss(`${this.clickArea}`, '!border-error-400', 'remove');
+        changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
     }
 
     unsetValue = (item) => {
@@ -217,11 +219,13 @@ class BladewindSelect {
     }
 
     reset = () => {
-        dom_els(this.selectItems).forEach((el) => {
-            this.unsetValue(el);
-        });
-        hide(this.displayArea);
-        unhide(this.placeholder);
+        if (this.enabled) {
+            dom_els(this.selectItems).forEach((el) => {
+                this.unsetValue(el);
+            });
+            hide(this.displayArea);
+            unhide(this.placeholder);
+        }
     }
 
     disable = () => {
@@ -231,6 +235,7 @@ class BladewindSelect {
         dom_el(this.clickArea).addEventListener('click', () => {
             hide(this.itemsContainer);
         });
+        this.enabled = false;
     }
 
     enable = () => {
@@ -239,6 +244,7 @@ class BladewindSelect {
         dom_el(this.clickArea).addEventListener('click', (e) => {
             unhide(this.itemsContainer);
         });
+        this.enabled = true;
     }
 
     callUserFunction = (item) => {

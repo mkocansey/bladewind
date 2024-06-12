@@ -1,6 +1,6 @@
 @props([
-    'hover_effect' => false,
-    'has_shadow' => true,
+    'hover_effect' => config('bladewind.contact_card.hover_effect', false),
+    'has_shadow' => config('bladewind.contact_card.has_shadow', true),
     'hasShadow' => true,
     'image' => asset('vendor/bladewind/images/avatar.png'),
     'name' => null,
@@ -20,7 +20,7 @@
     if(!$hasShadow) $has_shadow = $hasShadow;
 @endphp
 <x-bladewind::card
-        class="{{$class}}"
+        class="!p-5 {{$class}}"
         :hover_effect="$hover_effect"
         :has_shadow="$has_shadow"
         :has_border="$has_border"
@@ -69,8 +69,8 @@
                         {{ $birthday }}
                     </div>
                 @endif
-                {{ $slot }}
             </div>
         </div>
     </div>
+    {{ $slot }}
 </x-bladewind::card>

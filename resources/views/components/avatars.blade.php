@@ -12,30 +12,30 @@
      * */
      // size of the avatar
      // available sizes are: tiny | small | medium | regular | big | huge | omg
-    'size' => 'regular',
+    'size' => config('bladewind.avatars.size', 'regular'),
 
     // additional css to apply to the avatars group
     'class' => '',
 
     // should the avatars have a ring around them
-    'show_ring' => true,
+    'show_ring' => config('bladewind.avatars.show_ring', true),
 
     // should each avatar have a dot indicator
-    'dotted' => false,
+    'dotted' => config('bladewind.avatars.dotted', false),
 
     // where should the dot indicator be placed: bottom | top
-    'dot_position' => 'bottom',
+    'dot_position' => config('bladewind.avatars.dot_position', 'bottom'),
 
     // what should be the colour of the dot indicator
     // accepts all available colours in the BladewindUI palette
     // https://bladewindui.com/customize/colours
-    'dot_color' => 'green',
+    'dot_color' => config('bladewind.avatars.dot_color', 'primary'),
 
     // indicate how many more avatars are there but hidden +23
     'plus' => null,
 
     // should the avatars be stacked
-    'stacked' => true,
+    'stacked' => config('bladewind.avatars.stacked', true),
 
     // how many avatars should be displayed of the total available
     // you can have 20 avatars stacked, but you can opt to display only 10

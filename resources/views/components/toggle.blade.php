@@ -5,8 +5,8 @@
     // label to display next to the toggle element
     'label' => '',
     // the position of the label above. left or right
-    'label_position' => 'left',
-    'labelPosition' => 'left',
+    'label_position' => config('bladewind.toggle.label_position', 'left'),
+    'labelPosition' => config('bladewind.toggle.label_position', 'left'),
     // sets or unsets disabled on the toggle element
     'disabled' => false,
     // sets or unsets checked on the toggle element
@@ -14,9 +14,9 @@
     // background color to display when toggle is active
     'color' => 'primary',
     // should the label and toggle element be justified in their parent element?
-    'justified' => false,
+    'justified' => config('bladewind.toggle.justified', false),
     // how big should the toggle bar be. Options available are thin, thick, thicker
-    'bar' => 'thick',
+    'bar' => config('bladewind.toggle.bar', 'thick'),
     // javascript function to run when toggle is clicked
     'onclick' => 'javascript:void(0)',
     // css for label
@@ -36,8 +36,8 @@
     $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
     $justified = filter_var($justified, FILTER_VALIDATE_BOOLEAN);
     $bar = (!in_array($bar, ['thin', 'thick', 'thicker'])) ? 'thick' : $bar;
-    $color = (!in_array($color, ['red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'fuchsia', 'indigo', 'violet'])) ? 'primary' : $color;
-    $bar_colour = "peer-checked:bg-$color-500/80 after:border-$color-100";
+    $colour = (!in_array($color, ['primary', 'red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'fuchsia', 'indigo', 'violet'])) ? 'primary' : $color;
+    $bar_colour = "peer-checked:bg-$colour-600 after:border-$colour-100";
 @endphp
 
 <label class="relative @if(!$justified)inline-flex @else flex justify-between @endif items-center group bw-tgl-{{$name}}">
@@ -47,7 +47,7 @@
     <input type="checkbox" @if($checked) checked @endif @if($disabled) disabled @endif onclick="{!!$onclick!!}"
            name="{{$name}}"
            class="peer sr-only appearance-none {{$name}}"/>
-    <span class="flex items-center flex-shrink-0 p-1 bg-gray-900/10 dark:bg-slate-700 rounded-full cursor-pointer
+    <span class="flex items-center flex-shrink-0 p-1 bg-gray-900/10 dark:bg-dark-800/50 rounded-full cursor-pointer
     peer-disabled:opacity-40 rtl:peer-checked:after:-translate-x-full peer-checked:after:translate-x-full transition
     duration-200 ease-in-out after:transition after:duration-200 after:ease-in-out after:bg-white after:shadow-sm after:ring-1 after:ring-slate-700/10
     after:rounded-full bw-tgl-sp-{{$name}} {{$bar_circle_size[$bar]}} {{$bar_colour}} {{$class}}"></span>

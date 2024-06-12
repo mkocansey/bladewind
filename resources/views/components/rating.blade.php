@@ -1,11 +1,11 @@
 @props([
     'name' => 'rating',
     'rating' => 0,
-    'size' => 'small',
+    'size' => config('bladewind.rating.size', 'small'),
     'color' => 'orange',
     'onclick' => 'javascript:void(0)',
-    'type' => 'star',
-    'clickable' => true,
+    'type' => config('bladewind.rating.type', 'star'),
+    'clickable' => config('bladewind.rating.clickable', true),
     'sizing' => [
         'small' => 6,
         'medium' => 10,
@@ -28,7 +28,7 @@
              onmouseout="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'off')"
              onclick="setRating('{{$name}}', {{$x}});{!!$onclick!!}" @endif>
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="h-{{$sizing[$size]+$size_adjustment}} w-{{$sizing[$size]+$size_adjustment}} filled @if($rating==0 || $x > $rating*1) hidden @endif inline text-{{$color}}-500 @if($clickable) cursor-pointer @else cursor-default @endif @if($size=='big') mx-[-3px] @else mr-[-2px] @endif mt-[-1px]"
+                 class="h-{{$sizing[$size]+$size_adjustment}} w-{{$sizing[$size]+$size_adjustment}} filled @if($rating==0 || $x > $rating*1) hidden @endif inline text-{{$color}}-600 @if($clickable) cursor-pointer @else cursor-default @endif @if($size=='big') mx-[-3px] @else mr-[-2px] @endif mt-[-1px]"
                  viewBox="0 0 20 20" fill="currentColor">
                 @if($type == 'heart')
                     <path fill-rule="evenodd"
@@ -42,12 +42,12 @@
             </svg>
 
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="h-{{$sizing[$size]}} w-{{$sizing[$size]}} empty @if($x <= $rating*1) hidden @endif inline text-{{$color}}-500 @if($clickable) cursor-pointer @else cursor-default @endif !ml-[2px]"
+                 class="h-{{$sizing[$size]}} w-{{$sizing[$size]}} empty @if($x <= $rating*1) hidden @endif inline text-{{$color}}-600 @if($clickable) cursor-pointer @else cursor-default @endif !ml-[2px]"
                  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 @if($type == 'heart')
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                @elseif($type=='thumbsup')
+                @elseif($type == 'thumbsup')
                     <path stroke-linecap="round" stroke-linejoin="round"
                           d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
                 @else
@@ -58,7 +58,6 @@
         </div>
     @endfor
 </div>
-<span class="hidden w-6 w-7 w-10 w-11 w-14 w-16 h-6 h-7 h-10 h-11 h-14 h-16"></span>
 <script>
     flipStars = function (name, rating, current, mode) {
         for (y = rating; y <= current; y++) {

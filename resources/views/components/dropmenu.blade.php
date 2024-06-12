@@ -1,9 +1,9 @@
 @props([
     'name' => uniqid('bw-dropmenu-'),
-    'trigger' => 'ellipsis-horizontal-icon',
+    'trigger' => config('bladewind.dropmenu.trigger', 'ellipsis-horizontal-icon'),
     'trigger_css' => '',
-    'trigger_on' => 'click',
-    'divided' => false,
+    'trigger_on' => config('bladewind.dropmenu.trigger_on', 'click'),
+    'divided' => config('bladewind.dropmenu.divided', false),
     'scrollable' => false,
     'height' => 200,
     'hide_after_click' => true,
@@ -11,7 +11,7 @@
     'class' => '',
     'modular' => false, // append type="module" to script tags
     'pickerColour' => 'pink',
-    'icon_right' => false,
+    'icon_right' => config('bladewind.dropmenu.icon_right', false),
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);

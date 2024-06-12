@@ -1,12 +1,10 @@
 @props([ 
     'label' => '',
     'class' => '',
-    'can_close' => false,
-    'canClose' => false,
-    'outline' => false,
-    'add_clearing' => true,
-    'addClearing' => true,
-    'shade' => 'faint',
+    'can_close' => config('bladewind.tag.can_close', false),
+    'canClose' => config('bladewind.tag.can_close', false),
+    'add_clearing' => config('bladewind.tag.add_clearing', true),
+    'addClearing' => config('bladewind.tag.add_clearing', true),
     'onclick' => '',
     'id' => uniqid(),
     'add_id_prefix' => true,
@@ -15,12 +13,14 @@
     'selectable' => false,
 ])
 @aware([
-    'color' => 'blue',
-    'rounded' => false,
+    'shade' => config('bladewind.tag.shade', 'faint'),
+    'color' => config('bladewind.tag.color', 'primary'),
+    'rounded' => config('bladewind.tag.rounded', false),
+    'outline' => config('bladewind.tag.outline', false),
     'max' => null,
     'name' => null,
     'required' => false,
-    'uppercasing' => true,
+    'uppercasing' => config('bladewind.tag.uppercasing', true),
     'tiny' => false,
 ])
 @php
@@ -39,31 +39,34 @@
     if (!$addIdPrefix) $add_id_prefix = $addIdPrefix;
 
 
-    $color_weight = [
-        'faint' => 200,
-        'dark' => 500,
+    $colour_weight = [
+        'faint' => [ 'bg' => '200/80', 'border' => 200 ],
+        'dark' => [ 'bg' => 500, 'border' => '500/50' ],
     ];
 
-    $text_color_weight = [
-        'faint' => 700,
+    $text_colour_weight = [
+        'faint' => 600,
         'dark' => 50,
     ];
 
     $rounded_class = ($rounded) ? 'rounded-full' : 'rounded-md';
     $clearing_css = ($add_clearing) ? 'mb-3' : '';
-    $bg_border_color_css = ($outline) ? "border border-$color-$color_weight[$shade]" : "bg-$color-$color_weight[$shade] text-$color-$text_color_weight[$shade]";
-    $text_color_css = ($outline) ? "text-$color-700 dark:!text-$color-300" : "text-$color-$text_color_weight[$shade]";
-
+    $bg_colour_weight = $colour_weight[$shade]['bg'];
+    $border_colour_weight = $colour_weight[$shade]['border'];
+    $bg_border_colour_css = ($outline) ?
+        "border border-$color-$border_colour_weight" :
+        "bg-$color-$bg_colour_weight text-$color-$text_colour_weight[$shade]";
+    $text_color_css = ($outline) ? "text-$color-600 dark:!text-$color-300" : "text-$color-$text_colour_weight[$shade]";
     if( (!empty($name) && !empty($value)) ) {
         $can_close = false;
-        $bg_border_color_css = "bg-$color-200 hover:bg-$color-500 cursor-pointer selectable bw-$name-$value";
-        $text_color_css = "text-$color-700 hover:text-$color-50";
+        $bg_border_colour_css = "bg-$color-200/80 hover:bg-$color-600 cursor-pointer selectable bw-$name-$value";
+        $text_color_css = "text-$color-600 hover:text-$color-50";
         $selectable = true;
     }
 @endphp
 
 <label id="@if($add_id_prefix)bw-@endif{{$id}}" @if($selectable) onclick="selectTag('{{$value}}','{{$name}}')" @endif
-class="relative  @if($uppercasing) uppercase @endif @if($tiny) text-[9px] px-[8px] leading-5 @else px-[12px] leading-8 text-[10px] @endif tracking-widest whitespace-nowrap inline-block {{$rounded_class}} {{$clearing_css}} {{$bg_border_color_css}} {{$text_color_css}} {{$class}}">
+class="relative  @if($uppercasing) uppercase @endif @if($tiny) text-[9px] px-[8px] leading-5 @else px-[12px] leading-8 text-[10px] @endif tracking-widest whitespace-nowrap inline-block {{$rounded_class}} {{$clearing_css}} {{$bg_border_colour_css}} {{$text_color_css}} {{$class}}">
     {{ $label }}
     @if($can_close)
         <a href="javascript:void(0)" onclick="@if($onclick=='')this.parentElement.remove()@else{!!$onclick!!}@endif">
