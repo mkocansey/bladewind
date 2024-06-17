@@ -139,7 +139,7 @@
      class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md dark:backdrop-blur-lg @endif
      z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
     <div class="sm:{{$sizes[$size]}} lg:{{$sizes[$size]}} p-4 m-auto bw-{{$name}} animate__faster">
-        <div class="bg-white relative dark:bg-dark-800/60 dark:border dark:border-dark-600/60 rounded-lg drop-shadow-2xl">
+        <div class="bg-white relative dark:bg-dark-700/90 dark:border dark:border-dark-500/10 rounded-lg drop-shadow-2xl">
             @if( $show_action_buttons && $show_close_icon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
@@ -165,7 +165,7 @@
                     </div>
                 @endif
                 <div class="modal-body grow px-2 {{ $body_css  }}">
-                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-slate-300 tracking-wide modal-title text-left pb-0.5">{{ $title }}</h1>
+                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-dark-400 tracking-wide modal-title text-left pb-0.5">{{ $title }}</h1>
                     <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-sm text-left">
                         {{ $slot }}
                     </div>
@@ -174,7 +174,7 @@
             @if( $show_action_buttons )
                 <div class="modal-footer @if($stretch_action_buttons) flex flex-col-reverse @endif
                 @if($center_action_buttons || $size == 'tiny') text-center @else text-{{$align_buttons}} @endif
-                bg-gray-100 dark:bg-slate-800/80 border-t border-t-gray-200/60 dark:border-t-slate-700 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
+                bg-gray-100 dark:bg-dark-800/50 border-t border-t-gray-200/60 dark:border-t-dark-600/50 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footer_css }}">
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"

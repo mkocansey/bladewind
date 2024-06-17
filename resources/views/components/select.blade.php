@@ -4,6 +4,7 @@
 
     // the default text to display when the select shows
     'placeholder' => config('bladewind.select.placeholder', 'Select One'),
+    'label' => config('bladewind.select.label', null),
 
     /**
      * Optional function to execute when a select item is selected.
@@ -167,13 +168,20 @@
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
     <div class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
-        dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 {{$sizes[$size]}} pl-4 pr-2 clickable
-        @if(!$disabled)focus:border-blue-400 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif"
+        dark:text-dark-300 dark:border-dark-600 dark:bg-transparent {{$sizes[$size]}} pl-4 pr-2 clickable
+        @if(!$disabled)focus:border-blue-400 dark:focus:border-dark-500 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif"
          tabindex="0">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
-        <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">{{ $placeholder }}
-            @if($required)
-                <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
+        <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">
+            @if(!empty($label))
+                <span class="form-label !top-4">{{$label}} @if($required)
+                        <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
+                    @endif</span>
+            @else
+                {{ $placeholder }}
+                @if($required)
+                    <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
+                @endif
             @endif
         </div>
         <div class="text-left grow display-area hidden whitespace-nowrap overflow-x-scroll p-0 m-0"></div>
@@ -186,7 +194,7 @@
         </div>
     </div>
     <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 border-2 
-        border-blue-400 dark:text-slate-300 dark:border-slate-700 dark:bg-slate-800 border-t-0 -mt-1.5 
+        border-blue-400 dark:text-slate-300 dark:border-slate-700 dark:bg-dark-700 border-t-0 -mt-1.5
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
         <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-slate-700 py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
             <x-bladewind::input

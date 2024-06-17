@@ -53,7 +53,7 @@ var validateForm = (form) => {
     let BreakException = {};
     try {
         domEls(`${form} .required`).forEach((el) => {
-            changeCss(el, '!border-red-400', 'remove', true);
+            changeCss(el, '!border-red-500', 'remove', true);
             if (el.value === '') {
                 let el_name = el.getAttribute('name');
                 let el_parent = el.getAttribute('data-parent');
@@ -194,7 +194,7 @@ var changeCssForDomArray = (elements, css, mode = 'add') => {
 
 /**
  * Modify the css for a DOM element.
- * @param {string} element - The class name of ID of the DOM element to modify.
+ * @param {boolean|Element} element - The class name of ID of the DOM element to modify.
  * @param {string} css - Comma separated list of css classes to apply to <element>.
  * @param {string} mode - Add|Remove. Determines if <css> should be added or removed from <element>.
  * @param {boolean} elemntIsDomObject - If true, <element> will not be treated as a string but DOM element.

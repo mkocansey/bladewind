@@ -83,7 +83,9 @@
                             active:border-primary-600 active:border-secondary-600 active:border-blue-600 active:border-red-600
                             active:border-yellow-600 active:border-green-600 active:border-purple-600 active:border-orange-600
                             active:border-slate-600 active:border-gray-600 active:border-pink-600 active:border-cyan-600
-                            active:border-violet-600 active:border-indigo-600 active:border-fuchsia-600',
+                            active:border-violet-600 active:border-indigo-600 active:border-fuchsia-600
+
+                            focus:border-primary-500',
 
             'rings' =>      'ring-1 ring-2 ring-4 ring-8 focus:ring-1 focus:ring-2 focus:ring-4 focus:ring-8 focus:ring-black
                             focus:ring-primary-500 focus:ring-blue-500 focus:ring-red-500 focus:ring-yellow-500
