@@ -24,6 +24,7 @@
     'showErrorInline' => config('bladewind.textarea.show_error_inline', false),
 
     'toolbar' => config('bladewind.textarea.toolbar', false),
+    'except' => '',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -46,16 +47,20 @@
     $placeholder_color = ($label !== '') ? 'placeholder-transparent dark:placeholder-transparent' : '';
 @endphp
 <div class="relative w-full @if($add_clearing) mb-3 @endif">
-    <textarea {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
-              id="{{ $name }}"
-              name="{{ $name }}"
-              rows="{{ $rows }}"
-              @if($error_message !== '')
-                  data-error-message="{{$error_message}}"
-              data-error-inline="{{$show_error_inline}}"
-              data-error-heading="{{$error_heading}}"
-              @endif
-              placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selected_value}}</textarea>
+    @if($toolbar)
+        <div id="{{$name}}">{{$selected_value}}</div>
+    @else
+        <textarea {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
+                  id="{{ $name }}"
+                  name="{{ $name }}"
+                  rows="{{ $rows }}"
+                  @if($error_message !== '')
+                      data-error-message="{{$error_message}}"
+                  data-error-inline="{{$show_error_inline}}"
+                  data-error-heading="{{$error_heading}}"
+                  @endif
+                  placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selected_value}}</textarea>
+    @endif
     @if($error_message !== '')
         <div class="text-red-500 text-xs pt-2 px-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>
     @endif
@@ -63,11 +68,54 @@
         <label for="{{ $name }}" class="form-label dark:peer-focus:pt-1"
                onclick="dom_el('.{{$name}}').focus()">{{ $label }}
             @if($required == 'true')
-                <span class="text-red-400/80"><svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2 inline-block -mt-1"
-                                                   viewBox="0 0 20 20" fill="currentColor">
-  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-</svg></span>
+                <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
             @endif
         </label>
     @endif
 </div>
+@if($toolbar)
+    @once
+        {{--        <span class="hidden ql-toolbar ql-snow ql-stroke ql-thin ql-container ql-editor ql-blank"></span>--}}
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet"/>
+        <script>
+            const toolbarOptions = ['bold', 'italic', 'underline',
+                {'align': []},
+                {'indent': '-1'}, {'indent': '+1'}, 'link',
+                {'color': []}, {'background': []},
+                {'list': 'ordered'}, {'list': 'bullet'},
+                {'list': 'check'}, 'image', 'blockquote', 'code-block', 'clean'
+            ];
+
+            const modifyToolbarOptions = (toolbarOptions, except) => {
+                except = except.replaceAll(' ', '');
+                const exceptArray = except.split(',').map(item => item.trim());
+                return toolbarOptions.filter(option => {
+                    if (typeof option === 'string') {
+                        return !exceptArray.includes(option);
+                    } else if (typeof option === 'object') {
+                        const key = Object.keys(option)[0];
+                        return !exceptArray.includes(key);
+                    }
+                    return true;
+                });
+            }
+
+            const quillOptions = {
+                theme: 'snow',
+                placeholder: '{{ ($label !== '') ? $label : $placeholder }}',
+                modules: {
+                    toolbar: '',
+                },
+            };
+        </script>
+    @endonce
+    <script>
+        if (typeof Quill === 'undefined') {
+            console.log('Unable to load assets from https://quilljs.com');
+        } else {
+            quillOptions.modules.toolbar = modifyToolbarOptions(toolbarOptions, '{{$except}}');
+            var quill_{{$name}} = new Quill('#{{$name}}', quillOptions);
+        }
+    </script>
+@endif

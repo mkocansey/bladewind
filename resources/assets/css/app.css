@@ -1,10 +1,10 @@
 @import './button.css';
-@import './dropdown.css';
 @import './input.css';
-@import './popup.min.css';
-@import './side-nav.css';
 @import './table.css';
 @import './tabs.css';
+@import './dropdown.css';
+@import './popup.min.css';
+@import './side-nav.css';
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";

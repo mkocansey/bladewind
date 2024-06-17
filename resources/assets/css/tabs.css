@@ -1,7 +1,7 @@
 @layer components {
 
     .bw-tab {
-        @apply border-b border-gray-200 dark:border-gray-700
+        @apply border-b border-gray-200 dark:border-dark-600/80
     }
 
     .bw-tab.simple {
@@ -89,7 +89,7 @@
     }
 
     .bw-tab.system .atab span.is-active {
-        @apply !border-b-2 !border-b-white dark:!border-b-dark-800 mb-[-2px]
+        @apply !border-b-2 !border-b-white dark:!border-b-dark-700 mb-[-2px]
     }
 
     .bw-tab.system.primary {
@@ -121,7 +121,7 @@
     }
 
     .bw-tab.system.gray {
-        @apply border-b border-gray-500 dark:border-gray-700
+        @apply border-b border-gray-500 dark:border-gray-600
     }
 
     .bw-tab.system.pink {
