@@ -1,7 +1,7 @@
 @layer components {
 
     .bw-tab {
-        @apply border-b border-gray-200 dark:border-gray-700
+        @apply border-b border-gray-200 dark:border-dark-600/80
     }
 
     .bw-tab.simple {

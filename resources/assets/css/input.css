@@ -5,7 +5,7 @@
         !outline-none
         !ring-0
         border-2
-        w-full text-slate-600 border-slate-300/50 dark:text-dark-300 dark:border-dark-600 dark:bg-transparent /*dark-800*/
+        w-full text-slate-600 dark:text-dark-300 border-slate-300/50 dark:border-dark-600 dark:bg-transparent /*dark-800*/
         focus:outline-none
         focus:border-2
         focus:border-primary-500 dark:focus:border-dark-500 dark:placeholder-dark-400/60 transition-all
@@ -64,5 +64,25 @@
 
     .prefix svg, .suffix svg {
         @apply ltr:!mr-1 rtl:!ml-1 w-6 h-6 dark:text-dark-500
+    }
+
+    .ql-toolbar.ql-snow {
+        @apply dark:!bg-dark-700 !rounded-t-lg !border-2 !border-slate-300/50 dark:!border-dark-600 dark:!bg-transparent
+    }
+
+    .ql-toolbar.ql-snow .ql-stroke, .ql-stroke.ql-thin {
+        @apply dark:!text-dark-500 dark:!stroke-dark-500
+    }
+
+    .ql-snow.ql-toolbar button:hover .ql-stroke {
+        @apply !stroke-primary-500
+    }
+
+    .ql-container.ql-snow {
+        @apply dark:!bg-dark-700 !rounded-b-lg !border-2 !border-slate-300/50 dark:!border-dark-600 dark:!bg-transparent
+    }
+
+    .ql-editor.ql-blank::before {
+        @apply dark:!text-dark-400/60 !not-italic
     }
 }

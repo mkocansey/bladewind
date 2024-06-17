@@ -1,6 +1,6 @@
 @layer components {
     .bw-table.divided tr:not(:has(th),:last-child) {
-        @apply border-b-8 border-gray-200/30 dark:border-dark-700 border-t border-t-gray-200/40 dark:border-b-dark-700
+        @apply border-b-8 border-gray-200/15 dark:border-dark-700 border-t border-t-gray-200/40 dark:border-b-dark-700
     }
 
     .bw-table.divided.thin tr {
@@ -8,11 +8,13 @@
     }
 
     .bw-table tr > td {
-        @apply py-4 px-3 align-top text-sm text-slate-600/80 dark:text-dark-400 bg-white dark:bg-dark-800 border-x-2 border-gray-50/10 dark:border-dark-800/10
+        @apply py-4 px-3 align-top text-sm text-slate-600/80 dark:text-dark-400 bg-white dark:bg-dark-800/25 border-x-2 border-transparent
+        /*dark:bg-dark-600/40*/
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
-        @apply bg-slate-50 dark:bg-dark-800/60
+        @apply bg-slate-100/70 dark:bg-dark-800/15
+        /*dark:bg-dark-600/20*/
     }
 
     .bw-table.celled th, .bw-table.celled td {
@@ -21,14 +23,14 @@
 
     .bw-table thead > tr > th {
         @apply
-        bg-white dark:bg-dark-900/50
+        bg-white dark:bg-dark-800/40
         text-black/80 dark:text-dark-400
         text-xs
         text-left
         font-semibold
         tracking-widest
         px-3 py-4
-        border-t border-t-gray-200/30 dark:border-t-dark-800
+        border-t border-t-gray-200/30 dark:border-t-transparent
     }
 
     .bw-table.celled th:first-child, .bw-table.celled td:first-child {
@@ -64,15 +66,15 @@
     }
 
     .bw-table.with-hover-effect tr:hover > td {
-        @apply bg-gray-100/40 dark:bg-dark-800/60
+        @apply bg-gray-100/40 dark:bg-dark-600/30
     }
 
     .bw-table.with-hover-effect tr:hover > td:first-child {
-        @apply border-l-2 border-l-slate-400 dark:border-l-dark-600
+        @apply border-l-2 border-l-slate-400 dark:border-l-dark-500
     }
 
     .bw-table.with-hover-effect tr:hover > td:last-child {
-        @apply border-r-2 border-r-slate-400 dark:border-r-dark-600
+        @apply border-r-2 border-r-slate-400 dark:border-r-dark-500
     }
 
     .bw-table.selectable > tbody > tr {

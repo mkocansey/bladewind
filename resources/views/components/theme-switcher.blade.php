@@ -19,17 +19,17 @@
                     name="{{$lightIcon}}"
                     type="{{$iconType}}"
                     dir="{{$iconDir}}"
-                    class="text-indigo-400 hover:text-indigo-500 dark:hover:text-dark-300 stroke-2 theme-light hidden"/>
+                    class="text-primary-600 hover:text-primary-500 dark:!text-dark-500 dark:hover:text-dark-300 stroke-2 theme-light hidden"/>
             <x-bladewind::icon
                     name="{{$darkIcon}}"
                     type="{{$iconType}}"
                     dir="{{$iconDir}}"
-                    class="text-indigo-400 hover:text-indigo-500 dark:hover:text-dark-300 stroke-2 theme-dark hidden"/>
+                    class="text-primary-400 hover:text-primary-500 dark:!text-dark-500 dark:hover:!text-dark-400 stroke-2 theme-dark hidden"/>
             <x-bladewind::icon
                     name="{{$systemIcon}}"
                     type="{{$iconType}}"
                     dir="{{$iconDir}}"
-                    class="text-indigo-400 hover:text-indigo-500 dark:hover:text-dark-300 stroke-2 theme-system hidden"/>
+                    class="text-primary-400 hover:text-primary-500 dark:!text-dark-500 dark:hover:!text-dark-400 stroke-2 theme-system hidden"/>
         </x-slot:trigger>
         <x-bladewind::dropmenu-item onclick="chooseTheme('dark')" icon="{{$darkIcon}}" icon_css="stroke-2">
             {{$darkText}}
