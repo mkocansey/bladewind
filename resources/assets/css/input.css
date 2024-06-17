@@ -67,7 +67,7 @@
     }
 
     .ql-toolbar.ql-snow {
-        @apply dark:!bg-dark-700 !rounded-t-lg !border-2 !border-slate-300/50 dark:!border-dark-600 dark:!bg-transparent
+        @apply !rounded-t-lg !border-2 !border-slate-300/50 dark:!border-dark-600 dark:!bg-transparent
     }
 
     .ql-toolbar.ql-snow .ql-stroke, .ql-stroke.ql-thin {
@@ -79,10 +79,11 @@
     }
 
     .ql-container.ql-snow {
-        @apply dark:!bg-dark-700 !rounded-b-lg !border-2 !border-slate-300/50 dark:!border-dark-600 dark:!bg-transparent
+        @apply !rounded-b-lg !border-2 !border-slate-300/50 dark:!border-dark-600 dark:!bg-transparent
     }
 
     .ql-editor.ql-blank::before {
-        @apply dark:!text-dark-400/60 !not-italic
+        @apply !text-slate-300 dark:!text-dark-400/60 !not-italic
     }
+
 }
