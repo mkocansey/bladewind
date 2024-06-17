@@ -44,7 +44,7 @@
     $has_border_css =   ($has_border) ? 'border border-slate-200 dark:border-dark-600/60 focus:outline-none' : '';
     $header_compact_css =   (!$header && ! $compact) ? 'p-8' : (($compact) ? 'p-4' : '');
     $shadow_css =   ($has_shadow) ? 'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70' : '';
-    $hover_css =  ($hover_effect) ? 'hover:shadow-sm hover:dark:shadow-dark-900 cursor-pointer' : '';
+    $hover_css =  ($hover_effect) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
 @endphp
 <div {{ $attributes->merge([ 'class' => "$class $contact_card_css $has_border_css $header_compact_css $shadow_css $hover_css"]) }}>
     @if($header)

@@ -29,7 +29,7 @@
     if (!$hasShadow) $has_shadow = $hasShadow;
 @endphp
 
-<div class="bw-statistic bg-white dark:bg-slate-800 dark:border dark:border-slate-700/50 p-6 rounded-md relative @if($has_shadow)shadow shadow-gray-200/40 dark:shadow-slate-900 @endif {{$class}}">
+<div class="bw-statistic bg-white dark:bg-dark-800/30 border border-gray-100/80 dark:border-dark-600/60 focus:outline-none p-6 rounded-md relative @if($has_shadow) drop-shadow-sm shadow-sm shadow-slate-200 dark:shadow-dark-800/70 @endif {{$class}}">
     <div class="flex space-x-4">
         @if($icon !== '' && $icon_position=='left')
             <div class="grow-0 icon">{!! $icon !!}</div>

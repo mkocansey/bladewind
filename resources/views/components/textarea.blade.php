@@ -75,6 +75,7 @@
 </div>
 @if($toolbar)
     @once
+        {{--        <span class="hidden ql-toolbar ql-snow ql-stroke ql-thin ql-container ql-editor ql-blank"></span>--}}
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet"/>
         <script>
