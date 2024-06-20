@@ -193,7 +193,7 @@
             <x-bladewind::icon name="chevron-up-down" class="opacity-40 !ml-2"/>
         </div>
     </div>
-    <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 border-2 
+    <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 dark:shadow-none border-2
         border-blue-400 dark:text-slate-300 dark:border-dark-600 dark:bg-dark-700 border-t-0 -mt-1.5
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
         <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
@@ -204,7 +204,7 @@
                     suffix="magnifying-glass"
                     suffix_is_icon="true"/>
         </div>
-        <div class="divide-y divide-slate-100 dark:divide-slate-700 bw-select-items mt-0">
+        <div class="divide-y divide-slate-100 dark:divide-slate-600/70 bw-select-items mt-0">
             @if($data !== 'manual')
                 @foreach ($data as $item)
                     <x-bladewind::select-item

@@ -41,6 +41,7 @@
     //------------------ end empty state parameters -------------------
     'selectable' => config('bladewind.table.selectable', false),
     'checkable' => config('bladewind.table.checkable', false),
+    'transparent' => config('bladewind.table.transparent', false),
 ])
 @php
     // reset variables for Laravel 8 support
@@ -56,6 +57,7 @@
     $celled = filter_var($celled, FILTER_VALIDATE_BOOLEAN);
     $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
     $checkable = filter_var($checkable, FILTER_VALIDATE_BOOLEAN);
+    $transparent = filter_var($transparent, FILTER_VALIDATE_BOOLEAN);
     $message_as_empty_state = filter_var($message_as_empty_state, FILTER_VALIDATE_BOOLEAN);
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
@@ -123,15 +125,17 @@
         <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif  @if($celled) celled @endif
             @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif
-            @if($selectable) selectable @endif @if($checkable) checkable @endif">
+            @if($selectable) selectable @endif @if($checkable) checkable @endif @if($transparent) transparent @endif">
             @if(is_null($data))
-                <thead>
-                <tr>{{ $header }}</tr> {{--  class="bg-gray-200 dark:bg-dark-800" --}}
-                </thead>
+                @if(!empty($header))
+                    <thead>
+                    <tr>{{ $header }}</tr> {{--  class="bg-gray-200 dark:bg-dark-800" --}}
+                    </thead>
+                @endif
                 <tbody>{{ $slot }}</tbody>
             @else
                 <thead>
-                <tr class="bg-gray-200 dark:bg-dark-800">
+                <tr>
                     @php
                         // if there are no records, build the headings with $column_headings if the array exists
                         $table_headings = ($total_records>0) ? $table_headings : (($column_aliases) ?? []);
