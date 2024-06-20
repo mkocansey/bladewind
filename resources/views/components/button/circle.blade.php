@@ -5,7 +5,7 @@
 ])
 @aware([
     'type' => 'primary',
-    'color' => 'primary',
+    'color' => '',
     'size' => config('bladewind.button.circle.size', 'regular'),
     'name' => null,
     'can_submit' => false,
@@ -18,6 +18,9 @@
     'show_focus_ring' => true,
     'outline' => false,
 ])
+
+@php if($color == 'secondary') $type = 'secondary'; @endphp
+
 <x-bladewind::button
         :color="$color"
         :size="$size"

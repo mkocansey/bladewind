@@ -112,11 +112,13 @@
     if($canSubmit) $can_submit = $canSubmit;
     if(!$showFocusRing) $show_focus_ring = $showFocusRing;
 
-	$colour = (!empty($color)) ? $color : $type;
-    $outline_colour = "border-$colour-500/50 focus:ring-$colour-500 focus:outline-none focus:ring-opacity-25 focus:ring-offset-0 hover:border-$colour-600 dark:hover:border-$colour-500 active:border-$colour-600 text-$colour-600 %s";
-    $button_colour = "bg-$colour-500 hover:bg-$colour-600 hover:!no-underline focus:ring-$colour-500 active:bg-$colour-600 active:opacity-100 focus:outline-none focus:ring-opacity-25 focus:ring-offset-0 %s";
+    $colour = (!empty($color)) ? $color : $type;
+    $outline_colour =   "border-$colour-500/50 focus:ring-$colour-500 hover:border-$colour-600
+                        dark:hover:border-$colour-500 active:border-$colour-600 text-$colour-600  %s";
+    $button_colour =    "!bg-$colour-500 hover:!bg-$colour-600 focus:ring-$colour-500 active:bg-$colour-600 %s";
+
     if($colour == 'black') {
-        $outline_colour = preg_replace('/-\d+/', '', $outline_colour);
+        $outline_colour = preg_replace('/(-)?(\/)?\d+/', '', $outline_colour);
         $button_colour = preg_replace('/-\d+/', '', $button_colour);
     }
     $button_type = ($can_submit) ? 'submit' : 'button';
