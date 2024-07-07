@@ -13,6 +13,7 @@
     'showSpinner' => false,
     'has_shadow' => config('bladewind.statistic.has_shadow', true),
     'hasShadow' => config('bladewind.statistic.has_shadow', true),
+    'hasBorder' => config('bladewind.statistic.has_border', true),
     'class' => '',
     'number_css' => '',
 ])
@@ -22,14 +23,17 @@
     $showSpinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
     $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
     $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
+    $has_border = filter_var($hasBorder, FILTER_VALIDATE_BOOLEAN);
     if ($labelPosition !== $label_position) $label_position = $labelPosition;
     if ($iconPosition !== $icon_position) $icon_position = $iconPosition;
     if ($currencyPosition !== $currency_position) $currency_position = $currencyPosition;
     if ($showSpinner) $show_spinner = $showSpinner;
     if (!$hasShadow) $has_shadow = $hasShadow;
+    $shadow_css = ($has_shadow) ? 'drop-shadow-sm shadow-sm shadow-slate-200 dark:shadow-dark-800/70' : '';
+    $border_css = ($has_border) ? 'border border-gray-100/80 dark:border-dark-600/60' : '';
 @endphp
 
-<div class="bw-statistic bg-white dark:bg-dark-800/30 border border-gray-100/80 dark:border-dark-600/60 focus:outline-none p-6 rounded-md relative @if($has_shadow) drop-shadow-sm shadow-sm shadow-slate-200 dark:shadow-dark-800/70 @endif {{$class}}">
+<div {{ $attributes(['class' => "bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 rounded-md relative $shadow_css $border_css $class"]) }}>
     <div class="flex space-x-4">
         @if($icon !== '' && $icon_position=='left')
             <div class="grow-0 icon">{!! $icon !!}</div>
