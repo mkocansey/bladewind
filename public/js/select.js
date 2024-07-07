@@ -116,37 +116,39 @@ class BladewindSelect {
             this.filter(this.toFilter, this.selectedValue);
         }
 
-        if (!this.isMultiple) {
-            changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
-            dom_el(this.displayArea).innerText = selectedLabel;
-            input.value = this.selectedValue;
-            unhide(svg, true);
-            this.moveLabel();
-            if (this.canClear) {
-                unhide(`${this.clickArea} .reset`);
-                dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
-                    this.unsetValue(item);
-                    e.stopImmediatePropagation();
-                });
-            }
-        } else {
-            if (input.value.includes(this.selectedValue)) {
-                this.unsetValue(item);
-            } else {
-                if (!this.maxSelectableExceeded()) {
-                    unhide(svg, true);
-                    input.value += `,${this.selectedValue}`;
-                    dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, this.selectedValue);
-                    this.removeLabel(this.selectedValue);
-                } else {
-                    showNotification('', this.maxSelectionError, 'error');
-                }
+        if (this.enabled) {
+            if (!this.isMultiple) {
+                changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
+                dom_el(this.displayArea).innerText = selectedLabel;
+                input.value = this.selectedValue;
+                unhide(svg, true);
                 this.moveLabel();
+                if (this.canClear) {
+                    unhide(`${this.clickArea} .reset`);
+                    dom_el(`${this.clickArea} .reset`).addEventListener('click', (e) => {
+                        this.unsetValue(item);
+                        e.stopImmediatePropagation();
+                    });
+                }
+            } else {
+                if (input.value.includes(this.selectedValue)) {
+                    this.unsetValue(item);
+                } else {
+                    if (!this.maxSelectableExceeded()) {
+                        unhide(svg, true);
+                        input.value += `,${this.selectedValue}`;
+                        dom_el(this.displayArea).innerHTML += this.labelTemplate(selectedLabel, this.selectedValue);
+                        this.removeLabel(this.selectedValue);
+                    } else {
+                        showNotification('', this.maxSelectionError, 'error');
+                    }
+                    this.moveLabel();
+                }
+                this.scrollbars();
             }
-            this.scrollbars();
+            stripComma(input);
+            changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
         }
-        stripComma(input);
-        changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
     }
 
     unsetValue = (item) => {
@@ -154,8 +156,9 @@ class BladewindSelect {
         // let selectedValue = item.getAttribute('data-value');
         let svg = dom_el(`${this.rootElement} div[data-value="${this.selectedValue}"] svg`);
         let input = dom_el(this.formInput);
+
         // only unset values if the Select component is not disabled
-        if (!dom_el(this.clickArea).classList.contains('cursor-not-allowed')) {
+        if (this.enabled) { //!dom_el(this.clickArea).classList.contains('disabled')
             if (!this.isMultiple) {
                 unhide(`${this.rootElement} .placeholder`);
                 changeCssForDomArray(`${this.selectItems} svg`, 'hidden');
@@ -246,8 +249,8 @@ class BladewindSelect {
     }
 
     disable = () => {
-        changeCss(this.clickArea, 'opacity-40, select-none, cursor-not-allowed');
-        changeCss(this.clickArea, 'focus:border-blue-400, cursor-pointer', 'remove');
+        changeCss(this.clickArea, 'disabled');
+        changeCss(this.clickArea, 'enabled, readonly', 'remove');
         // hide(`${this.clickArea} .reset`);
         dom_el(this.clickArea).addEventListener('click', () => {
             hide(this.itemsContainer);
@@ -256,8 +259,8 @@ class BladewindSelect {
     }
 
     enable = () => {
-        changeCss(this.clickArea, 'opacity-40, select-none, cursor-not-allowed', 'remove');
-        changeCss(this.clickArea, 'focus:border-blue-400, cursor-pointer');
+        changeCss(this.clickArea, 'readonly, disabled', 'remove');
+        changeCss(this.clickArea, 'enabled');
         dom_el(this.clickArea).addEventListener('click', (e) => {
             unhide(this.itemsContainer);
         });

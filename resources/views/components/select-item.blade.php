@@ -22,6 +22,6 @@
     @if ($image !== '')
         <x-bladewind::avatar size="small" class="!mt-0 !mr-4" image="{{ $image }}"/>
     @endif
-    <span class="grow text-left">{!! $label !!}</span>
+    <span class="grow text-left">{!! html_entity_decode($label) !!}</span>
     <x-bladewind::icon name="check-circle" class="text-slate-400 size-5 hidden svg-{{$value }}"/>
 </div>
