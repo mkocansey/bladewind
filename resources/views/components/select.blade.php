@@ -167,14 +167,15 @@
      data-multiple="{{$multiple}}" data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
-    <div class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
-        dark:text-dark-300 dark:border-dark-600 dark:bg-transparent {{$sizes[$size]}} pl-4 pr-2 clickable
-        @if(!$disabled)focus:border-blue-400 dark:focus:border-dark-500 cursor-pointer @else opacity-40 select-none cursor-not-allowed @endif"
-         tabindex="0">
+    <div tabindex="0"
+         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
+         dark:text-dark-300 dark:border-dark-600 dark:bg-transparent {{$sizes[$size]}} pl-4 pr-2 clickable
+         @if($disabled) disabled @elseif($readonly) readonly @else enabled @endif">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
         <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">
             @if(!empty($label))
-                <span class="form-label !top-4">{{$label}} @if($required)
+                <span class="form-label !top-4">{{$label}}
+                    @if($required)
                         <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
                     @endif</span>
             @else

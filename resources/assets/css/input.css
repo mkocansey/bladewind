@@ -14,6 +14,10 @@
         px-3.5 py-[8.5px]
     }
 
+    .bw-input[disabled], .bw-input[readonly] {
+        @apply !bg-gray-100/60 dark:!bg-white/10 dark:!opacity-40 !text-slate-400/70 dark:!text-dark-400 cursor-not-allowed dark:!border-dark-500/70
+    }
+
     .bw-input.small {
         @apply py-2
     }
@@ -60,6 +64,14 @@
     .form-label.big {
         @apply
         peer-placeholder-shown:!top-[23px] peer-focus:!-top-2
+    }
+
+    .bw-select div.clickable.disabled, .bw-select div.clickable.readonly {
+        @apply !bg-gray-100/60 opacity-95 dark:opacity-70 dark:!bg-white/5 select-none cursor-not-allowed
+    }
+
+    .bw-select div.clickable.enabled {
+        @apply focus:border-blue-400 dark:focus:border-dark-500 cursor-pointer
     }
 
     .prefix svg, .suffix svg {
