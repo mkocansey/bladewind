@@ -8,12 +8,14 @@
     'iconRight' => true,
     'iconType' => 'outline',
     'iconDir' => '',
+    'modular' => false,
 ])
 @php
     $iconRight = filter_var($iconRight, FILTER_VALIDATE_BOOLEAN);
+    $modular = filter_var($modular, FILTER_VALIDATE_BOOLEAN);
 @endphp
 @once
-    <x-bladewind::dropmenu modular="false" icon_right="{{$iconRight}}">
+    <x-bladewind::dropmenu :modular="$modular" icon_right="{{$iconRight}}">
         <x-slot:trigger>
             <x-bladewind::icon
                     name="{{$lightIcon}}"
