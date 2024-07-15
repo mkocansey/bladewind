@@ -428,7 +428,7 @@ var goToTab = (element, colour, context) => {
 var positionPrefix = (element, mode = 'blur') => {
     let transparency = domEl(`.dv-${element} .prefix`).getAttribute('data-transparency');
     let offset = (transparency === '1') ? -5 : 7;
-    let prefix_width = ((domEl(`.dv-${element} .prefix`).offsetWidth) + offset) * 1;
+    let prefix_width = ((getPrefixSuffixOffsetWidth(`.dv-${element} .prefix`)) + offset) * 1;
     let default_label_left_pos = '0.875rem';
     let input_field = domEl(`input.${element}`);
     let label_field = domEl(`.dv-${element} label`);
@@ -453,6 +453,24 @@ var positionPrefix = (element, mode = 'blur') => {
     }
 }
 
+
+/**
+ * Get the offsetWidth of a prefix/suffix label
+ * @param {string} element - The css class (name) of the prefix/suffix field.
+ * @return {int}
+ */
+var getPrefixSuffixOffsetWidth = (element) => {
+    let ps_element = domEl(element);
+    const clone = ps_element.cloneNode(true);
+    clone.style.visibility = 'hidden';
+    clone.style.position = 'absolute';
+    clone.style.display = 'block';
+    document.body.appendChild(clone);
+    let offsetWidth = clone.offsetWidth;
+    document.body.removeChild(clone);
+    return offsetWidth;
+}
+
 /**
  * Position a suffix in an input field.
  * @param {string} element - The css class (name) of the input field.
@@ -462,7 +480,7 @@ var positionPrefix = (element, mode = 'blur') => {
 var positionSuffix = (element) => {
     let transparency = domEl(`.dv-${element} .suffix`).getAttribute('data-transparency');
     let offset = (transparency === '1') ? -5 : 7;
-    let suffix_width = ((domEl(`.dv-${element} .suffix`).offsetWidth) + offset) * 1;
+    let suffix_width = ((getPrefixSuffixOffsetWidth(`.dv-${element} .suffix`)) + offset) * 1;
     domEl(`input.${element}`).style.paddingRight = `${suffix_width}px`;
 }
 
