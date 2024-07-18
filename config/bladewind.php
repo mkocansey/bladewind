@@ -251,6 +251,7 @@ return [
         'close_after_action' => true,
         'backdrop_can_close' => true,
         'blur_backdrop' => true,
+        'blur_size' => 'medium',
         'center_action_buttons' => false,
         'stretch_action_buttons' => false,
         'show_close_icon' => false,

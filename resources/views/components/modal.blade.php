@@ -55,6 +55,9 @@
     'blur_backdrop' => config('bladewind.modal.blur_backdrop', true),
     'blurBackdrop' => config('bladewind.modal.blur_backdrop', true),
 
+    // specify intensity of the backdrop blur
+    'blurSize' => config('bladewind.modal.blur_size', 'medium'),
+
     // determines the size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
     'size' => config('bladewind.modal.size', 'medium'),
@@ -112,6 +115,7 @@
     if ($stretchActionButtons) $stretch_action_buttons = $stretchActionButtons;
     if ($blurBackdrop) $blur_backdrop = $blurBackdrop;
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
+    if (!$blurBackdrop) $blurSize = 'none';
     if(!in_array($align_buttons, ['right', 'center', 'left'])) $align_buttons = 'right';
     //-------------------------------------------------------------------
 
@@ -133,10 +137,23 @@
       }
     };
     $type_colour = $type_colour();
+
+   $blur_intensity = function() use ($blurSize) {
+       return match ($blurSize) {
+           'none' => "backdrop-blur-none",
+           'small' => "backdrop-blur-sm",
+           'large' => "backdrop-blur-lg",
+           'xl' => "backdrop-blur-xl",
+           'xxl' => "backdrop-blur-2xl",
+           'omg' => "backdrop-blur-3xl",
+           default => "backdrop-blur-md",
+       };
+    };
+//    $blur_intensity = $blur_intensity();
 @endphp
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdrop_can_close}}"
-     class="w-full h-full bg-black/40 fixed left-0 top-0 @if($blur_backdrop) backdrop-blur-md dark:backdrop-blur-lg @endif
+     class="w-full h-full bg-black/40 fixed left-0 top-0 {{$blur_intensity()}}
      z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
     <div class="sm:{{$sizes[$size]}} lg:{{$sizes[$size]}} p-4 m-auto bw-{{$name}} animate__faster">
         <div class="bg-white relative dark:bg-dark-700/90 dark:border dark:border-dark-500/10 rounded-lg drop-shadow-2xl">
