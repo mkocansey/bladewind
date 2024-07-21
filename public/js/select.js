@@ -14,7 +14,7 @@ class BladewindSelect {
     enabled;
 
 
-    constructor(name, placeholder, required) {
+    constructor(name, placeholder) {
         this.name = name;
         this.placeholder = placeholder || 'Select One';
         this.rootElement = `.bw-select-${name}`;
@@ -31,14 +31,19 @@ class BladewindSelect {
         this.enabled = true;
     }
 
-    activate = () => {
-        dom_el(this.clickArea).addEventListener('click', (e) => {
-            unhide(this.itemsContainer);
-        });
-        this.hide();
-        this.search();
-        this.manualModePreSelection();
-        this.selectItem();
+    activate = (options = {}) => {
+        if (options.disabled !== '1' && options.readonly !== '1') {
+            dom_el(this.clickArea).addEventListener('click', (e) => {
+                unhide(this.itemsContainer);
+            });
+            this.hide();
+            this.search();
+            this.manualModePreSelection();
+            this.selectItem();
+        } else {
+            this.selectItem();
+            this.enabled = false;
+        }
     }
 
     clearable = () => {
@@ -57,7 +62,9 @@ class BladewindSelect {
         dom_el(this.searchInput).addEventListener('keyup', (e) => {
             let value = (dom_el(this.searchInput).value);
             dom_els(this.selectItems).forEach((el) => {
-                (el.innerText.toLowerCase().indexOf(value.toLowerCase()) !== -1) ? unhide(el, true) : hide(el, true);
+                (el.innerText.toLowerCase().indexOf(value.toLowerCase()) !== -1) ?
+                    unhide(el, true) :
+                    hide(el, true);
             });
         });
     }
@@ -104,7 +111,6 @@ class BladewindSelect {
 
     setValue = (item) => {
         this.selectedValue = item.getAttribute('data-value');
-        // let selectedValue = item.getAttribute('data-value');
         let selectedLabel = item.getAttribute('data-label');
         let svg = dom_el(`${this.rootElement} div[data-value="${this.selectedValue}"] svg`);
         let input = dom_el(this.formInput);
@@ -130,7 +136,7 @@ class BladewindSelect {
                         e.stopImmediatePropagation();
                     });
                 }
-            } else {
+            } /*else {
                 if (input.value.includes(this.selectedValue)) {
                     this.unsetValue(item);
                 } else {
@@ -145,7 +151,7 @@ class BladewindSelect {
                     this.moveLabel();
                 }
                 this.scrollbars();
-            }
+            }*/
             stripComma(input);
             changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
         }

@@ -158,11 +158,13 @@ return [
         'trigger_on' => 'click',
         'icon_right' => false,
         'divided' => false,
+        'padded' => true,
         // default attributes for dropmenu-item component
         'item' => [
             'dir' => '',
             'icon_right' => false,
             'hover' => true,
+            'padded' => true,
             'divided' => false,
         ]
     ],
@@ -249,6 +251,7 @@ return [
         'close_after_action' => true,
         'backdrop_can_close' => true,
         'blur_backdrop' => true,
+        'blur_size' => 'medium',
         'center_action_buttons' => false,
         'stretch_action_buttons' => false,
         'show_close_icon' => false,

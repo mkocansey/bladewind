@@ -12,12 +12,14 @@
     'modular' => false, // append type="module" to script tags
     'pickerColour' => 'pink',
     'icon_right' => config('bladewind.dropmenu.icon_right', false),
+    'padded' => config('bladewind.dropmenu.padded', true),
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
     $height = !is_numeric($height) ? 200 : $height;
     $trigger_on = (!in_array($trigger_on, ['click', 'mouseover'])) ? 'click' : $trigger_on;
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
+    $padded = filter_var($padded, FILTER_VALIDATE_BOOLEAN);
     $scrollable = filter_var($scrollable, FILTER_VALIDATE_BOOLEAN);
     $hide_after_click = filter_var($hide_after_click, FILTER_VALIDATE_BOOLEAN);
     $icon_right = filter_var($icon_right, FILTER_VALIDATE_BOOLEAN);
@@ -41,11 +43,17 @@
     </div>
     <div class="opacity-0 hidden bw-dropmenu-items !z-20 animate__animated animate__fadeIn animate__faster"
          data-open="0">
-        <div class="absolute bg-white dark:bg-dark-700 @if($position=='right') -right-1  @endif mt-1 rounded-md {{$class}} shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70 whitespace-nowrap
-             p-2 border border-transparent dark:border-dark-800/20 bw-items-list ring-1 ring-slate-800 ring-opacity-5 @if($divided) divide-y divide-slate-100 dark:divide-dark-600/90 @endif"
-             @if($scrollable)
-                 style="height: {{$height}}px; overflow-y: scroll"
-                @endif>
+        <div @class([
+                'absolute bg-white dark:bg-dark-700 mt-1 rounded-md',
+                'border border-transparent dark:border-dark-800/20 bw-items-list ring-1 ring-slate-800 ring-opacity-5',
+                'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70 whitespace-nowrap',
+                '-right-1' => ($position=='right'),
+                'p-2' => $padded,
+                'p-0' => !$padded,
+                'divide-y divide-slate-100 dark:divide-dark-600/90' => $divided,
+                "$class"
+                ])
+             @if($scrollable)style="height: {{$height}}px;overflow-y: scroll"@endif>
             {{ $slot }}
         </div>
     </div>
