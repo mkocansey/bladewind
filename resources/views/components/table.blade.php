@@ -24,6 +24,7 @@
     'exclude_columns' => null,
     'include_columns' => null,
     'action_icons' => null,
+    'groupby' => null,
     'actions_title' => 'actions',
     'column_aliases' => [],
     'searchable' => config('bladewind.table.searchable', false),
@@ -67,6 +68,7 @@
     $column_aliases = (!empty($column_aliases)) ? ((is_array($column_aliases)) ?
         $column_aliases : json_decode(str_replace('&quot;', '"', $column_aliases), true)) : [];
     $icons_array = [];
+    $can_group = false;
 
     if (!is_null($data)) {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
@@ -82,6 +84,11 @@
 
         if( !empty($include_columns) ) {
             $table_headings = explode(',', str_replace(' ','', $include_columns));
+        }
+
+        if(!empty($groupby) && in_array($groupby, $table_headings)) {
+            $can_group = true;
+            $unique_group_headings = array_unique(array_column($data, $groupby));
         }
 
         // build action icons
@@ -129,7 +136,7 @@
             @if(is_null($data))
                 @if(!empty($header))
                     <thead>
-                    <tr>{{ $header }}</tr> {{--  class="bg-gray-200 dark:bg-dark-800" --}}
+                    <tr>{{ $header }}</tr>
                     </thead>
                 @endif
                 <tbody>{{ $slot }}</tbody>
@@ -139,9 +146,13 @@
                     @php
                         // if there are no records, build the headings with $column_headings if the array exists
                         $table_headings = ($total_records>0) ? $table_headings : (($column_aliases) ?? []);
+                        // when grouping rows, remove the heading for the column being grouped by
+                        if($can_group) {
+                            unset($table_headings[array_search($groupby, $table_headings)]);
+                        }
                     @endphp
                     @foreach($table_headings as $th)
-                        <th>{{ str_replace('_',' ', $column_aliases[$th] ?? $th ) }}</th>
+                        <th>{{ str_replace('_', ' ', $column_aliases[$th] ?? $th ) }}</th>
                     @endforeach
                     @if( !empty($action_icons))
                         <th class="!text-right">{{$actions_title}}</th>
@@ -150,34 +161,37 @@
                 </thead>
                 @if($total_records > 0)
                     <tbody>
-                    @foreach($data as $row)
-                        <tr data-id="{{ $row['id'] ?? uniqid() }}">
-                            @foreach($table_headings as $th)
-                                <td>{!! $row[$th] !!}</td>
-                            @endforeach
-                            @if( !empty($icons_array) )
-                                <td class="text-right space-x-2 actions">
-                                    @foreach($icons_array as $icon)
-                                        @if(isset($icon['icon']))
-                                            @if(!empty($icon['tip']))
-                                                <a data-tooltip="{{ $icon['tip'] }}" data-inverted=""
-                                                   data-position="top center"> @endif
-                                                    <x-bladewind::button.circle
-                                                            size="tiny"
-                                                            icon="{{ $icon['icon'] }}"
-                                                            color="{{ $icon['color'] ?? '' }}"
-                                                            {{--title="{{$icon['tip']??''}}"--}}
-                                                            onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
-                                                            type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}"/>
-                                                    @if(!empty($icon['tip']))
-                                                </a>
-                                            @endif
+                    @if($can_group)
+                        @foreach($unique_group_headings as $group_heading)
+                            <tr>
+                                <td class="group-heading" colspan="{{count($table_headings)}}">{{ $group_heading }}</td>
+                            </tr>
+                            @php
+                                $grouped_data = array_filter($data, function ($item) use ($group_heading, $groupby) {
+                                    return $item[$groupby] === $group_heading;
+                                });
+                            @endphp
+                            @foreach($grouped_data as $row)
+                                <tr data-id="{{ $row['id'] ?? uniqid() }}">
+                                    @foreach($table_headings as $th)
+                                        @if($th !== $groupby)
+                                            <td>{!! $row[$th] !!}</td>
                                         @endif
                                     @endforeach
-                                </td>
-                            @endif
-                        </tr>
-                    @endforeach
+                                    <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    @else
+                        @foreach($data as $row)
+                            <tr data-id="{{ $row['id'] ?? uniqid() }}">
+                                @foreach($table_headings as $th)
+                                    <td>{!! $row[$th] !!}</td>
+                                @endforeach
+                                <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
+                            </tr>
+                        @endforeach
+                    @endif
                     @else
                         <tr>
                             <td colspan="{{count($table_headings)}}" class="text-center">
