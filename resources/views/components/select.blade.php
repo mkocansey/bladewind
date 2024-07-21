@@ -232,10 +232,10 @@
 </script>
 <script @if($modular) type="module" @endif>
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
-    @if(!$disabled && !$readonly) bw_{{ $input_name }}.activate();
+    bw_{{ $input_name }}.activate({disabled: '{{$disabled}}', readonly: '{{$readonly}}'});
+    @if(!$disabled && !$readonly)
     bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');
     @endif
     @if(!empty($filter)) bw_{{ $input_name }}.filter('{{ $filter }}');
-    @endif @if(!($required && $multiple == 'false')) bw_{{ $input_name }}.clearable();
-    @endif
+    @endif @if(!($required && $multiple == 'false')) bw_{{ $input_name }}.clearable();@endif
 </script>

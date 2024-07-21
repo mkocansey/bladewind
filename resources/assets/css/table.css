@@ -9,12 +9,14 @@
 
     .bw-table tr > td {
         @apply py-4 px-3 align-top text-sm text-slate-600/80 dark:text-dark-400 bg-white dark:bg-dark-800/25 border-x-2 border-transparent leading-6
-        /*dark:bg-dark-600/40*/
+    }
+
+    .bw-table tr > td.group-heading {
+        @apply bg-gray-50 hover:!bg-gray-50 dark:bg-dark-800/35 hover:dark:!bg-dark-800/35
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
         @apply bg-slate-100/70 dark:bg-dark-800/15
-        /*dark:bg-dark-600/20*/
     }
 
     .bw-table.celled th, .bw-table.celled td {
