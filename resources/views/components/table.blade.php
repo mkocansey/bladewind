@@ -43,6 +43,7 @@
     'selectable' => config('bladewind.table.selectable', false),
     'checkable' => config('bladewind.table.checkable', false),
     'transparent' => config('bladewind.table.transparent', false),
+    'selected_value' => null,
 ])
 @php
     // reset variables for Laravel 8 support
@@ -314,9 +315,21 @@
                 });
             }
 
+            const checkSelected = (table, selectedValue) => {
+                let selectedValues = selectedValue.split(',');
+                dom_els(`${table}.selectable tr`).forEach((el) => {
+                    const thisValue = el.getAttribute('data-id');
+                    if (selectedValues.includes(thisValue)) {
+                        el.click();
+                    }
+                });
+            }
+
         </script>
     @endonce
     <script>
         addCheckboxesToTable('.bw-table.{{$name}}');
+        // select rows in selected_value
+        @if(!empty($selected_value)) checkSelected('.bw-table.{{$name}}', '{{$selected_value}}') @endif
     </script>
 @endif
