@@ -161,7 +161,7 @@
             type="{{ $type }}"
             id="{{ $name }}"
             name="{{ $name }}"
-            value="{{ $selected_value }}"
+            value="{{ html_entity_decode($selected_value) }}"
             autocomplete="new-password"
             placeholder="{{ $placeholder_label }}{{$required_symbol}}"
             @if($error_message != '')
