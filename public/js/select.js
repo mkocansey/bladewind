@@ -136,7 +136,7 @@ class BladewindSelect {
                         e.stopImmediatePropagation();
                     });
                 }
-            } /*else {
+            } else {
                 if (input.value.includes(this.selectedValue)) {
                     this.unsetValue(item);
                 } else {
@@ -151,7 +151,7 @@ class BladewindSelect {
                     this.moveLabel();
                 }
                 this.scrollbars();
-            }*/
+            }
             stripComma(input);
             changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
         }
