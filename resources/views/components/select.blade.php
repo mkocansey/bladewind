@@ -164,7 +164,8 @@
     }
 </style>
 <div class="relative bw-select bw-select-{{$input_name}} @if($add_clearing) mb-3 @endif"
-     data-multiple="{{$multiple}}" data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
+     data-multiple="{{$multiple}}" data-required="{{$required?'true':'false'}}"
+     data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
     <div tabindex="0"
@@ -237,5 +238,5 @@
     bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');
     @endif
     @if(!empty($filter)) bw_{{ $input_name }}.filter('{{ $filter }}');
-    @endif @if(!($required && $multiple == 'false')) bw_{{ $input_name }}.clearable();@endif
+    @endif @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();@endif
 </script>
