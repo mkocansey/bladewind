@@ -153,17 +153,22 @@
         $suffix_is_icon = true;
         $suffix_icon_css = 'hidden cursor-pointer dark:!bg-dark-900/60 dark:hover:!bg-dark-900 !p-0.5 !rounded-full bg-gray-400 !stroke-2 hover:bg-gray-600 text-white';
     }
+    if($attributes->has('readonly', 'disabled')){
+        if($attributes->get('readonly') == 'false') $attributes = $attributes->except('readonly');
+        if($attributes->get('disabled') == 'false') $attributes = $attributes->except('disabled');
+    }
 @endphp
 
 <div class="relative w-full dv-{{$name}} @if($add_clearing) mb-4 @endif">
     <input
-            {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color $size"]) }}
-            type="{{ $type }}"
-            id="{{ $name }}"
-            name="{{ $name }}"
-            value="{{ html_entity_decode($selected_value) }}"
-            autocomplete="new-password"
-            placeholder="{{ $placeholder_label }}{{$required_symbol}}"
+            {{ $attributes->class(["bw-input peer $is_required $name $placeholder_color $size"])->merge([
+                'type' => $type,
+                'id' => $name,
+                'name' => $name,
+                'value' => html_entity_decode($selected_value),
+                'autocomplete' => "new-password",
+                'placeholder' => $placeholder_label.$required_symbol,
+            ]) }}
             @if($error_message != '')
                 data-error-message="{{$error_message}}"
             data-error-inline="{{$show_error_inline}}"
