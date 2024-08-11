@@ -42,6 +42,16 @@ var dom_els = (element) => {
 }
 
 /**
+ * Check to see if val is empty
+ * @param {string} val - The string to test emptiness for
+ * @return {boolean} True if string is empty
+ */
+var isEmpty = (val) => {
+    let regex = /^\s*$/;
+    return regex.test(val);
+}
+
+/**
  * Validate a form and highlight each field that fails validation.
  * @param {string} element - The class name or ID of the element containing the fields to validate.
  *   element does not need to be a <form> tag. Can be any element containing form fields.
@@ -54,7 +64,9 @@ var validateForm = (form) => {
     try {
         domEls(`${form} .required`).forEach((el) => {
             changeCss(el, '!border-red-500', 'remove', true);
-            if (el.value === '') {
+            console.log('value:', el.value);
+            console.log(isEmpty(el.value));
+            if (isEmpty(el.value)) {
                 let el_name = el.getAttribute('name');
                 let el_parent = el.getAttribute('data-parent');
                 let error_message = el.getAttribute('data-error-message');

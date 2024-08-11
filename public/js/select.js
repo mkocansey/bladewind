@@ -5,6 +5,7 @@ class BladewindSelect {
     searchInput;
     selectItems;
     isMultiple;
+    required;
     displayArea;
     formInput;
     maxSelection;
@@ -24,10 +25,11 @@ class BladewindSelect {
         this.searchInput = `${this.itemsContainer} .bw_search`;
         this.selectItems = `${this.itemsContainer} .bw-select-items .bw-select-item`;
         this.isMultiple = (dom_el(this.rootElement).getAttribute('data-multiple') === 'true');
+        this.required = (dom_el(this.rootElement).getAttribute('data-required') === 'true');
         this.formInput = `input.bw-${this.name}`;
         dom_el(this.displayArea).style.maxWidth = `${(dom_el(this.rootElement).offsetWidth - 40)}px`;
         this.maxSelection = -1;
-        this.canClear = false;
+        this.canClear = (!this.required && !this.isMultiple);
         this.enabled = true;
     }
 
