@@ -49,7 +49,7 @@
 <div class="relative w-full @if($add_clearing) mb-3 @endif">
     @if($toolbar)
         <div id="{{$name}}">{{$selected_value}}</div>
-        <input type="hidden" name="{{ $name }}" id="{{ $name }}-hidden" value="">
+        <textarea hidden name="{{ $name }}" id="{{ $name }}-hidden" class="size-0"></textarea>
     @else
         <textarea {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
                   id="{{ $name }}"
