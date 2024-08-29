@@ -4,7 +4,6 @@
     // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
 
     'css_classes_to_pre_compile' => [
-
         'bg' => 'bg-primary-200/80 bg-blue-200/80 bg-red-200/80 bg-yellow-200/80 bg-green-200/80 bg-purple-200/80
                 bg-orange-200/80 bg-slate-200/80 bg-gray-200/80 bg-pink-200/80 bg-cyan-200/80 bg-violet-200/80
                 bg-indigo-200/80 bg-fuchsia-200/80
@@ -37,7 +36,7 @@
                 peer-checked:bg-purple-600 peer-checked:bg-orange-600 peer-checked:bg-slate-600 peer-checked:bg-gray-600 peer-checked:bg-pink-600
                 peer-checked:bg-cyan-600 peer-checked:bg-violet-600 peer-checked:bg-indigo-600 peer-checked:bg-fuchsia-600',
 
-        'text' =>   'text-white text-primary-50 text-blue-50 text-red-50 text-yellow-50 text-green-50 text-purple-50 text-orange-50
+        'text' => 'text-white text-primary-50 text-blue-50 text-red-50 text-yellow-50 text-green-50 text-purple-50 text-orange-50
                     text-gray-50 text-slate-50 text-pink-50 text-cyan-50 text-violet-50 text-indigo-50 text-fuchsia-50
 
                     hover:text-primary-50 hover:text-blue-50 hover:text-red-50 hover:text-yellow-50 hover:text-green-50
@@ -53,10 +52,12 @@
 
                     dark:!text-primary-300 dark:!text-blue-300 dark:!text-red-300 dark:!text-yellow-300 dark:!text-green-300
                     dark:!text-purple-300 dark:!text-orange-300 dark:!text-slate-300 dark:!text-pink-300 dark:!text-cyan-300
-                    dark:!text-violet-300 dark:!text-indigo-300 dark:!text-fuchsia-300',
+                    dark:!text-violet-300 dark:!text-indigo-300 dark:!text-fuchsia-300
+                    
+                    !text-center',
 
         'lines' => [
-            'borders' =>    'border-2 border-4 border-8 border-black
+            'borders' => 'border-2 border-4 border-8 border-black
                             after:border-primary-100 after:border-blue-100 after:border-red-100 after:border-yellow-100
                             after:border-green-100 after:border-purple-100 after:border-orange-100 after:border-slate-100
                             after:border-gray-100 after:border-pink-100 after:border-cyan-100 after:border-violet-100
@@ -92,13 +93,14 @@
 
                             focus:border-primary-500',
 
-            'rings' =>      'ring-1 ring-2 ring-4 ring-8 focus:ring-1 focus:ring-2 focus:ring-4 focus:ring-8 focus:ring-black
+            'rings' => 'ring-1 ring-2 ring-4 ring-8 focus:ring-1 focus:ring-2 focus:ring-4 focus:ring-8 focus:ring-black
                             focus:ring-primary-500 focus:ring-blue-500 focus:ring-red-500 focus:ring-yellow-500
                             focus:ring-green-500 focus:ring-purple-500 focus:ring-orange-500 focus:ring-slate-500
                             focus:ring-gray-500 focus:ring-pink-500 focus:ring-cyan-500 focus:ring-violet-500
                             focus:ring-indigo-500 focus:ring-fuchsia-500',
         ],
-        'sizes' => 'w-6 w-7 w-10 w-11 w-14 w-16 w-24 w-36 h-6 h-7 h-10 h-11 h-14 h-16 h-24 h-36 sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12 lg:w-1/6 lg:w-1/5 lg:w-1/4 lg:w-1/3 lg:w-2/5 lg:w-2/3 lg:w-11/12',
-        'positions' => '-bottom-1 -top-1'
+        'sizes' =>
+            'w-6 w-7 w-10 w-11 w-14 w-16 w-24 w-36 h-6 h-7 h-10 h-11 h-14 h-16 h-24 h-36 sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12 lg:w-1/6 lg:w-1/5 lg:w-1/4 lg:w-1/3 lg:w-2/5 lg:w-2/3 lg:w-11/12',
+        'positions' => '-bottom-1 -top-1',
     ],
 ])
