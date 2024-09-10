@@ -60,7 +60,7 @@
 </div>
 
 <script>
-    @php include_once('vendor/bladewind/js/dropmenu.js'); @endphp
+    @php include_once(public_path('vendor/bladewind/js/dropmenu.js')); @endphp
 </script>
 <script @if($modular) type="module" @endif>
     const {{ $name }} = new BladewindDropmenu('{{ $name }}', {
