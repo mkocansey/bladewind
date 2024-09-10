@@ -26,5 +26,5 @@
 </div>
 
 <script>
-    @php include_once('vendor/bladewind/js/notification.js'); @endphp
+    @php include_once(public_path('vendor/bladewind/js/notification.js')); @endphp
 </script>
