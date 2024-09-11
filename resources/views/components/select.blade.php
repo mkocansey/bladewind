@@ -229,7 +229,7 @@
 </div>
 
 <script>
-    @php include_once('vendor/bladewind/js/select.js'); @endphp
+    @php include_once(public_path('vendor/bladewind/js/select.js')); @endphp
 </script>
 <script @if($modular) type="module" @endif>
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
