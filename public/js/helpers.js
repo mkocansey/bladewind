@@ -64,8 +64,6 @@ var validateForm = (form) => {
     try {
         domEls(`${form} .required`).forEach((el) => {
             changeCss(el, '!border-red-500', 'remove', true);
-            console.log('value:', el.value);
-            console.log(isEmpty(el.value));
             if (isEmpty(el.value)) {
                 let el_name = el.getAttribute('name');
                 let el_parent = el.getAttribute('data-parent');

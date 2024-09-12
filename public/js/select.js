@@ -91,10 +91,13 @@ class BladewindSelect {
         dom_els(this.selectItems).forEach((el) => {
             let selected = (el.getAttribute('data-selected') !== null);
             if (selected) this.setValue(el);
-            el.addEventListener('click', () => {
-                this.setValue(el);
-                this.callUserFunction(el);
-            });
+            let isSelectable = (el.getAttribute('data-unselectable') === null);
+            if(isSelectable) {
+                el.addEventListener('click', () => {
+                    this.setValue(el);
+                    this.callUserFunction(el);
+                });
+            }
         });
     }
 
@@ -280,7 +283,7 @@ class BladewindSelect {
         if (user_function !== null && user_function !== undefined) {
             callUserFunction(
                 `${user_function}(
-                '${item.getAttribute('data-value')}', 
+                '${item.getAttribute('data-value')}',
                 '${item.getAttribute('data-label')}',
                 '${dom_el(this.formInput).value}')`
             );
