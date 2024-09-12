@@ -4,6 +4,7 @@
 
     // the default text to display when the select shows
     'placeholder' => config('bladewind.select.placeholder', 'Select One'),
+    'empty_placeholder' => config('bladewind.select.empty_placeholder', 'No options to select from'),
     'label' => config('bladewind.select.label', null),
 
     /**
@@ -133,7 +134,7 @@
     $filter = preg_replace('/[\s-]/', '_', $filter);
     $selected_value = ($selected_value != '') ? explode(',', str_replace(', ', ',', $selected_value)) : [];
 
-    if ($data !== 'manual') {
+    if ($data !== 'manual' && count($data)) {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
 
         if(! isset($data[0][$label_key]) ) {
@@ -208,7 +209,7 @@
         </div>
         <div class="divide-y divide-slate-100 dark:divide-slate-600/70 bw-select-items mt-0">
             @if($data !== 'manual')
-                @foreach ($data as $item)
+                @forelse ($data as $item)
                     <x-bladewind::select-item
                             label="{{ $item[$label_key] }}"
                             value="{{ $item[$value_key] }}"
@@ -216,8 +217,13 @@
                             onselect="{{ $onselect }}"
                             flag="{{ $item[$flag_key] ?? '' }}"
                             image="{{ $item[$image_key] ?? '' }}"
-                            selected="{{ (in_array($item[$value_key], $selected_value)) ? 'true' : 'false' }}"/>
-                @endforeach
+                            selected="{{ (in_array($item[$value_key], $selected_value)) ? 'true' : 'false' }}" />
+                @empty
+                    <x-bladewind::select-item
+                            :selectable="false"
+                            :label="$empty_placeholder"
+                    />
+                @endforelse
             @else
                 {!! $slot !!}
             @endif
