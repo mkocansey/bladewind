@@ -319,6 +319,7 @@ return [
     */
     'select' => [
         'placeholder' => 'Select One',
+        'empty_placeholder' => 'No options available',
         'label' => null,
         'add_clearing' => true,
         'max_error_message' => 'Please select only %s items',
