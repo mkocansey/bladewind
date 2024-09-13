@@ -31,6 +31,7 @@ class BladewindSelect {
         this.maxSelection = -1;
         this.canClear = (!this.required && !this.isMultiple);
         this.enabled = true;
+        this.selectedItem = null;
     }
 
     activate = (options = {}) => {
@@ -42,11 +43,47 @@ class BladewindSelect {
             this.search();
             this.manualModePreSelection();
             this.selectItem();
+            this.enableKeyboardNavigation();
         } else {
             this.selectItem();
             this.enabled = false;
         }
     }
+
+    enableKeyboardNavigation = () => {
+        dom_el(this.rootElement).addEventListener('keydown', (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                unhide(this.itemsContainer);
+                dom_el(this.searchInput).focus()
+            }
+            if (e.key === "Tab") {
+                hide(this.itemsContainer);
+            }
+
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                let els = [...dom_els(this.selectItems)].filter((el) => {
+                    if (el.classList.contains('hidden')) {
+                        return false;
+                    }
+
+                    return el.getAttribute('data-unselectable') === null;
+                });
+
+                if (!this.selectedItem) {
+                    this.selectedItem = e.key === 'ArrowDown' ? els[0] : els[els.length - 1];
+                } else {
+                    let idx = els.indexOf(this.selectedItem);
+
+                    this.selectedItem = e.key === 'ArrowDown' ? els[idx + 1] : els[idx - 1];
+                }
+                this.setValue(this.selectedItem);
+                this.callUserFunction(this.selectedItem);
+            }
+        });
+    }
+
 
     clearable = () => {
         this.canClear = true;

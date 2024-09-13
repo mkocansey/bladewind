@@ -164,6 +164,7 @@
     }
 </style>
 <div class="relative bw-select bw-select-{{$input_name}} @if($add_clearing) mb-3 @endif"
+     role="combobox"
      data-multiple="{{$multiple}}" data-required="{{$required?'true':'false'}}"
      data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
