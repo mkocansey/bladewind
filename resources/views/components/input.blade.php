@@ -153,7 +153,8 @@
         $suffix_is_icon = true;
         $suffix_icon_css = 'hidden cursor-pointer dark:!bg-dark-900/60 dark:hover:!bg-dark-900 !p-0.5 !rounded-full bg-gray-400 !stroke-2 hover:bg-gray-600 text-white';
     }
-    if($attributes->has('readonly', 'disabled')){
+
+    if($attributes->has('readonly') || $attributes->has('disabled')) {
         if($attributes->get('readonly') == 'false') $attributes = $attributes->except('readonly');
         if($attributes->get('disabled') == 'false') $attributes = $attributes->except('disabled');
     }
