@@ -134,25 +134,14 @@
     $filter = preg_replace('/[\s-]/', '_', $filter);
     $selected_value = ($selected_value != '') ? explode(',', str_replace(', ', ',', $selected_value)) : [];
 
-    if ($data !== 'manual' && count($data)) {
+    if ($data !== 'manual') {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
-
-        if(! isset($data[0][$label_key]) ) {
-            die('<p style="color:red">
-                &lt;x-bladewind.select /&gt;: ensure the value you set as label_key
-                exists in your array data</p>');
-        }
-
-        if( !empty($flag_key) && !isset($data[0][$flag_key]) ) {
-            die('<p style="color:red">
-                &lt;x-bladewind.select /&gt;: ensure the value you set as flag_key exists in your array</p>');
-        }
     }
 
     $size = (!in_array($size, ['small','medium', 'regular', 'big'])) ? 'medium' : $size;
     $sizes = [ 'small' => 'py-[6px]', 'medium' => 'py-[10px]', 'regular' => 'py-[6.5px]', 'big' => 'py-[18.5px]' ];
 @endphp
-<style>
+<style xmlns:x-bladewind="http://www.w3.org/1999/html">
     .display-area::-webkit-scrollbar {
         display: none;
         width: 0 !important;
@@ -218,7 +207,7 @@
                             onselect="{{ $onselect }}"
                             flag="{{ $item[$flag_key] ?? '' }}"
                             image="{{ $item[$image_key] ?? '' }}"
-                            selected="{{ (in_array($item[$value_key], $selected_value)) ? 'true' : 'false' }}" />
+                            selected="{{ (in_array($item[$value_key], $selected_value)) ? 'true' : 'false' }}"/>
                 @empty
                     <x-bladewind::select-item
                             :selectable="false"
