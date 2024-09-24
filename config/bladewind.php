@@ -319,6 +319,7 @@ return [
     */
     'select' => [
         'placeholder' => 'Select One',
+        'search_placeholder' => 'Type here...',
         'empty_placeholder' => 'No options available',
         'label' => null,
         'add_clearing' => true,

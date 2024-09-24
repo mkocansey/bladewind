@@ -9,6 +9,7 @@
     'showImage' => config('bladewind.empty_state.show_image', true),
     'onclick' => '',
     'class' => '',
+    'image_css' => '',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -17,9 +18,9 @@
     if ($buttonLabel !== $button_label) $button_label = $buttonLabel;
     if (! $showImage) $show_image = $showImage;
 @endphp
-<div class="text-center px-4 pb-10 bw-empty-state {{$class}}">
+<div class="text-center px-4 pb-6 bw-empty-state {{$class}}">
     @if($show_image == 'true')
-        <img src="{{ $image }}" class="h-52 mx-auto mb-6"/>
+        <img src="{{ $image }}" class="h-40 mx-auto mb-3 {{$image_css}}"/>
     @endif
     @if($heading != '')
         <div class="text-slate-700 dark:text-dark-400 text-2xl pt-4 pb-3 px-4 font-light">{!!$heading!!}</div>
@@ -30,7 +31,7 @@
     <div class="pt-2 dark:text-dark-400">{!! $slot !!}</div>
     @if($button_label != '')
         <x-bladewind::button
-                onclick="{!!$onclick!!}" class="block mx-auto my-4"
+                onclick="{!!$onclick!!}" class="block mx-auto my-2"
                 size="small">{{$button_label}}</x-bladewind::button>
     @endif
 </div>

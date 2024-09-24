@@ -4,7 +4,8 @@
 
     // the default text to display when the select shows
     'placeholder' => config('bladewind.select.placeholder', 'Select One'),
-    'empty_placeholder' => config('bladewind.select.empty_placeholder', 'No options to select from'),
+    'search_placeholder' => config('bladewind.select.search_placeholder', 'Type here...'),
+    'empty_placeholder' => config('bladewind.select.empty_placeholder', 'No options available'),
     'label' => config('bladewind.select.label', null),
 
     /**
@@ -108,6 +109,13 @@
 
     'size' => config('bladewind.select.size', 'medium'),
 
+    'empty_state' => 'false',
+    'empty_state_message' => config('bladewind.select.empty_placeholder', 'No options available'),
+    'empty_state_button_label' => 'Add',
+    'empty_state_onclick' => '',
+    'empty_state_show_image' => 'true',
+    'empty_state_image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
+
 ])
 @php
     $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
@@ -116,6 +124,7 @@
     $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
     $readonly = filter_var($readonly, FILTER_VALIDATE_BOOLEAN);
     $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
+    $empty_state = filter_var($empty_state, FILTER_VALIDATE_BOOLEAN);
     $max_selectable = (int) $max_selectable;
     $maxSelectable = (int) $maxSelectable;
 
@@ -136,6 +145,10 @@
 
     if ($data !== 'manual') {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
+        // if $data is empty there is no point to show the search bar even if user asked for it
+        if($searchable && empty($data)) {
+            $searchable = false;
+        }
     }
 
     $size = (!in_array($size, ['small','medium', 'regular', 'big'])) ? 'medium' : $size;
@@ -193,7 +206,7 @@
             <x-bladewind::input
                     class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_search"
                     add_clearing="false"
-                    placeholder="Type here..."
+                    :placeholder="$search_placeholder"
                     suffix="magnifying-glass"
                     suffixIsIcon="true"/>
         </div>
@@ -209,10 +222,21 @@
                             image="{{ $item[$image_key] ?? '' }}"
                             selected="{{ (in_array($item[$value_key], $selected_value)) ? 'true' : 'false' }}"/>
                 @empty
-                    <x-bladewind::select-item
-                            :selectable="false"
-                            :label="$empty_placeholder"
-                    />
+                    @if($empty_state)
+                        <x-bladewind::select-item
+                                :selectable="false"
+                                :empty_state="true"
+                                :empty_state_message="$empty_state_message"
+                                :empty_state_show_image="$empty_state_show_image"
+                                :empty_state_button_label="$empty_state_button_label"
+                                empty_state_onclick="{!! $empty_state_onclick !!}"
+                                :empty_state_image="$empty_state_image"/>
+                    @else
+                        <x-bladewind::select-item
+                                :selectable="false"
+                                :label="$empty_placeholder"
+                        />
+                    @endif
                 @endforelse
             @else
                 {!! $slot !!}
