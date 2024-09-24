@@ -195,7 +195,7 @@
                     add_clearing="false"
                     placeholder="Type here..."
                     suffix="magnifying-glass"
-                    suffix_is_icon="true"/>
+                    suffixIsIcon="true"/>
         </div>
         <div class="divide-y divide-slate-100 dark:divide-slate-600/70 bw-select-items mt-0">
             @if($data !== 'manual')

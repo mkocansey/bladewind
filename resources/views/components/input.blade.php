@@ -122,8 +122,8 @@
     if ($isDatepicker) $is_datepicker = $isDatepicker;
     if (!$transparentPrefix) $transparent_prefix = $transparentPrefix;
     if (!$transparentSuffix) $transparent_suffix = $transparentSuffix;
-    if (!$prefixIsIcon) $prefix_is_icon = $prefixIsIcon;
-    if (!$suffixIsIcon) $suffix_is_icon = $suffixIsIcon;
+    if ($prefixIsIcon) $prefix_is_icon = $prefixIsIcon;
+    if ($suffixIsIcon) $suffix_is_icon = $suffixIsIcon;
 
     if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
     if ($errorMessage !== $error_message) $error_message = $errorMessage;
