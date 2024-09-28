@@ -423,7 +423,7 @@ var goToTab = (element, colour, context) => {
     changeCssForDomArray(`.${context}-headings li.atab span`, 'is-inactive');
     changeCss(`.atab-${element} span`, 'is-inactive', 'remove');
     changeCss(`.atab-${element} span`, `is-active, ${colour}`);
-    domEls(`.${context_}-tab-contents div.atab-content`).forEach((element) => {
+    domEls(`.${context_}-tab-contents > div.atab-content`).forEach((element) => {
         hide(element, true);
     });
     unhide(tab_content, true);
