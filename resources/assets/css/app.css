@@ -5,6 +5,7 @@
 @import './dropdown.css';
 @import './progress.css';
 @import './popup.min.css';
+@import './slider.css';
 @import './side-nav.css';
 
 @import "tailwindcss/base";
