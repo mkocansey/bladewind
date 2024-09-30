@@ -25,11 +25,15 @@
     'cssOverride' => '',
     'percentage_label_opacity' => config('bladewind.progress_bar.percentage_label_opacity', 100),
     'percentageLabelOpacity' => config('bladewind.progress_bar.percentage_label_opacity', 100),
+    'striped' => false,
+    'animated' => false,
 ])
 
 @php
     // reset variables for Laravel 8 support
     $show_percentage_label = filter_var($show_percentage_label, FILTER_VALIDATE_BOOLEAN);
+    $striped = filter_var($striped, FILTER_VALIDATE_BOOLEAN);
+    $animated = filter_var($animated, FILTER_VALIDATE_BOOLEAN);
     $showPercentageLabel = filter_var($showPercentageLabel, FILTER_VALIDATE_BOOLEAN);
     $show_percentage_label_inline = filter_var($show_percentage_label_inline, FILTER_VALIDATE_BOOLEAN);
     $showPercentageLabelInline = filter_var($showPercentageLabelInline, FILTER_VALIDATE_BOOLEAN);
@@ -61,11 +65,14 @@
     @endif
     <div class="@if(!$transparent) bg-slate-200/70 dark:bg-dark-800/70 w-full @endif mt-1 my-2 rounded-full">
         <div style="width: {{$percentage}}%"
-             class="text-center py-1 {{$bar_color}} {{$css_override}} rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
+             class="text-center py-1 {{$bar_color}} {{$css_override}} relative overflow-hidden h-full rounded-full bar-width animate__animated animate__fadeIn {{$bar_class}}">
             @if($show_percentage_label && $show_percentage_label_inline)
                 <span class="text-{{$color}}-{{$text_color_weight[$shade]}} dark:text-dark-600 px-2 text-xs">
             {{$percentage_prefix}} <span class="opacity-{{$percentage_label_opacity}}">{{ $percentage}}%</span> {{$percentage_suffix}}
             </span>
+            @endif
+            @if($striped)
+                <div class="striped @if($animated) animated @endif absolute inset-0"></div>
             @endif
         </div>
     </div>

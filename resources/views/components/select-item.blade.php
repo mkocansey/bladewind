@@ -6,12 +6,21 @@
     'image' => '',
     'filter_by' => '',
     'selectable' => 'true',
+    'empty_state' => 'false',
+    'empty_state_message' => config('bladewind.select.empty_placeholder', 'No options available'),
+    'empty_state_button_label' => 'Add',
+    'empty_state_onclick' => '',
+    'empty_state_image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
+    'empty_state_show_image' => 'true',
 ])
-@aware([ 'onselect' => '', ])
+@aware([
+    'onselect' => '',
+])
 
 @php
     $selected = filter_var($selected, FILTER_VALIDATE_BOOLEAN);
     $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
+    $empty_state = filter_var($empty_state, FILTER_VALIDATE_BOOLEAN);
     $label = html_entity_decode($label);
 @endphp
 <div
@@ -21,12 +30,26 @@
         @if(!empty($filter_by)) data-filter-value="{{$filter_by}}" @endif
         @if($selected) data-selected="true" @endif
         @if($onselect !== '') data-user-function="{{ $onselect }}"@endif>
-    @if ($flag !== '' && $image == '')
-        <i class="{{ $flag }} flag"></i>
+    @if($empty_state)
+        <div class="text-center flex-grow">
+            <x-bladewind::empty-state
+                    class="!px-0 !pb-0"
+                    image_css="!h-24"
+                    :message="$empty_state_message"
+                    :button_label="$empty_state_button_label"
+                    :image="$empty_state_image"
+                    :show_image="$empty_state_show_image"
+                    onclick="{!! $empty_state_onclick !!}">
+            </x-bladewind::empty-state>
+        </div>
+    @else
+        @if ($flag !== '' && $image == '')
+            <i class="{{ $flag }} flag"></i>
+        @endif
+        @if ($image !== '')
+            <x-bladewind::avatar size="small" class="!mt-0 !mr-4" image="{{ $image }}"/>
+        @endif
+        <span class="grow text-left">{!! $label !!}</span>
+        <x-bladewind::icon name="check-circle" class="text-slate-400 size-5 hidden svg-{{$value }}"/>
     @endif
-    @if ($image !== '')
-        <x-bladewind::avatar size="small" class="!mt-0 !mr-4" image="{{ $image }}"/>
-    @endif
-    <span class="grow text-left">{!! $label !!}</span>
-    <x-bladewind::icon name="check-circle" class="text-slate-400 size-5 hidden svg-{{$value }}"/>
 </div>

@@ -1,0 +1,126 @@
+@layer components {
+
+    .bw-slider {
+        @apply appearance-none w-full h-2 bg-gray-200 outline-0 opacity-90 rounded-full transition-opacity absolute;
+    }
+
+    .bw-slider::-webkit-slider-thumb {
+        @apply rounded-full cursor-pointer appearance-none size-6
+    }
+
+    .bw-slider::-moz-range-thumb {
+        @apply rounded-full cursor-pointer appearance-none size-6
+    }
+
+    .bw-slider.primary::-webkit-slider-thumb {
+        @apply bg-primary-500
+    }
+
+    .bw-slider.primary::-moz-range-thumb {
+        @apply bg-primary-500
+    }
+
+    .bw-slider.pink::-webkit-slider-thumb {
+        @apply bg-pink-500
+    }
+
+    .bw-slider.pink::-moz-range-thumb {
+        @apply bg-pink-500
+    }
+
+    .bw-slider.blue::-webkit-slider-thumb {
+        @apply bg-blue-500
+    }
+
+    .bw-slider.blue::-moz-range-thumb {
+        @apply bg-blue-500
+    }
+
+    .bw-slider.red::-webkit-slider-thumb {
+        @apply bg-red-500
+    }
+
+    .bw-slider.red::-moz-range-thumb {
+        @apply bg-red-500
+    }
+
+    .bw-slider.yellow::-webkit-slider-thumb {
+        @apply bg-amber-500
+    }
+
+    .bw-slider.yellow::-moz-range-thumb {
+        @apply bg-amber-500
+    }
+
+    .bw-slider.black::-webkit-slider-thumb {
+        @apply bg-slate-500
+    }
+
+    .bw-slider.black::-moz-range-thumb {
+        @apply bg-slate-500
+    }
+
+    .bw-slider.gray::-webkit-slider-thumb {
+        @apply bg-slate-500
+    }
+
+    .bw-slider.gray::-moz-range-thumb {
+        @apply bg-slate-500
+    }
+
+    .bw-slider.purple::-webkit-slider-thumb {
+        @apply bg-purple-500
+    }
+
+    .bw-slider.purple::-moz-range-thumb {
+        @apply bg-purple-500
+    }
+
+    .bw-slider.cyan::-webkit-slider-thumb {
+        @apply bg-cyan-500
+    }
+
+    .bw-slider.cyan::-moz-range-thumb {
+        @apply bg-cyan-500
+    }
+
+    .bw-slider.orange::-webkit-slider-thumb {
+        @apply bg-orange-500
+    }
+
+    .bw-slider.orange::-moz-range-thumb {
+        @apply bg-orange-500
+    }
+
+    .bw-slider.violet::-webkit-slider-thumb {
+        @apply bg-violet-500
+    }
+
+    .bw-slider.violet::-moz-range-thumb {
+        @apply bg-violet-500
+    }
+
+    .bw-slider.indigo::-webkit-slider-thumb {
+        @apply bg-indigo-500
+    }
+
+    .bw-slider.indigo::-moz-range-thumb {
+        @apply bg-indigo-500
+    }
+
+    .bw-slider.fuchsia::-webkit-slider-thumb {
+        @apply bg-fuchsia-500
+    }
+
+    .bw-slider.fuchsia::-moz-range-thumb {
+        @apply bg-fuchsia-500
+    }
+
+    .bw-slider.green::-webkit-slider-thumb {
+        @apply bg-green-500
+    }
+
+    .bw-slider.green::-moz-range-thumb {
+        @apply bg-green-500
+    }
+}

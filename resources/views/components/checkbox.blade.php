@@ -20,9 +20,9 @@
     if(! in_array($color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
         $color = 'primary';
     }
-    $text_colour = ($color == 'black') ? 'text-black' : "text-{$color}-500 dark:bg-dark-800";
-    $ring_colour = ($color == 'black') ? 'ring-black' : "ring-{$color}-500";
-    $border_colour = ($color == 'black') ? 'border-slate-500/50' : "border-{$color}-500/50";
+    $text_colour = ($color == 'black') ? 'text-black' : "text-$color-600 dark:bg-dark-800";
+    $ring_colour = ($color == 'black') ? 'ring-black' : "ring-$color-500";
+    $border_colour = ($color == 'black') ? 'border-slate-500/50' : "border-$color-500/50";
     $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
     $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
     if (!$addClearing) $add_clearing = $addClearing;
