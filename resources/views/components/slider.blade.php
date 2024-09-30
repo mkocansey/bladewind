@@ -1,4 +1,3 @@
-`@php use Illuminate\Support\Str; @endphp
 @props([
     'name' => 'bw_'.uniqid(),
     'min' => 0,
@@ -25,7 +24,6 @@
 
     $color = (!in_array($color, ['primary', 'red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'black', 'purple', 'orange', 'violet', 'fuchsia', 'indigo'])) ? 'primary' : $color;
 @endphp
-
 <div class="bw-slider-container w-full relative {{$class}}">
     <input type="range"
            min="{{$min}}"
@@ -42,7 +40,7 @@
                class="bw-slider max-slider-{{$name}} {{$color}}"/>
     @endif
 
-    <div class="text-center pt-2 text-sm font-semibold @if(!$show_values) hidden @endif">
+    <div class="text-center pt-5 text-sm font-semibold @if(!$show_values) hidden @endif">
         <span class="slider-selection-{{$name}}">{{$selected}}
             @if($range)
                 - {{$max_selected}}
