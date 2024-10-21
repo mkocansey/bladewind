@@ -349,17 +349,19 @@ var animateCSS = (element, animation) =>
     new Promise((resolve, reject) => {
         const animationName = `animate__${animation}`;
         const node = document.querySelector(element);
-        node.classList.remove('hidden');
-        node.classList.add('animate__animated', animationName);
-        document.documentElement.style.setProperty('--animate-duration', '.5s');
+        if (node) {
+            node.classList.remove('hidden');
+            node.classList.add('animate__animated', animationName);
+            document.documentElement.style.setProperty('--animate-duration', '.5s');
 
-        function handleAnimationEnd(event) {
-            node.classList.remove('animate__animated', animationName);
-            event.stopPropagation();
-            resolve('Animation ended');
+            function handleAnimationEnd(event) {
+                node.classList.remove('animate__animated', animationName);
+                event.stopPropagation();
+                resolve('Animation ended');
+            }
+
+            node.addEventListener('animationend', handleAnimationEnd, {once: true});
         }
-
-        node.addEventListener('animationend', handleAnimationEnd, {once: true});
     });
 
 /**
