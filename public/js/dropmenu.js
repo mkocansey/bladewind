@@ -14,23 +14,23 @@ class BladewindDropmenu {
         // do this is only there are items
         if (this.hasItems()) {
             changeCss(this.items, 'opacity-0,hidden', 'remove');
-            dom_el(this.items).setAttribute('data-open', '1');
-            if (this.options.hideAfterClick && dom_els(`${this.items} .bw-item`)) {
-                dom_els(`${this.items} .bw-item`).forEach((item) => {
+            domEl(this.items).setAttribute('data-open', '1');
+            if (this.options.hideAfterClick && domEls(`${this.items} .bw-item`)) {
+                domEls(`${this.items} .bw-item`).forEach((item) => {
                     item.addEventListener('click', () => {
                         this.hide();
                     });
                 });
             }
             document.addEventListener('mouseup', (e) => {
-                let container = dom_el(`.${this.name}`);
+                let container = domEl(`.${this.name}`);
                 if (container && !container.contains(e.target)) this.hide();
             });
         }
     }
 
     hide = () => {
-        dom_el(this.items).setAttribute('data-open', '0');
+        domEl(this.items).setAttribute('data-open', '0');
         changeCss(this.items, 'animate__fadeIn', 'remove');
         changeCss(this.items, 'animate__fadeOut');
         setTimeout(() => {
@@ -45,17 +45,17 @@ class BladewindDropmenu {
     }
 
     toggle = () => {
-        (dom_el(this.items).getAttribute('data-open') === '0') ? this.show() : this.hide();
+        (domEl(this.items).getAttribute('data-open') === '0') ? this.show() : this.hide();
     }
 
     activate = () => {
-        dom_el(`.${this.name} .bw-trigger`).addEventListener(this.options.triggerOn, () => {
+        domEl(`.${this.name} .bw-trigger`).addEventListener(this.options.triggerOn, () => {
             this.toggle();
         });
     }
 
     hasItems = () => {
-        return dom_els(`${this.items} .bw-item`);
+        return domEls(`${this.items} .bw-item`);
     }
 
 

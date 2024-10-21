@@ -210,17 +210,17 @@
 <span class="overflow-hidden"></span>
 
 <script>
-    dom_el('.bw-{{$name}}-modal').addEventListener('click', function (e) {
+    domEl('.bw-{{$name}}-modal').addEventListener('click', function (e) {
         let backdrop_can_close = this.getAttribute('data-backdrop-can-close');
         if (backdrop_can_close) hideModal('{{$name}}');
     });
 
-    dom_el('.bw-{{$name}}').addEventListener('click', function (e) {
+    domEl('.bw-{{$name}}').addEventListener('click', function (e) {
         e.stopImmediatePropagation();
     });
 
-    if (dom_els('.bw-{{$name}}-modal .modal-footer>button')) {
-        dom_els('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
+    if (domEls('.bw-{{$name}}-modal .modal-footer>button')) {
+        domEls('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
             el.addEventListener('click', function (e) {
                 e.stopImmediatePropagation();
             });
@@ -231,7 +231,7 @@
         if (e.key === "Escape") {
             if (current_modal !== undefined && current_modal.length > 0) {
                 let modal_name = current_modal[(current_modal.length - 1)];
-                if (dom_el(`.bw-${modal_name}-modal`).getAttribute('data-backdrop-can-close') === '1') {
+                if (domEl(`.bw-${modal_name}-modal`).getAttribute('data-backdrop-can-close') === '1') {
                     hideModal(modal_name);
                     e.stopImmediatePropagation();
                 }

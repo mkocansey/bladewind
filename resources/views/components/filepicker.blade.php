@@ -68,38 +68,38 @@
 </div>
 
 <script>
-    dom_el('.bw-fp-{{ $name }}').addEventListener('drop', function (evt) {
+    domEl('.bw-fp-{{ $name }}').addEventListener('drop', function (evt) {
         changeCss('.bw-fp-{{ $name }}', 'border-gray-500', 'remove');
         changeCss('.bw-fp-{{ $name }}', 'border-gray-300');
         evt.preventDefault();
-        dom_el('.bw-{{ $name }}').click();
+        domEl('.bw-{{ $name }}').click();
     });
 
-    dom_el('.bw-fp-{{ $name }}').addEventListener('click', function () {
-        dom_el('.bw-{{ $name }}').click();
+    domEl('.bw-fp-{{ $name }}').addEventListener('click', function () {
+        domEl('.bw-{{ $name }}').click();
     });
 
-    dom_el('.bw-{{ $name }}').addEventListener('change', function () {
+    domEl('.bw-{{ $name }}').addEventListener('change', function () {
         let selection = this.value;
         if (selection !== '') {
             const [file] = this.files
 
             if (file) {
                 if (allowedFileSize(file.size, {{$max_file_size}})) {
-                    dom_el('.bw-fp-{{ $name }} .selection').innerHTML =
+                    domEl('.bw-fp-{{ $name }} .selection').innerHTML =
                         (file.type.indexOf('image') !== -1) ? '<img src="' + URL.createObjectURL(file) + '" class="rounded-md" />' : file.name;
                     convertToBase64(file, '.b64-{{ $name }}');
                 } else {
-                    dom_el('.bw-fp-{{ $name }} .selection').innerHTML = '<span class="text-red-500">File must be {{$max_file_size}}mb or below</span>';
+                    domEl('.bw-fp-{{ $name }} .selection').innerHTML = '<span class="text-red-500">File must be {{$max_file_size}}mb or below</span>';
                 }
             }
             changeCss('.bw-fp-{{ $name }} .clear', 'hidden', 'remove');
         }
     });
 
-    dom_el('.bw-fp-{{ $name }} .clear').addEventListener('click', function (e) {
-        dom_el('.bw-fp-{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
-        dom_el('.bw-{{ $name }}').value = dom_el('.b64-{{ $name }}').value = '';
+    domEl('.bw-fp-{{ $name }} .clear').addEventListener('click', function (e) {
+        domEl('.bw-fp-{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
+        domEl('.bw-{{ $name }}').value = domEl('.b64-{{ $name }}').value = '';
         changeCss('.bw-fp-{{ $name }} .clear', 'hidden');
         e.stopImmediatePropagation();
     });
@@ -110,7 +110,7 @@
     @else
         file = '{{ ($selected_value != '') ? $selected_value : $url }}';
     @endif
-    dom_el('.bw-fp-{{ $name }} .selection').innerHTML = file;
+    domEl('.bw-fp-{{ $name }} .selection').innerHTML = file;
     changeCss('.bw-fp-{{ $name }} .clear', 'hidden', 'remove');
     @endif
 

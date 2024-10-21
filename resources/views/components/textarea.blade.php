@@ -67,7 +67,7 @@
     @endif
     @if($label !== '')
         <label for="{{ $name }}" class="form-label dark:peer-focus:pt-1"
-               onclick="dom_el('.{{$name}}').focus()">{{ $label }}
+               onclick="domEl('.{{$name}}').focus()">{{ $label }}
             @if($required == 'true')
                 <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
             @endif
@@ -118,7 +118,7 @@
             quillOptions.modules.toolbar = modifyToolbarOptions(toolbarOptions, '{{$except}}');
             var quill_{{$name}} = new Quill('#{{$name}}', quillOptions);
             // Update the hidden input field whenever the textarea content changes
-            quill_{{ $name }}.on('text-change', function(delta, oldDelta, source) {
+            quill_{{ $name }}.on('text-change', function (delta, oldDelta, source) {
                 var value = quill_{{ $name }}.root.innerHTML;
                 document.getElementById('{{ $name }}-hidden').value = value;
             });
