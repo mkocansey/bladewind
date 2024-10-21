@@ -53,11 +53,15 @@ class BladewindSelect {
     enableKeyboardNavigation = () => {
         dom_el(this.rootElement).addEventListener('keydown', (e) => {
             if (e.key === "Enter") {
-                e.preventDefault();
-                unhide(this.itemsContainer);
-                dom_el(this.searchInput).focus()
+                if (!this.selectedItem) {
+                    e.preventDefault();
+                    unhide(this.itemsContainer);
+                    dom_el(this.searchInput).focus();
+                } else {
+                    hide(this.itemsContainer);
+                }
             }
-            if (e.key === "Tab") {
+            if (e.key === "Tab" || e.key === "Escape") {
                 hide(this.itemsContainer);
             }
 
@@ -78,6 +82,8 @@ class BladewindSelect {
 
                     this.selectedItem = e.key === 'ArrowDown' ? els[idx + 1] : els[idx - 1];
                 }
+                changeCssForDomArray(`${this.rootElement} .bw-select-item`, 'bg-slate-100/90', 'remove');
+                changeCss(this.selectedItem, 'bg-slate-100/90', 'add', true);
                 this.setValue(this.selectedItem);
                 this.callUserFunction(this.selectedItem);
             }
@@ -129,7 +135,7 @@ class BladewindSelect {
             let selected = (el.getAttribute('data-selected') !== null);
             if (selected) this.setValue(el);
             let isSelectable = (el.getAttribute('data-unselectable') === null);
-            if(isSelectable) {
+            if (isSelectable) {
                 el.addEventListener('click', () => {
                     this.setValue(el);
                     this.callUserFunction(el);
@@ -152,8 +158,8 @@ class BladewindSelect {
     }
 
     setValue = (item) => {
-        this.selectedValue = item.getAttribute('data-value');
-        let selectedLabel = item.getAttribute('data-label');
+        this.selectedValue = item ? item.getAttribute('data-value') : null;
+        let selectedLabel = item ? item.getAttribute('data-label') : null;
         let svg = dom_el(`${this.rootElement} div[data-value="${this.selectedValue}"] svg`);
         let input = dom_el(this.formInput);
 
@@ -200,7 +206,7 @@ class BladewindSelect {
     }
 
     unsetValue = (item) => {
-        this.selectedValue = item.getAttribute('data-value');
+        this.selectedValue = item ? item.getAttribute('data-value') : null;
         // let selectedValue = item.getAttribute('data-value');
         let svg = dom_el(`${this.rootElement} div[data-value="${this.selectedValue}"] svg`);
         let input = dom_el(this.formInput);
@@ -316,7 +322,7 @@ class BladewindSelect {
     }
 
     callUserFunction = (item) => {
-        let user_function = item.getAttribute('data-user-function');
+        let user_function = item ? item.getAttribute('data-user-function') : null;
         if (user_function !== null && user_function !== undefined) {
             callUserFunction(
                 `${user_function}(
