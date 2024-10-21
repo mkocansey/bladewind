@@ -180,7 +180,7 @@
         <div class="text-red-500 text-xs p-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>
     @endif
     @if(!empty($label))
-        <label for="{{ $name }}" class="form-label {{$size}}" onclick="dom_el('.{{$name}}').focus()">{!! $label !!}
+        <label for="{{ $name }}" class="form-label {{$size}}" onclick="domEl('.{{$name}}').focus()">{!! $label !!}
             @if($required)
                 <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
             @endif
@@ -225,19 +225,19 @@
 <input type="hidden" class="bw-raw-select"/>
 <script>
     @if($numeric)
-    dom_el('input.{{$name}}').addEventListener('keydown', (event) => {
+    domEl('input.{{$name}}').addEventListener('keydown', (event) => {
         isNumberKey(event, {{$with_dots}});
     });
-    dom_el('input.{{$name}}').setAttribute('inputmode', 'numeric');
+    domEl('input.{{$name}}').setAttribute('inputmode', 'numeric');
     @if($min || $max)
-    dom_el('input.{{$name}}').addEventListener('keyup', (event) => {
+    domEl('input.{{$name}}').addEventListener('keyup', (event) => {
         checkMinMax('{{$min}}', '{{$max}}', '{{$name}}');
     });
     @endif
     @endif
 
     @if($clearable)
-    dom_el('input.{{$name}}').addEventListener('keyup', (event) => {
+    domEl('input.{{$name}}').addEventListener('keyup', (event) => {
         makeClearable('{{$name}}');
     });
     @endif
