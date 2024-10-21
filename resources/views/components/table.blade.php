@@ -263,7 +263,7 @@
         </script>
     @endonce
     <script>
-        dom_els('.bw-table.{{$name}}.selectable tr').forEach((el) => {
+        domEls('.bw-table.{{$name}}.selectable tr').forEach((el) => {
             el.addEventListener('click', (e) => {
                 el.classList.toggle('selected');
                 let id = el.getAttribute('data-id');
@@ -305,7 +305,7 @@
             }
 
             const toggleAll = (srcEl, table) => {
-                dom_els(`${table}.selectable tr`).forEach((el) => {
+                domEls(`${table}.selectable tr`).forEach((el) => {
                     const checkbox = el.querySelector('td:first-child input[type="checkbox"]');
                     if (checkbox) {
                         // to properly take advantage of the logic for adding and removing IDs
@@ -317,7 +317,7 @@
 
             const checkSelected = (table, selectedValue) => {
                 let selectedValues = selectedValue.split(',');
-                dom_els(`${table}.selectable tr`).forEach((el) => {
+                domEls(`${table}.selectable tr`).forEach((el) => {
                     const thisValue = el.getAttribute('data-id');
                     if (selectedValues.includes(thisValue)) {
                         el.click();
