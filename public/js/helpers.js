@@ -306,7 +306,7 @@ var hideModalActionButtons = (element) => {
 
 /**
  * Hide an element.
- * @param {Element} element - The css class (name) of the element to hide.
+ * @param {string} element - The css class (name) of the element to hide.
  * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#hide}
@@ -319,7 +319,7 @@ var hide = (element, elementIsDomObject = false) => {
 
 /**
  * Display an element.
- * @param {Element} element - The css class (name) of the element to hide.
+ * @param {string} element - The css class (name) of the element to hide.
  * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#unhide}
@@ -349,17 +349,19 @@ var animateCSS = (element, animation) =>
     new Promise((resolve, reject) => {
         const animationName = `animate__${animation}`;
         const node = document.querySelector(element);
-        node.classList.remove('hidden');
-        node.classList.add('animate__animated', animationName);
-        document.documentElement.style.setProperty('--animate-duration', '.5s');
+        if (node) {
+            node.classList.remove('hidden');
+            node.classList.add('animate__animated', animationName);
+            document.documentElement.style.setProperty('--animate-duration', '.5s');
 
-        function handleAnimationEnd(event) {
-            node.classList.remove('animate__animated', animationName);
-            event.stopPropagation();
-            resolve('Animation ended');
+            function handleAnimationEnd(event) {
+                node.classList.remove('animate__animated', animationName);
+                event.stopPropagation();
+                resolve('Animation ended');
+            }
+
+            node.addEventListener('animationend', handleAnimationEnd, {once: true});
         }
-
-        node.addEventListener('animationend', handleAnimationEnd, {once: true});
     });
 
 /**
@@ -663,11 +665,11 @@ var checkMinMax = (min, max, element) => {
     if (field.value !== '' && ((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
         changeCss(field, '!border-red-400', 'add', true);
         if (error_message) {
-            (show_error_inline) ? unhide(`.${el_name}-inline-error`) :
+            (show_error_inline) ? unhide(`.${element}-inline-error`) :
                 showNotification(error_heading, error_message, 'error');
         }
     } else {
-        if (error_message) hide(`.${el_name}-inline-error`);
+        if (error_message) hide(`.${element}-inline-error`);
         changeCss(field, '!border-red-400', 'remove', true);
     }
 }

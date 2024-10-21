@@ -2,19 +2,25 @@ class BladewindNotification {
     title;
     message;
     type;
-    dismissInMinutes;
     dismissInSeconds;
     name;
     timeoutName;
     colours;
 
-    constructor(title, message, type, dismissInMinutes, size) {
-        this.title = title || '';
-        this.message = message || '';
-        this.type = type || 'success';
-        this.dismissInMinutes = dismissInMinutes || 15;
-        this.dismissInSeconds = this.dismissInMinutes * 1000;
-        this.name = `notification-${Math.floor((Math.random() * 100) + 1)}`;
+    constructor({
+                    title = "",
+                    message = "",
+                    type = "success",
+                    dismissInSeconds = 15,
+                    size = "regular",
+                    name = null
+                }) {
+        this.title = title;
+        this.message = message;
+        this.type = type;
+        this.dismissInSeconds = (dismissInSeconds || 15) * 1000;
+        this.name = name || Math.floor((Math.random() * 10000) + 1);
+        this.name = `notification-${this.name}`;
         this.timeoutName = this.name.replace('notification-', 'timeout_');
         this.colours = {
             "success": {"border": "border-green-500/50", "bg": "bg-green-200/80"},
@@ -22,17 +28,39 @@ class BladewindNotification {
             "warning": {"border": "border-yellow-500/50", "bg": "bg-amber-200/80"},
             "info": {"border": "border-blue-500/50", "bg": "bg-blue-200/80"},
         };
-        this.size = size || 'regular'
+        this.size = size;
         this.sizes = {
-            "small": {"container": "sm:!max-w-[350px]", "modal_icon": "!size-10", "close": "size-6", "heading": "text-base", "message": "text-sm"},
-            "regular": {"container": "sm:!max-w-[450px]", "modal_icon": "!size-14", "close": "size-6", "heading": "text-lg", "message": "text-sm"},
-            "big": {"container": "sm:!max-w-[550px]", "modal_icon": "!size-16", "close": "size-6", "heading": "text-3xl", "message": "text-base"}
-        }
-        this.setContainerSize()
+            "small": {
+                "container": "sm:!max-w-[350px]",
+                "modal_icon": "!size-10",
+                "close": "size-6",
+                "heading": "text-base",
+                "message": "text-sm"
+            },
+            "regular": {
+                "container": "sm:!max-w-[450px]",
+                "modal_icon": "!size-14",
+                "close": "size-6",
+                "heading": "text-lg",
+                "message": "text-sm"
+            },
+            "big": {
+                "container": "sm:!max-w-[550px]",
+                "modal_icon": "!size-16",
+                "close": "size-6",
+                "heading": "text-3xl",
+                "message": "text-base"
+            }
+        };
+        this.setContainerSize();
     }
 
     show = () => {
-        dom_el('.bw-notification-container').insertAdjacentHTML('beforeend', this.template());
+        if (domEl(`.${this.name}`)) {
+            clearTimeout(this.timeoutName);
+            domEl(`.${this.name}`).remove();
+        }
+        domEl('.bw-notification-container').insertAdjacentHTML('beforeend', this.template());
         animateCSS(`.${this.name}`, 'fadeInRight').then(() => {
             this.timeoutName = setTimeout(() => {
                 this.hide();
@@ -43,13 +71,13 @@ class BladewindNotification {
 
     hide = () => {
         animateCSS(`.${this.name}`, 'fadeOutRight').then(() => {
-            dom_el(`.${this.name}`).remove();
+            domEl(`.${this.name}`).remove();
             clearTimeout(this.timeoutName);
         });
     }
 
     closable = () => {
-        dom_el(`.${this.name} .close`).addEventListener('click', () => {
+        domEl(`.${this.name} .close`).addEventListener('click', () => {
             this.hide();
         });
     }
@@ -61,7 +89,7 @@ class BladewindNotification {
     modalIcon = () => {
         changeCss(`.bw-notification-icons .${this.type}`, this.sizes[this.size].modal_icon, 'add');
         changeCss(`.bw-notification-icons .${this.type}`, 'hidden', 'remove');
-        return dom_el(`.bw-notification-icons .${this.type}`).outerHTML.replaceAll('[type]', this.typeColour(this.type));
+        return domEl(`.bw-notification-icons .${this.type}`).outerHTML.replaceAll('[type]', this.typeColour(this.type));
     }
 
     template = () => {
@@ -95,6 +123,21 @@ class BladewindNotification {
 
 }
 
-var showNotification = (title, message, type, dismiss_in, size) => {
-    new BladewindNotification(title, message, type, dismiss_in, size).show();
+// TODO: change parameters to use an object so user can pass only needed parameters (v3.0)
+/*var showNotification = ({
+                            title='',
+                            message='',
+                            type='success',
+                            dismiss_in=15,
+                            size='regular',
+                            name=null}) => {*/
+var showNotification = (title, message, type = 'success', dismiss_in = 15, size = 'regular', name = null) => {
+    new BladewindNotification({
+        title: title,
+        message: message,
+        type: type,
+        dismissInSeconds: dismiss_in,
+        size: size,
+        name: name
+    }).show();
 }
