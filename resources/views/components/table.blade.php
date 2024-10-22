@@ -29,6 +29,9 @@
     'column_aliases' => [],
     'searchable' => config('bladewind.table.searchable', false),
     'search_placeholder' => config('bladewind.table.search_placeholder', 'Search table below...'),
+    'search_field' => null,
+    'search_debounce' => 0,
+    'search_min_length' => 0,
     'celled' => config('bladewind.table.celled', false),
     'uppercasing' => config('bladewind.table.uppercasing', true),
     'no_data_message' => config('bladewind.table.no_data_message', 'No records to display'),
@@ -55,6 +58,9 @@
     $compact = filter_var($compact, FILTER_VALIDATE_BOOLEAN);
     $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
     $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
+    $search_field = filter_var($search_field, FILTER_SANITIZE_STRING);
+    $search_debounce = filter_var($search_debounce, FILTER_VALIDATE_INT);
+    $search_min_length = filter_var($search_min_length, FILTER_VALIDATE_INT);
     $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
     $celled = filter_var($celled, FILTER_VALIDATE_BOOLEAN);
     $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
@@ -87,6 +93,28 @@
             $table_headings = explode(',', str_replace(' ','', $include_columns));
         }
 
+        if (!empty($exclude_columns) || !empty($include_columns)) {
+            // Filter out the $data object keys where they aren't in the table_headings list
+            $filteredData = [];
+            foreach ($data as $row) {
+                $filteredRow = [];
+                foreach ($table_headings as $heading) {
+                    $filteredRow[$heading] = $row[$heading];
+                }
+                $filteredData[] = $filteredRow;
+            }
+            
+            $data = $filteredData;
+            unset($filteredData);
+        }
+
+        // Ensure each row in $data has a unique ID
+        if (!in_array('id',$table_headings)){
+            foreach ($data as &$row){
+                $row['id'] = uniqid();
+            }
+        }
+        
         if(!empty($groupby) && in_array($groupby, $table_headings)) {
             $can_group = true;
             $unique_group_headings = array_unique(array_column($data, $groupby));
@@ -114,6 +142,9 @@
         }
     }
 @endphp
+<script>
+    let tableData = {!! json_encode($data) !!};
+</script>
 <div class="@if($has_border && !$celled) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
     <div class="w-full">
         @if($searchable)
@@ -121,7 +152,7 @@
                 <x-bladewind::input
                         name="bw-search-{{$name}}"
                         placeholder="{{$search_placeholder}}"
-                        onkeyup="filterTable(this.value, 'table.{{$name}}')"
+                        onInput="filterTableDebounced(this.value, 'table.{{$name}}', '{{$search_field}}', {{$search_debounce}}, {{$search_min_length}})();"
                         add_clearing="false"
                         class="!mb-0 focus:!border-slate-300 !pl-9 !py-3"
                         clearable="true"
@@ -176,7 +207,7 @@
                                 <tr data-id="{{ $row['id'] ?? uniqid() }}">
                                     @foreach($table_headings as $th)
                                         @if($th !== $groupby)
-                                            <td>{!! $row[$th] !!}</td>
+                                            <td data-row-id="{{ $row['id'] ?? uniqid() }}" data-column="{{ $th }}" >{!! $row[$th] !!}</td>
                                         @endif
                                     @endforeach
                                     <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
@@ -187,7 +218,7 @@
                         @foreach($data as $row)
                             <tr data-id="{{ $row['id'] ?? uniqid() }}">
                                 @foreach($table_headings as $th)
-                                    <td>{!! $row[$th] !!}</td>
+                                    <td data-row-id="{{ $row['id'] ?? uniqid() }}" data-column="{{ $th }}" >{!! $row[$th] !!}</td>
                                 @endforeach
                                 <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
                             </tr>
