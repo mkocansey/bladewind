@@ -79,21 +79,24 @@
 
     if (!is_null($data)) {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
-        $total_records = count($data);
-        $table_headings = ($total_records > 0) ? array_keys((array) $data[0]) : [];
 
-        if(!empty($exclude_columns)) {
+        $total_records = count($data);
+        $table_headings = $all_table_headings = ($total_records > 0) ? array_keys((array) $data[0]) : [];
+
+        if( !empty($include_columns) ) {
+            $exclude_columns = [];
+            $table_headings = explode(',', str_replace(' ','', $include_columns));
+        }
+
+        /*if(!empty($exclude_columns)) {
             $table_headings = array_filter($table_headings,
             function($column) use ( $exclude_columns) {
                 if(!in_array($column, $exclude_columns)) return $column;
             });
         }
+        */
 
-        if( !empty($include_columns) ) {
-            $table_headings = explode(',', str_replace(' ','', $include_columns));
-        }
-
-        if (!empty($exclude_columns) || !empty($include_columns)) {
+        /*if (!empty($exclude_columns) || !empty($include_columns)) {
             // Filter out the $data object keys where they aren't in the table_headings list
             $filteredData = [];
             foreach ($data as $row) {
@@ -103,13 +106,13 @@
                 }
                 $filteredData[] = $filteredRow;
             }
-            
+
             $data = $filteredData;
             unset($filteredData);
-        }
+        }*/
 
         // Ensure each row in $data has a unique ID
-        if (!in_array('id',$table_headings)){
+        if (!in_array('id', $all_table_headings)){
             foreach ($data as &$row){
                 $row['id'] = uniqid();
             }
@@ -143,7 +146,7 @@
     }
 @endphp
 <script>
-    let tableData = {!! json_encode($data) !!};
+    let tableData_{{str_replace('-','_', $name)}} = {!! json_encode($data) !!};
 </script>
 <div class="@if($has_border && !$celled) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
     <div class="w-full">
@@ -152,7 +155,7 @@
                 <x-bladewind::input
                         name="bw-search-{{$name}}"
                         placeholder="{{$search_placeholder}}"
-                        onInput="filterTableDebounced(this.value, 'table.{{$name}}', '{{$search_field}}', {{$search_debounce}}, {{$search_min_length}})();"
+                        onInput="filterTableDebounced(this.value, 'table.{{$name}}', '{{$search_field}}', {{$search_debounce}}, {{$search_min_length}}, tableData_{{str_replace('-','_', $name)}})();"
                         add_clearing="false"
                         class="!mb-0 focus:!border-slate-300 !pl-9 !py-3"
                         clearable="true"
@@ -160,7 +163,6 @@
                         prefix="magnifying-glass"/>
             </div>
         @endif
-
         <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif  @if($celled) celled @endif
             @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif
@@ -184,9 +186,11 @@
                         }
                     @endphp
                     @foreach($table_headings as $th)
-                        <th>{{ str_replace('_', ' ', $column_aliases[$th] ?? $th ) }}</th>
+                        @if(empty($exclude_columns) || (!empty($exclude_columns) && !in_array($th, $exclude_columns)))
+                            <th>{{ str_replace('_', ' ', $column_aliases[$th] ?? $th ) }}</th>
+                        @endif
                     @endforeach
-                    @if( !empty($action_icons))
+                    @if(!empty($action_icons))
                         <th class="!text-right">{{$actions_title}}</th>
                     @endif
                 </tr>
@@ -204,10 +208,12 @@
                                 });
                             @endphp
                             @foreach($grouped_data as $row)
-                                <tr data-id="{{ $row['id'] ?? uniqid() }}">
+                                @php $row_id =  $row['id']; @endphp
+                                <tr data-id="{{ $row_id }}">
                                     @foreach($table_headings as $th)
                                         @if($th !== $groupby)
-                                            <td data-row-id="{{ $row['id'] ?? uniqid() }}" data-column="{{ $th }}" >{!! $row[$th] !!}</td>
+                                            <td data-row-id="{{ $row_id }}"
+                                                data-column="{{ $th }}">{!! $row[$th] !!}</td>
                                         @endif
                                     @endforeach
                                     <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
@@ -216,12 +222,16 @@
                         @endforeach
                     @else
                         @foreach($data as $row)
-                            <tr data-id="{{ $row['id'] ?? uniqid() }}">
-                                @foreach($table_headings as $th)
-                                    <td data-row-id="{{ $row['id'] ?? uniqid() }}" data-column="{{ $th }}" >{!! $row[$th] !!}</td>
-                                @endforeach
-                                <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
-                            </tr>
+                            @php $row_id =  $row['id']; @endphp
+                            @if(empty($exclude_columns) || (!empty($exclude_columns) && !in_array($th, $exclude_columns)))
+                                <tr data-id="{{ $row_id }}">
+                                    @foreach($table_headings as $th)
+                                        <td data-row-id="{{ $row_id }}"
+                                            data-column="{{ $th }}">{!! $row[$th] !!}</td>
+                                    @endforeach
+                                    <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
+                                </tr>
+                            @endif
                         @endforeach
                     @endif
                     @else

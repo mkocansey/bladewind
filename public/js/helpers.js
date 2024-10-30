@@ -523,11 +523,11 @@ var togglePassword = (element, mode) => {
  */
 const partition = (arr, fn) => {
     return arr.reduce(
-      (acc, val, i, arr) => {
-        acc[fn(val, i, arr) ? 0 : 1].push(val);
-        return acc;
-      },
-      [[], []]
+        (acc, val, i, arr) => {
+            acc[fn(val, i, arr) ? 0 : 1].push(val);
+            return acc;
+        },
+        [[], []]
     );
 }
 
@@ -535,24 +535,25 @@ const partition = (arr, fn) => {
  * Filter a table based on keyword.
  * @param {string} keyword - The keyword to filter table by.
  * @param {string} table - The css class (name) of the table to filter.
- * @param {string} field - The field to search.
+ * @param {null} field - The field to search.
+ * @param {array} tableData - The data to filter
  * @return {void}
  */
-var filterTable = (keyword, table, field) => {
+var filterTable = (keyword, table, field, tableData) => {
     const [showList, hideList] = partition(tableData, (row) => {
-        if (field){
+        if (field) {
             return row[field].toLowerCase().match(keyword.toLowerCase());
         } else {
-            return Object.values(row).toString().match(keyword.toLowerCase());
+            return Object.values(row).toString().toLowerCase().match(keyword.toLowerCase());
         }
     });
 
-    hideList.forEach( (row) => {
+    hideList.forEach((row) => {
         hide(domEl(`${table} tbody tr[data-id='${row.id}']`), true);
     });
-    showList.forEach( (row) => {
-        const elem = domEl(`${table} tbody tr[data-id='${row.id}'].hidden`);
-        if (elem){
+    showList.forEach((row) => {
+        const elem = domEl(`${table} tbody tr[data-id='${row.id}']`);
+        if (elem) {
             unhide(elem, true);
         }
     });
@@ -567,19 +568,20 @@ var filterTable = (keyword, table, field) => {
  * @return {function} - The debounced search function to be run
  */
 let debounceTimerId;
-const filterTableDebounced = (keyword, table, field = null, delay = 0, minLength = 0) => {
+const filterTableDebounced = (keyword, table, field = null, delay = 0, minLength = 0, tableData = {}) => {
     if (keyword.length >= minLength) {
         return (...args) => {
             clearTimeout(debounceTimerId);
-            debounceTimerId = setTimeout( () => filterTable(keyword, table, field), delay);
+            debounceTimerId = setTimeout(() => filterTable(keyword, table, field, tableData), delay);
         };
     } else {
         return (...args) => {
             clearTimeout(debounceTimerId);
-            debounceTimerId = setTimeout( () => {
+            debounceTimerId = setTimeout(() => {
                 document.querySelectorAll(`${table} tbody tr.hidden`).forEach((tr) => {
                     unhide(tr, true);
-                });}, delay);
+                });
+            }, delay);
         };
     }
 };
