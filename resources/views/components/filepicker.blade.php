@@ -99,7 +99,7 @@
 
     domEl('.bw-fp-{{ $name }} .clear').addEventListener('click', function (e) {
         domEl('.bw-fp-{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
-        domEl('.bw-{{ $name }}').value = domEl('.b64-{{ $name }}').value = '';
+        domEl('.bw-{{ $name }}').value = domEl('.b64-{{ $name }}').value = domEl('.selected_{{ $name }}').value = '';
         changeCss('.bw-fp-{{ $name }} .clear', 'hidden');
         e.stopImmediatePropagation();
     });
