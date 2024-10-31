@@ -1,6 +1,6 @@
 @props([
     // name to uniquely identity a select
-    'name' => 'bw-select',
+    'name' => 'bw-select-'.uniqid(),
 
     // the default text to display when the select shows
     'placeholder' => config('bladewind.select.placeholder', 'Select One'),
@@ -196,7 +196,7 @@
             <x-bladewind::icon
                     name="x-circle" type="solid"
                     class="hidden reset size-6 text-white fill-gray-400/70 hover:fill-gray-400 dark:fill-white/40 dark:hover:fill-white/60"/>
-            <x-bladewind::icon name="chevron-up-down" class="opacity-40 !ml-2"/>
+            <x-bladewind::icon name="chevron-up-down" class="opacity-40 opener !ml-2"/>
         </div>
     </div>
     <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 dark:shadow-none border-2
