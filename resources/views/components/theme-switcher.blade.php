@@ -45,7 +45,7 @@
     </x-bladewind::dropmenu>
     <script>
         const chooseTheme = (theme) => {
-            theme = (theme !== undefined) ? theme : 'system';
+            theme = (theme !== 'null' && theme !== undefined && theme !== null) ? theme : 'system';
             addToStorage('theme', theme);
             if (theme === 'dark' || theme === 'system') {
                 document.documentElement.classList.add('dark');
