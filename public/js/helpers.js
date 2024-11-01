@@ -707,13 +707,14 @@ var trapFocusInModal = (event) => {
 }
 
 /**
- * Validate for mininum and maximum values of an input field
+ * Validate for minimum and maximum values of an input field
  * @param {number} min - The minimum value.
  * @param {number} max - The maximum value.
  * @param {string} element - The input field to validate.
+ * @param {boolean} enforce_limits - Ensure input does not exceed maximum or go below minimum
  * @return {void}
  */
-var checkMinMax = (min, max, element) => {
+var checkMinMax = (min, max, element, enforce_limits = false) => {
     let field = domEl(`.${element}`);
     let minimum = parseInt(min);
     let maximum = parseInt(max);
@@ -722,10 +723,15 @@ var checkMinMax = (min, max, element) => {
     let error_heading = field.getAttribute('data-error-heading');
 
     if (field.value !== '' && ((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
-        changeCss(field, '!border-red-400', 'add', true);
-        if (error_message) {
-            (show_error_inline) ? unhide(`.${element}-inline-error`) :
-                showNotification(error_heading, error_message, 'error');
+        if (enforce_limits) {
+            if (field.value < minimum) field.value = minimum;
+            if (field.value > maximum) field.value = maximum;
+        } else {
+            changeCss(field, '!border-red-400', 'add', true);
+            if (error_message) {
+                (show_error_inline) ? unhide(`.${element}-inline-error`) :
+                    showNotification(error_heading, error_message, 'error');
+            }
         }
     } else {
         if (error_message) hide(`.${element}-inline-error`);

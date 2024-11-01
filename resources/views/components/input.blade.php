@@ -87,6 +87,7 @@
     // javascript to execute when suffix icon is clicked
     'action' => null,
     'size' => config('bladewind.input.size', 'medium'),
+    'enforceLimits' => false,
 ])
 @php
     // reset variables for Laravel 8 support
@@ -114,6 +115,7 @@
     $numeric = filter_var($numeric, FILTER_VALIDATE_BOOLEAN);
     $viewable = filter_var($viewable, FILTER_VALIDATE_BOOLEAN);
     $clearable = filter_var($clearable, FILTER_VALIDATE_BOOLEAN);
+//    $enforceLimits = filter_var($enforceLimits, FILTER_VALIDATE_BOOLEAN);
 
     if (!$addClearing) $add_clearing = $addClearing;
     if ($showPlaceholderAlways) $show_placeholder_always = $showPlaceholderAlways;
@@ -230,8 +232,8 @@
     });
     domEl('input.{{$name}}').setAttribute('inputmode', 'numeric');
     @if($min || $max)
-    domEl('input.{{$name}}').addEventListener('keyup', (event) => {
-        checkMinMax('{{$min}}', '{{$max}}', '{{$name}}');
+    domEl('input.{{$name}}').addEventListener('input', (event) => {
+        checkMinMax('{{$min}}', '{{$max}}', '{{$name}}', {{$enforceLimits}});
     });
     @endif
     @endif

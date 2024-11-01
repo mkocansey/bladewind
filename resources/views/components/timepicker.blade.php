@@ -1,16 +1,16 @@
 @props([
     // name of the datepicker. This name is used when posting the form with the datepicker
     'name' => 'bw-timepicker-'.uniqid(),
-    'hour_label' => 'HH',
-    'minute_label' => 'MM',
-    'format_label' => '--',
-    'required' => 'false',
+    'hour_label' => config('bladewind.timepicker.hour_label','HH'),
+    'minute_label' => config('bladewind.timepicker.minute_label','MM'),
+    'format_label' => config('bladewind.timepicker.format_label','--'),
+    'required' => false,
       // what should the time hours be displayed as. Available options are 12, 24
-    'format' => '12',
+    'format' => config('bladewind.timepicker.format','12'),
     'selected_value' => '',
-    'style' => 'popup',
+    'style' => config('bladewind.timepicker.style','popup'),
     'label' => '',
-    'placeholder' => 'HH:MM',
+    'placeholder' => config('bladewind.timepicker.placeholder','HH:MM'),
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
@@ -54,7 +54,8 @@
                                     :selected_value="$selected_hour??''"
                                     class="w-[105px] text-center border-2 border-gray-200/70 rounded-md !px-4 !py-5 text-5xl font-semibold opacity-80 bw-{{$name}}_hh"
                                     placeholder="{{$hour_label}}"
-                                    oninput="setTime_{{$name}}(this.value); enforceNumericLimits('bw-{{$name}}_hh', {{($format=='12' ? 12 : 23)}}); moveToMinutes('{{$name}}')"/>
+                                    :enforce_limits="true"
+                                    oninput="setTime_{{$name}}(this.value); moveToMinutes('{{$name}}')"/>
             </div>
             <div class="px-3 text-center pt-2.5">
                 <div class="block size-3 bg-gray-500 my-4 rounded-full"></div>
@@ -65,7 +66,8 @@
                                     class="w-[105px] text-center border-2 border-gray-200/70 rounded-md !px-2 !py-5 text-5xl font-semibold opacity-80 bw-{{$name}}_mm"
                                     :selected_value="$selected_minute??''"
                                     placeholder="{{$minute_label}}"
-                                    oninput="setTime_{{$name}}(this.value); enforceNumericLimits('bw-{{$name}}_mm', 59)"
+                                    :enforce_limits="true"
+                                    oninput="setTime_{{$name}}(this.value); "
                                     maxlength="2"/>
             </div>
             @if($format  == '12')
@@ -101,10 +103,6 @@
                     changeCss(am, 'bg-gray-100, hover:bg-gray-300', 'add', true);
                 }
                 domEl(`.bw-${field}_format`).value = format;
-            }
-            const enforceNumericLimits = (field, max) => {
-                let element = domEl(`.${field}`);
-                if (element.value > max) element.value = max;
             }
             const moveToMinutes = (name) => {
                 if (domEl(`.bw-${name}_hh`).value.length >= 2) {
