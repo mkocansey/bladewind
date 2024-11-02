@@ -87,6 +87,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[List View](https://bladewindui.com/component/list-view)**
 - **[Modal](https://bladewindui.com/component/modal)**
 - **[Notification](https://bladewindui.com/component/notification)**
+- **[Number](https://bladewindui.com/component/number)**
 - **[Process Indicator](https://bladewindui.com/component/process-indicator)**
 - **[Progress Bar](https://bladewindui.com/component/progress-bar)**
 - **[Radio Button](https://bladewindui.com/component/radio-button)**
@@ -100,6 +101,7 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Textarea](https://bladewindui.com/component/textarea)**
 - **[Theme Switcher](https://bladewindui.com/component/theme-switcher)**
 - **[Timeline](https://bladewindui.com/component/timeline)**
+- **[Timepicker](https://bladewindui.com/component/timepicker)**
 - **[Toggle](https://bladewindui.com/component/toggle)**
 - **[Verification Code](https://bladewindui.com/component/verification-code)**
 
