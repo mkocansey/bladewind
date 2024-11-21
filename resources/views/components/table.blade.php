@@ -47,6 +47,19 @@
     'checkable' => config('bladewind.table.checkable', false),
     'transparent' => config('bladewind.table.transparent', false),
     'selected_value' => null,
+    'sortable' => config('bladewind.table.sortable', false),
+    'sortable_columns' => [],
+    'paginated' => config('bladewind.table.paginated', false),
+    'pagination_style' => config('bladewind.table.pagination_style', 'arrows'),
+    'page_size' => config('bladewind.table.page_size', 25),
+    'show_row_numbers' => config('bladewind.table.show_row_numbers', false),
+    'show_total' => config('bladewind.table.show_total', true),
+    'show_page_number' => config('bladewind.table.show_page_number', true),
+    'show_total_pages' => config('bladewind.table.show_total_pages', false),
+    'default_page' => 1,
+    'total_label' => config('bladewind.table.total_label', 'Showing :a to :b of :c records'),
+    'limit' => null,
+    'layout' => 'auto',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -66,21 +79,31 @@
     $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
     $checkable = filter_var($checkable, FILTER_VALIDATE_BOOLEAN);
     $transparent = filter_var($transparent, FILTER_VALIDATE_BOOLEAN);
+    $paginated = filter_var($paginated, FILTER_VALIDATE_BOOLEAN);
+    $sortable = filter_var($sortable, FILTER_VALIDATE_BOOLEAN);
+    $page_size = filter_var($page_size, FILTER_VALIDATE_INT);
     $message_as_empty_state = filter_var($message_as_empty_state, FILTER_VALIDATE_BOOLEAN);
+    $show_row_numbers = filter_var($show_row_numbers, FILTER_VALIDATE_BOOLEAN);
+    $show_total = filter_var($show_total, FILTER_VALIDATE_BOOLEAN);
+    $default_page = filter_var($default_page, FILTER_VALIDATE_INT);
+
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;
+    $name = preg_replace('/[\s-]/', '_', $name);
+
     $exclude_columns = !empty($exclude_columns) ? explode(',', str_replace(' ','', $exclude_columns)) : [];
     $action_icons = (!empty($action_icons)) ? ((is_array($action_icons)) ?
         $action_icons : json_decode(str_replace('&quot;', '"', $action_icons), true)) : [];
     $column_aliases = (!empty($column_aliases)) ? ((is_array($column_aliases)) ?
         $column_aliases : json_decode(str_replace('&quot;', '"', $column_aliases), true)) : [];
-    $icons_array = [];
+    $icons_array = $indices = [];
     $can_group = false;
 
     if (!is_null($data)) {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
 
-        $total_records = count($data);
+        $total_records = (!empty($limit)) ? $limit : count($data);
+        $default_page = ($default_page > ceil($total_records/$page_size)) ? 1 : $default_page;
         $table_headings = $all_table_headings = ($total_records > 0) ? array_keys((array) $data[0]) : [];
 
         if( !empty($include_columns) ) {
@@ -88,28 +111,10 @@
             $table_headings = explode(',', str_replace(' ','', $include_columns));
         }
 
-        /*if(!empty($exclude_columns)) {
-            $table_headings = array_filter($table_headings,
-            function($column) use ( $exclude_columns) {
-                if(!in_array($column, $exclude_columns)) return $column;
-            });
+        if($sortable){
+            $sortable_columns = empty($sortable_columns) ? $table_headings : explode(',', str_replace(' ','', $sortable_columns));
         }
-        */
-
-        /*if (!empty($exclude_columns) || !empty($include_columns)) {
-            // Filter out the $data object keys where they aren't in the table_headings list
-            $filteredData = [];
-            foreach ($data as $row) {
-                $filteredRow = [];
-                foreach ($table_headings as $heading) {
-                    $filteredRow[$heading] = $row[$heading];
-                }
-                $filteredData[] = $filteredRow;
-            }
-
-            $data = $filteredData;
-            unset($filteredData);
-        }*/
+//        dd($sortable_columns);
 
         // Ensure each row in $data has a unique ID
         if (!in_array('id', $all_table_headings)){
@@ -117,7 +122,7 @@
                 $row['id'] = uniqid();
             }
         }
-        
+
         if(!empty($groupby) && in_array($groupby, $table_headings)) {
             $can_group = true;
             $unique_group_headings = array_unique(array_column($data, $groupby));
@@ -143,8 +148,19 @@
                 }, $click);
             }
         }
+
+        if(!function_exists('pagination_row')){
+            function pagination_row($row_number, $page_size=25, $default_page=1): string
+            {
+                $row_id =  uniqid();
+                $row_page = ($row_number < $page_size) ? 1 : ceil($row_number/$page_size);
+                return sprintf("data-id=%s data-page=%s class=%s", $row_id, $row_page,
+                ($row_page != $default_page ? 'hidden' : ''));
+            }
+        }
     }
 @endphp
+
 <script>
     let tableData_{{str_replace('-','_', $name)}} = {!! json_encode($data) !!};
 </script>
@@ -166,8 +182,10 @@
         <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif  @if($celled) celled @endif
             @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif
-            @if($selectable) selectable @endif @if($checkable) checkable @endif @if($transparent) transparent @endif">
-            @if(is_null($data))
+            @if($sortable) sortable @endif @if($paginated) paginated @endif
+            @if($selectable) selectable @endif @if($checkable) checkable @endif @if($transparent) transparent @endif"
+               @if($paginated) data-current-page="{{$default_page}}" @endif>
+            @if(is_null($data) || $layout == 'custom')
                 @if(!empty($header))
                     <thead>
                     <tr>{{ $header }}</tr>
@@ -185,9 +203,32 @@
                             unset($table_headings[array_search($groupby, $table_headings)]);
                         }
                     @endphp
+                    @if($show_row_numbers)
+                        <th>#</th>
+                    @endif
                     @foreach($table_headings as $th)
-                        @if(empty($exclude_columns) || (!empty($exclude_columns) && !in_array($th, $exclude_columns)))
-                            <th>{{ str_replace('_', ' ', $column_aliases[$th] ?? $th ) }}</th>
+                        @if(empty($exclude_columns) || !in_array($th, $exclude_columns))
+                            @php
+                                // get positions/indices of the fields to be displayed
+                                // use these indices to directly target data to display from $data
+                                $indices[] = $loop->index;
+                            @endphp
+                            <th @if($sortable && in_array($th, $sortable_columns))
+                                    class="cursor-pointer"
+                                data-sort-dir="no-sort"
+                                data-can-sort="true"
+                                data-column-index="{{ count($indices)-1}}"
+                                onclick="sortTableByColumn(this, '{{$name}}')" @endif>
+                                <span class="peer cursor-pointer">{{ str_replace('_', ' ', $column_aliases[$th] ?? $th ) }}</span>
+                                @if($sortable && in_array($th, $sortable_columns))
+                                    <x-bladewind::icon name="funnel"
+                                                       class="!size-3 opacity-40 peer-hover:opacity-80 no-sort"/>
+                                    <x-bladewind::icon name="arrow-long-up"
+                                                       class="!size-3 opacity-60 peer-hover:opacity-90 sort-asc hidden"/>
+                                    <x-bladewind::icon name="arrow-long-down"
+                                                       class="!size-3 opacity-60 peer-hover:opacity-90 sort-desc hidden"/>
+                                @endif
+                            </th>
                         @endif
                     @endforeach
                     @if(!empty($action_icons))
@@ -195,7 +236,7 @@
                     @endif
                 </tr>
                 </thead>
-                @if($total_records > 0)
+                @if($total_records > 0 && $layout == 'auto')
                     <tbody>
                     @if($can_group)
                         @foreach($unique_group_headings as $group_heading)
@@ -222,16 +263,26 @@
                         @endforeach
                     @else
                         @foreach($data as $row)
-                            @php $row_id =  $row['id']; @endphp
-                            @if(empty($exclude_columns) || (!empty($exclude_columns) && !in_array($th, $exclude_columns)))
-                                <tr data-id="{{ $row_id }}">
-                                    @foreach($table_headings as $th)
+                            @php
+                                $row_id =  $row['id'];
+                                $row_page = (!$paginated || $loop->iteration < $page_size) ? 1 : ceil($loop->iteration/$page_size);
+                            @endphp
+                            @if(!empty($limit) && $loop->iteration > $limit)
+                                @break
+                            @endif
+                            <tr data-id="{{ $row_id }}" data-page="{{ $row_page }}"
+                                @if($paginated && $row_page != $default_page)class="hidden" @endif>
+                                @if($show_row_numbers)
+                                    <td>{{$loop->iteration}}</td>
+                                @endif
+                                @foreach($table_headings as $th)
+                                    @if(in_array($loop->index, $indices))
                                         <td data-row-id="{{ $row_id }}"
                                             data-column="{{ $th }}">{!! $row[$th] !!}</td>
-                                    @endforeach
-                                    <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
-                                </tr>
-                            @endif
+                                    @endif
+                                @endforeach
+                                <x-bladewind::table-icons :icons_array="$icons_array" :row="$row"/>
+                            </tr>
                         @endforeach
                     @endif
                     @else
@@ -258,6 +309,18 @@
                     </tbody>
                 @endif
         </table>
+        @if($paginated && !empty($total_records))
+            <x-bladewind::pagination
+                    :style="$pagination_style"
+                    :total_records="$total_records"
+                    :page_size="$page_size"
+                    :show_total="$show_total"
+                    :show_total_pages="$show_total_pages"
+                    :show_page_number="$show_page_number"
+                    :label="$total_label"
+                    :table="$name"
+                    :default_page="$default_page"/>
+        @endif
     </div>
 </div>
 @if($selectable)
@@ -365,7 +428,6 @@
                     }
                 });
             }
-
         </script>
     @endonce
     <script>
@@ -373,4 +435,92 @@
         // select rows in selected_value
         @if(!empty($selected_value)) checkSelected('.bw-table.{{$name}}', '{{$selected_value}}') @endif
     </script>
+@endif
+@if($sortable)
+    @once
+        <script>
+            const originalTableOrder = new Map();
+
+            // Save the initial order of all tables when the page loads
+            window.onload = () => {
+                document.querySelectorAll("table.sortable").forEach(table => {
+                    const tbody = table.tBodies[0];
+                    const rows = Array.from(tbody.rows);
+                    originalTableOrder.set(table, rows); // Store original rows for this table
+                });
+            };
+            const sortTableByColumn = (el, table) => {
+                let sortColumnIndex = el.getAttribute('data-column-index');
+                let sortDirection = el.getAttribute('data-sort-dir') || 'no-sort';
+                let sortTable = domEl(`.${table}`);
+                const tbody = sortTable.tBodies[0];
+                const originalOrder = Array.from(tbody.rows);  // Save initial row order
+                changeColumnSortIcon(sortColumnIndex, table, sortDirection);
+
+                // Cycle through sorting states: asc → desc → default
+                sortDirection = (sortDirection === "no-sort") ? "asc" : ((sortDirection === "asc") ? "desc" : "no-sort");
+                let sortColumn = domEl(`.${table} th[data-column-index="${sortColumnIndex}"]`);
+                sortColumn.setAttribute('data-sort-dir', sortDirection);
+
+                // Sort or reset the rows based on the new direction
+                if (sortDirection === "no-sort") {
+                    resetToOriginalOrder(sortTable, tbody);
+                } else {
+                    // Detach tbody to prevent re-rendering during sorting
+                    const rows = Array.from(tbody.rows);
+                    console.log(rows);
+                    document.body.appendChild(tbody);  // Temporarily detach for faster sorting
+
+                    // Cache values to avoid repeated DOM access
+                    rows.forEach(row => {
+                        row.sortKey = row.cells[sortColumnIndex].innerText.toLowerCase();
+                    });
+
+                    rows.sort((a, b) => {
+                        const result = a.sortKey.localeCompare(b.sortKey);
+                        return sortDirection === "asc" ? result : -result;
+                    });
+
+                    // Reattach the sorted rows
+                    rows.forEach(row => tbody.appendChild(row));
+                    sortTable.appendChild(tbody);  // Reattach tbody to the table
+                }
+
+            }
+
+            const changeColumnSortIcon = (column, table, direction) => {
+                resetColumnSortIcons(table);
+                if (direction === 'no-sort') {
+                    hide(`.${table} th[data-column-index="${column}"] svg.no-sort`);
+                    hide(`.${table} th[data-column-index="${column}"] svg.sort-desc`);
+                    unhide(`.${table} th[data-column-index="${column}"] svg.sort-asc`);
+                }
+                if (direction === 'asc') {
+                    hide(`.${table} th[data-column-index="${column}"] svg.no-sort`);
+                    hide(`.${table} th[data-column-index="${column}"] svg.sort-asc`);
+                    unhide(`.${table} th[data-column-index="${column}"] svg.sort-desc`);
+                }
+                if (direction === 'desc') {
+                    hide(`.${table} th[data-column-index="${column}"] svg.sort-asc`);
+                    hide(`.${table} th[data-column-index="${column}"] svg.sort-desc`);
+                    unhide(`.${table} th[data-column-index="${column}"] svg.no-sort`);
+                }
+            }
+
+            const resetColumnSortIcons = (table) => {
+                domEls(`.${table} th[data-can-sort="true"]`).forEach((el) => {
+                    let column = el.getAttribute('data-column-index');
+                    hide(`.${table} th[data-column-index="${column}"] svg.sort-desc`);
+                    hide(`.${table} th[data-column-index="${column}"] svg.sort-asc`);
+                    unhide(`.${table} th[data-column-index="${column}"] svg.no-sort`);
+                    el.setAttribute('data-sort-dir', 'no-sort');
+                });
+            }
+
+            function resetToOriginalOrder(table, tbody) {
+                const originalRows = originalTableOrder.get(table);
+                originalRows.forEach(row => tbody.appendChild(row)); // Reattach rows in original order
+            }
+        </script>
+    @endonce
 @endif

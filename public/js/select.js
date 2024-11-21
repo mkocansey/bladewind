@@ -13,6 +13,7 @@ class BladewindSelect {
     selectedValue;
     canClear;
     enabled;
+    metaData;
 
 
     constructor(name, placeholder) {
@@ -32,6 +33,7 @@ class BladewindSelect {
         this.canClear = (!this.required && !this.isMultiple);
         this.enabled = true;
         this.selectedItem = null;
+        this.metaData = domEl(this.rootElement).getAttribute('data-meta-data') || null;
     }
 
     activate = (options = {}) => {
@@ -324,11 +326,13 @@ class BladewindSelect {
     callUserFunction = (item) => {
         let user_function = item ? item.getAttribute('data-user-function') : null;
         if (user_function !== null && user_function !== undefined) {
+            let meta = (this.metaData) ? JSON.parse(JSON.stringify(this.metaData)) : null;
             callUserFunction(
                 `${user_function}(
                 '${item.getAttribute('data-value')}',
                 '${item.getAttribute('data-label')}',
-                '${domEl(this.formInput).value}')`
+                '${domEl(this.formInput).value}',
+                ${meta})`
             );
         }
     }

@@ -12,7 +12,7 @@ module.exports = {
                 secondary: colors.slate,
                 dark: colors.gray,
                 green: colors.emerald,
-            }
+            },
         },
     },
     plugins: [
