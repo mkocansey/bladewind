@@ -419,6 +419,15 @@ return [
         'no_data_message' => 'No records to display',
         'message_as_empty_state' => false,
         'show_image' => true,
+        'sortable' => false,
+        'paginated' => false,
+        'pagination_style' => 'arrows',
+        'page_size' => 25,
+        'show_row_numbers' => false,
+        'show_page_number' => false,
+        'show_total_pages' => false,
+        'show_total' => true,
+        'total_label' => 'Showing :a to :b of :c records',
     ],
 
     /*

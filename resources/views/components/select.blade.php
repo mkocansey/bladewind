@@ -115,6 +115,7 @@
     'empty_state_onclick' => '',
     'empty_state_show_image' => 'true',
     'empty_state_image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
+    'meta' => null,
 
 ])
 @php
@@ -171,10 +172,11 @@
      data-multiple="{{$multiple}}" data-required="{{$required?'true':'false'}}"
      data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
+     @if(!empty($meta)) data-meta-data="{{ $meta}}" @endif
      @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
     <div tabindex="0"
-         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50
-         dark:text-dark-300 dark:border-dark-600 dark:bg-transparent {{$sizes[$size]}} pl-4 pr-2 clickable
+         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50 hover:border-slate-300
+         dark:text-dark-300 dark:border-dark-600 dark:hover:border-dark-500/50 dark:bg-transparent {{$sizes[$size]}} pl-4 pr-2 clickable
          @if($disabled) disabled @elseif($readonly) readonly @else enabled @endif">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
         <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">
@@ -257,6 +259,8 @@
     @if(!$disabled && !$readonly)
     bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');
     @endif
-    @if(!empty($filter)) bw_{{ $input_name }}.filter('{{ $filter }}');
-    @endif @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();@endif
+    @if(!empty($filter))
+    bw_{{ $input_name }}.filter('{{ $filter }}');
+    @endif
+    @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();@endif
 </script>
