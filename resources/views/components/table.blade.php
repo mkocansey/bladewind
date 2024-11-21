@@ -449,29 +449,26 @@
                     originalTableOrder.set(table, rows); // Store original rows for this table
                 });
             };
+
             const sortTableByColumn = (el, table) => {
                 let sortColumnIndex = el.getAttribute('data-column-index');
                 let sortDirection = el.getAttribute('data-sort-dir') || 'no-sort';
                 let sortTable = domEl(`.${table}`);
                 const tbody = sortTable.tBodies[0];
-                const originalOrder = Array.from(tbody.rows);  // Save initial row order
+                let currentPage = String(sortTable.getAttribute('data-current-page') || 1);
+
                 changeColumnSortIcon(sortColumnIndex, table, sortDirection);
 
-                // Cycle through sorting states: asc → desc → default
                 sortDirection = (sortDirection === "no-sort") ? "asc" : ((sortDirection === "asc") ? "desc" : "no-sort");
                 let sortColumn = domEl(`.${table} th[data-column-index="${sortColumnIndex}"]`);
                 sortColumn.setAttribute('data-sort-dir', sortDirection);
 
-                // Sort or reset the rows based on the new direction
                 if (sortDirection === "no-sort") {
-                    resetToOriginalOrder(sortTable, tbody);
+                    resetToOriginalOrder(sortTable, tbody, currentPage);
                 } else {
-                    // Detach tbody to prevent re-rendering during sorting
-                    const rows = Array.from(tbody.rows);
-                    console.log(rows);
-                    document.body.appendChild(tbody);  // Temporarily detach for faster sorting
+                    const rows = Array.from(tbody.rows).filter(row => (row.getAttribute('data-page') === currentPage));
+                    document.body.appendChild(tbody);
 
-                    // Cache values to avoid repeated DOM access
                     rows.forEach(row => {
                         row.sortKey = row.cells[sortColumnIndex].innerText.toLowerCase();
                     });
@@ -481,11 +478,9 @@
                         return sortDirection === "asc" ? result : -result;
                     });
 
-                    // Reattach the sorted rows
                     rows.forEach(row => tbody.appendChild(row));
-                    sortTable.appendChild(tbody);  // Reattach tbody to the table
+                    sortTable.appendChild(tbody);
                 }
-
             }
 
             const changeColumnSortIcon = (column, table, direction) => {
@@ -517,9 +512,10 @@
                 });
             }
 
-            function resetToOriginalOrder(table, tbody) {
+            function resetToOriginalOrder(table, tbody, currentPage) {
                 const originalRows = originalTableOrder.get(table);
-                originalRows.forEach(row => tbody.appendChild(row)); // Reattach rows in original order
+                const currentPageRows = originalRows.filter(row => (row.getAttribute('data-page') === currentPage));
+                currentPageRows.forEach(row => tbody.appendChild(row));
             }
         </script>
     @endonce
