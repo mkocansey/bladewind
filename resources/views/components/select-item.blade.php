@@ -18,9 +18,9 @@
 ])
 
 @php
-    $selected = filter_var($selected, FILTER_VALIDATE_BOOLEAN);
-    $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
-    $empty_state = filter_var($empty_state, FILTER_VALIDATE_BOOLEAN);
+    $selected = parseBladewindVariable($selected);
+    $selectable = parseBladewindVariable($selectable);
+    $empty_state = parseBladewindVariable($empty_state);
     $label = html_entity_decode($label);
 @endphp
 <div

@@ -19,11 +19,11 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_spinner = filter_var($show_spinner, FILTER_VALIDATE_BOOLEAN);
-    $showSpinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
-    $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
-    $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
-    $has_border = filter_var($hasBorder, FILTER_VALIDATE_BOOLEAN);
+    $show_spinner = parseBladewindVariable($show_spinner);
+    $showSpinner = parseBladewindVariable($showSpinner);
+    $has_shadow = parseBladewindVariable($has_shadow);
+    $hasShadow = parseBladewindVariable($hasShadow);
+    $has_border = parseBladewindVariable($hasBorder);
     if ($labelPosition !== $label_position) $label_position = $labelPosition;
     if ($iconPosition !== $icon_position) $icon_position = $iconPosition;
     if ($currencyPosition !== $currency_position) $currency_position = $currencyPosition;

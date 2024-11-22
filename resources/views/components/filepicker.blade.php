@@ -30,10 +30,10 @@
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
-    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
-    $base64 = filter_var($base64, FILTER_VALIDATE_BOOLEAN);
+    $required = parseBladewindVariable($required);
+    $add_clearing = parseBladewindVariable($add_clearing);
+    $addClearing = parseBladewindVariable($addClearing);
+    $base64 = parseBladewindVariable($base64);
     if (!$addClearing) $add_clearing = $addClearing;
     if ($acceptedFileTypes !== $accepted_file_types) $accepted_file_types = $acceptedFileTypes;
     if ($selectedValue !== $selected_value) $selected_value = $selectedValue;

@@ -63,29 +63,29 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
-    $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
-    $hover_effect = filter_var($hover_effect, FILTER_VALIDATE_BOOLEAN);
-    $hoverEffect = filter_var($hoverEffect, FILTER_VALIDATE_BOOLEAN);
-    $striped = filter_var($striped, FILTER_VALIDATE_BOOLEAN);
-    $compact = filter_var($compact, FILTER_VALIDATE_BOOLEAN);
-    $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
-    $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
-    $search_field = filter_var($search_field, FILTER_SANITIZE_STRING);
-    $search_debounce = filter_var($search_debounce, FILTER_VALIDATE_INT);
-    $search_min_length = filter_var($search_min_length, FILTER_VALIDATE_INT);
-    $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
-    $celled = filter_var($celled, FILTER_VALIDATE_BOOLEAN);
-    $selectable = filter_var($selectable, FILTER_VALIDATE_BOOLEAN);
-    $checkable = filter_var($checkable, FILTER_VALIDATE_BOOLEAN);
-    $transparent = filter_var($transparent, FILTER_VALIDATE_BOOLEAN);
-    $paginated = filter_var($paginated, FILTER_VALIDATE_BOOLEAN);
-    $sortable = filter_var($sortable, FILTER_VALIDATE_BOOLEAN);
-    $page_size = filter_var($page_size, FILTER_VALIDATE_INT);
-    $message_as_empty_state = filter_var($message_as_empty_state, FILTER_VALIDATE_BOOLEAN);
-    $show_row_numbers = filter_var($show_row_numbers, FILTER_VALIDATE_BOOLEAN);
-    $show_total = filter_var($show_total, FILTER_VALIDATE_BOOLEAN);
-    $default_page = filter_var($default_page, FILTER_VALIDATE_INT);
+    $has_shadow = parseBladewindVariable($has_shadow);
+    $hasShadow = parseBladewindVariable($hasShadow);
+    $hover_effect = parseBladewindVariable($hover_effect);
+    $hoverEffect = parseBladewindVariable($hoverEffect);
+    $striped = parseBladewindVariable($striped);
+    $compact = parseBladewindVariable($compact);
+    $divided = parseBladewindVariable($divided);
+    $searchable = parseBladewindVariable($searchable);
+    $search_field = parseBladewindVariable($search_field, 'string');
+    $search_debounce = parseBladewindVariable($search_debounce, 'int');
+    $search_min_length = parseBladewindVariable($search_min_length, 'int');
+    $uppercasing = parseBladewindVariable($uppercasing);
+    $celled = parseBladewindVariable($celled);
+    $selectable = parseBladewindVariable($selectable);
+    $checkable = parseBladewindVariable($checkable);
+    $transparent = parseBladewindVariable($transparent);
+    $paginated = parseBladewindVariable($paginated);
+    $sortable = parseBladewindVariable($sortable);
+    $page_size = parseBladewindVariable($page_size, 'int');
+    $message_as_empty_state = parseBladewindVariable($message_as_empty_state);
+    $show_row_numbers = parseBladewindVariable($show_row_numbers);
+    $show_total = parseBladewindVariable($show_total);
+    $default_page = parseBladewindVariable($default_page, 'int');
 
     if ($hasShadow) $has_shadow = $hasShadow;
     if (!$hoverEffect) $hover_effect = $hoverEffect;

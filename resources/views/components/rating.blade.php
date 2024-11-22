@@ -15,7 +15,7 @@
 @php
     $name = str_replace(' ', '-', $name); 
     $size_adjustment = ($size == 'big') ? 2 : 1;
-    $clickable = filter_var($clickable, FILTER_VALIDATE_BOOLEAN);
+    $clickable = parseBladewindVariable($clickable);
 @endphp
 @if($clickable)
     <x-bladewind::input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}"/>

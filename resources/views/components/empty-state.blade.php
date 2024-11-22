@@ -13,8 +13,8 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_image = filter_var($show_image, FILTER_VALIDATE_BOOLEAN);
-    $showImage = filter_var($showImage, FILTER_VALIDATE_BOOLEAN);
+    $show_image = parseBladewindVariable($show_image);
+    $showImage = parseBladewindVariable($showImage);
     if ($buttonLabel !== $button_label) $button_label = $buttonLabel;
     if (! $showImage) $show_image = $showImage;
 @endphp

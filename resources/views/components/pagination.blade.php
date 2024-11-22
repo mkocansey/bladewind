@@ -11,10 +11,10 @@
 ])
 
 @php
-    $show_total = filter_var($show_total, FILTER_VALIDATE_BOOLEAN);
-    $show_page_number = filter_var($show_page_number, FILTER_VALIDATE_BOOLEAN);
-    $show_total_pages = filter_var($show_total_pages, FILTER_VALIDATE_BOOLEAN);
-    $default_page = filter_var($default_page, FILTER_VALIDATE_INT);
+    $show_total = parseBladewindVariable($show_total);
+    $show_page_number = parseBladewindVariable($show_page_number);
+    $show_total_pages = parseBladewindVariable($show_total_pages);
+    $default_page = parseBladewindVariable($default_page, 'int');
     $style = (!in_array($style, ['arrows', 'dropdown', 'numbers'])) ? 'arrows' : $style;
     $total_pages = ceil($total_records/$page_size);
     $default_page = (is_numeric($default_page) && $default_page > 0 && $default_page <= $total_pages) ? $default_page : 1;

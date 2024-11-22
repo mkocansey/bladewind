@@ -89,11 +89,11 @@
     $date_to_label = $dateToLabel;
     $date_from_name = $dateFromName;
     $date_to_name = $dateToName;
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    $validate = filter_var($validate, FILTER_VALIDATE_BOOLEAN);
-    $show_error_inline = filter_var($show_error_inline, FILTER_VALIDATE_BOOLEAN);
-    $use_placeholder = filter_var($use_placeholder, FILTER_VALIDATE_BOOLEAN);
-    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);
+    $required = parseBladewindVariable($required);
+    $validate = parseBladewindVariable($validate);
+    $show_error_inline = parseBladewindVariable($show_error_inline);
+    $use_placeholder = parseBladewindVariable($use_placeholder);
+    $stacked = parseBladewindVariable($stacked);
     //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';

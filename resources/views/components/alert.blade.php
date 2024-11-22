@@ -40,10 +40,10 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_icon = filter_var($show_icon, FILTER_VALIDATE_BOOLEAN);
-    $showIcon = filter_var($showIcon, FILTER_VALIDATE_BOOLEAN);
-    $show_close_icon = filter_var($show_close_icon, FILTER_VALIDATE_BOOLEAN);
-    $showCloseIcon = filter_var($showCloseIcon, FILTER_VALIDATE_BOOLEAN);
+    $show_icon = parseBladewindVariable($show_icon);
+    $showIcon = parseBladewindVariable($showIcon);
+    $show_close_icon = parseBladewindVariable($show_close_icon);
+    $showCloseIcon = parseBladewindVariable($showCloseIcon);
 
     if(!$showIcon) $show_icon = $showIcon;
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;

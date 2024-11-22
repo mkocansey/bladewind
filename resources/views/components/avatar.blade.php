@@ -42,9 +42,9 @@
         'omg' => [ 'size_css' => 'size-28', 'dot_css' => 'left-[79px] rtl:right-[79px]', 'plus_text_size' => 'text-3xl' ]
     ];
 
-    $dotted = filter_var($dotted, FILTER_VALIDATE_BOOLEAN);
-    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);
-    $show_ring = filter_var($show_ring, FILTER_VALIDATE_BOOLEAN);
+    $dotted = parseBladewindVariable($dotted);
+    $stacked = parseBladewindVariable($stacked);
+    $show_ring = parseBladewindVariable($show_ring);
     $dot_position = (in_array($dot_position, ['top','bottom'])) ? $dot_position : 'bottom';
     $avatar = $image ?: asset('vendor/bladewind/images/avatar.png');
     $show_plus = (substr($avatar, 0, 1) == '+');
@@ -55,11 +55,9 @@
     $stacked_css = ($stacked) ? 'mb-3 !-mr-3' : '';
     $label = (!empty($label)) ? substr($label, 0, 2) : $label;
 
-    if(! in_array($dot_color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
-        $dot_color = 'primary';
-    }
-    if( !empty($bg_color)  && ! in_array($bg_color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
-        $bg_color = 'primary';
+    $dot_color = defaultBladewindColour($dot_color);
+    if( !empty($bg_color)) {
+        $bg_color = defaultBladewindColour($bg_color);
     }
 
     if(!function_exists("urlExists")){
