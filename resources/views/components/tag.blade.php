@@ -40,7 +40,7 @@
 
 
     $colour_weight = [
-        'faint' => [ 'bg' => '200/80', 'border' => 200 ],
+        'faint' => [ 'bg' => '100/70', 'border' => 200 ],
         'dark' => [ 'bg' => 500, 'border' => '500/50' ],
     ];
 

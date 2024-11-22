@@ -63,11 +63,11 @@
     };
     $alternate_colour = $alternate_colour();
     $presets = (in_array($type, ['error','warning', 'info', 'success'])) ? [
-        'faint' => " bg-$alternate_colour-200/80 text-$alternate_colour-600",
+        'faint' => " bg-$alternate_colour-100/70 text-$alternate_colour-600",
         'dark' => "bg-$alternate_colour-500 text-white",
         'icon' => [ 'faint' => "text-$alternate_colour-600", 'dark' => "!text-$alternate_colour-50" ]
     ] : [   // not error, warning, info, success
-        'faint' => "bg-$type-200/80 text-$type-600",
+        'faint' => "bg-$type-100/70 text-$type-600",
         'dark' => "bg-$type-500 text-$type-50",
         'icon' => [ 'faint' => "text-$type-600", 'dark' => "!text-$type-50" ]
     ];
