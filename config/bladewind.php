@@ -133,8 +133,6 @@ return [
     'datepicker' => [
         'format' => 'yyyy-mm-dd',
         'week_starts' => 'sun',
-        'with_time' => false,
-        'hours_as' => 12,
         'validate' => false,
         'show_error_inline' => false,
         'stacked' => true,
