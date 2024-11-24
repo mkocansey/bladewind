@@ -262,5 +262,6 @@
     @if(!empty($filter))
     bw_{{ $input_name }}.filter('{{ $filter }}');
     @endif
-    @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();@endif
+    @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();
+    @endif
 </script>
