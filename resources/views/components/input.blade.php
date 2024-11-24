@@ -91,31 +91,31 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
-    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
-    $show_placeholder_always = filter_var($show_placeholder_always, FILTER_VALIDATE_BOOLEAN);
-    $showPlaceholderAlways = filter_var($showPlaceholderAlways, FILTER_VALIDATE_BOOLEAN);
-    $show_error_inline = filter_var($show_error_inline, FILTER_VALIDATE_BOOLEAN);
-    $showErrorInline = filter_var($showErrorInline, FILTER_VALIDATE_BOOLEAN);
-    $with_dots = filter_var($with_dots, FILTER_VALIDATE_BOOLEAN);
-    $withDots = filter_var($withDots, FILTER_VALIDATE_BOOLEAN);
-    $has_label = filter_var($has_label, FILTER_VALIDATE_BOOLEAN);
-    $hasLabel = filter_var($hasLabel, FILTER_VALIDATE_BOOLEAN);
-    $is_datepicker = filter_var($is_datepicker, FILTER_VALIDATE_BOOLEAN);
-    $isDatepicker = filter_var($isDatepicker, FILTER_VALIDATE_BOOLEAN);
-    $transparent_prefix = filter_var($transparent_prefix, FILTER_VALIDATE_BOOLEAN);
-    $transparentPrefix = filter_var($transparentPrefix, FILTER_VALIDATE_BOOLEAN);
-    $transparent_suffix = filter_var($transparent_suffix, FILTER_VALIDATE_BOOLEAN);
-    $transparentSuffix = filter_var($transparentSuffix, FILTER_VALIDATE_BOOLEAN);
-    $prefix_is_icon = filter_var($prefix_is_icon, FILTER_VALIDATE_BOOLEAN);
-    $prefixIsIcon = filter_var($prefixIsIcon, FILTER_VALIDATE_BOOLEAN);
-    $suffix_is_icon = filter_var($suffix_is_icon, FILTER_VALIDATE_BOOLEAN);
-    $suffixIsIcon = filter_var($suffixIsIcon, FILTER_VALIDATE_BOOLEAN);
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    $numeric = filter_var($numeric, FILTER_VALIDATE_BOOLEAN);
-    $viewable = filter_var($viewable, FILTER_VALIDATE_BOOLEAN);
-    $clearable = filter_var($clearable, FILTER_VALIDATE_BOOLEAN);
-//    $enforceLimits = filter_var($enforceLimits, FILTER_VALIDATE_BOOLEAN);
+    $add_clearing = parseBladewindVariable($add_clearing);
+    $addClearing = parseBladewindVariable($addClearing);
+    $show_placeholder_always = parseBladewindVariable($show_placeholder_always);
+    $showPlaceholderAlways = parseBladewindVariable($showPlaceholderAlways);
+    $show_error_inline = parseBladewindVariable($show_error_inline);
+    $showErrorInline = parseBladewindVariable($showErrorInline);
+    $with_dots = parseBladewindVariable($with_dots);
+    $withDots = parseBladewindVariable($withDots);
+    $has_label = parseBladewindVariable($has_label);
+    $hasLabel = parseBladewindVariable($hasLabel);
+    $is_datepicker = parseBladewindVariable($is_datepicker);
+    $isDatepicker = parseBladewindVariable($isDatepicker);
+    $transparent_prefix = parseBladewindVariable($transparent_prefix);
+    $transparentPrefix = parseBladewindVariable($transparentPrefix);
+    $transparent_suffix = parseBladewindVariable($transparent_suffix);
+    $transparentSuffix = parseBladewindVariable($transparentSuffix);
+    $prefix_is_icon = parseBladewindVariable($prefix_is_icon);
+    $prefixIsIcon = parseBladewindVariable($prefixIsIcon);
+    $suffix_is_icon = parseBladewindVariable($suffix_is_icon);
+    $suffixIsIcon = parseBladewindVariable($suffixIsIcon);
+    $required = parseBladewindVariable($required);
+    $numeric = parseBladewindVariable($numeric);
+    $viewable = parseBladewindVariable($viewable);
+    $clearable = parseBladewindVariable($clearable);
+//    $enforceLimits = parseBladewindVariable($enforceLimits);
 
     if (!$addClearing) $add_clearing = $addClearing;
     if ($showPlaceholderAlways) $show_placeholder_always = $showPlaceholderAlways;

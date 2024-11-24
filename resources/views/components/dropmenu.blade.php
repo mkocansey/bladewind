@@ -18,11 +18,11 @@
     $name = preg_replace('/[\s-]/', '_', $name);
     $height = !is_numeric($height) ? 200 : $height;
     $trigger_on = (!in_array($trigger_on, ['click', 'mouseover'])) ? 'click' : $trigger_on;
-    $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
-    $padded = filter_var($padded, FILTER_VALIDATE_BOOLEAN);
-    $scrollable = filter_var($scrollable, FILTER_VALIDATE_BOOLEAN);
-    $hide_after_click = filter_var($hide_after_click, FILTER_VALIDATE_BOOLEAN);
-    $icon_right = filter_var($icon_right, FILTER_VALIDATE_BOOLEAN);
+    $divided = parseBladewindVariable($divided);
+    $padded = parseBladewindVariable($padded);
+    $scrollable = parseBladewindVariable($scrollable);
+    $hide_after_click = parseBladewindVariable($hide_after_click);
+    $icon_right = parseBladewindVariable($icon_right);
 
     // TODO: Remove in 3.0.0 when Php < 8 support is dropped
     if (!function_exists('str_ends_with')) {

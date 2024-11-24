@@ -1,4 +1,4 @@
-function app(selected_date = '', date_format, first_weekday = 'sun') {
+function app(selected_date = '', date_format = 'YYYY-MM-DD', first_weekday = 'sun', min_date = '', max_date = '') {
     return {
         showDatepicker: false,
         datepickerValue: "",
@@ -6,8 +6,10 @@ function app(selected_date = '', date_format, first_weekday = 'sun') {
         dateFormat: date_format, //"YYYY-MM-DD",
         month: "",
         year: "",
-        no_of_days: [],
-        blankdays: [],
+        noOfDays: [],
+        blankDays: [],
+        minDate: min_date ? new Date(Date.parse(min_date)) : null,
+        maxDate: max_date ? new Date(Date.parse(max_date)) : null,
         initDate() {
             let today;
             if (this.selectedDate) {
@@ -25,6 +27,12 @@ function app(selected_date = '', date_format, first_weekday = 'sun') {
                 this.month = new Date().getMonth();
                 this.year = new Date().getFullYear();
             }
+        },
+        isDisabled(date) {
+            const currentDate = new Date(this.year, this.month, date);
+            if (this.minDate && currentDate < this.minDate) return true;
+            if (this.maxDate && currentDate > this.maxDate) return true;
+            return false;
         },
         formatDateForDisplay(date) {
             let formattedDay = DAYS[date.getDay()];
@@ -55,24 +63,17 @@ function app(selected_date = '', date_format, first_weekday = 'sun') {
         },
         isSelectedDate(date) {
             const d = new Date(this.year, this.month, date);
-            return this.datepickerValue ===
-            this.formatDateForDisplay(d) ?
-                true :
-                false;
-        },
+            return this.datepickerValue === this.formatDateForDisplay(d);
+        }
+        ,
         isToday(date) {
             const today = new Date();
             const d = new Date(this.year, this.month, date);
-            return today.toDateString() === d.toDateString() ?
-                true :
-                false;
+            return today.toDateString() === d.toDateString();
         },
         getDateValue(date, format) {
-            let selectedDate = new Date(
-                this.year,
-                this.month,
-                date
-            );
+            let selectedDate = new Date(this.year, this.month, date);
+            if (this.isDisabled(date)) return
             this.datepickerValue = this.formatDateForDisplay(
                 selectedDate
             );
@@ -80,27 +81,20 @@ function app(selected_date = '', date_format, first_weekday = 'sun') {
             this.showDatepicker = false;
         },
         getNoOfDays() {
-            let daysInMonth = new Date(
-                this.year,
-                this.month + 1,
-                0
-            ).getDate();
+            let daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
             // find where to start calendar day of week
-            let dayOfWeek = new Date(
-                this.year,
-                this.month
-            ).getDay();
-            let blankdaysArray = [];
+            let dayOfWeek = new Date(this.year, this.month).getDay();
+            let blankDaysArray = [];
             dayOfWeek = (first_weekday === 'sun') ? dayOfWeek : (dayOfWeek - 1);
             for (var i = 1; i <= dayOfWeek; i++) {
-                blankdaysArray.push(i);
+                blankDaysArray.push(i);
             }
             let daysArray = [];
             for (var i = 1; i <= daysInMonth; i++) {
                 daysArray.push(i);
             }
-            this.blankdays = blankdaysArray;
-            this.no_of_days = daysArray;
+            this.blankDays = blankDaysArray;
+            this.noOfDays = daysArray;
         },
     };
 }

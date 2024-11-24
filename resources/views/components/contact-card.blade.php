@@ -13,10 +13,10 @@
     'has_border' => true,
 ])
 @php
-    $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
-    $hover_effect = filter_var($hover_effect, FILTER_VALIDATE_BOOLEAN);
-    $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
-    $has_border = filter_var($has_border, FILTER_VALIDATE_BOOLEAN);
+    $has_shadow = parseBladewindVariable($has_shadow);
+    $hover_effect = parseBladewindVariable($hover_effect);
+    $hasShadow = parseBladewindVariable($hasShadow);
+    $has_border = parseBladewindVariable($has_border);
     if(!$hasShadow) $has_shadow = $hasShadow;
 @endphp
 <x-bladewind::card

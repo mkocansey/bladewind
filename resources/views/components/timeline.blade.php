@@ -21,11 +21,11 @@
     'position' => 'center',
 ])
 @php
-    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);
-    $completed = filter_var($completed, FILTER_VALIDATE_BOOLEAN);
+    $stacked = parseBladewindVariable($stacked);
+    $completed = parseBladewindVariable($completed);
     $completed = ($status !== 'pending') || $completed;
-    $last = filter_var($last, FILTER_VALIDATE_BOOLEAN);
-    $align_left = filter_var($align_left, FILTER_VALIDATE_BOOLEAN);
+    $last = parseBladewindVariable($last);
+    $align_left = parseBladewindVariable($align_left);
     $content = (!empty($label)) ? $label : $content;
     $anchor_size_css = ($anchor == 'big') ? "h-8 w-8" : "h-3 w-3";
     $anchor_css = sprintf('%s ' .(($completed) ? "bg-$color-500 " : "border-2 border-$color-500/50 "), $anchor_size_css);

@@ -32,11 +32,11 @@
     // reset variables for Laravel 8 support
     if ($labelPosition !== $label_position) $label_position = $labelPosition;
     $name = preg_replace('/[\s-]/', '_', $name);
-    $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
-    $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
-    $justified = filter_var($justified, FILTER_VALIDATE_BOOLEAN);
+    $disabled = parseBladewindVariable($disabled);
+    $checked = parseBladewindVariable($checked);
+    $justified = parseBladewindVariable($justified);
     $bar = (!in_array($bar, ['thin', 'thick', 'thicker'])) ? 'thick' : $bar;
-    $colour = (!in_array($color, ['primary', 'red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'purple', 'orange', 'fuchsia', 'indigo', 'violet'])) ? 'primary' : $color;
+    $colour = defaultBladewindColour($color);
     $bar_colour = "peer-checked:bg-$colour-600 after:border-$colour-100";
 @endphp
 

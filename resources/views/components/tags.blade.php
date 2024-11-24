@@ -14,9 +14,9 @@
     'class' => 'space-x-2 space-y-2',
 ])
 @php
-    $rounded = filter_var($rounded, FILTER_VALIDATE_BOOLEAN);
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    $tiny = filter_var($tiny, FILTER_VALIDATE_BOOLEAN);
+    $rounded = parseBladewindVariable($rounded);
+    $required = parseBladewindVariable($required);
+    $tiny = parseBladewindVariable($tiny);
     $max_selection = (!empty($max) && is_numeric($max)) ? $max : 9999999;
 @endphp
 

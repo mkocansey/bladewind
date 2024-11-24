@@ -95,17 +95,17 @@
 ])
 
 @php
-    $show_spinner = filter_var($show_spinner, FILTER_VALIDATE_BOOLEAN);
-    $showSpinner = filter_var($showSpinner, FILTER_VALIDATE_BOOLEAN);
-    $has_spinner = filter_var($has_spinner, FILTER_VALIDATE_BOOLEAN);
-    $hasSpinner = filter_var($hasSpinner, FILTER_VALIDATE_BOOLEAN);
-    $can_submit = filter_var($can_submit, FILTER_VALIDATE_BOOLEAN);
-    $canSubmit = filter_var($canSubmit, FILTER_VALIDATE_BOOLEAN);
-    $outline = filter_var($outline, FILTER_VALIDATE_BOOLEAN);
-    $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
-    $circular = filter_var($circular, FILTER_VALIDATE_BOOLEAN);
-    $show_focus_ring = filter_var($show_focus_ring, FILTER_VALIDATE_BOOLEAN);
-    $showFocusRing = filter_var($showFocusRing, FILTER_VALIDATE_BOOLEAN);
+    $show_spinner = parseBladewindVariable($show_spinner);
+    $showSpinner = parseBladewindVariable($showSpinner);
+    $has_spinner = parseBladewindVariable($has_spinner);
+    $hasSpinner = parseBladewindVariable($hasSpinner);
+    $can_submit = parseBladewindVariable($can_submit);
+    $canSubmit = parseBladewindVariable($canSubmit);
+    $outline = parseBladewindVariable($outline);
+    $uppercasing = parseBladewindVariable($uppercasing);
+    $circular = parseBladewindVariable($circular);
+    $show_focus_ring = parseBladewindVariable($show_focus_ring);
+    $showFocusRing = parseBladewindVariable($showFocusRing);
 
     if($showSpinner) $show_spinner = $showSpinner;
     if($hasSpinner) $has_spinner = $hasSpinner;

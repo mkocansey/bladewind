@@ -28,11 +28,11 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
-    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
-    $show_error_inline = filter_var($show_error_inline, FILTER_VALIDATE_BOOLEAN);
-    $showErrorInline = filter_var($showErrorInline, FILTER_VALIDATE_BOOLEAN);
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
+    $add_clearing = parseBladewindVariable($add_clearing);
+    $addClearing = parseBladewindVariable($addClearing);
+    $show_error_inline = parseBladewindVariable($show_error_inline);
+    $showErrorInline = parseBladewindVariable($showErrorInline);
+    $required = parseBladewindVariable($required);
 
     if (!$addClearing) $add_clearing = $addClearing;
     if($showErrorInline) $show_error_inline = $showErrorInline;

@@ -14,17 +14,15 @@
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
-    $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
-    $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
+    $checked = parseBladewindVariable($checked);
+    $disabled = parseBladewindVariable($disabled);
     $label_css = (!empty($labelCss)) ? $labelCss : $label_css;
-    if(! in_array($color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
-        $color = 'primary';
-    }
-    $text_colour = ($color == 'black') ? 'text-black' : "text-$color-600 dark:bg-dark-800";
-    $ring_colour = ($color == 'black') ? 'ring-black' : "ring-$color-500";
-    $border_colour = ($color == 'black') ? 'border-slate-500/50' : "border-$color-500/50";
-    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
-    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
+    $colour = defaultBladewindColour($color);
+    $text_colour = ($colour == 'black') ? 'text-black' : "text-$colour-600 dark:bg-dark-800";
+    $ring_colour = ($colour == 'black') ? 'ring-black' : "ring-$colour-500";
+    $border_colour = ($colour == 'black') ? 'border-slate-500/50' : "border-$colour-500/50";
+    $add_clearing = parseBladewindVariable($add_clearing);
+    $addClearing = parseBladewindVariable($addClearing);
     if (!$addClearing) $add_clearing = $addClearing;
 @endphp
 

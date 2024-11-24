@@ -25,12 +25,15 @@
     'selectedValueClass' => config('bladewind.filepicker.selected_value_class', 'h-52'),
     // file to display in edit mode
     'url' => '',
+    // allow base64 output
+    'base64' => true,
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
-    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
+    $required = parseBladewindVariable($required);
+    $add_clearing = parseBladewindVariable($add_clearing);
+    $addClearing = parseBladewindVariable($addClearing);
+    $base64 = parseBladewindVariable($base64);
     if (!$addClearing) $add_clearing = $addClearing;
     if ($acceptedFileTypes !== $accepted_file_types) $accepted_file_types = $acceptedFileTypes;
     if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
@@ -60,7 +63,8 @@
                 class="bw-{{ $name }} @if($required) required @endif"
                 id="bw_{{ $name }}"
                 accept="{{ $accepted_file_types }}"/>
-        <textarea class="b64-{{ $name }}@if($required) required @endif" name="b64_{{ $name }}"></textarea>
+        <textarea class="b64-{{ $name }}@if($required) required @endif"
+                  @if($base64)name="b64_{{ $name }}"@endif></textarea>
         @if(!empty($selected_value))
             <input type="hidden" class="selected_{{ $name }}" name="selected_{{ $name }}" value="{{$selected_value}}"/>
         @endif

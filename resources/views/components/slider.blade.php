@@ -12,8 +12,8 @@
 ])
 
 @php
-    $show_values = filter_var($show_values, FILTER_VALIDATE_BOOLEAN);
-    $range = filter_var($range, FILTER_VALIDATE_BOOLEAN);
+    $show_values = parseBladewindVariable($show_values);
+    $range = parseBladewindVariable($range);
 
     $step = (is_numeric($step) && $step > 0) ? $step : 1;
     $min = (is_numeric($min) && $min >= 0) ? $min : 0;
@@ -21,8 +21,7 @@
     $selected = (is_numeric($selected) && $selected >= 0) ? $selected : 0;
     $selected = ($min != 0 && $selected== 0) ? $min : $selected;
     $selected = ($selected > $max) ? $max : $selected;
-
-    $color = (!in_array($color, ['primary', 'red', 'yellow', 'green', 'blue', 'pink', 'cyan', 'gray', 'black', 'purple', 'orange', 'violet', 'fuchsia', 'indigo'])) ? 'primary' : $color;
+    $colour = defaultBladewindColour($color);
 @endphp
 <div class="bw-slider-container w-full relative {{$class}}">
     <input type="range"
@@ -30,14 +29,14 @@
            max="{{$max}}"
            value="{{$selected}}"
            step="{{$step}}"
-           class="bw-slider min-slider-{{$name}} {{$color}}"/>
+           class="bw-slider min-slider-{{$name}} {{$colour}}"/>
     @if($range)
         <input type="range"
                min="{{$min}}"
                max="{{$max}}"
                value="{{$max_selected}}"
                step="{{$step}}"
-               class="bw-slider max-slider-{{$name}} {{$color}}"/>
+               class="bw-slider max-slider-{{$name}} {{$colour}}"/>
     @endif
 
     <div class="text-center pt-5 text-sm font-semibold @if(!$show_values) hidden @endif">

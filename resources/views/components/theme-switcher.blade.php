@@ -11,8 +11,8 @@
     'modular' => false,
 ])
 @php
-    $iconRight = filter_var($iconRight, FILTER_VALIDATE_BOOLEAN);
-    $modular = filter_var($modular, FILTER_VALIDATE_BOOLEAN);
+    $iconRight = parseBladewindVariable($iconRight);
+    $modular = parseBladewindVariable($modular);
 @endphp
 @once
     <x-bladewind::dropmenu :modular="$modular" icon_right="{{$iconRight}}">

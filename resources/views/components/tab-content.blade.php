@@ -11,7 +11,7 @@
 ])
 @php 
     $name = preg_replace('/[\s]/', '-', $name);
-    $active = filter_var($active, FILTER_VALIDATE_BOOLEAN);
+    $active = parseBladewindVariable($active);
     $active_css = sprintf(((!$active) ? 'hidden %s' : '%s'), $class);
 @endphp
 <div class="atab-content bw-tc-{{$name}} {{$active_css}}">

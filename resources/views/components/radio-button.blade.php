@@ -13,8 +13,8 @@
     'disabled' => false,
 ])
 @php
-    $checked = filter_var($checked, FILTER_VALIDATE_BOOLEAN);
-    $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
+    $checked = parseBladewindVariable($checked);
+    $disabled = parseBladewindVariable($disabled);
     $label_css = (!empty($labelCss)) ? $labelCss : $label_css;
 @endphp
 <x-bladewind::checkbox

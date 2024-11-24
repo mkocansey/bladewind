@@ -23,8 +23,8 @@
 @aware(['color' => 'primary', 'style' => 'simple'])
 @php
     $name = preg_replace('/[\s]/', '-', $name);
-    $active = filter_var($active, FILTER_VALIDATE_BOOLEAN);
-    $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
+    $active = parseBladewindVariable($active);
+    $disabled = parseBladewindVariable($disabled);
 @endphp
 
 <li class="mr-2 cursor-pointer atab atab-{{ $name }} relative "

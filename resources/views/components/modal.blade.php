@@ -93,20 +93,20 @@
     if ($cancelButtonLabel !== $cancel_button_label) $cancel_button_label = $cancelButtonLabel;
     if ($cancelButtonAction !== $cancel_button_action) $cancel_button_action = $cancelButtonAction;
 
-    $close_after_action = filter_var($close_after_action, FILTER_VALIDATE_BOOLEAN);
-    $closeAfterAction = filter_var($closeAfterAction, FILTER_VALIDATE_BOOLEAN);
-    $backdrop_can_close = filter_var($backdrop_can_close, FILTER_VALIDATE_BOOLEAN);
-    $backdropCanClose = filter_var($backdropCanClose, FILTER_VALIDATE_BOOLEAN);
-    $show_action_buttons = filter_var($show_action_buttons, FILTER_VALIDATE_BOOLEAN);
-    $showActionButtons = filter_var($showActionButtons, FILTER_VALIDATE_BOOLEAN);
-    $center_action_buttons = filter_var($center_action_buttons, FILTER_VALIDATE_BOOLEAN);
-    $centerActionButtons = filter_var($centerActionButtons, FILTER_VALIDATE_BOOLEAN);
-    $stretch_action_buttons = filter_var($stretch_action_buttons, FILTER_VALIDATE_BOOLEAN);
-    $stretchActionButtons = filter_var($stretchActionButtons, FILTER_VALIDATE_BOOLEAN);
-    $blur_backdrop = filter_var($blur_backdrop, FILTER_VALIDATE_BOOLEAN);
-    $blurBackdrop = filter_var($blurBackdrop, FILTER_VALIDATE_BOOLEAN);
-    $show_close_icon = filter_var($show_close_icon, FILTER_VALIDATE_BOOLEAN);
-    $showCloseIcon = filter_var($showCloseIcon, FILTER_VALIDATE_BOOLEAN);
+    $close_after_action = parseBladewindVariable($close_after_action);
+    $closeAfterAction = parseBladewindVariable($closeAfterAction);
+    $backdrop_can_close = parseBladewindVariable($backdrop_can_close);
+    $backdropCanClose = parseBladewindVariable($backdropCanClose);
+    $show_action_buttons = parseBladewindVariable($show_action_buttons);
+    $showActionButtons = parseBladewindVariable($showActionButtons);
+    $center_action_buttons = parseBladewindVariable($center_action_buttons);
+    $centerActionButtons = parseBladewindVariable($centerActionButtons);
+    $stretch_action_buttons = parseBladewindVariable($stretch_action_buttons);
+    $stretchActionButtons = parseBladewindVariable($stretchActionButtons);
+    $blur_backdrop = parseBladewindVariable($blur_backdrop);
+    $blurBackdrop = parseBladewindVariable($blurBackdrop);
+    $show_close_icon = parseBladewindVariable($show_close_icon);
+    $showCloseIcon = parseBladewindVariable($showCloseIcon);
 
     if (!$closeAfterAction) $close_after_action = $closeAfterAction;
     if (!$backdropCanClose) $backdrop_can_close = $backdropCanClose;

@@ -16,6 +16,7 @@
     'class' => 'ltr:mr-2 rtl:ml-2 mt-2',
     'dot_position' => config('bladewind.avatar.dot_position', 'bottom'),
     'dot_color' => config('bladewind.avatar.dot_color', 'primary'),
+    'bg_color' => config('bladewind.avatar.bg_color', null),
     'dotted' => config('bladewind.avatar.dotted', false),
     'label' => null,
     'plus_action' => null,
@@ -41,9 +42,9 @@
         'omg' => [ 'size_css' => 'size-28', 'dot_css' => 'left-[79px] rtl:right-[79px]', 'plus_text_size' => 'text-3xl' ]
     ];
 
-    $dotted = filter_var($dotted, FILTER_VALIDATE_BOOLEAN);
-    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);
-    $show_ring = filter_var($show_ring, FILTER_VALIDATE_BOOLEAN);
+    $dotted = parseBladewindVariable($dotted);
+    $stacked = parseBladewindVariable($stacked);
+    $show_ring = parseBladewindVariable($show_ring);
     $dot_position = (in_array($dot_position, ['top','bottom'])) ? $dot_position : 'bottom';
     $avatar = $image ?: asset('vendor/bladewind/images/avatar.png');
     $show_plus = (substr($avatar, 0, 1) == '+');
@@ -54,8 +55,9 @@
     $stacked_css = ($stacked) ? 'mb-3 !-mr-3' : '';
     $label = (!empty($label)) ? substr($label, 0, 2) : $label;
 
-    if(! in_array($dot_color, ['primary','blue','red','yellow','green','orange','purple','cyan','pink', 'black', 'violet', 'indigo', 'fuchsia'])) {
-        $dot_color = 'primary';
+    $dot_color = defaultBladewindColour($dot_color);
+    if( !empty($bg_color)) {
+        $bg_color = defaultBladewindColour($bg_color);
     }
 
     if(!function_exists("urlExists")){
@@ -73,9 +75,9 @@
     if($use_label) $avatar = $label;
 @endphp
 
-<div class="relative inline-block rounded-full bw-avatar {{ $image_size }} {{$stacked_css}} {{$class}} @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-gray-200/50 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
+<div class="relative inline-block rounded-full bw-avatar {{ $image_size }} {{$stacked_css}} {{$class}} @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-{{(!empty($bg_color) ? $bg_color : 'gray')}}-200 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
     @if($show_plus || $use_label)
-        <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold bg-white dark:bg-dark-600 dark:text-dark-300 @if($show_plus && !empty($plus_action)) plus-more cursor-pointer @endif"
+        <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold tracking-wide {{ (!empty($bg_color) ? 'text-'.$bg_color.'-600' : 'white')}}  bg-{{ (!empty($bg_color) ? $bg_color.'-100' : 'white')}} dark:bg-dark-600 dark:text-dark-300 @if($show_plus && !empty($plus_action)) plus-more cursor-pointer @endif"
              @if($show_plus && !empty($plus_action)) onclick="{!! $plus_action !!}" @endif>
             {{$avatar}}
         </div>
