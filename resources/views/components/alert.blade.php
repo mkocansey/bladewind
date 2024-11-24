@@ -40,10 +40,10 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $show_icon = filter_var($show_icon, FILTER_VALIDATE_BOOLEAN);
-    $showIcon = filter_var($showIcon, FILTER_VALIDATE_BOOLEAN);
-    $show_close_icon = filter_var($show_close_icon, FILTER_VALIDATE_BOOLEAN);
-    $showCloseIcon = filter_var($showCloseIcon, FILTER_VALIDATE_BOOLEAN);
+    $show_icon = parseBladewindVariable($show_icon);
+    $showIcon = parseBladewindVariable($showIcon);
+    $show_close_icon = parseBladewindVariable($show_close_icon);
+    $showCloseIcon = parseBladewindVariable($showCloseIcon);
 
     if(!$showIcon) $show_icon = $showIcon;
     if(!$showCloseIcon) $show_close_icon = $showCloseIcon;
@@ -63,11 +63,11 @@
     };
     $alternate_colour = $alternate_colour();
     $presets = (in_array($type, ['error','warning', 'info', 'success'])) ? [
-        'faint' => " bg-$alternate_colour-200/80 text-$alternate_colour-600",
+        'faint' => " bg-$alternate_colour-100/70 text-$alternate_colour-600",
         'dark' => "bg-$alternate_colour-500 text-white",
         'icon' => [ 'faint' => "text-$alternate_colour-600", 'dark' => "!text-$alternate_colour-50" ]
     ] : [   // not error, warning, info, success
-        'faint' => "bg-$type-200/80 text-$type-600",
+        'faint' => "bg-$type-100/70 text-$type-600",
         'dark' => "bg-$type-500 text-$type-50",
         'icon' => [ 'faint' => "text-$type-600", 'dark' => "!text-$type-50" ]
     ];

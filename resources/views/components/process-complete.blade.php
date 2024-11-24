@@ -24,7 +24,7 @@
     if ($processCompletedAs !== $process_completed_as) $process_completed_as = $processCompletedAs;
     if ($buttonLabel !== $button_label) $button_label = $buttonLabel;
     if ($buttonAction !== $button_action) $button_action = $buttonAction;
-    $hide = filter_var($hide, FILTER_VALIDATE_BOOLEAN);
+    $hide = parseBladewindVariable($hide);
     //------------------------------------------------------
     $name = preg_replace('/[\s]/', '-', $name);
 @endphp

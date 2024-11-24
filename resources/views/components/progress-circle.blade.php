@@ -142,7 +142,7 @@
 
     if ($showPercent) $show_percent = $showPercent;
     if ($showLabel) $show_label = $showLabel;
-    $animate = filter_var($animate, FILTER_VALIDATE_BOOLEAN);
+    $animate = parseBladewindVariable($animate);
     if(!in_array($size, [ 'tiny', 'small', 'medium', 'big', 'large' ]) && ! is_numeric($size)) $size = 'medium';
     $custom_size_text = [ 
       'size' => is_numeric($text_size) ? $text_size : 30, 

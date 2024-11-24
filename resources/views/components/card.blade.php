@@ -26,14 +26,14 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $compact = filter_var($compact, FILTER_VALIDATE_BOOLEAN);
-    $has_shadow = filter_var($has_shadow, FILTER_VALIDATE_BOOLEAN);
-    $hasShadow = filter_var($hasShadow, FILTER_VALIDATE_BOOLEAN);
-    $reduce_padding = filter_var($reduce_padding, FILTER_VALIDATE_BOOLEAN);
-    $reducePadding = filter_var($reducePadding, FILTER_VALIDATE_BOOLEAN);
-    $hover_effect = filter_var($hover_effect, FILTER_VALIDATE_BOOLEAN);
-    $has_border = filter_var($has_border, FILTER_VALIDATE_BOOLEAN);
-    $is_contact_card = filter_var($is_contact_card, FILTER_VALIDATE_BOOLEAN);
+    $compact = parseBladewindVariable($compact);
+    $has_shadow = parseBladewindVariable($has_shadow);
+    $hasShadow = parseBladewindVariable($hasShadow);
+    $reduce_padding = parseBladewindVariable($reduce_padding);
+    $reducePadding = parseBladewindVariable($reducePadding);
+    $hover_effect = parseBladewindVariable($hover_effect);
+    $has_border = parseBladewindVariable($has_border);
+    $is_contact_card = parseBladewindVariable($is_contact_card);
     if ( !$hasShadow ) $has_shadow = $hasShadow;
     if ( $reducePadding ) {
         $reduce_padding = $reducePadding;

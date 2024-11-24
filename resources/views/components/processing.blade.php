@@ -12,9 +12,9 @@
 ])
 @php
     $name = preg_replace('/[\s]/', '-', $name);
-    $hide = filter_var($hide, FILTER_VALIDATE_BOOLEAN);
+    $hide = parseBladewindVariable($hide);
 @endphp
 <div class="{{ $name }} text-center text-sm @if($hide) hidden @endif mt-6 {{$class}}">
-    <x-bladewind::spinner />
+    <x-bladewind::spinner/>
     <div class="my-3 text-gray-400 process-message">{{ $message }}</div>
 </div>

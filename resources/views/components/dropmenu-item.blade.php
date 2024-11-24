@@ -13,12 +13,12 @@
     'iconRight' => config('bladewind.dropmenu.item.icon_right', false),
 ])
 @php
-    $divider = filter_var($divider, FILTER_VALIDATE_BOOLEAN);
-    $divided = filter_var($divided, FILTER_VALIDATE_BOOLEAN);
-    $header = filter_var($header, FILTER_VALIDATE_BOOLEAN);
-    $hover = filter_var($hover, FILTER_VALIDATE_BOOLEAN);
-    $padded = filter_var($padded, FILTER_VALIDATE_BOOLEAN);
-    $iconRight = filter_var($iconRight, FILTER_VALIDATE_BOOLEAN);
+    $divider = parseBladewindVariable($divider);
+    $divided = parseBladewindVariable($divided);
+    $header = parseBladewindVariable($header);
+    $hover = parseBladewindVariable($hover);
+    $padded = parseBladewindVariable($padded);
+    $iconRight = parseBladewindVariable($iconRight);
     $icon_css .= ($iconRight) ? ' !ml-2 !-mr-1' : ' !mr-2 -ml-0.5 ';
 @endphp
 

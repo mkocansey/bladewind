@@ -119,13 +119,13 @@
 
 ])
 @php
-    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
-    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
-    $searchable = filter_var($searchable, FILTER_VALIDATE_BOOLEAN);
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    $readonly = filter_var($readonly, FILTER_VALIDATE_BOOLEAN);
-    $disabled = filter_var($disabled, FILTER_VALIDATE_BOOLEAN);
-    $empty_state = filter_var($empty_state, FILTER_VALIDATE_BOOLEAN);
+    $add_clearing = parseBladewindVariable($add_clearing);
+    $addClearing = parseBladewindVariable($addClearing);
+    $searchable = parseBladewindVariable($searchable);
+    $required = parseBladewindVariable($required);
+    $readonly = parseBladewindVariable($readonly);
+    $disabled = parseBladewindVariable($disabled);
+    $empty_state = parseBladewindVariable($empty_state);
     $max_selectable = (int) $max_selectable;
     $maxSelectable = (int) $maxSelectable;
 
@@ -262,5 +262,6 @@
     @if(!empty($filter))
     bw_{{ $input_name }}.filter('{{ $filter }}');
     @endif
-    @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();@endif
+    @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();
+    @endif
 </script>

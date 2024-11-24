@@ -36,7 +36,7 @@
     //--------------------------------------------------------------------
 
     $name = preg_replace('/[\s-]/', '_', $name);
-    $mask = filter_var($mask, FILTER_VALIDATE_BOOLEAN);
+    $mask = parseBladewindVariable($mask);
 
     $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[75px] text-5xl";
     $cloak_size = ($size == 'big') ? " h-24" : "h-16";

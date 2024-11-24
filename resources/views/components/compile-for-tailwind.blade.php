@@ -4,7 +4,11 @@
     // https://tailwindcss.com/docs/content-configuration#dynamic-class-names
 
     'css_classes_to_pre_compile' => [
-        'bg' => 'bg-primary-200/80 bg-blue-200/80 bg-red-200/80 bg-yellow-200/80 bg-green-200/80 bg-purple-200/80
+        'bg' => 'bg-primary-100/70 bg-blue-100/70 bg-red-100/70 bg-yellow-100/70 bg-green-100/70 bg-purple-100/70
+                bg-orange-100/70 bg-slate-100/70 bg-gray-100/70 bg-pink-100/70 bg-cyan-100/70 bg-violet-100/70
+                bg-indigo-100/70 bg-fuchsia-100/70
+
+                bg-primary-200/80 bg-blue-200/80 bg-red-200/80 bg-yellow-200/80 bg-green-200/80 bg-purple-200/80
                 bg-orange-200/80 bg-slate-200/80 bg-gray-200/80 bg-pink-200/80 bg-cyan-200/80 bg-violet-200/80
                 bg-indigo-200/80 bg-fuchsia-200/80
 
@@ -14,6 +18,8 @@
 
                 bg-primary-500 bg-secondary-500 bg-blue-500 bg-red-500 bg-yellow-500 bg-green-500 bg-purple-500 bg-orange-500 bg-slate-500
                 bg-gray-500 bg-pink-500 bg-cyan-500 bg-violet-500 bg-indigo-500 bg-fuchsia-500 bg-black
+                group-hover:bg-primary-500 group-hover:bg-secondary-500 group-hover:bg-blue-500 group-hover:bg-red-500 group-hover:bg-yellow-500 group-hover:bg-green-500 group-hover:bg-purple-500 group-hover:bg-orange-500 group-hover:bg-slate-500
+                group-hover:bg-gray-500 group-hover:bg-pink-500 group-hover:bg-cyan-500 group-hover:bg-violet-500 group-hover:bg-indigo-500 group-hover:bg-fuchsia-500 group-hover:bg-black
                 !bg-primary-500 !bg-secondary-500 !bg-blue-500 !bg-red-500 !bg-yellow-500 !bg-green-500 !bg-purple-500 !bg-orange-500 !bg-slate-500
                 !bg-gray-500 !bg-pink-500 !bg-cyan-500 !bg-violet-500 !bg-indigo-500 !bg-fuchsia-500 !bg-black
 
@@ -71,6 +77,10 @@
                             border-green-500 border-purple-500 border-orange-500 border-slate-500 border-gray-500
                             border-pink-500 border-cyan-500 border-violet-500 border-indigo-500 border-fuchsia-500
 
+                            border-l-primary-500 border-l-secondary-500 border-l-blue-500 border-l-red-500 border-l-yellow-500
+                            border-l-green-500 border-l-purple-500 border-l-orange-500 border-l-slate-500 border-l-gray-500
+                            border-l-pink-500 border-l-cyan-500 border-l-violet-500 border-l-indigo-500 border-l-fuchsia-500
+
                             border-primary-500/50 border-secondary-500/50 border-blue-500/50 border-red-500/50
                             border-yellow-500/50 border-green-500/50 border-purple-500/50 border-orange-500/50
                             border-slate-500/50 border-gray-500/50 border-pink-500/50 border-cyan-500/50
@@ -94,13 +104,19 @@
                             focus:border-primary-500',
 
             'rings' => 'ring-1 ring-2 ring-4 ring-8 focus:ring-1 focus:ring-2 focus:ring-4 focus:ring-8 focus:ring-black
+
+                            ring-primary-200 ring-blue-200 ring-red-200 ring-yellow-200
+                            ring-green-200 ring-purple-200 ring-orange-200 ring-slate-200
+                            ring-gray-200 ring-pink-200 ring-cyan-200 ring-violet-200
+                            ring-indigo-200 ring-fuchsia-200
+
                             focus:ring-primary-500 focus:ring-blue-500 focus:ring-red-500 focus:ring-yellow-500
                             focus:ring-green-500 focus:ring-purple-500 focus:ring-orange-500 focus:ring-slate-500
                             focus:ring-gray-500 focus:ring-pink-500 focus:ring-cyan-500 focus:ring-violet-500
                             focus:ring-indigo-500 focus:ring-fuchsia-500',
         ],
-        'sizes' =>
-            'w-6 w-7 w-10 w-11 w-14 w-16 w-24 w-36 h-6 h-7 h-10 h-11 h-14 h-16 h-24 h-36 sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12 lg:w-1/6 lg:w-1/5 lg:w-1/4 lg:w-1/3 lg:w-2/5 lg:w-2/3 lg:w-11/12',
+        'sizes' => 'w-6 w-7 w-10 w-11 w-14 w-16 w-24 w-36 h-6 h-7 h-10 h-11 h-14 h-16 h-24 h-36 sm:w-1/6 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12 lg:w-1/6 lg:w-1/5 lg:w-1/4 lg:w-1/3 lg:w-2/5 lg:w-2/3 lg:w-11/12',
         'positions' => '-bottom-1 -top-1',
+        'opacity' => 'opacity-0 opacity-5 opacity-10 opacity-20 opacity-25 opacity-30 opacity-40 opacity-50 opacity-60 opacity-70 opacity-75 opacity-80 opacity-90 opacity-95 opacity-100',
     ],
 ])

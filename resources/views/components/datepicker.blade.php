@@ -22,23 +22,6 @@
     // is the value of the date field required? used for form validation. default is false
     'required' => false,
 
-    // should the datepicker include a timepicker. The timepicker is hidden by default
-    'with_time' => config('bladewind.datepicker.with_time', false),
-    'withTime' => config('bladewind.datepicker.with_time', false),
-
-    // when timepicker is included, what should the time hours be displayed as. Default is 12-hour format
-    // available options are 12, 24
-    'hours_as' => config('bladewind.datepicker.hours_as', 12),
-    'hoursAs' => config('bladewind.datepicker.hours_as', 12),
-
-    // what format should the time be displayed in
-    'time_format' => 'hh:mm',
-    'timeFormat' => 'hh:mm',
-
-    // when the timepicker is included, should the time be displayed with seconds. Default is false
-    'show_seconds' => false,
-    'showSeconds' => false,
-
     //----------- used for range datepickers ----------------------------------
     // what should be the default date for the from date
     'default_date_from' => '',
@@ -93,30 +76,24 @@
     'stacked' => false,
 
     // size of the input field
-    'size' => 'medium'
+    'size' => 'medium',
+    'min_date' => '',
+    'max_date' => '',
 ])
 @php
     // reset variables for Laravel 8 support
     $default_date = $defaultDate;
-    $with_time = filter_var($with_time, FILTER_VALIDATE_BOOLEAN);
-    $withTime = filter_var($withTime, FILTER_VALIDATE_BOOLEAN);
-    if($withTime) $with_time = $withTime;
-    $hours_as = $hoursAs;
-    $time_format = $timeFormat;
-    $show_seconds = filter_var($show_seconds, FILTER_VALIDATE_BOOLEAN);
-    $showSeconds = filter_var($showSeconds, FILTER_VALIDATE_BOOLEAN);
-    if($showSeconds) $show_seconds = $showSeconds;
     $default_date_from = $defaultDateFrom;
     $default_date_to = $defaultDateTo;
     $date_from_label = $dateFromLabel;
     $date_to_label = $dateToLabel;
     $date_from_name = $dateFromName;
     $date_to_name = $dateToName;
-    $required = filter_var($required, FILTER_VALIDATE_BOOLEAN);
-    $validate = filter_var($validate, FILTER_VALIDATE_BOOLEAN);
-    $show_error_inline = filter_var($show_error_inline, FILTER_VALIDATE_BOOLEAN);
-    $use_placeholder = filter_var($use_placeholder, FILTER_VALIDATE_BOOLEAN);
-    $stacked = filter_var($stacked, FILTER_VALIDATE_BOOLEAN);
+    $required = parseBladewindVariable($required);
+    $validate = parseBladewindVariable($validate);
+    $show_error_inline = parseBladewindVariable($show_error_inline);
+    $use_placeholder = parseBladewindVariable($use_placeholder);
+    $stacked = parseBladewindVariable($stacked);
     //--------------------------------------------------------
     $name = preg_replace('/[\s-]/', '_', $name);
     $default_date = ($default_date != '') ? $default_date : '';
@@ -129,7 +106,7 @@
     }
 </style>
 @if($type == 'single')
-    <div x-data="app('{{ $default_date }}', '{{ strtoupper($format) }}', '{{$week_starts}}')"
+    <div x-data="app('{{ $default_date }}', '{{ strtoupper($format) }}', '{{$week_starts}}', '{{$min_date}}', '{{$max_date}}')"
          x-init="[initDate(), getNoOfDays()]" x-cloak>
         <div class="relative w-full">
             <input
@@ -146,7 +123,6 @@
                     x-model="datepickerValue"
                     type="text"
                     id="dtp-{{ $name }}"
-                    max_date="today"
                     name="{{$name}}"
                     x-ref="{{$name}}"
                     label="{{ ($use_placeholder) ? '' : $label }}"
@@ -158,6 +134,7 @@
                     suffix_is_icon="true"
                     suffix_icon_div_css="rtl:!right-[unset] rtl:!left-0"
                     suffix_icon_css="text-slate-300"
+                    max_date="{{$max_date}}"
                     required="{{$required}}"/>
 
             <div class="bg-white dark:bg-dark-700 mt-12 p-4 absolute top-0 left-0 z-50 drop-shadow-md dark:border dark:border-dark-600/70 rounded-lg"
@@ -188,8 +165,9 @@
                 } else {
                     month++;
                 } getNoOfDays()">
-                            <x-bladewind::icon name="arrow-right"
-                                               class="size-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
+                            <x-bladewind::icon
+                                    name="arrow-right"
+                                    class="size-5 text-white/50 hover:text-white inline-flex rtl:!rotate-180"/>
                         </button>
                     </div>
                 </div>
@@ -204,17 +182,19 @@
                 </div>
 
                 <div class="flex flex-wrap -mx-1">
-                    <template x-for="blankday in blankdays">
+                    <template x-for="blankDay in blankDays">
                         <div style="width: 14.28%" class="text-center border p-1 border-transparent text-sm"></div>
                     </template>
-                    <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                    <template x-for="(date, dateIndex) in noOfDays" :key="dateIndex">
                         <div style="width: 14.28%" class=" mb-1">
                             <div @click="getDateValue(date, '{{$format}}')" x-text="date"
                                  class="cursor-pointer text-center text-sm leading-8 rounded-md transition ease-in-out duration-100"
-                                 :class="{
-                            'bg-primary-100 dark:bg-dark-800': isToday(date) == true,
-                            'text-gray-600 dark:text-gray-100 hover:bg-primary-200 hover:dark:bg-dark-500': isToday(date) == false && isSelectedDate(date) == false,
-                            'bg-primary-600 dark:bg-dark-900 text-white hover:bg-opacity-75': isSelectedDate(date) == true }">
+                                 :class="{'bg-primary-100 dark:bg-dark-800': isToday(date) == true,
+                                 'text-gray-300 dark:text-gray-600 cursor-not-allowed': isDisabled(date),
+                                'text-gray-600 dark:text-gray-100 hover:bg-primary-200 hover:dark:bg-dark-500':
+                                !isDisabled(date) && !isSelectedDate(date),
+                                'bg-primary-600 dark:bg-dark-900 text-white hover:bg-opacity-75': isSelectedDate(date),}"
+                                 :aria-disabled="isDisabled(date)">
                             </div>
                         </div>
                     </template>

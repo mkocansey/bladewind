@@ -37,6 +37,7 @@ return [
         'size' => 'regular',
         'show_ring' => true,
         'dot_color' => 'primary',
+        'bg_color' => null,
         'dot_position' => 'bottom',
         'dotted' => false,
         'stacked' => false,
@@ -132,8 +133,6 @@ return [
     'datepicker' => [
         'format' => 'yyyy-mm-dd',
         'week_starts' => 'sun',
-        'with_time' => false,
-        'hours_as' => 12,
         'validate' => false,
         'show_error_inline' => false,
         'stacked' => true,

@@ -21,7 +21,7 @@
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
-    $transparent_icons = filter_var($transparent_icons, FILTER_VALIDATE_BOOLEAN);
+    $transparent_icons = parseBladewindVariable($transparent_icons);
     $min = !is_numeric($min) ? 0 : $min;
     $max = (!empty($max) && !is_numeric($max)) ? 100 : $max;
     $selected_value = (!empty($selected_value)) ? $selected_value : (($min != 0) ? $min : 0);

@@ -25,22 +25,22 @@
 ])
 @php
     // reset variables for Laravel 8 support
-    $can_close = filter_var($can_close, FILTER_VALIDATE_BOOLEAN);
-    $canClose = filter_var($canClose, FILTER_VALIDATE_BOOLEAN);
-    $add_id_prefix = filter_var($add_id_prefix, FILTER_VALIDATE_BOOLEAN);
-    $addIdPrefix = filter_var($addIdPrefix, FILTER_VALIDATE_BOOLEAN);
-    $rounded = filter_var($rounded, FILTER_VALIDATE_BOOLEAN);
-    $add_clearing = filter_var($add_clearing, FILTER_VALIDATE_BOOLEAN);
-    $addClearing = filter_var($addClearing, FILTER_VALIDATE_BOOLEAN);
-    $outline = filter_var($outline, FILTER_VALIDATE_BOOLEAN);
-    $tiny = filter_var($tiny, FILTER_VALIDATE_BOOLEAN);
-    $uppercasing = filter_var($uppercasing, FILTER_VALIDATE_BOOLEAN);
+    $can_close = parseBladewindVariable($can_close);
+    $canClose = parseBladewindVariable($canClose);
+    $add_id_prefix = parseBladewindVariable($add_id_prefix);
+    $addIdPrefix = parseBladewindVariable($addIdPrefix);
+    $rounded = parseBladewindVariable($rounded);
+    $add_clearing = parseBladewindVariable($add_clearing);
+    $addClearing = parseBladewindVariable($addClearing);
+    $outline = parseBladewindVariable($outline);
+    $tiny = parseBladewindVariable($tiny);
+    $uppercasing = parseBladewindVariable($uppercasing);
     if ($canClose) $can_close = $canClose;
     if (!$addIdPrefix) $add_id_prefix = $addIdPrefix;
 
 
     $colour_weight = [
-        'faint' => [ 'bg' => '200/80', 'border' => 200 ],
+        'faint' => [ 'bg' => '100/70', 'border' => 200 ],
         'dark' => [ 'bg' => 500, 'border' => '500/50' ],
     ];
 
