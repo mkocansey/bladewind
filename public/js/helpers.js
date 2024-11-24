@@ -10,7 +10,7 @@ let elName;
 /**
  * Shortcut for document.querySelector.
  * @param {string} element - The element to find in the DOM.
- * @return {(Object|boolean)} The matching DOM element.
+ * @return {(Element|boolean)} The matching DOM element.
  * @see {@link https://bladewindui.com/extra/helper-functions#domel}
  */
 const domEl = (element) => {
@@ -34,6 +34,9 @@ const dom_el = (element) => {
 const domEls = (element, scope = null) => {
     if (scope) {
         if (typeof scope === 'string') {
+            if (scope.indexOf('.') === -1 && scope.indexOf('#') === -1) {
+                console.log(`${scope} needs to contain . or # to target it in the DOM`);
+            }
             scope = document.querySelector(scope);
         }
         return scope.querySelectorAll(element);
@@ -107,7 +110,7 @@ const clearErrors = (obj) => {
 };
 /**
  * Modify the css for a DOM element.
- * @param {string} element - The class name of ID of the DOM element to modify.
+ * @param {Element|boolean} element - The class name of ID of the DOM element to modify.
  * @param {string} css - Comma separated list of css classes to apply to <element>.
  * @param {string} mode - Add|Remove. Determines if <css> should be added or removed from <element>.
  * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
@@ -277,7 +280,7 @@ const changeCssForDomArray = (elements, css, mode = 'add') => {
 const animateCSS = (element, animation) =>
     new Promise((resolve, reject) => {
         const animationName = `animate__${animation}`;
-        const node = document.querySelector(element);
+        const node = domEl(element);
         if (node) {
             node.classList.remove('hidden');
             node.classList.add('animate__animated', animationName);

@@ -18,6 +18,8 @@
 
                 bg-primary-500 bg-secondary-500 bg-blue-500 bg-red-500 bg-yellow-500 bg-green-500 bg-purple-500 bg-orange-500 bg-slate-500
                 bg-gray-500 bg-pink-500 bg-cyan-500 bg-violet-500 bg-indigo-500 bg-fuchsia-500 bg-black
+                group-hover:bg-primary-500 group-hover:bg-secondary-500 group-hover:bg-blue-500 group-hover:bg-red-500 group-hover:bg-yellow-500 group-hover:bg-green-500 group-hover:bg-purple-500 group-hover:bg-orange-500 group-hover:bg-slate-500
+                group-hover:bg-gray-500 group-hover:bg-pink-500 group-hover:bg-cyan-500 group-hover:bg-violet-500 group-hover:bg-indigo-500 group-hover:bg-fuchsia-500 group-hover:bg-black
                 !bg-primary-500 !bg-secondary-500 !bg-blue-500 !bg-red-500 !bg-yellow-500 !bg-green-500 !bg-purple-500 !bg-orange-500 !bg-slate-500
                 !bg-gray-500 !bg-pink-500 !bg-cyan-500 !bg-violet-500 !bg-indigo-500 !bg-fuchsia-500 !bg-black
 
