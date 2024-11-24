@@ -15,7 +15,7 @@
      data-open-multiple="{{$can_open_multiple ? '1':'0'}}">
     @if($grouped)
         <x-bladewind::card>
-            <div class="divide-y divide-gray-200/70 space-y-4">
+            <div class="divide-y divide-gray-200/70 dark:divide-dark-600 space-y-4">
                 {!! $slot !!}
             </div>
         </x-bladewind::card>
@@ -43,7 +43,7 @@
                 targetAccordion.setAttribute('data-open', isOpen ? '1' : '0');
                 if (content) content.style.maxHeight = isOpen ? `${content.scrollHeight}px` : null;
                 changeCss(arrow, 'rotate-180', isOpen ? 'add' : 'remove', true);
-                changeCss(title, 'text-gray-700', isOpen ? 'add' : 'remove', true);
+                changeCss(title, 'text-gray-700 dark:text-slate-100', isOpen ? 'add' : 'remove', true);
             };
 
             if (!canOpenMultiple) {
