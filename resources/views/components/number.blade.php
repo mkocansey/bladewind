@@ -7,8 +7,8 @@
     'min' => 0,
     // maximum number a user can enter when numeric=true
     'max' => 100,
-    // by what digit should incrementing happen
-    'increment' => 1,
+    // by what digit should incrementing be done
+    'step' => 1,
     // is this a required field? Default is false
     'required' => false,
     // value to set when in edit mode, or if you want to load the input with default text
@@ -26,7 +26,7 @@
     $transparent_icons = parseBladewindVariable($transparent_icons);
     $min = !is_numeric($min) ? 0 : $min;
     $max = (!empty($max) && !is_numeric($max)) ? 100 : $max;
-    $increment = !is_numeric($increment) ? 1 : $increment;
+    $step = !is_numeric($step) ? 1 : $step;
     $selected_value = (!empty($selected_value)) ? $selected_value : (($min != 0) ? $min : 0);
 
     $sizes = [
@@ -66,11 +66,11 @@
     changeCss('.bw-number-{{$name}} .prefix svg', '!size-4,size-6,!stroke-2', 'remove');
     changeCss('.bw-number-{{$name}} .suffix svg', '!size-4,size-6,!stroke-2', 'remove');
     domEl('.bw-number-{{$name}} .suffix').addEventListener('click', () => {
-        domEl('.bw-number-{{$name}} input.{{$name}}').value = domEl('.bw-number-{{$name}} input.{{$name}}').value + {{$increment}};
+        domEl('.bw-number-{{$name}} input.{{$name}}').value = parseInt(domEl('.bw-number-{{$name}} input.{{$name}}').value) + parseInt({{$step}});
         checkMinMax('{{$min}}', '{{$max}}', '{{$name}}', 1);
     });
     domEl('.bw-number-{{$name}} .prefix').addEventListener('click', () => {
-        domEl('.bw-number-{{$name}} input.{{$name}}').value = domEl('.bw-number-{{$name}} input.{{$name}}').value - {{$increment}};
+        domEl('.bw-number-{{$name}} input.{{$name}}').value = parseInt(domEl('.bw-number-{{$name}} input.{{$name}}').value) - parseInt({{$step}});
         checkMinMax('{{$min}}', '{{$max}}', '{{$name}}', 1);
     });
 </script>
