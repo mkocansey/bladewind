@@ -24,7 +24,9 @@
     $next_button_status_css = ($default_page == $total_pages) ? $inactive_css : $default_button_css;
     $prev_button_status_css = ($default_page == 1) ? $inactive_css : $default_button_css;
     $to = $page_size*$default_page;
+    $to = ($to > $total_records) ? $total_records : $to;
     $from = $to - ($page_size-1);
+    $from = ($to == $total_records) ? 1 : $from;
     $prev_page = $default_page-1;
     $next_page = $default_page+1;
     $prev_page = ($prev_page <= 0) ? 0 : $default_page-1;
