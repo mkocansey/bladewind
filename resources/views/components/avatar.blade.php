@@ -46,6 +46,7 @@
     $stacked = parseBladewindVariable($stacked);
     $show_ring = parseBladewindVariable($show_ring);
     $dot_position = (in_array($dot_position, ['top','bottom'])) ? $dot_position : 'bottom';
+    $size = (in_array($size, ['tiny','small','medium', 'regular','big','huge','omg'])) ? $size : 'regular';
     $avatar = $image ?: asset('vendor/bladewind/images/avatar.png');
     $show_plus = (substr($avatar, 0, 1) == '+');
     $image_size = $sizes[$size]['size_css'];

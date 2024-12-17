@@ -6,7 +6,9 @@
     'css_classes_to_pre_compile' => [
         'bg' => 'bg-primary-100/70 bg-blue-100/70 bg-red-100/70 bg-yellow-100/70 bg-green-100/70 bg-purple-100/70
                 bg-orange-100/70 bg-slate-100/70 bg-gray-100/70 bg-pink-100/70 bg-cyan-100/70 bg-violet-100/70
-                bg-indigo-100/70 bg-fuchsia-100/70
+                bg-indigo-100/70 bg-fuchsia-100/70 bg-primary-100 bg-blue-100 bg-red-100 bg-yellow-100 bg-green-100 bg-purple-100
+                bg-orange-100 bg-slate-100 bg-gray-100 bg-pink-100 bg-cyan-100 bg-violet-100
+                bg-indigo-100 bg-fuchsia-100
 
                 bg-primary-200/80 bg-blue-200/80 bg-red-200/80 bg-yellow-200/80 bg-green-200/80 bg-purple-200/80
                 bg-orange-200/80 bg-slate-200/80 bg-gray-200/80 bg-pink-200/80 bg-cyan-200/80 bg-violet-200/80

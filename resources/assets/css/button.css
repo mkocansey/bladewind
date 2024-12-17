@@ -4,7 +4,7 @@
     }
 
     .bw-button-circle {
-        @apply focus:outline-none focus:!ring-opacity-25 focus:ring-offset-0 inline-block place-items-center align-top
+        @apply focus:outline-none focus:!ring-opacity-25 focus:ring-offset-0 rounded-full inline-flex place-items-center justify-center
     }
 
     .bw-button.tiny {
