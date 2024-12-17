@@ -11,9 +11,7 @@
     'can_submit' => false,
     'canSubmit' => false,
     'disabled' => false,
-    'tag' => 'button',
     'icon' => '',
-    'radius' => 'full',
     'button_text_css' => null,
     'show_focus_ring' => true,
     'outline' => false,
@@ -29,12 +27,12 @@
         :disabled="$disabled"
         :show_focus_ring="$show_focus_ring"
         :outline="$outline"
-        :tag="$tag"
-        :icon="$icon"
+        tag="button"
+        circular="true"
         radius="full"
+        :icon="$icon"
         :button_text_css="$button_text_css"
         :title="$title"
         :type="$type"
-        circular="true"
         :onclick="$onclick"
         :href="$href"/>

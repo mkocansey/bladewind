@@ -167,7 +167,7 @@
 <div class="@if($has_border && !$celled) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
     <div class="w-full">
         @if($searchable)
-            <div class="bw-table-filter-bar">
+            <div class="bw-table-filter-bar @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif">
                 <x-bladewind::input
                         name="bw-search-{{$name}}"
                         placeholder="{{$search_placeholder}}"

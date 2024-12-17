@@ -59,6 +59,7 @@
     $text_color_css = ($outline) ? "text-$color-600 dark:!text-$color-300" : "text-$color-$text_colour_weight[$shade]";
     if( (!empty($name) && !empty($value)) ) {
         $can_close = false;
+        $value = str_replace(' ', '-', $value);
         $bg_border_colour_css = "bg-$color-200/80 hover:bg-$color-600 cursor-pointer selectable bw-$name-$value";
         $text_color_css = "text-$color-600 hover:text-$color-50";
         $selectable = true;

@@ -69,31 +69,7 @@
 
     // display button text as uppercase or as user entered
     'uppercasing' => config('bladewind.button.uppercasing', true),
-
-    // css fpr various radii
-    'roundness'     => [
-        'none'      => 'rounded-none',
-        'small'     => 'rounded-md',
-        'medium'    => 'rounded-xl',
-        'full'      => 'rounded-full',
-    ],
-
-    'icon_size' => [
-        'circular' => [
-            'tiny' => '!size-[18px]',
-            'small' => '!size-[22px]',
-            'regular' => '!size-6',
-            'medium' => '!size-7',
-            'big' => '!size-9',
-        ],
-        'tiny' => '!size-3 !mt-[-2px]',
-        'small' => '!size-3.5',
-        'regular' => '!size-4',
-        'medium' => '!size-[20px]',
-        'big' => '!size-[25px]',
-    ],
 ])
-
 @php
     $show_spinner = parseBladewindVariable($show_spinner);
     $showSpinner = parseBladewindVariable($showSpinner);
@@ -111,6 +87,28 @@
     if($hasSpinner) $has_spinner = $hasSpinner;
     if($canSubmit) $can_submit = $canSubmit;
     if(!$showFocusRing) $show_focus_ring = $showFocusRing;
+
+    $roundness  = [
+        'none'      => 'rounded-none',
+        'small'     => 'rounded-md',
+        'medium'    => 'rounded-xl',
+        'full'      => 'rounded-full',
+    ];
+
+    $icon_size = [
+        'circular' => [
+            'tiny' => '!size-[16px]',
+            'small' => '!size-[22px]',
+            'regular' => '!size-6',
+            'medium' => '!size-7',
+            'big' => '!size-9',
+        ],
+        'tiny' => '!size-3 !mt-[-2px]',
+        'small' => '!size-3.5',
+        'regular' => '!size-4',
+        'medium' => '!size-[20px]',
+        'big' => '!size-[25px]',
+    ];
 
     $colour = (!empty($color)) ? $color : $type;
     $outline_colour =   "border-$colour-500/50 focus:ring-$colour-500 hover:border-$colour-600
@@ -146,7 +144,9 @@
     @if(!empty($icon) && !$icon_right)
         <x-bladewind::icon :name="$icon" class="stroke-2 {{$icon_css}}" />
     @endif
-    <span class="grow {{ $button_text_css }}">{{ $slot }}</span>
+    @if (!$circular)
+        <span class="grow {{ $button_text_css }}">{{ $slot }}</span>
+    @endif
     @if(!empty($icon) && $icon_right && !$has_spinner)
         <x-bladewind::icon :name="$icon" class="stroke-2 {{$icon_css}}" />
     @endif

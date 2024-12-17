@@ -1,5 +1,5 @@
 @props([
-    'name' => 'rating',
+    'name' => defaultBladewindName(),
     'rating' => 0,
     'size' => config('bladewind.rating.size', 'small'),
     'color' => 'orange',
@@ -13,7 +13,7 @@
     ],
 ])
 @php
-    $name = str_replace(' ', '-', $name); 
+    $name = str_replace(' ', '-', $name);
     $size_adjustment = ($size == 'big') ? 2 : 1;
     $clickable = parseBladewindVariable($clickable);
 @endphp
