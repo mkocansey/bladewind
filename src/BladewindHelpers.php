@@ -48,5 +48,10 @@ function parseBladewindVariable($variable, $parse_as = 'bool')
 
 function defaultBladewindName($prefix = 'blwd_'): string
 {
-    return str_replace('-', '_', uniqid($prefix));
+    return parseBladewindName(uniqid($prefix));
+}
+
+function parseBladewindName($name): string
+{
+    return str_replace('-', '_', $name);
 }
