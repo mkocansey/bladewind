@@ -224,7 +224,7 @@
         <script>positionSuffix('{{$name}}');</script>
     @endif
 </div>
-<input type="hidden" class="bw-raw-select"/>
+
 <script>
     @if($numeric)
     domEl('input.{{$name}}').addEventListener('keydown', (event) => {
