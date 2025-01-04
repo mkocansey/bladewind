@@ -11,6 +11,7 @@ const ACCEPTED_BLADEWIND_COLOURS = [
     'purple',
     'cyan',
     'pink',
+    'gray',
     'black',
     'violet',
     'indigo',

@@ -2,27 +2,27 @@
     'name' => defaultBladewindName(),
     'icon' => null,
     'avatar' => null,
-    'avatar_size' => 'medium',
-    'compact' => config('bladewind.selectable_card.compact', false),
+    'avatarSize' => config('bladewind.checkcards.avatar_size', 'medium'),
     'class' => null,
-    'color' => config('bladewind.checkcards.color', 'primary'),
-    'radius' => config('bladewind.checkcards.rounded', 'medium'),
-    'border_width' => 2,
-    'border_color' => 'gray',
-    'align_items' => 'top',
-    'max' => 1,
     'required' => false,
-    'show_error' => config('bladewind.checkcards.show_error', false),
-    'auto_select_new' => config('bladewind.checkcards.auto_select_new', true),
-    'error_heading' => config('bladewind.checkcards.error_heading', ''),
-    'error_message' => config('bladewind.checkcards.error_message', ''),
-    'selected_value' => '',
+    'max' => 1,
+    'compact' => config('bladewind.selectable_card.compact', false),
+    'color' => config('bladewind.checkcards.color', 'primary'),
+    'radius' => config('bladewind.checkcards.radius', 'medium'),
+    'borderWidth' => config('bladewind.checkcards.border_width', 2),
+    'borderColor' => config('bladewind.checkcards.border_color', 'gray'),
+    'alignItems' => config('bladewind.checkcards.align_items', 'top'),
+    'showError' => config('bladewind.checkcards.show_error', false),
+    'autoSelectNew' => config('bladewind.checkcards.auto_select_new', true),
+    'errorHeading' => config('bladewind.checkcards.error_heading', 'Max selection'),
+    'errorMessage' => config('bladewind.checkcards.error_message', 'You have selected the maximum cards allowed'),
+    'selectedValue' => '',
 ])
 @php
     $name = parseBladewindName($name);
     $required = parseBladewindVariable($required);
-    $show_error = parseBladewindVariable($show_error);
-    $auto_select_new = parseBladewindVariable($auto_select_new);
+    $show_error = parseBladewindVariable($showError);
+    $auto_select_new = parseBladewindVariable($autoSelectNew);
     $max_selection = (!empty($max) && is_numeric($max) && $max > 0) ? $max : 1;
     if($show_error) $auto_select_new = false;
 @endphp
@@ -30,8 +30,8 @@
 <div class="bw-checkcards-{{$name}} {{$class}}">
     <x-bladewind::input
             :name="$name"
-            :error_message="$error_message"
-            :error_heading="$error_heading"
+            :error_message="$errorMessage"
+            :error_heading="$errorHeading"
             data-max-selection="{{$max_selection}}"
             data-show-error="{{$show_error}}"
             data-auto-select="{{$auto_select_new}}"

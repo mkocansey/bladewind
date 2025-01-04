@@ -2,28 +2,28 @@
     'class' => null,
     'title' => '',
     'value' => '',
+    'icon_css' => '',
 ])
 @aware([
     'compact' => config('bladewind.checkcards.compact', false),
     'color' => config('bladewind.checkcards.color', 'primary'),
-    'radius' => config('bladewind.checkcards.rounded', false),
+    'radius' => config('bladewind.checkcards.radius', false),
     'name' => null,
-    'align_items' => 'top',
-    'radius' => 'medium',
-    'border_color' => 'gray',
-    'border_width' => 2,
-    'selected_value' => '',
-    'checkbox_position' => 'left',
+    'radius' => config('bladewind.checkcards.radius', 'medium'),
+    'borderWidth' => config('bladewind.checkcards.border_width', 2),
+    'borderColor' => config('bladewind.checkcards.border_color', 'gray'),
+    'alignItems' => config('bladewind.checkcards.align_items', 'top'),
+    'selectedValue' => '',
     'icon' => null,
     'avatar' => null,
-    'avatar_size' => 'medium',
+    'avatarSize' => config('bladewind.checkcards.avatar_size', 'medium'),
 ])
 @php
     $name = parseBladewindName($name);
     $compact = parseBladewindVariable($compact);
     $colour = defaultBladewindColour($color);
-    $border_colour = defaultBladewindColour($border_color, 'gray');
-    $border_width = !in_array($border_width, ['', 2,4,8]) ? '' : '-'.$border_width;
+    $border_colour = defaultBladewindColour($borderColor);
+    $border_width = !in_array($borderWidth, ['', 2,4,8]) ? '' : '-'.$borderWidth;
     $radius = !in_array($radius, ['none', 'small', 'medium', 'full']) ? 'small' : $radius;
     $radii = [
         'none' => 'rounded-none',
@@ -34,8 +34,8 @@
 @endphp
 <div @class([
         'bg-white dark:bg-dark-800/30 bw-selectable-card cursor-pointer focus:outline-none flex',
-        'items-center' => ($align_items == 'center'),
-        'items-start' => ($align_items != 'center'),
+        'items-center' => ($alignItems == 'center'),
+        'items-start' => ($alignItems != 'center'),
         "border$border_width border-$border_colour-400/50 hover:border-$border_colour-500/80 dark:border-dark-500 dark:hover:border-dark-500",
         $class => (!empty($class)),
         $radii[$radius],
@@ -47,10 +47,10 @@
     <div class="flex">
         @if(!empty($icon))
             <x:bladewind::icon name="{{$icon}}"
-                               class="rounded-full p-2 size-11 bg-{{$colour}}-100/70 text-{{$colour}}-600 mr-3"/>
+                               class="rounded-full p-2 size-11 bg-{{$colour}}-100/70 text-{{$colour}}-600 mr-3 {{$icon_css}}"/>
         @elseif(!empty($avatar))
-            <x-bladewind::avatar image="{{$avatar}}" bg_color="{{$colour}}" :size="$avatar_size"
-                                 class="mr-3.5 {{($align_items!='center') ? 'mt-2':''}}"/>
+            <x-bladewind::avatar image="{{$avatar}}" bg_color="{{$colour}}" :size="$avatarSize"
+                                 class="mr-3.5 {{($alignItems!='center') ? 'mt-2':''}}"/>
         @endif
     </div>
     <div class="grow">
@@ -112,8 +112,8 @@
     </script>
 @endonce
 
-@if($selected_value !== '')
-    @if(in_array($value, explode(',', $selected_value)))
+@if($selectedValue !== '')
+    @if(in_array($value, explode(',', $selectedValue)))
         <script>selectCheckcard('{{$name}}', '{{$value}}', '{{$border_colour}}'); </script>
     @endif
 @endif

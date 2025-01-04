@@ -136,6 +136,7 @@ return [
         'auto_select_new' => true,
         'color' => 'primary',
         'radius' => 'medium',
+        'avatar_size' => 'medium',
         'border_width' => 2,
         'border_color' => 'gray',
         'align_items' => 'top',

@@ -72,7 +72,8 @@
         }
     }
 
-    $use_label = (!urlExists($avatar) && $label) || (strlen($image) <= 3);
+//    $use_label = (!urlExists($avatar) && $label) || (strlen($image) <= 3);
+    $use_label = ($label) || (strlen($image) <= 3);
     if($use_label) $avatar = $label ?? $image; // $label will still be null if strlen($image) <= 3
 @endphp
 
