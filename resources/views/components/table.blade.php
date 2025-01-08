@@ -252,7 +252,7 @@
                                 @php $row_id =  $row['id']; @endphp
                                 <tr data-id="{{ $row_id }}">
                                     @foreach($table_headings as $th)
-                                        @if($th !== $groupby)
+                                        @if($th !== $groupby && in_array($loop->index, $indices))
                                             <td data-row-id="{{ $row_id }}"
                                                 data-column="{{ $th }}">{!! $row[$th] !!}</td>
                                         @endif
