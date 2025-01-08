@@ -470,17 +470,25 @@
                     document.body.appendChild(tbody);
 
                     rows.forEach(row => {
-                        row.sortKey = row.cells[sortColumnIndex].innerText.toLowerCase();
+                        const cellValue = row.cells[sortColumnIndex].innerText.trim();
+                        row.sortKey = isNumeric(cellValue) ? parseFloat(cellValue) : cellValue.toLowerCase();
                     });
 
                     rows.sort((a, b) => {
-                        const result = a.sortKey.localeCompare(b.sortKey);
-                        return sortDirection === "asc" ? result : -result;
+                        if (typeof a.sortKey === "number" && typeof b.sortKey === "number") {
+                            return sortDirection === "asc" ? a.sortKey - b.sortKey : b.sortKey - a.sortKey;
+                        } else {
+                            return sortDirection === "asc" ? a.sortKey.localeCompare(b.sortKey) : b.sortKey.localeCompare(a.sortKey);
+                        }
                     });
 
                     rows.forEach(row => tbody.appendChild(row));
                     sortTable.appendChild(tbody);
                 }
+            }
+
+            const isNumeric = (value) => {
+                return !isNaN(value) && !isNaN(parseFloat(value));
             }
 
             const changeColumnSortIcon = (column, table, direction) => {
