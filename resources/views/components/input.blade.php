@@ -239,7 +239,7 @@
     @endif
 
     @if($clearable)
-    domEl('input.{{$name}}').addEventListener('keyup', (event) => {
+    domEl('input.{{$name}}').addEventListener('input', (event) => {
         makeClearable('{{$name}}');
     });
     @endif
