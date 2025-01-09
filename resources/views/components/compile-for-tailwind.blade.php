@@ -75,6 +75,10 @@
                             border-green-200 border-purple-200 border-orange-200 border-slate-200 border-gray-200
                             border-pink-200 border-cyan-200 border-violet-200 border-indigo-200 border-fuchsia-200
 
+                            border-primary-400/50 border-secondary-400/50 border-blue-400/50 border-red-400/50 border-yellow-400/50
+                            border-green-400/50 border-purple-400/50 border-orange-400/50 border-slate-400/50 border-gray-400/50
+                            border-pink-400/50 border-cyan-400/50 border-violet-400/50 border-indigo-400/50 border-fuchsia-400/50
+
                             border-primary-500 border-secondary-500 border-blue-500 border-red-500 border-yellow-500
                             border-green-500 border-purple-500 border-orange-500 border-slate-500 border-gray-500
                             border-pink-500 border-cyan-500 border-violet-500 border-indigo-500 border-fuchsia-500
@@ -88,15 +92,15 @@
                             border-slate-500/50 border-gray-500/50 border-pink-500/50 border-cyan-500/50
                             border-violet-500/50 border-indigo-500/50 border-fuchsia-500/50
 
+                            hover:border-primary-500/80 hover:border-secondary-500/80 hover:border-blue-500/80 hover:border-red-500/80
+                            hover:border-yellow-500/80 hover:border-green-500/80 hover:border-purple-500/80 hover:border-orange-500/80
+                            hover:border-slate-500/80 hover:border-gray-500/80 hover:border-pink-500/80 hover:border-cyan-500/80
+                            hover:border-violet-500/80 hover:border-indigo-500/80 hover:border-fuchsia-500/80
+
                             hover:border-primary-600 hover:border-secondary-600 hover:border-blue-600 hover:border-red-600
                             hover:border-yellow-600 hover:border-green-600 hover:border-purple-600 hover:border-orange-600
                             hover:border-slate-600 hover:border-gray-600 hover:border-pink-600 hover:border-cyan-600
                             hover:border-violet-600 hover:border-indigo-600 hover:border-fuchsia-600
-
-                            dark:hover:border-primary-500 dark:hover:border-secondary-500 dark:hover:border-blue-500 dark:hover:border-red-500
-                            dark:hover:border-yellow-500 dark:hover:border-green-500 dark:hover:border-purple-500 dark:hover:border-orange-500
-                            dark:hover:border-slate-500 dark:hover:border-gray-500 dark:hover:border-pink-500 dark:hover:border-cyan-500
-                            dark:hover:border-violet-500 dark:hover:border-indigo-500 dark:hover:border-fuchsia-500
 
                             active:border-primary-600 active:border-secondary-600 active:border-blue-600 active:border-red-600
                             active:border-yellow-600 active:border-green-600 active:border-purple-600 active:border-orange-600

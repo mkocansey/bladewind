@@ -224,7 +224,7 @@
         <script>positionSuffix('{{$name}}');</script>
     @endif
 </div>
-<input type="hidden" class="bw-raw-select"/>
+
 <script>
     @if($numeric)
     domEl('input.{{$name}}').addEventListener('keydown', (event) => {
@@ -239,7 +239,7 @@
     @endif
 
     @if($clearable)
-    domEl('input.{{$name}}').addEventListener('keyup', (event) => {
+    domEl('input.{{$name}}').addEventListener('input', (event) => {
         makeClearable('{{$name}}');
     });
     @endif

@@ -211,8 +211,8 @@
 
 <script>
     domEl('.bw-{{$name}}-modal').addEventListener('click', function (e) {
-        let backdrop_can_close = this.getAttribute('data-backdrop-can-close');
-        if (backdrop_can_close) hideModal('{{$name}}');
+        let backdropCanClose = this.getAttribute('data-backdrop-can-close');
+        if (backdropCanClose) hideModal('{{$name}}');
     });
 
     domEl('.bw-{{$name}}').addEventListener('click', function (e) {
@@ -229,10 +229,10 @@
 
     document.addEventListener('keyup', function (e) {
         if (e.key === "Escape") {
-            if (current_modal !== undefined && current_modal.length > 0) {
-                let modal_name = current_modal[(current_modal.length - 1)];
-                if (domEl(`.bw-${modal_name}-modal`).getAttribute('data-backdrop-can-close') === '1') {
-                    hideModal(modal_name);
+            if (currentModal !== undefined && currentModal.length > 0) {
+                let modalName = currentModal[(currentModal.length - 1)];
+                if (domEl(`.bw-${modalName}-modal`).getAttribute('data-backdrop-can-close') === '1') {
+                    hideModal(modalName);
                     e.stopImmediatePropagation();
                 }
             }

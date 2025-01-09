@@ -72,13 +72,14 @@
         }
     }
 
-    $use_label = (!urlExists($avatar) && $label);
-    if($use_label) $avatar = $label;
+//    $use_label = (!urlExists($avatar) && $label) || (strlen($image) <= 3);
+    $use_label = ($label) || (strlen($image) <= 3);
+    if($use_label) $avatar = $label ?? $image; // $label will still be null if strlen($image) <= 3
 @endphp
 
 <div class="relative inline-block rounded-full bw-avatar {{ $image_size }} {{$stacked_css}} {{$class}} @if($show_ring) ring-2 ring-offset-2 ring-offset-white ring-{{(!empty($bg_color) ? $bg_color : 'gray')}}-200 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
     @if($show_plus || $use_label)
-        <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold tracking-wide {{ (!empty($bg_color) ? 'text-'.$bg_color.'-600' : 'white')}}  bg-{{ (!empty($bg_color) ? $bg_color.'-100' : 'white')}} dark:bg-dark-600 dark:text-dark-300 @if($show_plus && !empty($plus_action)) plus-more cursor-pointer @endif"
+        <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold tracking-wide {{ (!empty($bg_color) ? 'text-'.$bg_color.'-600' : 'white')}}  bg-{{ (!empty($bg_color) ? $bg_color.'-100/70' : 'white')}} dark:bg-dark-600 dark:text-dark-300 @if($show_plus && !empty($plus_action)) plus-more cursor-pointer @endif"
              @if($show_plus && !empty($plus_action)) onclick="{!! $plus_action !!}" @endif>
             {{$avatar}}
         </div>
