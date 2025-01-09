@@ -1,26 +1,30 @@
 @props([
     'image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
-    'button_label' => '', // button will not be displayed if no text is passed
     'buttonLabel' => '',
     'message' => '',   // message to display
     // true or false. set to false if you want to fully control the content
-    'show_image' => config('bladewind.empty_state.show_image', true),
     'showImage' => config('bladewind.empty_state.show_image', true),
     'onclick' => '',
     'class' => '',
-    'image_css' => '',
+    'imageCss' => '',
+    'imageSize' => 'medium',
 ])
 @php
-    // reset variables for Laravel 8 support
-    $show_image = parseBladewindVariable($show_image);
-    $showImage = parseBladewindVariable($showImage);
-    if ($buttonLabel !== $button_label) $button_label = $buttonLabel;
-    if (! $showImage) $show_image = $showImage;
+    $show_image = parseBladewindVariable($showImage);
+    $button_label = $buttonLabel;
+    $size = in_array($imageSize, ['small','medium','large','xl','omg']) ? $imageSize : 'medium';
+    $sizes = [
+        'small' => 'h-28',
+        'medium' => 'h-40',
+        'large' => 'h-64',
+        'xl' => 'h-80',
+        'omg' => 'h-96',
+];
 @endphp
 <div class="text-center px-4 pb-6 bw-empty-state {{$class}}">
     @if($show_image == 'true')
-        <img src="{{ $image }}" class="h-40 mx-auto mb-3 {{$image_css}}"/>
+        <img src="{{ $image }}" class="{{$sizes[$size]}} mx-auto mb-3 {{$imageCss}}"/>
     @endif
     @if($heading != '')
         <div class="text-slate-700 dark:text-dark-400 text-2xl pt-4 pb-3 px-4 font-light">{!!$heading!!}</div>

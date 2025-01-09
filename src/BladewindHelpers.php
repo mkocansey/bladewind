@@ -11,6 +11,7 @@ const ACCEPTED_BLADEWIND_COLOURS = [
     'purple',
     'cyan',
     'pink',
+    'gray',
     'black',
     'violet',
     'indigo',
@@ -48,5 +49,10 @@ function parseBladewindVariable($variable, $parse_as = 'bool')
 
 function defaultBladewindName($prefix = 'blwd_'): string
 {
-    return str_replace('-', '_', uniqid($prefix));
+    return parseBladewindName(uniqid($prefix));
+}
+
+function parseBladewindName($name): string
+{
+    return str_replace('-', '_', $name);
 }

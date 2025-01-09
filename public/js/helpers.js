@@ -317,9 +317,9 @@ const showModal = (element) => {
  * @return {void}
  */
 const trapFocusInModal = (event) => {
-    let modal_name = currentModal[(currentModal.length - 1)];
-    if (modal_name !== undefined) {
-        const focusableElements = domEls(`.bw-${modal_name}-modal input:not([type='hidden']):not([class*='hidden']), .bw-${modal_name}-modal button:not([class*="hidden"]),  .bw-${modal_name}-modal a:not([class*="hidden"])`);
+    let modalName = currentModal[(currentModal.length - 1)];
+    if (modalName !== undefined) {
+        const focusableElements = domEls(`.bw-${modalName}-modal input:not([type='hidden']):not([class*='hidden']), .bw-${modalName}-modal button:not([class*="hidden"]),  .bw-${modalName}-modal a:not([class*="hidden"])`);
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
         if (event.key === 'Tab') {
@@ -570,6 +570,16 @@ const partition = (arr, fn) => {
  * @return {void}
  */
 const filterTable = (keyword, table, field, tableData) => {
+    if (tableData === null) {
+        // not dynamic table, search row content
+        domEls(`${table} tbody tr`).forEach((tr) => {
+            (tr.innerText.toLowerCase().includes(keyword.toLowerCase())) ?
+                unhide(tr, true) : hide(tr, true);
+        });
+        return;
+    }
+
+    let currentPage = domEl(table).getAttribute('data-current-page');
     const [showList, hideList] = partition(tableData, (row) => {
         if (field) {
             return row[field].toLowerCase().match(keyword.toLowerCase());
@@ -579,10 +589,12 @@ const filterTable = (keyword, table, field, tableData) => {
     });
 
     hideList.forEach((row) => {
-        hide(domEl(`${table} tbody tr[data-id='${row.id}']`), true);
+        let thisRow = (currentPage !== null) ? `${table} tbody tr[data-id="${row.id}"][data-page="${currentPage}"]` : `${table} tbody tr[data-id="${row.id}"]`;
+        hide(domEl(thisRow), true);
     });
     showList.forEach((row) => {
-        const elem = domEl(`${table} tbody tr[data-id='${row.id}']`);
+        let thisRow = (currentPage !== null) ? `${table} tbody tr[data-id="${row.id}"][data-page="${currentPage}"]` : `${table} tbody tr[data-id="${row.id}"]`;
+        const elem = domEl(thisRow);
         if (elem) {
             unhide(elem, true);
         }
@@ -599,6 +611,8 @@ const filterTable = (keyword, table, field, tableData) => {
  */
 let debounceTimerId;
 const filterTableDebounced = (keyword, table, field = null, delay = 0, minLength = 0, tableData = {}) => {
+    let currentPage = domEl(table).getAttribute('data-current-page');
+    let rows = (currentPage !== null) ? `${table} tbody tr.hidden[data-page="${currentPage}"]` : `${table} tbody tr.hidden`;
     if (keyword.length >= minLength) {
         return (...args) => {
             clearTimeout(debounceTimerId);
@@ -608,7 +622,7 @@ const filterTableDebounced = (keyword, table, field = null, delay = 0, minLength
         return (...args) => {
             clearTimeout(debounceTimerId);
             debounceTimerId = setTimeout(() => {
-                document.querySelectorAll(`${table} tbody tr.hidden`).forEach((tr) => {
+                domEls(rows).forEach((tr) => {
                     unhide(tr, true);
                 });
             }, delay);
@@ -754,8 +768,8 @@ const checkMinMax = (min, max, element, enforce_limits = false) => {
 const makeClearable = (element) => {
     let field = domEl(`.${element}`);
     let suffixElement = domEl(`.${element}-suffix svg`);
-    let tableElement = element.replace('bw_search_', 'table.').replace('_', '-');
-    let clearingFunction = (domEl(tableElement)) ? ` filterTable('',\'${tableElement}\')` : '';
+    let tableElement = element.replace('bw_search_', 'table.');
+    let clearingFunction = (domEl(tableElement)) ? field.getAttribute('oninput').replace('this.value', "''") : '';
     if (!suffixElement.getAttribute('onclick')) {
         suffixElement.setAttribute('onclick', `domEl(\'.${element}\').value=''; hide(this, true); ${clearingFunction}`);
     }
