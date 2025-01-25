@@ -60,6 +60,7 @@
     'total_label' => config('bladewind.table.total_label', 'Showing :a to :b of :c records'),
     'limit' => null,
     'layout' => 'auto',
+    'groupHeadingCss' => '',
 ])
 @php
     // reset variables for Laravel 8 support
@@ -241,7 +242,10 @@
                     @if($can_group)
                         @foreach($unique_group_headings as $group_heading)
                             <tr>
-                                <td class="group-heading" colspan="{{count($table_headings)}}">{{ $group_heading }}</td>
+                                <td @class([
+        "group-heading" => empty($groupHeadingCss),
+        "$groupHeadingCss" => !empty($groupHeadingCss)
+]) colspan="{{count($table_headings)}}">{{ $group_heading }}</td>
                             </tr>
                             @php
                                 $grouped_data = array_filter($data, function ($item) use ($group_heading, $groupby) {
