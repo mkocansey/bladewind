@@ -72,11 +72,11 @@
             </div>
             @if($format  == '12')
                 <div class="pl-3 space-y-1">
-                    <div class="rounded-t-lg font-semibold cursor-pointer text-2xl px-4 py-2 {{ (!empty($selected_format) && $selected_format == 'AM') ? 'bg-gray-500 text-white' : 'bg-gray-100 hover:bg-gray-300' }} bw-time-format-am"
+                    <div class="rounded-t-lg font-semibold cursor-pointer text-2xl px-4 py-2 {{ (!empty($selected_format) && $selected_format == 'AM') ? 'bg-gray-500 text-white' : 'bg-gray-100 hover:bg-gray-300' }} bw-{{$name}}-time-format-am"
                          onclick="toggleFormat('AM', '{{$name}}');setTime_{{$name}}('AM')">
                         {{ __('bladewind::timepicker.AM') }}
                     </div>
-                    <div class="rounded-b-lg font-semibold cursor-pointer text-2xl px-4 py-2 {{ (!empty($selected_format) && $selected_format == 'PM') ? 'bg-gray-500 text-white' : 'bg-gray-100 hover:bg-gray-300' }} bw-time-format-pm"
+                    <div class="rounded-b-lg font-semibold cursor-pointer text-2xl px-4 py-2 {{ (!empty($selected_format) && $selected_format == 'PM') ? 'bg-gray-500 text-white' : 'bg-gray-100 hover:bg-gray-300' }} bw-{{$name}}-time-format-pm"
                          onclick="toggleFormat('PM', '{{$name}}');setTime_{{$name}}('PM')">
                         {{ __('bladewind::timepicker.PM') }}
                     </div>
@@ -87,9 +87,9 @@
     </x-bladewind::modal>
     @once
         <script>
-            const toggleFormat = (format, field) => {
-                let am = domEl('.bw-time-format-am');
-                let pm = domEl('.bw-time-format-pm');
+            const toggleFormat = (format, name) => {
+                let am = domEl(`.bw-${name}-time-format-am`);
+                let pm = domEl(`.bw-${name}-time-format-pm`);
                 if (format === 'AM') {
                     changeCss(am, 'bg-gray-500,text-white', 'add', true);
                     changeCss(am, 'bg-gray-100, hover:bg-gray-300', 'remove', true);
@@ -102,7 +102,7 @@
                     changeCss(am, 'bg-gray-500,text-white', 'remove', true);
                     changeCss(am, 'bg-gray-100, hover:bg-gray-300', 'add', true);
                 }
-                domEl(`.bw-${field}_format`).value = format;
+                domEl(`.bw-${name}_format`).value = format;
             }
             const moveToMinutes = (name) => {
                 if (domEl(`.bw-${name}_hh`).value.length >= 2) {
