@@ -298,16 +298,25 @@ const animateCSS = (element, animation) =>
 /**
  * Display a modal.
  * @param {string} element - The css class (name) of the modal.
+ * @param placeholders
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#showmodal}
  */
-const showModal = (element) => {
+const showModal = (element, placeholders = {}) => {
     unhide(`.bw-${element}-modal`);
     document.body.classList.add('overflow-hidden');
     domEl(`.bw-${element}-modal`).focus();
     let index = (currentModal.length === 0) ? 0 : currentModal.length + 1;
     animateCSS(`.bw-${element}`, 'zoomIn').then(() => {
         currentModal[index] = element;
+        if (placeholders) {
+            const modalBody = domEl(`.bw-${element}-modal .modal-body`);
+            if (!window.originalContent) {
+                window.originalContent = modalBody.innerHTML;
+            }
+            modalBody.innerHTML =
+                window.originalContent.replace(/:([\w]+)/g, (match, key) => placeholders[key] || match);
+        }
     });
 };
 
