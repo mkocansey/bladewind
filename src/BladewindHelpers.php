@@ -54,5 +54,5 @@ function defaultBladewindName($prefix = 'blwd_'): string
 
 function parseBladewindName($name): string
 {
-    return str_replace('-', '_', $name);
+    return preg_replace('/[\s-]/', '_', $name);
 }

@@ -86,7 +86,7 @@
     'suffix_icon_div_css' => 'rtl:!right-[unset] rtl:!left-0',
     // javascript to execute when suffix icon is clicked
     'action' => null,
-    'size' => config('bladewind.input.size', 'medium'),
+    'size' => config('bladewind.input.size', 'regular'),
     'enforceLimits' => false,
 ])
 @php

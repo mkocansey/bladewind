@@ -19,7 +19,7 @@
     }
 
     .bw-input.small {
-        @apply py-2
+        @apply py-[6px]
     }
 
     .bw-input.medium {
