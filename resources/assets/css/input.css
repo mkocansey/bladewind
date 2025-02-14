@@ -1,4 +1,14 @@
 @layer components {
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        @apply appearance-none;
+    }
+
+    input[type="number"] {
+        @apply appearance-none;
+        -moz-appearance: textfield;
+    }
+
     .bw-textarea,
     .bw-input {
         @apply
