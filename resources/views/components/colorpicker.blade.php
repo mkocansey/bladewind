@@ -2,8 +2,8 @@
     'name' => defaultBladewindName(),
     'selectedValue' => '#000000',
     'class' => '',
-    'size' => 'regular',
-    'showValue' => false,
+    'size' => config('bladewind.colorpicker.size','regular'),
+    'showValue' => config('bladewind.colorpicker.show_value',false),
     'colors' => '',
 ])
 <div class="inline-flex p-1 bw-color-picker-{{$name}} align-bottom rounded-md border-2 border-slate-300/50 hover:border-slate-300 dark:border-dark-600 dark:hover:border-dark-500/50">
