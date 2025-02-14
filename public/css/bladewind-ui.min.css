@@ -833,6 +833,7 @@ input.no-label::placeholder, .bw-input.no-label::placeholder, .bw-textarea.bw-in
 .hidden{display:none;}
 .\!size-0{width:0px !important;height:0px !important;}
 .\!size-10{width:2.5rem !important;height:2.5rem !important;}
+.\!size-11{width:2.75rem !important;height:2.75rem !important;}
 .\!size-12{width:3rem !important;height:3rem !important;}
 .\!size-14{width:3.5rem !important;height:3.5rem !important;}
 .\!size-16{width:4rem !important;height:4rem !important;}
@@ -866,6 +867,7 @@ input.no-label::placeholder, .bw-input.no-label::placeholder, .bw-textarea.bw-in
 .size-\[36px\]{width:36px;height:36px;}
 .size-\[52px\]{width:52px;height:52px;}
 .size-\[9px\]{width:9px;height:9px;}
+.size-14{width:3.5rem;height:3.5rem;}
 .\!h-14{height:3.5rem !important;}
 .\!h-2{height:0.5rem !important;}
 .\!h-24{height:6rem !important;}
