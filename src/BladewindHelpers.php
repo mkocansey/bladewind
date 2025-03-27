@@ -17,10 +17,23 @@ const ACCEPTED_BLADEWIND_COLOURS = [
     'indigo',
     'fuchsia'
 ];
+const ACCEPTED_BLADEWIND_ASPECT_RATIOS = [
+    'null',
+    'NaN',
+    '16:9',
+    '4:3',
+    '2:3',
+    '1:1',
+];
 
 function isValidBladewindColour($colour): bool
 {
     return in_array($colour, ACCEPTED_BLADEWIND_COLOURS);
+}
+
+function isValidAspectRatio($ratio): bool
+{
+    return in_array($ratio, ACCEPTED_BLADEWIND_ASPECT_RATIOS);
 }
 
 function defaultBladewindColour($colour, $default = DEFAULT_BLADEWIND_COLOUR): string
@@ -54,5 +67,5 @@ function defaultBladewindName($prefix = 'blwd_'): string
 
 function parseBladewindName($name): string
 {
-    return str_replace('-', '_', $name);
+    return preg_replace('/[\s-]/', '_', $name);
 }

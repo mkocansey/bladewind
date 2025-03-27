@@ -7,9 +7,8 @@
 @aware([
     'compact' => config('bladewind.checkcards.compact', false),
     'color' => config('bladewind.checkcards.color', 'primary'),
-    'radius' => config('bladewind.checkcards.radius', false),
-    'name' => null,
     'radius' => config('bladewind.checkcards.radius', 'medium'),
+    'name' => null,
     'borderWidth' => config('bladewind.checkcards.border_width', 2),
     'borderColor' => config('bladewind.checkcards.border_color', 'gray'),
     'alignItems' => config('bladewind.checkcards.align_items', 'top'),
@@ -45,13 +44,16 @@
 ]) {{ $attributes->merge([ 'class' => ""]) }} onclick="selectCheckcard('{{$name}}', '{{$value}}', '{{$border_colour}}')"
      data-value="{{$value}}">
     <div class="flex">
-        @if(!empty($icon))
-            <x:bladewind::icon name="{{$icon}}"
-                               class="rounded-full p-2 size-11 bg-{{$colour}}-100/70 text-{{$colour}}-600 mr-3 {{$icon_css}}"/>
-        @elseif(!empty($avatar))
-            <x-bladewind::avatar image="{{$avatar}}" bg_color="{{$colour}}" :size="$avatarSize"
-                                 class="mr-3.5 {{($alignItems!='center') ? 'mt-2':''}}"/>
-        @endif
+        <span>
+            @if(!empty($icon))
+                <x:bladewind::icon
+                        name="{{$icon}}"
+                        class="rounded-full p-2 bg-{{$colour}}-100/70 text-{{$colour}}-600 mr-3 {{ empty($icon_css) ? '!size-14' : 'size-14 '. $icon_css}}"/>
+            @elseif(!empty($avatar))
+                <x-bladewind::avatar image="{{$avatar}}" bg_color="{{$colour}}" :size="$avatarSize"
+                                     class="mr-3.5 {{($alignItems!='center') ? 'mt-2':''}}"/>
+            @endif
+        </span>
     </div>
     <div class="grow">
         @if(!empty($title))

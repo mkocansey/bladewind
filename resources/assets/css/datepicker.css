@@ -1,2 +1,49 @@
-*,:after,:before{border:0 solid;box-sizing:border-box}:after,:before{--tw-content:""}
-::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-date-and-time-value{min-height:1.5em}.toggle-bg:after{background:#fff;border-color:#d1d5db;border-radius:9999px;border-width:1px;box-shadow:var(--tw-ring-inset) 0 0 0 calc(var(--tw-ring-offset-width)) var(--tw-ring-color);content:"";height:1.25rem;left:.125rem;position:absolute;top:.125rem;transition-duration:.15s;transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;width:1.25rem}input:checked+.toggle-bg:after{border-color:#fff;transform:translateX(100%)}.tooltip-arrow,.tooltip-arrow:before{background:inherit;height:8px;position:absolute;width:8px}.tooltip-arrow{visibility:hidden}.tooltip-arrow:before{content:"";transform:rotate(45deg);visibility:visible}[data-tooltip-style^=light]+.tooltip>.tooltip-arrow:before{border-color:#e5e7eb;border-style:solid}[data-tooltip-style^=light]+.tooltip[data-popper-placement^=top]>.tooltip-arrow:before{border-bottom-width:1px;border-right-width:1px}[data-tooltip-style^=light]+.tooltip[data-popper-placement^=right]>.tooltip-arrow:before{border-bottom-width:1px;border-left-width:1px}[data-tooltip-style^=light]+.tooltip[data-popper-placement^=bottom]>.tooltip-arrow:before{border-left-width:1px;border-top-width:1px}[data-tooltip-style^=light]+.tooltip[data-popper-placement^=left]>.tooltip-arrow:before{border-right-width:1px;border-top-width:1px}.tooltip[data-popper-placement^=top]>.tooltip-arrow{bottom:-4px}.tooltip[data-popper-placement^=bottom]>.tooltip-arrow{top:-4px}.tooltip[data-popper-placement^=left]>.tooltip-arrow{right:-4px}.tooltip[data-popper-placement^=right]>.tooltip-arrow{left:-4px}.tooltip.invisible>.tooltip-arrow:before{visibility:hidden}.max-w-2xl{max-width:42rem}.max-w-7xl{max-width:80rem}.flex-none{flex:none}.flex-auto{flex:1 1 auto}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%}.-translate-x-1\/2,.transform{transform:var(--tw-transform)}.cursor-pointer{cursor:pointer}.cursor-not-allowed{cursor:not-allowed}.list-inside{list-style-position:inside}.list-outside{list-style-position:outside}.list-none{list-style-type:none}.list-disc{list-style-type:disc}.list-decimal{list-style-type:decimal}.grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.grid-cols-7{grid-template-columns:repeat(7,minmax(0,1fr))}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.p-4{padding:1rem}
+@layer components {
+    .bw-datepicker {
+        @apply absolute bg-white z-50 shadow-md rounded-lg p-2 border border-gray-100 flex flex-col
+    }
+
+    .bw-datepicker .in-range {
+        @apply bg-primary-200/70 border border-primary-50
+    }
+
+    .bw-datepicker .selected {
+        @apply bg-primary-600 dark:bg-dark-900 text-white rounded-md transition ease-in-out duration-100
+    }
+
+    .bw-datepicker .disabled {
+        @apply text-gray-300 dark:text-gray-600 cursor-not-allowed pointer-events-none
+    }
+
+    .bw-datepicker .a-month {
+        @apply py-4 px-7 text-slate-500 cursor-pointer font-semibold normal-case hover:bg-gray-100 text-sm
+    }
+
+    .bw-datepicker .a-year {
+        @apply p-5 cursor-pointer font-semibold hover:bg-gray-100
+    }
+
+    .bw-datepicker table {
+        @apply w-full border-collapse
+    }
+
+    .bw-datepicker td {
+        @apply text-center p-2 cursor-pointer text-slate-700 text-base border border-white
+    }
+
+    .bw-datepicker th {
+        @apply text-center px-2 cursor-pointer pt-3.5 pb-2 w-10 text-xs uppercase text-slate-500 font-normal tracking-wide
+    }
+
+    .bw-datepicker td:hover:not(.selected, .empty) {
+        @apply bg-primary-200 rounded-md
+    }
+
+    .bw-datepicker td:empty:hover {
+        @apply bg-white
+    }
+
+    .bw-datepicker .datepicker-header {
+        @apply flex justify-between items-center bg-primary-600 text-white px-3 py-5 -mt-2 -mx-2 rounded-t-lg
+    }
+}

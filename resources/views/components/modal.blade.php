@@ -8,7 +8,7 @@
     'title' => '',
 
     // name of the modal. used to uniquely identify the modal in css and js
-    'name' => 'bw-modal-'.uniqid(),
+    'name' => defaultBladewindName('bw-modal-'),
 
     // text to display on the primary button. default is Okay
     'ok_button_label' => config('bladewind.modal.ok_button_label', 'Okay'),

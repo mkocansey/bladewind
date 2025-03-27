@@ -198,8 +198,8 @@ const validateForm = (form) => {
  * onkeypress="return isNumberKey(event)"
  */
 const isNumberKey = (event, with_dots = 1) => {
-    let acceptedKeys = (with_dots === 1) ? /[\d\b\\.]/ : /\d\b/;
-    if (!event.key.toString().match(acceptedKeys) && event.keyCode !== 8 && event.keyCode !== 9) {
+    let acceptedKeys = (with_dots === 1) ? /[\d\b\\.,]/ : /\d\b/;
+    if (!event.key.toString().match(acceptedKeys) && event.key !== 'Enter' && event.key !== 'Tab') {
         event.preventDefault();
     }
 };
@@ -298,16 +298,25 @@ const animateCSS = (element, animation) =>
 /**
  * Display a modal.
  * @param {string} element - The css class (name) of the modal.
+ * @param placeholders
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#showmodal}
  */
-const showModal = (element) => {
+const showModal = (element, placeholders = {}) => {
     unhide(`.bw-${element}-modal`);
     document.body.classList.add('overflow-hidden');
     domEl(`.bw-${element}-modal`).focus();
     let index = (currentModal.length === 0) ? 0 : currentModal.length + 1;
     animateCSS(`.bw-${element}`, 'zoomIn').then(() => {
         currentModal[index] = element;
+        if (Object.keys(placeholders).length > 0) {
+            const modalBody = domEl(`.bw-${element}-modal .modal-body`);
+            if (!window.originalContent) {
+                window.originalContent = modalBody.innerHTML;
+            }
+            modalBody.innerHTML =
+                window.originalContent.replace(/:([\w]+)/g, (match, key) => placeholders[key] || match);
+        }
     });
 };
 
@@ -732,10 +741,10 @@ const compareDates = (element1, element2, message, inline) => {
  * @param {number} min - The minimum value.
  * @param {number} max - The maximum value.
  * @param {string} element - The input field to validate.
- * @param {boolean} enforce_limits - Ensure input does not exceed maximum or go below minimum
+ * @param {boolean} enforceLimits - Ensure input does not exceed maximum or go below minimum
  * @return {void}
  */
-const checkMinMax = (min, max, element, enforce_limits = false) => {
+const checkMinMax = (min, max, element, enforceLimits = false) => {
     let field = domEl(`.${element}`);
     let minimum = parseInt(min);
     let maximum = parseInt(max);
@@ -743,20 +752,27 @@ const checkMinMax = (min, max, element, enforce_limits = false) => {
     let showErrorInline = field.getAttribute('data-error-inline');
     let errorHeading = field.getAttribute('data-error-heading');
 
-    if (field.value !== '' && ((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
-        if (enforce_limits) {
-            if (field.value < minimum) field.value = minimum;
-            if (field.value > maximum) field.value = maximum;
+    const clearErrorMessage = () => {
+        if (errorMessage) hide(`.${element}-inline-error`);
+        changeCss(field, '!border-red-400', 'remove', true);
+    }
+    if (field.value !== '') {
+        if (enforceLimits) {
+            if (!isNaN(minimum) && field.value < minimum) field.value = minimum;
+            if (!isNaN(maximum) && field.value > maximum) field.value = maximum;
         } else {
-            changeCss(field, '!border-red-400', 'add', true);
-            if (errorMessage) {
-                (showErrorInline) ? unhide(`.${element}-inline-error`) :
-                    showNotification(errorHeading, errorMessage, 'error');
+            if (((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
+                changeCss(field, '!border-red-400', 'add', true);
+                if (errorMessage) {
+                    (showErrorInline) ? unhide(`.${element}-inline-error`) :
+                        showNotification(errorHeading, errorMessage, 'error');
+                }
+            } else {
+                clearErrorMessage();
             }
         }
     } else {
-        if (errorMessage) hide(`.${element}-inline-error`);
-        changeCss(field, '!border-red-400', 'remove', true);
+        clearErrorMessage();
     }
 };
 

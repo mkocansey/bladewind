@@ -12,7 +12,7 @@
     }
 
     .bw-table tr > td.group-heading {
-        @apply bg-gray-50 hover:!bg-gray-50 dark:bg-dark-800/35 hover:dark:!bg-dark-800/35
+        @apply bg-gray-200/70 hover:pointer-events-none dark:bg-dark-800/60 hover:dark:!pointer-events-none text-slate-700 dark:text-dark-400
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {

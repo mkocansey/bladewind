@@ -12,7 +12,7 @@
     }
 
     .bw-button.small {
-        @apply py-[11px] px-4 !text-[11px]
+        @apply py-[9.5px] px-4 !text-[11px]
     }
 
     .bw-button.medium {
