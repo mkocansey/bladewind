@@ -1,7 +1,6 @@
 @props([
-    'hover_effect' => config('bladewind.contact_card.hover_effect', false),
-    'has_shadow' => config('bladewind.contact_card.has_shadow', true),
-    'hasShadow' => true,
+    'hasHover' => config('bladewind.contact_card.has_hover', false),
+    'hasShadow' => config('bladewind.contact_card.has_shadow', true),
     'image' => asset('vendor/bladewind/images/avatar.png'),
     'name' => null,
     'mobile' => null,
@@ -10,20 +9,18 @@
     'position' => null,
     'birthday' => null,
     'class' => '',
-    'has_border' => true,
+    'hasBorder' => true,
 ])
 @php
-    $has_shadow = parseBladewindVariable($has_shadow);
-    $hover_effect = parseBladewindVariable($hover_effect);
     $hasShadow = parseBladewindVariable($hasShadow);
-    $has_border = parseBladewindVariable($has_border);
-    if(!$hasShadow) $has_shadow = $hasShadow;
+    $hasHover = parseBladewindVariable($hasHover);
+    $hasBorder = parseBladewindVariable($hasBorder);
 @endphp
 <x-bladewind::card
         class="!p-5 {{$class}}"
-        :hover_effect="$hover_effect"
-        :has_shadow="$has_shadow"
-        :has_border="$has_border"
+        :has_hover="$hasHover"
+        :has_shadow="$hasShadow"
+        :has_border="$hasBorder"
         :is_contact_card="true"
         :compact="true">
     <div class="flex items-start">

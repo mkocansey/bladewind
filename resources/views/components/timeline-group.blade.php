@@ -3,10 +3,10 @@
     'completed' => false,
     'color' => config('bladewind.timeline.group.color', 'gray'),
     'anchor' => config('bladewind.timeline.group.anchor', 'small'),
-    'anchor_css' => '',
+    'anchorCss' => '',
     'icon' => '',
-    'icon_css' => '',
-    'date_css' => '',
+    'iconCss' => '',
+    'dateCss' => '',
     'position' => 'center',
 ])
 {{$slot}}

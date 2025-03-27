@@ -53,20 +53,6 @@
     // when files exist, add new files to this position. top|bottom
     'addNewFilesTo' => config('bladewind.filepicker.add_new_files_to', 'top'),
 
-    // message to display when selected file's size exceeds allowed
-    'maxFileSizeExceededLabel' => config('bladewind.filepicker.max_file_size_exceeded_label', 'File is too large'),
-    'maxFileSizeLabel' => config('bladewind.filepicker.max_file_size_label', 'Maximum file size is {filesize}'),
-
-    // message to display when total size of all selected files exceeds allowed
-    'maxTotalFileSizeExceededLabel' => config('bladewind.filepicker.max_total_file_size_exceeded_label', 'Maximum total file size exceeded'),
-    'maxTotalFileSizeLabel' => config('bladewind.filepicker.max_total_file_size_label', 'Maximum total file size is {filesize}'),
-
-    // message to display when wrong file type is selected
-    'invalidFileTypeLabel' => config('bladewind.filepicker.invalid_file_type_label', 'Wrong file type uploaded'),
-
-    // message showing which file types are allowed
-    'expectedFileTypesLabel' => config('bladewind.filepicker.expected_file_types_label', 'Only {allButLastType} and {lastType} files allowed'),
-
     // show image previews when images are selected
     'showImagePreview' => config('bladewind.filepicker.show_image_preview', true),
 
@@ -218,12 +204,33 @@ const pond_{{$cleanName}} = FilePond.create(domEl('input[name="{{$name}}"]'), {
         credits: {{$showCredits ? 'true' : 'false'}},
         labelIdle: (domEl(".placeholder-{{$cleanName}}")) ? domEl(".placeholder-{{$cleanName}}").innerHTML : domEl(".bw-filepicker-placeholder-{{$cleanName}}").innerHTML,
         acceptedFileTypes: {!! json_encode(explode(',', str_replace(' ', '', $acceptedFileTypes))) !!},
-        labelMaxFileSizeExceeded: '{{$maxFileSizeExceededLabel}}',
-        labelMaxTotalFileSizeExceeded: '{{$maxTotalFileSizeExceededLabel}}',
-        labelMaxFileSize: '{{$maxFileSizeLabel}}',
-        labelMaxTotalFileSize: '{{$maxTotalFileSizeLabel}}',
-        labelFileTypeNotAllowed: '{{$invalidFileTypeLabel}}',
-        fileValidateTypeLabelExpectedTypes: '{{$expectedFileTypesLabel}}',
+        labelInvalidField: '{{ __("bladewind::bladewind.filepicker_invalid_field")}}',
+        labelFileWaitingForSize: '{{ __("bladewind::bladewind.filepicker_waiting_for_size")}}',
+        labelFileSizeNotAvailable: '{{ __("bladewind::bladewind.filepicker_file_size_not_available")}}',
+        labelFileLoading: '{{ __("bladewind::bladewind.filepicker_file_loading")}}',
+        labelFileLoadError: '{{ __("bladewind::bladewind.filepicker_file_load_error")}}',
+        labelFileProcessing: '{{ __("bladewind::bladewind.filepicker_file_processing")}}',
+        labelFileProcessingComplete: '{{ __("bladewind::bladewind.filepicker_file_processing_complete")}}',
+        labelFileProcessingAborted: '{{ __("bladewind::bladewind.filepicker_file_processing_aborted")}}',
+        labelFileProcessingError: '{{ __("bladewind::bladewind.filepicker_file_processing_error")}}',
+        labelFileProcessingRevertError: '{{ __("bladewind::bladewind.filepicker_file_processing_revert_error")}}',
+        labelFileRemoveError: '{{ __("bladewind::bladewind.filepicker_file_remove_error")}}',
+        labelTapToCancel: '{{ __("bladewind::bladewind.cancel")}}',
+        labelTapToRetry: '{{ __("bladewind::bladewind.retry")}}',
+        labelTapToUndo: '{{ __("bladewind::bladewind.undo")}}',
+        labelButtonRemoveItem: '{{ __("bladewind::bladewind.remove")}}',
+        labelButtonAbortItemLoad: '{{ __("bladewind::bladewind.abort")}}',
+        labelButtonRetryItemLoad: '{{ __("bladewind::bladewind.retry")}}',
+        labelButtonAbortItemProcessing: '{{ __("bladewind::bladewind.cancel")}}',
+        labelButtonUndoItemProcessing: '{{ __("bladewind::bladewind.undo")}}',
+        labelButtonRetryItemProcessing: '{{ __("bladewind::bladewind.retry")}}',
+        labelButtonProcessItem: '{{ __("bladewind::bladewind.upload")}}',
+        labelMaxFileSizeExceeded: '{{ __("bladewind::bladewind.filepicker_max_file_size_exceeded")}}',
+        labelMaxTotalFileSizeExceeded: '{{ __("bladewind::bladewind.filepicker_max_total_file_size_exceeded")}}',
+        labelMaxFileSize: '{{__("bladewind::bladewind.filepicker_max_file_size")}}',
+        labelMaxTotalFileSize: '{{__("bladewind::bladewind.filepicker_max_total_file_size")}}',
+        labelFileTypeNotAllowed: '{{__("bladewind::bladewind.filepicker_invalid_file_type")}}',
+        fileValidateTypeLabelExpectedTypes: '{{__("bladewind::bladewind.filepicker_expected_file_types")}}',
         fileValidateTypeLabelExpectedTypesMap: {
             'image/*': 'images',
             'audio/*': 'audios',

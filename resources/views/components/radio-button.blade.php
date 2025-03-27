@@ -4,18 +4,17 @@
     'name' => 'radio',
     'value' => '',
     'label' => '',
-    'label_css' => 'mr-6',
     'labelCss' => 'mr-6',
     'color' => 'blue',
     'checked' => false,
-    'add_clearing' => config('bladewind.radio_button.add_clearing', true),
-    'class' => '',
+    'addClearing' => config('bladewind.radio_button.add_clearing', true),
     'disabled' => false,
+    'class' => '',
 ])
 @php
     $checked = parseBladewindVariable($checked);
     $disabled = parseBladewindVariable($disabled);
-    $label_css = (!empty($labelCss)) ? $labelCss : $label_css;
+    $addClearing = parseBladewindVariable($addClearing);
 @endphp
 <x-bladewind::checkbox
         name="{{$name}}"
@@ -23,7 +22,8 @@
         value="{{$value}}"
         color="{{$color}}"
         class="rounded-full {{$class}}"
-        label_css="{{$label_css}}"
+        label_css="{{$labelCss}}"
         disabled="{{$disabled}}"
         checked="{{$checked}}"
+        add_clearing="{{$addClearing}}"
         type="radio"/>

@@ -1,15 +1,20 @@
 @props([
     // name of the input field for use in forms
     'name' => defaultBladewindName('input-'),
+
     // what type of input box are you displaying
     // available options are text, password, email, search, tel
     'type' => 'text', 
+
     // label to display on the input box
     'label' => '',
+
     // should the input accept numbers only. Default is false
     'numeric' => false,
+
     // minimum number a user can enter when numeric=true
     'min' => null,
+
     // maximum number a user can enter when numeric=true
     'max' => null,
 
@@ -98,7 +103,6 @@
 ])
 
 @php
-    $name = parseBladewindName($name);
     $add_clearing = parseBladewindVariable($addClearing);
     $show_placeholder_always = parseBladewindVariable($showPlaceholderAlways);
     $show_error_inline = parseBladewindVariable($showErrorInline);
