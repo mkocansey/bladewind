@@ -1,121 +1,335 @@
+@php use Illuminate\Support\Str; @endphp
 @props([
     // name of the input field for use in passing form submission data
     // this is prefixed with bw- when used as a class name
-    'name' => 'bw-filepicker',
+    'name' => defaultBladewindName('bw-file-'),
+
+    // by default all file media and pdf file types can be selected
+    'acceptedFileTypes' => config('bladewind.filepicker.accepted_file_types', 'image/*,audio/*,video/*,application/pdf'),
+
     // the default text to display in the file picker
-    'placeholder' => 'Select a file',
-    // by default all file audo, video, image and pdf file types can be selected
-    // either restrict or allow more file types by modifying this value
-    'accepted_file_types' => config('bladewind.filepicker.accepted_file_types', 'audio/*,video/*,image/*, .pdf'),
-    'acceptedFileTypes' => config('bladewind.filepicker.accepted_file_types', 'audio/*,video/*,image/*, .pdf'),
-    // should the user be forced to select a file. used in conjunction with validation scripts
-    // default is false.
+    'placeholderLine1' => config('bladewind.filepicker.placeholder_line1', 'Choose files or drag and drop to upload'),
+    'placeholderLine2' => config('bladewind.filepicker.placeholder_line2', '%s up to %s'),
+
+    // ensure a file is selected by user
     'required' => false,
-    // maximum allowed filezie in MB
-    'max_file_size' => config('bladewind.filepicker.max_file_size', 5),
-    'maxFileSize'   => config('bladewind.filepicker.max_file_size', 5),
-    // adds margin after the input box
-    'add_clearing' => config('bladewind.filepicker.max_file_size', true),
-    'addClearing' => config('bladewind.filepicker.max_file_size', true),
-    // display a selected value by default
-    'selected_value' => '',
-    'selectedValue' => '',
-    // the css to apply to the selected value
-    'selected_value_class' => config('bladewind.filepicker.selected_value_class', 'h-52'),
-    'selectedValueClass' => config('bladewind.filepicker.selected_value_class', 'h-52'),
-    // file to display in edit mode
-    'url' => '',
-    // allow base64 output
-    'base64' => true,
+
+    // add files to the component by browsing for files
+    'canBrowse' => config('bladewind.filepicker.can_browse', true),
+
+    // add files using only drag and drop on the filepicker component
+    'canDrop' => config('bladewind.filepicker.can_drop', true),
+
+    // disable the filepicker
+    'disabled' => false,
+
+    // validate sizes of selected files
+    'validateFileSize' => config('bladewind.filepicker.validate_file_size', true),
+
+    // generate base64 output of selected files
+    'base64' => config('bladewind.filepicker.base64', false),
+
+    // how should the base64 data be returned. string | url
+    'base64Output' => config('bladewind.filepicker.base64_output', 'url'),
+
+    // show Filepond credits
+    'showCredits' => config('bladewind.filepicker.show_credits', false),
+
+    // should files be automatically uploaded to a server once selected
+    'autoUpload' => config('bladewind.filepicker.auto_upload', false),
+
+    // how many files can the user select
+    'maxFiles'   => config('bladewind.filepicker.max_files', 1),
+
+    // maximum size for each file
+    'maxFileSize'   => config('bladewind.filepicker.max_file_size', '5mb'),
+
+    // maximum size allowed for all files selected
+    'maxTotalFileSize'   => config('bladewind.filepicker.max_total_file_size', null),
+
+    // display selected files when component loads
+    'selectedValue' => [],
+
+    // when files exist, add new files to this position. top|bottom
+    'addNewFilesTo' => config('bladewind.filepicker.add_new_files_to', 'top'),
+
+    // message to display when selected file's size exceeds allowed
+    'maxFileSizeExceededLabel' => config('bladewind.filepicker.max_file_size_exceeded_label', 'File is too large'),
+    'maxFileSizeLabel' => config('bladewind.filepicker.max_file_size_label', 'Maximum file size is {filesize}'),
+
+    // message to display when total size of all selected files exceeds allowed
+    'maxTotalFileSizeExceededLabel' => config('bladewind.filepicker.max_total_file_size_exceeded_label', 'Maximum total file size exceeded'),
+    'maxTotalFileSizeLabel' => config('bladewind.filepicker.max_total_file_size_label', 'Maximum total file size is {filesize}'),
+
+    // message to display when wrong file type is selected
+    'invalidFileTypeLabel' => config('bladewind.filepicker.invalid_file_type_label', 'Wrong file type uploaded'),
+
+    // message showing which file types are allowed
+    'expectedFileTypesLabel' => config('bladewind.filepicker.expected_file_types_label', 'Only {allButLastType} and {lastType} files allowed'),
+
+    // show image previews when images are selected
+    'showImagePreview' => config('bladewind.filepicker.show_image_preview', true),
+
+    // allow image resizing in the background. This does not display any UI resizing controls
+    'canResizeImage' => config('bladewind.filepicker.can_resize_image', false),
+
+    // images should be resized to this width
+    'imageResizeWidth' => config('bladewind.filepicker.image_resize_width', null),
+
+    // images should be resized to this height
+    'imageResizeHeight' => config('bladewind.filepicker.image_resize_height', null),
+
+    // allow image cropping
+    'canCrop' => config('bladewind.filepicker.can_crop', false),
+
+    // aspect ratio used for image cropping
+    'cropAspectRatio' => config('bladewind.filepicker.crop_aspect_ratio', '16:9'),
+
+    // url for file uploads
+    'uploadRoute' => null,
+
+    // HTTP headers to append when calling $uploadRoute
+    'uploadHeaders' => [],
+
+    // HTTP method for uploading files
+    'uploadMethod' => 'POST',
+
+    // url for deleting uploaded files
+    'deleteRoute' => null,
+
+    // HTTP method for deleting uploaded files
+    'deleteMethod' => null,
+
+    // HTTP headers to append when calling $deleteRoute
+    'deleteHeaders' => null,
 ])
 @php
-    $name = preg_replace('/[\s-]/', '_', $name);
+    $name = parseBladewindName($name);
+    $cleanName = str_replace('[]', '', $name);
     $required = parseBladewindVariable($required);
-    $add_clearing = parseBladewindVariable($add_clearing);
-    $addClearing = parseBladewindVariable($addClearing);
-    $base64 = parseBladewindVariable($base64);
-    if (!$addClearing) $add_clearing = $addClearing;
-    if ($acceptedFileTypes !== $accepted_file_types) $accepted_file_types = $acceptedFileTypes;
-    if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
-    if ($selectedValueClass !== $selected_value_class) $selected_value_class = $selectedValueClass;
-    if ($maxFileSize !== $max_file_size) $max_file_size = $maxFileSize;
-    if (! is_numeric($max_file_size)) $max_file_size = 5;
-    $image_file_types = [ "png", "jpg", "jpeg", "gif", "svg" ];
+    $canBrowse = parseBladewindVariable($canBrowse);
+    $canDrop = parseBladewindVariable($canDrop);
+    $canCrop = parseBladewindVariable($canCrop);
+    $canResizeImage = parseBladewindVariable($canResizeImage);
+    $validateFileSize = parseBladewindVariable($validateFileSize);
+    $showImagePreview = parseBladewindVariable($showImagePreview);
+    $autoUpload = parseBladewindVariable($autoUpload);
+    $maxFileSize = ((Str::contains($maxFileSize,'b')) ? $maxFileSize : $maxFileSize.'mb') ;
+    $maxFiles = (! is_numeric($maxFiles)) ? 1 : (int) $maxFiles;
+    $imageResizeWidth = (! is_numeric($imageResizeWidth)) ? null : $imageResizeWidth;
+    $imageResizeHeight = (! is_numeric($imageResizeHeight)) ? null : $imageResizeHeight;
+    $hasImageFiles = Str::contains($acceptedFileTypes,['image','png','jpg','jpeg','gif']);
+    $cropAspectRatio = isValidAspectRatio($cropAspectRatio) ? $cropAspectRatio : 'NaN';
+    if(!app()->environment('production') && !file_exists('vendor/bladewind/css/filepond.min.css')) {
+        echo '<span class="text-red-400">filepicker assets missing. <a href="https://bladewindui.com/install#install">publish</a> public bladewind assets</span>';
+    }
+    $deleteRoute = empty($deleteRoute) ? $uploadRoute : $deleteRoute;
+    $deleteMethod = empty($deleteMethod) ? $uploadMethod : $deleteMethod;
+    $uploadHeaders = is_array($uploadHeaders) ? $uploadHeaders : json_decode($uploadHeaders, true);
+    $deleteHeaders = empty($deleteHeaders) ? $uploadHeaders : (is_array($deleteHeaders) ? $deleteHeaders : json_decode($deleteHeaders, true));
 @endphp
-<div class="border-gray-500"></div>
-<div class="relative px-2 py-3 border-2 border-dotted border-gray-300 hover:border-gray-400 dark:text-dark-300 dark:border-dark-600
-    dark:bg-transparent hover:dark:border-dark-500 text-center cursor-pointer rounded-md bw-fp-{{ $name }} @if($add_clearing) mb-3 @endif">
-    <x-bladewind::icon name="document-text"
-                       class="h-6 w-6 absolute z-20 left-4 rtl:!right-4 rtl:!left-[unset] text-gray-300 dark:text-dark-500"/>
-    <x-bladewind::icon name="x-circle"
-                       class="absolute right-3 rtl:!left-3 rtl:!right-[unset] h-8 w-8 text-gray-600 hover:text-gray-700 clear cursor-pointer hidden"
-                       type="solid"/>
-    <span class="text-gray-400/80 px-6 pl-10 zoom-out inline-block selection">
-        {{ $placeholder }}
-        @if($required)
-            <span class="text-red-300">*</span>
-        @endif
-    </span>
-    <div class="w-0 h-0 overflow-hidden">
-        <input
-                type="file"
-                name="{{ $name }}"
-                class="bw-{{ $name }} @if($required) required @endif"
-                id="bw_{{ $name }}"
-                accept="{{ $accepted_file_types }}"/>
-        <textarea class="b64-{{ $name }}@if($required) required @endif"
-                  @if($base64)name="b64_{{ $name }}"@endif></textarea>
-        @if(!empty($selected_value))
-            <input type="hidden" class="selected_{{ $name }}" name="selected_{{ $name }}" value="{{$selected_value}}"/>
-        @endif
+@once
+    <link href="{{ asset('vendor/bladewind/css/filepond.css') }}" rel="stylesheet"/>
+    @if($hasImageFiles)
+    <link href="{{ asset('vendor/bladewind/css/filepond-plugin-image-preview.css') }}" rel="stylesheet"/>
+    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-exif-orientation.js') }}"></script>
+    <link href="{{ asset('vendor/bladewind/css/cropper.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('vendor/bladewind/js/cropper.min.js') }}"></script>
+    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-crop.js') }}"></script>
+    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-preview.js') }}"></script>
+    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-resize.js') }}"></script>
+    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-transform.js') }}"></script>
+    @endif
+    @if($validateFileSize)
+        <script src="{{ asset('vendor/bladewind/js/filepond-plugin-file-validate-size.js') }}"></script>
+        @if($hasImageFiles)<script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-validate-size.js') }}"></script>@endif
+    @endif
+    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-file-encode.js') }}"></script>
+    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-file-validate-type.js') }}"></script>
+    <script src="{{ asset('vendor/bladewind/js/filepond.min.js') }}"></script>
+    <script>const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") || "{{ csrf_token() }}";;</script>
+@endonce
+@if($canCrop)
+    @once
+        <x-bladewind::modal name="cropper-container" size="large" align_buttons="center" backdrop_can_close="false" ok_button_label="Crop">
+            <img class="cropper-image max-w-full" />
+        </x-bladewind::modal>
+    @endonce
+@endif
+
+<div class="bw-filepicker-placeholder-{{$cleanName}} space-y-2 flex hidden align-middle py-3">
+    <div>
+        <x-bladewind::icon name="arrow-up-tray" class="!size-14 rounded-full p-3 bg-white stroke-2 text-slate-400"/>
+    </div>
+    <div class="text-left pl-2.5 pt-1.5">
+        <div>{!! $placeholderLine1 !!}</div>
+        <div class="!text-xs tracking-wider opacity-70">
+        {{
+            sprintf($placeholderLine2,
+            strtoupper(preg_replace(['/\/\*/', '/application\//', '/,/', '/\s*,\s*/', '/\./'], ['', '', ', ', ', '], $acceptedFileTypes)),
+            strtoupper($maxFileSize))
+        }}
+        </div>
     </div>
 </div>
 
+<input type="file" name="{{$name}}" accept="{{$acceptedFileTypes}}" @if($required) required="true" @endif />
+@if($base64)<div class="{{$cleanName}}-b64-container hidden"></div>@endif
+
 <script>
-    domEl('.bw-fp-{{ $name }}').addEventListener('drop', function (evt) {
-        changeCss('.bw-fp-{{ $name }}', 'border-gray-500', 'remove');
-        changeCss('.bw-fp-{{ $name }}', 'border-gray-300');
-        evt.preventDefault();
-        domEl('.bw-{{ $name }}').click();
-    });
-
-    domEl('.bw-fp-{{ $name }}').addEventListener('click', function () {
-        domEl('.bw-{{ $name }}').click();
-    });
-
-    domEl('.bw-{{ $name }}').addEventListener('change', function () {
-        let selection = this.value;
-        if (selection !== '') {
-            const [file] = this.files
-
-            if (file) {
-                if (allowedFileSize(file.size, {{$max_file_size}})) {
-                    domEl('.bw-fp-{{ $name }} .selection').innerHTML =
-                        (file.type.indexOf('image') !== -1) ? '<img src="' + URL.createObjectURL(file) + '" class="rounded-md" />' : file.name;
-                    convertToBase64(file, '.b64-{{ $name }}');
-                } else {
-                    domEl('.bw-fp-{{ $name }} .selection').innerHTML = '<span class="text-red-500">File must be {{$max_file_size}}mb or below</span>';
-                }
+@if($canCrop) @once
+    const cropperContainer = domEl('.cropper-container');
+    const cropperImage = domEl('.cropper-image');
+    const cropButton = domEl('.bw-cropper-container-modal .okay');
+    let cropper;
+@endonce @endif
+    FilePond.registerPlugin(
+        FilePondPluginImageExifOrientation,
+        FilePondPluginFileValidateSize,
+        FilePondPluginFileValidateType,
+        FilePondPluginImageValidateSize,
+        FilePondPluginImagePreview,
+        @if($canCrop)FilePondPluginImageCrop,@endif
+        FilePondPluginImageResize,
+        FilePondPluginImageTransform,
+        @if($base64)FilePondPluginFileEncode,@endif
+    );
+const pond_{{$cleanName}} = FilePond.create(domEl('input[name="{{$name}}"]'), {
+        name: '{{$cleanName}}',
+        className: '{{$cleanName}}',
+        maxFiles: {{$maxFiles}},
+        maxFileSize: '{{$maxFileSize}}',
+        allowFileSizeValidation: {{$validateFileSize ? 'true' : 'false'}},
+        maxTotalFileSize: {{!empty($maxTotalFileSize) ? "'$maxTotalFileSize'" : 'null'}},
+        allowMultiple: {{$maxFiles > 1 ? 'true' : 'false'}},
+        allowBrowse: {{$canBrowse ? 'true' : 'false'}},
+        allowDrop: {{$canDrop ? 'true' : 'false'}},
+        @if($base64)allowFileEncode: true,@endif
+        @if($hasImageFiles)
+        @if($canCrop)allowImageCrop: {{$canCrop ? 'true' : 'false'}},@endif
+        allowImagePreview: {{$showImagePreview ? 'true' : 'false'}},
+        allowImageResize: {{$canResizeImage ? 'true' : 'false'}},
+        imageEditAllowEdit: true,
+        imageResizeTargetWidth: {{empty($imageResizeWidth) ? 'null' : $imageResizeWidth}},
+        imageResizeTargetHeight: {{empty($imageResizeHeight) ? 'null' : $imageResizeHeight}},
+        @endif
+        disabled: {{$disabled ? 'true' : 'false'}},
+        itemInsertLocation: '{{$addNewFilesTo == 'top' ? 'before' : 'after'}}',
+        credits: {{$showCredits ? 'true' : 'false'}},
+        labelIdle: (domEl(".placeholder-{{$cleanName}}")) ? domEl(".placeholder-{{$cleanName}}").innerHTML : domEl(".bw-filepicker-placeholder-{{$cleanName}}").innerHTML,
+        acceptedFileTypes: {!! json_encode(explode(',', str_replace(' ', '', $acceptedFileTypes))) !!},
+        labelMaxFileSizeExceeded: '{{$maxFileSizeExceededLabel}}',
+        labelMaxTotalFileSizeExceeded: '{{$maxTotalFileSizeExceededLabel}}',
+        labelMaxFileSize: '{{$maxFileSizeLabel}}',
+        labelMaxTotalFileSize: '{{$maxTotalFileSizeLabel}}',
+        labelFileTypeNotAllowed: '{{$invalidFileTypeLabel}}',
+        fileValidateTypeLabelExpectedTypes: '{{$expectedFileTypesLabel}}',
+        fileValidateTypeLabelExpectedTypesMap: {
+            'image/*': 'images',
+            'audio/*': 'audios',
+            'video/*': 'videos',
+            'application/msword': 'word docs',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'word docs',
+            'video/*': 'videos',
+            'application/json': 'json',
+            'application/pdf': 'pdfs'
+        },
+        iconRemove: `<x-bladewind::icon name="trash" class="p-1 opacity-80 hover:text-red-500" type="solid" />`,
+        @if($autoUpload && !empty($uploadRoute))
+            server: {
+                process: {
+                    url: "{{$uploadRoute}}",
+                    method: "{{$uploadMethod}}",
+                    headers: {
+                        @if(!empty($uploadHeaders))
+                            @foreach($uploadHeaders as $key => $value)
+                                "{{ $key }}": "{{ $value }}",
+                            @endforeach
+                        @endif
+                        "X-CSRF-TOKEN": `${csrfToken}`
+                    },
+                },
+                revert: {
+                    url: "{{$deleteRoute}}",
+                    method: "{{$deleteMethod}}",
+                    headers: {
+                        @if(!empty($deleteHeaders))
+                            @foreach($deleteHeaders as $key => $value)
+                                "{{ $key }}": "{{ $value }}",
+                            @endforeach
+                        @endif
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": `${csrfToken}`
+                    },
+                },
             }
-            changeCss('.bw-fp-{{ $name }} .clear', 'hidden', 'remove');
-        }
+        @else
+            storeAsFile: true,
+        @endif
+        @if(!empty($selectedValue))
+            files: @json($selectedValue),
+            allowRevert: true,
+        @endif
     });
+@if($canCrop || $base64)
+    pond_{{$cleanName}}.on('addfile', (error, fileItem) => {
+        if (error) return;
+        @if($canCrop)
+            const file = fileItem.file;
+            if (file.isCropped || !file.type.startsWith("image/")) return;
 
-    domEl('.bw-fp-{{ $name }} .clear').addEventListener('click', function (e) {
-        domEl('.bw-fp-{{ $name }} .selection').innerHTML = '{{ $placeholder }}';
-        domEl('.bw-{{ $name }}').value = domEl('.b64-{{ $name }}').value = domEl('.selected_{{ $name }}').value = '';
-        changeCss('.bw-fp-{{ $name }} .clear', 'hidden');
-        e.stopImmediatePropagation();
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                cropperImage.src = reader.result;
+                showModal('cropper-container');
+
+                if (cropper) cropper.destroy();
+
+                cropper = new Cropper(cropperImage, {
+                    viewMode: 1,
+                    autoCrop: true,
+                    aspectRatio: {!! str_replace(':','/', "$cropAspectRatio") !!},
+                });
+
+                cropButton.onclick = () => {
+                    const canvas = cropper.getCroppedCanvas();
+                    if (!canvas) return;
+
+                    canvas.toBlob((blob) => {
+                        if (!blob) return;
+
+                        const croppedFile = new File([blob], file.name, {
+                            type: file.type,
+                            lastModified: Date.now(),
+                        });
+
+                        croppedFile.isCropped = true;
+                        hideModal('cropper-container');
+
+                        pond_{{$name}}.removeFile(fileItem.id);
+                        pond_{{$name}}.addFile(croppedFile).then(() => {
+                            cropper.destroy();
+                            cropper = null;
+                        });
+                    }, file.type);
+                };
+            };
+            reader.readAsDataURL(file);
+        @endif
+        @if($base64)
+            const base64_container = domEl(".{{$cleanName}}-b64-container");
+            const base64 = {{$base64Output == 'string' ? 'fileItem.getFileEncodeBase64String()' : 'fileItem.getFileEncodeDataURL()'}};
+
+            if (!base64_container.querySelector(`input[data-id="${fileItem.id}"]`)) {
+                let hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = "{{$cleanName}}_b64[]"
+                hiddenInput.value = base64;
+                hiddenInput.dataset.id = fileItem.id; // Store FilePond file ID
+                base64_container.appendChild(hiddenInput);
+            }
+        @endif
     });
-
-    @if(!empty($url))
-            @if(in_array(pathinfo($url, PATHINFO_EXTENSION), $image_file_types))
-        file = '<img src="{{ $url }}" alt="{{ $url }}" class="rounded-md {{$selected_value_class}}" />';
-    @else
-        file = '{{ ($selected_value != '') ? $selected_value : $url }}';
     @endif
-    domEl('.bw-fp-{{ $name }} .selection').innerHTML = file;
-    changeCss('.bw-fp-{{ $name }} .clear', 'hidden', 'remove');
-    @endif
-
 </script>

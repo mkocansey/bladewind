@@ -11,8 +11,7 @@
     'imageSize' => 'medium',
 ])
 @php
-    $show_image = parseBladewindVariable($showImage);
-    $button_label = $buttonLabel;
+    $showImage = parseBladewindVariable($showImage);
     $size = in_array($imageSize, ['small','medium','large','xl','omg']) ? $imageSize : 'medium';
     $sizes = [
         'small' => 'h-28',
@@ -23,7 +22,7 @@
 ];
 @endphp
 <div class="text-center px-4 pb-6 bw-empty-state {{$class}}">
-    @if($show_image == 'true')
+    @if($showImage == 'true')
         <img src="{{ $image }}" class="{{$sizes[$size]}} mx-auto mb-3 {{$imageCss}}"/>
     @endif
     @if($heading != '')
@@ -33,9 +32,9 @@
         <div class="text-slate-600/70 dark:text-dark-500 px-6">{!!$message!!}</div>
     @endif
     <div class="pt-2 dark:text-dark-400">{!! $slot !!}</div>
-    @if($button_label != '')
+    @if($buttonLabel != '')
         <x-bladewind::button
                 onclick="{!!$onclick!!}" class="block mx-auto my-2"
-                size="small">{{$button_label}}</x-bladewind::button>
+                size="small">{{$buttonLabel}}</x-bladewind::button>
     @endif
 </div>

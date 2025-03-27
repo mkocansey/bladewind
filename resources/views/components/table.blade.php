@@ -1,80 +1,85 @@
 @props([
     // your table headers in <th></th> tags
     'header' => '',
+
     // setting to true will result in a striped table
     'striped' => config('bladewind.table.striped', false),
+
     // should the table with displayed with a drop-shadow effect
-    'has_shadow' => config('bladewind.table.has_shadow', false),
     'hasShadow' => config('bladewind.table.has_shadow', false),
+
     // should the table have a border on all four sides
-    'has_border' => config('bladewind.table.has_border', false),
+    'hasBorder' => config('bladewind.table.has_border', false),
+
     // should the table have row dividers
     'divided' => config('bladewind.table.divided', true),
+
     // if table has row dividers, how wide should they be
     // available value are regular, thin
     'divider' => config('bladewind.table.divider', 'regular'),
+
     // should rows light up on hover
-    'hover_effect' => config('bladewind.table.hover_effect', true),
-    'hoverEffect' => config('bladewind.table.hover_effect', true),
+    'hasHover' => config('bladewind.table.has_hover', true),
+
     // should the rows be tighter together
     'compact' => config('bladewind.table.compact', false),
+
     // provide a table name you can access via css
-    'name' => 'tbl-'.uniqid(),
+    'name' => defaultBladewindName('tbl-'),
+
     'data' => null,
-    'exclude_columns' => null,
-    'include_columns' => null,
-    'action_icons' => null,
-    'groupby' => null,
-    'actions_title' => 'actions',
-    'column_aliases' => [],
+    'excludeColumns' => null,
+    'includeColumns' => null,
+    'actionIcons' => null,
+    'groupBy' => null,
+    'actionsTitle' => 'actions',
+    'columnAliases' => [],
     'searchable' => config('bladewind.table.searchable', false),
-    'search_placeholder' => config('bladewind.table.search_placeholder', 'Search table below...'),
-    'search_field' => null,
-    'search_debounce' => 0,
-    'search_min_length' => 0,
+    'searchPlaceholder' => config('bladewind.table.search_placeholder', 'Search table below...'),
+    'searchField' => null,
+    'searchDebounce' => 0,
+    'searchMinLength' => 0,
     'celled' => config('bladewind.table.celled', false),
     'uppercasing' => config('bladewind.table.uppercasing', true),
-    'no_data_message' => config('bladewind.table.no_data_message', 'No records to display'),
-    'message_as_empty_state' => config('bladewind.table.message_as_empty_state', false),
+    'noDataMessage' => config('bladewind.table.no_data_message', 'No records to display'),
+    'messageAsEmptyState' => config('bladewind.table.message_as_empty_state', false),
     // parameters expected by the empty state component ---------------
     'image' => asset('vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
-    'button_label' => '',
-    'show_image' => config('bladewind.table.show_image', true),
+    'buttonLabel' => '',
+    'showImage' => config('bladewind.table.show_image', true),
     'onclick' => '',
     //------------------ end empty state parameters -------------------
     'selectable' => config('bladewind.table.selectable', false),
     'checkable' => config('bladewind.table.checkable', false),
     'transparent' => config('bladewind.table.transparent', false),
-    'selected_value' => null,
+    'selectedValue' => null,
     'sortable' => config('bladewind.table.sortable', false),
-    'sortable_columns' => [],
+    'sortableColumns' => [],
     'paginated' => config('bladewind.table.paginated', false),
-    'pagination_style' => config('bladewind.table.pagination_style', 'arrows'),
-    'page_size' => config('bladewind.table.page_size', 25),
-    'show_row_numbers' => config('bladewind.table.show_row_numbers', false),
-    'show_total' => config('bladewind.table.show_total', true),
-    'show_page_number' => config('bladewind.table.show_page_number', true),
-    'show_total_pages' => config('bladewind.table.show_total_pages', false),
-    'default_page' => 1,
-    'total_label' => config('bladewind.table.total_label', 'Showing :a to :b of :c records'),
+    'paginationStyle' => config('bladewind.table.pagination_style', 'arrows'),
+    'pageSize' => config('bladewind.table.page_size', 25),
+    'showRowNumbers' => config('bladewind.table.show_row_numbers', false),
+    'showTotal' => config('bladewind.table.show_total', true),
+    'showPageNumber' => config('bladewind.table.show_page_number', true),
+    'showTotalPages' => config('bladewind.table.show_total_pages', false),
+    'defaultPage' => 1,
+    'totalLabel' => config('bladewind.table.total_label', 'Showing :a to :b of :c records'),
     'limit' => null,
     'layout' => 'auto',
     'groupHeadingCss' => '',
 ])
 @php
     // reset variables for Laravel 8 support
-    $has_shadow = parseBladewindVariable($has_shadow);
     $hasShadow = parseBladewindVariable($hasShadow);
-    $hover_effect = parseBladewindVariable($hover_effect);
-    $hoverEffect = parseBladewindVariable($hoverEffect);
+    $hasHover = parseBladewindVariable($hasHover);
     $striped = parseBladewindVariable($striped);
     $compact = parseBladewindVariable($compact);
     $divided = parseBladewindVariable($divided);
     $searchable = parseBladewindVariable($searchable);
-    $search_field = parseBladewindVariable($search_field, 'string');
-    $search_debounce = parseBladewindVariable($search_debounce, 'int');
-    $search_min_length = parseBladewindVariable($search_min_length, 'int');
+    $searchField = parseBladewindVariable($searchField, 'string');
+    $searchDebounce = parseBladewindVariable($searchDebounce, 'int');
+    $searchMinLength = parseBladewindVariable($searchMinLength, 'int');
     $uppercasing = parseBladewindVariable($uppercasing);
     $celled = parseBladewindVariable($celled);
     $selectable = parseBladewindVariable($selectable);
@@ -82,40 +87,38 @@
     $transparent = parseBladewindVariable($transparent);
     $paginated = parseBladewindVariable($paginated);
     $sortable = parseBladewindVariable($sortable);
-    $page_size = parseBladewindVariable($page_size, 'int');
-    $message_as_empty_state = parseBladewindVariable($message_as_empty_state);
-    $show_row_numbers = parseBladewindVariable($show_row_numbers);
-    $show_total = parseBladewindVariable($show_total);
-    $default_page = parseBladewindVariable($default_page, 'int');
+    $pageSize = parseBladewindVariable($pageSize, 'int');
+    $messageAsEmptyState = parseBladewindVariable($messageAsEmptyState);
+    $showRowNumbers = parseBladewindVariable($showRowNumbers);
+    $showTotal = parseBladewindVariable($showTotal);
+    $defaultPage = parseBladewindVariable($defaultPage, 'int');
 
-    if ($hasShadow) $has_shadow = $hasShadow;
-    if (!$hoverEffect) $hover_effect = $hoverEffect;
     $name = preg_replace('/[\s-]/', '_', $name);
 
-    $exclude_columns = !empty($exclude_columns) ? explode(',', str_replace(' ','', $exclude_columns)) : [];
-    $action_icons = (!empty($action_icons)) ? ((is_array($action_icons)) ?
-        $action_icons : json_decode(str_replace('&quot;', '"', $action_icons), true)) : [];
-    $column_aliases = (!empty($column_aliases)) ? ((is_array($column_aliases)) ?
-        $column_aliases : json_decode(str_replace('&quot;', '"', $column_aliases), true)) : [];
+    $excludeColumns = !empty($excludeColumns) ? explode(',', str_replace(' ','', $excludeColumns)) : [];
+    $actionIcons = (!empty($actionIcons)) ? ((is_array($actionIcons)) ?
+        $actionIcons : json_decode(str_replace('&quot;', '"', $actionIcons), true)) : [];
+    $columnAliases = (!empty($columnAliases)) ? ((is_array($columnAliases)) ?
+        $columnAliases : json_decode(str_replace('&quot;', '"', $columnAliases), true)) : [];
     $icons_array = $indices = [];
     $can_group = false;
 
     if (!is_null($data)) {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
 
-        $total_records = (!empty($limit)) ? $limit : count($data);
-        $default_page = ($default_page > ceil($total_records/$page_size)) ? 1 : $default_page;
-        $table_headings = $all_table_headings = ($total_records > 0) ? array_keys((array) $data[0]) : [];
+        $totalRecords = (!empty($limit)) ? $limit : count($data);
+        $defaultPage = ($defaultPage > ceil($totalRecords/$pageSize)) ? 1 : $defaultPage;
+        $table_headings = $all_table_headings = ($totalRecords > 0) ? array_keys((array) $data[0]) : [];
 
-        if( !empty($include_columns) ) {
-            $exclude_columns = [];
-            $table_headings = explode(',', str_replace(' ','', $include_columns));
+        if( !empty($includeColumns) ) {
+            $excludeColumns = [];
+            $table_headings = explode(',', str_replace(' ','', $includeColumns));
         }
 
         if($sortable){
-            $sortable_columns = empty($sortable_columns) ? $table_headings : explode(',', str_replace(' ','', $sortable_columns));
+            $sortableColumns = empty($sortableColumns) ? $table_headings : explode(',', str_replace(' ','', $sortableColumns));
         }
-//        dd($sortable_columns);
+//        dd($sortableColumns);
 
         // Ensure each row in $data has a unique ID
         if (!in_array('id', $all_table_headings)){
@@ -124,13 +127,13 @@
             }
         }
 
-        if(!empty($groupby) && in_array($groupby, $table_headings)) {
+        if(!empty($groupBy) && in_array($groupBy, $table_headings)) {
             $can_group = true;
-            $unique_group_headings = array_unique(array_column($data, $groupby));
+            $unique_group_headings = array_unique(array_column($data, $groupBy));
         }
 
         // build action icons
-        foreach ($action_icons as $action) {
+        foreach ($actionIcons as $action) {
             $action_array = explode('|',$action);
             $temp_actions_arr = [];
             foreach($action_array as $this_action){
@@ -151,12 +154,12 @@
         }
 
         if(!function_exists('pagination_row')){
-            function pagination_row($row_number, $page_size=25, $default_page=1): string
+            function pagination_row($row_number, $pageSize=25, $defaultPage=1): string
             {
                 $row_id =  uniqid();
-                $row_page = ($row_number < $page_size) ? 1 : ceil($row_number/$page_size);
+                $row_page = ($row_number < $pageSize) ? 1 : ceil($row_number/$pageSize);
                 return sprintf("data-id=%s data-page=%s class=%s", $row_id, $row_page,
-                ($row_page != $default_page ? 'hidden' : ''));
+                ($row_page != $defaultPage ? 'hidden' : ''));
             }
         }
     }
@@ -165,14 +168,14 @@
 <script>
     let tableData_{{str_replace('-','_', $name)}} = {!! json_encode($data) !!};
 </script>
-<div class="@if($has_border && !$celled) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
+<div class="@if($hasBorder && !$celled) border border-gray-200/70 dark:border-dark-700/60 @endif border-collapse max-w-full">
     <div class="w-full">
         @if($searchable)
-            <div class="bw-table-filter-bar @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif">
+            <div class="bw-table-filter-bar @if($hasShadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif">
                 <x-bladewind::input
                         name="bw-search-{{$name}}"
-                        placeholder="{{$search_placeholder}}"
-                        onInput="filterTableDebounced(this.value, 'table.{{$name}}', '{{$search_field}}', {{$search_debounce}}, {{$search_min_length}}, tableData_{{str_replace('-','_', $name)}})();"
+                        placeholder="{{$searchPlaceholder}}"
+                        onInput="filterTableDebounced(this.value, 'table.{{$name}}', '{{$searchField}}', {{$searchDebounce}}, {{$searchMinLength}}, tableData_{{str_replace('-','_', $name)}})();"
                         add_clearing="false"
                         class="!mb-0 focus:!border-slate-300 !pl-9 !py-3"
                         clearable="true"
@@ -180,12 +183,12 @@
                         prefix="magnifying-glass"/>
             </div>
         @endif
-        <table class="bw-table w-full {{$name}} @if($has_shadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif
+        <table class="bw-table w-full {{$name}} @if($hasShadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif
             @if($divided) divided @if($divider=='thin') thin @endif @endif  @if($striped) striped @endif  @if($celled) celled @endif
-            @if($hover_effect) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif
+            @if($hasHover) with-hover-effect @endif @if($compact) compact @endif @if($uppercasing) uppercase-headers @endif
             @if($sortable) sortable @endif @if($paginated) paginated @endif
             @if($selectable) selectable @endif @if($checkable) checkable @endif @if($transparent) transparent @endif"
-               @if($paginated) data-current-page="{{$default_page}}" @endif>
+               @if($paginated) data-current-page="{{$defaultPage}}" @endif>
             @if(is_null($data) || $layout == 'custom')
                 @if(!empty($header))
                     <thead>
@@ -198,30 +201,30 @@
                 <tr>
                     @php
                         // if there are no records, build the headings with $column_headings if the array exists
-                        $table_headings = ($total_records>0) ? $table_headings : (($column_aliases) ?? []);
+                        $table_headings = ($totalRecords>0) ? $table_headings : (($columnAliases) ?? []);
                         // when grouping rows, remove the heading for the column being grouped by
                         if($can_group) {
-                            unset($table_headings[array_search($groupby, $table_headings)]);
+                            unset($table_headings[array_search($groupBy, $table_headings)]);
                         }
                     @endphp
-                    @if($show_row_numbers)
+                    @if($showRowNumbers)
                         <th>#</th>
                     @endif
                     @foreach($table_headings as $th)
-                        @if(empty($exclude_columns) || !in_array($th, $exclude_columns))
+                        @if(empty($excludeColumns) || !in_array($th, $excludeColumns))
                             @php
                                 // get positions/indices of the fields to be displayed
                                 // use these indices to directly target data to display from $data
                                 $indices[] = $loop->index;
                             @endphp
-                            <th @if($sortable && in_array($th, $sortable_columns))
+                            <th @if($sortable && in_array($th, $sortableColumns))
                                     class="cursor-pointer"
                                 data-sort-dir="no-sort"
                                 data-can-sort="true"
                                 data-column-index="{{ count($indices)-1}}"
                                 onclick="sortTableByColumn(this, '{{$name}}')" @endif>
-                                <span class="peer cursor-pointer">{{ str_replace('_', ' ', $column_aliases[$th] ?? $th ) }}</span>
-                                @if($sortable && in_array($th, $sortable_columns))
+                                <span class="peer cursor-pointer">{{ str_replace('_', ' ', $columnAliases[$th] ?? $th ) }}</span>
+                                @if($sortable && in_array($th, $sortableColumns))
                                     <x-bladewind::icon name="funnel"
                                                        class="!size-3 opacity-40 peer-hover:opacity-80 no-sort"/>
                                     <x-bladewind::icon name="arrow-long-up"
@@ -232,12 +235,12 @@
                             </th>
                         @endif
                     @endforeach
-                    @if(!empty($action_icons))
-                        <th class="!text-right">{{$actions_title}}</th>
+                    @if(!empty($actionIcons))
+                        <th class="!text-right">{{$actionsTitle}}</th>
                     @endif
                 </tr>
                 </thead>
-                @if($total_records > 0 && $layout == 'auto')
+                @if($totalRecords > 0 && $layout == 'auto')
                     <tbody>
                     @if($can_group)
                         @foreach($unique_group_headings as $group_heading)
@@ -248,15 +251,15 @@
 ]) colspan="{{count($table_headings)}}">{{ $group_heading }}</td>
                             </tr>
                             @php
-                                $grouped_data = array_filter($data, function ($item) use ($group_heading, $groupby) {
-                                    return $item[$groupby] === $group_heading;
+                                $grouped_data = array_filter($data, function ($item) use ($group_heading, $groupBy) {
+                                    return $item[$groupBy] === $group_heading;
                                 });
                             @endphp
                             @foreach($grouped_data as $row)
                                 @php $row_id =  $row['id']; @endphp
                                 <tr data-id="{{ $row_id }}">
                                     @foreach($table_headings as $th)
-                                        @if($th !== $groupby && in_array($loop->index, $indices))
+                                        @if($th !== $groupBy && in_array($loop->index, $indices))
                                             <td data-row-id="{{ $row_id }}"
                                                 data-column="{{ $th }}">{!! $row[$th] !!}</td>
                                         @endif
@@ -269,14 +272,14 @@
                         @foreach($data as $row)
                             @php
                                 $row_id =  $row['id'];
-                                $row_page = (!$paginated || $loop->iteration < $page_size) ? 1 : ceil($loop->iteration/$page_size);
+                                $row_page = (!$paginated || $loop->iteration < $pageSize) ? 1 : ceil($loop->iteration/$pageSize);
                             @endphp
                             @if(!empty($limit) && $loop->iteration > $limit)
                                 @break
                             @endif
                             <tr data-id="{{ $row_id }}" data-page="{{ $row_page }}"
-                                @if($paginated && $row_page != $default_page)class="hidden" @endif>
-                                @if($show_row_numbers)
+                                @if($paginated && $row_page != $defaultPage)class="hidden" @endif>
+                                @if($showRowNumbers)
                                     <td>{{$loop->iteration}}</td>
                                 @endif
                                 @foreach($table_headings as $th)
@@ -292,16 +295,16 @@
                     @else
                         <tr>
                             <td colspan="{{count($table_headings)}}" class="text-center">
-                                @if($message_as_empty_state)
+                                @if($messageAsEmptyState)
                                     <x-bladewind::empty-state
-                                            :message="$no_data_message"
-                                            :button_label="$button_label"
+                                            :message="$noDataMessage"
+                                            :buttonLabel="$buttonLabel"
                                             :onclick="$onclick"
                                             :image="$image"
-                                            :show_image="$show_image"
+                                            :showImage="$showImage"
                                             :heading="$heading"/>
                                 @else
-                                    {{ $no_data_message }}
+                                    {{ $noDataMessage }}
                                 @endif
                                 <script>
                                     changeCss('.{{$name}}', 'with-hover-effect', 'remove');
@@ -313,17 +316,17 @@
                     </tbody>
                 @endif
         </table>
-        @if($paginated && !empty($total_records))
+        @if($paginated && !empty($totalRecords))
             <x-bladewind::pagination
-                    :style="$pagination_style"
-                    :total_records="$total_records"
-                    :page_size="$page_size"
-                    :show_total="$show_total"
-                    :show_total_pages="$show_total_pages"
-                    :show_page_number="$show_page_number"
-                    :label="$total_label"
+                    :style="$paginationStyle"
+                    :totalRecords="$totalRecords"
+                    :pageSize="$pageSize"
+                    :showTotal="$showTotal"
+                    :showTotalPages="$showTotalPages"
+                    :showPageNumber="$showPageNumber"
+                    :label="$totalLabel"
                     :table="$name"
-                    :default_page="$default_page"/>
+                    :defaultPage="$defaultPage"/>
         @endif
     </div>
 </div>
@@ -436,8 +439,8 @@
     @endonce
     <script>
         addCheckboxesToTable('.bw-table.{{$name}}');
-        // select rows in selected_value
-        @if(!empty($selected_value)) checkSelected('.bw-table.{{$name}}', '{{$selected_value}}') @endif
+        // select rows in selectedValue
+        @if(!empty($selectedValue)) checkSelected('.bw-table.{{$name}}', '{{$selectedValue}}') @endif
     </script>
 @endif
 @if($sortable)

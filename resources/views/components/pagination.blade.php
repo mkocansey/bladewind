@@ -1,49 +1,49 @@
 @props([
-    'total_records' => null,
-    'page_size' => 25,
+    'totalRecords' => null,
+    'pageSize' => 25,
     'style' => 'arrows',
-    'show_total' => true,
-    'show_page_number' => true,
-    'show_total_pages' => false,
-    'default_page' => 1,
+    'showTotal' => true,
+    'showPageNumber' => true,
+    'showTotalPages' => false,
+    'defaultPage' => 1,
     'table' => null,
     'label' => 'Showing :a to :b of :c records',
 ])
 
 @php
-    $show_total = parseBladewindVariable($show_total);
-    $show_page_number = parseBladewindVariable($show_page_number);
-    $show_total_pages = parseBladewindVariable($show_total_pages);
-    $default_page = parseBladewindVariable($default_page, 'int');
+    $showTotal = parseBladewindVariable($showTotal);
+    $showPageNumber = parseBladewindVariable($showPageNumber);
+    $showTotalPages = parseBladewindVariable($showTotalPages);
+    $defaultPage = parseBladewindVariable($defaultPage, 'int');
     $style = (!in_array($style, ['arrows', 'dropdown', 'numbers'])) ? 'arrows' : $style;
-    $total_pages = ceil($total_records/$page_size);
-    $default_page = (is_numeric($default_page) && $default_page > 0 && $default_page <= $total_pages) ? $default_page : 1;
+    $total_pages = ceil($totalRecords/$pageSize);
+    $defaultPage = (is_numeric($defaultPage) && $defaultPage > 0 && $defaultPage <= $total_pages) ? $defaultPage : 1;
     $inactive_css = "opacity-30 hover:opacity-30 !hover:border-gray-500/50";
     $active_css = "!border-primary-500 dark:!border-gray-300";
     $default_button_css = "!border-gray-200 dark:!border-dark-600 hover:!border-gray-400 dark:hover:!border-dark-500";
-    $next_button_status_css = ($default_page == $total_pages) ? $inactive_css : $default_button_css;
-    $prev_button_status_css = ($default_page == 1) ? $inactive_css : $default_button_css;
-    $to = $page_size*$default_page;
-    $to = ($to > $total_records) ? $total_records : $to;
-    $from = $to - ($page_size-1);
-    $from = ($to == $total_records) ? 1 : $from;
-    $prev_page = $default_page-1;
-    $next_page = $default_page+1;
-    $prev_page = ($prev_page <= 0) ? 0 : $default_page-1;
+    $next_button_status_css = ($defaultPage == $total_pages) ? $inactive_css : $default_button_css;
+    $prev_button_status_css = ($defaultPage == 1) ? $inactive_css : $default_button_css;
+    $to = $pageSize*$defaultPage;
+    $to = ($to > $totalRecords) ? $totalRecords : $to;
+    $from = $to - ($pageSize-1);
+    $from = ($to == $totalRecords) ? 1 : $from;
+    $prev_page = $defaultPage-1;
+    $next_page = $defaultPage+1;
+    $prev_page = ($prev_page <= 0) ? 0 : $defaultPage-1;
 @endphp
 
-@if(!empty($total_records) && !empty($table))
+@if(!empty($totalRecords) && !empty($table))
     <script>
-        var previousPage_{{$table}} = {{$default_page}};
+        var previousPage_{{$table}} = {{$defaultPage}};
         var totalPages_{{$table}} = {{$total_pages}};
-        var pageSize_{{$table}} = {{$page_size}};
-        var totalRecords_{{$table}} = {{$total_records}};
+        var pageSize_{{$table}} = {{$pageSize}};
+        var totalRecords_{{$table}} = {{$totalRecords}};
         var paginationStyle_{{$table}} = '{{$style}}';
     </script>
     <div class="flex px-5 py-2 justify-between text-sm items-center opacity-80 bw-pagination-{{$table}}">
         <div>
-            @if($show_total)
-                {!! str_replace(':c', '<strong>'.$total_records.'</strong>',
+            @if($showTotal)
+                {!! str_replace(':c', '<strong>'.$totalRecords.'</strong>',
                     str_replace(':b', '<span class="font-semibold to">'.$to.'</span>',
                     str_replace(':a', '<span class="font-semibold from">'.$from.'</span>', $label)))  !!}
             @endif
@@ -56,9 +56,9 @@
                         color="gray"
                         size="tiny"
                         icon="arrow-left" class="!pr-0 prev-btn {{$prev_button_status_css}}"
-                        onclick="goToPage('{{$prev_page}}', '{{$table}}', '{{$default_page}}')"/>
-                <span class="page-number font-semibold p-1 @if(!$show_page_number)hidden @endif"><span
-                            class="page">{{$default_page}}</span>@if($show_total_pages)
+                        onclick="goToPage('{{$prev_page}}', '{{$table}}', '{{$defaultPage}}')"/>
+                <span class="page-number font-semibold p-1 @if(!$showPageNumber)hidden @endif"><span
+                            class="page">{{$defaultPage}}</span>@if($showTotalPages)
                         /{{$total_pages}}
                     @endif</span>
                 <x-bladewind::button
@@ -71,8 +71,8 @@
             @elseif($style == 'dropdown')
                 <div class="!z-50">
                     <span class="table-name hidden" data-value="{{$table}}"></span>
-                    <span class="current-page hidden" data-value="{{$default_page}}"></span>
-                    <x-bladewind::select :selected_value="$default_page" :required="true" data="manual"
+                    <span class="current-page hidden" data-value="{{$defaultPage}}"></span>
+                    <x-bladewind::select :selected_value="$defaultPage" :required="true" data="manual"
                                          meta="{table: '{{$table}}'}" size="small">
                         @for($p=1; $p <= $total_pages; $p++)
                             <x-bladewind::select-item :label="$p" :value="$p" onselect="routeToPage"/>
@@ -80,7 +80,7 @@
                     </x-bladewind::select>
                 </div>
             @else
-                <span class="current-page hidden" data-value="{{$default_page}}"></span>
+                <span class="current-page hidden" data-value="{{$defaultPage}}"></span>
                 <div class="flex">
                     <x-bladewind::button
                             type="primary"
@@ -93,7 +93,7 @@
                     <span class="mt-3 prev-dots"></span>
                     @for($p=1; $p <= $total_pages; $p++)
                         @php
-                            $button_css = ($p==$default_page) ? $active_css : $default_button_css;
+                            $button_css = ($p==$defaultPage) ? $active_css : $default_button_css;
                         @endphp
                         <x-bladewind::button
                                 type="primary"
@@ -115,7 +115,7 @@
                             class="!ml-0.5 !pl-5 !pr-1 next-btn {{$default_button_css}}"
                             onclick="routeToPage('{{$next_page}}', '', '', {table: '{{$table}}'}); shufflePageNumbers('{{$next_page}}', '{{$table}}')"/>
                 </div>
-                <script>shufflePageNumbers('{{$default_page}}', '{{$table}}')</script>
+                <script>shufflePageNumbers('{{$defaultPage}}', '{{$table}}')</script>
             @endif
         </div>
     </div>
