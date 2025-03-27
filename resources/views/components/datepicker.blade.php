@@ -93,7 +93,7 @@
             wed: '{{ __('bladewind::bladewind.wed') }}'.substring(0, 3),
             thu: '{{ __('bladewind::bladewind.thu') }}'.substring(0, 3),
             fri: '{{ __('bladewind::bladewind.fri') }}'.substring(0, 3),
-            sat: '{{ __('bladewind::bladewind.dat') }}'.substring(0, 3)
+            sat: '{{ __('bladewind::bladewind.sat') }}'.substring(0, 3)
         };
     </script>
     <script src="{{ asset('vendor/bladewind/js/datepicker.js') }}"></script>

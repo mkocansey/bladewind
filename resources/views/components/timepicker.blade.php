@@ -1,16 +1,16 @@
 @props([
     // name of the datepicker. This name is used when posting the form with the datepicker
     'name' => defaultBladewindName(),
-    'hourLabel' => config('bladewind.timepicker.hour_label','HH'),
-    'minuteLabel' => config('bladewind.timepicker.minute_label','MM'),
-    'formatLabel' => config('bladewind.timepicker.format_label','--'),
+    'hourLabel' => config('bladewind.timepicker.hour_label', __("bladewind::bladewind.timepicker_hour_label")),
+    'minuteLabel' => config('bladewind.timepicker.minute_label', __("bladewind::bladewind.timepicker_minute_label")),
+    'formatLabel' => config('bladewind.timepicker.format_label', __("bladewind::bladewind.timepicker_format_label")),
     'required' => false,
       // what should the time hours be displayed as. Available options are 12, 24
-    'format' => config('bladewind.timepicker.format','12'),
+    'format' => config('bladewind.timepicker.format', '12'),
     'selectedValue' => '',
-    'style' => config('bladewind.timepicker.style','popup'),
+    'style' => config('bladewind.timepicker.style', 'popup'),
     'label' => '',
-    'placeholder' => config('bladewind.timepicker.placeholder','HH:MM'),
+    'placeholder' => config('bladewind.timepicker.placeholder', __("bladewind::bladewind.timepicker_placeholder")),
 ])
 @php
     $name = parseBladewindName($name);
@@ -89,12 +89,12 @@
                     <div tabindex="3"
                          class="rounded-t-lg font-semibold cursor-pointer text-2xl px-4 py-2 {{ (!empty($selected_format) && $selected_format == 'AM') ? 'bg-gray-500 text-white' : 'bg-gray-100 hover:bg-gray-300' }} bw-{{$name}}-time-format-am"
                          onclick="toggleFormat('AM', '{{$name}}');">
-                        {{ __('bladewind::bladewind.am') }}
+                        {{ __('bladewind::bladewind.timepicker_am') }}
                     </div>
                     <div tabindex="4"
                          class="rounded-b-lg font-semibold cursor-pointer text-2xl px-4 py-2 {{ (!empty($selected_format) && $selected_format == 'PM') ? 'bg-gray-500 text-white' : 'bg-gray-100 hover:bg-gray-300' }} bw-{{$name}}-time-format-pm"
                          onclick="toggleFormat('PM', '{{$name}}');">
-                        {{ __('bladewind::bladewind.pm') }}
+                        {{ __('bladewind::bladewind.timepicker_pm') }}
                     </div>
                     <input type="hidden" class="bw-{{$name}}_format bg-gray-500"/>
                 </div>
@@ -206,8 +206,8 @@
                         name="{{$name}}_format"
                         :required="$required"
                         selected_value="{{$selected_format??''}}">
-                    <x-bladewind::select-item label="{{ __('bladewind::bladewind.am') }}" value="AM"/>
-                    <x-bladewind::select-item label="{{ __('bladewind::bladewind.pm') }}" value="PM"/>
+                    <x-bladewind::select-item label="{{ __('bladewind::bladewind.timepicker_am') }}" value="AM"/>
+                    <x-bladewind::select-item label="{{ __('bladewind::bladewind.timepicker_pm') }}" value="PM"/>
                 </x-bladewind::select>
             </div>
         @endif

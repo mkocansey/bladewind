@@ -1,5 +1,5 @@
 @props([ 
-    'name' => 'processing',
+    'name' => defaultBladewindName(),
 
     // the process indicator is rendered within the page and so by default
     // its hidden until a process needs to be started
@@ -11,7 +11,6 @@
     'class' => '',
 ])
 @php
-    $name = preg_replace('/[\s]/', '-', $name);
     $hide = parseBladewindVariable($hide);
 @endphp
 <div class="{{ $name }} text-center text-sm @if($hide) hidden @endif mt-6 {{$class}}">

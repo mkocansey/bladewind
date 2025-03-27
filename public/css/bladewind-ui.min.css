@@ -834,7 +834,6 @@ input.no-label::placeholder, .bw-input.no-label::placeholder, .bw-textarea.bw-in
 .hidden{display:none;}
 .\!size-0{width:0px !important;height:0px !important;}
 .\!size-10{width:2.5rem !important;height:2.5rem !important;}
-.\!size-11{width:2.75rem !important;height:2.75rem !important;}
 .\!size-12{width:3rem !important;height:3rem !important;}
 .\!size-14{width:3.5rem !important;height:3.5rem !important;}
 .\!size-16{width:4rem !important;height:4rem !important;}
@@ -852,8 +851,8 @@ input.no-label::placeholder, .bw-input.no-label::placeholder, .bw-textarea.bw-in
 .\!size-\[25px\]{width:25px !important;height:25px !important;}
 .size-0{width:0px;height:0px;}
 .size-10{width:2.5rem;height:2.5rem;}
-.size-11{width:2.75rem;height:2.75rem;}
 .size-12{width:3rem;height:3rem;}
+.size-14{width:3.5rem;height:3.5rem;}
 .size-16{width:4rem;height:4rem;}
 .size-20{width:5rem;height:5rem;}
 .size-28{width:7rem;height:7rem;}
@@ -868,10 +867,6 @@ input.no-label::placeholder, .bw-input.no-label::placeholder, .bw-textarea.bw-in
 .size-\[36px\]{width:36px;height:36px;}
 .size-\[52px\]{width:52px;height:52px;}
 .size-\[9px\]{width:9px;height:9px;}
-.size-14{width:3.5rem;height:3.5rem;}
-.size-24{width:6rem;height:6rem;}
-.\!size-24{width:6rem !important;height:6rem !important;}
-.\!size-20{width:5rem !important;height:5rem !important;}
 .\!h-14{height:3.5rem !important;}
 .\!h-2{height:0.5rem !important;}
 .\!h-24{height:6rem !important;}
@@ -962,7 +957,6 @@ to{transform:rotate(360deg);}}
 .\!cursor-default{cursor:default !important;}
 .cursor-default{cursor:default;}
 .cursor-pointer{cursor:pointer;}
-.\!cursor-pointer{cursor:pointer !important;}
 .select-none{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
 .resize{resize:both;}
 .appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none;}
@@ -1099,7 +1093,6 @@ to{transform:rotate(360deg);}}
 .border-yellow-400\/50{border-color:rgb(250 204 21 / 0.5);}
 .border-yellow-500{--tw-border-opacity:1;border-color:rgb(234 179 8 / var(--tw-border-opacity, 1));}
 .border-yellow-500\/50{border-color:rgb(234 179 8 / 0.5);}
-.border-red-400{--tw-border-opacity:1;border-color:rgb(248 113 113 / var(--tw-border-opacity, 1));}
 .border-y-gray-200\/50{border-top-color:rgb(229 231 235 / 0.5);border-bottom-color:rgb(229 231 235 / 0.5);}
 .border-b-slate-200\/75{border-bottom-color:rgb(226 232 240 / 0.75);}
 .border-b-white{--tw-border-opacity:1;border-bottom-color:rgb(255 255 255 / var(--tw-border-opacity, 1));}
@@ -1223,8 +1216,6 @@ to{transform:rotate(360deg);}}
 .bg-yellow-200\/80{background-color:rgb(254 240 138 / 0.8);}
 .bg-yellow-300{--tw-bg-opacity:1;background-color:rgb(253 224 71 / var(--tw-bg-opacity, 1));}
 .bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1));}
-.bg-white\/80{background-color:rgb(255 255 255 / 0.8);}
-.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1));}
 .fill-gray-400\/70{fill:rgb(156 163 175 / 0.7);}
 .fill-slate-400{fill:#94a3b8;}
 .stroke-white{stroke:#fff;}
@@ -1242,7 +1233,6 @@ to{transform:rotate(360deg);}}
 .p-4{padding:1rem;}
 .p-5{padding:1.25rem;}
 .p-6{padding:1.5rem;}
-.p-8{padding:2rem;}
 .p-\[3px\]{padding:3px;}
 .\!px-0{padding-left:0px !important;padding-right:0px !important;}
 .\!px-2{padding-left:0.5rem !important;padding-right:0.5rem !important;}
@@ -1299,12 +1289,12 @@ to{transform:rotate(360deg);}}
 .pr-5{padding-right:1.25rem;}
 .pt-0{padding-top:0px;}
 .pt-1{padding-top:0.25rem;}
+.pt-1\.5{padding-top:0.375rem;}
 .pt-2{padding-top:0.5rem;}
 .pt-2\.5{padding-top:0.625rem;}
 .pt-4{padding-top:1rem;}
 .pt-5{padding-top:1.25rem;}
 .pt-\[1px\]{padding-top:1px;}
-.pt-1\.5{padding-top:0.375rem;}
 .\!text-left{text-align:left !important;}
 .text-left{text-align:left;}
 .\!text-center{text-align:center !important;}
@@ -1459,8 +1449,8 @@ to{transform:rotate(360deg);}}
 .drop-shadow-2xl{--tw-drop-shadow:drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}
 .drop-shadow-sm{--tw-drop-shadow:drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}
 .invert{--tw-invert:invert(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}
-.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}
 .\!filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;}
+.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);}
 .backdrop-blur-2xl{--tw-backdrop-blur:blur(40px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);}
 .backdrop-blur-3xl{--tw-backdrop-blur:blur(64px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);}
 .backdrop-blur-lg{--tw-backdrop-blur:blur(16px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);}
@@ -1590,6 +1580,7 @@ to{transform:rotate(360deg);}}
 .hover\:text-primary-500:hover{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1));}
 .hover\:text-purple-50:hover{--tw-text-opacity:1;color:rgb(250 245 255 / var(--tw-text-opacity, 1));}
 .hover\:text-red-50:hover{--tw-text-opacity:1;color:rgb(254 242 242 / var(--tw-text-opacity, 1));}
+.hover\:text-red-500:hover{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1));}
 .hover\:text-slate-50:hover{--tw-text-opacity:1;color:rgb(248 250 252 / var(--tw-text-opacity, 1));}
 .hover\:text-slate-500:hover{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1));}
 .hover\:text-slate-600:hover{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1));}
@@ -1597,7 +1588,6 @@ to{transform:rotate(360deg);}}
 .hover\:text-violet-50:hover{--tw-text-opacity:1;color:rgb(245 243 255 / var(--tw-text-opacity, 1));}
 .hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1));}
 .hover\:text-yellow-50:hover{--tw-text-opacity:1;color:rgb(254 252 232 / var(--tw-text-opacity, 1));}
-.hover\:text-red-500:hover{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1));}
 .hover\:\!opacity-100:hover{opacity:1 !important;}
 .hover\:opacity-100:hover{opacity:1;}
 .hover\:opacity-30:hover{opacity:0.3;}

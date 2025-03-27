@@ -14,8 +14,8 @@
     'alignItems' => config('bladewind.checkcards.align_items', 'top'),
     'showError' => config('bladewind.checkcards.show_error', false),
     'autoSelectNew' => config('bladewind.checkcards.auto_select_new', true),
-    'errorHeading' => config('bladewind.checkcards.error_heading', 'Max selection'),
-    'errorMessage' => config('bladewind.checkcards.error_message', 'You have selected the maximum cards allowed'),
+    'errorHeading' => config('bladewind.checkcards.error_heading', __('bladewind::bladewind.checkcard_error_heading')),
+    'errorMessage' => config('bladewind.checkcards.error_message', __('bladewind::bladewind.checkcard_error_message')),
     'selectedValue' => '',
 ])
 @php

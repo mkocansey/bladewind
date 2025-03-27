@@ -1,11 +1,11 @@
 @props([
     // name to uniquely identity a select
-    'name' => 'bw-select-'.uniqid(),
+    'name' => defaultBladewindName('bw-select-'),
 
     // the default text to display when the select shows
-    'placeholder' => config('bladewind.select.placeholder', 'Select One'),
-    'search_placeholder' => config('bladewind.select.search_placeholder', 'Type here...'),
-    'empty_placeholder' => config('bladewind.select.empty_placeholder', 'No options available'),
+    'placeholder' => config('bladewind.select.placeholder', __("bladewind::bladewind.select_placeholder")),
+    'searchPlaceholder' => config('bladewind.select.search_placeholder', __("bladewind::bladewind.select_search_placeholder")),
+    'emptyPlaceholder' => config('bladewind.select.empty_placeholder', __("bladewind::bladewind.select_empty_placeholder")),
     'label' => config('bladewind.select.label', null),
 
     /**
@@ -30,32 +30,28 @@
     /**
      * What key in your data array should be used to populate 'value' of the select when an item is selected
      * By default, a key of 'value' is used. If your data is something like
-     *  [ {"id": 1,"name": "Burkina Faso"} ], your value_key will be 'id'
+     *  [ {"id": 1,"name": "Burkina Faso"} ], your valueKey will be 'id'
     */
-    'value_key' => 'value',
     'valueKey' => 'value',
 
     /**
      * What key in your data array should be used to display the labels the user will see as select items
      * The default key used for labels is 'label'. If your data is something like
-     * [ {"id": 1,"name": "Burkina Faso"} ] your label_key will be 'name'
+     * [ {"id": 1,"name": "Burkina Faso"} ] your labelKey will be 'name'
     */
-    'label_key' => 'label',
     'labelKey' => 'label',
 
     /**
      * What key in your data array should be used to display flag icons next to the labels
-     * [ {"id": 1, "name": "Burkina Faso", "flag": "/assets/images/bf-flag.png"} ] your flag_key will be 'flag'
+     * [ {"id": 1, "name": "Burkina Faso", "flag": "/assets/images/bf-flag.png"} ] your flagKey will be 'flag'
      */
-    'flag_key' => null,
     'flagKey' => null,
 
     /**
      * What key in your data array should be used to display images next to the labels
      * The default key used for images is '', meaning images will be ignored. If your data is something like
-     * [ {"id":"1","name":"Burkina Faso", "image":"/assets/images/bf-flag.png"}] your image_key will be 'image'
+     * [ {"id":"1","name":"Burkina Faso", "image":"/assets/images/bf-flag.png"}] your imageKey will be 'image'
     */
-    'image_key' => null,
     'imageKey' => null,
 
     /**
@@ -63,7 +59,6 @@
      * different from the name you gave the component. Example. you may name the select as country but
      * want the data to be submitted as country_id.
     */
-    'data_serialize_as' => '',
     'dataSerializeAs' => '',
 
     // enforces validation if set to true
@@ -76,16 +71,14 @@
     'multiple' => 'false',
 
     // adds margin after the input box
-    'add_clearing' => config('bladewind.select.add_clearing', true),
     'addClearing' => config('bladewind.select.add_clearing', true),
 
     /**
      * Determines if a value passed in the data array should automatically be selected
      * Helpful when using the component in edit mode or as part of filter options
-     * The value you specify should exist in your value_key. If your value_key is 'id', you
-     * cannot set a selected_value of 'Burkina Faso'
+     * The value you specify should exist in your valueKey. If your valueKey is 'id', you
+     * cannot set a selectedValue of 'Burkina Faso'
     */
-    'selected_value' => '',
     'selectedValue' => '',
 
     // setting this to true adds a search box above the select items
@@ -93,56 +86,44 @@
     'searchable' => false,
 
     // specify the maximum number of items that can be selected
-    'max_selectable' => -1,
     'maxSelectable' => -1,
 
-    // error message to display when max_selectable is exceeded
-    'max_error_message' => config('bladewind.select.max_error_message', 'Please select only %s items'),
-    'maxErrorMessage' => config('bladewind.select.max_error_message', 'Please select only %s items'),
+    // error message to display when maxSelectable is exceeded
+    'maxErrorMessage' => config('bladewind.select.max_error_message', __("bladewind::bladewind.select_max_selection")),
 
     'filter' => '',
 
-    'filter_by' => '',
+    'filterBy' => '',
 
     // append type="module" to script tags
     'modular' => config('bladewind.select.modular', false),
 
     'size' => config('bladewind.select.size', 'medium'),
 
-    'empty_state' => 'false',
-    'empty_state_message' => config('bladewind.select.empty_placeholder', 'No options available'),
-    'empty_state_button_label' => 'Add',
-    'empty_state_onclick' => '',
-    'empty_state_show_image' => 'true',
-    'empty_state_image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
+    'emptyState' => 'false',
+    'emptyStateMessage' => config('bladewind.select.empty_placeholder', __("bladewind::bladewind.select_empty_placeholder")),
+    'emptyStateButtonLabel' => __("bladewind::bladewind.select_empty_state_button_label"),
+    'emptyStateOnclick' => '',
+    'emptyStateShowImage' => 'true',
+    'emptyStateImage' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
     'meta' => null,
 
 ])
 @php
-    $add_clearing = parseBladewindVariable($add_clearing);
     $addClearing = parseBladewindVariable($addClearing);
     $searchable = parseBladewindVariable($searchable);
     $required = parseBladewindVariable($required);
     $readonly = parseBladewindVariable($readonly);
     $disabled = parseBladewindVariable($disabled);
-    $empty_state = parseBladewindVariable($empty_state);
-    $max_selectable = (int) $max_selectable;
+    $emptyState = parseBladewindVariable($emptyState);
     $maxSelectable = (int) $maxSelectable;
 
-    if ($dataSerializeAs !== $data_serialize_as) $data_serialize_as = $dataSerializeAs;
-    if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
-    if ($valueKey !== $value_key) $value_key = $valueKey;
-    if ($labelKey !== $label_key) $label_key = $labelKey;
-    if ($flagKey !== $flag_key) $flag_key = $flagKey;
-    if ($imageKey !== $image_key) $image_key = $imageKey;
-    if (!$add_clearing) $add_clearing = $addClearing;
-    if ($maxSelectable !== $max_selectable) $max_selectable = $maxSelectable;
-    $max_error_message = ($maxErrorMessage != $max_error_message) ? addslashes($maxErrorMessage) : addslashes($max_error_message);
-    if($max_error_message == '') $max_error_message = 'Please select only %s items';
+    $maxErrorMessage = addslashes($maxErrorMessage);
+    if($maxErrorMessage == '') $maxErrorMessage = __("bladewind::bladewind.select_max_selection");
 
-    $input_name = preg_replace('/[\s-]/', '_', $name);
-    $filter = preg_replace('/[\s-]/', '_', $filter);
-    $selected_value = ($selected_value != '') ? explode(',', str_replace(', ', ',', $selected_value)) : [];
+    $input_name = $name;
+    $filter = parseBladewindName($filter);
+    $selectedValue = ($selectedValue != '') ? explode(',', str_replace(', ', ',', $selectedValue)) : [];
 
     if ($data !== 'manual') {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
@@ -167,13 +148,13 @@
         scroll-behavior: smooth;
     }
 </style>
-<div class="relative bw-select bw-select-{{$input_name}} @if($add_clearing) mb-3 @endif"
+<div class="relative bw-select bw-select-{{$input_name}} @if($addClearing) mb-3 @endif"
      role="combobox"
      data-multiple="{{$multiple}}" data-required="{{$required?'true':'false'}}"
      data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if(!empty($meta)) data-meta-data="{{ $meta}}" @endif
-     @if($data == 'manual' && $selected_value != '') data-selected-value="{{implode(',',$selected_value)}}" @endif>
+     @if($data == 'manual' && $selectedValue != '') data-selected-value="{{implode(',',$selectedValue)}}" @endif>
     <div tabindex="0"
          class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50 hover:border-slate-300
          dark:text-dark-300 dark:border-dark-600 dark:hover:border-dark-500/50 dark:bg-transparent {{$sizes[$size]}} pl-4 pr-2 clickable
@@ -208,7 +189,7 @@
             <x-bladewind::input
                     class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_search"
                     add_clearing="false"
-                    :placeholder="$search_placeholder"
+                    :placeholder="$searchPlaceholder"
                     suffix="magnifying-glass"
                     suffixIsIcon="true"/>
         </div>
@@ -216,27 +197,27 @@
             @if($data !== 'manual')
                 @forelse ($data as $item)
                     <x-bladewind::select-item
-                            label="{{ $item[$label_key] }}"
-                            value="{{ $item[$value_key] }}"
-                            filter_by="{{ ($filter_by != '') ? $item[$filter_by] : '' }}"
+                            label="{{ $item[$labelKey] }}"
+                            value="{{ $item[$valueKey] }}"
+                            filter_by="{{ ($filterBy != '') ? $item[$filterBy] : '' }}"
                             onselect="{{ $onselect }}"
-                            flag="{{ $item[$flag_key] ?? '' }}"
-                            image="{{ $item[$image_key] ?? '' }}"
-                            selected="{{ (in_array($item[$value_key], $selected_value)) ? 'true' : 'false' }}"/>
+                            flag="{{ $item[$flagKey] ?? '' }}"
+                            image="{{ $item[$imageKey] ?? '' }}"
+                            selected="{{ (in_array($item[$valueKey], $selectedValue)) ? 'true' : 'false' }}"/>
                 @empty
-                    @if($empty_state)
+                    @if($emptyState)
                         <x-bladewind::select-item
                                 :selectable="false"
                                 :empty_state="true"
-                                :empty_state_message="$empty_state_message"
-                                :empty_state_show_image="$empty_state_show_image"
-                                :empty_state_button_label="$empty_state_button_label"
-                                empty_state_onclick="{!! $empty_state_onclick !!}"
-                                :empty_state_image="$empty_state_image"/>
+                                :empty_state_message="$emptyStateMessage"
+                                :empty_state_show_image="$emptyStateShowImage"
+                                :empty_state_button_label="$emptyStateButtonLabel"
+                                empty_state_onclick="{!! $emptyStateOnclick !!}"
+                                :empty_state_image="$emptyStateImage"/>
                     @else
                         <x-bladewind::select-item
                                 :selectable="false"
-                                :label="$empty_placeholder"
+                                :label="$emptyPlaceholder"
                         />
                     @endif
                 @endforelse
@@ -245,7 +226,7 @@
             @endif
         </div>
     </div>
-    <input type="hidden" name="{{ ($data_serialize_as !== '') ? $data_serialize_as : $input_name }}"
+    <input type="hidden" name="{{ ($dataSerializeAs !== '') ? $dataSerializeAs : $input_name }}"
            class="bw-{{$input_name}} @if($required) required @endif"
            @if($required) data-parent="bw-select-{{$input_name}}" @endif
            @if($multiple) autocomplete="off" @endif />
@@ -258,7 +239,7 @@
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     bw_{{ $input_name }}.activate({disabled: '{{$disabled}}', readonly: '{{$readonly}}'});
     @if(!$disabled && !$readonly)
-    bw_{{ $input_name }}.maxSelectable({{$max_selectable}}, '{{ sprintf($max_error_message, $max_selectable) }}');
+    bw_{{ $input_name }}.maxSelectable({{$maxSelectable}}, '{{ sprintf($maxErrorMessage, $maxSelectable) }}');
     @endif
     @if(!empty($filter))
     bw_{{ $input_name }}.filter('{{ $filter }}');

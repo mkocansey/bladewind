@@ -1,42 +1,35 @@
 @props([
     'name' => uniqid('bw-dropmenu-'),
     'trigger' => config('bladewind.dropmenu.trigger', 'ellipsis-horizontal-icon'),
-    'trigger_css' => '',
-    'trigger_on' => config('bladewind.dropmenu.trigger_on', 'click'),
+    'triggerCss' => '',
+    'triggerOn' => config('bladewind.dropmenu.trigger_on', 'click'),
     'divided' => config('bladewind.dropmenu.divided', false),
     'scrollable' => false,
     'height' => 200,
-    'hide_after_click' => true,
+    'hideAfterClick' => true,
     'position' => 'right',
     'class' => '',
     'modular' => false, // append type="module" to script tags
     'pickerColour' => 'pink',
-    'icon_right' => config('bladewind.dropmenu.icon_right', false),
+    'iconRight' => config('bladewind.dropmenu.icon_right', false),
     'padded' => config('bladewind.dropmenu.padded', true),
 ])
 @php
     $name = preg_replace('/[\s-]/', '_', $name);
     $height = !is_numeric($height) ? 200 : $height;
-    $trigger_on = (!in_array($trigger_on, ['click', 'mouseover'])) ? 'click' : $trigger_on;
+    $triggerOn = (!in_array($triggerOn, ['click', 'mouseover'])) ? 'click' : $triggerOn;
     $divided = parseBladewindVariable($divided);
     $padded = parseBladewindVariable($padded);
     $scrollable = parseBladewindVariable($scrollable);
-    $hide_after_click = parseBladewindVariable($hide_after_click);
-    $icon_right = parseBladewindVariable($icon_right);
-
-    // TODO: Remove in 3.0.0 when Php < 8 support is dropped
-    if (!function_exists('str_ends_with')) {
-      function str_ends_with($str, $end): bool {
-        return (@substr_compare($str, $end, -strlen($end))==0);
-      }
-    }
+    $hideAfterClick = parseBladewindVariable($hideAfterClick);
+    $iconRight = parseBladewindVariable($iconRight);
 @endphp
 <div class="relative inline-block leading-none text-left bw-dropmenu !z-20 {{$name}}" tabindex="0">
     <div class="bw-trigger cursor-pointer inline-block">
         @if(str_ends_with($trigger, '-icon'))
             <x-bladewind::icon
                     name="{{ trim(str_replace('-icon','', $trigger)) }}"
-                    class="h-6 w-6 text-gray-500 transition duration-150 ease-in-out z-10 {{$trigger_css}}"/>
+                    class="h-6 w-6 text-gray-500 transition duration-150 ease-in-out z-10 {{$triggerCss}}"/>
         @else
             {!!$trigger!!}
         @endif
@@ -64,7 +57,7 @@
 </script>
 <script @if($modular) type="module" @endif>
     const {{ $name }} = new BladewindDropmenu('{{ $name }}', {
-        triggerOn: '{{$trigger_on}}',
-        hideAfterClick: '{{$hide_after_click}}'
+        triggerOn: '{{$triggerOn}}',
+        hideAfterClick: '{{$hideAfterClick}}'
     });
 </script>

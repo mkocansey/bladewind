@@ -7,7 +7,7 @@
     'showTotalPages' => false,
     'defaultPage' => 1,
     'table' => null,
-    'label' => 'Showing :a to :b of :c records',
+    'label' => __("bladewind::bladewind.pagination_label"),
 ])
 
 @php

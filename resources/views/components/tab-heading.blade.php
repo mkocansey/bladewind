@@ -9,20 +9,19 @@
     // unique way to identify this tab using css or javascript
     // this name is used for switching to a corresponding tab content
     // if url => 'default'
-    'name' => 'tab',
+    'name' => defaultBladewindName('bw-tab-heading-'),
     // the default action of a tab is to switch to its corresponding tab content div 
     // to enable switching; the tab content div needs to have the same name as the tab
     // the alternative action is to pass a url. clicking on the tab will open the url
     'url' => 'default',
     // display optional icon prefix
     'icon' => null,
-    'icon_css' => '',
-    'icon_type' => config('bladewind.tab.heading.icon_type', 'outline'),
-    'icon_dir' => config('bladewind.tab.heading.icon_dir', ''),
+    'iconCss' => '',
+    'iconType' => config('bladewind.tab.heading.icon_type', 'outline'),
+    'iconDir' => config('bladewind.tab.heading.icon_dir', ''),
 ])
 @aware(['color' => 'primary', 'style' => 'simple'])
 @php
-    $name = preg_replace('/[\s]/', '-', $name);
     $active = parseBladewindVariable($active);
     $disabled = parseBladewindVariable($disabled);
 @endphp
@@ -39,7 +38,7 @@
                     @endif
               @endif">
         @if(!empty($icon))
-            <x-bladewind::icon :name="$icon" class="{{$icon_css}}" :type="$icon_type" :dir="$icon_dir"/>
+            <x-bladewind::icon :name="$icon" class="{{$iconCss}}" :type="$iconType" :dir="$iconDir"/>
         @endif
         {!! $label !!}</span>
 </li>
