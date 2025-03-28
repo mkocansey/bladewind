@@ -4,11 +4,11 @@
     }
 
     .bw-datepicker .in-range {
-        @apply bg-primary-200/70 border border-primary-50
+        @apply border
     }
 
     .bw-datepicker .selected {
-        @apply bg-primary-600 dark:bg-dark-900 text-white rounded-md transition ease-in-out duration-100
+        @apply dark:bg-dark-900 text-white rounded-md transition ease-in-out duration-100
     }
 
     .bw-datepicker .disabled {
@@ -36,7 +36,8 @@
     }
 
     .bw-datepicker td:hover:not(.selected, .empty) {
-        @apply bg-primary-200 rounded-md
+        @apply /*bg-primary-200*/
+        rounded-md
     }
 
     .bw-datepicker td:empty:hover {
@@ -44,6 +45,6 @@
     }
 
     .bw-datepicker .datepicker-header {
-        @apply flex justify-between items-center bg-primary-600 text-white px-3 py-5 -mt-2 -mx-2 rounded-t-lg
+        @apply flex justify-between items-center text-white px-3 py-5 -mt-2 -mx-2 rounded-t-lg
     }
 }

@@ -35,16 +35,17 @@
         <div id="{{$name}}"></div>
         <textarea hidden name="{{ $name }}" id="{{ $name }}-hidden" class="size-0"></textarea>
     @else
-        <textarea {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
-                  id="{{ $name }}"
-                  name="{{ $name }}"
-                  rows="{{ $rows }}"
-                  @if($errorMessage !== '')
-                      data-error-message="{{$errorMessage}}"
-                  data-error-inline="{{$showErrorInline}}"
-                  data-error-heading="{{$errorHeading}}"
-                  @endif
-                  placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selectedValue}}</textarea>
+        <textarea
+                {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color focus:border-primary-500"]) }}
+                id="{{ $name }}"
+                name="{{ $name }}"
+                rows="{{ $rows }}"
+                @if($errorMessage !== '')
+                    data-error-message="{{$errorMessage}}"
+                data-error-inline="{{$showErrorInline}}"
+                data-error-heading="{{$errorHeading}}"
+                @endif
+                placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selectedValue}}</textarea>
     @endif
     @if($errorMessage !== '')
         <div class="text-red-500 text-xs pt-2 px-1 {{ $name }}-inline-error hidden">{{$errorMessage}}</div>

@@ -169,7 +169,7 @@ function initCalendar({
             const cell = document.createElement("td");
             const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
             cell.textContent = day;
-            cell.classList.add("a-day");
+            cell.classList.add("a-day", "hover:bg-primary-200");
 
             if ((minDate && date.getTime() < minDate.setHours(0, 0, 0, 0)) ||
                 (maxDate && date.getTime() > maxDate.setHours(23, 59, 59, 999))) {
@@ -182,15 +182,15 @@ function initCalendar({
             }
 
             if (startDate instanceof Date && date.getTime() === startDate.getTime()) {
-                cell.classList.add("selected");
+                cell.classList.add("selected", "bg-primary-600");
             }
 
             if (endDate instanceof Date && date.getTime() === endDate.getTime()) {
-                cell.classList.add("selected");
+                cell.classList.add("selected", "bg-primary-600");
             }
 
             if (startDate instanceof Date && endDate instanceof Date && date > startDate && date < endDate) {
-                cell.classList.add("in-range");
+                cell.classList.add("in-range", "bg-primary-200/70", "border-primary-50");
             }
 
             row.appendChild(cell);
@@ -265,7 +265,7 @@ function initCalendar({
         nextButton = document.createElement("span");
         prevButton = document.createElement("span");
         title = document.createElement("div");
-        header.className = "datepicker-header";
+        header.className = "datepicker-header bg-primary-600";
         nextButton.innerHTML = domEl('.bw-datepicker-right-arrow').innerHTML;
         prevButton.innerHTML = domEl('.bw-datepicker-left-arrow').innerHTML;
         prevButton.classList.add("nav-button");

@@ -183,13 +183,15 @@
         </div>
     </div>
     <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 dark:shadow-none border-2
-        border-blue-400 dark:text-slate-300 dark:border-dark-600 dark:bg-dark-700 border-t-0 -mt-1.5
+        border-primary-600 dark:text-slate-300 dark:border-dark-600 dark:bg-dark-700 border-t-0 -mt-1.5
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
         <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
             <x-bladewind::input
                     class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_search"
                     add_clearing="false"
                     :placeholder="$searchPlaceholder"
+                    onFocus="changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'border-primary-600'); changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'hover:border-slate-300', 'remove')"
+                    onBlur="changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'border-primary-600', 'remove');  changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'hover:border-slate-300')"
                     suffix="magnifying-glass"
                     suffixIsIcon="true"/>
         </div>
