@@ -18,7 +18,7 @@
         w-full text-slate-600 dark:text-dark-300 border-slate-300/50 hover:border-slate-300 dark:border-dark-600 dark:hover:border-dark-500/50 dark:bg-transparent
         focus:outline-none
         focus:border-2
-        focus:border-primary-500 dark:focus:border-dark-500 dark:placeholder-dark-400/60 transition-all
+        dark:focus:border-dark-500 dark:placeholder-dark-400/60 transition-all
         rounded-md
         text-sm
         px-3.5 py-[8.5px]
@@ -81,7 +81,7 @@
     }
 
     .bw-select div.clickable.enabled {
-        @apply focus:border-blue-400 dark:focus:border-dark-500 cursor-pointer
+        @apply focus:border-primary-600 dark:focus:border-dark-500 cursor-pointer
     }
 
     .prefix svg, .suffix svg {
