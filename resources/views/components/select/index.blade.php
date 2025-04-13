@@ -110,6 +110,7 @@
 
 ])
 @php
+    $name = parseBladewindName($name);
     $addClearing = parseBladewindVariable($addClearing);
     $searchable = parseBladewindVariable($searchable);
     $required = parseBladewindVariable($required);
@@ -198,7 +199,7 @@
         <div class="divide-y divide-slate-100 dark:divide-slate-600/70 bw-select-items mt-0">
             @if($data !== 'manual')
                 @forelse ($data as $item)
-                    <x-bladewind::select-item
+                    <x-bladewind::select.item
                             label="{{ $item[$labelKey] }}"
                             value="{{ $item[$valueKey] }}"
                             filter_by="{{ ($filterBy != '') ? $item[$filterBy] : '' }}"
@@ -208,7 +209,7 @@
                             selected="{{ (in_array($item[$valueKey], $selectedValue)) ? 'true' : 'false' }}"/>
                 @empty
                     @if($emptyState)
-                        <x-bladewind::select-item
+                        <x-bladewind::select.item
                                 :selectable="false"
                                 :empty_state="true"
                                 :empty_state_message="$emptyStateMessage"
@@ -217,7 +218,7 @@
                                 empty_state_onclick="{!! $emptyStateOnclick !!}"
                                 :empty_state_image="$emptyStateImage"/>
                     @else
-                        <x-bladewind::select-item
+                        <x-bladewind::select.item
                                 :selectable="false"
                                 :label="$emptyPlaceholder"
                         />
