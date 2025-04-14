@@ -15,6 +15,7 @@
     $checked = parseBladewindVariable($checked);
     $disabled = parseBladewindVariable($disabled);
     $addClearing = parseBladewindVariable($addClearing);
+    $name = parseBladewindName($name);
 @endphp
 <x-bladewind::checkbox
         name="{{$name}}"

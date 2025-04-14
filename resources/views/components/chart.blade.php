@@ -28,6 +28,7 @@
     <script src="{{ asset('vendor/bladewind/js/chart.js') }}"></script>
 @endonce
 @php
+    $name = parseBladewindName($name);
     $options = !is_array($options) ? [] : $options;
     $plugins = !is_array($plugins) ? [] : $plugins;
     $showAxisLines = parseBladewindVariable($showAxisLines);

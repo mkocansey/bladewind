@@ -1,6 +1,8 @@
 @props([
     'size' => 'xl',
-    'width' => [
+])
+@php
+    $width = [
         'omg' => '7xl',
         'xxl' => '6xl',
         'xl' => '4xl',
@@ -8,9 +10,7 @@
         'medium' => '2xl',
         'small' => 'lg',
         'tiny' => 'md'
-    ]
-])
-@php
+    ];
     $sizes = ['omg', 'xxl', 'xl', 'big', 'medium', 'small', 'tiny'];
 
     if(! in_array($size, $sizes)) {

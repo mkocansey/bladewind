@@ -22,6 +22,7 @@
     'class' => '',
 ])
 @php
+    $name = parseBladewindName($name);
     $disabled = parseBladewindVariable($disabled);
     $checked = parseBladewindVariable($checked);
     $justified = parseBladewindVariable($justified);

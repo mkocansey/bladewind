@@ -27,8 +27,8 @@
     'size' => config('bladewind.code.size', 'regular'),
 ])
 @php
+    $name = parseBladewindName($name);
     $mask = parseBladewindVariable($mask);
-
     $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[75px] text-5xl";
     $cloak_size = ($size == 'big') ? " h-24" : "h-16";
 @endphp

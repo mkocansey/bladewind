@@ -14,6 +14,7 @@
 @php
     $showValues = parseBladewindVariable($showValues);
     $range = parseBladewindVariable($range);
+    $name = parseBladewindName($name);
 
     $step = (is_numeric($step) && $step > 0) ? $step : 1;
     $min = (is_numeric($min) && $min >= 0) ? $min : 0;

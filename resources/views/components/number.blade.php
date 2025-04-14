@@ -29,6 +29,7 @@
     'class' => '',
 ])
 @php
+    $name = parseBladewindName($name);
     $withDots = parseBladewindVariable($withDots);
     $required = parseBladewindVariable($required);
     $transparentIcons = parseBladewindVariable($transparentIcons);
