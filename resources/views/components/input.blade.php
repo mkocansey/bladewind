@@ -103,6 +103,7 @@
 ])
 
 @php
+    $name = parseBladewindName($name);
     $add_clearing = parseBladewindVariable($addClearing);
     $show_placeholder_always = parseBladewindVariable($showPlaceholderAlways);
     $show_error_inline = parseBladewindVariable($showErrorInline);

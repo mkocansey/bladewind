@@ -12,6 +12,7 @@
 ])
 @php
     $hide = parseBladewindVariable($hide);
+    $name = parseBladewindName($name);
 @endphp
 <div class="{{ $name }} text-center text-sm @if($hide) hidden @endif mt-6 {{$class}}">
     <x-bladewind::spinner/>

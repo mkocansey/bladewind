@@ -1,5 +1,5 @@
 @props([
-    'name' => uniqid('bw-dropmenu-'),
+    'name' => defaultBladewindName('bw-dropmenu-'),
     'trigger' => config('bladewind.dropmenu.trigger', 'ellipsis-horizontal-icon'),
     'triggerCss' => '',
     'triggerOn' => config('bladewind.dropmenu.trigger_on', 'click'),
@@ -15,7 +15,7 @@
     'padded' => config('bladewind.dropmenu.padded', true),
 ])
 @php
-    $name = preg_replace('/[\s-]/', '_', $name);
+    $name = parseBladewindName($name);
     $height = !is_numeric($height) ? 200 : $height;
     $triggerOn = (!in_array($triggerOn, ['click', 'mouseover'])) ? 'click' : $triggerOn;
     $divided = parseBladewindVariable($divided);

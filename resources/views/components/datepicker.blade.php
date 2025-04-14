@@ -39,6 +39,7 @@
     'maxDate' => '',
 ])
 @php
+    $name = parseBladewindName($name);
     $required = parseBladewindVariable($required);
     $weekStarts = in_array($weekStarts, ['sunday','monday']) ? $weekStarts : 'sunday';
 @endphp

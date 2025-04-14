@@ -25,6 +25,7 @@
     $addClearing = parseBladewindVariable($addClearing);
     $showErrorInline = parseBladewindVariable($showErrorInline);
     $required = parseBladewindVariable($required);
+    $name = parseBladewindName($name);
 
     $required_symbol = ($label == '' && $required) ? ' *' : '';
     $is_required = ($required) ? 'required' : '';

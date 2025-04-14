@@ -51,15 +51,6 @@
     // determines the size of the modal. available options are small, medium, large and xl
     // on mobile it is small by default but fills up the width of the screen
     'size' => config('bladewind.modal.size', 'medium'),
-    'sizes' => [
-        'tiny' => 'w-1/6',
-        'small' => 'w-1/5',
-        'medium' => 'w-1/4',
-        'big' => 'w-1/3',
-        'large' => 'w-2/5',
-        'xl' => 'w-2/3',
-        'omg' => 'w-11/12'
-    ],
 
     // add extra css to the modal body
     'bodyCss' => '',
@@ -83,6 +74,16 @@
     $stretchActionButtons = parseBladewindVariable($stretchActionButtons);
     $blurBackdrop = parseBladewindVariable($blurBackdrop);
     $showCloseIcon = parseBladewindVariable($showCloseIcon);
+
+    $sizes = [
+        'tiny' => 'w-1/6',
+        'small' => 'w-1/5',
+        'medium' => 'w-1/4',
+        'big' => 'w-1/3',
+        'large' => 'w-2/5',
+        'xl' => 'w-2/3',
+        'omg' => 'w-11/12'
+    ];
 
     if (!$blurBackdrop) $blurSize = 'none';
     if(!in_array($alignButtons, ['right', 'center', 'left'])) $alignButtons = 'right';

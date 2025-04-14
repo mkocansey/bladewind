@@ -11,6 +11,7 @@
     'addClearing' => config('bladewind.checkbox.add_clearing', true),
 ])
 @php
+    $name = parseBladewindName($name);
     $checked = parseBladewindVariable($checked);
     $disabled = parseBladewindVariable($disabled);
     $colour = defaultBladewindColour($color);

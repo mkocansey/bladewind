@@ -18,6 +18,7 @@
 ])
 @php
     $hide = parseBladewindVariable($hide);
+    $name = parseBladewindName($name);
 @endphp
 <div class="{{$name}} text-center mt-6 @if($hide) hidden @endif {{$class}}">
     @if($processCompletedAs === 'passed')

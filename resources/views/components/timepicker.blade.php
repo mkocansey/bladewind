@@ -175,10 +175,10 @@
                     selected_value="{{$selected_hour??''}}">
                 @for($hours=1; $hours < (($format=='12') ? 13:24); $hours++)
                     @php $hours = (($format=='12') ? $hours : str_pad($hours, 2, '0', STR_PAD_LEFT))  @endphp
-                    <x-bladewind::select-item label="{{$hours}}" value="{{$hours}}"/>
+                    <x-bladewind::select.item label="{{$hours}}" value="{{$hours}}"/>
                 @endfor
                 @if($format !== '12')
-                    <x-bladewind::select-item label="00" value="00"/>
+                    <x-bladewind::select.item label="00" value="00"/>
                 @endif
             </x-bladewind::select>
         </div>
@@ -190,10 +190,10 @@
                     name="{{$name}}_mm"
                     :required="$required"
                     selected_value="{{$selected_minute??''}}">
-                <x-bladewind::select-item label="00" value="00"/>
+                <x-bladewind::select.item label="00" value="00"/>
                 @for($minutes=1; $minutes < 60; $minutes++)
                     @php $minutes = str_pad($minutes, 2, '0', STR_PAD_LEFT) @endphp
-                    <x-bladewind::select-item label="{{$minutes}}" value="{{$minutes}}"/>
+                    <x-bladewind::select.item label="{{$minutes}}" value="{{$minutes}}"/>
                 @endfor
             </x-bladewind::select>
         </div>
@@ -206,8 +206,8 @@
                         name="{{$name}}_format"
                         :required="$required"
                         selected_value="{{$selected_format??''}}">
-                    <x-bladewind::select-item label="{{ __('bladewind::bladewind.timepicker_am') }}" value="AM"/>
-                    <x-bladewind::select-item label="{{ __('bladewind::bladewind.timepicker_pm') }}" value="PM"/>
+                    <x-bladewind::select.item label="{{ __('bladewind::bladewind.timepicker_am') }}" value="AM"/>
+                    <x-bladewind::select.item label="{{ __('bladewind::bladewind.timepicker_pm') }}" value="PM"/>
                 </x-bladewind::select>
             </div>
         @endif
