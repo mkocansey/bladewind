@@ -75,7 +75,7 @@
                     <x-bladewind::select :selected_value="$defaultPage" :required="true" data="manual"
                                          meta="{table: '{{$table}}'}" size="small">
                         @for($p=1; $p <= $total_pages; $p++)
-                            <x-bladewind::select-item :label="$p" :value="$p" onselect="routeToPage"/>
+                            <x-bladewind::select.item :label="$p" :value="$p" onselect="routeToPage"/>
                         @endfor
                     </x-bladewind::select>
                 </div>
