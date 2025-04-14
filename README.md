@@ -1,5 +1,5 @@
 <p><img src="https://img.shields.io/github/license/mkocansey/bladewind" alt="License" /></p><br />
-<p><img src="https://github.com/mkocansey/bladewind-docs/blob/development/public/assets/images/bladewind-logo.png" style="height: 30px; margin-bottom:10px" /></p>
+<p><img src="https://bladewindui.com/assets/images/bladewind-logo.png" style="height: 30px; margin-bottom:10px" /></p>
 
 BladewindUI is a collection of UI components written purely using TailwindCSS, Laravel blade templates and Vanilla
 Javascript. These components are super simple to use and come with different levels of customization.
@@ -76,7 +76,11 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Button](https://bladewindui.com/component/button)**
 - **[Card](https://bladewindui.com/component/card)**
 - **[Centered Content](https://bladewindui.com/component/centered-content)**
+- **[Chart](https://bladewindui.com/component/chart)**
 - **[Checkbox](https://bladewindui.com/component/checkbox)**
+- **[Checkbox](https://bladewindui.com/component/checkbox)**
+- **[CheckCard](https://bladewindui.com/component/checkcard)**
+- **[Colorpicker](https://bladewindui.com/component/colorpicker)**
 - **[Datepicker](https://bladewindui.com/component/datepicker)**
 - **[Dropdown](https://bladewindui.com/component/dropdown)**
 - **[Dropmenu](https://bladewindui.com/component/dropmenu)**
@@ -88,7 +92,6 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[List View](https://bladewindui.com/component/list-view)**
 - **[Modal](https://bladewindui.com/component/modal)**
 - **[Notification](https://bladewindui.com/component/notification)**
-- **[Number](https://bladewindui.com/component/number)**
 - **[Process Indicator](https://bladewindui.com/component/process-indicator)**
 - **[Progress Bar](https://bladewindui.com/component/progress-bar)**
 - **[Radio Button](https://bladewindui.com/component/radio-button)**
@@ -100,7 +103,6 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Table](https://bladewindui.com/component/table)**
 - **[Tag](https://bladewindui.com/component/tag)**
 - **[Textarea](https://bladewindui.com/component/textarea)**
-- **[Theme Switcher](https://bladewindui.com/component/theme-switcher)**
 - **[Timeline](https://bladewindui.com/component/timeline)**
 - **[Timepicker](https://bladewindui.com/component/timepicker)**
 - **[Toggle](https://bladewindui.com/component/toggle)**
