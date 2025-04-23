@@ -14,7 +14,7 @@
      data-name="{{$name}}"
      data-open-multiple="{{$can_open_multiple ? '1':'0'}}">
     @if($grouped)
-        <x-bladewind::card>
+        <x-bladewind::card class="!px-0">
             <div class="divide-y divide-gray-200/70 dark:divide-dark-600 space-y-4">
                 {!! $slot !!}
             </div>
