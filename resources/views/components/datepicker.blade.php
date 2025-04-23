@@ -39,6 +39,7 @@
     'maxDate' => '',
 ])
 @php
+    $name = parseBladewindName($name);
     $required = parseBladewindVariable($required);
     $weekStarts = in_array($weekStarts, ['sunday','monday']) ? $weekStarts : 'sunday';
 @endphp
@@ -74,27 +75,27 @@
 </svg></span>
     <script>
         const MONTH_NAMES = {
-            jan: '{{ __('bladewind::datepicker.JAN') }}',
-            feb: '{{ __('bladewind::datepicker.FEB') }}',
-            mar: '{{ __('bladewind::datepicker.MAR') }}',
-            apr: '{{ __('bladewind::datepicker.APR') }}',
-            may: '{{ __('bladewind::datepicker.MAY') }}',
-            jun: '{{ __('bladewind::datepicker.JUN') }}',
-            jul: '{{ __('bladewind::datepicker.JUL') }}',
-            aug: '{{ __('bladewind::datepicker.AUG') }}',
-            sep: '{{ __('bladewind::datepicker.SEP') }}',
-            oct: '{{ __('bladewind::datepicker.OCT') }}',
-            nov: '{{ __('bladewind::datepicker.NOV') }}',
-            dec: '{{ __('bladewind::datepicker.DEC') }}',
+            jan: '{{ __('bladewind::bladewind.jan') }}',
+            feb: '{{ __('bladewind::bladewind.feb') }}',
+            mar: '{{ __('bladewind::bladewind.mar') }}',
+            apr: '{{ __('bladewind::bladewind.apr') }}',
+            may: '{{ __('bladewind::bladewind.may') }}',
+            jun: '{{ __('bladewind::bladewind.jun') }}',
+            jul: '{{ __('bladewind::bladewind.jul') }}',
+            aug: '{{ __('bladewind::bladewind.aug') }}',
+            sep: '{{ __('bladewind::bladewind.sep') }}',
+            oct: '{{ __('bladewind::bladewind.oct') }}',
+            nov: '{{ __('bladewind::bladewind.nov') }}',
+            dec: '{{ __('bladewind::bladewind.dec') }}',
         };
         const DAY_NAMES = {
-            sun: '{{ __('bladewind::datepicker.SUN') }}'.substring(0, 3),
-            mon: '{{ __('bladewind::datepicker.MON') }}'.substring(0, 3),
-            tue: '{{ __('bladewind::datepicker.TUE') }}'.substring(0, 3),
-            wed: '{{ __('bladewind::datepicker.WED') }}'.substring(0, 3),
-            thu: '{{ __('bladewind::datepicker.THU') }}'.substring(0, 3),
-            fri: '{{ __('bladewind::datepicker.FRI') }}'.substring(0, 3),
-            sat: '{{ __('bladewind::datepicker.SAT') }}'.substring(0, 3)
+            sun: '{{ __('bladewind::bladewind.sun') }}'.substring(0, 3),
+            mon: '{{ __('bladewind::bladewind.mon') }}'.substring(0, 3),
+            tue: '{{ __('bladewind::bladewind.tue') }}'.substring(0, 3),
+            wed: '{{ __('bladewind::bladewind.wed') }}'.substring(0, 3),
+            thu: '{{ __('bladewind::bladewind.thu') }}'.substring(0, 3),
+            fri: '{{ __('bladewind::bladewind.fri') }}'.substring(0, 3),
+            sat: '{{ __('bladewind::bladewind.sat') }}'.substring(0, 3)
         };
     </script>
     <script src="{{ asset('vendor/bladewind/js/datepicker.js') }}"></script>

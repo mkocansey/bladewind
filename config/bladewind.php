@@ -92,8 +92,7 @@ return [
         'compact' => false,
         'has_shadow' => true,
         'has_border' => true,
-        'reduce_padding' => false,
-        'hover_effect' => false,
+        'has_hover' => false,
     ],
 
     /*
@@ -103,7 +102,7 @@ return [
     */
     'contact_card' => [
         'has_shadow' => true,
-        'hover_effect' => false,
+        'has_hover' => false,
     ],
 
     /*
@@ -113,6 +112,27 @@ return [
     */
     'centered_content' => [
 
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Chart component
+    |--------------------------------------------------------------------------
+    */
+    'chart' => [
+        'show_axis_lines' => true,
+        'show_x_axis_lines' => true,
+        'show_y_axis_lines' => true,
+        'show_axis_labels' => true,
+        'show_x_axis_labels' => true,
+        'show_y_axis_labels' => true,
+        'show_borders' => true,
+        'show_x_border' => true,
+        'show_y_border' => true,
+        'show_legend' => true,
+        'show_line' => false,
+        'legend_position' => 'top',
+        'legend_alignment' => 'center',
     ],
 
     /*
@@ -142,6 +162,16 @@ return [
         'align_items' => 'top',
         'error_heading' => 'Max selection',
         'error_message' => 'You have selected the maximum cards allowed',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Colorpicker component
+    |--------------------------------------------------------------------------
+    */
+    'colorpicker' => [
+        'size' => 'regular',
+        'show_value' => false,
     ],
 
     /*
@@ -205,10 +235,32 @@ return [
     |--------------------------------------------------------------------------
     */
     'filepicker' => [
-        'accepted_file_types' => 'audio/*, video/*, image/*, .pdf',
-        'max_file_size' => 5,
-        'add_clearing' => true,
-        'selected_value_class' => 'h-52',
+        'accepted_file_types' => 'image/*,audio/*,video/*,application/pdf',
+        'placeholder_line1' => 'Choose files or drag and drop to upload',
+        'placeholder_line2' => '%s up to %s',
+        'can_browse' => true,
+        'can_drop' => true,
+        'validate_file_size' => true,
+        'base64' => false,
+        'base64_output' => 'url',
+        'show_credits' => false,
+        'auto_upload' => false,
+        'max_files' => 1,
+        'max_file_size' => '5mb',
+        'max_total_file_size' => null,
+        'add_new_files_to' => 'top',
+        'max_file_size_exceeded_label' => 'File is too large',
+        'max_file_size_label' => 'Maximum file size is {filesize}',
+        'max_total_file_size_exceeded_label' => 'Maximum total file size exceeded',
+        'max_total_file_size_label' => 'Maximum total file size is {filesize}',
+        'invalid_file_type_label' => 'Wrong file type uploaded',
+        'expected_file_types_label' => 'Only {allButLastType} and {lastType} files allowed',
+        'show_image_preview' => true,
+        'can_resize_image' => false,
+        'image_resize_width' => null,
+        'image_resize_height' => null,
+        'can_crop' => false,
+        'crop_aspect_ratio' => '16:9',
     ],
 
     /*
@@ -264,8 +316,8 @@ return [
     */
     'modal' => [
         'align_buttons' => 'right',
-        'ok_button_label' => 'okay',
-        'cancel_button_label' => 'cancel',
+        'ok_button_label' => __('bladewind::bladewind.okay'),
+        'cancel_button_label' => __('bladewind::bladewind.cancel'),
         'close_after_action' => true,
         'backdrop_can_close' => true,
         'blur_backdrop' => true,
@@ -348,12 +400,12 @@ return [
     |--------------------------------------------------------------------------
     */
     'select' => [
-        'placeholder' => 'Select One',
-        'search_placeholder' => 'Type here...',
-        'empty_placeholder' => 'No options available',
+        'placeholder' => __("bladewind::bladewind.select_placeholder"),
+        'search_placeholder' => __("bladewind::bladewind.select_search_placeholder"),
+        'empty_placeholder' => __("bladewind::bladewind.select_empty_placeholder"),
         'label' => null,
         'add_clearing' => true,
-        'max_error_message' => 'Please select only %s items',
+        'max_error_message' => __("bladewind::bladewind.select_max_selection"),
         'modular' => false,
         'size' => 'medium',
     ],
@@ -425,7 +477,7 @@ return [
         'has_border' => false,
         'divided' => true,
         'divider' => 'regular',
-        'hover_effect' => true,
+        'has_hover' => true,
         'compact' => false,
         'uppercasing' => true,
         'celled' => false,
@@ -509,12 +561,12 @@ return [
     |--------------------------------------------------------------------------
     */
     'timepicker' => [
-        'hour_label' => 'HH',
-        'minute_label' => 'MM',
-        'format_label' => '--',
+        'hour_label' => __("bladewind::bladewind.timepicker_hour_label"),
+        'minute_label' => __("bladewind::bladewind.timepicker_minute_label"),
+        'format_label' => __("bladewind::bladewind.timepicker_format_label"),
         'format' => '12',
         'style' => 'popup',
-        'placeholder' => 'HH:MM',
+        'placeholder' => __("bladewind::bladewind.timepicker_placeholder"),
     ],
 
     /*

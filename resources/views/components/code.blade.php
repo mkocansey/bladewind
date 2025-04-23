@@ -1,9 +1,8 @@
 @props([
     // name of the input field for use in forms
-    'name' => 'pin-code-'.uniqid(),
+    'name' => defaultBladewindName('pin-code-'),
 
     // total number of boxes to display
-    'total_digits' => config('bladewind.code.total_digits', 4),
     'totalDigits' => config('bladewind.code.total_digits', 4),
 
     /*
@@ -13,12 +12,10 @@
     note that the code is passed to your function as the only parameter so you need to expect a parameter
     when defining your function... using the above example: verifyPin = (pin_code) => {}
     */
-    'on_verify' => null,
     'onVerify' => null,
 
     // error message to display when pin is wrong
-    'error_message' => 'You entered a wrong code',
-    'errorMessage' => 'You entered a wrong code',
+    'errorMessage' => __('bladewind::bladewind.otp_error_message'),
 
     // should input text be masked to hide code
     'mask' => config('bladewind.code.mask', false),
@@ -30,14 +27,8 @@
     'size' => config('bladewind.code.size', 'regular'),
 ])
 @php
-    // reset variables for Laravel 8 support
-    $total_digits = $totalDigits;
-    $error_message = $errorMessage;
-    //--------------------------------------------------------------------
-
-    $name = preg_replace('/[\s-]/', '_', $name);
+    $name = parseBladewindName($name);
     $mask = parseBladewindVariable($mask);
-
     $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[75px] text-5xl";
     $cloak_size = ($size == 'big') ? " h-24" : "h-16";
 @endphp
@@ -45,14 +36,14 @@
 <div class="dv-{{ $name }} relative">
     <div class="flex {{ $name }}-boxes">
         <div class="flex space-x-2 mx-auto">
-            @for ($x = 0; $x < $total_digits; $x++)
+            @for ($x = 0; $x < $totalDigits; $x++)
                 <x-bladewind::input
                         numeric="true"
                         type="{{ ($mask) ? 'password' : 'text' }}"
                         with_dots="false"
                         add_clearing="false"
                         onkeydown="hidePinError('{{ $name }}')"
-                        onkeyup="moveCursorNext('{{ $name }}', {{ $x }}, {{ $total_digits }}, '{{ $on_verify }}', event)"
+                        onkeyup="moveCursorNext('{{ $name }}', {{ $x }}, {{ $totalDigits }}, '{{ $onVerify }}', event)"
                         class="shadow-sm text-center font-light text-black dark:text-dark-400 focus:!border-primary-600 {{$input_css}} {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
                         maxlength="1"
                 />
@@ -60,7 +51,7 @@
         </div>
     </div>
     <div class="text-center text-sm text-error-500 my-6 hidden bw-{{ $name }}-pin-error">
-        {!! $error_message !!}
+        {!! $errorMessage !!}
     </div>
     <div class="text-center tracking-wider text-sm my-6 bw-{{ $name }}-pin-timer">
         <div class="countdown hidden"><span class="minutes"></span>:<span class="seconds"></span></div>

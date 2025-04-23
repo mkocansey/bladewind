@@ -8,9 +8,9 @@
     'tiny' => config('bladewind.tag.tiny', false),
     'outline' => config('bladewind.tag.outline', false),
     'uppercasing' => config('bladewind.tag.uppercasing', true),
-    'selected_value' => '',
-    'error_message' => '',
-    'error_heading' => '',
+    'selectedValue' => '',
+    'errorMessage' => '',
+    'errorHeading' => '',
     'class' => 'space-x-2 space-y-2',
 ])
 @php
@@ -23,14 +23,14 @@
 <div class="bw-tags-{{$name}} {{$class}}">
     <x-bladewind::input
             :name="$name"
-            :error_message="$error_message"
-            :error_heading="$error_heading"
+            :error_message="$errorMessage"
+            :error_heading="$errorHeading"
             data-max-selection="{{$max_selection}}"
             type="hidden"
             class="{{ ($required) ? 'required':''}}"/>
     {{ $slot }}
 </div>
 
-@if($selected_value !== '')
-    <script>highlightSelectedTags('{{$selected_value}}', '{{$name}}'); </script>
+@if($selectedValue !== '')
+    <script>highlightSelectedTags('{{$selectedValue}}', '{{$name}}'); </script>
 @endif

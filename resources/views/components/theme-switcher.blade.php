@@ -33,15 +33,15 @@
                     dir="{{$iconDir}}"
                     class="text-primary-400 hover:text-primary-500 dark:!text-dark-500 dark:hover:!text-dark-400 stroke-2 theme-system hidden"/>
         </x-slot:trigger>
-        <x-bladewind::dropmenu-item onclick="chooseTheme('light')" icon="{{$lightIcon}}" icon_css="stroke-2">
+        <x-bladewind::dropmenu.item onclick="chooseTheme('light')" icon="{{$lightIcon}}" icon_css="stroke-2">
             {{$lightText}}
-        </x-bladewind::dropmenu-item>
-        <x-bladewind::dropmenu-item onclick="chooseTheme('dark')" icon="{{$darkIcon}}" icon_css="stroke-2">
+        </x-bladewind::dropmenu.item>
+        <x-bladewind::dropmenu.item onclick="chooseTheme('dark')" icon="{{$darkIcon}}" icon_css="stroke-2">
             {{$darkText}}
-        </x-bladewind::dropmenu-item>
-        <x-bladewind::dropmenu-item onclick="chooseTheme('system')" icon="{{$systemIcon}}" icon_css="stroke-2">
+        </x-bladewind::dropmenu.item>
+        <x-bladewind::dropmenu.item onclick="chooseTheme('system')" icon="{{$systemIcon}}" icon_css="stroke-2">
             {{$systemText}}
-        </x-bladewind::dropmenu-item>
+        </x-bladewind::dropmenu.item>
     </x-bladewind::dropmenu>
     <script>
         const chooseTheme = (theme) => {

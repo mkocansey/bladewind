@@ -1,69 +1,55 @@
 @props([
     // name of the input field for use in forms
-    'name' => 'textarea-'.uniqid(),
+    'name' => defaultBladewindName('textarea-'),
     'rows' => config('bladewind.textarea.rows', 3),
     'label' => '',
     'required' => false,
-    'add_clearing' => config('bladewind.textarea.add_clearing', true),
     'addClearing' => config('bladewind.textarea.add_clearing', true),
     'placeholder' => '', // placeholder text
-    'selected_value' => '', // selected value
     'selectedValue' => '',
      // message to display when validation fails for this field
     // this is just attached to the input field as a data attribute
-    'error_message' => '',
     'errorMessage' => '',
     // this is an easy way to pass a translatable heading to the notification component
     // since it is triggered from Javascript, it is hard to translate any text from within js
-    'error_heading' => config('bladewind.textarea.error_heading', 'Error'),
-    'errorHeading' => config('bladewind.textarea.error_heading', 'Error'),
+    'errorHeading' => config('bladewind.textarea.error_heading', __("bladewind::bladewind.error_heading")),
     // how should error messages be displayed for this input
     // by default error messages are displayed in the Bladewind notification component
     // the component should exist on the page
-    'show_error_inline' => config('bladewind.textarea.show_error_inline', false),
     'showErrorInline' => config('bladewind.textarea.show_error_inline', false),
 
     'toolbar' => config('bladewind.textarea.toolbar', false),
     'except' => '',
 ])
 @php
-    // reset variables for Laravel 8 support
-    $add_clearing = parseBladewindVariable($add_clearing);
     $addClearing = parseBladewindVariable($addClearing);
-    $show_error_inline = parseBladewindVariable($show_error_inline);
     $showErrorInline = parseBladewindVariable($showErrorInline);
     $required = parseBladewindVariable($required);
+    $name = parseBladewindName($name);
 
-    if (!$addClearing) $add_clearing = $addClearing;
-    if($showErrorInline) $show_error_inline = $showErrorInline;
-    if ($selectedValue !== $selected_value) $selected_value = $selectedValue;
-    if ($errorMessage !== $error_message) $error_message = $errorMessage;
-    if ($errorHeading !== $error_heading) $error_heading = $errorHeading;
-    //----------------------------------------------------
-    
-    $name = preg_replace('/[\s-]/', '_', $name);
     $required_symbol = ($label == '' && $required) ? ' *' : '';
     $is_required = ($required) ? 'required' : '';
     $placeholder_color = ($label !== '') ? 'placeholder-transparent dark:placeholder-transparent' : '';
 @endphp
-<div class="relative w-full @if($add_clearing) mb-3 @endif">
+<div class="relative w-full @if($addClearing) mb-3 @endif">
     @if($toolbar)
         <div id="{{$name}}"></div>
         <textarea hidden name="{{ $name }}" id="{{ $name }}-hidden" class="size-0"></textarea>
     @else
-        <textarea {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color"]) }}
-                  id="{{ $name }}"
-                  name="{{ $name }}"
-                  rows="{{ $rows }}"
-                  @if($error_message !== '')
-                      data-error-message="{{$error_message}}"
-                  data-error-inline="{{$show_error_inline}}"
-                  data-error-heading="{{$error_heading}}"
-                  @endif
-                  placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selected_value}}</textarea>
+        <textarea
+                {{ $attributes->merge(['class' => "bw-input peer $is_required $name $placeholder_color focus:border-primary-500"]) }}
+                id="{{ $name }}"
+                name="{{ $name }}"
+                rows="{{ $rows }}"
+                @if($errorMessage !== '')
+                    data-error-message="{{$errorMessage}}"
+                data-error-inline="{{$showErrorInline}}"
+                data-error-heading="{{$errorHeading}}"
+                @endif
+                placeholder="{{ ($label !== '') ? $label : $placeholder }}{{$required_symbol}}">{{$selectedValue}}</textarea>
     @endif
-    @if($error_message !== '')
-        <div class="text-red-500 text-xs pt-2 px-1 {{ $name }}-inline-error hidden">{{$error_message}}</div>
+    @if($errorMessage !== '')
+        <div class="text-red-500 text-xs pt-2 px-1 {{ $name }}-inline-error hidden">{{$errorMessage}}</div>
     @endif
     @if($label !== '')
         <label for="{{ $name }}" class="form-label dark:peer-focus:pt-1"
@@ -124,7 +110,7 @@
             });
 
             // set the initial content for quill
-            quill_{{ $name }}.root.innerHTML = @js($selected_value);
+            quill_{{ $name }}.root.innerHTML = @js($selectedValue);
         }
     </script>
 @endif

@@ -2,10 +2,14 @@
     'name' => defaultBladewindName(),
     'selectedValue' => '#000000',
     'class' => '',
-    'size' => 'regular',
-    'showValue' => false,
+    'size' => config('bladewind.colorpicker.size','regular'),
+    'showValue' => config('bladewind.colorpicker.show_value',false),
     'colors' => '',
 ])
+@php
+    $name = parseBladewindName($name);
+    $showValue = parseBladewindVariable($showValue);
+@endphp
 <div class="inline-flex p-1 bw-color-picker-{{$name}} align-bottom rounded-md border-2 border-slate-300/50 hover:border-slate-300 dark:border-dark-600 dark:hover:border-dark-500/50">
     <input type="hidden" name="{{$name}}" value="{{$selectedValue}}"/>
     @if(empty($colors))
@@ -34,7 +38,7 @@
                  "rounded-md bw-cp-trigger"
                  ])></div>
             </x-slot:trigger>
-            <x-bladewind::dropmenu-item hover="false" padded="false">
+            <x-bladewind::dropmenu.item hover="false" padded="false">
                 <div class="clear-both grid grid-cols-4 gap-2" style="width: 130px">
                     @foreach($colors as $colour)
                         <div class="size-7 rounded-md border-2 border-transparent hover:border-slate-400 dark:border-transparent dark:hover:border-dark-500/50"
@@ -42,7 +46,7 @@
                              onclick="setColour('{{$name}}','{{trim($colour)}}')"></div>
                     @endforeach
                 </div>
-            </x-bladewind::dropmenu-item>
+            </x-bladewind::dropmenu.item>
         </x-bladewind::dropmenu>
     @endif
     @if($showValue)

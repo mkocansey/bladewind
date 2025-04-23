@@ -15,7 +15,7 @@
 @php
     $path = 'vendor/bladewind/icons';
     $icons_dir = ($dir !== '') ? $dir : ((! in_array($type, [ 'outline', 'solid' ])) ? "$path/outline" : "$path/$type");
-    $svg_file = file_exists(realpath("$icons_dir/$name.svg")) ? realpath("$icons_dir/$name.svg") : null;
+    $svg_file = file_exists(public_path("$icons_dir/$name.svg")) ? public_path("$icons_dir/$name.svg") : null;
 @endphp
 @if (!empty($name))
     @if(!empty($action))

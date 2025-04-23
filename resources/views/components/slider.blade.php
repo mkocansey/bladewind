@@ -1,19 +1,20 @@
 @props([
-    'name' => 'bw_'.uniqid(),
+    'name' => defaultBladewindName('bw-slider-'),
     'min' => 0,
     'max' => 100,
     'step' => 1,
     'selected' => 0,
-    'max_selected' => '',
+    'maxSelected' => '',
     'color' => 'primary',
-    'show_values' => config('bladewind.slider.show_values', true),
+    'showValues' => config('bladewind.slider.show_values', true),
     'range' => config('bladewind.slider.range', false),
     'class' => '',
 ])
 
 @php
-    $show_values = parseBladewindVariable($show_values);
+    $showValues = parseBladewindVariable($showValues);
     $range = parseBladewindVariable($range);
+    $name = parseBladewindName($name);
 
     $step = (is_numeric($step) && $step > 0) ? $step : 1;
     $min = (is_numeric($min) && $min >= 0) ? $min : 0;
@@ -34,15 +35,15 @@
         <input type="range"
                min="{{$min}}"
                max="{{$max}}"
-               value="{{$max_selected}}"
+               value="{{$maxSelected}}"
                step="{{$step}}"
                class="bw-slider max-slider-{{$name}} {{$colour}}"/>
     @endif
 
-    <div class="text-center pt-5 text-sm font-semibold @if(!$show_values) hidden @endif">
+    <div class="text-center pt-5 text-sm font-semibold @if(!$showValues) hidden @endif">
         <span class="slider-selection-{{$name}}">{{$selected}}
             @if($range)
-                - {{$max_selected}}
+                - {{$maxSelected}}
             @endif
         </span>
     </div>
@@ -50,7 +51,7 @@
            name="{{$name}}"
            id="{{$name}}"
            class="slider-selection-{{$name}}-input bw-slider-{{$name}}"
-           value="{{$selected}}@if($range),{{$max_selected}}@endif"/>
+           value="{{$selected}}@if($range),{{$maxSelected}}@endif"/>
 </div>
 
 <script>

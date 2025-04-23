@@ -13,12 +13,13 @@
     ],
 ])
 @php
-    $name = str_replace(' ', '-', $name);
     $size_adjustment = ($size == 'big') ? 2 : 1;
     $clickable = parseBladewindVariable($clickable);
+    $name = parseBladewindName($name);
 @endphp
 @if($clickable)
-    <x-bladewind::input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}"/>
+    <x-bladewind::input type="hidden" name="{{$name}}" id="{{$name}}" class="rating-value-{{$name}}"
+                        selected_value="{{$rating}}"/>
 @endif
 <div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block">
     @for ($x = 1; $x < 6; $x++)

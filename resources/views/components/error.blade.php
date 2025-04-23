@@ -1,17 +1,10 @@
 @props([
-    'heading' => 'Error!',
-    'description' => 'Something went wrong',
-    'button_text' => 'Go to homepage',
-    'buttonText' => 'Go to homepage',
-    'button_url' => '/',
+    'heading' => __('bladewind::bladewind.error_heading'),
+    'description' => __('bladewind::bladewind.error_description'),
+    'buttonText' => __('bladewind::bladewind.error_button_text'),
     'buttonUrl' => '/',
     'image' => '',
 ])
-@php
-    // reset variables for Laravel 8 support
-    if ($buttonText !== $button_text) $button_text = $buttonText;
-    if ($buttonUrl !== $button_url) $button_url = $buttonUrl;
-@endphp
 <div class="flex justify-center items-center">
     <div class="max-w-xl px-8">
         <div class="p-6">{!!$image!!}</div>
@@ -20,8 +13,8 @@
             {!! $description !!}
         </p>
         <div class="text-center pt-2">
-            <a href="{{ $button_url }}">
-                <x-bladewind::button type="primary" size="small">{{ $button_text }}</x-bladewind::button>
+            <a href="{{ $buttonUrl }}">
+                <x-bladewind::button type="primary" size="small">{{ $buttonText }}</x-bladewind::button>
             </a>
         </div>
     </div>
