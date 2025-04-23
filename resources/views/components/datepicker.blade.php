@@ -49,6 +49,7 @@
             type="text"
             id="{{ $name }}"
             name="{{$name}}"
+            label="{{$label}}"
             placeholder="{{ $placeholder }}"
             size="{{$size}}"
             suffix="calendar-days"
