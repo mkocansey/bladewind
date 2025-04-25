@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'name' => defaultBladewindName(),
     'value' => null,
@@ -20,6 +21,7 @@
     $ring_colour = ($colour == 'black') ? 'ring-black' : "ring-$colour-500";
     $border_colour = ($colour == 'black') ? 'border-slate-500/50' : "border-$colour-500/50";
 @endphp
+{{-- format-ignore-end --}}
 
 <label class="inline-flex items-center cursor-pointer text-sm @if($disabled) opacity-60 @endif @if($addClearing) mb-3 @endif {{ $labelCss }}">
     <input

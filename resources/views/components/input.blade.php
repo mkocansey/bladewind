@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // name of the input field for use in forms
     'name' => defaultBladewindName('input-'),
@@ -145,6 +146,7 @@
         if($attributes->get('disabled') == 'false') $attributes = $attributes->except('disabled');
     }
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="relative w-full dv-{{$name}} @if($add_clearing) mb-4 @endif">
     <input

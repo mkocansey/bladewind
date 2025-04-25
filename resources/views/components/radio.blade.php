@@ -1,4 +1,5 @@
-@props([ 
+{{-- format-ignore-start --}}
+@props([
     // to create a radio button group, specify the same name
     // for all the radio buttons in the group
     'name' => 'radio',
@@ -17,6 +18,8 @@
     $addClearing = parseBladewindVariable($addClearing);
     $name = parseBladewindName($name);
 @endphp
+{{-- format-ignore-end --}}
+
 <x-bladewind::checkbox
         name="{{$name}}"
         label="{{$label}}"

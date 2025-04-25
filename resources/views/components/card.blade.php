@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // title of the card
     'title' => null,
@@ -40,6 +41,8 @@
     $shadow_css =   ($hasShadow) ? 'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70' : '';
     $hover_css =  ($hasHover) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
 @endphp
+{{-- format-ignore-end --}}
+
 <div {{ $attributes->merge([ 'class' => "$class $contact_card_css $has_border_css $header_compact_css $shadow_css $hover_css"]) }}>
     @if($header)
         <div class="border-b border-gray-100/30 dark:border-dark-600/60">

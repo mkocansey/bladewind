@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'size' => 'xl',
 ])
@@ -17,6 +18,8 @@
         $size = 'xl';
     }
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="max-w-md max-w-lg max-w-2xl max-w-3xl max-w-4xl max-w-6xl max-w-7xl "></div>
 <div {{ $attributes->merge(['class' => "max-w-$width[$size] mx-auto"]) }}>
     {{ $slot }}

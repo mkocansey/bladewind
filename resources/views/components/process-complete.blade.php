@@ -1,4 +1,5 @@
-@props([ 
+{{-- format-ignore-start --}}
+@props([
     'name' => defaultBladewindName(),
     // available options are passed and failed
     // default is passed and it shows a green thumbsup icon
@@ -20,6 +21,8 @@
     $hide = parseBladewindVariable($hide);
     $name = parseBladewindName($name);
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="{{$name}} text-center mt-6 @if($hide) hidden @endif {{$class}}">
     @if($processCompletedAs === 'passed')
         <x-bladewind::icon

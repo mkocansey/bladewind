@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'stacked' => config('bladewind.timeline.group.stacked', false),
     'completed' => false,
@@ -9,4 +10,5 @@
     'dateCss' => '',
     'position' => 'center',
 ])
+{{-- format-ignore-end --}}
 {{$slot}}

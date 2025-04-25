@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // where do you want the notification displayed
     // available options are top-right, top-center, top-left, bottom-right, bottom-center, bottom-left
@@ -16,6 +17,7 @@
         'bottom_left' => 'left-4 bottom-10',
     ];
 @endphp
+{{-- format-ignore-end --}}
 <div class="fixed flex flex-col-reverse {{ $position_css[str_replace('-', '_', $position)] }} z-50 bw-notification-container w-11/12"></div>
 {{--sm:w-1/4 sm:w-96 md:w-96  w-11/12--}}
 <div class="bw-notification-icons hidden">

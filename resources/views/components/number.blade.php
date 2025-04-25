@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // name of the input field for use in forms
     'name' => defaultBladewindName('input-'),
@@ -46,6 +47,7 @@
     ];
     $size = (in_array($size, ['small','medium', 'regular','big'])) ? $size : 'medium';
 @endphp
+{{-- format-ignore-end --}}
 
 <span class="inline-flex bw-number-{{$name}} place">
     <x-bladewind::input

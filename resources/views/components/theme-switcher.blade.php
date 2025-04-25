@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'lightIcon' => 'sun',
     'lightText' => 'Light',
@@ -14,6 +15,8 @@
     $iconRight = parseBladewindVariable($iconRight);
     $modular = parseBladewindVariable($modular);
 @endphp
+{{-- format-ignore-end --}}
+
 @once
     <x-bladewind::dropmenu :modular="$modular" icon_right="{{$iconRight}}">
         <x-slot:trigger>

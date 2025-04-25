@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'image' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
     'heading' => '',
@@ -21,6 +22,8 @@
         'omg' => 'h-96',
 ];
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="text-center px-4 pb-6 bw-empty-state {{$class}}">
     @if($showImage == 'true')
         <img src="{{ $image }}" class="{{$sizes[$size]}} mx-auto mb-3 {{$imageCss}}"/>

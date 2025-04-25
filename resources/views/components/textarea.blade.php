@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // name of the input field for use in forms
     'name' => defaultBladewindName('textarea-'),
@@ -31,6 +32,8 @@
     $is_required = ($required) ? 'required' : '';
     $placeholder_color = ($label !== '') ? 'placeholder-transparent dark:placeholder-transparent' : '';
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="relative w-full @if($addClearing) mb-3 @endif">
     @if($toolbar)
         <div id="{{$name}}"></div>

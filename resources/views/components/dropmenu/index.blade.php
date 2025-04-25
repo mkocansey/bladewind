@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'name' => defaultBladewindName('bw-dropmenu-'),
     'trigger' => config('bladewind.dropmenu.trigger', 'ellipsis-horizontal-icon'),
@@ -24,6 +25,8 @@
     $hideAfterClick = parseBladewindVariable($hideAfterClick);
     $iconRight = parseBladewindVariable($iconRight);
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="relative inline-block leading-none text-left bw-dropmenu !z-20 {{$name}}" tabindex="0">
     <div class="bw-trigger cursor-pointer inline-block">
         @if(str_ends_with($trigger, '-icon'))

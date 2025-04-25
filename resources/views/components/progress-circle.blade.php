@@ -1,4 +1,4 @@
-@php use Illuminate\Support\Str; @endphp
+{{-- format-ignore-start --}}
 @props([
     'percentage' => 0,
     'circleWidth' => 0,

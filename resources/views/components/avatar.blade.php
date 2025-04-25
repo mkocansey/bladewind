@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'image' => null,
     'alt' => 'image',
@@ -64,6 +65,7 @@
      // $label will still be null if strlen($image) <= 3
     if($use_label) $avatar = $label ?? $image;
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="relative inline-block rounded-full bw-avatar {{ $image_size }} {{$stacked_css}} {{$class}} @if($showRing) ring-2 ring-offset-2 ring-offset-white ring-{{(!empty($bgColor) ? $bgColor : 'gray')}}-200 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
     @if($show_plus || $use_label)

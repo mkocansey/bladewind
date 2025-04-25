@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'name' => defaultBladewindName(),
     'icon' => null,
@@ -26,6 +27,7 @@
     $max_selection = (!empty($max) && is_numeric($max) && $max > 0) ? $max : 1;
     if($show_error) $auto_select_new = false;
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="bw-checkcards-{{$name}} {{$class}}">
     <x-bladewind::input

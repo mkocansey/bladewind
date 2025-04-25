@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'hasHover' => config('bladewind.contact_card.has_hover', false),
     'hasShadow' => config('bladewind.contact_card.has_shadow', true),
@@ -16,6 +17,8 @@
     $hasHover = parseBladewindVariable($hasHover);
     $hasBorder = parseBladewindVariable($hasBorder);
 @endphp
+{{-- format-ignore-end --}}
+
 <x-bladewind::card
         class="!p-5 {{$class}}"
         :has_hover="$hasHover"

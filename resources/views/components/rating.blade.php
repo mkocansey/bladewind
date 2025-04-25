@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'name' => defaultBladewindName(),
     'rating' => 0,
@@ -17,6 +18,8 @@
     $clickable = parseBladewindVariable($clickable);
     $name = parseBladewindName($name);
 @endphp
+{{-- format-ignore-end --}}
+
 @if($clickable)
     <x-bladewind::input type="hidden" name="{{$name}}" id="{{$name}}" class="rating-value-{{$name}}"
                         selected_value="{{$rating}}"/>

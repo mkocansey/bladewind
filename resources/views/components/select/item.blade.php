@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'value' => 'value',
     'label' => 'label',
@@ -23,6 +24,8 @@
     $emptyState = parseBladewindVariable($emptyState);
     $label = html_entity_decode($label);
 @endphp
+{{-- format-ignore-end --}}
+
 <div
         class="py-3 pl-4 pr-3 flex items-center text-base cursor-pointer bw-select-item @if($selectable) hover:bg-slate-100/90 dark:hover:bg-dark-800/50 dark:hover:text-dark-200 @else text-blue-900/40 @endif"
         data-label="{!! $label !!}" data-value="{{ $value }}"

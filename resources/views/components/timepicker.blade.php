@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // name of the datepicker. This name is used when posting the form with the datepicker
     'name' => defaultBladewindName(),
@@ -21,6 +22,8 @@
         $selected_format = (strlen($selected_time_array[1]) > 2) ? strtoupper(substr($selected_time_array[1], 2, 2)) : '';
     }
 @endphp
+{{-- format-ignore-end --}}
+
 @if($style == 'popup')
     <div style="width: 125px"
          class="inline-flex items-center align-middle bw-timepicker-{{$name}}">
