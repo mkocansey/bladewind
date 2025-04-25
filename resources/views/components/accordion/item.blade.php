@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
    'color' => '',
    'open' => false,
@@ -13,6 +14,7 @@
     $grouped = parseBladewindVariable($grouped);
     $open = parseBladewindVariable($open);
 @endphp
+{{-- format-ignore-end --}}
 
 <div @class([
         'w-full bw-accordion px-5 '.$name . ' '.$class,

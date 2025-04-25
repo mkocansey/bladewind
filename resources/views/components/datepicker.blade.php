@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // allow date range selection
     'range' => false,
@@ -43,6 +44,7 @@
     $required = parseBladewindVariable($required);
     $weekStarts = in_array($weekStarts, ['sunday','monday']) ? $weekStarts : 'sunday';
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="relative w-full">
     <x-bladewind::input

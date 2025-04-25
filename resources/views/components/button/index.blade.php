@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // this has nothing to do HTML's button types
     // this defines if the button is primary or secondary
@@ -121,6 +122,7 @@
     $merged_attributes = $attributes->merge(['class' => "$base_button_css $size $type $name $primary_colour_css $disabled_css $radius_css $outline_css $has_icon_css"]);
     $icon_css = ($circular) ? $icon_size['circular'][$size] : $icon_size[$size].' dark:text-white/80 ' . ((!$iconRight) ? '!-ml-2 rtl:!-mr-2 !mr-2 rtl:!ml-2' : '!-mr-2 rtl:!-ml-2 !ml-2 rtl:!mr-2');
 @endphp
+{{-- format-ignore-end --}}
 
 <{{ $tag }} {{ $merged_attributes }} @if($disabled) disabled @endif @if($tag == 'button') type="{{ $button_type }}" @endif >
     @if(!empty($icon) && !$iconRight)

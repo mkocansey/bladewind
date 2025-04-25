@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'name' => defaultBladewindName('bw-slider-'),
     'min' => 0,
@@ -24,6 +25,8 @@
     $selected = ($selected > $max) ? $max : $selected;
     $colour = defaultBladewindColour($color);
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="bw-slider-container w-full relative {{$class}}">
     <input type="range"
            min="{{$min}}"

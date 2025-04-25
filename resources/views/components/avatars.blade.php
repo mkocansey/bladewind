@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
      // size of the avatar
      // available sizes are: tiny | small | medium | regular | big | huge | omg
@@ -31,6 +32,7 @@
     // accepts a JS function as a string
     'plusAction' => null,
 ])
+{{-- format-ignore-end --}}
 
 <div class="bw-avatars {{$class}}">
     {{$slot}}

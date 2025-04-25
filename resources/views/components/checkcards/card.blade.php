@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'class' => null,
     'title' => '',
@@ -31,6 +32,8 @@
         'full' => 'rounded-full'
     ];
 @endphp
+{{-- format-ignore-end --}}
+
 <div @class([
         'bg-white dark:bg-dark-800/30 bw-selectable-card cursor-pointer focus:outline-none flex',
         'items-center' => ($alignItems == 'center'),

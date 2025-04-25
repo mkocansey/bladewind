@@ -1,4 +1,4 @@
-@props(['icons_array' => null, 'row' => null])
+{{-- format-ignore-start --}}@props(['icons_array' => null, 'row' => null]){{-- format-ignore-end --}}
 @if( !empty($icons_array) )
     <td class="text-right space-x-2 actions">
         @foreach($icons_array as $icon)

@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // determines types of icon to display. Available options: info, success, error, warning
     // only the blank type (type='') has no icon. useful if you want your modal to contain a form 
@@ -119,6 +120,7 @@
        };
     };
 @endphp
+{{-- format-ignore-end --}}
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdropCanClose}}"
      class="w-full h-full bg-black/40 fixed left-0 top-0 {{$blur_intensity()}}

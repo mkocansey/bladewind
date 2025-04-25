@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'totalRecords' => null,
     'pageSize' => 25,
@@ -31,6 +32,7 @@
     $next_page = $defaultPage+1;
     $prev_page = ($prev_page <= 0) ? 0 : $defaultPage-1;
 @endphp
+{{-- format-ignore-end --}}
 
 @if(!empty($totalRecords) && !empty($table))
     <script>

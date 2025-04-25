@@ -1,4 +1,5 @@
-@props([ 
+{{-- format-ignore-start --}}
+@props([
     'label' => '',
     'class' => '',
     'canClose' => config('bladewind.tag.can_close', false),
@@ -55,6 +56,7 @@
         $selectable = true;
     }
 @endphp
+{{-- format-ignore-end --}}
 
 <label id="@if($addIdPrefix)bw-@endif{{$id}}" @if($selectable) onclick="selectTag('{{$value}}','{{$name}}')" @endif
 class="relative  @if($uppercasing) uppercase @endif @if($tiny) text-[9px] px-[8px] leading-5 @else px-[12px] leading-8 text-[10px] @endif tracking-widest whitespace-nowrap inline-block {{$rounded_class}} {{$clearing_css}} {{$bg_border_colour_css}} {{$text_color_css}} {{$class}}">

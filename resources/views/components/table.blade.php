@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // your table headers in <th></th> tags
     'header' => '',
@@ -164,6 +165,7 @@
         }
     }
 @endphp
+{{-- format-ignore-end --}}
 
 <script>
     let tableData_{{str_replace('-','_', $name)}} = {!! json_encode($data) !!};
