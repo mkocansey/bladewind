@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // the text to display on the tab
     'label' => 'tab',
@@ -25,6 +26,7 @@
     $active = parseBladewindVariable($active);
     $disabled = parseBladewindVariable($disabled);
 @endphp
+{{-- format-ignore-end --}}
 
 <li class="mr-2 cursor-pointer atab atab-{{ $name }} relative "
     onclick="@if(!$disabled) @if($url == 'default') goToTab('{{$name}}', '{{$color}}', this.parentElement.getAttribute('data-name')) @else location.href='{{ $url }}' @endif @endif">

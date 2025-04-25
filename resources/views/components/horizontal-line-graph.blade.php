@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'label' => '',
     'percentage' => 0,
@@ -6,6 +7,7 @@
     'percentageLabelOpacity' => config('bladewind.horizontal_line_graph.percentage_label_opacity', 50),
     'class' => '',
 ])
+{{-- format-ignore-end --}}
 
 <x-bladewind::progress-bar
         percentage="{{$percentage}}"

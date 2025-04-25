@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
    // error, warning, success, info
    'type' => 'info',
@@ -65,6 +66,7 @@
         ]
     ];
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="w-full bw-alert animate__animated animate__fadeIn rounded-md flex p-3  {{$colours[$shade] }} {{ $class }}">
     @if($showIcon)

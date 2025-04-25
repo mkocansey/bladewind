@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'number' => '',
     'labelPosition' => config('bladewind.statistic.label_position', 'top'),
@@ -20,6 +21,7 @@
     $shadow_css = ($hasShadow) ? 'drop-shadow-sm shadow-sm shadow-slate-200 dark:shadow-dark-800/70' : '';
     $border_css = ($hasBorder) ? 'border border-gray-100/80 dark:border-dark-600/60' : '';
 @endphp
+{{-- format-ignore-end --}}
 
 <div {{ $attributes(['class' => "bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 rounded-md relative $shadow_css $border_css $class"]) }}>
     <div class="flex space-x-4">

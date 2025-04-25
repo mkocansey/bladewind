@@ -1,4 +1,5 @@
-@props([ 
+{{-- format-ignore-start --}}
+@props([
     'color' => config('bladewind.tag.color', 'primary'),
     'shade' => config('bladewind.tag.shade', 'faint'),
     'rounded' => config('bladewind.tag.rounded', false),
@@ -19,6 +20,7 @@
     $tiny = parseBladewindVariable($tiny);
     $max_selection = (!empty($max) && is_numeric($max)) ? $max : 9999999;
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="bw-tags-{{$name}} {{$class}}">
     <x-bladewind::input

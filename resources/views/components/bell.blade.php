@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'size'          => config('bladewind.bell.size', 'small'),
     'showDot'       => config('bladewind.bell.show_dot', true),
@@ -26,6 +27,7 @@
     $size = (! in_array($size, ['small','big'])) ? 'small' : $size;
     $colour = defaultBladewindColour($color);
 @endphp
+{{-- format-ignore-end --}}
 
 <div {{ $attributes->merge(['class' => "bw-bell relative inline-block"]) }}>
     <x-bladewind::icon name="bell" class="{{ $sizing[$size]['bell'] }} cursor-pointer {{$invert_css}}"/>

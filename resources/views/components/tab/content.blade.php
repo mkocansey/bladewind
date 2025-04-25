@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // available options are true or false as strings.
     // setting this to true will set this tab content as the active one
@@ -13,6 +14,8 @@
     $active = parseBladewindVariable($active);
     $active_css = sprintf(((!$active) ? 'hidden %s' : '%s'), $class);
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="atab-content bw-tc-{{$name}} {{$active_css}}">
     {{ $slot }}
 </div>

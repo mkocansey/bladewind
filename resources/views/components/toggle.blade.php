@@ -1,4 +1,5 @@
-@props([ 
+{{-- format-ignore-start --}}
+@props([
     // unique name for identifying the toggle element
     // useful for checking the value of the toggle when form is submitted
     'name' => defaultBladewindName('bw-toggle-'),
@@ -37,6 +38,7 @@
         'thicker' => 'w-[4.5rem] h-10 after:w-8 after:h-8',
     ];
 @endphp
+{{-- format-ignore-end --}}
 
 <label class="relative @if(!$justified)inline-flex @else flex justify-between @endif items-center group bw-tgl-{{$name}}">
     @if($labelPosition == 'left' && !empty($label))

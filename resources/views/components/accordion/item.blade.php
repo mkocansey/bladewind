@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
    'color' => '',
    'open' => false,
@@ -13,11 +14,12 @@
     $grouped = parseBladewindVariable($grouped);
     $open = parseBladewindVariable($open);
 @endphp
+{{-- format-ignore-end --}}
 
 <div @class([
-        'w-full bw-accordion '.$name . ' '.$class,
+        'w-full bw-accordion px-5 '.$name . ' '.$class,
         'pt-4 first:pt-0 ' => $grouped,
-        'border py-3.5 px-5 rounded-md hover:shadow-md shadow-sm' => !$grouped,
+        'border py-3.5 rounded-md hover:shadow shadow-sm' => !$grouped,
         'bg-'.$color.'-100/70 border-'.$color.'-200' => (!$grouped && !empty($color)),
         "border-gray-200/70 dark:border-dark-600" => (!$grouped && empty($color))
 ])

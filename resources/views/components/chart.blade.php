@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'name' => defaultBladewindName('bw-chart-'),
     'labels' => [],
@@ -113,6 +114,7 @@
     // convert to an object for javascript
     if(empty($options)) $options = (object)[];
 @endphp
+{{-- format-ignore-end --}}
 
 <canvas class="chart-{{$name}} {{$class}}"></canvas>
 

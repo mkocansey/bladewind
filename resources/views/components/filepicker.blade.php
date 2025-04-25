@@ -1,4 +1,4 @@
-@php use Illuminate\Support\Str; @endphp
+{{-- format-ignore-start --}}
 @props([
     // name of the input field for use in passing form submission data
     // this is prefixed with bw- when used as a class name
@@ -100,11 +100,11 @@
     $validateFileSize = parseBladewindVariable($validateFileSize);
     $showImagePreview = parseBladewindVariable($showImagePreview);
     $autoUpload = parseBladewindVariable($autoUpload);
-    $maxFileSize = ((Str::contains($maxFileSize,'b')) ? $maxFileSize : $maxFileSize.'mb') ;
+    $maxFileSize = ((str_contains($maxFileSize,'b')) ? $maxFileSize : $maxFileSize.'mb') ;
     $maxFiles = (! is_numeric($maxFiles)) ? 1 : (int) $maxFiles;
     $imageResizeWidth = (! is_numeric($imageResizeWidth)) ? null : $imageResizeWidth;
     $imageResizeHeight = (! is_numeric($imageResizeHeight)) ? null : $imageResizeHeight;
-    $hasImageFiles = Str::contains($acceptedFileTypes,['image','png','jpg','jpeg','gif']);
+    $hasImageFiles = str_contains($acceptedFileTypes,['image','png','jpg','jpeg','gif']);
     $cropAspectRatio = isValidAspectRatio($cropAspectRatio) ? $cropAspectRatio : 'NaN';
     if(!app()->environment('production') && !file_exists('vendor/bladewind/css/filepond.min.css')) {
         echo '<span class="text-red-400">filepicker assets missing. <a href="https://bladewindui.com/install#install">publish</a> public bladewind assets</span>';
@@ -135,6 +135,8 @@
     <script src="{{ asset('vendor/bladewind/js/filepond.min.js') }}"></script>
     <script>const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") || "{{ csrf_token() }}";;</script>
 @endonce
+{{-- format-ignore-end --}}
+
 @if($canCrop)
     @once
         <x-bladewind::modal name="cropper-container" size="large" align_buttons="center" backdrop_can_close="false" ok_button_label="Crop">

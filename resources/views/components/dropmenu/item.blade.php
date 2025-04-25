@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'class' => '',
     'icon' => '',
@@ -21,6 +22,7 @@
     $iconRight = parseBladewindVariable($iconRight);
     $icon_css .= ($iconRight) ? ' !ml-2 !-mr-1' : ' !mr-2 -ml-0.5 ';
 @endphp
+{{-- format-ignore-end --}}
 
 <div @class([
         'flex align-middle text-gray-600 cursor-pointer dark:text-dark-300 w-full text-sm !text-left bw-item '.$class,

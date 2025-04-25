@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'onclick' => '',
     'title' => '',
@@ -17,6 +18,7 @@
 ])
 
 @php if($color == 'secondary') $type = 'secondary'; @endphp
+{{-- format-ignore-end --}}
 
 <x-bladewind::button
         :color="$color"

@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'status' => 'pending',
     'date' => '',
@@ -35,6 +36,8 @@
     $iconCss = (($completed && $anchor == 'big') ? 'text-white ' : "!text-$color-500 opacity-70 ") . $iconCss;
     if(!empty($avatar)) $anchor = "big";
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="flex">
     <div class="@if($position!=='left') grow w-1/2 @else @if(!$stacked) min-w-28 @else !pr-0 @endif @endif text-right pr-5 text-sm">
         @if(!$stacked || ($stacked && $alignLeft))

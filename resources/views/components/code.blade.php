@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // name of the input field for use in forms
     'name' => defaultBladewindName('pin-code-'),
@@ -32,6 +33,7 @@
     $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[75px] text-5xl";
     $cloak_size = ($size == 'big') ? " h-24" : "h-16";
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="dv-{{ $name }} relative">
     <div class="flex {{ $name }}-boxes">

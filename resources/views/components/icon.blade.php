@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // determines which icon to display. Name must match the exact name defined on 
     // https://heroicons.com
@@ -17,6 +18,8 @@
     $icons_dir = ($dir !== '') ? $dir : ((! in_array($type, [ 'outline', 'solid' ])) ? "$path/outline" : "$path/$type");
     $svg_file = file_exists(public_path("$icons_dir/$name.svg")) ? public_path("$icons_dir/$name.svg") : null;
 @endphp
+{{-- format-ignore-end --}}
+
 @if (!empty($name))
     @if(!empty($action))
         <a onclick="{!! $action !!}" class="cursor-pointer"> @endif

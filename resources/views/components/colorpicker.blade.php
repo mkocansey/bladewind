@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     'name' => defaultBladewindName(),
     'selectedValue' => '#000000',
@@ -10,6 +11,8 @@
     $name = parseBladewindName($name);
     $showValue = parseBladewindVariable($showValue);
 @endphp
+{{-- format-ignore-end --}}
+
 <div class="inline-flex p-1 bw-color-picker-{{$name}} align-bottom rounded-md border-2 border-slate-300/50 hover:border-slate-300 dark:border-dark-600 dark:hover:border-dark-500/50">
     <input type="hidden" name="{{$name}}" value="{{$selectedValue}}"/>
     @if(empty($colors))

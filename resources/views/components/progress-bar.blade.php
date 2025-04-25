@@ -1,4 +1,4 @@
-@php use Illuminate\Support\Str; @endphp
+{{-- format-ignore-start --}}
 @props([
     'transparent' => false,
     'percentage' => 0,
@@ -35,11 +35,12 @@
         'dark' => 50,
     ];
 @endphp
+{{-- format-ignore-end --}}
 
 <div class="bw-progress-bar {{$class}}">
     @if($showPercentageLabel &&
         !$showPercentageLabelInline &&
-        Str::contains($percentageLabelPosition, 'top'))
+        str_contains($percentageLabelPosition, 'top'))
         <div class="text-xs tracking-wider {{str_replace('top-','text-', $percentageLabelPosition)}}">
             {{$percentagePrefix}} <span
                     class="opacity-{{$percentageLabelOpacity}}">{{ $percentage}}%</span> {{$percentageSuffix}}
@@ -60,7 +61,7 @@
     </div>
     @if($showPercentageLabel &&
         !$showPercentageLabelInline &&
-        Str::contains($percentageLabelPosition, 'bottom'))
+        str_contains($percentageLabelPosition, 'bottom'))
         <div class="text-xs tracking-wider {{str_replace('bottom-','text-', $percentageLabelPosition)}}">
             {{$percentagePrefix}} <span
                     class="opacity-{{$percentageLabelOpacity}}">{{ $percentage}}%</span> {{$percentageSuffix}}

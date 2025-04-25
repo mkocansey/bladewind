@@ -1,3 +1,4 @@
+{{-- format-ignore-start --}}
 @props([
     // name to uniquely identity a select
     'name' => defaultBladewindName('bw-select-'),
@@ -137,6 +138,8 @@
     $size = (!in_array($size, ['small','medium', 'regular', 'big'])) ? 'medium' : $size;
     $sizes = [ 'small' => 'py-[6px]', 'medium' => 'py-[10px]', 'regular' => 'py-[6.5px]', 'big' => 'py-[18.5px]' ];
 @endphp
+{{-- format-ignore-end --}}
+
 <style xmlns:x-bladewind="http://www.w3.org/1999/html">
     .display-area::-webkit-scrollbar {
         display: none;
