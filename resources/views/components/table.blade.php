@@ -223,7 +223,7 @@
                                     class="cursor-pointer"
                                 data-sort-dir="no-sort"
                                 data-can-sort="true"
-                                data-column-index="{{ count($indices)-1}}"
+                                data-column-index="{{ $checkable ? count($indices) : count($indices)-1}}"
                                 onclick="sortTableByColumn(this, '{{$name}}')" @endif>
                                 <span class="peer cursor-pointer">{{ str_replace('_', ' ', $columnAliases[$th] ?? $th ) }}</span>
                                 @if($sortable && in_array($th, $sortableColumns))
