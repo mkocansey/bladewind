@@ -15,6 +15,8 @@
     // reduce padding within the card
     'compact' => config('bladewind.card.compact', false),
 
+    'noPadding' => config('bladewind.card.no_padding', false),
+
     // content to display as card header
     'header' => null,
 
@@ -33,11 +35,12 @@
     $hasHover = parseBladewindVariable($hasHover);
     $hasBorder = parseBladewindVariable($hasBorder);
     $isContactCard = parseBladewindVariable($isContactCard);
+    $noPadding = parseBladewindVariable($noPadding);
 
     $class = "bg-white dark:bg-dark-800/30 rounded-lg $class";
     $contact_card_css =   ($isContactCard) ? 'bw-contact-card' : 'bw-card';
     $has_border_css =   ($hasBorder) ? 'border border-slate-200 dark:border-dark-600/60 focus:outline-none' : '';
-    $header_compact_css =   (!$header && ! $compact) ? 'p-6' : (($compact) ? 'p-4' : '');
+    $header_compact_css =   (!$header && ! $compact && !$noPadding) ? 'p-6' : (($compact) ? 'p-4' : '');
     $shadow_css =   ($hasShadow) ? 'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70' : '';
     $hover_css =  ($hasHover) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
 @endphp
