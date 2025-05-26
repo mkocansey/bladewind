@@ -2,7 +2,7 @@
 @props([
     'image' => null,
     'alt' => 'image',
-    'class' => 'ltr:mr-2 rtl:ml-2 mt-2',
+    'class' => '',
     'dotPosition' => config('bladewind.avatar.dot_position', 'bottom'),
     'dotColor' => config('bladewind.avatar.dot_color', 'primary'),
     'bgColor' => config('bladewind.avatar.bg_color', null),
@@ -67,14 +67,14 @@
 @endphp
 {{-- format-ignore-end --}}
 
-<div class="relative inline-block rounded-full bw-avatar {{ $image_size }} {{$stacked_css}} {{$class}} @if($showRing) ring-2 ring-offset-2 ring-offset-white ring-{{(!empty($bgColor) ? $bgColor : 'gray')}}-200 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
+<div class="relative inline-block ltr:mr-2 rtl:ml-2 mt-1 rounded-full bw-avatar {{ $image_size }} {{$stacked_css}} {{$class}} @if($showRing) ring-2 ring-offset-2 ring-offset-white ring-{{(!empty($bgColor) ? $bgColor : 'gray')}}-200 dark:ring-0 dark:ring-offset-dark-700/50  @endif">
     @if($show_plus || $use_label)
         <div class="{{ $image_size }} {{$plus_text_size}} absolute rounded-full flex items-center justify-center font-semibold tracking-wide {{ (!empty($bgColor) ? 'text-'.$bgColor.'-600' : 'white')}}  bg-{{ (!empty($bgColor) ? $bgColor.'-100/70' : 'white')}} dark:bg-dark-600 dark:text-dark-300 @if($show_plus && !empty($plusAction)) plus-more cursor-pointer @endif"
              @if($show_plus && !empty($plusAction)) onclick="{!! $plusAction !!}" @endif>
             {{$avatar}}
         </div>
     @else
-        <img class="{{ $image_size }} absolute object-cover object-center rounded-full" src="{{$avatar}}"
+        <img class="{{ $image_size }} object-cover object-center rounded-full" src="{{$avatar}}"
              alt="{{$avatar}}"/>
     @endif
     @if($dotted && !$show_plus)

@@ -90,6 +90,7 @@ return [
     */
     'card' => [
         'compact' => false,
+        'no_padding' => false,
         'has_shadow' => true,
         'has_border' => true,
         'has_hover' => false,
