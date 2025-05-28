@@ -1,9 +1,10 @@
-{{-- format-ignore-start --}}([
-'heading' => __('bladewind::bladewind.error_heading'),
-'description' => __('bladewind::bladewind.error_description'),
-'buttonText' => __('bladewind::bladewind.error_button_text'),
-'buttonUrl' => '/',
-'image' => '',
+{{-- format-ignore-start --}}
+@props([
+    'heading' => __('bladewind::bladewind.error_heading'),
+    'description' => __('bladewind::bladewind.error_description'),
+    'buttonText' => __('bladewind::bladewind.error_button_text'),
+    'buttonUrl' => '/',
+    'image' => '',
 ])
 <div class="flex justify-center items-center">
     <div class="max-w-xl px-8">
