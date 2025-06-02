@@ -12,18 +12,38 @@
     'hasBorder' => config('bladewind.statistic.has_border', true),
     'class' => '',
     'numberCss' => '',
+    'url' => null,
 ])
 @php
     $showSpinner = parseBladewindVariable($showSpinner);
     $hasShadow = parseBladewindVariable($hasShadow);
     $hasBorder = parseBladewindVariable($hasBorder);
 
-    $shadow_css = ($hasShadow) ? 'drop-shadow-sm shadow-sm shadow-slate-200 dark:shadow-dark-800/70' : '';
-    $border_css = ($hasBorder) ? 'border border-gray-100/80 dark:border-dark-600/60' : '';
+    $shadow_css = ($hasShadow) ? 'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70' : '';
+    $border_css = ($hasBorder) ? 'border border-slate-200 dark:border-dark-600/60 focus:outline-none' : '';
+    $hover_css =  (!empty($url)) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
+
+    $classes = implode(' ', array_filter([
+        'bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 rounded-md relative',
+        $shadow_css,
+        $border_css,
+        $hover_css,
+        $class
+    ]));
+
+    if(!empty($url)) {
+        if(str_contains($url, '(') && str_contains($url, ')')) {
+            $redirect = "javascript:$url";
+        } elseif (str_starts_with($url, 'http')){
+            $redirect = "window.open('".addslashes($url)."')";
+        } else {
+            $redirect = "location.href='".addslashes($url)."'";
+        }
+    }
 @endphp
 {{-- format-ignore-end --}}
 
-<div {{ $attributes(['class' => "bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 rounded-md relative $shadow_css $border_css $class"]) }}>
+<div {{ $attributes->merge(['class' => $classes])}} @if($url) onclick="{{$redirect}}" @endif>
     <div class="flex space-x-4">
         @if($icon !== '' && $iconPosition=='left')
             <div class="grow-0 icon">{!! $icon !!}</div>
