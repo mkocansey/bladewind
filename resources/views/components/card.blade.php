@@ -26,6 +26,8 @@
     // additional css
     'class' => null,
 
+    'url' => null,
+
     // the contact card uses this card component but needs to have a different class name
     'isContactCard' => false,
 ])
@@ -42,11 +44,29 @@
     $has_border_css =   ($hasBorder) ? 'border border-slate-200 dark:border-dark-600/60 focus:outline-none' : '';
     $header_compact_css =   (!$header && ! $compact && !$noPadding) ? 'p-6' : (($compact) ? 'p-4' : '');
     $shadow_css =   ($hasShadow) ? 'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70' : '';
-    $hover_css =  ($hasHover) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
+    $hover_css =  ($hasHover || !empty($url)) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
+
+    $classes = implode(' ', array_filter([
+        $class,
+        $contact_card_css,
+        $has_border_css,
+        $header_compact_css,
+        $shadow_css,
+        $hover_css
+    ]));
+    if(!empty($url)) {
+        if(str_contains($url, '(') && str_contains($url, ')')) {
+            $redirect = "javascript:$url";
+        } elseif (str_starts_with($url, 'http')){
+            $redirect = "window.open('".addslashes($url)."')";
+        } else {
+            $redirect = "location.href='".addslashes($url)."'";
+        }
+    }
 @endphp
 {{-- format-ignore-end --}}
 
-<div {{ $attributes->merge([ 'class' => "$class $contact_card_css $has_border_css $header_compact_css $shadow_css $hover_css"]) }}>
+<div {{ $attributes->merge([ 'class' => $classes]) }} @if($url) onclick="{{$redirect}}" @endif>
     @if($header)
         <div class="border-b border-gray-100/30 dark:border-dark-600/60">
             {{ $header }}
