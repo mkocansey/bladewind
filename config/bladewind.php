@@ -102,8 +102,13 @@ return [
     |--------------------------------------------------------------------------
     */
     'contact_card' => [
-        'has_shadow' => true,
         'has_hover' => false,
+        'has_shadow' => true,
+        'has_border' => true,
+        'no_padding' => false,
+        'compact' => true,
+        'lazy' => true,
+        'centered' => true,
     ],
 
     /*
