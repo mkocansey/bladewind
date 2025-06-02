@@ -99,7 +99,7 @@
     // append type="module" to script tags
     'modular' => config('bladewind.select.modular', false),
 
-    'size' => config('bladewind.select.size', 'medium'),
+    'size' => config('bladewind.select.size', 'regular'),
 
     'emptyState' => 'false',
     'emptyStateMessage' => config('bladewind.select.empty_placeholder', __("bladewind::bladewind.select_empty_placeholder")),
