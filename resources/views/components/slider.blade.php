@@ -10,6 +10,8 @@
     'showValues' => config('bladewind.slider.show_values', true),
     'range' => config('bladewind.slider.range', false),
     'class' => '',
+    'nonce' => config('bladewind.script.nonce', null),
+
 ])
 
 @php
@@ -57,32 +59,31 @@
            value="{{$selected}}@if($range),{{$maxSelected}}@endif"/>
 </div>
 
-<script>
+<x-bladewind::script :nonce="$nonce">
     const minSlider_{{$name}} = domEl('.min-slider-{{$name}}');
     const maxSlider_{{$name}} = domEl('.max-slider-{{$name}}');
     const sliderValue_{{$name}} = domEl('.slider-selection-{{$name}}');
     const sliderInput_{{$name}} = domEl('.slider-selection-{{$name}}-input');
 
     minSlider_{{$name}}.oninput = function () {
-        if (parseInt(minSlider_{{$name}}.value) > parseInt(maxSlider_{{$name}}.value) - 1) {
-            minSlider_{{$name}}.value = parseInt(maxSlider_{{$name}}.value) - 1;
-        }
-        @if($range)
-            sliderValue_{{$name}}.innerHTML = `${minSlider_{{$name}}.value} - ${maxSlider_{{$name}}.value}`;
+    if (parseInt(minSlider_{{$name}}.value) > parseInt(maxSlider_{{$name}}.value) - 1) {
+    minSlider_{{$name}}.value = parseInt(maxSlider_{{$name}}.value) - 1;
+    }
+    @if($range)
+        sliderValue_{{$name}}.innerHTML = `${minSlider_{{$name}}.value} - ${maxSlider_{{$name}}.value}`;
         sliderInput_{{$name}}.value = `${minSlider_{{$name}}.value},${maxSlider_{{$name}}.value}`;
-        @else
-            sliderValue_{{$name}}.innerHTML = `${minSlider_{{$name}}.value}`;
+    @else
+        sliderValue_{{$name}}.innerHTML = `${minSlider_{{$name}}.value}`;
         sliderInput_{{$name}}.value = `${minSlider_{{$name}}.value}`;
-        @endif
+    @endif
     };
     @if($range)
         maxSlider_{{$name}}.oninput = function () {
         if (parseInt(maxSlider_{{$name}}.value) < parseInt(minSlider_{{$name}}.value) + 1) {
-            maxSlider_{{$name}}.value = parseInt(minSlider_{{$name}}.value) + 1;
+        maxSlider_{{$name}}.value = parseInt(minSlider_{{$name}}.value) + 1;
         }
         sliderValue_{{$name}}.innerHTML = `${minSlider_{{$name}}.value} - ${maxSlider_{{$name}}.value}`;
         sliderInput_{{$name}}.value = `${minSlider_{{$name}}.value},${maxSlider_{{$name}}.value}`;
-    };
+        };
     @endif
-
-</script>
+</x-bladewind::script>

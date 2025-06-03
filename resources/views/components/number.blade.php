@@ -28,6 +28,7 @@
     'iconType' => config('bladewind.number.icon_type', 'outline'),
     'transparentIcons' => config('bladewind.number.transparent_icons', true),
     'class' => '',
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);
@@ -73,15 +74,17 @@
             :selected_value="$selectedValue"
             :name="$name"/>
 </span>
-<script>
+<x-bladewind::script :nonce="$nonce">
     changeCss('.bw-number-{{$name}} .prefix svg', '!size-4,size-6,!stroke-2', 'remove');
     changeCss('.bw-number-{{$name}} .suffix svg', '!size-4,size-6,!stroke-2', 'remove');
     domEl('.bw-number-{{$name}} .suffix').addEventListener('click', () => {
-        domEl('.bw-number-{{$name}} input.{{$name}}').value = parseInt(domEl('.bw-number-{{$name}} input.{{$name}}').value) + parseInt({{$step}});
-        checkMinMax('{{$min}}', '{{$max}}', '{{$name}}', 1);
+    domEl('.bw-number-{{$name}} input.{{$name}}').value = parseInt(domEl('.bw-number-{{$name}} input.{{$name}}').value)
+    + parseInt({{$step}});
+    checkMinMax('{{$min}}', '{{$max}}', '{{$name}}', 1);
     });
     domEl('.bw-number-{{$name}} .prefix').addEventListener('click', () => {
-        domEl('.bw-number-{{$name}} input.{{$name}}').value = parseInt(domEl('.bw-number-{{$name}} input.{{$name}}').value) - parseInt({{$step}});
-        checkMinMax('{{$min}}', '{{$max}}', '{{$name}}', 1);
+    domEl('.bw-number-{{$name}} input.{{$name}}').value = parseInt(domEl('.bw-number-{{$name}} input.{{$name}}').value)
+    - parseInt({{$step}});
+    checkMinMax('{{$min}}', '{{$max}}', '{{$name}}', 1);
     });
-</script>
+</x-bladewind::script>

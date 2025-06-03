@@ -10,6 +10,7 @@
     'iconType' => 'outline',
     'iconDir' => '',
     'modular' => false,
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $iconRight = parseBladewindVariable($iconRight);
@@ -46,26 +47,26 @@
             {{$systemText}}
         </x-bladewind::dropmenu.item>
     </x-bladewind::dropmenu>
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         const chooseTheme = (theme) => {
-            theme = (theme !== 'null' && theme !== undefined && theme !== null) ? theme : 'system';
-            addToStorage('theme', theme);
-            if (theme === 'dark' || theme === 'system') {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+        theme = (theme !== 'null' && theme !== undefined && theme !== null) ? theme : 'system';
+        addToStorage('theme', theme);
+        if (theme === 'dark' || theme === 'system') {
+        document.documentElement.classList.add('dark');
+        } else {
+        document.documentElement.classList.remove('dark');
+        }
 
-            hide('.theme-dark');
-            hide('.theme-light');
-            hide('.theme-system');
-            unhide(`.theme-${theme}`);
+        hide('.theme-dark');
+        hide('.theme-light');
+        hide('.theme-system');
+        unhide(`.theme-${theme}`);
         }
         chooseTheme(getFromStorage('theme'));
 
         // Listen for changes in the system theme
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
-            chooseTheme(event.matches ? 'dark' : 'light');
+        chooseTheme(event.matches ? 'dark' : 'light');
         });
-    </script>
+    </x-bladewind::script>
 @endonce

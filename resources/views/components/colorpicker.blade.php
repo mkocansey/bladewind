@@ -6,6 +6,7 @@
     'size' => config('bladewind.colorpicker.size','regular'),
     'showValue' => config('bladewind.colorpicker.show_value',false),
     'colors' => '',
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);
@@ -57,11 +58,11 @@
     @endif
 </div>
 @once
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         const setColour = (name, colour) => {
-            domEl(`input[name="${name}"]`).value = colour;
-            domEl(`.bw-cp-label-${name}`).textContent = colour;
-            domEl(`.bw-cp-trigger.${name}`).style.background = colour;
+        domEl(`input[name="${name}"]`).value = colour;
+        domEl(`.bw-cp-label-${name}`).textContent = colour;
+        domEl(`.bw-cp-trigger.${name}`).style.background = colour;
         }
-    </script>
+    </x-bladewind::script>
 @endonce

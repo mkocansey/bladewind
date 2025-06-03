@@ -9,6 +9,7 @@
     'defaultPage' => 1,
     'table' => null,
     'label' => __("bladewind::bladewind.pagination_label"),
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 
 @php
@@ -35,13 +36,13 @@
 {{-- format-ignore-end --}}
 
 @if(!empty($totalRecords) && !empty($table))
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         var previousPage_{{$table}} = {{$defaultPage}};
         var totalPages_{{$table}} = {{$total_pages}};
         var pageSize_{{$table}} = {{$pageSize}};
         var totalRecords_{{$table}} = {{$totalRecords}};
         var paginationStyle_{{$table}} = '{{$style}}';
-    </script>
+    </x-bladewind::script>
     <div class="flex px-5 py-2 justify-between text-sm items-center opacity-80 bw-pagination-{{$table}}">
         <div>
             @if($showTotal)
@@ -117,153 +118,157 @@
                             class="!ml-0.5 !pl-5 !pr-1 next-btn {{$default_button_css}}"
                             onclick="routeToPage('{{$next_page}}', '', '', {table: '{{$table}}'}); shufflePageNumbers('{{$next_page}}', '{{$table}}')"/>
                 </div>
-                <script>shufflePageNumbers('{{$defaultPage}}', '{{$table}}')</script>
+                <x-bladewind::script :nonce="$nonce">shufflePageNumbers('{{$defaultPage}}', '{{$table}}')
+                </x-bladewind::script>
             @endif
         </div>
     </div>
 @endif
 @once
     <span class="dots hidden"><x-bladewind::icon name="ellipsis-horizontal"/></span>
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         var selectPage = (page, previousPage, table) => {
-            let pageButton = domEl(`.bw-pagination-${table} button[data-page="${page}"]`);
-            let prevPageButton = domEl(`.bw-pagination-${table} button[data-page="${previousPage}"]`);
-            if (pageButton && prevPageButton) {
-                let cssToRemove = "border-gray-500/50, focus:ring-gray-500, hover:border-gray-600, dark:hover:border-gray-500,{{str_replace(' ', ',', $default_button_css)}}";
-                let cssToAdd = '{{str_replace(' ', ',', $active_css)}}';
-                changeCss(pageButton, cssToRemove, 'remove', true);
-                changeCss(pageButton, cssToAdd, 'add', true);
-                changeCss(prevPageButton, cssToRemove, 'add', true);
-                changeCss(prevPageButton, cssToAdd, 'remove', true);
-            }
+        let pageButton = domEl(`.bw-pagination-${table} button[data-page="${page}"]`);
+        let prevPageButton = domEl(`.bw-pagination-${table} button[data-page="${previousPage}"]`);
+        if (pageButton && prevPageButton) {
+        let cssToRemove = "border-gray-500/50, focus:ring-gray-500, hover:border-gray-600,
+        dark:hover:border-gray-500,{{str_replace(' ', ',', $default_button_css)}}";
+        let cssToAdd = '{{str_replace(' ', ',', $active_css)}}';
+        changeCss(pageButton, cssToRemove, 'remove', true);
+        changeCss(pageButton, cssToAdd, 'add', true);
+        changeCss(prevPageButton, cssToRemove, 'add', true);
+        changeCss(prevPageButton, cssToAdd, 'remove', true);
+        }
         }
 
         var goToPage = (page, table) => {
-            let currentPage = parseInt(page);
-            let previousPage = window[`previousPage_${table}`];
-            let totalPages = window[`totalPages_${table}`];
-            let totalRecords = window[`totalRecords_${table}`];
-            let pageSize = window[`pageSize_${table}`];
-            let paginationStyle = window[`paginationStyle_${table}`];
+        let currentPage = parseInt(page);
+        let previousPage = window[`previousPage_${table}`];
+        let totalPages = window[`totalPages_${table}`];
+        let totalRecords = window[`totalRecords_${table}`];
+        let pageSize = window[`pageSize_${table}`];
+        let paginationStyle = window[`paginationStyle_${table}`];
 
-            if ((currentPage === previousPage)) return false;
-            if (currentPage !== 0 && currentPage <= totalPages) {
-                let nextPage = currentPage + 1;
-                let prevPage = currentPage - 1;
-                let nextButton = domEl(`.bw-pagination-${table} .next-btn`);
-                let prevButton = domEl(`.bw-pagination-${table} .prev-btn`);
-                let end = (currentPage * pageSize);
-                let begin = end - (pageSize - 1);
-                end = (end > totalRecords) ? totalRecords : end;
+        if ((currentPage === previousPage)) return false;
+        if (currentPage !== 0 && currentPage <= totalPages) {
+        let nextPage = currentPage + 1;
+        let prevPage = currentPage - 1;
+        let nextButton = domEl(`.bw-pagination-${table} .next-btn`);
+        let prevButton = domEl(`.bw-pagination-${table} .prev-btn`);
+        let end = (currentPage * pageSize);
+        let begin = end - (pageSize - 1);
+        end = (end > totalRecords) ? totalRecords : end;
 
-                // show rows on the current page
-                domEls(`table.${table} tr[data-page="${currentPage}"]`).forEach((el) => {
-                    unhide(el, true);
-                });
-                // hide rows on previous pages
-                if (domEls(`table.${table} tr[data-page="${previousPage}"]`)) {
-                    domEls(`table.${table} tr[data-page="${previousPage}"]`).forEach((el) => {
-                        hide(el, true);
-                    });
-                }
+        // show rows on the current page
+        domEls(`table.${table} tr[data-page="${currentPage}"]`).forEach((el) => {
+        unhide(el, true);
+        });
+        // hide rows on previous pages
+        if (domEls(`table.${table} tr[data-page="${previousPage}"]`)) {
+        domEls(`table.${table} tr[data-page="${previousPage}"]`).forEach((el) => {
+        hide(el, true);
+        });
+        }
 
-                if (prevButton) {
-                    if (currentPage === 1) {
-                        prevButton.removeAttribute('onclick');
-                        changeCss(prevButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'add', true);
-                    } else {
-                        if (paginationStyle === 'numbers') {
-                            prevButton.setAttribute('onclick', `goToPage(${prevPage}, '${table}'); shufflePageNumbers('${prevPage}', '${table}')`);
-                        } else {
-                            prevButton.setAttribute('onclick', `goToPage(${prevPage}, '${table}')`);
-                        }
-                        changeCss(prevButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'remove', true);
-                    }
-                }
-                if (nextButton) {
-                    if (currentPage === totalPages) {
-                        nextButton.removeAttribute('onclick');
-                        changeCss(nextButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'add', true);
-                    } else {
-                        if (paginationStyle === 'numbers') {
-                            nextButton.setAttribute('onclick', `goToPage(${nextPage}, '${table}'); shufflePageNumbers('${nextPage}', '${table}')`);
-                        } else {
-                            nextButton.setAttribute('onclick', `goToPage(${nextPage}, '${table}')`);
-                        }
-                        changeCss(nextButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'remove', true);
-                    }
-                }
-                selectPage(currentPage, previousPage, table);
-                domEl(`.bw-pagination-${table} .from`).innerText = begin;
-                domEl(`.bw-pagination-${table} .to`).innerText = end;
-                domEl(`.bw-pagination-${table} .page-number .page`).innerText = currentPage;
-                domEl(`.${table}`).setAttribute('data-current-page', currentPage);
-                window[`previousPage_${table}`] = currentPage;
-            }
+        if (prevButton) {
+        if (currentPage === 1) {
+        prevButton.removeAttribute('onclick');
+        changeCss(prevButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'add', true);
+        } else {
+        if (paginationStyle === 'numbers') {
+        prevButton.setAttribute('onclick', `goToPage(${prevPage}, '${table}'); shufflePageNumbers('${prevPage}',
+        '${table}')`);
+        } else {
+        prevButton.setAttribute('onclick', `goToPage(${prevPage}, '${table}')`);
+        }
+        changeCss(prevButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'remove', true);
+        }
+        }
+        if (nextButton) {
+        if (currentPage === totalPages) {
+        nextButton.removeAttribute('onclick');
+        changeCss(nextButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'add', true);
+        } else {
+        if (paginationStyle === 'numbers') {
+        nextButton.setAttribute('onclick', `goToPage(${nextPage}, '${table}'); shufflePageNumbers('${nextPage}',
+        '${table}')`);
+        } else {
+        nextButton.setAttribute('onclick', `goToPage(${nextPage}, '${table}')`);
+        }
+        changeCss(nextButton, 'opacity-30,hover:opacity-30,hover:!border-gray-500/50', 'remove', true);
+        }
+        }
+        selectPage(currentPage, previousPage, table);
+        domEl(`.bw-pagination-${table} .from`).innerText = begin;
+        domEl(`.bw-pagination-${table} .to`).innerText = end;
+        domEl(`.bw-pagination-${table} .page-number .page`).innerText = currentPage;
+        domEl(`.${table}`).setAttribute('data-current-page', currentPage);
+        window[`previousPage_${table}`] = currentPage;
+        }
         }
 
         var routeToPage = (page, value, third, meta = {}) => {
-            let table = meta.table;
-            let currentPage = domEl(`.${table}`).getAttribute('data-current-page');
+        let table = meta.table;
+        let currentPage = domEl(`.${table}`).getAttribute('data-current-page');
 
-            if ((currentPage === page)) return false;
-            if ((page !== currentPage) && domEls(`table.${table} tr[data-page="${currentPage}"]`)) {
-                domEls(`table.${table} tr[data-page="${currentPage}"]`).forEach((el) => {
-                    hide(el, true);
-                });
-            }
-            goToPage(page, table);
+        if ((currentPage === page)) return false;
+        if ((page !== currentPage) && domEls(`table.${table} tr[data-page="${currentPage}"]`)) {
+        domEls(`table.${table} tr[data-page="${currentPage}"]`).forEach((el) => {
+        hide(el, true);
+        });
+        }
+        goToPage(page, table);
         }
 
         const shufflePageNumbers = (page, table) => {
-            let totalPages = window[`totalPages_${table}`];
-            let dots = domEl('.dots').innerHTML;
-            let equalDivider = domEl(`.bw-pagination-${table} .dots-3`);
-            let firstDots = domEl(`.bw-pagination-${table} .dots-1`);
-            let lastDots = domEl(`.bw-pagination-${table} .dots-${totalPages - 1}`);
-            page = parseInt(page);
+        let totalPages = window[`totalPages_${table}`];
+        let dots = domEl('.dots').innerHTML;
+        let equalDivider = domEl(`.bw-pagination-${table} .dots-3`);
+        let firstDots = domEl(`.bw-pagination-${table} .dots-1`);
+        let lastDots = domEl(`.bw-pagination-${table} .dots-${totalPages - 1}`);
+        page = parseInt(page);
 
-            const hideAllButtons = () => {
-                domEls(`.bw-pagination-${table} .btn`).forEach((el) => {
-                    hide(el, true);
-                });
-            }
+        const hideAllButtons = () => {
+        domEls(`.bw-pagination-${table} .btn`).forEach((el) => {
+        hide(el, true);
+        });
+        }
 
-            const defaultMode = () => {
-                let defaultsArray = [1, 2, 3, totalPages - 2, totalPages - 1, totalPages];
-                equalDivider.innerHTML = dots;
-                firstDots.innerHTML = '';
-                lastDots.innerHTML = '';
-                hideAllButtons();
-                for (x = 0; x <= defaultsArray.length; x++) {
-                    unhide(`.bw-pagination-${table} .btn-${defaultsArray[x]}`);
-                }
-            }
+        const defaultMode = () => {
+        let defaultsArray = [1, 2, 3, totalPages - 2, totalPages - 1, totalPages];
+        equalDivider.innerHTML = dots;
+        firstDots.innerHTML = '';
+        lastDots.innerHTML = '';
+        hideAllButtons();
+        for (x = 0; x <= defaultsArray.length; x++) {
+        unhide(`.bw-pagination-${table} .btn-${defaultsArray[x]}`);
+        }
+        }
 
-            // if total pages are more than 7
-            if (totalPages > 7) {
-                // -- if the page is 3 or more
-                if (page >= 3) {
-                    if (page >= (totalPages - 1)) {
-                        defaultMode();
-                    } else {
-                        equalDivider.innerHTML = '';
-                        firstDots.innerHTML = dots;
-                        lastDots.innerHTML = dots;
+        // if total pages are more than 7
+        if (totalPages > 7) {
+        // -- if the page is 3 or more
+        if (page >= 3) {
+        if (page >= (totalPages - 1)) {
+        defaultMode();
+        } else {
+        equalDivider.innerHTML = '';
+        firstDots.innerHTML = dots;
+        lastDots.innerHTML = dots;
 
-                        hideAllButtons();
+        hideAllButtons();
 
-                        for (x = (page - 2); x <= (page + 2); x++) {
-                            unhide(`.bw-pagination-${table} .btn-${x}`);
-                        }
-                        unhide(`.bw-pagination-${table} .btn-1`);
-                        unhide(`.bw-pagination-${table} .btn-${totalPages}`);
-                    }
-                } else {
-                    defaultMode();
-                }
-            }
+        for (x = (page - 2); x <= (page + 2); x++) {
+        unhide(`.bw-pagination-${table} .btn-${x}`);
+        }
+        unhide(`.bw-pagination-${table} .btn-1`);
+        unhide(`.bw-pagination-${table} .btn-${totalPages}`);
+        }
+        } else {
+        defaultMode();
+        }
+        }
 
         }
-    </script>
+    </x-bladewind::script>
 @endonce

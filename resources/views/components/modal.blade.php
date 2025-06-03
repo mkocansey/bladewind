@@ -66,6 +66,8 @@
 
     // change positions of the action buttons .. left, center, right
     'alignButtons' => config('bladewind.modal.align_buttons', 'right'),
+
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $closeAfterAction = parseBladewindVariable($closeAfterAction);
@@ -179,36 +181,36 @@
 </div>
 <span class="overflow-hidden"></span>
 
-<script>
+<x-bladewind::script :nonce="$nonce">
     domEl('.bw-{{$name}}-modal').addEventListener('click', function (e) {
-        let backdropCanClose = this.getAttribute('data-backdrop-can-close');
-        if (backdropCanClose) hideModal('{{$name}}');
+    let backdropCanClose = this.getAttribute('data-backdrop-can-close');
+    if (backdropCanClose) hideModal('{{$name}}');
     });
 
     domEl('.bw-{{$name}}').addEventListener('click', function (e) {
-        e.stopImmediatePropagation();
+    e.stopImmediatePropagation();
     });
 
     if (domEls('.bw-{{$name}}-modal .modal-footer>button')) {
-        domEls('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
-            el.addEventListener('click', function (e) {
-                e.stopImmediatePropagation();
-            });
-        });
+    domEls('.bw-{{$name}}-modal .modal-footer>button').forEach((el) => {
+    el.addEventListener('click', function (e) {
+    e.stopImmediatePropagation();
+    });
+    });
     }
 
     document.addEventListener('keyup', function (e) {
-        if (e.key === "Escape") {
-            if (currentModal !== undefined && currentModal.length > 0) {
-                let modalName = currentModal[(currentModal.length - 1)];
-                if (domEl(`.bw-${modalName}-modal`).getAttribute('data-backdrop-can-close') === '1') {
-                    hideModal(modalName);
-                    e.stopImmediatePropagation();
-                }
-            }
-        }
+    if (e.key === "Escape") {
+    if (currentModal !== undefined && currentModal.length > 0) {
+    let modalName = currentModal[(currentModal.length - 1)];
+    if (domEl(`.bw-${modalName}-modal`).getAttribute('data-backdrop-can-close') === '1') {
+    hideModal(modalName);
+    e.stopImmediatePropagation();
+    }
+    }
+    }
     });
 
     document.addEventListener('keydown', trapFocusInModal);
 
-</script>
+</x-bladewind::script>

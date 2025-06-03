@@ -99,8 +99,10 @@
 
     // javascript to execute when suffix icon is clicked
     'action' => null,
+
     'size' => config('bladewind.input.size', 'regular'),
     'enforceLimits' => false,
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 
 @php
@@ -187,7 +189,7 @@
             @else
                 {!! $prefix !!}
             @endif</div>
-        <script>positionPrefix('{{$name}}', 'blur');</script>
+        <x-bladewind::script :nonce="$nonce">positionPrefix('{{$name}}', 'blur');</x-bladewind::script>
     @endif
     @if (!empty($suffix))
         <div class="{{$name}}-suffix suffix text-sm select-none pl-3.5 !pr-3 {{$suffixIconDivCss}} z-20 text-blue-900/50 dark:text-dark-400 absolute right-0 inset-y-0 inline-flex items-center @if(!$transparent_suffix) bg-slate-100 border-2 border-slate-200 border-l-0 dark:border-dark-700 dark:bg-dark-900/50 dark:border-l-0 rounded-tr-md rounded-br-md @endif"
@@ -210,11 +212,11 @@
                 {!! $suffix !!}
             @endif
         </div>
-        <script>positionSuffix('{{$name}}');</script>
+        <x-bladewind::script :nonce="$nonce">positionSuffix('{{$name}}');</x-bladewind::script>
     @endif
 </div>
 
-<script>
+<x-bladewind::script :nonce="$nonce">
     @if($clearable)
     domEl('input.{{$name}}').addEventListener('input', () => {
         makeClearable('{{$name}}');
@@ -235,4 +237,4 @@
         }
     }
     @endonce
-</script>
+</x-bladewind::script>

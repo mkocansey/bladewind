@@ -12,6 +12,7 @@
     'style' => config('bladewind.timepicker.style', 'popup'),
     'label' => '',
     'placeholder' => config('bladewind.timepicker.placeholder', __("bladewind::bladewind.timepicker_placeholder")),
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);
@@ -44,10 +45,10 @@
                         name="x-circle" type="solid"
                         class="ml-1 opacity-70 hover:opacity-100 cursor-pointer"/>
             </div>
-            <script>
+            <x-bladewind::script :nonce="$nonce">
                 const clockIcon = domEl('.bw-timepicker-{{$name}} .suffix').innerHTML;
                 const clearIcon = domEl('.clear-time').innerHTML;
-            </script>
+            </x-bladewind::script>
         @endonce
     </div>
     <x-bladewind::modal
@@ -105,7 +106,7 @@
         </div>
     </x-bladewind::modal>
     @once
-        <script>
+        <script @if($nonce)nonce="{{$nonce}}"@endif>
             const openTimepicker = (name) => {
                 showModal(`${name}`);
                 window.setTimeout(() => {
@@ -216,18 +217,18 @@
         @endif
     </div>
     <input type="hidden" class="bw-time-{{$name}}" name="{{$name}}" value="{{str_replace(' ', '', $selectedValue)}}"/>
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         const setTime_{{$name}} = () => {
-            let field = domEl(`.bw-time-{{$name}}`);
-            if (field) {
-                let hour = domEl('.bw-{{$name}}_hh').value;
-                let minute = ':' + domEl('.bw-{{$name}}_mm').value;
-                let format = domEl('.bw-{{$name}}_format').value;
-                let time = `${hour}${minute}${format ?? ''}`;
-                if (time.length >= 4) {
-                    field.value = time;
-                }
-            }
+        let field = domEl(`.bw-time-{{$name}}`);
+        if (field) {
+        let hour = domEl('.bw-{{$name}}_hh').value;
+        let minute = ':' + domEl('.bw-{{$name}}_mm').value;
+        let format = domEl('.bw-{{$name}}_format').value;
+        let time = `${hour}${minute}${format ?? ''}`;
+        if (time.length >= 4) {
+        field.value = time;
         }
-    </script>
+        }
+        }
+    </x-bladewind::script>
 @endif

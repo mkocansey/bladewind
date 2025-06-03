@@ -89,6 +89,8 @@
 
     // HTTP headers to append when calling $deleteRoute
     'deleteHeaders' => null,
+
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);
@@ -119,22 +121,22 @@
     <link href="{{ asset('vendor/bladewind/css/filepond.css') }}" rel="stylesheet"/>
     @if($hasImageFiles)
     <link href="{{ asset('vendor/bladewind/css/filepond-plugin-image-preview.css') }}" rel="stylesheet"/>
-    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-exif-orientation.js') }}"></script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-image-exif-orientation.js') }}"></x-bladewind::script>
     <link href="{{ asset('vendor/bladewind/css/cropper.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('vendor/bladewind/js/cropper.min.js') }}"></script>
-    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-crop.js') }}"></script>
-    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-preview.js') }}"></script>
-    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-resize.js') }}"></script>
-    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-transform.js') }}"></script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/cropper.min.js') }}"></x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-image-crop.js') }}"></x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-image-preview.js') }}"></x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-image-resize.js') }}"></x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-image-transform.js') }}"></x-bladewind::script>
     @endif
     @if($validateFileSize)
-        <script src="{{ asset('vendor/bladewind/js/filepond-plugin-file-validate-size.js') }}"></script>
-        @if($hasImageFiles)<script src="{{ asset('vendor/bladewind/js/filepond-plugin-image-validate-size.js') }}"></script>@endif
+        <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-file-validate-size.js') }}"></x-bladewind::script>
+        @if($hasImageFiles)<x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-image-validate-size.js') }}"></x-bladewind::script>@endif
     @endif
-    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-file-encode.js') }}"></script>
-    <script src="{{ asset('vendor/bladewind/js/filepond-plugin-file-validate-type.js') }}"></script>
-    <script src="{{ asset('vendor/bladewind/js/filepond.min.js') }}"></script>
-    <script>const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") || "{{ csrf_token() }}";;</script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-file-encode.js') }}"></x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond-plugin-file-validate-type.js') }}"></x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/filepond.min.js') }}"></x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce">const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") || "{{ csrf_token() }}";</x-bladewind::script>
 @endonce
 {{-- format-ignore-end --}}
 
@@ -165,7 +167,7 @@
 <input type="file" name="{{$name}}" accept="{{$acceptedFileTypes}}" @if($required) required="true" @endif />
 @if($base64)<div class="{{$cleanName}}-b64-container hidden"></div>@endif
 
-<script>
+<x-bladewind::script :nonce="$nonce">
 @if($canCrop) @once
     const cropperContainer = domEl('.cropper-container');
     const cropperImage = domEl('.cropper-image');
@@ -342,4 +344,4 @@ const pond_{{$cleanName}} = FilePond.create(domEl('input[name="{{$name}}"]'), {
         @endif
     });
     @endif
-</script>
+</x-bladewind::script>
