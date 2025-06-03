@@ -7,16 +7,18 @@
     'onclick' => 'javascript:void(0)',
     'type' => config('bladewind.rating.type', 'star'),
     'clickable' => config('bladewind.rating.clickable', true),
-    'sizing' => [
-        'small' => 6,
-        'medium' => 10,
-        'big' => 14,
-    ],
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $size_adjustment = ($size == 'big') ? 2 : 1;
     $clickable = parseBladewindVariable($clickable);
     $name = parseBladewindName($name);
+
+    $sizing = [
+        'small' => 6,
+        'medium' => 10,
+        'big' => 14,
+    ];
 @endphp
 {{-- format-ignore-end --}}
 
@@ -62,36 +64,36 @@
         </div>
     @endfor
 </div>
-<script>
+<x-bladewind::script :nonce="$nonce">
     flipStars = function (name, rating, current, mode) {
-        for (y = rating; y <= current; y++) {
-            if (domEl(`.bw-rating-${y}.${name}`)) {
-                if (!domEl(`.bw-rating-${y}.${name}`).classList.contains('rated')) {
-                    if (mode == 'on') {
-                        hide(`.bw-rating-${y}.${name} .empty`);
-                        unhide(`.bw-rating-${y}.${name} .filled`);
-                    } else {
-                        unhide(`.bw-rating-${y}.${name} .empty`);
-                        hide(`.bw-rating-${y}.${name} .filled`);
-                    }
-                }
-            }
-        }
+    for (y = rating; y <= current; y++) {
+    if (domEl(`.bw-rating-${y}.${name}`)) {
+    if (!domEl(`.bw-rating-${y}.${name}`).classList.contains('rated')) {
+    if (mode == 'on') {
+    hide(`.bw-rating-${y}.${name} .empty`);
+    unhide(`.bw-rating-${y}.${name} .filled`);
+    } else {
+    unhide(`.bw-rating-${y}.${name} .empty`);
+    hide(`.bw-rating-${y}.${name} .filled`);
+    }
+    }
+    }
+    }
     }
 
     setRating = function (name, rate) {
-        changeCssForDomArray(`.${name}.rated`, 'rated', 'remove');
-        if (rate < 5) {
-            for (x = rate; x <= 6; x++) {
-                unhide(`.bw-rating-${x}.${name} .empty`);
-                hide(`.bw-rating-${x}.${name} .filled`);
-            }
-        }
-        for (x = 1; x <= rate; x++) {
-            unhide(`.bw-rating-${x}.${name} .filled`);
-            hide(`.bw-rating-${x}.${name} .empty`);
-            changeCss(`.bw-rating-${x}.${name}`, 'rated');
-        }
-        domEl('.rating-value-{{$name}}').value = rate;
+    changeCssForDomArray(`.${name}.rated`, 'rated', 'remove');
+    if (rate < 5) {
+    for (x = rate; x <= 6; x++) {
+    unhide(`.bw-rating-${x}.${name} .empty`);
+    hide(`.bw-rating-${x}.${name} .filled`);
     }
-</script>
+    }
+    for (x = 1; x <= rate; x++) {
+    unhide(`.bw-rating-${x}.${name} .filled`);
+    hide(`.bw-rating-${x}.${name} .empty`);
+    changeCss(`.bw-rating-${x}.${name}`, 'rated');
+    }
+    domEl('.rating-value-{{$name}}').value = rate;
+    }
+</x-bladewind::script>

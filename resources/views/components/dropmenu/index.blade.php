@@ -14,6 +14,7 @@
     'pickerColour' => 'pink',
     'iconRight' => config('bladewind.dropmenu.icon_right', false),
     'padded' => config('bladewind.dropmenu.padded', true),
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);
@@ -55,12 +56,12 @@
     </div>
 </div>
 
-<script>
+<x-bladewind::script :nonce="$nonce">
     @php include_once(public_path('vendor/bladewind/js/dropmenu.js')); @endphp
-</script>
-<script @if($modular) type="module" @endif>
+</x-bladewind::script>
+<x-bladewind::script :nonce="$nonce" :modular="$modular">
     const {{ $name }} = new BladewindDropmenu('{{ $name }}', {
-        triggerOn: '{{$triggerOn}}',
-        hideAfterClick: '{{$hideAfterClick}}'
+    triggerOn: '{{$triggerOn}}',
+    hideAfterClick: '{{$hideAfterClick}}'
     });
-</script>
+</x-bladewind::script>

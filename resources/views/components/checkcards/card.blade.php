@@ -17,6 +17,7 @@
     'icon' => null,
     'avatar' => null,
     'avatarSize' => config('bladewind.checkcards.avatar_size', 'medium'),
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);
@@ -76,49 +77,51 @@
 </div>
 
 @once
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         var selectCheckcard = (name, value, borderColour) => {
-            let input = domEl(`input.${name}`);
-            let arrInputValue = (input.value !== '') ? input.value.split(',') : [];
-            let elString = `div.${name}[data-value="${value}"]`;
-            let el = domEl(elString);
-            let checkmark = domEl(`${elString} .checkmark`);
-            const border_default = `border-${borderColour}-400/50,hover:border-${borderColour}-500/80`;
-            const border_active = `border-${borderColour}-500`;
-            const maxSelection = parseInt(input.getAttribute('data-max-selection'));
-            const errorHeading = input.getAttribute('data-error-heading') ?? '';
-            const errorMessage = input.getAttribute('data-error-message');
-            const showError = parseInt(input.getAttribute('data-show-error')) === 1;
-            const autoSelect = parseInt(input.getAttribute('data-auto-select')) === 1;
+        let input = domEl(`input.${name}`);
+        let arrInputValue = (input.value !== '') ? input.value.split(',') : [];
+        let elString = `div.${name}[data-value="${value}"]`;
+        let el = domEl(elString);
+        let checkmark = domEl(`${elString} .checkmark`);
+        const border_default = `border-${borderColour}-400/50,hover:border-${borderColour}-500/80`;
+        const border_active = `border-${borderColour}-500`;
+        const maxSelection = parseInt(input.getAttribute('data-max-selection'));
+        const errorHeading = input.getAttribute('data-error-heading') ?? '';
+        const errorMessage = input.getAttribute('data-error-message');
+        const showError = parseInt(input.getAttribute('data-show-error')) === 1;
+        const autoSelect = parseInt(input.getAttribute('data-auto-select')) === 1;
 
-            if (arrInputValue.length > 0 && arrInputValue.includes(value)) {
-                arrInputValue = arrInputValue.filter(item => item !== value);
-                input.value = arrInputValue.join(',');
-                hide(checkmark, true);
-                changeCss(el, border_default, 'add', true);
-                changeCss(el, border_active, 'remove', true);
-            } else {
-                if (arrInputValue.length >= maxSelection) {
-                    if (autoSelect) { //removed last item selected
-                        selectCheckcard(name, arrInputValue[arrInputValue.length - 1], borderColour);
-                        arrInputValue.pop();
-                    } else {
-                        if (showError) showNotification(errorHeading, errorMessage, 'error');
-                        return false;
-                    }
-                }
-                arrInputValue.push(value);
-                input.value = arrInputValue.join(',');
-                unhide(checkmark, true);
-                changeCss(el, border_default, 'remove', true);
-                changeCss(el, border_active, 'add', true);
-            }
+        if (arrInputValue.length > 0 && arrInputValue.includes(value)) {
+        arrInputValue = arrInputValue.filter(item => item !== value);
+        input.value = arrInputValue.join(',');
+        hide(checkmark, true);
+        changeCss(el, border_default, 'add', true);
+        changeCss(el, border_active, 'remove', true);
+        } else {
+        if (arrInputValue.length >= maxSelection) {
+        if (autoSelect) { //removed last item selected
+        selectCheckcard(name, arrInputValue[arrInputValue.length - 1], borderColour);
+        arrInputValue.pop();
+        } else {
+        if (showError) showNotification(errorHeading, errorMessage, 'error');
+        return false;
         }
-    </script>
+        }
+        arrInputValue.push(value);
+        input.value = arrInputValue.join(',');
+        unhide(checkmark, true);
+        changeCss(el, border_default, 'remove', true);
+        changeCss(el, border_active, 'add', true);
+        }
+        }
+    </x-bladewind::script>
 @endonce
 
 @if($selectedValue !== '')
     @if(in_array($value, explode(',', $selectedValue)))
-        <script>selectCheckcard('{{$name}}', '{{$value}}', '{{$border_colour}}'); </script>
+        <x-bladewind::script :nonce="$nonce">
+            selectCheckcard('{{$name}}', '{{$value}}', '{{$border_colour}}');
+        </x-bladewind::script>
     @endif
 @endif

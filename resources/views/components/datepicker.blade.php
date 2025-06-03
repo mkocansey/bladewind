@@ -38,6 +38,8 @@
 
     // calendar dates end at
     'maxDate' => '',
+
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);
@@ -75,40 +77,42 @@
                                                        class="size-6 cursor-pointer opacity-80 hover:opacity-100">
   <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/>
 </svg></span>
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         const MONTH_NAMES = {
-            jan: '{{ __('bladewind::bladewind.jan') }}',
-            feb: '{{ __('bladewind::bladewind.feb') }}',
-            mar: '{{ __('bladewind::bladewind.mar') }}',
-            apr: '{{ __('bladewind::bladewind.apr') }}',
-            may: '{{ __('bladewind::bladewind.may') }}',
-            jun: '{{ __('bladewind::bladewind.jun') }}',
-            jul: '{{ __('bladewind::bladewind.jul') }}',
-            aug: '{{ __('bladewind::bladewind.aug') }}',
-            sep: '{{ __('bladewind::bladewind.sep') }}',
-            oct: '{{ __('bladewind::bladewind.oct') }}',
-            nov: '{{ __('bladewind::bladewind.nov') }}',
-            dec: '{{ __('bladewind::bladewind.dec') }}',
+        jan: '{{ __('bladewind::bladewind.jan') }}',
+        feb: '{{ __('bladewind::bladewind.feb') }}',
+        mar: '{{ __('bladewind::bladewind.mar') }}',
+        apr: '{{ __('bladewind::bladewind.apr') }}',
+        may: '{{ __('bladewind::bladewind.may') }}',
+        jun: '{{ __('bladewind::bladewind.jun') }}',
+        jul: '{{ __('bladewind::bladewind.jul') }}',
+        aug: '{{ __('bladewind::bladewind.aug') }}',
+        sep: '{{ __('bladewind::bladewind.sep') }}',
+        oct: '{{ __('bladewind::bladewind.oct') }}',
+        nov: '{{ __('bladewind::bladewind.nov') }}',
+        dec: '{{ __('bladewind::bladewind.dec') }}',
         };
         const DAY_NAMES = {
-            sun: '{{ __('bladewind::bladewind.sun') }}'.substring(0, 3),
-            mon: '{{ __('bladewind::bladewind.mon') }}'.substring(0, 3),
-            tue: '{{ __('bladewind::bladewind.tue') }}'.substring(0, 3),
-            wed: '{{ __('bladewind::bladewind.wed') }}'.substring(0, 3),
-            thu: '{{ __('bladewind::bladewind.thu') }}'.substring(0, 3),
-            fri: '{{ __('bladewind::bladewind.fri') }}'.substring(0, 3),
-            sat: '{{ __('bladewind::bladewind.sat') }}'.substring(0, 3)
+        sun: '{{ __('bladewind::bladewind.sun') }}'.substring(0, 3),
+        mon: '{{ __('bladewind::bladewind.mon') }}'.substring(0, 3),
+        tue: '{{ __('bladewind::bladewind.tue') }}'.substring(0, 3),
+        wed: '{{ __('bladewind::bladewind.wed') }}'.substring(0, 3),
+        thu: '{{ __('bladewind::bladewind.thu') }}'.substring(0, 3),
+        fri: '{{ __('bladewind::bladewind.fri') }}'.substring(0, 3),
+        sat: '{{ __('bladewind::bladewind.sat') }}'.substring(0, 3)
         };
-    </script>
-    <script src="{{ asset('vendor/bladewind/js/datepicker.js') }}"></script>
+    </x-bladewind::script>
+    <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/datepicker.js') }}"></x-bladewind::script>
 @endonce
-<script>
+<x-bladewind::script :nonce="$nonce">
     initCalendar({
-        inputId: "{{$name}}",
-        weekStarts: "{{$weekStarts}}",
-        @if(!empty($minDate))minDate: "{{$minDate}}",
-        @endif @if(!empty($maxDate))maxDate: "{{$maxDate}}",
-        @endif dateFormat: "{{$format}}",
-        useRange: {{$range ? 1 : 0}}
+    inputId: "{{$name}}",
+    weekStarts: "{{$weekStarts}}",
+    @if(!empty($minDate))
+        minDate: "{{$minDate}}",
+    @endif @if(!empty($maxDate))
+        maxDate: "{{$maxDate}}",
+    @endif dateFormat: "{{$format}}",
+    useRange: {{$range ? 1 : 0}}
     });
-</script>
+</x-bladewind::script>

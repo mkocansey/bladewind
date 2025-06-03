@@ -78,7 +78,6 @@ You are now ready to start using any of the BladewindUI components in your appli
 - **[Centered Content](https://bladewindui.com/component/centered-content)**
 - **[Chart](https://bladewindui.com/component/chart)**
 - **[Checkbox](https://bladewindui.com/component/checkbox)**
-- **[Checkbox](https://bladewindui.com/component/checkbox)**
 - **[CheckCard](https://bladewindui.com/component/checkcard)**
 - **[Colorpicker](https://bladewindui.com/component/colorpicker)**
 - **[Datepicker](https://bladewindui.com/component/datepicker)**

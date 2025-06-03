@@ -24,9 +24,10 @@
     'legendPosition' => config('bladewind.chart.legend_position', 'top'),
     'legendAlignment' => config('bladewind.chart.legend_alignment', 'center'),
     'class' => '',
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @once
-    <script src="{{ asset('vendor/bladewind/js/chart.js') }}"></script>
+    <x-bladewind::script src="{{ asset('vendor/bladewind/js/chart.js') }}" :nonce="$nonce"></x-bladewind::script>
 @endonce
 @php
     $name = parseBladewindName($name);
@@ -118,26 +119,30 @@
 
 <canvas class="chart-{{$name}} {{$class}}"></canvas>
 
-<script>
+<x-bladewind::script :nonce="$nonce">
     const chart_{{$name}} = domEl('.chart-{{$name}}');
 
     new Chart(chart_{{$name}}, {
-        type: '{{$type}}',
-        @if($hasDatasetKey)
+    type: '{{$type}}',
+    @if($hasDatasetKey)
         data: @json($data),
-        @else
+    @else
         data: {
-            labels: @json($labels),
-            datasets: [{
-                label: '{{$title}}',
-                data: @json($data),
-                borderWidth: {{$borderWidth}},
-                @if(!empty($bgColor)) backgroundColor: "{{$bgColor}}", @endif
-                        @if(!empty($borderColor)) borderColor: "{{$borderColor}}", @endif
-            }]
-        },
+        labels: @json($labels),
+        datasets: [{
+        label: '{{$title}}',
+        data: @json($data),
+        borderWidth: {{$borderWidth}},
+        @if(!empty($bgColor))
+            backgroundColor: "{{$bgColor}}",
         @endif
-        options: @json($options),
-        plugins: @json($plugins),
+        @if(!empty($borderColor))
+            borderColor: "{{$borderColor}}",
+        @endif
+        }]
+        },
+    @endif
+    options: @json($options),
+    plugins: @json($plugins),
     });
-</script>
+</x-bladewind::script>
