@@ -3,6 +3,7 @@
     // where do you want the notification displayed
     // available options are top-right, top-center, top-left, bottom-right, bottom-center, bottom-left
     'position' => config('bladewind.notification.position', 'top-right'),
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     // [type] is replaced with the type of notification in notification.js
@@ -27,6 +28,6 @@
     <x-bladewind::modal-icon class="hidden {{$css}}" type="success"/>
 </div>
 
-<script>
+<x-bladewind::script :nonce="$nonce">
     @php include_once(public_path('vendor/bladewind/js/notification.js')); @endphp
-</script>
+</x-bladewind::script>

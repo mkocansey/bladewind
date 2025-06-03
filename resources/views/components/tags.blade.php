@@ -13,6 +13,7 @@
     'errorMessage' => '',
     'errorHeading' => '',
     'class' => 'space-x-2 space-y-2',
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $rounded = parseBladewindVariable($rounded);
@@ -34,5 +35,5 @@
 </div>
 
 @if($selectedValue !== '')
-    <script>highlightSelectedTags('{{$selectedValue}}', '{{$name}}'); </script>
+    <x-bladewind::script :nonce="$nonce">highlightSelectedTags('{{$selectedValue}}', '{{$name}}');</x-bladewind::script>
 @endif

@@ -108,6 +108,7 @@
     'emptyStateShowImage' => 'true',
     'emptyStateImage' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
     'meta' => null,
+    'nonce' => config('bladewind.script.nonce', null),
 
 ])
 @php
@@ -238,18 +239,19 @@
            @if($multiple) autocomplete="off" @endif />
 </div>
 
-<script>
+<x-bladewind::script :nonce="$nonce">
     @php include_once(public_path('vendor/bladewind/js/select.js')); @endphp
-</script>
-<script @if($modular) type="module" @endif>
+</x-bladewind::script>
+<x-bladewind::script :nonce="$nonce" :modular="$modular">
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     bw_{{ $input_name }}.activate({disabled: '{{$disabled}}', readonly: '{{$readonly}}'});
     @if(!$disabled && !$readonly)
-    bw_{{ $input_name }}.maxSelectable({{$maxSelectable}}, '{{ sprintf($maxErrorMessage, $maxSelectable) }}');
+        bw_{{ $input_name }}.maxSelectable({{$maxSelectable}}, '{{ sprintf($maxErrorMessage, $maxSelectable) }}');
     @endif
     @if(!empty($filter))
-    bw_{{ $input_name }}.filter('{{ $filter }}');
+        bw_{{ $input_name }}.filter('{{ $filter }}');
     @endif
-    @if(!$required && $multiple == 'false') bw_{{ $input_name }}.clearable();
+    @if(!$required && $multiple == 'false')
+        bw_{{ $input_name }}.clearable();
     @endif
-</script>
+</x-bladewind::script>

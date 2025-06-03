@@ -4,6 +4,7 @@
    'grouped' => true,
    'can_open_multiple' => false,
    'class' => '',
+   'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = defaultBladewindName();
@@ -27,35 +28,35 @@
 </div>
 
 @once
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         const toggleVisibility = (element) => {
-            const accordion = domEl(`.${element}`);
-            if (!accordion) return;
+        const accordion = domEl(`.${element}`);
+        if (!accordion) return;
 
-            const parentAccordion = accordion.closest('.bw-accordions');
-            const canOpenMultiple = parentAccordion?.getAttribute('data-open-multiple') === '1';
-            const accordions = domEls('.bw-accordion', `.${parentAccordion?.getAttribute('data-name') || ''}`);
+        const parentAccordion = accordion.closest('.bw-accordions');
+        const canOpenMultiple = parentAccordion?.getAttribute('data-open-multiple') === '1';
+        const accordions = domEls('.bw-accordion', `.${parentAccordion?.getAttribute('data-name') || ''}`);
 
-            const toggleState = (targetAccordion, isOpen) => {
-                const accordionName = targetAccordion.getAttribute('data-name');
-                const content = domEl(`.${accordionName} .accordion-content`);
-                const arrow = domEl(`.${accordionName} .accordion-arrow`);
-                const title = domEl(`.${accordionName} .accordion-title`);
+        const toggleState = (targetAccordion, isOpen) => {
+        const accordionName = targetAccordion.getAttribute('data-name');
+        const content = domEl(`.${accordionName} .accordion-content`);
+        const arrow = domEl(`.${accordionName} .accordion-arrow`);
+        const title = domEl(`.${accordionName} .accordion-title`);
 
-                targetAccordion.setAttribute('data-open', isOpen ? '1' : '0');
-                if (content) content.style.maxHeight = isOpen ? `${content.scrollHeight}px` : null;
-                changeCss(arrow, 'rotate-180', isOpen ? 'add' : 'remove', true);
-                changeCss(title, 'text-gray-700 dark:text-slate-100', isOpen ? 'add' : 'remove', true);
-            };
-
-            if (!canOpenMultiple) {
-                accordions.forEach((el) => {
-                    if (el !== accordion) toggleState(el, false);
-                });
-            }
-
-            const isOpen = accordion.getAttribute('data-open') === '1';
-            toggleState(accordion, !isOpen);
+        targetAccordion.setAttribute('data-open', isOpen ? '1' : '0');
+        if (content) content.style.maxHeight = isOpen ? `${content.scrollHeight}px` : null;
+        changeCss(arrow, 'rotate-180', isOpen ? 'add' : 'remove', true);
+        changeCss(title, 'text-gray-700 dark:text-slate-100', isOpen ? 'add' : 'remove', true);
         };
-    </script>
+
+        if (!canOpenMultiple) {
+        accordions.forEach((el) => {
+        if (el !== accordion) toggleState(el, false);
+        });
+        }
+
+        const isOpen = accordion.getAttribute('data-open') === '1';
+        toggleState(accordion, !isOpen);
+        };
+    </x-bladewind::script>
 @endonce

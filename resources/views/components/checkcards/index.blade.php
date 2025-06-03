@@ -18,6 +18,7 @@
     'errorHeading' => config('bladewind.checkcards.error_heading', __('bladewind::bladewind.checkcard_error_heading')),
     'errorMessage' => config('bladewind.checkcards.error_message', __('bladewind::bladewind.checkcard_error_message')),
     'selectedValue' => '',
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $name = parseBladewindName($name);

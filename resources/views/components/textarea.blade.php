@@ -21,6 +21,7 @@
 
     'toolbar' => config('bladewind.textarea.toolbar', false),
     'except' => '',
+    'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
     $addClearing = parseBladewindVariable($addClearing);
@@ -66,54 +67,55 @@
 @if($toolbar)
     @once
         {{--        <span class="hidden ql-toolbar ql-snow ql-stroke ql-thin ql-container ql-editor ql-blank"></span>--}}
-        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        <x-bladewind::script :nonce="$nonce"
+                             src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></x-bladewind::script>
         <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet"/>
-        <script>
+        <x-bladewind::script :nonce="$nonce">
             const toolbarOptions = ['bold', 'italic', 'underline',
-                {'align': []},
-                {'indent': '-1'}, {'indent': '+1'}, 'link',
-                {'color': []}, {'background': []},
-                {'list': 'ordered'}, {'list': 'bullet'},
-                {'list': 'check'}, 'image', 'blockquote', 'code-block', 'clean'
+            {'align': []},
+            {'indent': '-1'}, {'indent': '+1'}, 'link',
+            {'color': []}, {'background': []},
+            {'list': 'ordered'}, {'list': 'bullet'},
+            {'list': 'check'}, 'image', 'blockquote', 'code-block', 'clean'
             ];
 
             const modifyToolbarOptions = (toolbarOptions, except) => {
-                except = except.replaceAll(' ', '');
-                const exceptArray = except.split(',').map(item => item.trim());
-                return toolbarOptions.filter(option => {
-                    if (typeof option === 'string') {
-                        return !exceptArray.includes(option);
-                    } else if (typeof option === 'object') {
-                        const key = Object.keys(option)[0];
-                        return !exceptArray.includes(key);
-                    }
-                    return true;
-                });
+            except = except.replaceAll(' ', '');
+            const exceptArray = except.split(',').map(item => item.trim());
+            return toolbarOptions.filter(option => {
+            if (typeof option === 'string') {
+            return !exceptArray.includes(option);
+            } else if (typeof option === 'object') {
+            const key = Object.keys(option)[0];
+            return !exceptArray.includes(key);
+            }
+            return true;
+            });
             }
 
             const quillOptions = {
-                theme: 'snow',
-                placeholder: '{{ ($label !== '') ? $label : $placeholder }}',
-                modules: {
-                    toolbar: '',
-                },
+            theme: 'snow',
+            placeholder: '{{ ($label !== '') ? $label : $placeholder }}',
+            modules: {
+            toolbar: '',
+            },
             };
-        </script>
+        </x-bladewind::script>
     @endonce
-    <script>
+    <x-bladewind::script :nonce="$nonce">
         if (typeof Quill === 'undefined') {
-            console.log('Unable to load assets from https://quilljs.com');
+        console.log('Unable to load assets from https://quilljs.com');
         } else {
-            quillOptions.modules.toolbar = modifyToolbarOptions(toolbarOptions, '{{$except}}');
-            var quill_{{$name}} = new Quill('#{{$name}}', quillOptions);
-            // Update the hidden input field whenever the textarea content changes
-            quill_{{ $name }}.on('text-change', function (delta, oldDelta, source) {
-                var value = quill_{{ $name }}.root.innerHTML;
-                document.getElementById('{{ $name }}-hidden').value = value;
-            });
+        quillOptions.modules.toolbar = modifyToolbarOptions(toolbarOptions, '{{$except}}');
+        var quill_{{$name}} = new Quill('#{{$name}}', quillOptions);
+        // Update the hidden input field whenever the textarea content changes
+        quill_{{ $name }}.on('text-change', function (delta, oldDelta, source) {
+        var value = quill_{{ $name }}.root.innerHTML;
+        document.getElementById('{{ $name }}-hidden').value = value;
+        });
 
-            // set the initial content for quill
-            quill_{{ $name }}.root.innerHTML = @js($selectedValue);
+        // set the initial content for quill
+        quill_{{ $name }}.root.innerHTML = @js($selectedValue);
         }
-    </script>
+    </x-bladewind::script>
 @endif

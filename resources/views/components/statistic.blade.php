@@ -43,7 +43,7 @@
 @endphp
 {{-- format-ignore-end --}}
 
-<div {{ $attributes->merge(['class' => $classes])}} @if($url) onclick="{{$redirect}}" @endif>
+<div {{ $attributes->merge(['class' => $classes])}} @if($url) onclick="{!! $redirect !!}" @endif>
     <div class="flex space-x-4">
         @if($icon !== '' && $iconPosition=='left')
             <div class="grow-0 icon">{!! $icon !!}</div>
