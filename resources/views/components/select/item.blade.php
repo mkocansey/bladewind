@@ -13,6 +13,7 @@
     'emptyStateOnclick' => '',
     'emptyStateImage' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
     'emptyStateShowImage' => 'true',
+    'visible' => 'true',
 ])
 @aware([
     'onselect' => '',
@@ -23,11 +24,20 @@
     $selectable = parseBladewindVariable($selectable);
     $emptyState = parseBladewindVariable($emptyState);
     $label = html_entity_decode($label);
+    $visible = parseBladewindVariable($visible);
 @endphp
 {{-- format-ignore-end --}}
 
 <div
-        class="py-3 pl-4 pr-3 flex items-center text-base cursor-pointer bw-select-item @if($selectable) hover:bg-slate-100/90 dark:hover:bg-dark-800/50 dark:hover:text-dark-200 @else text-blue-900/40 @endif"
+        {{ $attributes->merge([
+            'class' => 
+                "py-3 pl-4 pr-3 items-center text-base cursor-pointer bw-select-item "
+            . ($visible ? 'flex ' : 'hidden ')
+            . ($selectable
+                    ? 'hover:bg-slate-100/90 dark:hover:bg-dark-800/50 dark:hover:text-dark-200 '
+                    : 'text-blue-900/40 ')
+        ]) }}
+
         data-label="{!! $label !!}" data-value="{{ $value }}"
         @if(!$selectable) data-unselectable @endif
         @if(!empty($filterBy)) data-filter-value="{{$filterBy}}" @endif

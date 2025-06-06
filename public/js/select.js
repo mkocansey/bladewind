@@ -106,15 +106,24 @@ class BladewindSelect {
     }
 
     search = () => {
-        domEl(this.searchInput).addEventListener('keyup', (e) => {
-            let value = (domEl(this.searchInput).value);
-            domEls(this.selectItems).forEach((el) => {
-                (el.innerText.toLowerCase().indexOf(value.toLowerCase()) !== -1) ?
-                    unhide(el, true) :
-                    hide(el, true);
-            });
+        const inputEl = domEl(this.searchInput);
+        const emptyEl = domEl(`${this.selectItems}[data-empty-state="true"]`);
+        const allItems = [...domEls(this.selectItems)];
+        const items = emptyEl ? allItems.filter(el => el !== emptyEl) : allItems;
+
+        if (emptyEl) hide(emptyEl, true);
+
+        inputEl.addEventListener('keyup', () => {
+            const searchValue = inputEl.value.toLowerCase();
+
+            for (const el of items) {
+                const match = el.innerText.toLowerCase().includes(searchValue);
+                match ? unhide(el, true) : hide(el, true);
+            }
         });
-    }
+    };
+
+
 
     /**
      * When using non-dynamic selects, ensure select_value=<value>
@@ -354,13 +363,28 @@ class BladewindSelect {
 
     filter = (element, by = '') => {
         this.toFilter = element;
+
+        const els = domEls(`.bw-select-${element} .bw-select-items .bw-select-item`);
+        let anyVisible = false;
+
         if (by !== '') { //this.selectedValue
-            domEls(`.bw-select-${element}  .bw-select-items .bw-select-item`).forEach((el) => {
-                const filterValue = el.getAttribute('data-filter-value');
-                (filterValue === by) ? unhide(el, true) : hide(el, true);
+            els.forEach(el => {
+                const val = el.getAttribute('data-filter-value');
+                (val === by) ? (unhide(el, true), anyVisible = true) : hide(el, true);
             });
         }
-    }
+
+        const emptyEl = domEl(`.bw-select-${element} .bw-select-items .bw-select-item[data-empty-state="true"]`);
+        if (emptyEl) {
+            anyVisible ? hide(emptyEl, true) : unhide(emptyEl, true);
+        }
+
+        const searchWrapper = domEl(`.bw-select-${element} .bw-search-wrapper`);
+        if (searchWrapper) {
+            anyVisible ? unhide(searchWrapper, true) : hide(searchWrapper, true);
+        }
+    };
+
 
     clearFilter = (element, by = '') => {
         if (element) {

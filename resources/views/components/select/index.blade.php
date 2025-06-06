@@ -190,7 +190,7 @@
     <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 dark:shadow-none border-2
         border-primary-600 dark:text-slate-300 dark:border-dark-600 dark:bg-dark-700 border-t-0 -mt-1.5
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
-        <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
+        <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 bw-search-wrapper @if(!$searchable) hidden @endif">
             <x-bladewind::input
                     class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_search"
                     add_clearing="false"
@@ -220,7 +220,7 @@
                                 :empty_state_show_image="$emptyStateShowImage"
                                 :empty_state_button_label="$emptyStateButtonLabel"
                                 empty_state_onclick="{!! $emptyStateOnclick !!}"
-                                :empty_state_image="$emptyStateImage"/>
+                                :empty_state_image="$emptyStateImage" />
                     @else
                         <x-bladewind::select.item
                                 :selectable="false"
@@ -228,6 +228,24 @@
                         />
                     @endif
                 @endforelse
+                @if($emptyState)
+                    <x-bladewind::select.item
+                            :selectable="false"
+                            :empty_state="true"
+                            :empty_state_message="$emptyStateMessage"
+                            :empty_state_show_image="$emptyStateShowImage"
+                            :empty_state_button_label="$emptyStateButtonLabel"
+                            empty_state_onclick="{!! $emptyStateOnclick !!}"
+                            :empty_state_image="$emptyStateImage"
+                            :visible="false"
+                            data-empty-state="true" />
+                @else
+                    <x-bladewind::select.item
+                        :selectable="false"
+                        :label="$emptyPlaceholder"
+                        :visible="false" 
+                        data-empty-state="true" />
+                @endif
             @else
                 {!! $slot !!}
             @endif
