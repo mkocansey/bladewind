@@ -46,6 +46,7 @@ class BladewindSelect {
             this.manualModePreSelection();
             this.selectItem();
             this.enableKeyboardNavigation();
+            this.setEmptyStateMessage();
         } else {
             this.selectItem();
             this.enabled = false;
@@ -129,6 +130,13 @@ class BladewindSelect {
                 let item_value = el.getAttribute('data-value');
                 if (item_value === selectedValue) el.setAttribute('data-selected', true);
             });
+        }
+    }
+
+    setEmptyStateMessage = () => {
+        let copyEmptyStateFrom = domEl(`${this.rootElement}`).getAttribute('data-copy-empty-state-from');
+        if (copyEmptyStateFrom) {
+            domEl(`${this.rootElement} div[data-ref="empty-state"]`).innerHTML = domEl(`.bw-empty-state.${copyEmptyStateFrom}`).innerHTML;
         }
     }
 
@@ -378,4 +386,34 @@ class BladewindSelect {
             }
         }
     }
+
+    addItem = (value, label) => {
+        const container = domEl(`${this.rootElement} .bw-select-items`);
+        if (!container) return;
+
+        const item = document.createElement('div');
+        item.className = 'bw-select-item';
+        item.setAttribute('data-value', value);
+        item.setAttribute('data-label', label);
+        item.innerHTML = `${label} <svg class="hidden"><!-- your checkmark SVG --></svg>`;
+
+        container.appendChild(item);
+        this.selectItem(); // Rebind events
+    }
+
+    removeItem = ({value = null, index = null}) => {
+        let item = null;
+        if (value !== null) {
+            item = domEl(`${this.rootElement} .bw-select-item[data-value="${value}"]`);
+        } else if (index !== null) {
+            const items = domEls(`${this.rootElement} .bw-select-item`);
+            item = items[index];
+        }
+        if (item) item.remove();
+    }
+
+    itemExists = (value) => {
+        return domEl(`${this.rootElement} .bw-select-item[data-value="${value}"]`) !== null;
+    }
+
 }

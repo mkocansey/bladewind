@@ -101,12 +101,7 @@
 
     'size' => config('bladewind.select.size', 'regular'),
 
-    'emptyState' => 'false',
-    'emptyStateMessage' => config('bladewind.select.empty_placeholder', __("bladewind::bladewind.select_empty_placeholder")),
-    'emptyStateButtonLabel' => __("bladewind::bladewind.select_empty_state_button_label"),
-    'emptyStateOnclick' => '',
-    'emptyStateShowImage' => 'true',
-    'emptyStateImage' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
+    'emptyStateFrom' => null,
     'meta' => null,
     'nonce' => config('bladewind.script.nonce', null),
 
@@ -118,7 +113,6 @@
     $required = parseBladewindVariable($required);
     $readonly = parseBladewindVariable($readonly);
     $disabled = parseBladewindVariable($disabled);
-    $emptyState = parseBladewindVariable($emptyState);
     $maxSelectable = (int) $maxSelectable;
 
     $maxErrorMessage = addslashes($maxErrorMessage);
@@ -159,6 +153,7 @@
      data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
      @if(!empty($filter)) data-filter="{{ $filter}}" @endif
      @if(!empty($meta)) data-meta-data="{{ $meta}}" @endif
+     @if(!empty($emptyStateFrom)) data-copy-empty-state-from="{{ $emptyStateFrom}}" @endif
      @if($data == 'manual' && $selectedValue != '') data-selected-value="{{implode(',',$selectedValue)}}" @endif>
     <div tabindex="0"
          class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50 hover:border-slate-300
@@ -212,20 +207,10 @@
                             image="{{ $item[$imageKey] ?? '' }}"
                             selected="{{ (in_array($item[$valueKey], $selectedValue)) ? 'true' : 'false' }}"/>
                 @empty
-                    @if($emptyState)
-                        <x-bladewind::select.item
-                                :selectable="false"
-                                :empty_state="true"
-                                :empty_state_message="$emptyStateMessage"
-                                :empty_state_show_image="$emptyStateShowImage"
-                                :empty_state_button_label="$emptyStateButtonLabel"
-                                empty_state_onclick="{!! $emptyStateOnclick !!}"
-                                :empty_state_image="$emptyStateImage"/>
+                    @if(!empty($emptyStateFrom))
+                        <x-bladewind::select.item :selectable="false" :empty_state_from="$emptyStateFrom"/>
                     @else
-                        <x-bladewind::select.item
-                                :selectable="false"
-                                :label="$emptyPlaceholder"
-                        />
+                        <x-bladewind::select.item :selectable="false" :label="$emptyPlaceholder"/>
                     @endif
                 @endforelse
             @else

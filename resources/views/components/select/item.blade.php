@@ -7,12 +7,7 @@
     'image' => '',
     'filterBy' => '',
     'selectable' => 'true',
-    'emptyState' => 'false',
-    'emptyStateMessage' => config('bladewind.select.empty_placeholder', __("bladewind::bladewind.select_empty_placeholder")),
-    'emptyStateButtonLabel' => 'Add',
-    'emptyStateOnclick' => '',
-    'emptyStateImage' => config('bladewind.empty_state.image', '/vendor/bladewind/images/empty-state.svg'),
-    'emptyStateShowImage' => 'true',
+    'emptyStateFrom' => null,
 ])
 @aware([
     'onselect' => '',
@@ -21,9 +16,13 @@
 @php
     $selected = parseBladewindVariable($selected);
     $selectable = parseBladewindVariable($selectable);
-    $emptyState = parseBladewindVariable($emptyState);
     $label = html_entity_decode($label);
 @endphp
+@once
+    <style>div[data-ref="empty-state"] img {
+            @apply
+        }</style>
+@endonce
 {{-- format-ignore-end --}}
 
 <div
@@ -33,18 +32,8 @@
         @if(!empty($filterBy)) data-filter-value="{{$filterBy}}" @endif
         @if($selected) data-selected="true" @endif
         @if($onselect !== '') data-user-function="{{ $onselect }}"@endif>
-    @if($emptyState)
-        <div class="text-center flex-grow">
-            <x-bladewind::empty-state
-                    class="!px-0 !pb-0"
-                    image_css="!h-24"
-                    :message="$emptyStateMessage"
-                    :button_label="$emptyStateButtonLabel"
-                    :image="$emptyStateImage"
-                    :show_image="$emptyStateShowImage"
-                    onclick="{!! $emptyStateOnclick !!}">
-            </x-bladewind::empty-state>
-        </div>
+    @if(!empty($emptyStateFrom))
+        <div class="text-center flex-grow" data-ref="empty-state"></div>
     @else
         @if ($flag !== '' && $image == '')
             <i class="{{ $flag }} flag"></i>
