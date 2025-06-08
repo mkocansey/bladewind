@@ -74,7 +74,7 @@
             {{$avatar}}
         </div>
     @else
-        <img class="{{ $image_size }} object-cover object-center rounded-full" src="{{$avatar}}"
+        <img class="{{ $image_size }} object-cover object-center rounded-full {{$class}}" src="{{$avatar}}"
              alt="{{$avatar}}"/>
     @endif
     @if($dotted && !$show_plus)
