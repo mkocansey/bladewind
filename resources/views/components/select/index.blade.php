@@ -162,7 +162,7 @@
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
         <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">
             @if(!empty($label))
-                <span class="form-label !top-4">{{$label}}
+                <span class="form-label !top-[13px]">{{$label}}
                     @if($required)
                         <x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>
                     @endif</span>
@@ -197,7 +197,29 @@
         </div>
         <div class="divide-y divide-slate-100 dark:divide-slate-600/70 bw-select-items mt-0">
             @if($data !== 'manual')
-                @forelse ($data as $item)
+                @foreach($data as $item)
+                    <x-bladewind::select.item
+                            label="{{ $item[$labelKey] }}"
+                            value="{{ $item[$valueKey] }}"
+                            filter_by="{{ ($filterBy != '') ? $item[$filterBy] : '' }}"
+                            onselect="{{ $onselect }}"
+                            flag="{{ $item[$flagKey] ?? '' }}"
+                            image="{{ $item[$imageKey] ?? '' }}"
+                            selected="{{ (in_array($item[$valueKey], $selectedValue)) ? 'true' : 'false' }}"/>
+                @endforeach
+                @if(!empty($emptyStateFrom))
+                    <x-bladewind::select.item
+                            :selectable="false"
+                            :empty_state_from="$emptyStateFrom"
+                            :is-empty="true"/>
+                @else
+                    <x-bladewind::select.item
+                            :selectable="false"
+                            :label="$emptyPlaceholder"
+                            :is-empty="true"/>
+                @endif
+                {{--                @endforelse--}}
+                {{--@forelse ($data as $item)
                     <x-bladewind::select.item
                             label="{{ $item[$labelKey] }}"
                             value="{{ $item[$valueKey] }}"
@@ -212,7 +234,7 @@
                     @else
                         <x-bladewind::select.item :selectable="false" :label="$emptyPlaceholder"/>
                     @endif
-                @endforelse
+                @endforelse--}}
             @else
                 {!! $slot !!}
             @endif

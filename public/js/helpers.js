@@ -34,14 +34,15 @@ const dom_el = (element) => {
 const domEls = (element, scope = null) => {
     if (scope) {
         if (typeof scope === 'string') {
-            if (scope.indexOf('.') === -1 && scope.indexOf('#') === -1) {
-                console.log(`${scope} needs to contain . or # to target it in the DOM`);
+            if (!scope.includes('.') && !scope.includes('#')) {
+                console.log(`${scope} needs to contain . or # to target a DOM element`);
             }
             scope = document.querySelector(scope);
         }
         return scope.querySelectorAll(element);
     }
-    return (document.querySelectorAll(element).length > 0) ? document.querySelectorAll(element) : false;
+    const elements = document.querySelectorAll(element);
+    return elements.length ? elements : false;
 };
 
 /**
