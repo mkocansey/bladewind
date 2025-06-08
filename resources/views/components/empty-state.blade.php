@@ -10,10 +10,15 @@
     'class' => '',
     'imageCss' => '',
     'imageSize' => 'medium',
+    'name' => defaultBladewindName(),
+    'forSelect' => false,
 ])
 @php
+    $name = parseBladewindName($name);
     $showImage = parseBladewindVariable($showImage);
+    $forSelect = parseBladewindVariable($forSelect);
     $size = in_array($imageSize, ['small','medium','large','xl','omg']) ? $imageSize : 'medium';
+    $size = ($forSelect) ? 'small' : $size;
     $sizes = [
         'small' => 'h-28',
         'medium' => 'h-40',
@@ -24,7 +29,10 @@
 @endphp
 {{-- format-ignore-end --}}
 
-<div class="text-center px-4 pb-6 bw-empty-state {{$class}}">
+<div @class([
+  "text-center px-4 pb-6 bw-empty-state $name $class",
+  "hidden" => $forSelect
+])>
     @if($showImage == 'true')
         <img src="{{ $image }}" class="{{$sizes[$size]}} mx-auto mb-3 {{$imageCss}}"/>
     @endif
