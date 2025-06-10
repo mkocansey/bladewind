@@ -157,8 +157,15 @@ class BladewindSelect {
 
     showHideEmptyState = (element = this.name) => {
         const emptyStateItem = domEl(this.strSelectItems(element, '.empty-state'));
-        if (emptyStateItem) {
-            (this.totalItems(element) === 0) ? unhide(emptyStateItem, true) : hide(emptyStateItem, true);
+        const searchBar = `${this.strRootElement(element)} .search-bar`;
+        const hasNoItems = this.totalItems(element) === 0;
+
+        if (!emptyStateItem) return;
+
+        hasNoItems ? unhide(emptyStateItem, true) : hide(emptyStateItem, true);
+
+        if (this.isSearchable(element)) {
+            hasNoItems ? hide(searchBar) : unhide(searchBar);
         }
     }
 
@@ -390,6 +397,10 @@ class BladewindSelect {
         return (name.includes('bw-select')) ? name : `.bw-select-${name}`;
     }
 
+    isSearchable = (name = this.name) => {
+        return domEl(this.strRootElement(name)).className.includes('searchable');
+    }
+
     filter = (element, by = '') => {
         this.toFilter = element || this.name;
         if (by !== '') {
@@ -403,7 +414,7 @@ class BladewindSelect {
 
     clearFilter = (element, by = '') => {
         if (element) {
-            const elementItems = this.strSelectItems(element); //`.bw-select-${element}  .bw-select-items .bw-select-item`;
+            const elementItems = this.strSelectItems(element);
             if (by === '') { // clear all filters
                 domEls(elementItems).forEach((el) => {
                     unhide(el, true);
