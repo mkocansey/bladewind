@@ -133,7 +133,7 @@
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
                             name="x-mark"
-                            class="p-1 !size-5 stroke-2 modal-close-icon right-3 top-3.5 absolute rounded-full
+                            class="p-1 stroke-2 modal-close-icon right-3 top-3.5 absolute rounded-full
                             text-gray-400 hover:text-gray-500 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-200
                             hover:bg-gray-300 dark:bg-dark-700/80 dark:hover:bg-dark-700"/>
                 </a>
@@ -154,8 +154,8 @@
                     </div>
                 @endif
                 <div class="modal-body grow px-2 {{ $bodyCss  }}">
-                    <h1 class="text-lg font-semibold leading-5 text-gray-900 dark:text-dark-400 tracking-wide modal-title text-left pb-0.5">{{ $title }}</h1>
-                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-sm text-left">
+                    <h1 class="text-xl font-semibold leading-5 text-gray-900 dark:text-dark-400 tracking-wide modal-title text-left py-1">{{ $title }}</h1>
+                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-base text-left">
                         {{ $slot }}
                     </div>
                 </div>
