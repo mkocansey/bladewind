@@ -20,8 +20,8 @@
     $size = in_array($imageSize, ['small','medium','large','xl','omg']) ? $imageSize : 'medium';
     $size = ($forSelect) ? 'small' : $size;
     $sizes = [
-        'small' => 'h-28',
-        'medium' => 'h-40',
+        'small' => 'h-24',
+        'medium' => 'h-36',
         'large' => 'h-64',
         'xl' => 'h-80',
         'omg' => 'h-96',
@@ -37,7 +37,7 @@
         <img src="{{ $image }}" class="{{$sizes[$size]}} mx-auto mb-3 {{$imageCss}}"/>
     @endif
     @if($heading != '')
-        <div class="text-slate-700 dark:text-dark-400 text-2xl pt-4 pb-3 px-4 font-light">{!!$heading!!}</div>
+        <div class="text-slate-700 dark:text-dark-400 text-2xl pt-4 pb-2 px-4 font-light">{!!$heading!!}</div>
     @endif
     @if($message != '')
         <div class="text-slate-600/70 dark:text-dark-500 px-6">{!!$message!!}</div>
