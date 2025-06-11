@@ -64,7 +64,7 @@ const isEmpty = (val) => {
 
 /**
  * Hide an element.
- * @param {string} element - The css class (name) of the element to hide.
+ * @param {Element|boolean} element - The css class (name) of the element to hide.
  * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#hide}

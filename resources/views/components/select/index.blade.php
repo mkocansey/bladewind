@@ -147,7 +147,7 @@
         scroll-behavior: smooth;
     }
 </style>
-<div class="relative bw-select bw-select-{{$input_name}} @if($addClearing) mb-3 @endif"
+<div class="relative bw-select bw-select-{{$input_name}} @if($addClearing) mb-3 @endif @if($searchable) searchable @endif"
      role="combobox"
      data-multiple="{{$multiple}}" data-required="{{$required?'true':'false'}}"
      data-type="{{ $data !== 'manual' ? 'dynamic' : 'manual'}}"
@@ -185,7 +185,7 @@
     <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 dark:shadow-none border-2
         border-primary-600 dark:text-slate-300 dark:border-dark-600 dark:bg-dark-700 border-t-0 -mt-1.5
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
-        <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 @if(!$searchable) hidden @endif">
+        <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 search-bar @if(!$searchable) hidden @endif">
             <x-bladewind::input
                     class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_search"
                     add_clearing="false"
@@ -218,23 +218,6 @@
                             :label="$emptyPlaceholder"
                             :is-empty="true"/>
                 @endif
-                {{--                @endforelse--}}
-                {{--@forelse ($data as $item)
-                    <x-bladewind::select.item
-                            label="{{ $item[$labelKey] }}"
-                            value="{{ $item[$valueKey] }}"
-                            filter_by="{{ ($filterBy != '') ? $item[$filterBy] : '' }}"
-                            onselect="{{ $onselect }}"
-                            flag="{{ $item[$flagKey] ?? '' }}"
-                            image="{{ $item[$imageKey] ?? '' }}"
-                            selected="{{ (in_array($item[$valueKey], $selectedValue)) ? 'true' : 'false' }}"/>
-                @empty
-                    @if(!empty($emptyStateFrom))
-                        <x-bladewind::select.item :selectable="false" :empty_state_from="$emptyStateFrom"/>
-                    @else
-                        <x-bladewind::select.item :selectable="false" :label="$emptyPlaceholder"/>
-                    @endif
-                @endforelse--}}
             @else
                 {!! $slot !!}
             @endif
@@ -245,10 +228,9 @@
            @if($required) data-parent="bw-select-{{$input_name}}" @endif
            @if($multiple) autocomplete="off" @endif />
 </div>
-
-<x-bladewind::script :nonce="$nonce">
-    @php include_once(public_path('vendor/bladewind/js/select.js')); @endphp
-</x-bladewind::script>
+@once
+    <x-bladewind::script :nonce="$nonce" :src="asset('vendor/bladewind/js/select.js')"></x-bladewind::script>
+@endonce
 <x-bladewind::script :nonce="$nonce" :modular="$modular">
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     bw_{{ $input_name }}.activate({disabled: '{{$disabled}}', readonly: '{{$readonly}}'});
