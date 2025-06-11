@@ -228,10 +228,9 @@
            @if($required) data-parent="bw-select-{{$input_name}}" @endif
            @if($multiple) autocomplete="off" @endif />
 </div>
-
-<x-bladewind::script :nonce="$nonce">
-    @php include_once(public_path('vendor/bladewind/js/select.js')); @endphp
-</x-bladewind::script>
+@once
+    <x-bladewind::script :nonce="$nonce" :src="asset('vendor/bladewind/js/select.js')"></x-bladewind::script>
+@endonce
 <x-bladewind::script :nonce="$nonce" :modular="$modular">
     const bw_{{ $input_name }} = new BladewindSelect('{{ $input_name }}', '{{ $placeholder }}');
     bw_{{ $input_name }}.activate({disabled: '{{$disabled}}', readonly: '{{$readonly}}'});
