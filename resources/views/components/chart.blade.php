@@ -125,13 +125,13 @@
     new Chart(chart_{{$name}}, {
     type: '{{$type}}',
     @if($hasDatasetKey)
-        data: @json($data),
+        data: {!! formatJsonForChart($data) !!},
     @else
         data: {
         labels: @json($labels),
         datasets: [{
         label: '{{$title}}',
-        data: @json($data),
+        data: {!! formatJsonForChart($data) !!},
         borderWidth: {{$borderWidth}},
         @if(!empty($bgColor))
             backgroundColor: "{{$bgColor}}",
@@ -142,7 +142,7 @@
         }]
         },
     @endif
-    options: @json($options),
-    plugins: @json($plugins),
+    options: {!! formatJsonForChart($options) !!},
+    plugins: {!! formatJsonForChart($plugins) !!},
     });
 </x-bladewind::script>
