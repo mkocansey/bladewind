@@ -131,8 +131,8 @@
         let pageButton = domEl(`.bw-pagination-${table} button[data-page="${page}"]`);
         let prevPageButton = domEl(`.bw-pagination-${table} button[data-page="${previousPage}"]`);
         if (pageButton && prevPageButton) {
-        let cssToRemove = "border-gray-500/50, focus:ring-gray-500, hover:border-gray-600,
-        dark:hover:border-gray-500,{{str_replace(' ', ',', $default_button_css)}}";
+        let cssToRemove = `border-gray-500/50, focus:ring-gray-500, hover:border-gray-600,
+        dark:hover:border-gray-500,{{str_replace(' ', ',', $default_button_css)}}`;
         let cssToAdd = '{{str_replace(' ', ',', $active_css)}}';
         changeCss(pageButton, cssToRemove, 'remove', true);
         changeCss(pageButton, cssToAdd, 'add', true);
