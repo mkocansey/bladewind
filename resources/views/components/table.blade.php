@@ -105,6 +105,8 @@
     $icons_array = $indices = [];
     $can_group = false;
 
+    if($checkable) $selectable = true;
+
     if (!is_null($data)) {
         $data = (!is_array($data)) ? json_decode(str_replace('&quot;', '"', $data), true) : $data;
 
