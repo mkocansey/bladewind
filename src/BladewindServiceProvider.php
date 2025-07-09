@@ -6,6 +6,13 @@ use Illuminate\Support\ServiceProvider;
 
 class BladewindServiceProvider extends ServiceProvider
 {
+    public function register(): void
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/bladewind.php', 'bladewind'
+        );
+    }
+
     public function boot()
     {
         require_once __DIR__.'/../src/BladewindHelpers.php';

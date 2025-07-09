@@ -455,7 +455,7 @@
             }
 
             itemExists = (value) => {
-                return domEl(`${this.rootElement} .bw-select-item[data-value="${value}"]`) !== null;
+                return domEl(`${this.rootElement} .bw-select-item[data-value="${value}"]`) !== false;
             }
 
         }
