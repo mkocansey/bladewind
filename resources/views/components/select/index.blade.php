@@ -156,8 +156,9 @@
      @if(!empty($emptyStateFrom)) data-copy-empty-state-from="{{ $emptyStateFrom}}" @endif
      @if($data == 'manual' && $selectedValue != '') data-selected-value="{{implode(',',$selectedValue)}}" @endif>
     <div tabindex="0"
-         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border-2 border-slate-300/50 hover:border-slate-300
-         dark:text-dark-300 dark:border-dark-600 dark:hover:border-dark-500/50 dark:bg-transparent {{$sizes[$size]}} pl-4 pr-2 clickable
+         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border border-slate-400/60
+        hover:border-slate-500 dark:border-dark-600 dark:hover:border-dark-500/50 dark:bg-transparent
+         dark:text-dark-300 {{$sizes[$size]}} pl-4 pr-2 clickable box-border
          @if($disabled) disabled @elseif($readonly) readonly @else enabled @endif">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
         <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">

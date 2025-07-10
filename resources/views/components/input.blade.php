@@ -152,7 +152,7 @@
 
 <div class="relative w-full dv-{{$name}} @if($add_clearing) mb-4 @endif">
     <input
-            {{ $attributes->class(["bw-input peer $is_required $name $placeholder_color $size focus:border-primary-500"])->merge([
+            {{ $attributes->class(["bw-input peer $is_required $name $placeholder_color $size focus:outline-primary-500 focus:border-primary-500"])->merge([
                 'type' => $type,
                 'id' => $name,
                 'name' => $name,

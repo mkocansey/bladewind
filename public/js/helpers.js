@@ -755,15 +755,18 @@ const checkMinMax = (min, max, element, enforceLimits = false) => {
 
     const clearErrorMessage = () => {
         if (errorMessage) hide(`.${element}-inline-error`);
-        changeCss(field, '!border-red-400', 'remove', true);
+        changeCss(field, 'has-error', 'remove', true);
+        changeCss(field, 'focus:outline-primary-500,focus:border-primary-500', 'add', true);
     }
+
     if (field.value !== '') {
         if (enforceLimits) {
             if (!isNaN(minimum) && field.value < minimum) field.value = minimum;
             if (!isNaN(maximum) && field.value > maximum) field.value = maximum;
         } else {
             if (((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
-                changeCss(field, '!border-red-400', 'add', true);
+                changeCss(field, 'focus:outline-primary-500,focus:border-primary-500', 'remove', true);
+                changeCss(field, 'has-error', 'add', true);
                 if (errorMessage) {
                     (showErrorInline) ? unhide(`.${element}-inline-error`) :
                         showNotification(errorHeading, errorMessage, 'error');
