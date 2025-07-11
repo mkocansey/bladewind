@@ -1,6 +1,6 @@
 @layer components {
     .bw-datepicker {
-        @apply absolute bg-white z-50 shadow-md rounded-lg p-2 border border-gray-100 flex flex-col
+        @apply absolute bg-white dark:bg-dark-700 z-50 shadow-md rounded-lg p-2 border border-gray-100 dark:border-dark-600 flex flex-col dark:shadow-xl
     }
 
     .bw-datepicker .in-range {
@@ -16,11 +16,11 @@
     }
 
     .bw-datepicker .a-month {
-        @apply py-4 px-7 text-slate-500 cursor-pointer font-semibold normal-case hover:bg-gray-100 text-sm
+        @apply py-4 px-7 text-slate-700 dark:text-dark-400 cursor-pointer font-light normal-case hover:bg-gray-100 dark:hover:text-dark-200 dark:hover:bg-dark-600 text-base tracking-wider
     }
 
     .bw-datepicker .a-year {
-        @apply p-5 cursor-pointer font-semibold hover:bg-gray-100
+        @apply p-5 text-slate-700 dark:text-dark-400 cursor-pointer font-light normal-case hover:bg-gray-100 dark:hover:text-dark-200 dark:hover:bg-dark-600 text-base tracking-wider
     }
 
     .bw-datepicker table {
@@ -28,20 +28,19 @@
     }
 
     .bw-datepicker td {
-        @apply text-center p-2 cursor-pointer text-slate-700 text-base border border-white
+        @apply text-center p-2 cursor-pointer text-slate-700 dark:text-dark-400 text-base border border-white dark:border-dark-600/30 tracking-wider font-light
     }
 
     .bw-datepicker th {
-        @apply text-center px-2 cursor-pointer pt-3.5 pb-2 w-10 text-xs uppercase text-slate-500 font-normal tracking-wide
+        @apply text-center px-2 cursor-pointer pt-3.5 pb-2 w-10 text-xs uppercase text-slate-500 dark:text-dark-400 font-normal tracking-wide
     }
 
     .bw-datepicker td:hover:not(.selected, .empty) {
-        @apply /*bg-primary-200*/
-        rounded-md
+        @apply rounded-md
     }
 
     .bw-datepicker td:empty:hover {
-        @apply bg-white
+        @apply bg-white dark:bg-dark-700
     }
 
     .bw-datepicker .datepicker-header {

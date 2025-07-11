@@ -32,7 +32,8 @@
   },
   "scripts": {
     "post-update-cmd": [
-      "@php artisan vendor:publish --provider=\"Mkocansey\\Bladewind\\BladewindServiceProvider\" --tag=bladewind-public --force"
+      "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-public --force');\"",
+      "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-lang --force');\""
     ]
   }
 }

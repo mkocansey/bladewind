@@ -10,7 +10,7 @@
     'color' => config('bladewind.checkcards.color', 'primary'),
     'radius' => config('bladewind.checkcards.radius', 'medium'),
     'name' => null,
-    'borderWidth' => config('bladewind.checkcards.border_width', 2),
+    'borderWidth' => config('bladewind.checkcards.border_width', ''),
     'borderColor' => config('bladewind.checkcards.border_color', 'gray'),
     'alignItems' => config('bladewind.checkcards.align_items', 'top'),
     'selectedValue' => '',

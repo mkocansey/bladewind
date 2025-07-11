@@ -152,13 +152,14 @@
 
 <div class="relative w-full dv-{{$name}} @if($add_clearing) mb-4 @endif">
     <input
-            {{ $attributes->class(["bw-input peer $is_required $name $placeholder_color $size focus:border-primary-500"])->merge([
+            {{ $attributes->class(["bw-input peer $is_required $name $placeholder_color $size focus:outline-primary-500 focus:border-primary-500"])->merge([
                 'type' => $type,
                 'id' => $name,
                 'name' => $name,
                 'value' => html_entity_decode($selectedValue),
                 'autocomplete' => "new-password",
                 'placeholder' => $placeholder_label.$required_symbol,
+                'wire:model' => $attributes->get('wire:model'),
             ])->when($errorMessage != '', fn($attrs) => $attrs->merge([
             'data-error-message' => $errorMessage,
             'data-error-inline' => $show_error_inline,
@@ -223,7 +224,7 @@
     });
     @endif
     @once
-    const allowExtraCharsForNumbers = (event, name, withDots) => {
+    function allowExtraCharsForNumbers(event, name, withDots) {
         if (event.inputType === "deleteContentBackward" || event.inputType === "deleteContentForward") {
             return;
         }

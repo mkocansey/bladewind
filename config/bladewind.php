@@ -320,10 +320,12 @@ return [
     | Modal component
     |--------------------------------------------------------------------------
     */
+    // __('bladewind::bladewind.cancel', 'cancel') fails because the translation file is not loaded yet
+    // throws BindingResolutionException: Target class [translator] does not exist.
     'modal' => [
         'align_buttons' => 'right',
-        'ok_button_label' => __('bladewind::bladewind.okay'),
-        'cancel_button_label' => __('bladewind::bladewind.cancel'),
+        'ok_button_label' => 'okay',
+        'cancel_button_label' => 'cancel',
         'close_after_action' => true,
         'backdrop_can_close' => true,
         'blur_backdrop' => true,
@@ -406,12 +408,12 @@ return [
     |--------------------------------------------------------------------------
     */
     'select' => [
-        'placeholder' => __("bladewind::bladewind.select_placeholder"),
-        'search_placeholder' => __("bladewind::bladewind.select_search_placeholder"),
-        'empty_placeholder' => __("bladewind::bladewind.select_empty_placeholder"),
+        'placeholder' => 'Select One',
+        'search_placeholder' => 'Type here...',
+        'empty_placeholder' => 'No options available',
         'label' => null,
         'add_clearing' => true,
-        'max_error_message' => __("bladewind::bladewind.select_max_selection"),
+        'max_error_message' => 'Please select only %s items',
         'modular' => false,
         'size' => 'medium',
     ],
@@ -579,12 +581,12 @@ return [
     |--------------------------------------------------------------------------
     */
     'timepicker' => [
-        'hour_label' => __("bladewind::bladewind.timepicker_hour_label"),
-        'minute_label' => __("bladewind::bladewind.timepicker_minute_label"),
-        'format_label' => __("bladewind::bladewind.timepicker_format_label"),
+        'hour_label' => 'HH',
+        'minute_label' => 'MM',
+        'format_label' => '--',
         'format' => '12',
         'style' => 'popup',
-        'placeholder' => __("bladewind::bladewind.timepicker_placeholder"),
+        'placeholder' => 'HH:MM',
     ],
 
     /*
