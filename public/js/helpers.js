@@ -98,14 +98,22 @@ const clearErrors = (obj) => {
     let elName = obj.elName;
     let showErrorInline = obj.showErrorInline;
     if (el.value !== '') {
-        (elParent !== null) ?
-            domEl(`.${elParent} .clickable`).classList.remove('!border-red-400') :
-            el.classList.remove('!border-red-400');
+        if (elParent !== null) {
+            domEl(`.${elParent} .clickable`).classList.remove('!border-red-400');
+        } else {
+            // el.classList.remove('!border-red-400');
+            changeCss(el, 'has-error', 'remove', true);
+            changeCss(el, 'focus:outline-primary-500,focus:border-primary-500', 'add', true);
+        }
         (showErrorInline) ? hide(`.${elName}-inline-error`) : '';
     } else {
-        (elParent !== null) ?
-            domEl(`.${elParent} .clickable`).classList.add('!border-red-400') :
-            el.classList.add('!border-red-400');
+        if (elParent !== null) {
+            domEl(`.${elParent} .clickable`).classList.add('!border-red-400');
+        } else {
+            // el.classList.add('!border-red-400');
+            changeCss(el, 'has-error', 'add', true);
+            changeCss(el, 'focus:outline-primary-500,focus:border-primary-500', 'remove', true);
+        }
         (showErrorInline) ? unhide(`.${elName}-inline-error`) : '';
     }
 };
@@ -153,7 +161,9 @@ const validateForm = (form) => {
     try {
         fieldToValidate = (typeof (form) === 'string') ? domEls(`${form} .required`) : form.querySelectorAll('.required');
         fieldToValidate.forEach((el) => {
-            changeCss(el, '!border-red-500', 'remove', true);
+            // changeCss(el, '!border-red-500', 'remove', true);
+            changeCss(el, 'has-error', 'remove', true);
+            changeCss(el, 'focus:outline-primary-500,focus:border-primary-500', 'add', true);
             if (isEmpty(el.value)) {
                 let elName = el.getAttribute('name');
                 let elParent = el.getAttribute('data-parent');
@@ -161,9 +171,12 @@ const validateForm = (form) => {
                 let showErrorInline = el.getAttribute('data-error-inline');
                 let errorHeading = el.getAttribute('data-error-heading');
 
-                (elParent !== null) ?
-                    changeCss(`.${elParent} .clickable`, '!border-red-400') :
-                    changeCss(el, '!border-red-400', 'add', true);
+                if (elParent !== null) {
+                    changeCss(`.${elParent} .clickable`, '!border-red-400');
+                } else {
+                    changeCss(el, 'has-error', 'add', true);
+                    changeCss(el, 'focus:outline-primary-500,focus:border-primary-500', 'remove', true);
+                }
                 el.focus();
                 if (errorMessage) {
                     (showErrorInline) ? unhide(`.${elName}-inline-error`) :
@@ -755,15 +768,18 @@ const checkMinMax = (min, max, element, enforceLimits = false) => {
 
     const clearErrorMessage = () => {
         if (errorMessage) hide(`.${element}-inline-error`);
-        changeCss(field, '!border-red-400', 'remove', true);
+        changeCss(field, 'has-error', 'remove', true);
+        changeCss(field, 'focus:outline-primary-500,focus:border-primary-500', 'add', true);
     }
+
     if (field.value !== '') {
         if (enforceLimits) {
             if (!isNaN(minimum) && field.value < minimum) field.value = minimum;
             if (!isNaN(maximum) && field.value > maximum) field.value = maximum;
         } else {
             if (((!isNaN(minimum) && field.value < minimum) || (!isNaN(maximum) && field.value > maximum))) {
-                changeCss(field, '!border-red-400', 'add', true);
+                changeCss(field, 'focus:outline-primary-500,focus:border-primary-500', 'remove', true);
+                changeCss(field, 'has-error', 'add', true);
                 if (errorMessage) {
                     (showErrorInline) ? unhide(`.${element}-inline-error`) :
                         showNotification(errorHeading, errorMessage, 'error');

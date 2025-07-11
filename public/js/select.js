@@ -41,6 +41,7 @@
                 if (options.disabled !== '1' && options.readonly !== '1') {
                     domEl(this.clickArea).addEventListener('click', (e) => {
                         unhide(this.itemsContainer);
+                        // changeCss(this.clickArea, 'focus:outline-2,focus:-outline-offset-1,focus:outline-primary-500,focus:border-primary-500');
                     });
                     this.hide();
                     this.search();
@@ -166,7 +167,7 @@
                 hasNoItems ? unhide(emptyStateItem, true) : hide(emptyStateItem, true);
 
                 if (this.isSearchable(element)) {
-                    hasNoItems ? hide(searchBar) : unhide(searchBar);
+                    // hasNoItems ? hide(searchBar) : unhide(searchBar);
                 }
             }
 
@@ -242,7 +243,8 @@
                         this.scrollbars();
                     }
                     stripComma(input);
-                    changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
+                    // changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
+                    changeCss(`${this.clickArea}`, 'has-error', 'remove');
                 }
             }
 
@@ -455,7 +457,7 @@
             }
 
             itemExists = (value) => {
-                return domEl(`${this.rootElement} .bw-select-item[data-value="${value}"]`) !== null;
+                return domEl(`${this.rootElement} .bw-select-item[data-value="${value}"]`) !== false;
             }
 
         }

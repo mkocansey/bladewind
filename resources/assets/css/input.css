@@ -11,22 +11,28 @@
 
     .bw-textarea,
     .bw-raw-select,
-    .bw-input {
-        @apply
-        !outline-none
-        !ring-0
-        border-2
-        w-full text-slate-600 dark:text-dark-300 border-slate-300/50 hover:border-slate-300 dark:border-dark-600 dark:hover:border-dark-500/50 dark:bg-transparent
-        focus:outline-none
-        focus:border-2
-        dark:focus:border-dark-500 dark:placeholder-dark-400/60 transition-all
-        rounded-md
-        text-sm
-        px-3.5 py-[8.5px]
+    .bw-input { /* !outline-none ! */
+        @apply w-full text-slate-600 dark:text-dark-300 !ring-0 dark:bg-transparent focus:outline-2 rounded-md text-sm
+        focus:-outline-offset-1 dark:placeholder-dark-400/60 transition-all tracking-wide px-3 py-[8.5px] placeholder-primary-900/40
+    }
+
+    .bw-textarea:not(.has-error),
+    .bw-raw-select:not(.has-error),
+    .bw-select .clickable:not(.has-error),
+    .bw-input:not(.has-error) {
+        @apply border-slate-400/60 hover:border-slate-400 dark:border-dark-600 dark:hover:border-dark-500/50 dark:focus:border-dark-500
+    }
+
+    .bw-textarea.has-error,
+    .bw-raw-select.has-error,
+    .bw-input.has-error {
+        @apply border-red-500 hover:border-red-500 dark:border-red-500 dark:hover:border-red-500 dark:focus:border-red-500
+        focus:outline-red-500 focus:border-red-500
     }
 
     .bw-input[disabled], .bw-input[readonly], fieldset[disabled] .bw-input {
-        @apply !bg-gray-100/60 dark:!bg-white/10 dark:!opacity-40 !text-slate-400/70 dark:!text-dark-400 cursor-not-allowed dark:!border-dark-500/70
+        @apply !bg-gray-100/60 dark:!bg-white/10 dark:!opacity-40 !text-slate-400/70 dark:!text-dark-400
+        cursor-not-allowed dark:!border-dark-500/70
     }
 
     .bw-input.small {
@@ -47,29 +53,20 @@
 
     .form-label {
         @apply
-        absolute
-        cursor-text
-        left-3.5
-        rtl:!right-3.5
-        rtl:left-[unset]
-        !inline-block
-        -top-2
-        text-xs
-        px-1
-        transition-all
-        peer-placeholder-shown:top-[11.8px]
-        peer-focus:-top-2 bg-white text-primary-900/40 dark:text-dark-400/60 z-20 dark:bg-dark-700 dark:px-2 dark:rounded-md dark:py-0.5
+        absolute cursor-text left-3 rtl:!right-3 rtl:left-[unset] !inline-block -top-2 text-sm px-1 transition-all
+        peer-placeholder-shown:top-[10.2px] peer-focus:-top-2 bg-white text-primary-900/40 dark:text-dark-400/60
+        z-20 dark:bg-dark-700 dark:px-2 dark:rounded-md dark:py-0.5 tracking-wide
         /*dark-800*/
     }
 
     .form-label.small {
         @apply
-        peer-placeholder-shown:!top-[11px] peer-focus:!-top-2
+        peer-placeholder-shown:!top-[7px] peer-focus:!-top-2
     }
 
     .form-label.medium {
         @apply
-        peer-placeholder-shown:!top-[15px] peer-focus:!-top-2
+        peer-placeholder-shown:!top-[11.5px] peer-focus:!-top-[9px]
     }
 
     .form-label.big {

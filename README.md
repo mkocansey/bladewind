@@ -20,13 +20,18 @@ composer require mkocansey/bladewind
 
 <br />
 
-Next you need to **publish the package assets** by running this command, still in the terminal at the root of your
+Next you need to **publish the package assets and language files** by running this command, still in the terminal at the
+root of your
 Laravel project.
 
 <br />
 
 ```
-php artisan vendor:publish --provider="Mkocansey\Bladewind\BladewindServiceProvider" --tag=bladewind-public --force
+php artisan vendor:publish --tag=bladewind-public --force
+```
+
+```
+php artisan vendor:publish --tag=bladewind-lang --force
 ```
 
 <br />

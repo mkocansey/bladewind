@@ -20,7 +20,9 @@ function initCalendar({
     }
 
     const datePicker = document.createElement("div");
-    datePicker.classList.add("bw-datepicker", "hidden");
+    datePicker.classList.add(`bw-datepicker`, `${inputId}`, "hidden");
+    datePicker.setAttribute("role", "dialog");
+    datePicker.setAttribute("aria-modal", "true");
     document.body.appendChild(datePicker);
 
     let startDate = null;
@@ -121,13 +123,13 @@ function initCalendar({
             renderCalendar();
         });
 
-        document.querySelector(".month").addEventListener("click", (e) => {
+        domEl(`.${inputId} .month`).addEventListener("click", (e) => {
             e.stopPropagation();
             monthView = true;
             renderMonths();
         });
 
-        document.querySelector(".year").addEventListener("click", (e) => {
+        domEl(`.${inputId} .year`).addEventListener("click", (e) => {
             e.stopPropagation();
             yearView = true;
             renderYears();
@@ -169,7 +171,7 @@ function initCalendar({
             const cell = document.createElement("td");
             const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
             cell.textContent = day;
-            cell.classList.add("a-day", "hover:bg-primary-200");
+            cell.classList.add("a-day", "hover:bg-primary-200", "dark:hover:text-dark-200", "dark:hover:bg-dark-600");
 
             if ((minDate && date.getTime() < minDate.setHours(0, 0, 0, 0)) ||
                 (maxDate && date.getTime() > maxDate.setHours(23, 59, 59, 999))) {
@@ -235,7 +237,7 @@ function initCalendar({
         ];
 
         const container = document.createElement("div");
-        container.className = "month-container grid grid-cols-3";
+        container.className = "month-container grid grid-cols-3 divide-x divide-y border dark:border-dark-600/30 dark:divide-dark-600/30 dark:divide-dark-600/30 text-center -mx-2 -mb-2 radius-b-lg";
 
         months.forEach((month, index) => {
             const date = new Date(currentDate.getFullYear(), index, 1);
@@ -273,17 +275,12 @@ function initCalendar({
         if (isFullCalendar) {
             let monthKey = currentDate.toLocaleString("en-US", {month: "short"}).toLowerCase();
             let thisMonth = MONTH_NAMES[monthKey] || monthKey;
-            title.className = "month-year text-lg tracking-wide cursor-pointer";
+            title.className = "month-year text-lg tracking-wider cursor-pointer font-light";
             title.innerHTML = `
-      <span class="month opacity-80 hover:opacity-100">${thisMonth}</span>
-      <span class="year opacity-80 hover:opacity-100">${currentDate.getFullYear()}</span>`;
-            title = document.createElement("div");
-            title.className = "month-year text-lg tracking-wide cursor-pointer";
-            title.innerHTML = `
-      <span class="month opacity-80 hover:opacity-100">${currentDate.toLocaleString("default", {month: "long"})}</span>
-      <span class="year opacity-80 hover:opacity-100">${currentDate.getFullYear()}</span>`;
+                  <span class="month opacity-80 hover:opacity-100">${currentDate.toLocaleString("default", {month: "long"})}</span>
+                  <span class="year opacity-80 hover:opacity-100">${currentDate.getFullYear()}</span>`;
         } else {
-            title.className = "calendar-title";
+            title.className = "calendar-title text-lg tracking-wider font-light";
             title.textContent = heading;
         }
 
@@ -310,7 +307,7 @@ function initCalendar({
         });
 
         const container = document.createElement("div");
-        container.className = "year-container grid grid-cols-4";
+        container.className = "year-container grid grid-cols-4 divide-x divide-y border dark:border-dark-600/30 dark:divide-dark-600/30 text-center -mx-2 -mb-2 radius-b-lg";
 
         for (let i = startYear - 1; i <= startYear + 10; i++) {
             const yearEl = document.createElement("div");
@@ -366,17 +363,25 @@ function initCalendar({
                 picker.classList.add("hidden");
             }
         });
+
         if (datePicker.classList.contains("hidden")) {
             monthView = false;
             yearView = false;
             renderCalendar();
             datePicker.classList.remove("hidden");
+            datePicker.setAttribute("aria-hidden", "false");
+            datePicker.setAttribute("tabindex", "0");
+            datePicker.focus();
+        } else {
+            datePicker.classList.add("hidden");
+            datePicker.setAttribute("aria-hidden", "true");
         }
     });
 
     document.addEventListener("click", (e) => {
         if (!datePicker.contains(e.target) && e.target !== dateInput) {
             datePicker.classList.add("hidden");
+            datePicker.setAttribute("aria-hidden", "true");
         }
     });
 
