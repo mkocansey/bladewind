@@ -156,9 +156,8 @@
      @if(!empty($emptyStateFrom)) data-copy-empty-state-from="{{ $emptyStateFrom}}" @endif
      @if($data == 'manual' && $selectedValue != '') data-selected-value="{{implode(',',$selectedValue)}}" @endif>
     <div tabindex="0"
-         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border border-slate-400/60
-        hover:border-slate-500 dark:border-dark-600 dark:hover:border-dark-500/50 dark:bg-transparent
-         dark:text-dark-300 {{$sizes[$size]}} pl-4 pr-2 clickable box-border
+         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border dark:bg-transparent
+         dark:text-dark-300 {{$sizes[$size]}} pl-4 pr-2 clickable focus:border-2 focus:border-primary-500
          @if($disabled) disabled @elseif($readonly) readonly @else enabled @endif">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
         <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">
@@ -188,12 +187,12 @@
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
         <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 search-bar @if(!$searchable) hidden @endif">
             <x-bladewind::input
-                    class="!border-0 !border-b !rounded-none focus:!border-slate-300 dark:focus:!border-slate-600 !w-full !text-sm bw_search"
+                    class="!border-0 !rounded-none focus:!outline-none !w-full !text-sm bw_search"
                     add_clearing="false"
                     :placeholder="$searchPlaceholder"
-                    onFocus="changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'border-primary-600'); changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'hover:border-slate-300', 'remove')"
-                    onBlur="changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'border-primary-600', 'remove');  changeCss('.bw-select-{{$input_name}} div.clickable.enabled', 'hover:border-slate-300')"
                     suffix="magnifying-glass"
+                    onfocus="changeCss('.bw-select-{{$input_name}} .clickable', 'border-2,!border-primary-500')"
+                    onblur="changeCss('.bw-select-{{$input_name}} .clickable', 'border-2,!border-primary-500','remove')"
                     suffixIsIcon="true"/>
         </div>
         <div class="divide-y divide-slate-100 dark:divide-slate-600/70 bw-select-items mt-0">

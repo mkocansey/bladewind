@@ -133,47 +133,55 @@
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
                             name="x-mark"
-                            class="p-1 stroke-2 modal-close-icon right-3 top-3.5 absolute rounded-full
-                            text-gray-400 hover:text-gray-500 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-200
-                            hover:bg-gray-300 dark:bg-dark-700/80 dark:hover:bg-dark-700"/>
+                            class="p-1 stroke-2 modal-close-icon right-4 top-4 absolute rounded-full !size-7
+                            text-gray-400 hover:text-gray-200 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-100
+                            hover:bg-gray-700 dark:bg-dark-700/80 dark:hover:bg-dark-700"/>
                 </a>
             @endif
             <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-5">
                 @if(!empty($type) || !empty($icon))
-                    <div class="modal-icon grow-0 pr-2">
+                    <div class="modal-icon grow-0 pr-2 pt-1.5">
                         @if(!empty($type) )
                             <x-bladewind::modal-icon
                                     type="{{ $type }}"
                                     icon="{{$icon}}"
-                                    class="!size-14 p-2 rounded-full bg-{{$type_colour}}-200/80 dark:bg-{{$type_colour}}-600
-                                    text-{{$type_colour}}-600 dark:text-{{$type_colour}}-100"/>
+                                    class="!size-14 p-2.5 rounded-full bg-{{$type_colour}}-100 dark:bg-{{$type_colour}}-600
+                                    text-{{$type_colour}}-600 dark:text-{{$type_colour}}-100 stroke-1"/>
                         @endif
                         @if(!empty($icon) && empty($type))
                             <x-bladewind::icon name="{{ $icon }}" class="!h-14 !w-14 {{$iconCss}}"/>
                         @endif
                     </div>
                 @endif
-                <div class="modal-body grow px-2 {{ $bodyCss  }}">
-                    <h1 class="text-xl font-semibold leading-5 text-gray-900 dark:text-dark-400 tracking-wide modal-title text-left py-1">{{ $title }}</h1>
-                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-base text-left">
+                <div class="modal-body grow px-2 pb-1 {{ $bodyCss  }}">
+                    <h1 class="text-lg font-light leading-5 text-gray-800 dark:text-dark-400 tracking-wide modal-title text-left pt-2">{{ $title }}</h1>
+                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-sm text-left font-light leading-[22.5px] tracking-wide">
                         {{ $slot }}
                     </div>
                 </div>
             </div>
             @if( $showActionButtons )
-                <div class="modal-footer @if($stretchActionButtons) flex flex-col-reverse @endif
-                @if($centerActionButtons || $size == 'tiny') text-center @else text-{{$alignButtons}} @endif
-                bg-gray-100 dark:bg-dark-800/50 border-t border-t-gray-200/60 dark:border-t-dark-600/50 py-3 px-6 rounded-br-lg rounded-bl-lg {{ $footerCss }}">
+                <div @class([
+                    'modal-footer bg-gray-100 dark:bg-dark-800/50 border-t border-t-gray-200 dark:border-t-dark-600/50',
+                    'py-3 px-6 rounded-br-lg rounded-bl-lg space-x-2 '. $footerCss,
+                    'flex flex-col-reverse space-x-0' => $stretchActionButtons,
+                    'text-center' => $centerActionButtons || $size == 'tiny',
+                    'text-'.$alignButtons => !$centerActionButtons || $size != 'tiny'])>
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
+                            outline="true"
                             onclick="{!! $cancelAction !!}"
-                            class="cancel {{ (($stretchActionButtons) ? 'block w-full mb-3' : '') }} {{ $cancelCss }}">{{$cancelButtonLabel}}</x-bladewind::button>
+                            @class([
+                                'cancel ' . $cancelCss,
+                                'block w-full mt-2' => $stretchActionButtons])>{{$cancelButtonLabel}}</x-bladewind::button>
 
                     <x-bladewind::button
                             size="{{$button_size}}"
                             onclick="{!! $okAction !!}"
-                            class="okay {{ (($stretchActionButtons) ? 'block w-full mb-3 !ml-0' : 'ml-3') }} {{ $okCss }}">{{$okButtonLabel}}</x-bladewind::button>
+                            @class([
+                                'okay ' . $okCss,
+                                'block w-full' => $stretchActionButtons])>{{$okButtonLabel}}</x-bladewind::button>
                 </div>
             @endif
         </div>

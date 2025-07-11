@@ -24,8 +24,8 @@
 
 <div
         @class([
-        "py-3 pl-4 pr-3 flex items-center text-base cursor-pointer bw-select-item",
-        "hover:bg-slate-100/90 dark:hover:bg-dark-800/50 dark:hover:text-dark-200" => $selectable,
+        "py-2 pl-4 pr-3 flex items-center text-base cursor-pointer bw-select-item",
+        "hover:bg-primary-600 hover:text-primary-50 dark:hover:bg-dark-800/50 dark:hover:text-dark-200" => $selectable,
         "text-blue-900/40" => !$selectable,
         "hidden empty-state" => $isEmpty
         ])

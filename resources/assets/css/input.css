@@ -18,6 +18,7 @@
 
     .bw-textarea:not(.has-error),
     .bw-raw-select:not(.has-error),
+    .bw-select .clickable:not(.has-error),
     .bw-input:not(.has-error) {
         @apply border-slate-400/60 hover:border-slate-400 dark:border-dark-600 dark:hover:border-dark-500/50 dark:focus:border-dark-500
     }
