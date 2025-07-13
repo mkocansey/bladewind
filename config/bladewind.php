@@ -108,7 +108,7 @@ return [
         'no_padding' => false,
         'compact' => true,
         'lazy' => true,
-        'centered' => true,
+        'centered' => false,
     ],
 
     /*

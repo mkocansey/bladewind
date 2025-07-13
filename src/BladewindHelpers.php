@@ -75,3 +75,10 @@ function formatJsonForChart($json): string
     $output = json_encode($json, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     return preg_replace_callback('/"JS::(.*?)"/s', fn($m) => $m[1], $output);
 }
+
+function pagination_row($row_number, $pageSize = 25, $defaultPage = 1): string
+{
+    $row_id = uniqid();
+    $row_page = ($row_number < $pageSize) ? 1 : ceil($row_number / $pageSize);
+    return sprintf("data-id=%s data-page=%s class=%s", $row_id, $row_page, ($row_page != $defaultPage ? 'hidden' : ''));
+}

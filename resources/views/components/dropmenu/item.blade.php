@@ -3,7 +3,7 @@
     'class' => '',
     'icon' => '',
     'dir' => config('bladewind.dropmenu.item.dir', ''),
-    'icon_css' => '',
+    'iconCss' => '',
     'divider' => false,
     'header' => false,
     'hover' => config('bladewind.dropmenu.item.hover', true),
@@ -20,7 +20,7 @@
     $hover = parseBladewindVariable($hover);
     $padded = parseBladewindVariable($padded);
     $iconRight = parseBladewindVariable($iconRight);
-    $icon_css .= ($iconRight) ? ' !ml-2 !-mr-1' : ' !mr-2 -ml-0.5 ';
+    $iconCss .= ($iconRight) ? ' !ml-2 !-mr-1' : ' !mr-2 -ml-0.5 ';
 @endphp
 {{-- format-ignore-end --}}
 
@@ -36,8 +36,10 @@
         '!cursor-default border-b border-b-slate-200/75  dark:!border-b-gray-100/10 mb-1' => $header,
 ]) {{$attributes->merge(['data-item' => "true"])}}>
     @if(!empty($icon) && !$header)
-        <x-bladewind::icon name="{!! $icon !!}" :dir="$dir"
-                           class="!size-4 !mt-0.5 !text-gray-400 dark:!text-dark-500  {{$icon_css}}"/>
+        <x-bladewind::icon
+                name="{!! $icon !!}"
+                :dir="$dir"
+                class="!size-4 !mt-0.5 !text-gray-400 dark:!text-dark-500  {{$iconCss}}"/>
     @endif
     {!! $slot !!}
 </div>
