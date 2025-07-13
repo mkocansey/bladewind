@@ -12,6 +12,7 @@
     'imageSize' => 'medium',
     'name' => defaultBladewindName(),
     'forSelect' => false,
+    'buttonRadius' => config('bladewind.button.radius'),
 ])
 @php
     $name = parseBladewindName($name);
@@ -45,7 +46,9 @@
     <div class="pt-2 dark:text-dark-400">{!! $slot !!}</div>
     @if($buttonLabel != '')
         <x-bladewind::button
-                onclick="{!!$onclick!!}" class="block mx-auto my-2"
+                onclick="{!!$onclick!!}"
+                class="block mx-auto my-2"
+                radius="{{$buttonRadius}}"
                 size="small">{{$buttonLabel}}</x-bladewind::button>
     @endif
 </div>

@@ -13,7 +13,8 @@
     note that the code is passed to your function as the only parameter so you need to expect a parameter
     when defining your function... using the above example: verifyPin = (pin_code) => {}
     */
-    'onVerify' => null,
+    'onVerify' => null, //TODO: drop this attribute in the next major release
+    'onverify' => null,
 
     // error message to display when pin is wrong
     'errorMessage' => __('bladewind::bladewind.otp_error_message'),
@@ -34,6 +35,7 @@
     $mask = parseBladewindVariable($mask);
     $input_css = ($size !== 'big') ? " w-14 text-xl" : "w-[75px] text-5xl";
     $cloak_size = ($size == 'big') ? " h-24" : "h-16";
+    $onverify = $onVerify;
 @endphp
 {{-- format-ignore-end --}}
 
@@ -47,7 +49,7 @@
                         with_dots="false"
                         add_clearing="false"
                         onkeydown="hidePinError('{{ $name }}')"
-                        onkeyup="moveCursorNext('{{ $name }}', {{ $x }}, {{ $totalDigits }}, '{{ $onVerify }}', event)"
+                        onkeyup="moveCursorNext('{{ $name }}', {{ $x }}, {{ $totalDigits }}, '{{ $onverify }}', event)"
                         class="shadow-sm text-center font-light text-black dark:text-dark-400 focus:!border-primary-600 {{$input_css}} {{ $name }}-pin-code {{ $name }}-pcode{{ $x }}"
                         maxlength="1"
                 />
