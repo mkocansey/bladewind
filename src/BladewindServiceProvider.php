@@ -13,7 +13,7 @@ class BladewindServiceProvider extends ServiceProvider
 
     public function boot()
     {
-//        require_once __DIR__.'/../src/BladewindHelpers.php';
+        require_once __DIR__.'/../src/BladewindHelpers.php';
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'bladewind');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'bladewind');
