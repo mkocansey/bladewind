@@ -79,13 +79,13 @@
     $showCloseIcon = parseBladewindVariable($showCloseIcon);
 
     $sizes = [
-        'tiny' => 'w-1/6',
-        'small' => 'w-1/5',
-        'medium' => 'w-1/4',
-        'big' => 'w-1/3',
-        'large' => 'w-2/5',
-        'xl' => 'w-2/3',
-        'omg' => 'w-11/12'
+        'tiny' => ['lg'=>'w-1/6', 'sm'=>'w-1/6'],
+        'small' => ['lg'=>'w-1/5', 'sm'=>'w-1/5'],
+        'medium' => ['lg' =>'w-1/3', 'sm'=>'w-1/4'],
+        'big' => ['lg'=>'w-1/3', 'sm'=>'w-1/3'],
+        'large' => ['lg'=>'w-2/5', 'sm'=>'w-2/5'],
+        'xl' => ['lg'=>'w-2/3', 'sm'=>'w-2/3'],
+        'omg' => ['lg'=>'w-11/12', 'sm'=>'w-11/12'],
     ];
 
     if (!$blurBackdrop) $blurSize = 'none';
@@ -127,7 +127,7 @@
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdropCanClose}}"
      class="w-full h-full bg-black/40 fixed left-0 top-0 {{$blur_intensity()}}
      z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
-    <div class="sm:{{$sizes[$size]}} lg:{{$sizes[$size]}} p-4 m-auto bw-{{$name}} animate__faster">
+    <div class="w-screen sm:{{$sizes[$size]['sm']}} lg:{{$sizes[$size]['lg']}} p-4 m-auto bw-{{$name}} animate__faster">
         <div class="bg-white relative dark:bg-dark-700/90 dark:border dark:border-dark-500/10 rounded-lg drop-shadow-2xl">
             @if( $showActionButtons && $showCloseIcon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">

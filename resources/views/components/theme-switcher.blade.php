@@ -10,6 +10,7 @@
     'iconType' => 'outline',
     'iconDir' => '',
     'modular' => false,
+    'class' => '',
     'nonce' => config('bladewind.script.nonce', null),
 ])
 @php
@@ -25,17 +26,17 @@
                     name="{{$lightIcon}}"
                     type="{{$iconType}}"
                     dir="{{$iconDir}}"
-                    class="text-primary-600 hover:text-primary-500 dark:!text-dark-500 dark:hover:text-dark-300 stroke-2 theme-light hidden"/>
+                    class="text-primary-600 hover:text-primary-500 dark:!text-dark-500 dark:hover:text-dark-300 stroke-2 theme-light hidden {{$class}}"/>
             <x-bladewind::icon
                     name="{{$darkIcon}}"
                     type="{{$iconType}}"
                     dir="{{$iconDir}}"
-                    class="text-primary-400 hover:text-primary-500 dark:!text-dark-500 dark:hover:!text-dark-400 stroke-2 theme-dark hidden"/>
+                    class="text-primary-400 hover:text-primary-500 dark:!text-dark-500 dark:hover:!text-dark-400 stroke-2 theme-dark hidden {{$class}}"/>
             <x-bladewind::icon
                     name="{{$systemIcon}}"
                     type="{{$iconType}}"
                     dir="{{$iconDir}}"
-                    class="text-primary-400 hover:text-primary-500 dark:!text-dark-500 dark:hover:!text-dark-400 stroke-2 theme-system hidden"/>
+                    class="text-primary-400 hover:text-primary-500 dark:!text-dark-500 dark:hover:!text-dark-400 stroke-2 theme-system hidden {{$class}}"/>
         </x-slot:trigger>
         <x-bladewind::dropmenu.item onclick="chooseTheme('light')" icon="{{$lightIcon}}" icon_css="stroke-2">
             {{$lightText}}
