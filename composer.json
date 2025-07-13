@@ -15,10 +15,7 @@
   "autoload": {
     "psr-4": {
       "Mkocansey\\Bladewind\\": "src/"
-    },
-    "files": [
-      "src/BladewindHelpers.php"
-    ]
+    }
   },
   "authors": [
     {
