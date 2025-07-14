@@ -63,6 +63,15 @@ const isEmpty = (val) => {
 };
 
 /**
+ * Check if this is a number
+ * @param value The value to test
+ * @return {boolean} True if string is empty
+ */
+const isNumeric = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+};
+
+/**
  * Hide an element.
  * @param {Element|boolean} element - The css class (name) of the element to hide.
  * @param {boolean} elementIsDomObject - If true, <element> will not be treated as a string but DOM element.

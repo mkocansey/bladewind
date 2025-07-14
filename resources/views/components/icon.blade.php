@@ -17,6 +17,7 @@
     $path = 'vendor/bladewind/icons';
     $icons_dir = ($dir !== '') ? $dir : ((! in_array($type, [ 'outline', 'solid' ])) ? "$path/outline" : "$path/$type");
     $svg_file = file_exists(public_path("$icons_dir/$name.svg")) ? public_path("$icons_dir/$name.svg") : null;
+    $svg_class = (preg_match('/\b(h|w|size)-\S+/', $class)) ? "inline-block $class" : "size-6 inline-block $class";
 @endphp
 {{-- format-ignore-end --}}
 
@@ -27,7 +28,7 @@
                 {{-- do this for complete svg tags --}}
                 {!!$name!!}
             @elseif($svg_file)
-                {!! str_replace('<svg', '<svg class="size-6 inline-block '.$class.'"', file_get_contents($svg_file)) !!}
+                {!! str_replace('<svg', '<svg class="'.$svg_class.'"', file_get_contents($svg_file)) !!}
             @endif
             @if(!empty($action)) </a>
     @endif
