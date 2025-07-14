@@ -1,4 +1,6 @@
 const colors = require("tailwindcss/colors");
+import animations from "./public/js/animations";
+
 module.exports = {
     darkMode: 'class',
     content: [
@@ -16,6 +18,7 @@ module.exports = {
         },
     },
     plugins: [
-        require('@tailwindcss/forms')
+        require('@tailwindcss/forms'),
+        animations
     ],
 };

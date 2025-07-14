@@ -19,7 +19,7 @@
 ])
 @php
     $hide = parseBladewindVariable($hide);
-    $name = parseBladewindName($name);
+//    $name = parseBladewindName($name);
 @endphp
 {{-- format-ignore-end --}}
 

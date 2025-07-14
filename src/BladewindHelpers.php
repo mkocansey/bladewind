@@ -25,6 +25,14 @@ const ACCEPTED_BLADEWIND_ASPECT_RATIOS = [
     '2:3',
     '1:1',
 ];
+const ACCEPTED_BLADEWIND_SIZES = [
+    'tiny',
+    'small',
+    'medium',
+    'large',
+    'xl',
+    'omg',
+];
 
 function isValidBladewindColour($colour): bool
 {
