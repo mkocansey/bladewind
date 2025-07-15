@@ -96,7 +96,7 @@
     $defaultPage = parseBladewindVariable($defaultPage, 'int');
 
     $name = preg_replace('/[\s-]/', '_', $name);
-    $iconsArray = $indices = [];
+    $iconsArray = [];
     $canGroup = false;
 
     $excludeColumns = !empty($excludeColumns) ? explode(',', str_replace(' ','', $excludeColumns)) : [];
