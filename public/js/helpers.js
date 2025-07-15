@@ -4,9 +4,7 @@
  * ----------------------------------------------
  */
 
-const currentModal = [];
-let elName;
-
+const openModals = [];
 /**
  * Shortcut for document.querySelector.
  * @param {string} element - The element to find in the DOM.
@@ -20,9 +18,7 @@ const domEl = (element) => {
 /**
  * Alias for domEl(element)
  */
-const dom_el = (element) => {
-    return domEl(element);
-};
+const dom_el = domEl;
 
 /**
  * Shortcut for document.querySelectorAll.
@@ -48,9 +44,7 @@ const domEls = (element, scope = null) => {
 /**
  * Alias for domEls(element)
  */
-const dom_els = (element) => {
-    return domEls(element);
-};
+const dom_els = domEls;
 
 /**
  * Check to see if val is empty
@@ -60,6 +54,15 @@ const dom_els = (element) => {
 const isEmpty = (val) => {
     let regex = /^\s*$/;
     return regex.test(val);
+};
+
+/**
+ * Check if this is a number
+ * @param value The value to test
+ * @return {boolean} True if string is empty
+ */
+const isNumeric = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
 };
 
 /**
@@ -291,24 +294,23 @@ const changeCssForDomArray = (elements, css, mode = 'add') => {
  * @return {void}
  * @see {@link https://bladewindui.com/extra/helper-functions#animatecss}
  */
-const animateCSS = (element, animation) =>
-    new Promise((resolve, reject) => {
-        const animationName = `animate__${animation}`;
+const animateCss = (element, animation) => {
+    return new Promise((resolve, reject) => {
+        const animationClass = `animate__${animation}`;
         const node = domEl(element);
-        if (node) {
-            node.classList.remove('hidden');
-            node.classList.add('animate__animated', animationName);
-            document.documentElement.style.setProperty('--animate-duration', '.5s');
+        if (!node) return resolve();
 
-            function handleAnimationEnd(event) {
-                node.classList.remove('animate__animated', animationName);
-                event.stopPropagation();
-                resolve('Animation ended');
-            }
-
-            node.addEventListener('animationend', handleAnimationEnd, {once: true});
-        }
+        node.classList.remove('hidden');
+        node.classList.add('animate__animated', animationClass);
+        document.documentElement.style.setProperty('--animate-duration', '.5s');
+        node.addEventListener('animationend', function handler() {
+            node.classList.remove('animate__animated', animationClass);
+            node.removeEventListener('animationend', handler);
+            resolve();
+        }, {once: true});
     });
+}
+const animateCSS = animateCss;
 /**
  * Display a modal.
  * @param {string} element - The css class (name) of the modal.
@@ -320,9 +322,9 @@ const showModal = (element, placeholders = {}) => {
     unhide(`.bw-${element}-modal`);
     document.body.classList.add('overflow-hidden');
     domEl(`.bw-${element}-modal`).focus();
-    let index = (currentModal.length === 0) ? 0 : currentModal.length + 1;
-    animateCSS(`.bw-${element}`, 'zoomIn').then(() => {
-        currentModal[index] = element;
+    let index = (openModals.length === 0) ? 0 : openModals.length + 1;
+    animateCss(`.bw-${element}`, 'zoomIn').then(() => {
+        openModals[index] = element;
         if (Object.keys(placeholders).length > 0) {
             const modalBody = domEl(`.bw-${element}-modal .modal-body`);
             if (!window.originalContent) {
@@ -340,7 +342,7 @@ const showModal = (element, placeholders = {}) => {
  * @return {void}
  */
 const trapFocusInModal = (event) => {
-    let modalName = currentModal[(currentModal.length - 1)];
+    let modalName = openModals[(openModals.length - 1)];
     if (modalName !== undefined) {
         const focusableElements = domEls(`.bw-${modalName}-modal input:not([type='hidden']):not([class*='hidden']), .bw-${modalName}-modal button:not([class*="hidden"]),  .bw-${modalName}-modal a:not([class*="hidden"])`);
         const firstElement = focusableElements[0];
@@ -363,11 +365,13 @@ const trapFocusInModal = (event) => {
  * @see {@link https://bladewindui.com/extra/helper-functions#hidemodal}
  */
 const hideModal = (element) => {
-    animateCSS(`.bw-${element}`, 'zoomOut').then(() => {
-        hide(`.bw-${element}-modal`);
-        currentModal.pop();
+    animateCss(`.bw-${element}`, 'zoomOut').then(() => {
+        openModals.pop();
         document.body.classList.remove('overflow-hidden');
         domEl(`.bw-${element}-modal`).removeEventListener('keydown', trapFocusInModal);
+        animateCss(`.bw-${element}-modal`, 'zoomOut').then(() => {
+            hide(`.bw-${element}-modal`);
+        });
     });
 };
 

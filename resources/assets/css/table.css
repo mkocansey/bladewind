@@ -12,7 +12,7 @@
     }
 
     .bw-table tr > td.group-heading {
-        @apply bg-gray-200/70 hover:pointer-events-none dark:bg-dark-800/60 hover:dark:!pointer-events-none text-slate-700 dark:text-dark-400
+        @apply bg-gray-200/70 dark:bg-dark-800/60 text-slate-700 dark:text-dark-400 hover:bg-gray-200/70 hover:dark:bg-dark-800/60
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
@@ -67,7 +67,7 @@
         @apply border-x-0 border-t-0 border-b-4 border-double border-gray-300 dark:border-dark-700 border-separate
     }
 
-    .bw-table.with-hover-effect tr:hover > td {
+    .bw-table.with-hover-effect tr:not(.no-hover):hover > td {
         @apply bg-gray-100/40 dark:bg-dark-600/30
     }
 
@@ -79,11 +79,11 @@
         @apply pr-5
     }
 
-    .bw-table.with-hover-effect tr:hover > td:first-child {
+    .bw-table.with-hover-effect tr:not(.no-hover):hover > td:first-child {
         @apply border-l-2 border-l-slate-400 dark:border-l-dark-500
     }
 
-    .bw-table.with-hover-effect tr:hover > td:last-child {
+    .bw-table.with-hover-effect tr:not(.no-hover):hover > td:last-child {
         @apply border-r-2 border-r-slate-400 dark:border-r-dark-500
     }
 

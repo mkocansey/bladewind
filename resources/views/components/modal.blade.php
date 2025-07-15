@@ -79,17 +79,17 @@
     $showCloseIcon = parseBladewindVariable($showCloseIcon);
 
     $sizes = [
-        'tiny' => ['lg'=>'w-1/6', 'sm'=>'w-1/6'],
-        'small' => ['lg'=>'w-1/5', 'sm'=>'w-1/5'],
-        'medium' => ['lg' =>'w-1/3', 'sm'=>'w-1/4'],
-        'big' => ['lg'=>'w-1/3', 'sm'=>'w-1/3'],
-        'large' => ['lg'=>'w-2/5', 'sm'=>'w-2/5'],
-        'xl' => ['lg'=>'w-2/3', 'sm'=>'w-2/3'],
-        'omg' => ['lg'=>'w-11/12', 'sm'=>'w-11/12'],
+        'tiny' => 'sm:w-72',
+        'small' => 'sm:w-96',
+        'medium' => 'sm:w-[32rem]',
+        'large' => 'sm:w-[60rem]',
+        'xl' => 'sm:w-[86rem]',
+        'omg' => 'max-w-screen',
     ];
 
     if (!$blurBackdrop) $blurSize = 'none';
     if(!in_array($alignButtons, ['right', 'center', 'left'])) $alignButtons = 'right';
+    if(!in_array($size, ACCEPTED_BLADEWIND_SIZES)) $size = 'medium';
 
 //    $name = str_replace(' ', '-', $name);
     $cancelCss = ($cancelButtonLabel == '') ? 'hidden' : '';
@@ -98,6 +98,7 @@
     if($okButtonAction !== 'close') $okAction = $okButtonAction . (($closeAfterAction) ? ';'.$okAction : '');
     if($cancelButtonAction !== 'close') $cancelAction = $cancelButtonAction . (($closeAfterAction) ? ';'.$cancelAction : '');
     $button_size = ($stretchActionButtons) ? 'medium' : (($size == 'tiny') ? 'tiny' : 'small');
+    $sizes['big'] = $sizes['large']; // big maintained for backward compatibility
 
     // get colours that match the various types
    $type_colour = function() use ($type) {
@@ -116,7 +117,6 @@
            'small' => "backdrop-blur-sm",
            'large' => "backdrop-blur-lg",
            'xl' => "backdrop-blur-xl",
-           'xxl' => "backdrop-blur-2xl",
            'omg' => "backdrop-blur-3xl",
            default => "backdrop-blur-md",
        };
@@ -125,16 +125,15 @@
 {{-- format-ignore-end --}}
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdropCanClose}}"
-     class="w-full h-full bg-black/40 fixed left-0 top-0 {{$blur_intensity()}}
-     z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
-    <div class="w-screen sm:{{$sizes[$size]['sm']}} lg:{{$sizes[$size]['lg']}} p-4 m-auto bw-{{$name}} animate__faster">
+     class="fixed inset-0 flex items-center justify-center bg-black/40 {{$blur_intensity()}} z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
+    <div class="w-screen {{$sizes[$size]}} @if($size=='omg') sm:px-12 @endif px-5 m-auto bw-{{$name}} animate__faster">
         <div class="bg-white relative dark:bg-dark-700/90 dark:border dark:border-dark-500/10 rounded-lg drop-shadow-2xl">
             @if( $showActionButtons && $showCloseIcon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
                             name="x-mark"
-                            class="p-1 stroke-2 modal-close-icon right-4 top-4 absolute rounded-full !size-7
-                            text-gray-400 hover:text-gray-200 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-100
+                            class="p-1 stroke-2 modal-close-icon right-2.5 top-2.5 absolute rounded-full
+                            text-gray-500 hover:text-gray-200 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-200
                             hover:bg-gray-700 dark:bg-dark-700/80 dark:hover:bg-dark-700"/>
                 </a>
             @endif
@@ -145,17 +144,17 @@
                             <x-bladewind::modal-icon
                                     type="{{ $type }}"
                                     icon="{{$icon}}"
-                                    class="!size-14 p-2.5 rounded-full bg-{{$type_colour}}-100 dark:bg-{{$type_colour}}-600
+                                    class="size-14 p-2.5 rounded-full bg-{{$type_colour}}-100 dark:bg-{{$type_colour}}-600
                                     text-{{$type_colour}}-600 dark:text-{{$type_colour}}-100 stroke-1"/>
                         @endif
                         @if(!empty($icon) && empty($type))
-                            <x-bladewind::icon name="{{ $icon }}" class="!h-14 !w-14 {{$iconCss}}"/>
+                            <x-bladewind::icon name="{{ $icon }}" class="size-14 {{$iconCss}}"/>
                         @endif
                     </div>
                 @endif
                 <div class="modal-body grow px-2 pb-1 {{ $bodyCss  }}">
                     <h1 class="text-lg font-light leading-5 text-gray-800 dark:text-dark-400 tracking-wide modal-title text-left pt-2">{{ $title }}</h1>
-                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-sm text-left font-light leading-[22.5px] tracking-wide">
+                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-base text-left font-light tracking-wide leading-6">
                         {{ $slot }}
                     </div>
                 </div>
@@ -163,10 +162,11 @@
             @if( $showActionButtons )
                 <div @class([
                     'modal-footer bg-gray-100 dark:bg-dark-800/50 border-t border-t-gray-200 dark:border-t-dark-600/50',
-                    'py-3 px-6 rounded-br-lg rounded-bl-lg space-x-2 '. $footerCss,
-                    'flex flex-col-reverse space-x-0' => $stretchActionButtons,
-                    'text-center' => $centerActionButtons || $size == 'tiny',
-                    'text-'.$alignButtons => !$centerActionButtons || $size != 'tiny'])>
+                    'py-3 px-6 rounded-br-lg rounded-bl-lg '. $footerCss,
+                    ' space-x-2' => !$stretchActionButtons,
+                    'flex flex-col-reverse' => $stretchActionButtons,
+                    'text-center' => ($centerActionButtons || $size == 'tiny'),
+                    'text-'.$alignButtons => !$centerActionButtons && $size != 'tiny'])>
                     <x-bladewind::button
                             type="secondary"
                             size="{{$button_size}}"
@@ -209,8 +209,8 @@
 
     document.addEventListener('keyup', function (e) {
     if (e.key === "Escape") {
-    if (currentModal !== undefined && currentModal.length > 0) {
-    let modalName = currentModal[(currentModal.length - 1)];
+    if (openModals !== undefined && openModals.length > 0) {
+    let modalName = openModals[(openModals.length - 1)];
     if (domEl(`.bw-${modalName}-modal`).getAttribute('data-backdrop-can-close') === '1') {
     hideModal(modalName);
     e.stopImmediatePropagation();
