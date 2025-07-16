@@ -11,3 +11,20 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+    :root {
+        --slide-distance: 2rem;
+        --fade-distance: 1rem;
+        --zoom-duration: 0.5s;
+        --shimmer-duration: 1.5s;
+        --shimmer-angle: 90deg;
+        --shimmer-mode: alternate;
+        --shimmer-direction: 1;
+        --shimmer-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .dark {
+        --shimmer-color: rgba(255, 255, 255, 0.1);
+    }
+}

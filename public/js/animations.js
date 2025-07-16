@@ -32,7 +32,7 @@ export default function ({addUtilities}) {
             '0%': {opacity: '0', transform: 'translateX(var(--fade-distance))'},
             '100%': {opacity: '1', transform: 'translateX(0)'},
         },
-        '@keyframes shimmer-alternate': {
+        '@keyframes shimmerAlternate': {
             '0%': {left: 'calc(-150% * var(--shimmer-direction, 1))'},
             '100%': {left: '100%'},
         },
@@ -44,7 +44,7 @@ export default function ({addUtilities}) {
             '0%': {transform: 'scale(1)', opacity: '1'},
             '100%': {transform: 'scale(0)', opacity: '0'},
         },
-    }
+    };
 
     const utilities = {
         '.animate-slideInLeft': {animation: 'slideInLeft var(--slide-duration) ease-out forwards'},
@@ -57,22 +57,19 @@ export default function ({addUtilities}) {
         '.animate-fadeInRight': {animation: 'fadeInRight var(--fade-duration) ease-out forwards'},
         '.animate-zoomIn': {animation: 'zoomIn var(--zoom-duration, 0.5s) ease-out forwards'},
         '.animate-zoomOut': {animation: 'zoomOut var(--zoom-duration, 0.5s) ease-out forwards'},
-        '.shimmer': {
-            position: 'relative',
-            overflow: 'hidden',
-        },
-        '.shimmer::after': {
+        '.bw-shimmer::after': {
             content: '""',
             position: 'absolute',
             top: '0',
-            left: 'calc(-150% * var(--shimmer-direction, 1))',
+            left: 'calc(-150% * 1)',
             height: '100%',
             width: '150%',
-            background: 'linear-gradient(90deg, transparent, var(--shimmer-highlight, rgba(255,255,255,0.3)), transparent)',
-            animation: 'shimmer-alternate var(--shimmer-duration, 1.5s) infinite alternate',
+            background: 'linear-gradient(var(--shimmer-angle, 90deg), transparent, var(--shimmer-color, rgba(255,255,255,0.6)), transparent)',
+            animation: 'shimmerAlternate var(--shimmer-duration,1s) infinite',
+            'animation-direction': 'var(--shimmer-mode, alternate)',
         },
-    }
+    };
 
-    addUtilities(keyframes)
-    addUtilities(utilities)
+    addUtilities(keyframes);
+    addUtilities(utilities);
 }
