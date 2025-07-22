@@ -48,7 +48,7 @@
     }
 
     .bw-table-filter-bar {
-        @apply bg-slate-200/50 p-1.5 dark:bg-dark-800/30 rounded-md
+        @apply bg-slate-200/50 dark:bg-dark-800/30 rounded-md
     }
 
     .bw-table-filter-bar input {

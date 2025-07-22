@@ -167,16 +167,16 @@
 ])>
     <div class="w-full">
         @if($searchable)
-            <div class="bw-table-filter-bar @if($hasShadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif">
-                <input
+            <div class="bw-table-filter-bar p-2 @if($hasShadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif">
+                <x-bladewind::input
                         name="bw-search-{{$name}}"
                         placeholder="{{$searchPlaceholder}}"
-                        onInput="filterTableDebounced(this.value, 'table.{{$name}}', '{{$searchField}}', {{$searchDebounce}}, {{$searchMinLength}}, tableData_{{str_replace('-','_', $name)}})();"
                         add_clearing="false"
-                        class="!mb-0 focus:!border-slate-300 !pl-9 !py-3"
                         clearable="true"
-                        prefix_is_icon="true"
-                        prefix="magnifying-glass"/>
+                        class="!border-0 !outline-transparent focus:!border-none focus:!outline-transparent !py-2.5"
+                        onInput="filterTableDebounced(this.value, 'table.{{$name}}', '{{$searchField}}', {{$searchDebounce}}, {{$searchMinLength}}, tableData_{{str_replace('-','_', $name)}})();"
+                        prefix="magnifying-glass"
+                        prefix_is_icon="true"/>
             </div>
         @endif
         <table @if($paginated) data-current-page="{{$defaultPage}}" @endif @class([
