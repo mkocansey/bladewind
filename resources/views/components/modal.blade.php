@@ -82,6 +82,7 @@
         'tiny' => 'sm:w-72',
         'small' => 'sm:w-96',
         'medium' => 'sm:w-[32rem]',
+        'big' => 'sm:w-[48rem]',
         'large' => 'sm:w-[60rem]',
         'xl' => 'sm:w-[86rem]',
         'omg' => 'w-full',
@@ -98,7 +99,6 @@
     if($okButtonAction !== 'close') $okAction = $okButtonAction . (($closeAfterAction) ? ';'.$okAction : '');
     if($cancelButtonAction !== 'close') $cancelAction = $cancelButtonAction . (($closeAfterAction) ? ';'.$cancelAction : '');
     $button_size = ($stretchActionButtons) ? 'medium' : (($size == 'tiny') ? 'tiny' : 'small');
-    $sizes['big'] = $sizes['large']; // big maintained for backward compatibility
 
     // get colours that match the various types
    $type_colour = function() use ($type) {
