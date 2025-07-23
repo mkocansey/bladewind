@@ -255,7 +255,7 @@
                                     @foreach($tableHeadings as $th)
                                         <td data-row-id="{{ $row_id }}" data-column="{{ $th }}">{!! $row[$th] !!}</td>
                                     @endforeach
-                                    <table-icons :icons_array="$iconsArray" :row="$row"/>
+                                    <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
                                 </tr>
                             @endforeach
                         @endforeach
@@ -279,7 +279,7 @@
                                         data-column="{{ $th }}">{!! $row[$th] !!}</td>
                                     {{--                                    @endif--}}
                                 @endforeach
-                                <table-icons :icons_array="$iconsArray" :row="$row"/>
+                                <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
                             </tr>
                         @endforeach
                     @endif
