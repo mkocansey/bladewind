@@ -1137,13 +1137,13 @@
 
     /* correct box sizing, line-height and positioning on child elements */
     border-radius: 0.5em;
-    background-color: rgb(241, 245, 249);
-    border: 2px dashed rgba(202, 213, 226, 0.5);
+    background-color: rgba(241, 245, 249, 0.2);
+    border: 1px dashed rgba(148, 163, 184, 0.6); /*rgba(202, 213, 226, 0.5);*/
     cursor: pointer;
 }
 
 .filepond--root:hover {
-    border: 2px dashed rgba(144, 161, 185, 0.5);
+    border: 1px dashed rgba(148, 163, 184, 1);; /*rgba(144, 161, 185, 0.5);*/
 }
 
 
@@ -1206,4 +1206,13 @@
 .filepond--file-action-button:hover.filepond--action-remove-item svg {
     color: rgb(239, 158, 158);
     transition: color 0.25s ease-in;
-/*}*/
+}
+
+.dark .filepond--root {
+    background-color: rgba(241, 245, 249, 0.03);
+    border: 1px dashed rgba(148, 163, 184, 0.4);
+}
+
+.dark .filepond--root:hover {
+    border: 1px dashed rgba(148, 163, 184, 0.8);
+}

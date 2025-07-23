@@ -39,7 +39,7 @@
         'bg-white dark:bg-dark-800/30 bw-selectable-card cursor-pointer focus:outline-none flex',
         'items-center' => ($alignItems == 'center'),
         'items-start' => ($alignItems != 'center'),
-        "border$border_width border-$border_colour-400/50 hover:border-$border_colour-500/80 dark:border-dark-500 dark:hover:border-dark-500",
+        "border$border_width border-$border_colour-400/50 hover:border-$border_colour-500/80 dark:border-dark-500/80 dark:hover:border-dark-400/70",
         $class => (!empty($class)),
         $radii[$radius],
         $name,
@@ -61,9 +61,9 @@
     </div>
     <div class="grow">
         @if(!empty($title))
-            <div class="text-base tracking-wide font-medium text-slate-900">{{$title}}</div>
+            <div class="text-base tracking-wide font-medium text-slate-900 dark:text-dark-200">{{$title}}</div>
         @endif
-        <div class="text-slate-500">
+        <div class="text-slate-500 dark:text-dark-400">
             {{$slot}}
         </div>
     </div>

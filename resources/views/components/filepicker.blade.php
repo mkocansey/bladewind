@@ -150,9 +150,9 @@
 
 <div class="bw-filepicker-placeholder-{{$cleanName}} space-y-2 flex hidden align-middle py-3">
     <div>
-        <x-bladewind::icon name="arrow-up-tray" class="!size-14 rounded-full p-3 bg-white stroke-2 text-slate-400"/>
+        <x-bladewind::icon name="note-2" class="size-14 rounded-full p-2 bg-gray-200/50 stroke-2 text-slate-400 dark:bg-dark-100/50 dark:invert dark:opacity-30"/>
     </div>
-    <div class="text-left pl-2.5 pt-1.5">
+    <div class="text-left pl-2.5 pt-1.5 dark:text-dark-200">
         <div>{!! $placeholderLine1 !!}</div>
         <div class="!text-xs tracking-wider opacity-70">
         {{

@@ -87,7 +87,7 @@
         <div class="text-right" onclick="this.parentElement.style.display='none'">
             <x-bladewind::icon
                     name="x-mark"
-                    class="size-[18px] p-[3px] stroke-2 cursor-pointer {{$close_icon_css}} bg-white/20 hover:bg-white/60 rounded-full hover:text-slate-600"/>
+                    class="size-[18px] -mt-[2px] p-[3px] stroke-2 cursor-pointer {{$close_icon_css}} bg-white/20  hover:bg-white/60 rounded-full hover:text-slate-600"/>
         </div>
     @endif
 </div>
