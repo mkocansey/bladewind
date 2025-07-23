@@ -29,6 +29,7 @@ const ACCEPTED_BLADEWIND_SIZES = [
     'tiny',
     'small',
     'medium',
+    'big',
     'large',
     'xl',
     'omg',
