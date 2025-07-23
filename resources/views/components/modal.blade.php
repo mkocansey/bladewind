@@ -84,7 +84,7 @@
         'medium' => 'sm:w-[32rem]',
         'large' => 'sm:w-[60rem]',
         'xl' => 'sm:w-[86rem]',
-        'omg' => 'max-w-screen',
+        'omg' => 'w-full',
     ];
 
     if (!$blurBackdrop) $blurSize = 'none';
@@ -126,15 +126,15 @@
 
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdropCanClose}}"
      class="fixed inset-0 flex items-center justify-center bg-black/40 {{$blur_intensity()}} z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
-    <div class="{{$sizes[$size]}} @if($size=='omg') sm:px-12 @else max-w-screen-sm @endif px-5 m-auto bw-{{$name}} animate__faster">
+    <div class="{{$sizes[$size]}} @if($size=='omg') sm:px-12 @else max-w-screen @endif px-5 m-auto bw-{{$name}} animate__faster">
         <div class="bg-white relative dark:bg-dark-700/90 dark:border dark:border-dark-500/10 rounded-lg drop-shadow-2xl">
             @if( $showActionButtons && $showCloseIcon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
                             name="x-mark"
                             class="p-1 stroke-2 modal-close-icon right-2.5 top-2.5 absolute rounded-full
-                            text-gray-500 hover:text-gray-200 dark:text-dark-400 hover:dark:text-dark-400 bg-gray-200
-                            hover:bg-gray-700 dark:bg-dark-700/80 dark:hover:bg-dark-700"/>
+                            text-gray-500 hover:text-gray-200 bg-gray-200
+                            hover:bg-gray-700 dark:bg-dark-800 dark:hover:bg-dark-900 dark:hover:text-dark-400"/>
                 </a>
             @endif
             <div class="{{(!empty($type) || !empty($icon))?'flex':'flex-initial'}} p-5">
