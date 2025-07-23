@@ -93,7 +93,7 @@ class BladewindNotification {
     }
 
     template = () => {
-        return `<div class="flex border-l-[6px] border-y-[1px] border-y-gray-200/50 border-opacity-80 ${this.name} border-l-${this.typeColour(this.type)}-500
+        return `<div class="flex border-l-[6px] border-y-[1px] border-y-gray-200/50 dark:border-y-dark-500/50 border-opacity-80 ${this.name} border-l-${this.typeColour(this.type)}-500
                 bg-white dark:bg-dark-800/95 shadow-md dark:shadow-slate-800/50 p-4 rounded-lg mb-3">
             <div class="pr-4 grow-0">${this.modalIcon()}</div>
             <div class="pb-1 pr-4 relative grow">
@@ -106,7 +106,8 @@ class BladewindNotification {
 
     closeIcon = () => {
         return `<svg xmlns="http://www.w3.org/2000/svg" class="close ${this.sizes[this.size].close} absolute -right-1 cursor-pointer
-                    -top-1 text-gray-400 sm:!max-w-[350px] hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-900 p-1" fill="none"
+                    -top-1 text-gray-400 hover:text-gray-500 dark:hover:text-dark-100 sm:!max-w-[350px] 
+                    bg-gray-200 hover:bg-gray-300 rounded-full dark:bg-dark-900 dark:hover:bg-dark-950 p-1" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>`;
     }
