@@ -96,7 +96,8 @@
 
     $colour = (!empty($color)) ? $color : $type;
     $outline_colour =   "border-$colour-500/50 focus:ring-$colour-500 hover:border-$colour-600
-                        dark:hover:border-$colour-500 active:border-$colour-600 text-$colour-600  %s";
+                        dark:hover:border-$colour-200 active:border-$colour-600 text-$colour-600
+                        dark:text-dark-400 dark:hover:text-dark-300  %s";
     $button_colour =    "!bg-$colour-500 hover:!bg-$colour-600 focus:ring-$colour-500 active:bg-$colour-600 %s";
 
     if($colour == 'black') {

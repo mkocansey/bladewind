@@ -153,8 +153,8 @@
                     </div>
                 @endif
                 <div class="modal-body grow px-2 pb-1 {{ $bodyCss  }}">
-                    <h1 class="text-lg font-light leading-5 text-gray-800 dark:text-dark-400 tracking-wide modal-title text-left pt-2">{{ $title }}</h1>
-                    <div class="modal-text text-gray-500 dark:text-slate-400 pt-2 text-base text-left font-light tracking-wide leading-6">
+                    <h1 class="text-lg font-light leading-5 text-gray-800 dark:text-dark-200 tracking-wide modal-title text-left pt-2">{{ $title }}</h1>
+                    <div class="modal-text text-gray-500 dark:text-dark-300 pt-2 text-base text-left font-light tracking-wide leading-6">
                         {{ $slot }}
                     </div>
                 </div>

@@ -39,7 +39,7 @@
     $isContactCard = parseBladewindVariable($isContactCard);
     $noPadding = parseBladewindVariable($noPadding);
 
-    $class = "bg-white dark:bg-dark-800/30 rounded-lg $class";
+    $class = "bg-white dark:bg-dark-800/25 rounded-lg $class";
     $contact_card_css =   ($isContactCard) ? 'bw-contact-card' : 'bw-card';
     $has_border_css =   ($hasBorder) ? 'border border-slate-200 dark:border-dark-600/60 focus:outline-none' : '';
     $header_compact_css =   (!$header && ! $compact && !$noPadding) ? 'p-6' : (($compact) ? 'p-4' : '');
