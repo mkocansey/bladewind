@@ -163,7 +163,7 @@
 </x-bladewind::script>
 <div @class([
     'border-collapse max-w-full',
-    'border border-gray-200/70 dark:border-dark-700/60' => ($hasBorder && !$celled)
+    'border border-gray-200/70 dark:border-dark-600' => ($hasBorder && !$celled)
 ])>
     <div class="w-full">
         @if($searchable)
@@ -287,7 +287,7 @@
                         <tr>
                             <td colspan="{{count($tableHeadings)}}" class="text-center">
                                 @if($messageAsEmptyState)
-                                    <empty-state
+                                    <x-bladewind::empty-state
                                             :message="$noDataMessage"
                                             :buttonLabel="$buttonLabel"
                                             :onclick="$onclick"

@@ -186,7 +186,7 @@
              data-transparency="{{$transparent_prefix}}">
             @if($prefix_is_icon)
                 <x-bladewind::icon name='{!! $prefix !!}' type="{{ $prefixIconType }}"
-                                   class="!size-4 !stroke-2 !opacity-70 hover:!opacity-100 {{$prefixIconCss}}"/>
+                                   class="!size-[18px] !stroke-2 !opacity-70 hover:opacity-100 mr-2 {{$prefixIconCss}}"/>
             @else
                 {!! $prefix !!}
             @endif</div>

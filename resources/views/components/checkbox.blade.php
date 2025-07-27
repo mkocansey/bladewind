@@ -18,8 +18,8 @@
     $colour = defaultBladewindColour($color);
     $addClearing = parseBladewindVariable($addClearing);
     $text_colour = ($colour == 'black') ? 'text-black' : "text-$colour-600 dark:bg-dark-800";
-    $ring_colour = ($colour == 'black') ? 'ring-black' : "ring-$colour-500";
-    $border_colour = ($colour == 'black') ? 'border-slate-500/50' : "border-$colour-500/50";
+    $ring_colour = ($colour == 'black') ? 'ring-black' : "ring-$colour-500 dark:ring-dark-500";
+    $border_colour = ($colour == 'black') ? 'border-slate-500/50' : "border-$colour-500/50 dark:border-dark-500/80";
 @endphp
 {{-- format-ignore-end --}}
 

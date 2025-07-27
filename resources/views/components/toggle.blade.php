@@ -29,7 +29,7 @@
     $justified = parseBladewindVariable($justified);
     $bar = (!in_array($bar, ['thin', 'thick', 'thicker'])) ? 'thick' : $bar;
     $colour = defaultBladewindColour($color);
-    $bar_colour = "peer-checked:bg-$colour-600 after:border-$colour-100";
+    $bar_colour = "peer-checked:bg-$colour-600 after:border-$colour-100 dark:after:border-red-700";
 
     // build size of the bar and circle
     $bar_circle_size = [
@@ -47,9 +47,9 @@
     <input type="checkbox" @if($checked) checked @endif @if($disabled) disabled @endif onclick="{!!$onclick!!}"
            name="{{$name}}"
            class="peer sr-only appearance-none {{$name}}"/>
-    <span class="flex items-center flex-shrink-0 p-1 bg-gray-900/10 dark:bg-dark-800/50 rounded-full cursor-pointer
+    <span class="flex items-center flex-shrink-0 p-1 bg-gray-900/10 dark:bg-dark-800 rounded-full cursor-pointer
     peer-disabled:opacity-40 rtl:peer-checked:after:-translate-x-full peer-checked:after:translate-x-full transition
-    duration-200 ease-in-out after:transition after:duration-200 after:ease-in-out after:bg-white after:shadow-sm after:ring-1 after:ring-slate-700/10
+    duration-200 ease-in-out after:transition after:duration-200 after:ease-in-out after:bg-white dark:after:bg-dark-400 after:shadow-sm after:ring-1 after:ring-slate-700/10
     after:rounded-full bw-tgl-sp-{{$name}} {{$bar_circle_size[$bar]}} {{$bar_colour}} {{$class}}"></span>
     @if($labelPosition=='right' && $label !== '')
         <span class="pl-4 rtl:pr-4 {{$class}}">{!!$label!!}</span>

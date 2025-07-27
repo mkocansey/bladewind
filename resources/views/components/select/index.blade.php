@@ -156,11 +156,12 @@
      @if(!empty($emptyStateFrom)) data-copy-empty-state-from="{{ $emptyStateFrom}}" @endif
      @if($data == 'manual' && $selectedValue != '') data-selected-value="{{implode(',',$selectedValue)}}" @endif>
     <div tabindex="0"
-         class="flex justify-between text-sm items-center rounded-md bg-white text-slate-600 border dark:bg-transparent
-         dark:text-dark-300 {{$sizes[$size]}} pl-4 pr-2 clickable focus:border-2 focus:border-primary-500
+         class="flex justify-between text-sm items-center rounded-md bg-white text-gray-600
+         dark:text-dark-300 {{$sizes[$size]}} pl-4 pr-2 clickable focus:!outline-primary-500
+         focus:!border-primary-500  dark:focus:!border-primary-500  dark:focus:!outline-primary-500
          @if($disabled) disabled @elseif($readonly) readonly @else enabled @endif">
         <x-bladewind::icon name="chevron-left" class="!-ml-3 hidden scroll-left"/>
-        <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-slate-500">
+        <div class="text-left placeholder grow-0 text-blue-900/40 dark:text-dark-400/60">
             @if(!empty($label))
                 <span class="form-label !top-[13px]">{{$label}}
                     @if($required)
@@ -177,25 +178,25 @@
         <div class="whitespace-nowrap inline-flex">
             <x-bladewind::icon name="chevron-right" class="scroll-right !-mr-2 !mt-0.5 !w-5 !h-5 hidden"/>
             <x-bladewind::icon
-                    name="x-circle" type="solid"
-                    class="hidden reset size-6 text-white fill-gray-400/70 hover:fill-gray-400 dark:fill-white/40 dark:hover:fill-white/60"/>
+                    name="x-mark" type="solid"
+                    class="hidden reset size-5 rounded-full p-1 text-gray-600 hover:text-gray-800 dark:text-dark-300 bg-gray-200 hover:bg-gray-300 dark:bg-dark-800/60 dark:hover:bg-dark-900"/>
             <x-bladewind::icon name="chevron-up-down" class="opacity-40 opener !ml-2"/>
         </div>
     </div>
-    <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-slate-400 dark:shadow-none border-2
-        border-primary-600 dark:text-slate-300 dark:border-dark-600 dark:bg-dark-700 border-t-0 -mt-1.5
+    <div class="w-full absolute z-30 rounded-br-lg rounded-bl-lg bg-white shadow-sm shadow-gray-400 dark:shadow-none border-2
+        border-primary-500 dark:text-gray-300 dark:bg-dark-700 border-t-0 -mt-1.5
         hidden bw-select-items-container overflow-scroll max-h-64 animate__animated animate__fadeIn animate__faster">
-        <div class="sticky top-0 min-w-full bg-slate-100 dark:bg-transparent py-1 pr-0 -pl-1 search-bar @if(!$searchable) hidden @endif">
+        <div class="sticky top-0 min-w-full bg-gray-100 dark:bg-transparent py-1 pr-0 -pl-1 search-bar @if(!$searchable) hidden @endif">
             <x-bladewind::input
                     class="!border-0 !rounded-none focus:!outline-none !w-full !text-sm bw_search"
                     add_clearing="false"
                     :placeholder="$searchPlaceholder"
                     suffix="magnifying-glass"
-                    onfocus="changeCss('.bw-select-{{$input_name}} .clickable', 'border-2,!border-primary-500')"
-                    onblur="changeCss('.bw-select-{{$input_name}} .clickable', 'border-2,!border-primary-500','remove')"
+                    onfocus="changeCss('.bw-select-{{$input_name}} .clickable', '!border-2, !outline-2, !-outline-offset-1, !outline-primary-500, !border-primary-500, dark:!border-primary-500, dark:!outline-primary-500')"
+                    onblur="changeCss('.bw-select-{{$input_name}} .clickable', '!border-2, !outline-2, !-outline-offset-1, !outline-primary-500, !border-primary-500, dark:!border-primary-500, dark:!outline-primary-500','remove')"
                     suffixIsIcon="true"/>
         </div>
-        <div class="divide-y divide-slate-100 dark:divide-slate-600/70 bw-select-items mt-0">
+        <div class="divide-y divide-gray-100 dark:divide-dark-600/80 bw-select-items mt-0">
             @if($data !== 'manual')
                 @foreach($data as $item)
                     <x-bladewind::select.item
