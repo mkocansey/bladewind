@@ -1,7 +1,7 @@
 @layer components {
 
     .bw-tab {
-        @apply border-b border-gray-200 dark:border-dark-600/80
+        @apply border-b border-gray-200 dark:border-dark-500
     }
 
     .bw-tab.simple {
@@ -13,7 +13,7 @@
     }
 
     .bw-tab.simple .atab span {
-        @apply inline-block p-4 text-sm font-medium text-center
+        @apply inline-block p-4 text-base font-medium text-center dark:text-dark-400 tracking-wider
     }
 
     .bw-tab.simple .atab span.is-disabled {
@@ -25,7 +25,7 @@
     }
 
     .bw-tab .atab span.primary {
-        @apply text-primary-500 border-primary-500 hover:text-primary-500 hover:border-primary-500
+        @apply text-primary-500 dark:text-primary-500 border-primary-500 hover:text-primary-500 hover:border-primary-500
     }
 
     .bw-tab .atab span.blue {

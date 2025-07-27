@@ -25,7 +25,7 @@
 <div
         @class([
         "py-2 pl-4 pr-3 flex items-center text-base cursor-pointer bw-select-item",
-        "hover:bg-primary-600 hover:text-primary-50 dark:hover:bg-dark-800/50 dark:hover:text-dark-200" => $selectable,
+        "hover:bg-primary-600 hover:text-primary-50" => $selectable,
         "text-blue-900/40" => !$selectable,
         "hidden empty-state" => $isEmpty
         ])
@@ -33,12 +33,12 @@
         @if(!$selectable) data-unselectable @endif
         @if(!empty($filterBy)) data-filter-value="{{$filterBy}}" @endif
         @if($selected) data-selected="true" @endif
-        @if($onselect !== '') data-user-function="{{ $onselect }}"@endif>
+        @if($onselect !== '') data-user-function="{{ $onselect }}" @endif>
     @if($isEmpty)
         @if($emptyStateFrom)
             <div class="text-center grow empty-state-copy"></div>
         @else
-            <span class="grow text-left">{!! $label !!}</span>
+            <span class="grow text-left text-gray-500">{!! $label !!}</span>
         @endif
     @else
         @if ($flag !== '' && $image == '')

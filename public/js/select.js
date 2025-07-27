@@ -41,7 +41,6 @@
                 if (options.disabled !== '1' && options.readonly !== '1') {
                     domEl(this.clickArea).addEventListener('click', (e) => {
                         unhide(this.itemsContainer);
-                        // changeCss(this.clickArea, 'focus:outline-2,focus:-outline-offset-1,focus:outline-primary-500,focus:border-primary-500');
                     });
                     this.hide();
                     this.search();
@@ -243,7 +242,6 @@
                         this.scrollbars();
                     }
                     stripComma(input);
-                    // changeCss(`${this.clickArea}`, '!border-red-400', 'remove');
                     changeCss(`${this.clickArea}`, 'has-error', 'remove');
                 }
             }
@@ -315,12 +313,15 @@
             }
 
             labelTemplate = (label, value) => {
-                return `<span class="bg-slate-200 hover:bg-slate-300 inline-flex items-center text-slate-700 py-[2.5px] pl-2.5 pr-1 ` +
+                return `<span class="bg-slate-200 hover:bg-slate-300 dark:bg-dark-800 dark:hover:bg-dark-900 
+                    inline-flex items-center text-slate-700 dark:text-dark-300 py-[2.5px] pl-2.5 pr-1 ` +
                     `mr-2 text-sm rounded-md bw-sp-${value} animate__animated animate__bounceIn animate__faster" ` +
                     `onclick="event.stopPropagation();window.event.cancelBubble = true">${label}` +
-                    `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" ` +
-                    `class="w-5 h-5 fill-slate-400 hover:fill-slate-600 text-slate-100" data-value="${value}"><path stroke-linecap="round" ` +
-                    `stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></span>`;
+                    `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
+                    stroke="currentColor" class="!size-4 p-0.5 rounded-full  bg-gray-400 hover:bg-gray-600 text-slate-100 
+                    dark:bg-dark-500 dark:hover:bg-dark-600 dark:text-dark-300 ml-1" data-value="${value}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg></span>`;
             }
 
             removeLabel = () => {

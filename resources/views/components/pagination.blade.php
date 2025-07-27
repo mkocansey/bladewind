@@ -21,7 +21,7 @@
     $total_pages = ceil($totalRecords/$pageSize);
     $defaultPage = (is_numeric($defaultPage) && $defaultPage > 0 && $defaultPage <= $total_pages) ? $defaultPage : 1;
     $inactive_css = "opacity-30 hover:opacity-30 !hover:border-gray-500/50";
-    $active_css = "!border-primary-500 dark:!border-gray-300";
+    $active_css = "!border-primary-500 dark:!border-dark-400";
     $default_button_css = "!border-gray-200 dark:!border-dark-600 hover:!border-gray-400 dark:hover:!border-dark-500";
     $next_button_status_css = ($defaultPage == $total_pages) ? $inactive_css : $default_button_css;
     $prev_button_status_css = ($defaultPage == 1) ? $inactive_css : $default_button_css;

@@ -9,6 +9,7 @@
                                 size="tiny"
                                 icon="{{ $icon['icon'] }}"
                                 color="{{ $icon['color'] ?? '' }}"
+                                outline="true"
                                 onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
                                 type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}"/>
                         @if(!empty($icon['tip'])) </a>

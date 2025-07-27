@@ -4,11 +4,11 @@
     }
 
     .bw-table.divided.thin tbody tr {
-        @apply border-y border-t-gray-200 border-b-gray-200/60 dark:border-t-dark-600/60 dark:border-b-dark-600/30
+        @apply border-y border-t-gray-200 border-b-gray-200/60 dark:border-t-dark-600/80 dark:border-b-dark-600/30
     }
 
     .bw-table tr > td {
-        @apply py-4 px-3 align-top text-sm text-slate-600/80 dark:text-dark-400 bg-white dark:bg-dark-800/25 border-x-2 border-transparent leading-6
+        @apply py-4 px-3 align-top text-sm text-slate-600/80 dark:text-dark-300/70 bg-white dark:bg-dark-800/25 border-x-2 border-transparent leading-6
     }
 
     .bw-table tr > td.group-heading {
@@ -16,27 +16,27 @@
     }
 
     .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
-        @apply bg-slate-100/70 dark:bg-dark-800/15
+        @apply bg-slate-100/70 dark:bg-dark-800/45
     }
 
     .bw-table.celled th, .bw-table.celled td {
-        @apply border-x-0 border-r border-gray-300/50 dark:border-dark-700/60 !border-collapse
+        @apply border-x-0 border-r border-gray-300/50 dark:border-dark-600/80 !border-collapse
     }
 
     .bw-table thead > tr > th {
         @apply
-        bg-white dark:bg-dark-800/40
-        text-black/80 dark:text-dark-400
+        bg-white dark:bg-dark-800/60
+        text-black/80 dark:text-dark-300
         text-xs
         text-left
         font-semibold
         tracking-widest
         px-3 py-4
-        border-t border-t-gray-200/30 dark:border-t-dark-600/30 dark:border-b-transparent
+        border-t border-t-gray-200/30 dark:border-t-dark-600/80 dark:border-b-transparent
     }
 
     .bw-table.celled th:first-child, .bw-table.celled td:first-child {
-        @apply border-x border-gray-300/50 dark:border-dark-700/60 !border-collapse
+        @apply border-x border-gray-300/50 dark:border-dark-600/80 !border-collapse
     }
 
     .bw-table.has-no-data thead > tr {
@@ -48,7 +48,7 @@
     }
 
     .bw-table-filter-bar {
-        @apply bg-slate-200/50 dark:bg-dark-800/30 rounded-md
+        @apply bg-slate-200/50 dark:bg-dark-800/80 rounded-t-lg
     }
 
     .bw-table-filter-bar input {
@@ -64,7 +64,7 @@
     }
 
     .bw-table td.double-underline {
-        @apply border-x-0 border-t-0 border-b-4 border-double border-gray-300 dark:border-dark-700 border-separate
+        @apply border-x-0 border-t-0 border-b-4 border-double border-gray-300 dark:border-dark-600 border-separate
     }
 
     .bw-table.with-hover-effect tr:not(.no-hover):hover > td {
@@ -96,7 +96,7 @@
     }
 
     .bw-table.selectable > tbody > tr.selected > td {
-        @apply bg-primary-100/80 dark:bg-dark-800/60
+        @apply bg-primary-100/80 dark:bg-dark-800/55
     }
 
     .bw-table th:first-child input[type="checkbox"] {
