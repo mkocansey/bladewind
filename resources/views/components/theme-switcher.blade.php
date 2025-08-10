@@ -50,24 +50,34 @@
     </x-bladewind::dropmenu>
     <x-bladewind::script :nonce="$nonce">
         const chooseTheme = (theme) => {
-        theme = (theme !== 'null' && theme !== undefined && theme !== null) ? theme : 'system';
-        addToStorage('theme', theme);
-        if (theme === 'dark' || theme === 'system') {
-        document.documentElement.classList.add('dark');
-        } else {
-        document.documentElement.classList.remove('dark');
-        }
-
-        hide('.theme-dark');
-        hide('.theme-light');
-        hide('.theme-system');
-        unhide(`.theme-${theme}`);
-        }
+            theme = (theme !== 'null' && theme !== undefined && theme !== null) ? theme : 'system';
+            addToStorage('theme', theme);
+        
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else if (theme === 'system') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }
+        
+            hide('.theme-dark');
+            hide('.theme-light');
+            hide('.theme-system');
+            unhide(`.theme-${theme}`);
+        };
+        
         chooseTheme(getFromStorage('theme'));
-
+        
         // Listen for changes in the system theme
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
-        chooseTheme(event.matches ? 'dark' : 'light');
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (getFromStorage('theme') === 'system') {
+                chooseTheme('system');
+            }
         });
     </x-bladewind::script>
 @endonce
