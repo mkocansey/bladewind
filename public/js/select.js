@@ -12,6 +12,7 @@
             formInput;
             maxSelection;
             toFilter;
+            filterBy;
             selectedValue;
             canClear;
             enabled;
@@ -109,8 +110,10 @@
 
             search = () => {
                 domEl(this.searchInput).addEventListener('keyup', (e) => {
+                    let searchScope = domEl(this.rootElement).getAttribute('data-filter-by') || null;
                     let value = (domEl(this.searchInput).value);
-                    domEls(this.selectItems).forEach((el) => {
+                    let items = (searchScope) ? `${this.selectItems}[data-filter-value="${searchScope}"]` : this.selectItems;
+                    domEls(items).forEach((el) => {
                         (el.innerText.toLowerCase().indexOf(value.toLowerCase()) !== -1) ?
                             unhide(el, true) :
                             hide(el, true);
@@ -407,11 +410,13 @@
 
             filter = (element, by = '') => {
                 this.toFilter = element || this.name;
+                this.filterBy = by;
                 if (by !== '') {
                     domEls(this.strSelectItems(this.toFilter, `:not(.empty-state)`)).forEach((el) => {
                         const filterValue = el.getAttribute('data-filter-value');
                         (filterValue === by) ? unhide(el, true) : hide(el, true);
                     });
+                    domEl(`.bw-select-${this.toFilter}`).setAttribute('data-filter-by', by);
                     this.setEmptyStateMessage(element);
                 }
             }
