@@ -250,6 +250,7 @@
                                         "$groupHeadingCss" => !empty($groupHeadingCss)])>{{ $heading }}</td>
                             </tr>
                             @foreach($rows as $row)
+                                @dump($row)
                                 @php $row_id =  $row['id'] ?? uniqid(); @endphp
                                 <tr data-id="{{ $row_id }}">
                                     @foreach($tableHeadings as $th)
@@ -268,16 +269,17 @@
                             @if(!empty($limit) && $loop->iteration > $limit)
                                 @break
                             @endif
-                            <tr data-id="{{ $row_id }}" data-page="{{ $row_page }}"
-                                @if($paginated && $row_page != $defaultPage)class="hidden" @endif>
+                            <tr @class([
+                                'hidden' => ($paginated && $row_page != $defaultPage),
+                                'cursor-pointer' => !empty($onclick),
+                                ]) data-id="{{ $row_id }}" data-page="{{ $row_page }}"
+                                @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>
                                 @if($showRowNumbers)
                                     <td>{{$loop->iteration}}</td>
                                 @endif
                                 @foreach($tableHeadings as $th)
-                                    {{--                                    @if(in_array($loop->index, $indices))--}}
                                     <td data-row-id="{{ $row_id }}"
                                         data-column="{{ $th }}">{!! $row[$th] !!}</td>
-                                    {{--                                    @endif--}}
                                 @endforeach
                                 <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
                             </tr>
