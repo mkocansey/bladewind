@@ -250,9 +250,9 @@
                                         "$groupHeadingCss" => !empty($groupHeadingCss)])>{{ $heading }}</td>
                             </tr>
                             @foreach($rows as $row)
-                                @dump($row)
                                 @php $row_id =  $row['id'] ?? uniqid(); @endphp
-                                <tr data-id="{{ $row_id }}">
+                                <tr data-id="{{ $row_id }}"
+                                    @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>
                                     @foreach($tableHeadings as $th)
                                         <td data-row-id="{{ $row_id }}" data-column="{{ $th }}">{!! $row[$th] !!}</td>
                                     @endforeach
