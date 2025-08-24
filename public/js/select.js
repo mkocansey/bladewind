@@ -17,6 +17,7 @@
             canClear;
             enabled;
             metaData;
+            skipReset;
 
             constructor(name, placeholder) {
                 this.name = name;
@@ -206,13 +207,12 @@
                 let svg = domEl(`${this.rootElement} div[data-value="${this.selectedValue}"] svg`);
                 let input = domEl(this.formInput);
 
+                if (this.toFilter && !this.skipReset) {
+                    this.filter(this.toFilter, this.selectedValue, false);
+                }
+
                 hide(`${this.rootElement} .placeholder`);
                 unhide(this.displayArea);
-
-                if (this.toFilter) {
-                    (new BladewindSelect(this.toFilter, '')).reset();  //FIXME: dont new up an instance
-                    this.filter(this.toFilter, this.selectedValue);
-                }
 
                 if (this.enabled) {
                     if (!this.isMultiple) {
@@ -408,10 +408,12 @@
                 return domEl(this.strRootElement(name)).className.includes('searchable');
             }
 
-            filter = (element, by = '') => {
+            filter = (element, by = '', skipReset = true) => {
                 this.toFilter = element || this.name;
                 this.filterBy = by;
+                this.skipReset = skipReset;
                 if (by !== '') {
+                    this.reset();
                     domEls(this.strSelectItems(this.toFilter, `:not(.empty-state)`)).forEach((el) => {
                         const filterValue = el.getAttribute('data-filter-value');
                         (filterValue === by) ? unhide(el, true) : hide(el, true);
