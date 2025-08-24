@@ -239,7 +239,7 @@
         bw_{{ $input_name }}.maxSelectable({{$maxSelectable}}, '{{ sprintf($maxErrorMessage, $maxSelectable) }}');
     @endif
     @if(!empty($filter))
-        bw_{{ $input_name }}.filter('{{ $filter }}');
+        bw_{{ $input_name }}.filter('{{ $filter }}', '', false);
     @endif
     @if(!$required && $multiple == 'false')
         bw_{{ $input_name }}.clearable();
