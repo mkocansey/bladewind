@@ -175,14 +175,16 @@
     let cropper;
 @endonce @endif
     FilePond.registerPlugin(
-        FilePondPluginImageExifOrientation,
         FilePondPluginFileValidateSize,
         FilePondPluginFileValidateType,
+        @if($hasImageFiles)
+        FilePondPluginImageExifOrientation,
         FilePondPluginImageValidateSize,
         FilePondPluginImagePreview,
-        @if($canCrop)FilePondPluginImageCrop,@endif
         FilePondPluginImageResize,
         FilePondPluginImageTransform,
+        @if($canCrop)FilePondPluginImageCrop,@endif
+        @endif
         @if($base64)FilePondPluginFileEncode,@endif
     );
 const pond_{{$cleanName}} = FilePond.create(domEl('input[name="{{$name}}"]'), {
