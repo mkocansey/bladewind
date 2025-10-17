@@ -413,7 +413,6 @@
                 this.filterBy = by;
                 this.skipReset = skipReset;
                 if (by !== '') {
-                    this.reset();
                     domEls(this.strSelectItems(this.toFilter, `:not(.empty-state)`)).forEach((el) => {
                         const filterValue = el.getAttribute('data-filter-value');
                         (filterValue === by) ? unhide(el, true) : hide(el, true);
