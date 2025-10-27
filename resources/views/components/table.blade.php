@@ -147,9 +147,10 @@
 
         if(!function_exists('build_click')){
             function build_click($click, $rowData){
-                return preg_replace_callback('/{\w+}/', function ($matches) use ($rowData) {
+                return preg_replace_callback("/'\{\w+}'/", function ($matches) use ($rowData) {
                     foreach($matches as $match) {
-                        return $rowData[str_replace('}', '', str_replace('{', '', $match))];
+                        $value  = $rowData[str_replace('}\'', '', str_replace('\'{', '', $match))];
+                        return "'{$value}'";
                     }
                 }, $click);
             }
