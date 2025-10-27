@@ -139,7 +139,13 @@
             $actionArray = explode('|',$action);
             $tempActionsArray = [];
             foreach($actionArray as $this_action){
-                $action_str_to_arr = explode(':', $this_action);
+                /*
+                * Fix: Ensure correct splitting of action string for modal placeholder syntax.
+                * Previously, explode(':', $this_action) could split into more than two parts
+                * when colons appeared inside parameters, e.g. showModal('modal', {key: '{data-key}'}).
+                * Now, explode(':', $this_action, 2) limits the split to two parts, preserving existing behavior.
+                */
+                $action_str_to_arr = explode(':', $this_action, 2);
                 $tempActionsArray[trim($action_str_to_arr[0])] = trim($action_str_to_arr[1]);
             }
             $iconsArray[] = $tempActionsArray;
@@ -147,9 +153,10 @@
 
         if(!function_exists('build_click')){
             function build_click($click, $rowData){
-                return preg_replace_callback('/{\w+}/', function ($matches) use ($rowData) {
+                return preg_replace_callback("/'\{\w+}'/", function ($matches) use ($rowData) {
                     foreach($matches as $match) {
-                        return $rowData[str_replace('}', '', str_replace('{', '', $match))];
+                        $value  = $rowData[str_replace('}\'', '', str_replace('\'{', '', $match))];
+                        return "'{$value}'";
                     }
                 }, $click);
             }
