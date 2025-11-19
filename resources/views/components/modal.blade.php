@@ -132,8 +132,8 @@
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
                             name="x-mark"
-                            class="p-1 stroke-2 modal-close-icon right-2.5 top-2.5 absolute rounded-full
-                            text-gray-500 hover:text-gray-200 bg-gray-200
+                            class="p-1.5 stroke-2 modal-close-icon right-3.5 top-3 absolute rounded-full
+                            size-7 text-gray-500 hover:text-gray-200 bg-gray-200
                             hover:bg-gray-700 dark:bg-dark-800 dark:hover:bg-dark-900 dark:hover:text-dark-400"/>
                 </a>
             @endif

@@ -1,6 +1,9 @@
 {{-- format-ignore-start --}}
 @props([
     'totalRecords' => null,
+    'totalPages' => null,
+    'nextPage' => null,
+    'previousPage' => null,
     'pageSize' => 25,
     'style' => 'arrows',
     'showTotal' => true,
@@ -8,6 +11,8 @@
     'showTotalPages' => false,
     'defaultPage' => 1,
     'table' => null,
+    'dynamic' => false,
+    'dynamicUrl' => '',
     'label' => __("bladewind::bladewind.pagination_label"),
     'nonce' => config('bladewind.script.nonce', null),
 ])
@@ -29,16 +34,16 @@
     $to = ($to > $totalRecords) ? $totalRecords : $to;
     $from = $to - ($pageSize-1);
     $from = ($to == $totalRecords) ? 1 : $from;
-    $prev_page = $defaultPage-1;
-    $next_page = $defaultPage+1;
-    $prev_page = ($prev_page <= 0) ? 0 : $defaultPage-1;
+    $prev_page = $previousPage ?? $defaultPage-1;
+    $next_page = $nextPage ?? $defaultPage+1;
+    $prev_page = (!is_numeric($prev_page) || $prev_page <= 0) ? 0 : $defaultPage-1;
 @endphp
 {{-- format-ignore-end --}}
 
 @if(!empty($totalRecords) && !empty($table))
     <x-bladewind::script :nonce="$nonce">
-        var previousPage_{{$table}} = {{$defaultPage}};
-        var totalPages_{{$table}} = {{$total_pages}};
+        var previousPage_{{$table}} = {{$prev_page ?? $defaultPage}};
+        var totalPages_{{$table}} = {{$totalPages ?? $total_pages}};
         var pageSize_{{$table}} = {{$pageSize}};
         var totalRecords_{{$table}} = {{$totalRecords}};
         var paginationStyle_{{$table}} = '{{$style}}';
@@ -53,13 +58,22 @@
         </div>
         <div>
             @if($style == 'arrows')
+                @php
+                    $prev_link = ($dynamic && $prev_page > 1) ?
+                        "location.href='".(str_contains($dynamicUrl,'?') ? $dynamicUrl.'&page='.$prev_page : $dynamicUrl.'?page='.$prev_page)."'" :
+                        "goToPage('".$prev_page."', '".$table."', '".$defaultPage."')";
+                    $next_link = ($dynamic && $next_page != '') ?
+                        "location.href='".(str_contains($dynamicUrl,'?') ? $dynamicUrl.'&page='.$next_page : $dynamicUrl.'?page='.$next_page)."'" :
+                        "goToPage('".$next_page."', '".$table."')";
+                @endphp
                 <x-bladewind::button
                         type="primary"
                         :outline="true"
                         color="gray"
                         size="tiny"
-                        icon="arrow-left" class="!pr-0 prev-btn {{$prev_button_status_css}}"
-                        onclick="goToPage('{{$prev_page}}', '{{$table}}', '{{$defaultPage}}')"/>
+                        icon="arrow-left"
+                        class="!pr-0 prev-btn {{$prev_button_status_css}}"
+                        onclick="{{$prev_link}}"/>
                 <span class="page-number font-semibold p-1 @if(!$showPageNumber)hidden @endif"><span
                             class="page">{{$defaultPage}}</span>@if($showTotalPages)
                         /{{$total_pages}}
@@ -69,8 +83,9 @@
                         :outline="true"
                         color="gray"
                         size="tiny"
-                        icon="arrow-right" class="!pr-0 next-btn {{$next_button_status_css}}"
-                        onclick="goToPage('{{$next_page}}', '{{$table}}')"/>
+                        icon="arrow-right"
+                        class="!pr-0 next-btn {{$next_button_status_css}}"
+                        onclick="{{$next_link}}"/>
             @elseif($style == 'dropdown')
                 <div class="!z-50">
                     <span class="table-name hidden" data-value="{{$table}}"></span>
@@ -97,6 +112,10 @@
                     @for($p=1; $p <= $total_pages; $p++)
                         @php
                             $button_css = ($p==$defaultPage) ? $active_css : $default_button_css;
+                            $go_to_page = ($dynamic && $p != '') ?
+                                (str_contains($dynamicUrl,'?') ? $dynamicUrl.'&page='.$p : $dynamicUrl.'?page='.$p) :
+                                "routeToPage('".$p."', '', '', {table: '".$table."'}); shufflePageNumbers('".$p."', '".$table."')";
+                            //routeToPage('{{$p}}', '', '', {table: '{{$table}}'}); shufflePageNumbers('{{$p}}', '{{$table}}')
                         @endphp
                         <x-bladewind::button
                                 type="primary"
@@ -105,7 +124,7 @@
                                 size="tiny"
                                 data-page="{{$p}}"
                                 class="btn {{ (strlen($p) == 1) ? '!px-3' : '!px-2' }} hidden !text-xs !mx-0.5 btn-{{$p}} {{$button_css}}"
-                                onclick="routeToPage('{{$p}}', '', '', {table: '{{$table}}'}); shufflePageNumbers('{{$p}}', '{{$table}}')">{{$p}}</x-bladewind::button>
+                                onclick="{{$go_to_page}}">{{$p}}</x-bladewind::button>
                         <span class="mt-3 dots-{{$p}}"></span>
                     @endfor
                     <span class="mt-3 next-dots"></span>
@@ -118,7 +137,8 @@
                             class="!ml-0.5 !pl-5 !pr-1 next-btn {{$default_button_css}}"
                             onclick="routeToPage('{{$next_page}}', '', '', {table: '{{$table}}'}); shufflePageNumbers('{{$next_page}}', '{{$table}}')"/>
                 </div>
-                <x-bladewind::script :nonce="$nonce">shufflePageNumbers('{{$defaultPage}}', '{{$table}}')
+                <x-bladewind::script :nonce="$nonce">
+                    shufflePageNumbers('{{$defaultPage}}', '{{$table}}')
                 </x-bladewind::script>
             @endif
         </div>

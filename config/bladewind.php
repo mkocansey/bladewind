@@ -69,7 +69,7 @@ return [
     */
     'button' => [
         'size' => 'regular',
-        'radius' => 'small',
+        'radius' => 'full',
         'show_focus_ring' => true,
         'tag' => 'button',
         'icon_right' => false,
@@ -330,7 +330,7 @@ return [
         'backdrop_can_close' => true,
         'blur_backdrop' => true,
         'blur_size' => 'medium',
-        'center_action_buttons' => false,
+        'center_action_buttons' => true,
         'stretch_action_buttons' => false,
         'show_close_icon' => false,
         'size' => 'medium',

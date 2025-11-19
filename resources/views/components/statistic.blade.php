@@ -19,12 +19,12 @@
     $hasShadow = parseBladewindVariable($hasShadow);
     $hasBorder = parseBladewindVariable($hasBorder);
 
-    $shadow_css = ($hasShadow) ? 'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70' : '';
-    $border_css = ($hasBorder) ? 'border border-slate-200 dark:border-dark-600/60 focus:outline-none' : '';
-    $hover_css =  (!empty($url)) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
+    $shadow_css = ($hasShadow) ? 'shadow-sm shadow-black/5 dark:shadow-dark-800/70' : '';
+    $border_css = ($hasBorder) ? 'border border-neutral-200 dark:border-dark-600/60 focus:outline-none' : '';
+    $hover_css =  (!empty($url)) ? 'hover:border hover:border-neutral-400/70 hover:shadow-sm hover:shadow-black/5 hover:dark:shadow-dark-900 cursor-pointer' : '';
 
     $classes = implode(' ', array_filter([
-        'bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 rounded-md relative',
+        'bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 rounded-lg relative',
         $shadow_css,
         $border_css,
         $hover_css,
