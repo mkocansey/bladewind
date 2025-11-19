@@ -94,6 +94,7 @@ return [
         'has_shadow' => true,
         'has_border' => true,
         'has_hover' => false,
+        'radius' => 'small',
     ],
 
     /*
@@ -334,6 +335,7 @@ return [
         'stretch_action_buttons' => false,
         'show_close_icon' => false,
         'size' => 'medium',
+        'radius' => 'small',
     ],
 
     /*

@@ -68,6 +68,7 @@
     'alignButtons' => config('bladewind.modal.align_buttons', 'right'),
 
     'nonce' => config('bladewind.script.nonce', null),
+    'radius' => config('bladewind.modal.radius', 'small'),
 ])
 @php
     $closeAfterAction = parseBladewindVariable($closeAfterAction);
@@ -127,7 +128,7 @@
 <div data-name="{{$name}}" data-backdrop-can-close="{{$backdropCanClose}}"
      class="fixed inset-0 flex items-center justify-center bg-black/40 {{$blur_intensity()}} z-40 flex bw-modal bw-{{$name}}-modal hidden overscroll-contain">
     <div class="{{$sizes[$size]}} @if($size=='omg') sm:px-12 @else max-w-screen @endif px-5 m-auto bw-{{$name}} animate__faster">
-        <div class="bg-white relative dark:bg-dark-700/90 dark:border dark:border-dark-500/10 rounded-lg drop-shadow-2xl">
+        <div class="bg-white relative dark:bg-dark-700/90 dark:border dark:border-dark-500/10 {{getRadiusString($radius)}} drop-shadow-2xl">
             @if( $showActionButtons && $showCloseIcon)
                 <a href="javascript:void(0)" onclick="{!! $cancelAction !!}">
                     <x-bladewind::icon
@@ -162,7 +163,7 @@
             @if( $showActionButtons )
                 <div @class([
                     'modal-footer bg-gray-100 dark:bg-dark-800/50 border-t border-t-gray-200 dark:border-t-dark-600/50',
-                    'py-3 px-6 rounded-br-lg rounded-bl-lg '. $footerCss,
+                    'py-3 px-6  '. $footerCss . getRadiusString($radius, 'b'),
                     ' space-x-2' => !$stretchActionButtons,
                     'flex flex-col-reverse' => $stretchActionButtons,
                     'text-center' => ($centerActionButtons || $size == 'tiny'),
