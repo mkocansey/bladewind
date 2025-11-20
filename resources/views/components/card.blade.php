@@ -30,6 +30,7 @@
 
     // the contact card uses this card component but needs to have a different class name
     'isContactCard' => false,
+    'radius' => config('bladewind.card.radius', 'small'),
 ])
 @php
     $compact = parseBladewindVariable($compact);
@@ -39,12 +40,13 @@
     $isContactCard = parseBladewindVariable($isContactCard);
     $noPadding = parseBladewindVariable($noPadding);
 
-    $class = "bg-white dark:bg-dark-800/25 rounded-lg $class";
+    $radius_css = getRadiusString($radius);
+    $class = "bg-white dark:bg-dark-800/25 $radius_css $class";
     $contact_card_css =   ($isContactCard) ? 'bw-contact-card' : 'bw-card';
-    $has_border_css =   ($hasBorder) ? 'border border-slate-200 dark:border-dark-600/60 focus:outline-none' : '';
+    $has_border_css =   ($hasBorder) ? 'border border-neutral-200 dark:border-dark-600/60 focus:outline-none' : '';
     $header_compact_css =   (!$header && ! $compact && !$noPadding) ? 'p-6' : (($compact) ? 'p-4' : '');
-    $shadow_css =   ($hasShadow) ? 'shadow-sm shadow-slate-200/50 dark:shadow-dark-800/70' : '';
-    $hover_css =  ($hasHover || !empty($url)) ? 'hover:shadow-slate-400 hover:dark:shadow-dark-900 cursor-pointer' : '';
+    $shadow_css =   ($hasShadow) ? 'shadow-sm shadow-black/5 dark:shadow-dark-800/70' : '';
+    $hover_css =  ($hasHover || !empty($url)) ? 'hover:shadow-sm hover:shadow-black/10 hover:border hover:border-neutral-400/70 hover:dark:shadow-dark-900 cursor-pointer' : '';
 
     $classes = implode(' ', array_filter([
         $class,
@@ -73,7 +75,7 @@
         </div>
     @endif
     @if($title && ! $header)
-        <div class="uppercase tracking-wide text-xs text-gray-500/90 mb-2">{{ $title }}</div>
+        <div class="uppercase tracking-wide text-sm text-gray-500 mb-2 antialiased">{{ $title }}</div>
     @endif
     <div @if($title && ! $header) class="mt-6" @endif>
         {{ $slot }}

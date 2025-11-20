@@ -96,3 +96,16 @@ function pagination_row($row_number, $pageSize = 25, $defaultPage = 1): string
 {
     return paginationRow($row_number, $pageSize, $defaultPage);
 }
+
+function getRadiusString($radius, $prefix = null): string
+{
+    $roundness = [
+        'none' => 'rounded-none',
+        'small' => 'rounded-lg',
+        'medium' => 'rounded-xl',
+        'large' => 'rounded-2xl',
+        'xl' => 'rounded-3xl',
+    ];
+    return (!empty($prefix) ? str_replace('rounded-', "rounded-$prefix-",
+        $roundness[$radius]) : $roundness[$radius]) ?? '';
+}

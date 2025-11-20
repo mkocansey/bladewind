@@ -2,14 +2,16 @@
 @props([
    'color' => '',
    'grouped' => true,
-   'can_open_multiple' => false,
+   'canOpenMultiple' => false,
    'class' => '',
    'nonce' => config('bladewind.script.nonce', null),
+   'noPadding' => false,
 ])
 @php
     $name = defaultBladewindName();
     $grouped = parseBladewindVariable($grouped);
-    $can_open_multiple = parseBladewindVariable($can_open_multiple);
+    $can_open_multiple = parseBladewindVariable($canOpenMultiple);
+    $noPadding = parseBladewindVariable($noPadding);
 @endphp
 {{-- format-ignore-end --}}
 
@@ -17,13 +19,13 @@
      data-name="{{$name}}"
      data-open-multiple="{{$can_open_multiple ? '1':'0'}}">
     @if($grouped)
-        <x-bladewind::card class="!px-0">
-            <div class="divide-y divide-gray-200/70 dark:divide-dark-600 space-y-4">
+        <x-bladewind::card no-padding="true">
+            <div class="divide-y divide-gray-200/70 dark:divide-dark-600 @if($noPadding) space-y-0.5 py-0.5 @else space-y-2 py-2.5 @endif">
                 {!! $slot !!}
             </div>
         </x-bladewind::card>
     @else
-        <div class="space-y-4">{!! $slot !!}</div>
+        <div class="@if($noPadding) space-y-0.5 @else space-y-2 @endif">{!! $slot !!}</div>
     @endif
 </div>
 

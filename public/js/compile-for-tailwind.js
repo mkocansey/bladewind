@@ -102,6 +102,7 @@ const css_classes_to_pre_compile =
                 sm:w-1/5 sm:w-1/4 sm:w-1/3 sm:w-2/5 sm:w-2/3 sm:w-11/12 lg:w-1/6 lg:w-1/5 lg:w-1/4 lg:w-1/3 
                 lg:w-2/5 lg:w-2/3 lg:w-11/12`,
         positions: "-bottom-1 -top-1",
+        radius: "rounded-full rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-b-lg rounded-b-xl rounded-b-2xl rounded-b-3xl",
         opacity: `opacity-0 opacity-5 opacity-10 opacity-20 opacity-25 opacity-30 opacity-40 opacity-50 
                 opacity-60 opacity-70 opacity-75 opacity-80 opacity-90 opacity-95 opacity-100`,
     }
