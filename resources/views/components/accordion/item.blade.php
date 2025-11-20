@@ -9,6 +9,7 @@
     'color' => $color,
     'grouped' => true,
     'noPadding' => false,
+    'contentCanClose' => true,
 ])
 @php
     $name = defaultBladewindName();
@@ -45,7 +46,8 @@
 ])/>
         </div>
     </div>
-    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+         @if(!$contentCanClose) onclick="event.stopPropagation()"@endif>
         <div @class([
         "pt-2",
         'dark:!text-dark-600' => (!$grouped && !empty($color))

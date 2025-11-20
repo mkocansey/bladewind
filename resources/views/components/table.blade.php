@@ -258,12 +258,13 @@
                             </tr>
                             @foreach($rows as $row)
                                 @php $row_id =  $row['id'] ?? uniqid(); @endphp
-                                <tr data-id="{{ $row_id }}"
-                                    @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>
+                                <tr data-id="{{ $row_id }}">
                                     @foreach($tableHeadings as $th)
-                                        <td data-row-id="{{ $row_id }}" data-column="{{ $th }}">{!! $row[$th] !!}</td>
+                                        <td data-row-id="{{ $row_id }}" data-column="{{ $th }}"
+                                            @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{!! $row[$th] !!}</td>
                                     @endforeach
-                                    <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
+                                    <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"
+                                                              :onclick="$onclick"/>
                                 </tr>
                             @endforeach
                         @endforeach
@@ -279,14 +280,14 @@
                             <tr @class([
                                 'hidden' => ($paginated && $row_page != $defaultPage),
                                 'cursor-pointer' => !empty($onclick),
-                                ]) data-id="{{ $row_id }}" data-page="{{ $row_page }}"
-                                @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>
+                                ]) data-id="{{ $row_id }}" data-page="{{ $row_page }}">
                                 @if($showRowNumbers)
-                                    <td>{{$loop->iteration}}</td>
+                                    <td @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{{$loop->iteration}}</td>
                                 @endif
                                 @foreach($tableHeadings as $th)
                                     <td data-row-id="{{ $row_id }}"
-                                        data-column="{{ $th }}">{!! $row[$th] !!}</td>
+                                        data-column="{{ $th }}"
+                                        @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{!! $row[$th] !!}</td>
                                 @endforeach
                                 <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
                             </tr>
