@@ -47,6 +47,10 @@
         @apply uppercase
     }
 
+    .bw-table-filter-bar-unhinged input {
+        @apply border-0 bg-transparent focus:outline-0 focus:border-0 !mb-0
+    }
+
     .bw-table-filter-bar {
         @apply bg-slate-200/50 dark:bg-dark-800/80 rounded-t-lg
     }
