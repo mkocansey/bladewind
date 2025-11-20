@@ -40,6 +40,7 @@
     'searchField' => null,
     'searchDebounce' => 0,
     'searchMinLength' => 0,
+    'searchContainer' => null,
     'celled' => config('bladewind.table.celled', false),
     'uppercasing' => config('bladewind.table.uppercasing', true),
     'noDataMessage' => config('bladewind.table.no_data_message', __("bladewind::bladewind.table_no_data")),
@@ -174,7 +175,8 @@
 ])>
     <div class="w-full">
         @if($searchable)
-            <div class="bw-table-filter-bar p-2 @if($hasShadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif">
+            <div class="bw-table-filter-bar p-2 @if($hasShadow) drop-shadow shadow shadow-gray-200/70 dark:shadow-md dark:shadow-dark-950/20 @endif"
+                 data-table-name="{{$name}}">
                 <x-bladewind::input
                         name="bw-search-{{$name}}"
                         placeholder="{{$searchPlaceholder}}"
@@ -258,12 +260,13 @@
                             </tr>
                             @foreach($rows as $row)
                                 @php $row_id =  $row['id'] ?? uniqid(); @endphp
-                                <tr data-id="{{ $row_id }}"
-                                    @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>
+                                <tr data-id="{{ $row_id }}">
                                     @foreach($tableHeadings as $th)
-                                        <td data-row-id="{{ $row_id }}" data-column="{{ $th }}">{!! $row[$th] !!}</td>
+                                        <td data-row-id="{{ $row_id }}" data-column="{{ $th }}"
+                                            @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{!! $row[$th] !!}</td>
                                     @endforeach
-                                    <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
+                                    <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"
+                                                              :onclick="$onclick"/>
                                 </tr>
                             @endforeach
                         @endforeach
@@ -279,14 +282,14 @@
                             <tr @class([
                                 'hidden' => ($paginated && $row_page != $defaultPage),
                                 'cursor-pointer' => !empty($onclick),
-                                ]) data-id="{{ $row_id }}" data-page="{{ $row_page }}"
-                                @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>
+                                ]) data-id="{{ $row_id }}" data-page="{{ $row_page }}">
                                 @if($showRowNumbers)
-                                    <td>{{$loop->iteration}}</td>
+                                    <td @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{{$loop->iteration}}</td>
                                 @endif
                                 @foreach($tableHeadings as $th)
                                     <td data-row-id="{{ $row_id }}"
-                                        data-column="{{ $th }}">{!! $row[$th] !!}</td>
+                                        data-column="{{ $th }}"
+                                        @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{!! $row[$th] !!}</td>
                                 @endforeach
                                 <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
                             </tr>
@@ -336,6 +339,15 @@
 @if($selectable)
     <x-bladewind::script :nonce="$nonce">listenToSelectableTableRowEvents('{{$name}}');</x-bladewind::script>
     <input type="hidden" name="{{$name}}" class="{{$name}}"/>
+@endif
+@if(!empty($searchContainer))
+    <script>
+        let searchContainer = domEl(".{{$searchContainer}}");
+        if (searchContainer) {
+            searchContainer.innerHTML = '<div class="bw-table-filter-bar-unhinged">' + domEl('div[data-table-name="{{$name}}"]').innerHTML + '</div>';
+            domEl('div[data-table-name="{{$name}}"]').remove();
+        }
+    </script>
 @endif
 
 @if($checkable)

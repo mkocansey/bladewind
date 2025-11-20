@@ -6,6 +6,7 @@
    'class' => '',
    'nonce' => config('bladewind.script.nonce', null),
    'noPadding' => false,
+   'contentCanClose' => true,
 ])
 @php
     $name = defaultBladewindName();
