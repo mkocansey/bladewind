@@ -34,6 +34,7 @@
 
     // icon to display to the left of the button
     'icon' => '',
+    'iconType' => 'outline',
 
     'iconRight' => config('bladewind.button.icon_right', false),
 
@@ -127,13 +128,13 @@
 
 <{{ $tag }} {{ $merged_attributes }} @if($disabled) disabled @endif @if($tag == 'button') type="{{ $button_type }}" @endif >
     @if(!empty($icon) && !$iconRight)
-        <x-bladewind::icon :name="$icon" class="stroke-2 {{$icon_css}}" />
+        <x-bladewind::icon :name="$icon" :type="$iconType" class="stroke-2 {{$icon_css}}" />
     @endif
     @if (!$circular)
         <span class="grow {{ $buttonTextCss }}">{{ $slot }}</span>
     @endif
     @if(!empty($icon) && $iconRight && !$hasSpinner)
-        <x-bladewind::icon :name="$icon" class="stroke-2 {{$icon_css}}" />
+        <x-bladewind::icon :name="$icon" :type="$iconType" class="stroke-2 {{$icon_css}}" />
     @endif
     @if($hasSpinner)
         <x-bladewind::spinner class="{{$icon_size[$size]}} !-mr-2 rtl:!-ml-2 !ml-2 rtl:!mr-2 {{ $spinner_css }}" />

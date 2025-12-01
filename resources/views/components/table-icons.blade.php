@@ -6,20 +6,22 @@
 {{-- format-ignore-end --}}
 @if( !empty($icons_array) )
     <td class="text-right space-x-2 actions">
-        @foreach($icons_array as $icon)
-            @if(isset($icon['icon']))
-                @if(!empty($icon['tip']))
-                    <a data-tooltip="{{ $icon['tip'] }}" data-inverted="" data-position="top center"> @endif
+        <div class="flex justify-end space-x-2 align-middle">
+            @foreach($icons_array as $icon)
+                @if(isset($icon['icon']))
+                    <div @if(!empty($icon['tip'])) data-tooltip="{{ $icon['tip'] }}" data-inverted=""
+                         data-position="top center" @endif class="!pb-0 !mb-0">
                         <x-bladewind::button.circle
                                 size="tiny"
-                                icon="{{ $icon['icon'] }}"
-                                color="{{ $icon['color'] ?? '' }}"
-                                outline="true"
+                                :icon="$icon['icon']"
+                                :icon-type="$icon['icon_type']??'outline'"
+                                :color="$icon['color'] ?? ''"
+                                :outline="$icon['button_outline'] ?? true"
                                 onclick="{!! build_click($icon['click'], $row) ?? 'void(0)' !!}"
                                 type="{!! isset($icon['color']) ? 'primary' : 'secondary' !!}"/>
-                        @if(!empty($icon['tip'])) </a>
+                    </div>
                 @endif
-            @endif
-        @endforeach
+            @endforeach
+        </div>
     </td>
 @endif

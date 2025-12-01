@@ -13,6 +13,7 @@
     'class' => '',
     'numberCss' => '',
     'url' => null,
+    'radius' => config('bladewind.statistic.radius', 'small'),
 ])
 @php
     $showSpinner = parseBladewindVariable($showSpinner);
@@ -22,12 +23,14 @@
     $shadow_css = ($hasShadow) ? 'shadow-sm shadow-black/5 dark:shadow-dark-800/70' : '';
     $border_css = ($hasBorder) ? 'border border-neutral-200 dark:border-dark-600/60 focus:outline-none' : '';
     $hover_css =  (!empty($url)) ? 'hover:border hover:border-neutral-400/70 hover:shadow-sm hover:shadow-black/5 hover:dark:shadow-dark-900 cursor-pointer' : '';
+    $radius_css = getRadiusString($radius);
 
     $classes = implode(' ', array_filter([
-        'bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 rounded-lg relative',
+        'bw-statistic bg-white dark:bg-dark-800/30 focus:outline-none p-6 relative',
         $shadow_css,
         $border_css,
         $hover_css,
+        $radius_css,
         $class
     ]));
 
