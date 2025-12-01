@@ -136,24 +136,27 @@
         }
 
         // build action icons
-        foreach ($actionIcons as $action) {
-            $actionArray = explode('|',$action);
-            $tempActionsArray = [];
-            foreach($actionArray as $this_action){
-                /*
-                * Fix: Ensure correct splitting of action string for modal placeholder syntax.
-                * Previously, explode(':', $this_action) could split into more than two parts
-                * when colons appeared inside parameters, e.g. showModal('modal', {key: '{data-key}'}).
-                * Now, explode(':', $this_action, 2) limits the split to two parts, preserving existing behavior.
-                */
-                $action_str_to_arr = explode(':', $this_action, 2);
-                $tempActionsArray[trim($action_str_to_arr[0])] = trim($action_str_to_arr[1]);
+        $tempActionsArray = [];
+        if(!empty($actionIcons[0]) && is_string($actionIcons[0])){
+            foreach ($actionIcons as $action) {
+                $parts = array_map('trim', explode('|', $action));
+                $result = [];
+                foreach ($parts as $part) {
+                    [$key, $value] = explode(':', $part, 2);
+                    $key = trim($key);
+                    $value = trim($value);
+                    if ($key !== '' && $value !== '') {
+                        $result[$key] = $value;
+                    }
+                }
+                $tempActionsArray[] = $result;
             }
-            $iconsArray[] = $tempActionsArray;
+            $actionIcons = $tempActionsArray;
         }
 
         if(!function_exists('build_click')){
-            function build_click($click, $rowData){
+            function build_click($click, $rowData): array|string|null
+            {
                 return preg_replace_callback("/'\{\w+}'/", function ($matches) use ($rowData) {
                     foreach($matches as $match) {
                         $value  = $rowData[str_replace('}\'', '', str_replace('\'{', '', $match))];
@@ -265,8 +268,10 @@
                                         <td data-row-id="{{ $row_id }}" data-column="{{ $th }}"
                                             @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{!! $row[$th] !!}</td>
                                     @endforeach
-                                    <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"
-                                                              :onclick="$onclick"/>
+                                    <x-bladewind::table-icons
+                                            :icons_array="$actionIcons"
+                                            :row="$row"
+                                            :onclick="$onclick"/>
                                 </tr>
                             @endforeach
                         @endforeach
@@ -291,7 +296,7 @@
                                         data-column="{{ $th }}"
                                         @if(!empty($onclick)) onclick="{!! build_click($onclick, $row) !!}" @endif>{!! $row[$th] !!}</td>
                                 @endforeach
-                                <x-bladewind::table-icons :icons_array="$iconsArray" :row="$row"/>
+                                <x-bladewind::table-icons :icons_array="$actionIcons" :row="$row"/>
                             </tr>
                         @endforeach
                     @endif

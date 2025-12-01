@@ -12,6 +12,7 @@
     'canSubmit' => false,
     'disabled' => false,
     'icon' => '',
+    'iconType' => 'solid',
     'buttonTextCss' => null,
     'showFocusRing' => true,
     'outline' => false,
@@ -32,6 +33,7 @@
         circular="true"
         radius="full"
         :icon="$icon"
+        :iconType="$iconType"
         :button_text_css="$buttonTextCss"
         :title="$title"
         :type="$type"
