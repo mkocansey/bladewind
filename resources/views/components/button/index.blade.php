@@ -126,7 +126,10 @@
 @endphp
 {{-- format-ignore-end --}}
 
-<{{ $tag }} {{ $merged_attributes }} @if($disabled) disabled @endif @if($tag == 'button') type="{{ $button_type }}" @endif >
+<{{ $tag }}
+    {{ $merged_attributes }}
+    {{ $disabled ? 'disabled' : ''}}
+    {{($tag == 'button') ? 'type="'.$button_type.'"' : '' }}>
     @if(!empty($icon) && !$iconRight)
         <x-bladewind::icon :name="$icon" :type="$iconType" class="stroke-2 {{$icon_css}}" />
     @endif
