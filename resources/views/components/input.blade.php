@@ -123,7 +123,7 @@
     $clearable = parseBladewindVariable($clearable);
     $enforce_limits = parseBladewindVariable($enforceLimits);
 
-    $required_symbol = ($label == '' && $required) ? ' *' : '';
+    $required_symbol = ($label == '' && $placeholder != '' && $required) ? ' *' : ''; 
     $is_required = ($required) ? 'required' : '';
     $placeholder_color = ($show_placeholder_always || $label == '') ? '' : 'placeholder-transparent dark:placeholder-transparent';
     $placeholder_label = ($show_placeholder_always) ? $placeholder : (($label !== '') ? $label : $placeholder);
