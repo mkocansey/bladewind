@@ -1,0 +1,17 @@
+{
+    "name": "mkocansey/bladewind-filepicker",
+    "description": "BladewindUI — File picker component (powered by FilePond)",
+    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "filepicker"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
+    "require": {"php": ">=8.1", "mkocansey/bladewind-core": "^2.0", "mkocansey/bladewind-script": "^2.0"},
+    "autoload": {
+        "psr-4": {"Mkocansey\\Bladewind\\Filepicker\\": "src/"}
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["Mkocansey\\Bladewind\\Filepicker\\FilepickerServiceProvider"]
+        }
+    }
+}
