@@ -1,0 +1,17 @@
+{
+    "name": "mkocansey/bladewind-centered-content",
+    "description": "BladewindUI — Centered content layout wrapper",
+    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "centered-content"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
+    "require": {"php": ">=8.1", "mkocansey/bladewind-core": "^2.0"},
+    "autoload": {
+        "psr-4": {"Mkocansey\\Bladewind\\CenteredContent\\": "src/"}
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["Mkocansey\\Bladewind\\CenteredContent\\CenteredContentServiceProvider"]
+        }
+    }
+}

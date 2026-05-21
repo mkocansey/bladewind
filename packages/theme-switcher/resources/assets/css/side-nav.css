@@ -1,0 +1,40 @@
+@layer components {
+    .bw-side-nav>nav>a {
+        @apply
+            block
+            tracking-wider
+            px-3
+            py-2
+            text-white/80
+            hover:bg-gradient-to-r from-blue-500/60 to-blue-700
+            hover:rounded-md
+            hover:cursor-pointer
+            capitalize
+            text-sm
+            my-2
+    }
+    .bw-side-nav>nav>a.active {
+        @apply
+            bg-blue-500/60
+            rounded-md
+            hover:cursor-default
+            bg-gradient-to-r from-blue-500/60 to-blue-700
+    }
+    .bw-side-nav>nav>label {
+        @apply
+        block
+        text-sm
+        uppercase
+        tracking-widest
+        text-white/40
+        font-bold
+        mb-3
+        ml-3
+    }
+    .bw-side-nav>nav>a>svg {
+        @apply
+            inline-block
+            opacity-60
+            mr-4
+    }
+}

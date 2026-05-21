@@ -1,0 +1,108 @@
+@layer components {
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        @apply appearance-none;
+    }
+
+    input[type="number"] {
+        @apply appearance-none;
+        -moz-appearance: textfield;
+    }
+
+    .bw-textarea,
+    .bw-raw-select,
+    .bw-input { /* !outline-none ! */
+        @apply w-full text-gray-600 dark:text-dark-300 !ring-0 dark:bg-transparent rounded-md text-sm
+        focus:-outline-offset-1 focus:outline-2 dark:placeholder-dark-400/60 transition-all tracking-wider
+        px-3 py-[8.5px] placeholder-primary-900/40
+    }
+
+    .bw-textarea:not(.has-error),
+    .bw-raw-select:not(.has-error),
+    .bw-input:not(.has-error) {
+        @apply border-gray-400/60 hover:border-gray-400 dark:border-dark-600 dark:hover:border-dark-500/50
+    }
+
+    .bw-textarea.has-error,
+    .bw-raw-select.has-error,
+    .bw-input.has-error {
+        @apply border-red-500 hover:border-red-500 dark:border-red-500 dark:hover:border-red-500 dark:focus:border-red-500
+        focus:outline-red-500 focus:border-red-500
+    }
+
+    .bw-input[disabled], .bw-input[readonly], fieldset[disabled] .bw-input {
+        @apply !bg-gray-100/60 dark:!bg-white/10 dark:!opacity-40 !text-gray-400/70 dark:!text-dark-400
+        cursor-not-allowed dark:!border-dark-500/70
+    }
+
+    .bw-input.small {
+        @apply py-[6px]
+    }
+
+    .bw-input.medium {
+        @apply py-[12px]
+    }
+
+    .bw-input.big {
+        @apply py-5
+    }
+
+    input.no-label, .bw-input.no-label, .bw-textarea.bw-input.no-label {
+        @apply placeholder-transparent
+    }
+
+    .form-label {
+        @apply
+        absolute cursor-text left-3 rtl:!right-3 rtl:left-[unset] !inline-block -top-2 text-sm px-1 transition-all
+        peer-placeholder-shown:top-[10.2px] peer-focus:-top-2 bg-white text-primary-900/40 dark:text-dark-300/50
+        z-20 dark:bg-dark-700/95 dark:px-2 dark:rounded-md dark:py-0.5 tracking-wider
+    }
+
+    .form-label.small {
+        @apply
+        peer-placeholder-shown:!top-[7px] peer-focus:!-top-2
+    }
+
+    .form-label.medium {
+        @apply
+        peer-placeholder-shown:!top-[11.5px] peer-focus:!-top-[9px]
+    }
+
+    .form-label.big {
+        @apply
+        peer-placeholder-shown:!top-[23px] peer-focus:!-top-2
+    }
+
+    .bw-select div.clickable.disabled, .bw-select div.clickable.readonly, fieldset[disabled] .bw-select {
+        @apply !bg-gray-100/60 opacity-95 dark:opacity-40 !border-opacity-40 dark:!bg-dark-300/5 select-none cursor-not-allowed
+    }
+
+    .bw-select div.clickable.enabled {
+        @apply cursor-pointer border dark:bg-transparent border-gray-400/60 hover:border-gray-400 dark:border-dark-600 dark:hover:border-dark-500/50 focus:-outline-offset-1 focus:outline-2 focus:border-2
+    }
+
+    .prefix svg, .suffix svg {
+        @apply ltr:!mr-1 rtl:!ml-1 w-6 h-6 dark:text-dark-500
+    }
+
+    .ql-toolbar.ql-snow {
+        @apply !rounded-t-lg !border-2 !border-gray-300/50 dark:!border-dark-600 dark:!bg-transparent
+    }
+
+    .ql-toolbar.ql-snow .ql-stroke, .ql-stroke.ql-thin {
+        @apply dark:!text-dark-500 dark:!stroke-dark-500
+    }
+
+    .ql-snow.ql-toolbar button:hover .ql-stroke {
+        @apply !stroke-primary-500
+    }
+
+    .ql-container.ql-snow {
+        @apply !rounded-b-lg !border-2 !border-gray-300/50 dark:!border-dark-600 dark:!bg-transparent
+    }
+
+    .ql-editor.ql-blank::before {
+        @apply !text-gray-300 dark:!text-dark-400/60 !not-italic
+    }
+
+}

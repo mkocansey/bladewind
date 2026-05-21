@@ -1,39 +1,66 @@
 {
-  "name": "mkocansey/bladewind",
-  "description": "Laravel UI Components using TailwindCSS, Blade Templates and vanilla Javascript",
-  "keywords": [
-    "laravel",
-    "ui components",
-    "tailwindcss",
-    "blade components"
-  ],
-  "require": {
-    "php": ">=8.0"
-  },
-  "license": "MIT",
-  "type": "library",
-  "autoload": {
-    "psr-4": {
-      "Mkocansey\\Bladewind\\": "src/"
+    "name": "mkocansey/bladewind-monorepo",
+    "description": "BladewindUI monorepo — development root (not a Composer package)",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "symplify/monorepo-builder": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Core\\":              "packages/core/src/",
+            "Mkocansey\\Bladewind\\Icon\\":              "packages/icon/src/",
+            "Mkocansey\\Bladewind\\Script\\":            "packages/script/src/",
+            "Mkocansey\\Bladewind\\Spinner\\":           "packages/spinner/src/",
+            "Mkocansey\\Bladewind\\Button\\":            "packages/button/src/",
+            "Mkocansey\\Bladewind\\Alert\\":             "packages/alert/src/",
+            "Mkocansey\\Bladewind\\Modal\\":             "packages/modal/src/",
+            "Mkocansey\\Bladewind\\Table\\":             "packages/table/src/",
+            "Mkocansey\\Bladewind\\Input\\":             "packages/input/src/",
+            "Mkocansey\\Bladewind\\Textarea\\":          "packages/textarea/src/",
+            "Mkocansey\\Bladewind\\Select\\":            "packages/select/src/",
+            "Mkocansey\\Bladewind\\Checkbox\\":          "packages/checkbox/src/",
+            "Mkocansey\\Bladewind\\Radio\\":             "packages/radio/src/",
+            "Mkocansey\\Bladewind\\Toggle\\":            "packages/toggle/src/",
+            "Mkocansey\\Bladewind\\Datepicker\\":        "packages/datepicker/src/",
+            "Mkocansey\\Bladewind\\Timepicker\\":        "packages/timepicker/src/",
+            "Mkocansey\\Bladewind\\Colorpicker\\":       "packages/colorpicker/src/",
+            "Mkocansey\\Bladewind\\Filepicker\\":        "packages/filepicker/src/",
+            "Mkocansey\\Bladewind\\Slider\\":            "packages/slider/src/",
+            "Mkocansey\\Bladewind\\Checkcards\\":        "packages/checkcards/src/",
+            "Mkocansey\\Bladewind\\Number\\":            "packages/number/src/",
+            "Mkocansey\\Bladewind\\Code\\":              "packages/code/src/",
+            "Mkocansey\\Bladewind\\Card\\":              "packages/card/src/",
+            "Mkocansey\\Bladewind\\ContactCard\\":       "packages/contact-card/src/",
+            "Mkocansey\\Bladewind\\Avatar\\":            "packages/avatar/src/",
+            "Mkocansey\\Bladewind\\Accordion\\":         "packages/accordion/src/",
+            "Mkocansey\\Bladewind\\Tag\\":               "packages/tag/src/",
+            "Mkocansey\\Bladewind\\Timeline\\":          "packages/timeline/src/",
+            "Mkocansey\\Bladewind\\Statistic\\":         "packages/statistic/src/",
+            "Mkocansey\\Bladewind\\Rating\\":            "packages/rating/src/",
+            "Mkocansey\\Bladewind\\HorizontalLineGraph\\": "packages/horizontal-line-graph/src/",
+            "Mkocansey\\Bladewind\\EmptyState\\":        "packages/empty-state/src/",
+            "Mkocansey\\Bladewind\\CenteredContent\\":   "packages/centered-content/src/",
+            "Mkocansey\\Bladewind\\Chart\\":             "packages/chart/src/",
+            "Mkocansey\\Bladewind\\Progress\\":          "packages/progress/src/",
+            "Mkocansey\\Bladewind\\Listview\\":          "packages/listview/src/",
+            "Mkocansey\\Bladewind\\Tab\\":               "packages/tab/src/",
+            "Mkocansey\\Bladewind\\Dropmenu\\":          "packages/dropmenu/src/",
+            "Mkocansey\\Bladewind\\Pagination\\":        "packages/pagination/src/",
+            "Mkocansey\\Bladewind\\ThemeSwitcher\\":     "packages/theme-switcher/src/",
+            "Mkocansey\\Bladewind\\":                    "packages/meta/src/"
+        },
+        "files": [
+            "packages/core/src/BladewindHelpers.php"
+        ]
     }
-  },
-  "authors": [
-    {
-      "name": "Michael K. Ocansey",
-      "email": "mike@bladewindui.com"
-    }
-  ],
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Mkocansey\\Bladewind\\BladewindServiceProvider"
-      ]
-    }
-  },
-  "scripts": {
-    "post-update-cmd": [
-      "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-public --force');\"",
-      "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-lang --force');\""
-    ]
-  }
 }
