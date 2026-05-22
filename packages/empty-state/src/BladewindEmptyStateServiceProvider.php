@@ -19,9 +19,15 @@ class BladewindEmptyStateServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views/components/' => resource_path('views/components/bladewind'),
         ], 'bladewind-components');
 
-        $this->publishes([
-            __DIR__.'/../resources/assets/css/' => public_path('vendor/bladewind/css'),
-            __DIR__.'/../public/'               => public_path('vendor/bladewind'),
-        ], 'bladewind-public');
+        $bladewindPublicPaths = [];
+        if (is_dir(__DIR__.'/../resources/assets/css')) {
+            $bladewindPublicPaths[__DIR__.'/../resources/assets/css/'] = public_path('vendor/bladewind/css');
+        }
+        if (is_dir(__DIR__.'/../public')) {
+            $bladewindPublicPaths[__DIR__.'/../public/'] = public_path('vendor/bladewind');
+        }
+        if (!empty($bladewindPublicPaths)) {
+            $this->publishes($bladewindPublicPaths, 'bladewind-public');
+        }
     }
 }

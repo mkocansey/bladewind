@@ -21,8 +21,7 @@ class BladewindServiceProvider extends ServiceProvider
             __DIR__.'/../config/bladewind.php' => config_path('bladewind.php'),
         ], 'bladewind-config');
 
-        $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/bladewind'),
-        ], 'bladewind-public');
+        // The compiled CSS/JS bundle is published via the individual packages'
+        // bladewind-public tag. The meta package itself has no additional assets.
     }
 }
