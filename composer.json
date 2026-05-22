@@ -1,7 +1,8 @@
 {
-    "name": "mkocansey/bladewind-monorepo",
-    "description": "BladewindUI monorepo — development root (not a Composer package)",
-    "type": "project",
+    "name": "mkocansey/bladewind",
+    "description": "BladewindUI — elegant Laravel Blade UI components powered by TailwindCSS",
+    "keywords": ["laravel", "blade", "tailwindcss", "ui components", "bladewindui"],
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -10,10 +11,56 @@
         }
     ],
     "require": {
-        "php": ">=8.1"
+        "php": ">=8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0"
     },
     "require-dev": {
         "symplify/monorepo-builder": "^11.0"
+    },
+    "replace": {
+        "mkocansey/bladewind-core":                 "self.version",
+        "mkocansey/bladewind-icon":                 "self.version",
+        "mkocansey/bladewind-script":               "self.version",
+        "mkocansey/bladewind-spinner":              "self.version",
+        "mkocansey/bladewind-button":               "self.version",
+        "mkocansey/bladewind-alert":                "self.version",
+        "mkocansey/bladewind-modal":                "self.version",
+        "mkocansey/bladewind-table":                "self.version",
+        "mkocansey/bladewind-input":                "self.version",
+        "mkocansey/bladewind-textarea":             "self.version",
+        "mkocansey/bladewind-select":               "self.version",
+        "mkocansey/bladewind-checkbox":             "self.version",
+        "mkocansey/bladewind-radio":                "self.version",
+        "mkocansey/bladewind-toggle":               "self.version",
+        "mkocansey/bladewind-datepicker":           "self.version",
+        "mkocansey/bladewind-timepicker":           "self.version",
+        "mkocansey/bladewind-colorpicker":          "self.version",
+        "mkocansey/bladewind-filepicker":           "self.version",
+        "mkocansey/bladewind-slider":               "self.version",
+        "mkocansey/bladewind-checkcards":           "self.version",
+        "mkocansey/bladewind-number":               "self.version",
+        "mkocansey/bladewind-code":                 "self.version",
+        "mkocansey/bladewind-forms":                "self.version",
+        "mkocansey/bladewind-card":                 "self.version",
+        "mkocansey/bladewind-contact-card":         "self.version",
+        "mkocansey/bladewind-avatar":               "self.version",
+        "mkocansey/bladewind-accordion":            "self.version",
+        "mkocansey/bladewind-tag":                  "self.version",
+        "mkocansey/bladewind-timeline":             "self.version",
+        "mkocansey/bladewind-statistic":            "self.version",
+        "mkocansey/bladewind-rating":               "self.version",
+        "mkocansey/bladewind-horizontal-line-graph":"self.version",
+        "mkocansey/bladewind-empty-state":          "self.version",
+        "mkocansey/bladewind-centered-content":     "self.version",
+        "mkocansey/bladewind-chart":                "self.version",
+        "mkocansey/bladewind-progress":             "self.version",
+        "mkocansey/bladewind-listview":             "self.version",
+        "mkocansey/bladewind-content":              "self.version",
+        "mkocansey/bladewind-tab":                  "self.version",
+        "mkocansey/bladewind-dropmenu":             "self.version",
+        "mkocansey/bladewind-pagination":           "self.version",
+        "mkocansey/bladewind-theme-switcher":       "self.version",
+        "mkocansey/bladewind-navigation":           "self.version"
     },
     "autoload": {
         "psr-4": {
@@ -62,5 +109,52 @@
         "files": [
             "packages/core/src/BladewindHelpers.php"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\Core\\BladewindCoreServiceProvider",
+                "Mkocansey\\Bladewind\\Icon\\BladewindIconServiceProvider",
+                "Mkocansey\\Bladewind\\Script\\BladewindScriptServiceProvider",
+                "Mkocansey\\Bladewind\\Spinner\\BladewindSpinnerServiceProvider",
+                "Mkocansey\\Bladewind\\Button\\BladewindButtonServiceProvider",
+                "Mkocansey\\Bladewind\\Alert\\BladewindAlertServiceProvider",
+                "Mkocansey\\Bladewind\\Modal\\BladewindModalServiceProvider",
+                "Mkocansey\\Bladewind\\Table\\BladewindTableServiceProvider",
+                "Mkocansey\\Bladewind\\Input\\BladewindInputServiceProvider",
+                "Mkocansey\\Bladewind\\Textarea\\BladewindTextareaServiceProvider",
+                "Mkocansey\\Bladewind\\Select\\BladewindSelectServiceProvider",
+                "Mkocansey\\Bladewind\\Checkbox\\BladewindCheckboxServiceProvider",
+                "Mkocansey\\Bladewind\\Radio\\BladewindRadioServiceProvider",
+                "Mkocansey\\Bladewind\\Toggle\\BladewindToggleServiceProvider",
+                "Mkocansey\\Bladewind\\Datepicker\\BladewindDatepickerServiceProvider",
+                "Mkocansey\\Bladewind\\Timepicker\\BladewindTimepickerServiceProvider",
+                "Mkocansey\\Bladewind\\Colorpicker\\BladewindColorpickerServiceProvider",
+                "Mkocansey\\Bladewind\\Filepicker\\BladewindFilepickerServiceProvider",
+                "Mkocansey\\Bladewind\\Slider\\BladewindSliderServiceProvider",
+                "Mkocansey\\Bladewind\\Checkcards\\BladewindCheckcardsServiceProvider",
+                "Mkocansey\\Bladewind\\Number\\BladewindNumberServiceProvider",
+                "Mkocansey\\Bladewind\\Code\\BladewindCodeServiceProvider",
+                "Mkocansey\\Bladewind\\Card\\BladewindCardServiceProvider",
+                "Mkocansey\\Bladewind\\ContactCard\\BladewindContactCardServiceProvider",
+                "Mkocansey\\Bladewind\\Avatar\\BladewindAvatarServiceProvider",
+                "Mkocansey\\Bladewind\\Accordion\\BladewindAccordionServiceProvider",
+                "Mkocansey\\Bladewind\\Tag\\BladewindTagServiceProvider",
+                "Mkocansey\\Bladewind\\Timeline\\BladewindTimelineServiceProvider",
+                "Mkocansey\\Bladewind\\Statistic\\BladewindStatisticServiceProvider",
+                "Mkocansey\\Bladewind\\Rating\\BladewindRatingServiceProvider",
+                "Mkocansey\\Bladewind\\HorizontalLineGraph\\BladewindHorizontalLineGraphServiceProvider",
+                "Mkocansey\\Bladewind\\EmptyState\\BladewindEmptyStateServiceProvider",
+                "Mkocansey\\Bladewind\\CenteredContent\\BladewindCenteredContentServiceProvider",
+                "Mkocansey\\Bladewind\\Chart\\BladewindChartServiceProvider",
+                "Mkocansey\\Bladewind\\Progress\\BladewindProgressServiceProvider",
+                "Mkocansey\\Bladewind\\Listview\\BladewindListviewServiceProvider",
+                "Mkocansey\\Bladewind\\Tab\\BladewindTabServiceProvider",
+                "Mkocansey\\Bladewind\\Dropmenu\\BladewindDropmenuServiceProvider",
+                "Mkocansey\\Bladewind\\Pagination\\BladewindPaginationServiceProvider",
+                "Mkocansey\\Bladewind\\ThemeSwitcher\\BladewindThemeSwitcherServiceProvider",
+                "Mkocansey\\Bladewind\\BladewindServiceProvider"
+            ]
+        }
     }
 }
