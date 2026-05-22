@@ -5,6 +5,34 @@ The individual package repos (`mkocansey/bladewind-table` etc.) are **read-only 
 
 ---
 
+## Root `composer.json` — why it is a `library` with `replace`
+
+The monorepo root is named `mkocansey/bladewind` and declares `type: library` so that
+downstream projects can depend on it directly via a Composer **path repository** during
+local development:
+
+```json
+"repositories": {
+    "mkocansey/bladewind": {
+        "type": "path",
+        "url": "/path/to/bladewindui"
+    }
+}
+```
+
+The `replace` block tells Composer that installing the root package also satisfies every
+sub-package requirement (e.g. `mkocansey/bladewind-button ^2.0`), so no network calls
+are made for the individual split repos during local dev.
+
+The `extra.laravel.providers` list registers all component service providers so Laravel
+auto-discovers them from a single path-repo install.
+
+**On Packagist**, `mkocansey/bladewind` resolves to the `packages/meta` split repo (which
+requires all the individual split packages from Packagist). The monorepo root is never
+published to Packagist directly.
+
+---
+
 ## First-time setup
 
 ### 1. Create the split repos on GitHub
