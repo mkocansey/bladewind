@@ -37,9 +37,11 @@ published to Packagist directly.
 
 ### 1. Create the split repos on GitHub
 
-Create one empty public repo per package (no README, no licence — keep them completely empty):
+Create one empty public repo per package (no README, no licence — keep them completely empty).
+There are **44 repos** in total — one per `packages/*` directory plus the full-install meta repo:
 
 ```
+# Foundation
 mkocansey/bladewind-core
 mkocansey/bladewind-icon
 mkocansey/bladewind-script
@@ -47,11 +49,57 @@ mkocansey/bladewind-spinner
 mkocansey/bladewind-button
 mkocansey/bladewind-alert
 mkocansey/bladewind-modal
-mkocansey/bladewind-forms
 mkocansey/bladewind-table
+
+# Forms leaf packages
+mkocansey/bladewind-input
+mkocansey/bladewind-textarea
+mkocansey/bladewind-select
+mkocansey/bladewind-checkbox
+mkocansey/bladewind-radio
+mkocansey/bladewind-toggle
+mkocansey/bladewind-datepicker
+mkocansey/bladewind-timepicker
+mkocansey/bladewind-colorpicker
+mkocansey/bladewind-filepicker
+mkocansey/bladewind-slider
+mkocansey/bladewind-checkcards
+mkocansey/bladewind-number
+mkocansey/bladewind-code
+
+# Forms aggregate (metapackage)
+mkocansey/bladewind-forms
+
+# Content leaf packages
+mkocansey/bladewind-card
+mkocansey/bladewind-contact-card
+mkocansey/bladewind-avatar
+mkocansey/bladewind-accordion
+mkocansey/bladewind-tag
+mkocansey/bladewind-timeline
+mkocansey/bladewind-statistic
+mkocansey/bladewind-rating
+mkocansey/bladewind-horizontal-line-graph
+mkocansey/bladewind-empty-state
+mkocansey/bladewind-centered-content
+mkocansey/bladewind-chart
+mkocansey/bladewind-progress
+mkocansey/bladewind-listview
+
+# Content aggregate (metapackage)
 mkocansey/bladewind-content
+
+# Navigation leaf packages
+mkocansey/bladewind-tab
+mkocansey/bladewind-dropmenu
+mkocansey/bladewind-pagination
+mkocansey/bladewind-theme-switcher
+
+# Navigation aggregate (metapackage)
 mkocansey/bladewind-navigation
-mkocansey/bladewind          ← the full-install meta package
+
+# Full-install meta package
+mkocansey/bladewind          ← maps to packages/meta/
 ```
 
 ### 2. Add the GitHub Actions secret
@@ -91,7 +139,7 @@ vendor/bin/monorepo-builder validate
 #    → Packagist picks up the new release via webhook
 vendor/bin/monorepo-builder release 2.1.0
 
-# 5. Done. Monitor the Actions tab to confirm all 43 splits succeeded.
+# 5. Done. Monitor the Actions tab to confirm all 44 splits succeeded.
 ```
 
 ---
@@ -136,15 +184,69 @@ Aggregate packages are `type: metapackage` — they contain no code, only a `req
 ## Adding a new component
 
 1. Create `packages/<name>/` with:
-   - `composer.json` (name: `mkocansey/bladewind-<name>`, type: `library`)
-   - `src/Bladewind<Name>ServiceProvider.php`
-   - `config/bladewind.php` (just this component's keys)
+   - `composer.json` (name: `mkocansey/bladewind-<name>`, type: `library`) — list only the leaf packages it actually depends on in `require` (grep the blade file for `<x-bladewind::*` to find them)
+   - `src/Bladewind<Name>ServiceProvider.php` — use the `is_dir()` guard pattern for `bladewind-public` (see below)
+   - `config/bladewind.php` (just this component's config keys)
    - `resources/views/components/` (blade files)
-2. Add `"Mkocansey\\Bladewind\\<Name>\\": "packages/<name>/src/"` to root `composer.json` `autoload.psr-4`
-3. Add a matrix entry to `.github/workflows/split-packages.yml`
+
+2. Add to root `composer.json` — three places:
+   - `autoload.psr-4`: `"Mkocansey\\Bladewind\\<Name>\\": "packages/<name>/src/"`
+   - `replace`: `"mkocansey/bladewind-<name>": "self.version"`
+   - `extra.laravel.providers`: `"Mkocansey\\Bladewind\\<Name>\\Bladewind<Name>ServiceProvider"`
+
+3. Add a matrix entry to `.github/workflows/split-packages.yml`:
+   ```yaml
+   - { local_path: 'packages/<name>', split_repository: 'bladewind-<name>' }
+   ```
+
 4. If the component belongs to a group (forms/content/navigation), add it to the relevant `packages/<group>/composer.json` `require`
+
 5. Add it to `packages/meta/composer.json` `require` (or it'll be pulled transitively via the group)
+
 6. Add its config keys to `packages/meta/config/bladewind.php`
+
 7. Create the empty GitHub repo `mkocansey/bladewind-<name>`
+
 8. Register it on Packagist with a GitHub webhook
+
 9. Release a new minor version
+
+### Service provider template for new components
+
+Use this exact pattern — the `is_dir()` guards prevent errors when a package has no CSS or no `public/` directory:
+
+```php
+<?php
+
+namespace Mkocansey\Bladewind\<Name>;
+
+use Illuminate\Support\ServiceProvider;
+
+class Bladewind<Name>ServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/bladewind.php', 'bladewind');
+    }
+
+    public function boot(): void
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'bladewind');
+
+        $this->publishes([
+            __DIR__.'/../resources/views/components/' => resource_path('views/components/bladewind'),
+        ], 'bladewind-components');
+
+        $bladewindPublicPaths = [];
+        if (is_dir(__DIR__.'/../resources/assets/css')) {
+            $bladewindPublicPaths[__DIR__.'/../resources/assets/css/'] = public_path('vendor/bladewind/css');
+        }
+        if (is_dir(__DIR__.'/../public')) {
+            $bladewindPublicPaths[__DIR__.'/../public/'] = public_path('vendor/bladewind');
+        }
+        if (!empty($bladewindPublicPaths)) {
+            $this->publishes($bladewindPublicPaths, 'bladewind-public');
+        }
+    }
+}
+```
