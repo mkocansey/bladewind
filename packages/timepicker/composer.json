@@ -1,17 +1,40 @@
 {
     "name": "mkocansey/bladewind-timepicker",
     "description": "BladewindUI — Timepicker component",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "timepicker"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "timepicker"
+    ],
     "license": "MIT",
     "type": "library",
-    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
-    "require": {"php": ">=8.1", "mkocansey/bladewind-core": "^2.0", "mkocansey/bladewind-icon": "^2.0", "mkocansey/bladewind-script": "^2.0", "mkocansey/bladewind-input": "^2.0", "mkocansey/bladewind-modal": "^2.0", "mkocansey/bladewind-select": "^2.0"},
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.0",
+        "mkocansey/bladewind-icon": "^4.0",
+        "mkocansey/bladewind-script": "^4.0",
+        "mkocansey/bladewind-input": "^4.0",
+        "mkocansey/bladewind-modal": "^4.0",
+        "mkocansey/bladewind-select": "^4.0"
+    },
     "autoload": {
-        "psr-4": {"Mkocansey\\Bladewind\\Timepicker\\": "src/"}
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Timepicker\\": "src/"
+        }
     },
     "extra": {
         "laravel": {
-            "providers": ["Mkocansey\\Bladewind\\Timepicker\\TimepickerServiceProvider"]
+            "providers": [
+                "Mkocansey\\Bladewind\\Timepicker\\TimepickerServiceProvider"
+            ]
         }
     }
 }

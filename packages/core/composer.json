@@ -1,7 +1,12 @@
 {
     "name": "mkocansey/bladewind-core",
     "description": "Shared foundation for BladewindUI — helpers, CSS variables, and base JS",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui"
+    ],
     "license": "MIT",
     "type": "library",
     "authors": [

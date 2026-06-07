@@ -1,24 +1,35 @@
 {
     "name": "mkocansey/bladewind-content",
     "description": "BladewindUI content bundle — installs all content components (Card, Accordion, Avatar, Tag, Timeline, Statistic, Rating, Chart, Progress, Empty State, and more)",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "content"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "content"
+    ],
     "license": "MIT",
     "type": "metapackage",
-    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
     "require": {
-        "mkocansey/bladewind-card":                 "^2.0",
-        "mkocansey/bladewind-contact-card":         "^2.0",
-        "mkocansey/bladewind-avatar":               "^2.0",
-        "mkocansey/bladewind-accordion":            "^2.0",
-        "mkocansey/bladewind-tag":                  "^2.0",
-        "mkocansey/bladewind-timeline":             "^2.0",
-        "mkocansey/bladewind-statistic":            "^2.0",
-        "mkocansey/bladewind-rating":               "^2.0",
-        "mkocansey/bladewind-horizontal-line-graph":"^2.0",
-        "mkocansey/bladewind-empty-state":          "^2.0",
-        "mkocansey/bladewind-centered-content":     "^2.0",
-        "mkocansey/bladewind-chart":                "^2.0",
-        "mkocansey/bladewind-progress":             "^2.0",
-        "mkocansey/bladewind-listview":             "^2.0"
+        "mkocansey/bladewind-card": "^4.0",
+        "mkocansey/bladewind-contact-card": "^4.0",
+        "mkocansey/bladewind-avatar": "^4.0",
+        "mkocansey/bladewind-accordion": "^4.0",
+        "mkocansey/bladewind-tag": "^4.0",
+        "mkocansey/bladewind-timeline": "^4.0",
+        "mkocansey/bladewind-statistic": "^4.0",
+        "mkocansey/bladewind-rating": "^4.0",
+        "mkocansey/bladewind-horizontal-line-graph": "^4.0",
+        "mkocansey/bladewind-empty-state": "^4.0",
+        "mkocansey/bladewind-centered-content": "^4.0",
+        "mkocansey/bladewind-chart": "^4.0",
+        "mkocansey/bladewind-progress": "^4.0",
+        "mkocansey/bladewind-listview": "^4.0"
     }
 }

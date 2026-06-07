@@ -1,7 +1,13 @@
 {
     "name": "mkocansey/bladewind-icon",
     "description": "BladewindUI Icon component — Heroicons-powered SVG icons",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "icon"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "icon"
+    ],
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -12,7 +18,7 @@
     ],
     "require": {
         "php": ">=8.1",
-        "mkocansey/bladewind-core": "^2.0"
+        "mkocansey/bladewind-core": "^4.0"
     },
     "autoload": {
         "psr-4": {

@@ -1,24 +1,35 @@
 {
     "name": "mkocansey/bladewind-forms",
     "description": "BladewindUI forms bundle — installs all form components (Input, Select, Checkbox, Radio, Toggle, Datepicker, Timepicker, Colorpicker, Filepicker, Slider, Checkcards, Textarea, Number, Code)",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "forms"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "forms"
+    ],
     "license": "MIT",
     "type": "metapackage",
-    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
     "require": {
-        "mkocansey/bladewind-input":       "^2.0",
-        "mkocansey/bladewind-textarea":    "^2.0",
-        "mkocansey/bladewind-select":      "^2.0",
-        "mkocansey/bladewind-checkbox":    "^2.0",
-        "mkocansey/bladewind-radio":       "^2.0",
-        "mkocansey/bladewind-toggle":      "^2.0",
-        "mkocansey/bladewind-datepicker":  "^2.0",
-        "mkocansey/bladewind-timepicker":  "^2.0",
-        "mkocansey/bladewind-colorpicker": "^2.0",
-        "mkocansey/bladewind-filepicker":  "^2.0",
-        "mkocansey/bladewind-slider":      "^2.0",
-        "mkocansey/bladewind-checkcards":  "^2.0",
-        "mkocansey/bladewind-number":      "^2.0",
-        "mkocansey/bladewind-code":        "^2.0"
+        "mkocansey/bladewind-input": "^4.0",
+        "mkocansey/bladewind-textarea": "^4.0",
+        "mkocansey/bladewind-select": "^4.0",
+        "mkocansey/bladewind-checkbox": "^4.0",
+        "mkocansey/bladewind-radio": "^4.0",
+        "mkocansey/bladewind-toggle": "^4.0",
+        "mkocansey/bladewind-datepicker": "^4.0",
+        "mkocansey/bladewind-timepicker": "^4.0",
+        "mkocansey/bladewind-colorpicker": "^4.0",
+        "mkocansey/bladewind-filepicker": "^4.0",
+        "mkocansey/bladewind-slider": "^4.0",
+        "mkocansey/bladewind-checkcards": "^4.0",
+        "mkocansey/bladewind-number": "^4.0",
+        "mkocansey/bladewind-code": "^4.0"
     }
 }

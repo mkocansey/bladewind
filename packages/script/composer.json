@@ -1,7 +1,13 @@
 {
     "name": "mkocansey/bladewind-script",
     "description": "BladewindUI Script component — inline and external script tag helper",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "script"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "script"
+    ],
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -12,7 +18,7 @@
     ],
     "require": {
         "php": ">=8.1",
-        "mkocansey/bladewind-core": "^2.0"
+        "mkocansey/bladewind-core": "^4.0"
     },
     "autoload": {
         "psr-4": {

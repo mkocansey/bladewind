@@ -1,7 +1,13 @@
 {
     "name": "mkocansey/bladewind",
     "description": "BladewindUI — elegant Laravel Blade UI components powered by TailwindCSS",
-    "keywords": ["laravel", "blade", "tailwindcss", "ui components", "bladewindui"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "ui components",
+        "bladewindui"
+    ],
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -12,17 +18,17 @@
     ],
     "require": {
         "php": ">=8.1",
-        "mkocansey/bladewind-core":                 "^2.0",
-        "mkocansey/bladewind-icon":                 "^2.0",
-        "mkocansey/bladewind-script":               "^2.0",
-        "mkocansey/bladewind-spinner":              "^2.0",
-        "mkocansey/bladewind-button":               "^2.0",
-        "mkocansey/bladewind-alert":                "^2.0",
-        "mkocansey/bladewind-modal":                "^2.0",
-        "mkocansey/bladewind-table":                "^2.0",
-        "mkocansey/bladewind-forms":                "^2.0",
-        "mkocansey/bladewind-content":              "^2.0",
-        "mkocansey/bladewind-navigation":           "^2.0"
+        "mkocansey/bladewind-core": "^4.0",
+        "mkocansey/bladewind-icon": "^4.0",
+        "mkocansey/bladewind-script": "^4.0",
+        "mkocansey/bladewind-spinner": "^4.0",
+        "mkocansey/bladewind-button": "^4.0",
+        "mkocansey/bladewind-alert": "^4.0",
+        "mkocansey/bladewind-modal": "^4.0",
+        "mkocansey/bladewind-table": "^4.0",
+        "mkocansey/bladewind-forms": "^4.0",
+        "mkocansey/bladewind-content": "^4.0",
+        "mkocansey/bladewind-navigation": "^4.0"
     },
     "autoload": {
         "psr-4": {

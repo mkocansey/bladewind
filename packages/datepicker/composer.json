@@ -1,17 +1,37 @@
 {
     "name": "mkocansey/bladewind-datepicker",
     "description": "BladewindUI — Datepicker component",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "datepicker"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "datepicker"
+    ],
     "license": "MIT",
     "type": "library",
-    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
-    "require": {"php": ">=8.1", "mkocansey/bladewind-core": "^2.0", "mkocansey/bladewind-script": "^2.0", "mkocansey/bladewind-input": "^2.0"},
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.0",
+        "mkocansey/bladewind-script": "^4.0",
+        "mkocansey/bladewind-input": "^4.0"
+    },
     "autoload": {
-        "psr-4": {"Mkocansey\\Bladewind\\Datepicker\\": "src/"}
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Datepicker\\": "src/"
+        }
     },
     "extra": {
         "laravel": {
-            "providers": ["Mkocansey\\Bladewind\\Datepicker\\DatepickerServiceProvider"]
+            "providers": [
+                "Mkocansey\\Bladewind\\Datepicker\\DatepickerServiceProvider"
+            ]
         }
     }
 }

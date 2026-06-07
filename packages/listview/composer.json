@@ -1,17 +1,36 @@
 {
     "name": "mkocansey/bladewind-listview",
     "description": "BladewindUI — List view component",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "listview"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "listview"
+    ],
     "license": "MIT",
     "type": "library",
-    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
-    "require": {"php": ">=8.1", "mkocansey/bladewind-core": "^2.0", "mkocansey/bladewind-script": "^2.0"},
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.0",
+        "mkocansey/bladewind-script": "^4.0"
+    },
     "autoload": {
-        "psr-4": {"Mkocansey\\Bladewind\\Listview\\": "src/"}
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Listview\\": "src/"
+        }
     },
     "extra": {
         "laravel": {
-            "providers": ["Mkocansey\\Bladewind\\Listview\\ListviewServiceProvider"]
+            "providers": [
+                "Mkocansey\\Bladewind\\Listview\\ListviewServiceProvider"
+            ]
         }
     }
 }

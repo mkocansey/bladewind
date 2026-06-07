@@ -1,17 +1,37 @@
 {
     "name": "mkocansey/bladewind-accordion",
     "description": "BladewindUI — Accordion component",
-    "keywords": ["laravel", "blade", "tailwindcss", "bladewindui", "accordion"],
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "accordion"
+    ],
     "license": "MIT",
     "type": "library",
-    "authors": [{"name": "Michael K. Ocansey", "email": "mike@bladewindui.com"}],
-    "require": {"php": ">=8.1", "mkocansey/bladewind-core": "^2.0", "mkocansey/bladewind-script": "^2.0", "mkocansey/bladewind-card": "^2.0"},
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.0",
+        "mkocansey/bladewind-script": "^4.0",
+        "mkocansey/bladewind-card": "^4.0"
+    },
     "autoload": {
-        "psr-4": {"Mkocansey\\Bladewind\\Accordion\\": "src/"}
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Accordion\\": "src/"
+        }
     },
     "extra": {
         "laravel": {
-            "providers": ["Mkocansey\\Bladewind\\Accordion\\AccordionServiceProvider"]
+            "providers": [
+                "Mkocansey\\Bladewind\\Accordion\\AccordionServiceProvider"
+            ]
         }
     }
 }
