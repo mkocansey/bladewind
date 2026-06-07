@@ -96,3 +96,8 @@ jobs:
           repository_name: ${{ matrix.package.split_repository }}
           user_name: 'BladewindUI Bot'
           user_email: 'bot@bladewindui.com'
+          # This workflow only fires on tag pushes (see `on.push.tags` above),
+          # so github.ref_name is always the tag name (e.g. "v4.0.0"). Without
+          # this, the action only pushes the branch — no tag is applied to the
+          # split repo, so Packagist never registers a new version.
+          tag: '${{ github.ref_name }}'
