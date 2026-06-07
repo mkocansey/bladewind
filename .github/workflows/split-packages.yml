@@ -85,10 +85,14 @@ jobs:
 
       - name: Split ${{ matrix.package.local_path }} → ${{ matrix.package.split_repository }}
         uses: danharrin/monorepo-split-github-action@v2.3.0
+        env:
+          # The action reads the token from this env var (NOT a `with:` input —
+          # passing it as `access_token:` is silently ignored, which left every
+          # split job reporting "success" while pushing nothing).
+          GITHUB_TOKEN: ${{ secrets.MONOREPO_SPLIT_TOKEN }}
         with:
           package_directory: ${{ matrix.package.local_path }}
           repository_organization: 'mkocansey'
           repository_name: ${{ matrix.package.split_repository }}
           user_name: 'BladewindUI Bot'
           user_email: 'bot@bladewindui.com'
-          access_token: ${{ secrets.MONOREPO_SPLIT_TOKEN }}
