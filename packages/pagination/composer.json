@@ -18,11 +18,11 @@
     ],
     "require": {
         "php": ">=8.1",
-        "mkocansey/bladewind-core": "^4.0",
-        "mkocansey/bladewind-icon": "^4.0",
-        "mkocansey/bladewind-script": "^4.0",
-        "mkocansey/bladewind-button": "^4.0",
-        "mkocansey/bladewind-select": "^4.0"
+        "mkocansey/bladewind-core": "^4.1",
+        "mkocansey/bladewind-icon": "^4.1",
+        "mkocansey/bladewind-script": "^4.1",
+        "mkocansey/bladewind-button": "^4.1",
+        "mkocansey/bladewind-select": "^4.1"
     },
     "autoload": {
         "psr-4": {
