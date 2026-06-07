@@ -1,0 +1,94 @@
+name: Split packages into read-only repositories
+
+# Fires on every tag push created by: vendor/bin/monorepo-builder release X.Y.Z
+# Each matrix entry splits one packages/* subdirectory into its own GitHub repo
+# and re-applies the same tag so Packagist picks it up automatically.
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  packages_split:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false   # split all packages even if one fails
+      matrix:
+        package:
+
+          # ── Foundation ────────────────────────────────────────────────────────
+          - { local_path: 'packages/core',    split_repository: 'bladewind-core'    }
+          - { local_path: 'packages/icon',    split_repository: 'bladewind-icon'    }
+          - { local_path: 'packages/script',  split_repository: 'bladewind-script'  }
+          - { local_path: 'packages/spinner', split_repository: 'bladewind-spinner' }
+          - { local_path: 'packages/button',  split_repository: 'bladewind-button'  }
+          - { local_path: 'packages/alert',   split_repository: 'bladewind-alert'   }
+          - { local_path: 'packages/modal',   split_repository: 'bladewind-modal'   }
+          - { local_path: 'packages/table',   split_repository: 'bladewind-table'   }
+
+          # ── Form leaf packages ────────────────────────────────────────────────
+          - { local_path: 'packages/input',       split_repository: 'bladewind-input'       }
+          - { local_path: 'packages/textarea',    split_repository: 'bladewind-textarea'    }
+          - { local_path: 'packages/select',      split_repository: 'bladewind-select'      }
+          - { local_path: 'packages/checkbox',    split_repository: 'bladewind-checkbox'    }
+          - { local_path: 'packages/radio',       split_repository: 'bladewind-radio'       }
+          - { local_path: 'packages/toggle',      split_repository: 'bladewind-toggle'      }
+          - { local_path: 'packages/datepicker',  split_repository: 'bladewind-datepicker'  }
+          - { local_path: 'packages/timepicker',  split_repository: 'bladewind-timepicker'  }
+          - { local_path: 'packages/colorpicker', split_repository: 'bladewind-colorpicker' }
+          - { local_path: 'packages/filepicker',  split_repository: 'bladewind-filepicker'  }
+          - { local_path: 'packages/slider',      split_repository: 'bladewind-slider'      }
+          - { local_path: 'packages/checkcards',  split_repository: 'bladewind-checkcards'  }
+          - { local_path: 'packages/number',      split_repository: 'bladewind-number'      }
+          - { local_path: 'packages/code',        split_repository: 'bladewind-code'        }
+
+          # ── Forms aggregate (metapackage) ─────────────────────────────────────
+          - { local_path: 'packages/forms', split_repository: 'bladewind-forms' }
+
+          # ── Content leaf packages ─────────────────────────────────────────────
+          - { local_path: 'packages/card',                 split_repository: 'bladewind-card'                 }
+          - { local_path: 'packages/contact-card',         split_repository: 'bladewind-contact-card'         }
+          - { local_path: 'packages/avatar',               split_repository: 'bladewind-avatar'               }
+          - { local_path: 'packages/accordion',            split_repository: 'bladewind-accordion'            }
+          - { local_path: 'packages/tag',                  split_repository: 'bladewind-tag'                  }
+          - { local_path: 'packages/timeline',             split_repository: 'bladewind-timeline'             }
+          - { local_path: 'packages/statistic',            split_repository: 'bladewind-statistic'            }
+          - { local_path: 'packages/rating',               split_repository: 'bladewind-rating'               }
+          - { local_path: 'packages/horizontal-line-graph',split_repository: 'bladewind-horizontal-line-graph'}
+          - { local_path: 'packages/empty-state',          split_repository: 'bladewind-empty-state'          }
+          - { local_path: 'packages/centered-content',     split_repository: 'bladewind-centered-content'     }
+          - { local_path: 'packages/chart',                split_repository: 'bladewind-chart'                }
+          - { local_path: 'packages/progress',             split_repository: 'bladewind-progress'             }
+          - { local_path: 'packages/listview',             split_repository: 'bladewind-listview'             }
+
+          # ── Content aggregate (metapackage) ───────────────────────────────────
+          - { local_path: 'packages/content', split_repository: 'bladewind-content' }
+
+          # ── Navigation leaf packages ──────────────────────────────────────────
+          - { local_path: 'packages/tab',           split_repository: 'bladewind-tab'           }
+          - { local_path: 'packages/dropmenu',      split_repository: 'bladewind-dropmenu'      }
+          - { local_path: 'packages/pagination',    split_repository: 'bladewind-pagination'    }
+          - { local_path: 'packages/theme-switcher',split_repository: 'bladewind-theme-switcher'}
+
+          # ── Navigation aggregate (metapackage) ────────────────────────────────
+          - { local_path: 'packages/navigation', split_repository: 'bladewind-navigation' }
+
+          # ── Full install meta package ─────────────────────────────────────────
+          - { local_path: 'packages/meta', split_repository: 'bladewind' }
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history is required by splitsh to replay per-package commits
+          fetch-depth: 0
+
+      - name: Split ${{ matrix.package.local_path }} → ${{ matrix.package.split_repository }}
+        uses: danharrin/monorepo-split-github-action@v2.3.0
+        with:
+          package_directory: ${{ matrix.package.local_path }}
+          repository_organization: 'mkocansey'
+          repository_name: ${{ matrix.package.split_repository }}
+          user_name: 'BladewindUI Bot'
+          user_email: 'bot@bladewindui.com'
+          access_token: ${{ secrets.MONOREPO_SPLIT_TOKEN }}
