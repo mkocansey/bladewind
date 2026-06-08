@@ -1,7 +1,16 @@
 # Releasing BladewindUI
 
-All work happens in **this monorepo** (`mkocansey/bladewindui`).  
+All work happens in **this monorepo**, hosted at **`mkocansey/bladewind`**
+(your local clone may sit in a directory called `bladewindui` — that's just a local
+folder name; the GitHub remote and the Packagist source are both `mkocansey/bladewind`).
 The individual package repos (`mkocansey/bladewind-table` etc.) are **read-only mirrors** — never push to them directly.
+
+> ⚠️ **Never target a split repo named `bladewind`.** That name belongs to *this*
+> monorepo's own remote. A matrix entry that splits `packages/meta` into a repo called
+> `bladewind` makes the split action force-push filtered subtree history into its own
+> parent, overwriting `main` (this happened on 2026-06-08 — `main` was wiped down to
+> 3 files and had to be restored from a contributor's local clone). See the note above
+> the (deliberately absent) `packages/meta` entry in `split-packages.yml`.
 
 ---
 
@@ -27,9 +36,18 @@ are made for the individual split repos during local dev.
 The `extra.laravel.providers` list registers all component service providers so Laravel
 auto-discovers them from a single path-repo install.
 
-**On Packagist**, `mkocansey/bladewind` resolves to the `packages/meta` split repo (which
-requires all the individual split packages from Packagist). The monorepo root is never
-published to Packagist directly.
+**On Packagist**, `mkocansey/bladewind` is sourced **directly from this monorepo**
+(`github.com/mkocansey/bladewind`) — and has been since 2022 (versions v3.0.10 through
+the current release all resolve to this repo's root, per Packagist's own `source.url`
+metadata). The root `composer.json` *is* the published full-install package: its
+`replace` block declares every granular sub-package at `self.version`, so installing
+`mkocansey/bladewind` transparently satisfies `mkocansey/bladewind-button`,
+`mkocansey/bladewind-table`, etc. without Composer ever touching the split repos.
+
+`packages/meta` is **intentionally not split** into its own repo — doing so would
+require a split target literally named `bladewind`, which collides with this monorepo's
+own remote (see the warning above, and the explanatory note in `split-packages.yml`
+where that matrix entry would otherwise go).
 
 ---
 

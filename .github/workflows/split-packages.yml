@@ -74,16 +74,15 @@ jobs:
           # ── Navigation aggregate (metapackage) ────────────────────────────────
           - { local_path: 'packages/navigation', split_repository: 'bladewind-navigation' }
 
-          # ── Full install meta package ─────────────────────────────────────────
-          # DISABLED 2026-06-08: 'bladewind' is THIS monorepo's own GitHub repo
-          # (mkocansey/bladewind), not a separate split target. Splitting
-          # packages/meta into it force-overwrote main with just the meta
-          # package's 3 files, destroying the entire monorepo (recovered from
-          # a local clone). Either rename this monorepo's GitHub repo (e.g. to
-          # mkocansey/bladewindui) and create a fresh empty mkocansey/bladewind
-          # for the meta split, or pick another name for the meta split repo —
-          # then re-enable this entry pointing at the correct destination.
-          # - { local_path: 'packages/meta', split_repository: 'bladewind' }
+          # NOTE: packages/meta is intentionally NOT split into its own repo.
+          # 'mkocansey/bladewind' on Packagist has been sourced directly from
+          # THIS monorepo (github.com/mkocansey/bladewind) since 2022 — the
+          # root composer.json IS the full-install package, and its `replace`
+          # block already declares every granular sub-package at self.version,
+          # so installing mkocansey/bladewind satisfies all of them. A split
+          # entry targeting a repo named 'bladewind' would collide with this
+          # monorepo's own remote and overwrite it (this happened once on
+          # 2026-06-08 — main was wiped and restored from a local clone).
 
     steps:
       - uses: actions/checkout@v4
