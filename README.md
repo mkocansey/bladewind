@@ -3,17 +3,19 @@
 
 BladewindUI is a collection of UI components built with TailwindCSS, Laravel Blade templates, and vanilla JavaScript. Every component is simple to use and ships with sensible defaults you can override per-project.
 
----
 
-## Installation
+
+# Installation
 
 ### Install everything (recommended starting point)
+
+This pulls in all components.
 
 ```bash
 composer require mkocansey/bladewind
 ```
 
-This pulls in all components. It is the same one-liner as before — nothing changes for existing users.
+
 
 ### Install a component group
 
@@ -27,7 +29,7 @@ composer require mkocansey/bladewind-navigation  # all navigation components
 
 ### Install a single component
 
-Every component is its own Composer package. Install exactly what you need:
+Every component is its own Composer package. Install exactly what you need. 
 
 ```bash
 composer require mkocansey/bladewind-table
@@ -35,9 +37,9 @@ composer require mkocansey/bladewind-accordion
 composer require mkocansey/bladewind-datepicker
 ```
 
-Shared dependencies (icon, script, spinner, etc.) are pulled in automatically via Composer's dependency resolution — you never wire them up manually.
+Shared dependencies (icon, script, spinner, etc.) are pulled in automatically via Composer's dependency resolution.
 
----
+
 
 ## First-time setup
 
@@ -68,14 +70,14 @@ You are ready to use any component:
 
 Full installation guide: [bladewindui.com/install](https://bladewindui.com/install)
 
----
+
 
 ## Components
 
 Components are organised into groups. Each group maps directly to a Composer package.
 Standalone packages (Button, Modal, Alert, Table, Spinner) sit outside any group.
 
----
+
 
 ### Standalone packages
 
@@ -92,15 +94,17 @@ They are pulled in as dependencies by other components that need them.
 | [Spinner](https://bladewindui.com/component/spinner) | `mkocansey/bladewind-spinner` | Spinner, Shimmer, Processing, Process Complete |
 | [Table](https://bladewindui.com/component/table) | `mkocansey/bladewind-table` | Table, Table Icons |
 
----
+
 
 ### Forms group — `mkocansey/bladewind-forms`
 
 ```bash
 composer require mkocansey/bladewind-forms
-# — or install any single component —
+
+# or install any single component
 composer require mkocansey/bladewind-input
 composer require mkocansey/bladewind-datepicker
+...
 ```
 
 | Package | Composer name | Component(s) |
@@ -120,15 +124,17 @@ composer require mkocansey/bladewind-datepicker
 | [Number](https://bladewindui.com/component/number) | `mkocansey/bladewind-number` | Number stepper |
 | [Verification Code](https://bladewindui.com/component/verification-code) | `mkocansey/bladewind-code` | Verification Code / OTP |
 
----
+
 
 ### Content group — `mkocansey/bladewind-content`
 
 ```bash
 composer require mkocansey/bladewind-content
-# — or install any single component —
+
+# or install any single component
 composer require mkocansey/bladewind-accordion
 composer require mkocansey/bladewind-chart
+...
 ```
 
 | Package | Composer name | Component(s) |
@@ -148,15 +154,17 @@ composer require mkocansey/bladewind-chart
 | [List View](https://bladewindui.com/component/list-view) | `mkocansey/bladewind-listview` | List View, List View Item |
 | [Contact Card](https://bladewindui.com/component/contact-card) | `mkocansey/bladewind-contact-card` | Contact Card |
 
----
+
 
 ### Navigation group — `mkocansey/bladewind-navigation`
 
 ```bash
 composer require mkocansey/bladewind-navigation
-# — or install any single component —
+
+# or install any single component
 composer require mkocansey/bladewind-tab
 composer require mkocansey/bladewind-pagination
+...
 ```
 
 | Package | Composer name | Component(s) |
@@ -166,7 +174,7 @@ composer require mkocansey/bladewind-pagination
 | [Pagination](https://bladewindui.com/component/pagination) | `mkocansey/bladewind-pagination` | Pagination |
 | [Theme Switcher](https://bladewindui.com/component/theme-switcher) | `mkocansey/bladewind-theme-switcher` | Theme Switcher (light / dark) |
 
----
+
 
 ## How groups work
 
@@ -176,7 +184,7 @@ The three group packages (`bladewind-forms`, `bladewind-content`, `bladewind-nav
 - Uninstalling it and requiring just `mkocansey/bladewind-accordion` is clean and leaves nothing behind.
 - Each leaf package registers its own Laravel service provider, so components are auto-discovered whether you install them individually or as part of a group.
 
----
+
 
 ## Customising defaults
 
@@ -190,13 +198,11 @@ This creates `config/bladewind.php` in your project. Every attribute in every co
 
 Full customisation guide: [bladewindui.com/customize](https://bladewindui.com/customize)
 
----
+
 
 ## Documentation
+The complete documentation with extensive examples for each component is available at [bladewindui.com](https://bladewindui.com)
 
-[bladewindui.com](https://bladewindui.com)
-
----
 
 ## Questions and support
 
@@ -204,7 +210,6 @@ Full customisation guide: [bladewindui.com/customize](https://bladewindui.com/cu
 - Twitter / X: [@bladewindui](https://twitter.com/bladewindui)
 - Security vulnerabilities: please e-mail rather than opening a public issue
 
----
 
 ## License
 
