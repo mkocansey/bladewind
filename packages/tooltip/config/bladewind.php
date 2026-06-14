@@ -1,16 +1,13 @@
 <?php
-
 return [
     /*
     |--------------------------------------------------------------------------
-    | Alert component
+    | Tooltip component
     |--------------------------------------------------------------------------
     */
-    'alert' => [
-        'shade' => 'faint',
-        'show_icon' => true,
-        'color' => null,
-        'size' => 'tiny',
-        'show_ring' => false,
+    'tooltip' => [
+        'position' => 'top',
+        'color' => 'dark',
+        'size' => 'small',
     ],
 ];

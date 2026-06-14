@@ -74,7 +74,7 @@
     }
 
     .bw-select div.clickable.disabled, .bw-select div.clickable.readonly, fieldset[disabled] .bw-select {
-        @apply !bg-gray-100/60 opacity-95 dark:opacity-40 !border-opacity-40 dark:!bg-dark-300/5 select-none cursor-not-allowed
+        @apply !bg-gray-100/60 opacity-95 dark:opacity-40 dark:!bg-dark-300/5 select-none cursor-not-allowed
     }
 
     .bw-select div.clickable.enabled {

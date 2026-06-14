@@ -1,51 +1,53 @@
 {
-    "name": "mkocansey/bladewind",
-    "description": "BladewindUI — elegant Laravel Blade UI components powered by TailwindCSS",
-    "keywords": [
-        "laravel",
-        "blade",
-        "tailwindcss",
-        "ui components",
-        "bladewindui"
-    ],
-    "license": "MIT",
-    "type": "library",
-    "authors": [
-        {
-            "name": "Michael K. Ocansey",
-            "email": "mike@bladewindui.com"
-        }
-    ],
-    "require": {
-        "php": ">=8.1",
-        "mkocansey/bladewind-core": "^4.1",
-        "mkocansey/bladewind-icon": "^4.1",
-        "mkocansey/bladewind-script": "^4.1",
-        "mkocansey/bladewind-spinner": "^4.1",
-        "mkocansey/bladewind-button": "^4.1",
-        "mkocansey/bladewind-alert": "^4.1",
-        "mkocansey/bladewind-modal": "^4.1",
-        "mkocansey/bladewind-table": "^4.1",
-        "mkocansey/bladewind-forms": "^4.1",
-        "mkocansey/bladewind-content": "^4.1",
-        "mkocansey/bladewind-navigation": "^4.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "Mkocansey\\Bladewind\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Mkocansey\\Bladewind\\BladewindServiceProvider"
-            ]
-        }
-    },
-    "scripts": {
-        "post-update-cmd": [
-            "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-public --force');\"",
-            "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-lang --force');\""
-        ]
+  "name": "mkocansey/bladewind",
+  "description": "BladewindUI — elegant Laravel Blade UI components powered by TailwindCSS",
+  "keywords": [
+    "laravel",
+    "blade",
+    "tailwindcss",
+    "ui components",
+    "bladewindui"
+  ],
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Michael K. Ocansey",
+      "email": "mike@bladewindui.com"
     }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "mkocansey/bladewind-core": "^4.1",
+    "mkocansey/bladewind-icon": "^4.1",
+    "mkocansey/bladewind-script": "^4.1",
+    "mkocansey/bladewind-spinner": "^4.1",
+    "mkocansey/bladewind-button": "^4.1",
+    "mkocansey/bladewind-alert": "^4.1",
+    "mkocansey/bladewind-bell": "^4.1",
+    "mkocansey/bladewind-notification": "^4.1",
+    "mkocansey/bladewind-modal": "^4.1",
+    "mkocansey/bladewind-table": "^4.1",
+    "mkocansey/bladewind-forms": "^4.1",
+    "mkocansey/bladewind-content": "^4.1",
+    "mkocansey/bladewind-navigation": "^4.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mkocansey\\Bladewind\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Mkocansey\\Bladewind\\BladewindServiceProvider"
+      ]
+    }
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-public --force');\"",
+      "@php -r \"if (file_exists('artisan')) passthru('php artisan vendor:publish --tag=bladewind-lang --force');\""
+    ]
+  }
 }

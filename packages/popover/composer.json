@@ -1,12 +1,12 @@
 {
-    "name": "mkocansey/bladewind-alert",
-    "description": "BladewindUI — Alert component",
+    "name": "mkocansey/bladewind-popover",
+    "description": "BladewindUI — Popover component",
     "keywords": [
         "laravel",
         "blade",
         "tailwindcss",
         "bladewindui",
-        "alert"
+        "popover"
     ],
     "license": "MIT",
     "type": "library",
@@ -20,17 +20,17 @@
         "php": ">=8.1",
         "mkocansey/bladewind-core": "^4.1",
         "mkocansey/bladewind-icon": "^4.1",
-        "mkocansey/bladewind-modal": "^4.1"
+        "mkocansey/bladewind-script": "^4.1"
     },
     "autoload": {
         "psr-4": {
-            "Mkocansey\\Bladewind\\Alert\\": "src/"
+            "Mkocansey\\Bladewind\\Popover\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Mkocansey\\Bladewind\\Alert\\BladewindAlertServiceProvider"
+                "Mkocansey\\Bladewind\\Popover\\BladewindPopoverServiceProvider"
             ]
         }
     }

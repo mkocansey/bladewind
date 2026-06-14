@@ -1,10 +1,10 @@
 <?php
 
-namespace Mkocansey\Bladewind\Alert;
+namespace Mkocansey\Bladewind\Notification;
 
 use Illuminate\Support\ServiceProvider;
 
-class BladewindAlertServiceProvider extends ServiceProvider
+class BladewindNotificationServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -18,5 +18,9 @@ class BladewindAlertServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views/components/' => resource_path('views/components/bladewind'),
         ], 'bladewind-components');
+
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/bladewind'),
+        ], 'bladewind-public');
     }
 }

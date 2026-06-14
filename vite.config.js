@@ -22,7 +22,7 @@ export default defineConfig({
                 // CSS files are emitted directly; no JS chunk needed for the CSS entry.
                 assetFileNames: (assetInfo) => {
                     if (assetInfo.name?.endsWith('.css')) {
-                        return '[name][extname]'
+                        return 'css/bladewind-ui.min[extname]'
                     }
                     return 'assets/[name]-[hash][extname]'
                 },

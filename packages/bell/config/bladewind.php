@@ -3,14 +3,13 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Alert component
+    | Bell component
     |--------------------------------------------------------------------------
     */
-    'alert' => [
-        'shade' => 'faint',
-        'show_icon' => true,
-        'color' => null,
-        'size' => 'tiny',
-        'show_ring' => false,
+    'bell' => [
+        'show_dot' => true,
+        'animate_dot' => false,
+        'size' => 'small',
+        'color' => 'primary',
     ],
 ];

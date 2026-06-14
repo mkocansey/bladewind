@@ -3,14 +3,10 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Alert component
+    | Notification component
     |--------------------------------------------------------------------------
     */
-    'alert' => [
-        'shade' => 'faint',
-        'show_icon' => true,
-        'color' => null,
-        'size' => 'tiny',
-        'show_ring' => false,
+    'notification' => [
+        'position' => 'top-right',
     ],
 ];

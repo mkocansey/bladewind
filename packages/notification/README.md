@@ -1,15 +1,15 @@
-[![License](https://img.shields.io/github/license/mkocansey/bladewind)](https://github.com/mkocansey/bladewind/blob/main/LICENSE) [![Packagist Version](https://img.shields.io/packagist/v/mkocansey/bladewind-alert)](https://packagist.org/packages/mkocansey/bladewind-alert)
+[![License](https://img.shields.io/github/license/mkocansey/bladewind)](https://github.com/mkocansey/bladewind/blob/main/LICENSE) [![Packagist Version](https://img.shields.io/packagist/v/mkocansey/bladewind-notification)](https://packagist.org/packages/mkocansey/bladewind-notification)
 
 <img src="https://bladewindui.com/assets/images/bw-logo.png" height="30" alt="BladewindUI" />
 
-# Alert
+# Notification
 
-BladewindUI Alert component.
+BladewindUI Notification component.
 
 ## Installation
 
 ```bash
-composer require mkocansey/bladewind-alert
+composer require mkocansey/bladewind-notification
 ```
 
 Or install the full library:

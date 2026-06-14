@@ -1,12 +1,12 @@
 {
-    "name": "mkocansey/bladewind-alert",
-    "description": "BladewindUI — Alert component",
+    "name": "mkocansey/bladewind-bell",
+    "description": "BladewindUI — Bell component",
     "keywords": [
         "laravel",
         "blade",
         "tailwindcss",
         "bladewindui",
-        "alert"
+        "bell"
     ],
     "license": "MIT",
     "type": "library",
@@ -19,18 +19,17 @@
     "require": {
         "php": ">=8.1",
         "mkocansey/bladewind-core": "^4.1",
-        "mkocansey/bladewind-icon": "^4.1",
-        "mkocansey/bladewind-modal": "^4.1"
+        "mkocansey/bladewind-icon": "^4.1"
     },
     "autoload": {
         "psr-4": {
-            "Mkocansey\\Bladewind\\Alert\\": "src/"
+            "Mkocansey\\Bladewind\\Bell\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Mkocansey\\Bladewind\\Alert\\BladewindAlertServiceProvider"
+                "Mkocansey\\Bladewind\\Bell\\BladewindBellServiceProvider"
             ]
         }
     }

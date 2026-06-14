@@ -1,16 +1,14 @@
 <?php
-
 return [
     /*
     |--------------------------------------------------------------------------
-    | Alert component
+    | Popover component
     |--------------------------------------------------------------------------
     */
-    'alert' => [
-        'shade' => 'faint',
-        'show_icon' => true,
-        'color' => null,
-        'size' => 'tiny',
-        'show_ring' => false,
+    'popover' => [
+        'trigger' => 'information-circle-icon',
+        'trigger_on' => 'click',
+        'position' => 'bottom',
+        'width' => 280,
     ],
 ];

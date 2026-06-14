@@ -1,0 +1,43 @@
+@layer components {
+    .bw-tooltip {
+        @apply relative inline-block;
+    }
+
+    .bw-tooltip .bw-tooltip-bubble {
+        @apply absolute z-30 whitespace-nowrap rounded-md font-medium pointer-events-none
+               opacity-0 scale-95 transition-all duration-150 ease-in-out;
+    }
+
+    .bw-tooltip:hover .bw-tooltip-bubble {
+        @apply opacity-100 scale-100;
+    }
+
+    /* ── Sizes ─────────────────────────────────────────────────────────────── */
+    .bw-tooltip .bw-tooltip-bubble.tiny    { @apply text-[10px] px-2 py-1; }
+    .bw-tooltip .bw-tooltip-bubble.small   { @apply text-xs px-2.5 py-1.5; }
+    .bw-tooltip .bw-tooltip-bubble.regular { @apply text-sm px-3 py-2; }
+
+    /* ── Colors ─────────────────────────────────────────────────────────────── */
+    .bw-tooltip .bw-tooltip-bubble.dark  { @apply bg-slate-800 dark:bg-dark-600 text-white; }
+    .bw-tooltip .bw-tooltip-bubble.light {
+        @apply bg-white dark:bg-dark-700 text-slate-600 dark:text-dark-200
+               border border-slate-200 dark:border-dark-600 shadow-md;
+    }
+
+    /* ── Positions ──────────────────────────────────────────────────────────── */
+    .bw-tooltip .bw-tooltip-bubble.top    { @apply bottom-full left-1/2 -translate-x-1/2 mb-2; }
+    .bw-tooltip .bw-tooltip-bubble.bottom { @apply top-full    left-1/2 -translate-x-1/2 mt-2; }
+    .bw-tooltip .bw-tooltip-bubble.left   { @apply right-full  top-1/2  -translate-y-1/2 mr-2; }
+    .bw-tooltip .bw-tooltip-bubble.right  { @apply left-full   top-1/2  -translate-y-1/2 ml-2; }
+
+    /* ── Arrow ──────────────────────────────────────────────────────────────── */
+    .bw-tooltip .bw-tooltip-arrow { @apply absolute size-[6px] rotate-45; }
+
+    .bw-tooltip .bw-tooltip-bubble.dark  .bw-tooltip-arrow { @apply bg-slate-800 dark:bg-dark-600; }
+    .bw-tooltip .bw-tooltip-bubble.light .bw-tooltip-arrow { @apply bg-white dark:bg-dark-700; }
+
+    .bw-tooltip .bw-tooltip-bubble.top    .bw-tooltip-arrow { @apply top-full    left-1/2 -translate-x-1/2 -mt-[3px]; }
+    .bw-tooltip .bw-tooltip-bubble.bottom .bw-tooltip-arrow { @apply bottom-full left-1/2 -translate-x-1/2 -mb-[3px]; }
+    .bw-tooltip .bw-tooltip-bubble.left   .bw-tooltip-arrow { @apply left-full   top-1/2  -translate-y-1/2 -ml-[3px]; }
+    .bw-tooltip .bw-tooltip-bubble.right  .bw-tooltip-arrow { @apply right-full  top-1/2  -translate-y-1/2 -mr-[3px]; }
+}

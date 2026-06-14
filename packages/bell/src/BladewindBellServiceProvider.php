@@ -1,10 +1,10 @@
 <?php
 
-namespace Mkocansey\Bladewind\Alert;
+namespace Mkocansey\Bladewind\Bell;
 
 use Illuminate\Support\ServiceProvider;
 
-class BladewindAlertServiceProvider extends ServiceProvider
+class BladewindBellServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
