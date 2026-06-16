@@ -14,3 +14,27 @@
         --shimmer-color: rgba(255, 255, 255, 0.1);
     }
 }
+
+@keyframes shimmerAlternate {
+    0%   { left: calc(-150% * var(--shimmer-direction, 1)); }
+    100% { left: 100%; }
+}
+
+@layer components {
+    .bw-shimmer::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: calc(-150% * 1);
+        height: 100%;
+        width: 150%;
+        background: linear-gradient(
+            var(--shimmer-angle, 90deg),
+            transparent,
+            var(--shimmer-color, rgba(255, 255, 255, 0.6)),
+            transparent
+        );
+        animation: shimmerAlternate var(--shimmer-duration, 1.5s) infinite;
+        animation-direction: var(--shimmer-mode, alternate);
+    }
+}

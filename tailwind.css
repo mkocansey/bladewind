@@ -8,6 +8,8 @@
 
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @plugin "@tailwindcss/forms";
 
 /* ── Per-component CSS ─────────────────────────────────────────────────────── */
