@@ -18,16 +18,5 @@ class BladewindTextareaServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views/components/' => resource_path('views/components/bladewind'),
         ], 'bladewind-components');
-
-        $bladewindPublicPaths = [];
-        if (is_dir(__DIR__.'/../resources/assets/css')) {
-            $bladewindPublicPaths[__DIR__.'/../resources/assets/css/'] = public_path('vendor/bladewind/css');
-        }
-        if (is_dir(__DIR__.'/../public')) {
-            $bladewindPublicPaths[__DIR__.'/../public/'] = public_path('vendor/bladewind');
-        }
-        if (!empty($bladewindPublicPaths)) {
-            $this->publishes($bladewindPublicPaths, 'bladewind-public');
-        }
     }
 }

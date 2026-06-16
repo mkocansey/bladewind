@@ -17,21 +17,21 @@ const css_classes_to_pre_compile =
                 group-hover:bg-red-500 group-hover:bg-yellow-500 group-hover:bg-green-500 group-hover:bg-purple-500 
                 group-hover:bg-orange-500 group-hover:bg-slate-500 group-hover:bg-gray-500 group-hover:bg-pink-500 
                 group-hover:bg-cyan-500 group-hover:bg-violet-500 group-hover:bg-indigo-500 group-hover:bg-fuchsia-500 
-                group-hover:bg-black !bg-primary-500 !bg-secondary-500 !bg-blue-500 !bg-red-500 !bg-yellow-500 
-                !bg-green-500 !bg-purple-500 !bg-orange-500 !bg-slate-500
-                !bg-gray-500 !bg-pink-500 !bg-cyan-500 !bg-violet-500 !bg-indigo-500 !bg-fuchsia-500 !bg-black
+                group-hover:bg-black bg-primary-500! bg-secondary-500! bg-blue-500! bg-red-500! bg-yellow-500! 
+                bg-green-500! bg-purple-500! bg-orange-500! bg-slate-500!
+                bg-gray-500! bg-pink-500! bg-cyan-500! bg-violet-500! bg-indigo-500! bg-fuchsia-500! bg-black!
                 hover:bg-primary-600 hover:bg-secondary-600 hover:bg-blue-600 hover:bg-red-600 hover:bg-yellow-600 
                 hover:bg-green-600 hover:bg-purple-600 hover:bg-orange-600 hover:bg-slate-600 hover:bg-gray-600 
                 hover:bg-pink-600 hover:bg-cyan-600 hover:bg-violet-600 hover:bg-indigo-600 hover:bg-fuchsia-600
-                hover:!bg-primary-600 hover:!bg-secondary-600 hover:!bg-blue-600 hover:!bg-red-600 hover:!bg-yellow-600 
-                hover:!bg-green-600 hover:!bg-purple-600 hover:!bg-orange-600 hover:!bg-slate-600 hover:!bg-gray-600 
-                hover:!bg-pink-600 hover:!bg-cyan-600 hover:!bg-violet-600 hover:!bg-indigo-600 hover:!bg-fuchsia-600
+                hover:bg-primary-600! hover:bg-secondary-600! hover:bg-blue-600! hover:bg-red-600! hover:bg-yellow-600! 
+                hover:bg-green-600! hover:bg-purple-600! hover:bg-orange-600! hover:bg-slate-600! hover:bg-gray-600! 
+                hover:bg-pink-600! hover:bg-cyan-600! hover:bg-violet-600! hover:bg-indigo-600! hover:bg-fuchsia-600!
                 dark:bg-primary-600 dark:bg-secondary-600 dark:bg-blue-600 dark:bg-red-600 dark:bg-yellow-600 
                 dark:bg-green-600 dark:bg-purple-600 dark:bg-orange-600 dark:bg-slate-600 dark:bg-gray-600 
                 dark:bg-pink-600 dark:bg-cyan-600 dark:bg-violet-600 dark:bg-indigo-600 dark:bg-fuchsia-600
-                active:!bg-primary-600 active:!bg-blue-600 active:!bg-red-600 active:!bg-yellow-600 active:!bg-green-600
-                active:!bg-purple-600 active:!bg-orange-600 active:!bg-slate-600 active:!bg-gray-600 active:!bg-pink-600
-                active:!bg-cyan-600 active:!bg-violet-600 active:!bg-indigo-600 active:!bg-fuchsia-600
+                active:bg-primary-600! active:bg-blue-600! active:bg-red-600! active:bg-yellow-600! active:bg-green-600!
+                active:bg-purple-600! active:bg-orange-600! active:bg-slate-600! active:bg-gray-600! active:bg-pink-600!
+                active:bg-cyan-600! active:bg-violet-600! active:bg-indigo-600! active:bg-fuchsia-600!
                 peer-checked:bg-primary-600 peer-checked:bg-blue-600 peer-checked:bg-red-600 peer-checked:bg-yellow-600 
                 peer-checked:bg-green-600 peer-checked:bg-purple-600 peer-checked:bg-orange-600 peer-checked:bg-slate-600 
                 peer-checked:bg-gray-600 peer-checked:bg-pink-600 peer-checked:bg-cyan-600 peer-checked:bg-violet-600 
@@ -47,10 +47,10 @@ const css_classes_to_pre_compile =
                     dark:text-primary-100 dark:text-blue-100 dark:text-red-100 dark:text-yellow-100 dark:text-green-100
                     dark:text-purple-100 dark:text-orange-100 dark:text-slate-100 dark:text-pink-100 dark:text-cyan-100
                     dark:text-violet-100 dark:text-indigo-100 dark:text-fuchsia-100
-                    dark:!text-primary-300 dark:!text-blue-300 dark:!text-red-300 dark:!text-yellow-300 dark:!text-green-300
-                    dark:!text-purple-300 dark:!text-orange-300 dark:!text-slate-300 dark:!text-pink-300 dark:!text-cyan-300
-                    dark:!text-violet-300 dark:!text-indigo-300 dark:!text-fuchsia-300
-                    !text-center`,
+                    dark:text-primary-300! dark:text-blue-300! dark:text-red-300! dark:text-yellow-300! dark:text-green-300!
+                    dark:text-purple-300! dark:text-orange-300! dark:text-slate-300! dark:text-pink-300! dark:text-cyan-300!
+                    dark:text-violet-300! dark:text-indigo-300! dark:text-fuchsia-300!
+                    text-center!`,
 
         lines: {
             borders: `border-2 border-4 border-8 border-black

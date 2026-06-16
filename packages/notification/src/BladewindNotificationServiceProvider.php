@@ -18,9 +18,5 @@ class BladewindNotificationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views/components/' => resource_path('views/components/bladewind'),
         ], 'bladewind-components');
-
-        $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/bladewind'),
-        ], 'bladewind-public');
     }
 }

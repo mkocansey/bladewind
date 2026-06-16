@@ -19,8 +19,5 @@ class BladewindButtonServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views/components/' => resource_path('views/components/bladewind'),
         ], 'bladewind-components');
 
-        $this->publishes([
-            __DIR__.'/../resources/assets/css/button.css' => public_path('vendor/bladewind/css/button.css'),
-        ], 'bladewind-public');
     }
 }

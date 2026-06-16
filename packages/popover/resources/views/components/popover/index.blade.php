@@ -22,12 +22,6 @@
     $width = ! is_numeric($width) ? 280 : $width;
     $modular = parseBladewindVariable($modular);
 
-    $positioning = [
-        'top' => 'bottom-full left-1/2 -translate-x-1/2 mb-2',
-        'bottom' => 'top-full left-1/2 -translate-x-1/2 mt-2',
-        'left' => 'right-full top-1/2 -translate-y-1/2 mr-2',
-        'right' => 'left-full top-1/2 -translate-y-1/2 ml-2',
-    ];
 @endphp
 {{-- format-ignore-end --}}
 
@@ -42,11 +36,17 @@
         @endif
     </div>
 
-    <div class="opacity-0 hidden bw-popover-content absolute !z-20 animate__animated animate__fadeIn animate__faster {{ $positioning[$position] }}"
-         style="width: {{ $width }}px" data-open="0">
+    <div @class([
+            'opacity-0 hidden bw-popover-content absolute !z-20 animate__animated animate__fadeIn animate__faster',
+            'top-full bottom-auto left-1/2 -translate-x-1/2 mt-2' => $position === 'bottom',
+            'bottom-full top-auto left-1/2 -translate-x-1/2 mb-2' => $position === 'top',
+            'left-full right-auto top-1/2 -translate-y-1/2 ml-2'  => $position === 'right',
+            'right-full left-auto top-1/2 -translate-y-1/2 mr-2'  => $position === 'left',
+        ])
+         style="width:{{ $width }}px" data-open="0">
         <div @class([
                 'rounded-md border border-transparent dark:border-dark-800/20 bg-white dark:bg-dark-700',
-                'ring-1 ring-slate-800 ring-opacity-5 shadow-md shadow-slate-200/80 dark:shadow-dark-800/70',
+                'ring-1 ring-slate-800/5 shadow-md shadow-slate-200/80 dark:shadow-dark-800/70',
                 'overflow-hidden',
                 "$class"
                 ])>
