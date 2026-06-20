@@ -1,0 +1,38 @@
+{
+    "name": "mkocansey/bladewind-contact-card",
+    "description": "BladewindUI — Contact card component",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "contact-card"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.1",
+        "mkocansey/bladewind-icon": "^4.1",
+        "mkocansey/bladewind-card": "^4.1",
+        "mkocansey/bladewind-avatar": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\ContactCard\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\ContactCard\\ContactCardServiceProvider"
+            ]
+        }
+    }
+}

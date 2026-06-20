@@ -1,0 +1,25 @@
+{
+    "name": "mkocansey/bladewind-navigation",
+    "description": "BladewindUI navigation bundle — installs all navigation components (Tab, Dropmenu, Pagination, Theme Switcher)",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "navigation"
+    ],
+    "license": "MIT",
+    "type": "metapackage",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "mkocansey/bladewind-tab": "^4.1",
+        "mkocansey/bladewind-dropmenu": "^4.1",
+        "mkocansey/bladewind-pagination": "^4.1",
+        "mkocansey/bladewind-theme-switcher": "^4.1"
+    }
+}

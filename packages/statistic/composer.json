@@ -1,0 +1,37 @@
+{
+    "name": "mkocansey/bladewind-statistic",
+    "description": "BladewindUI — Statistic / KPI card component",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "statistic"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.1",
+        "mkocansey/bladewind-icon": "^4.1",
+        "mkocansey/bladewind-spinner": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Statistic\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\Statistic\\StatisticServiceProvider"
+            ]
+        }
+    }
+}

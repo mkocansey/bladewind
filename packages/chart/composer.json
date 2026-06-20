@@ -1,0 +1,36 @@
+{
+    "name": "mkocansey/bladewind-chart",
+    "description": "BladewindUI — Chart component (line, bar, pie, donut)",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "chart"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.1",
+        "mkocansey/bladewind-script": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Chart\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\Chart\\ChartServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,130 +1,216 @@
-<p><img src="https://img.shields.io/github/license/mkocansey/bladewind" alt="License" /></p><br />
+<p><img src="https://img.shields.io/github/license/mkocansey/bladewind" alt="License" /></p>
 <p><img src="https://bladewindui.com/assets/images/bw-logo.png" style="height: 30px; margin-bottom:10px" /></p>
 
-BladewindUI is a collection of UI components written purely using TailwindCSS, Laravel blade templates and Vanilla
-Javascript. These components are super simple to use and come with different levels of customization.
-<br /><br />
+BladewindUI is a collection of UI components built with TailwindCSS, Laravel Blade templates, and vanilla JavaScript. Every component is simple to use and ships with sensible defaults you can override per-project.
 
-### Installation
 
-The full installation guide is available on https://bladewindui.com/install.
-<br />
 
-BladewindUI is very specific to Laravel since all components are written purely using blade syntax. To install in your
-Laravel project simply run this command in the terminal at the root of your project.
-<br /><br />
+# Installation
 
-```
+### Install everything (recommended starting point)
+
+This pulls in all components.
+
+```bash
 composer require mkocansey/bladewind
 ```
 
-<br />
 
-Next you need to **publish the package assets and language files** by running this command, still in the terminal at the
-root of your
-Laravel project.
 
-<br />
+### Install a component group
 
+Each logical group is available as its own package. Install a group when you only need a subset of BladewindUI:
+
+```bash
+composer require mkocansey/bladewind-forms       # all form components
+composer require mkocansey/bladewind-content     # all content & display components
+composer require mkocansey/bladewind-navigation  # all navigation components
 ```
+
+### Install a single component
+
+Every component is its own Composer package. Install exactly what you need. 
+
+```bash
+composer require mkocansey/bladewind-table
+composer require mkocansey/bladewind-accordion
+composer require mkocansey/bladewind-datepicker
+```
+
+Shared dependencies (icon, script, spinner, etc.) are pulled in automatically via Composer's dependency resolution.
+
+
+
+## First-time setup
+
+After installing, publish the compiled CSS, JavaScript, and language files:
+
+```bash
 php artisan vendor:publish --tag=bladewind-public --force
-```
-
-```
 php artisan vendor:publish --tag=bladewind-lang --force
 ```
 
-<br />
+Add the stylesheet to the `<head>` of your layout:
 
-Now include the BladewindUI css file in the &lt;head&gt; of your pages. This should ideally be done in the layouts file
-your app pages extend from. You will also need to include the css used for animating the modals and other elements.
-
-<br />
-
-```
-<link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
-```
-
-```
+```html
 <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
 ```
 
-<br />
+Add the JavaScript before the closing `</body>` tag:
 
-Finally, include the BladewindUI javascript file anywhere before the closing of the &lt;/body&gt; tag of your pages.
-Again, this should ideally be done in the layouts file your app's pages extend from.
-
-<br />
-
-```
-<script src="{{ asset('vendor/bladewind/js/helpers.js') }}" type="text/javascript"></script>
+```html
+<script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
 ```
 
-<br />
+You are ready to use any component:
 
-You are now ready to start using any of the BladewindUI components in your application
-
-<br />
-
-```
+```html
 <x-bladewind::button>Save User</x-bladewind::button>
 ```
 
-<br /><br />
+Full installation guide: [bladewindui.com/install](https://bladewindui.com/install)
 
-### Components Include
 
-- **[Accordion](https://bladewindui.com/component/accordion)**
-- **[Alert](https://bladewindui.com/component/alert)**
-- **[Avatar](https://bladewindui.com/component/avatar)**
-- **[Bell](https://bladewindui.com/component/bell)**
-- **[Button](https://bladewindui.com/component/button)**
-- **[Card](https://bladewindui.com/component/card)**
-- **[Centered Content](https://bladewindui.com/component/centered-content)**
-- **[Chart](https://bladewindui.com/component/chart)**
-- **[Checkbox](https://bladewindui.com/component/checkbox)**
-- **[CheckCard](https://bladewindui.com/component/checkcard)**
-- **[Colorpicker](https://bladewindui.com/component/colorpicker)**
-- **[Datepicker](https://bladewindui.com/component/datepicker)**
-- **[Dropdown](https://bladewindui.com/component/dropdown)**
-- **[Dropmenu](https://bladewindui.com/component/dropmenu)**
-- **[Empty State](https://bladewindui.com/component/empty-state)**
-- **[Filepicker](https://bladewindui.com/component/filepicker)**
-- **[Horizontal Line Graph](https://bladewindui.com/component/horizontal-line-graph)**
-- **[Icon](https://bladewindui.com/component/icon)**
-- **[Input](https://bladewindui.com/component/input)**
-- **[List View](https://bladewindui.com/component/list-view)**
-- **[Modal](https://bladewindui.com/component/modal)**
-- **[Notification](https://bladewindui.com/component/notification)**
-- **[Process Indicator](https://bladewindui.com/component/process-indicator)**
-- **[Progress Bar](https://bladewindui.com/component/progress-bar)**
-- **[Radio Button](https://bladewindui.com/component/radio-button)**
-- **[Rating](https://bladewindui.com/component/rating)**
-- **[Select](https://bladewindui.com/component/select)**
-- **[Statistic](https://bladewindui.com/component/statistic)**
-- **[Spinner](https://bladewindui.com/component/spinner)**
-- **[Tab](https://bladewindui.com/component/tab)**
-- **[Table](https://bladewindui.com/component/table)**
-- **[Tag](https://bladewindui.com/component/tag)**
-- **[Textarea](https://bladewindui.com/component/textarea)**
-- **[Timeline](https://bladewindui.com/component/timeline)**
-- **[Timepicker](https://bladewindui.com/component/timepicker)**
-- **[Toggle](https://bladewindui.com/component/toggle)**
-- **[Verification Code](https://bladewindui.com/component/verification-code)**
 
-<br /><br />
+## Components
 
-Check out the full documentation on https://bladewindui.com.
+Components are organised into groups. Each group maps directly to a Composer package.
+Standalone packages (Button, Modal, Alert, Table, Spinner) sit outside any group.
 
-<br /><br />
 
-## Questions and General Info
 
-If you want to ask anything at all or report a security vulnerability, please
-e-mail [mike@bladewindui.com](mailto:mike@bladewindui.com) or tweet [@bladewindui](https://twitter.com/bladewindui)
+### Standalone packages
 
-<br />
+These components are their own packages and are not bundled into any group.
+They are pulled in as dependencies by other components that need them.
+
+| Package | Composer name | Component(s) |
+|---|---|---|
+| Core | `mkocansey/bladewind-core` | Shared helpers, CSS variables, `helpers.js` |
+| [Icon](https://bladewindui.com/component/icon) | `mkocansey/bladewind-icon` | SVG icon wrapper (Heroicons) |
+| [Button](https://bladewindui.com/component/button) | `mkocansey/bladewind-button` | Button, Circle Button |
+| [Modal](https://bladewindui.com/component/modal) | `mkocansey/bladewind-modal` | Modal, Modal Icon |
+| [Alert](https://bladewindui.com/component/alert) | `mkocansey/bladewind-alert` | Alert, Notification, Bell |
+| [Spinner](https://bladewindui.com/component/spinner) | `mkocansey/bladewind-spinner` | Spinner, Shimmer, Processing, Process Complete |
+| [Table](https://bladewindui.com/component/table) | `mkocansey/bladewind-table` | Table, Table Icons |
+
+
+
+### Forms group — `mkocansey/bladewind-forms`
+
+```bash
+composer require mkocansey/bladewind-forms
+
+# or install any single component
+composer require mkocansey/bladewind-input
+composer require mkocansey/bladewind-datepicker
+...
+```
+
+| Package | Composer name | Component(s) |
+|---|---|---|
+| [Input](https://bladewindui.com/component/input) | `mkocansey/bladewind-input` | Input, Error |
+| [Textarea](https://bladewindui.com/component/textarea) | `mkocansey/bladewind-textarea` | Textarea |
+| [Select](https://bladewindui.com/component/select) | `mkocansey/bladewind-select` | Select, Select Item |
+| [Checkbox](https://bladewindui.com/component/checkbox) | `mkocansey/bladewind-checkbox` | Checkbox |
+| [Radio Button](https://bladewindui.com/component/radio-button) | `mkocansey/bladewind-radio` | Radio Button |
+| [Toggle](https://bladewindui.com/component/toggle) | `mkocansey/bladewind-toggle` | Toggle |
+| [Datepicker](https://bladewindui.com/component/datepicker) | `mkocansey/bladewind-datepicker` | Datepicker |
+| [Timepicker](https://bladewindui.com/component/timepicker) | `mkocansey/bladewind-timepicker` | Timepicker |
+| [Colorpicker](https://bladewindui.com/component/colorpicker) | `mkocansey/bladewind-colorpicker` | Colorpicker |
+| [Filepicker](https://bladewindui.com/component/filepicker) | `mkocansey/bladewind-filepicker` | Filepicker (powered by FilePond) |
+| [Slider](https://bladewindui.com/component/slider) | `mkocansey/bladewind-slider` | Slider |
+| [Checkcards](https://bladewindui.com/component/checkcard) | `mkocansey/bladewind-checkcards` | Checkcards, Checkcard |
+| [Number](https://bladewindui.com/component/number) | `mkocansey/bladewind-number` | Number stepper |
+| [Verification Code](https://bladewindui.com/component/verification-code) | `mkocansey/bladewind-code` | Verification Code / OTP |
+
+
+
+### Content group — `mkocansey/bladewind-content`
+
+```bash
+composer require mkocansey/bladewind-content
+
+# or install any single component
+composer require mkocansey/bladewind-accordion
+composer require mkocansey/bladewind-chart
+...
+```
+
+| Package | Composer name | Component(s) |
+|---|---|---|
+| [Card](https://bladewindui.com/component/card) | `mkocansey/bladewind-card` | Card, Contact Card |
+| [Avatar](https://bladewindui.com/component/avatar) | `mkocansey/bladewind-avatar` | Avatar, Avatars |
+| [Accordion](https://bladewindui.com/component/accordion) | `mkocansey/bladewind-accordion` | Accordion, Accordion Item |
+| [Tag](https://bladewindui.com/component/tag) | `mkocansey/bladewind-tag` | Tag, Tags |
+| [Timeline](https://bladewindui.com/component/timeline) | `mkocansey/bladewind-timeline` | Timeline, Timelines |
+| [Statistic](https://bladewindui.com/component/statistic) | `mkocansey/bladewind-statistic` | Statistic |
+| [Rating](https://bladewindui.com/component/rating) | `mkocansey/bladewind-rating` | Rating |
+| [Horizontal Line Graph](https://bladewindui.com/component/horizontal-line-graph) | `mkocansey/bladewind-horizontal-line-graph` | Horizontal Line Graph |
+| [Empty State](https://bladewindui.com/component/empty-state) | `mkocansey/bladewind-empty-state` | Empty State |
+| [Centered Content](https://bladewindui.com/component/centered-content) | `mkocansey/bladewind-centered-content` | Centered Content |
+| [Chart](https://bladewindui.com/component/chart) | `mkocansey/bladewind-chart` | Chart (line, bar, pie, donut) |
+| [Progress](https://bladewindui.com/component/progress-bar) | `mkocansey/bladewind-progress` | Progress Bar, Progress Circle |
+| [List View](https://bladewindui.com/component/list-view) | `mkocansey/bladewind-listview` | List View, List View Item |
+| [Contact Card](https://bladewindui.com/component/contact-card) | `mkocansey/bladewind-contact-card` | Contact Card |
+
+
+
+### Navigation group — `mkocansey/bladewind-navigation`
+
+```bash
+composer require mkocansey/bladewind-navigation
+
+# or install any single component
+composer require mkocansey/bladewind-tab
+composer require mkocansey/bladewind-pagination
+...
+```
+
+| Package | Composer name | Component(s) |
+|---|---|---|
+| [Tab](https://bladewindui.com/component/tab) | `mkocansey/bladewind-tab` | Tab, Tab Body, Tab Content, Tab Heading |
+| [Dropmenu](https://bladewindui.com/component/dropmenu) | `mkocansey/bladewind-dropmenu` | Dropmenu, Dropmenu Item |
+| [Pagination](https://bladewindui.com/component/pagination) | `mkocansey/bladewind-pagination` | Pagination |
+| [Theme Switcher](https://bladewindui.com/component/theme-switcher) | `mkocansey/bladewind-theme-switcher` | Theme Switcher (light / dark) |
+
+
+
+## How groups work
+
+The three group packages (`bladewind-forms`, `bladewind-content`, `bladewind-navigation`) contain **no code** — they are pure Composer metapackages whose only job is to pull in the right leaf packages. This means:
+
+- Installing `mkocansey/bladewind-content` is identical to installing every content leaf package individually.
+- Uninstalling it and requiring just `mkocansey/bladewind-accordion` is clean and leaves nothing behind.
+- Each leaf package registers its own Laravel service provider, so components are auto-discovered whether you install them individually or as part of a group.
+
+
+
+## Customising defaults
+
+Publish the config file (available when using the full `mkocansey/bladewind` package):
+
+```bash
+php artisan vendor:publish --tag=bladewind-config
+```
+
+This creates `config/bladewind.php` in your project. Every attribute in every component has a default defined here. Override them once and all component instances in your project will follow suit.
+
+Full customisation guide: [bladewindui.com/customize](https://bladewindui.com/customize)
+
+
+
+## Documentation
+The complete documentation with extensive examples for each component is available at [bladewindui.com](https://bladewindui.com)
+
+
+## Questions and support
+
+- Email: [mike@bladewindui.com](mailto:mike@bladewindui.com)
+- Twitter / X: [@bladewindui](https://twitter.com/bladewindui)
+- Security vulnerabilities: please e-mail rather than opening a public issue
+
 
 ## License
 
-BladewindUI is an open-sourced library licensed under the [MIT license](https://opensource.org/licenses/MIT).
+BladewindUI is open-sourced software licensed under the [MIT licence](https://opensource.org/licenses/MIT).

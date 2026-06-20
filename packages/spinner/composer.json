@@ -1,0 +1,37 @@
+{
+    "name": "mkocansey/bladewind-spinner",
+    "description": "BladewindUI loading-state components — Spinner, Shimmer, Processing, Process Complete",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "spinner",
+        "loading"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.1",
+        "mkocansey/bladewind-icon": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Spinner\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\Spinner\\BladewindSpinnerServiceProvider"
+            ]
+        }
+    }
+}

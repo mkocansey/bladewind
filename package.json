@@ -1,10 +1,15 @@
 {
-  "devDependencies": {
-    "@tailwindcss/forms": "^0.5.3",
-    "autoprefixer": "^10.4.4",
-    "mix-tailwindcss": "^1.3.0",
-    "postcss": "^8.5.14",
-    "postcss-import": "^14.1.0",
-    "tailwindcss": "^3.4.1"
-  }
+    "name": "bladewindui",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5",
+        "@tailwindcss/vite": "^4.0",
+        "tailwindcss": "^4.0",
+        "vite": "^6.0"
+    }
 }

@@ -1,0 +1,38 @@
+{
+    "name": "mkocansey/bladewind-button",
+    "description": "BladewindUI Button component — standard and circular buttons",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "button"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.1",
+        "mkocansey/bladewind-icon": "^4.1",
+        "mkocansey/bladewind-spinner": "^4.1",
+        "mkocansey/bladewind-script": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Button\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\Button\\BladewindButtonServiceProvider"
+            ]
+        }
+    }
+}

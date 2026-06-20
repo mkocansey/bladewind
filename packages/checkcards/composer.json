@@ -1,0 +1,41 @@
+{
+    "name": "mkocansey/bladewind-checkcards",
+    "description": "BladewindUI — Check-cards multi-select component",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "checkcards"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.1",
+        "mkocansey/bladewind-icon": "^4.1",
+        "mkocansey/bladewind-script": "^4.1",
+        "mkocansey/bladewind-input": "^4.1",
+        "mkocansey/bladewind-checkbox": "^4.1",
+        "mkocansey/bladewind-avatar": "^4.1",
+        "mkocansey/bladewind-button": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Checkcards\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\Checkcards\\CheckcardsServiceProvider"
+            ]
+        }
+    }
+}

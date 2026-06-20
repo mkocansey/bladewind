@@ -1,0 +1,120 @@
+@layer components {
+    .bw-table.divided tr:not(:has(th),:last-child) {
+        @apply border-b-8 border-gray-200/15 dark:border-dark-700 border-t border-t-gray-200/40 dark:border-b-dark-700
+    }
+
+    .bw-table.divided.thin tbody tr {
+        @apply border-y border-t-gray-200 border-b-gray-200/60 dark:border-t-dark-600/80 dark:border-b-dark-600/30
+    }
+
+    .bw-table tr > td {
+        @apply py-4 px-3 align-top text-sm text-slate-600/80 dark:text-dark-300/70 bg-white dark:bg-dark-800/25 border-x-2 border-transparent leading-6
+    }
+
+    .bw-table tr > td.group-heading {
+        @apply bg-gray-200/70 dark:bg-dark-800/60 text-slate-700 dark:text-dark-400 hover:bg-gray-200/70 hover:dark:bg-dark-800/60
+    }
+
+    .bw-table.striped tr:nth-child(even) > td, .bw-table.striped tr:nth-child(even):hover > td {
+        @apply bg-slate-100/70 dark:bg-dark-800/45
+    }
+
+    .bw-table.celled th, .bw-table.celled td {
+        @apply border-x-0 border-r border-gray-300/50 dark:border-dark-600/80 !border-collapse
+    }
+
+    .bw-table thead > tr > th {
+        @apply
+        bg-white dark:bg-dark-800/60
+        text-black/80 dark:text-dark-300
+        text-xs
+        text-left
+        font-semibold
+        tracking-widest
+        px-3 py-4
+        border-t border-t-gray-200/30 dark:border-t-dark-600/80 dark:border-b-transparent
+    }
+
+    .bw-table.celled th:first-child, .bw-table.celled td:first-child {
+        @apply border-x border-gray-300/50 dark:border-dark-600/80 !border-collapse
+    }
+
+    .bw-table.has-no-data thead > tr {
+        @apply !border-transparent
+    }
+
+    .bw-table.uppercase-headers thead > tr > th {
+        @apply uppercase
+    }
+
+    .bw-table-filter-bar-unhinged input {
+        @apply border-0 bg-transparent focus:outline-0 focus:border-0 !mb-0
+    }
+
+    .bw-table-filter-bar {
+        @apply bg-slate-200/50 dark:bg-dark-800/80 rounded-t-lg
+    }
+
+    .bw-table-filter-bar input {
+        @apply dark:border-0 dark:bg-transparent dark:focus:outline-0 dark:focus:border-0
+    }
+
+    .bw-table.compact thead > tr > th {
+        @apply !py-2.5
+    }
+
+    .bw-table.compact tr > td {
+        @apply !py-2
+    }
+
+    .bw-table td.double-underline {
+        @apply border-x-0 border-t-0 border-b-4 border-double border-gray-300 dark:border-dark-600 border-separate
+    }
+
+    .bw-table.with-hover-effect tr:not(.no-hover):hover > td {
+        @apply bg-gray-100/40 dark:bg-dark-600/30
+    }
+
+    .bw-table td:first-child, .bw-table th:first-child {
+        @apply pl-5
+    }
+
+    .bw-table td:last-child, .bw-table th:last-child {
+        @apply pr-5
+    }
+
+    .bw-table.with-hover-effect tr:not(.no-hover):hover > td:first-child {
+        @apply border-l-2 border-l-slate-400 dark:border-l-dark-500
+    }
+
+    .bw-table.with-hover-effect tr:not(.no-hover):hover > td:last-child {
+        @apply border-r-2 border-r-slate-400 dark:border-r-dark-500
+    }
+
+    .bw-table.selectable > tbody > tr {
+        @apply cursor-pointer
+    }
+
+    .bw-table.selectable > tbody > tr.selected {
+        @apply border-y border-primary-200 dark:border-dark-600
+    }
+
+    .bw-table.selectable > tbody > tr.selected > td {
+        @apply bg-primary-100/80 dark:bg-dark-800/55
+    }
+
+    .bw-table th:first-child input[type="checkbox"] {
+        @apply !mt-1
+    }
+
+    .bw-table td:first-child input[type="checkbox"] {
+        @apply !mt-0.5
+    }
+
+    .bw-table.transparent tr,
+    .bw-table.transparent th,
+    .bw-table.transparent td {
+        @apply !bg-transparent hover:!bg-transparent
+    }
+
+}

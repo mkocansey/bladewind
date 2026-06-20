@@ -1,0 +1,35 @@
+{
+    "name": "mkocansey/bladewind-forms",
+    "description": "BladewindUI forms bundle — installs all form components (Input, Select, Checkbox, Radio, Toggle, Datepicker, Timepicker, Colorpicker, Filepicker, Slider, Checkcards, Textarea, Number, Code)",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "forms"
+    ],
+    "license": "MIT",
+    "type": "metapackage",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "mkocansey/bladewind-input": "^4.1",
+        "mkocansey/bladewind-textarea": "^4.1",
+        "mkocansey/bladewind-select": "^4.1",
+        "mkocansey/bladewind-checkbox": "^4.1",
+        "mkocansey/bladewind-radio": "^4.1",
+        "mkocansey/bladewind-toggle": "^4.1",
+        "mkocansey/bladewind-datepicker": "^4.1",
+        "mkocansey/bladewind-timepicker": "^4.1",
+        "mkocansey/bladewind-colorpicker": "^4.1",
+        "mkocansey/bladewind-filepicker": "^4.1",
+        "mkocansey/bladewind-slider": "^4.1",
+        "mkocansey/bladewind-checkcards": "^4.1",
+        "mkocansey/bladewind-number": "^4.1",
+        "mkocansey/bladewind-code": "^4.1"
+    }
+}
