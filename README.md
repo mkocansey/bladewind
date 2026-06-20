@@ -143,6 +143,7 @@ composer require mkocansey/bladewind-chart
 | [Popover](https://bladewindui.com/component/popover)                             | `mkocansey/bladewind-popover`               | Popover                       |
 | [Progress](https://bladewindui.com/component/progress-bar)                       | `mkocansey/bladewind-progress`              | Progress Bar, Progress Circle |
 | [Rating](https://bladewindui.com/component/rating)                               | `mkocansey/bladewind-rating`                | Rating                        |
+| [Sortable](https://bladewindui.com/component/sortable)                           | `mkocansey/bladewind-sortable`              | Sortable, Sortable Item       |
 | [Statistic](https://bladewindui.com/component/statistic)                         | `mkocansey/bladewind-statistic`             | Statistic                     |
 | [Tag](https://bladewindui.com/component/tag)                                     | `mkocansey/bladewind-tag`                   | Tag, Tags                     |
 | [Timeline](https://bladewindui.com/component/timeline)                           | `mkocansey/bladewind-timeline`              | Timeline, Timelines           |

@@ -32,6 +32,7 @@
         "mkocansey/bladewind-progress": "^4.1",
         "mkocansey/bladewind-listview": "^4.1",
         "mkocansey/bladewind-tooltip": "^4.1",
-        "mkocansey/bladewind-popover": "^4.1"
+        "mkocansey/bladewind-popover": "^4.1",
+        "mkocansey/bladewind-sortable": "^4.1"
     }
 }
