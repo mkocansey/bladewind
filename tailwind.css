@@ -7,18 +7,18 @@
  */
 
 @import "tailwindcss";
-@import "@tailwindcss/forms";
+@plugin "@tailwindcss/forms";
 
 /* ── Per-component CSS ─────────────────────────────────────────────────────── */
 @import "./packages/button/resources/assets/css/button.css";
-@import "./packages/forms/resources/assets/css/input.css";
-@import "./packages/forms/resources/assets/css/datepicker.css";
-@import "./packages/forms/resources/assets/css/slider.css";
+@import "./packages/input/resources/assets/css/input.css";
+@import "./packages/datepicker/resources/assets/css/datepicker.css";
+@import "./packages/slider/resources/assets/css/slider.css";
 @import "./packages/table/resources/assets/css/table.css";
-@import "./packages/navigation/resources/assets/css/tabs.css";
-@import "./packages/navigation/resources/assets/css/popup.min.css";
-@import "./packages/navigation/resources/assets/css/side-nav.css";
-@import "./packages/content/resources/assets/css/progress.css";
+@import "./packages/tab/resources/assets/css/tabs.css";
+@import "./packages/dropmenu/resources/assets/css/popup.min.css";
+@import "./packages/theme-switcher/resources/assets/css/side-nav.css";
+@import "./packages/progress/resources/assets/css/progress.css";
 @import "./packages/core/resources/assets/css/core.css";
 
 /* ── Theme ─────────────────────────────────────────────────────────────────── */
