@@ -153,8 +153,8 @@
         <x-bladewind::icon name="note-2" class="size-14 rounded-full p-2 bg-gray-200/50 stroke-2 text-slate-400 dark:bg-dark-100/50 dark:invert dark:opacity-30"/>
     </div>
     <div class="text-left pl-2.5 pt-1.5 dark:text-dark-200">
-        <div>{!! $placeholderLine1 !!} @if($required)<x-bladewind::icon name="star" class="!text-red-400 !w-2 !h-2 mt-[-2px]" type="solid"/>@endif</div>
-        <div class="!text-xs tracking-wider opacity-70">
+        <div>{!! $placeholderLine1 !!} @if($required)<x-bladewind::icon name="star" class="text-red-400! size-2! mt-[-2px]" type="solid"/>@endif</div>
+        <div class="text-xs! tracking-wider opacity-70">
         {{
             sprintf($placeholderLine2,
             strtoupper(preg_replace(['/\/\*/', '/application\//', '/,/', '/\s*,\s*/', '/\./'], ['', '', ', ', ', '], $acceptedFileTypes)),
@@ -164,7 +164,7 @@
     </div>
 </div>
 
-<input type="file" name="{{$name}}" accept="{{$acceptedFileTypes}}" @if($required) required="true" @endif />
+<input type="file" name="{{$name}}" accept="{{$acceptedFileTypes}}" @if($required) required="required" @endif />
 @if($base64)<div class="{{$cleanName}}-b64-container hidden"></div>@endif
 
 <x-bladewind::script :nonce="$nonce">
