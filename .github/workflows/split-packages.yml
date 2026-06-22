@@ -65,6 +65,7 @@ jobs:
           - { local_path: 'packages/listview',             split_repository: 'bladewind-listview'             }
           - { local_path: 'packages/tooltip',              split_repository: 'bladewind-tooltip'              }
           - { local_path: 'packages/popover',              split_repository: 'bladewind-popover'              }
+          - { local_path: 'packages/sortable',             split_repository: 'bladewind-sortable'             }
 
           # ── Content aggregate (metapackage) ───────────────────────────────────
           - { local_path: 'packages/content', split_repository: 'bladewind-content' }
