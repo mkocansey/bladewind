@@ -24,13 +24,17 @@ return static function (MBConfig $config): void {
     // 2. Bump "replace" entries in the meta composer.json
     // 3. Apply the tag to git
     // 4. Push the tag (triggers the GitHub Actions split workflow)
-    // 5. Set next dev aliases
+    //
+    // The "next dev iteration" workers below are intentionally disabled: they
+    // always bump mutual constraints to the next *minor* (e.g. 4.2 → ^4.3),
+    // which is wrong for patch releases and leaves the working tree dirty after
+    // every release. Re-enable them if you want the automatic next-cycle bump.
     $config->workers([
         SetCurrentMutualDependenciesReleaseWorker::class,
         UpdateReplaceReleaseWorker::class,
         TagVersionReleaseWorker::class,
         PushTagReleaseWorker::class,
-        SetNextMutualDependenciesReleaseWorker::class,
-        UpdateBranchAliasReleaseWorker::class,
+        // SetNextMutualDependenciesReleaseWorker::class,
+        // UpdateBranchAliasReleaseWorker::class,
     ]);
 };
