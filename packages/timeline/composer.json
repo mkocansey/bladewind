@@ -18,9 +18,9 @@
     ],
     "require": {
         "php": ">=8.1",
-        "mkocansey/bladewind-core": "^4.1",
-        "mkocansey/bladewind-icon": "^4.1",
-        "mkocansey/bladewind-avatar": "^4.1"
+        "mkocansey/bladewind-core": "^4.2",
+        "mkocansey/bladewind-icon": "^4.2",
+        "mkocansey/bladewind-avatar": "^4.2"
     },
     "autoload": {
         "psr-4": {
