@@ -1,0 +1,62 @@
+/* BladewindUI — Sortable component
+   Visual states applied by SortableJS during drag interactions. */
+
+/* the placeholder left behind in the list while an item is being dragged */
+.bw-sortable-ghost {
+    opacity: .4 !important;
+    background: rgb(241 245 249 / .8) !important; /* slate-100 */
+}
+.dark .bw-sortable-ghost {
+    background: rgb(30 41 59 / .6) !important; /* dark slate */
+}
+
+/* the original item that was picked up */
+.bw-sortable-chosen {
+    cursor: grabbing !important;
+}
+
+/* the floating element that follows the cursor */
+.bw-sortable-drag {
+    opacity: 1 !important;
+    cursor: grabbing !important;
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / .25) !important;
+}
+
+/* items selected when multidrag is enabled */
+.bw-sortable-selected {
+    background: rgb(219 234 254 / .7) !important; /* blue-100 */
+    box-shadow: inset 3px 0 0 0 rgb(59 130 246) !important; /* blue-500 */
+}
+.dark .bw-sortable-selected {
+    background: rgb(30 58 138 / .35) !important;
+}
+
+/* the item highlighted as the swap target when swapping is enabled */
+.bw-sortable-swap-highlight {
+    background: rgb(254 249 195 / .8) !important; /* yellow-100 */
+}
+.dark .bw-sortable-swap-highlight {
+    background: rgb(113 63 18 / .4) !important;
+}
+
+/* a list item is grabbable on its whole surface unless a handle is used */
+.bw-sortable-list > .bw-sortable-item {
+    cursor: grab;
+}
+/* when a handle is present, only the handle is grabbable */
+.bw-sortable-list.bw-has-handle > .bw-sortable-item {
+    cursor: default;
+}
+.bw-sortable-handle {
+    cursor: grab;
+    touch-action: none;
+}
+.bw-sortable-handle:active {
+    cursor: grabbing;
+}
+
+/* items excluded via the filter attribute cannot be dragged */
+.bw-sortable-filtered {
+    cursor: not-allowed !important;
+    opacity: .55;
+}

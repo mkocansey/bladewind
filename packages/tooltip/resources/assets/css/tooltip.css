@@ -1,0 +1,4 @@
+/* Size overrides — the base [data-tooltip] font-size (.9rem) maps to "small".
+   Only tiny and regular need explicit rules. */
+[data-tooltip][data-size="tiny"]:after   { font-size: .7rem !important; padding: .2em .35em !important; }
+[data-tooltip][data-size="regular"]:after { font-size: 1rem !important; padding: .5em .65em !important; }

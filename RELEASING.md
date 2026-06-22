@@ -56,7 +56,7 @@ where that matrix entry would otherwise go).
 ### 1. Create the split repos on GitHub
 
 Create one empty public repo per package (no README, no licence — keep them completely empty).
-There are **44 repos** in total — one per `packages/*` directory plus the full-install meta repo:
+There are **48 repos** in total — one per `packages/*` directory plus the full-install meta repo:
 
 ```
 # Foundation
@@ -66,6 +66,8 @@ mkocansey/bladewind-script
 mkocansey/bladewind-spinner
 mkocansey/bladewind-button
 mkocansey/bladewind-alert
+mkocansey/bladewind-bell
+mkocansey/bladewind-notification
 mkocansey/bladewind-modal
 mkocansey/bladewind-table
 
@@ -103,6 +105,8 @@ mkocansey/bladewind-centered-content
 mkocansey/bladewind-chart
 mkocansey/bladewind-progress
 mkocansey/bladewind-listview
+mkocansey/bladewind-tooltip
+mkocansey/bladewind-popover
 
 # Content aggregate (metapackage)
 mkocansey/bladewind-content

@@ -102,6 +102,26 @@
 
     'size' => config('bladewind.input.size', 'regular'),
     'enforceLimits' => false,
+
+    // input mask template using wildcards 9 (digit), a (letter), * (alphanumeric).
+    // every other character is a literal that is inserted automatically.
+    // e.g. mask="(999) 999-9999" or mask="99/99/9999"
+    'mask' => '',
+
+    // dynamic mask for formats that change as the user types. use the built-in
+    // 'creditCard', or the name of a global JS function that returns a template
+    // for the current value. e.g. dynamicMask="creditCard"
+    'dynamicMask' => null,
+
+    // format the field as a money input (adds thousands separators, fixes decimals)
+    'money' => false,
+    // character used to separate the decimal part when money=true
+    'moneyDecimalSeparator' => config('bladewind.input.money_decimal_separator', '.'),
+    // character used to group thousands when money=true
+    'moneyThousandsSeparator' => config('bladewind.input.money_thousands_separator', ','),
+    // number of decimal places to allow when money=true. 0 disables decimals
+    'moneyPrecision' => config('bladewind.input.money_precision', 2),
+
     'nonce' => config('bladewind.script.nonce', null),
 ])
 
@@ -123,12 +143,20 @@
     $clearable = parseBladewindVariable($clearable);
     $enforce_limits = parseBladewindVariable($enforceLimits);
 
-    $required_symbol = ($label == '' && $required) ? ' *' : '';
+    $required_symbol = ($label == '' && $placeholder != '' && $required) ? ' *' : '';
     $is_required = ($required) ? 'required' : '';
     $placeholder_color = ($show_placeholder_always || $label == '') ? '' : 'placeholder-transparent dark:placeholder-transparent';
     $placeholder_label = ($show_placeholder_always) ? $placeholder : (($label !== '') ? $label : $placeholder);
     $with_dots = ($with_dots) ? 1 : 0;
     $type = ($numeric) ? 'number' : $type;
+
+    $money = parseBladewindVariable($money);
+    $has_mask = ($mask !== '' || ! empty($dynamicMask) || $money);
+    // masking needs a text field — formatted values can contain separators and letters
+    if($has_mask) {
+        $type = 'text';
+        $numeric = false;
+    }
 
     if($type == "password" && $viewable) {
         $suffix = 'eye';
@@ -168,6 +196,15 @@
             'onbeforeinput' => "allowExtraCharsForNumbers(event,'$name',$with_dots);",
             ]))->when($type == 'number' && ($min||$max), fn($attrs) => $attrs->merge([
             'oninput' => "checkMinMax('$min', '$max', '$name', $enforceLimits);",
+            ]))->when($mask !== '', fn($attrs) => $attrs->merge([
+            'data-mask' => $mask,
+            ]))->when(! empty($dynamicMask), fn($attrs) => $attrs->merge([
+            'data-mask-dynamic' => $dynamicMask,
+            ]))->when($money, fn($attrs) => $attrs->merge([
+            'data-mask-money' => 'true',
+            'data-mask-decimal' => $moneyDecimalSeparator,
+            'data-mask-thousands' => $moneyThousandsSeparator,
+            'data-mask-precision' => $moneyPrecision,
             ]))
             }}
     />
@@ -239,3 +276,10 @@
     }
     @endonce
 </x-bladewind::script>
+
+@if($has_mask)
+    @once
+        <x-bladewind::script :nonce="$nonce" src="{{ asset('vendor/bladewind/js/mask.js') }}"></x-bladewind::script>
+    @endonce
+    <x-bladewind::script :nonce="$nonce">BladewindMask.attach(domEl('input.{{$name}}'));</x-bladewind::script>
+@endif

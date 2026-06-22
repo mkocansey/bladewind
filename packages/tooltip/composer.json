@@ -1,0 +1,35 @@
+{
+    "name": "mkocansey/bladewind-tooltip",
+    "description": "BladewindUI — Tooltip component",
+    "keywords": [
+        "laravel",
+        "blade",
+        "tailwindcss",
+        "bladewindui",
+        "tooltip"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Michael K. Ocansey",
+            "email": "mike@bladewindui.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "mkocansey/bladewind-core": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mkocansey\\Bladewind\\Tooltip\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mkocansey\\Bladewind\\Tooltip\\BladewindTooltipServiceProvider"
+            ]
+        }
+    }
+}

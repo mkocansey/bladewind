@@ -9,5 +9,8 @@ return [
         'transparent_suffix' => true,
         'clearable' => false,
         'size' => 'medium',
+        'money_decimal_separator' => '.',
+        'money_thousands_separator' => ',',
+        'money_precision' => 2,
     ],
 ];

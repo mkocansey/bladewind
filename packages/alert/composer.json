@@ -1,13 +1,12 @@
 {
     "name": "mkocansey/bladewind-alert",
-    "description": "BladewindUI Alert, Notification, and Bell components",
+    "description": "BladewindUI — Alert component",
     "keywords": [
         "laravel",
         "blade",
         "tailwindcss",
         "bladewindui",
-        "alert",
-        "notification"
+        "alert"
     ],
     "license": "MIT",
     "type": "library",
@@ -21,7 +20,7 @@
         "php": ">=8.1",
         "mkocansey/bladewind-core": "^4.1",
         "mkocansey/bladewind-icon": "^4.1",
-        "mkocansey/bladewind-script": "^4.1"
+        "mkocansey/bladewind-modal": "^4.1"
     },
     "autoload": {
         "psr-4": {

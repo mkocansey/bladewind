@@ -7,23 +7,29 @@
  */
 
 @import "tailwindcss";
-@import "@tailwindcss/forms";
+
+@variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/forms";
 
 /* ── Per-component CSS ─────────────────────────────────────────────────────── */
+@import "./packages/core/public/css/animate.min.css";
 @import "./packages/button/resources/assets/css/button.css";
-@import "./packages/forms/resources/assets/css/input.css";
-@import "./packages/forms/resources/assets/css/datepicker.css";
-@import "./packages/forms/resources/assets/css/slider.css";
+@import "./packages/input/resources/assets/css/input.css";
+@import "./packages/datepicker/resources/assets/css/datepicker.css";
+@import "./packages/slider/resources/assets/css/slider.css";
 @import "./packages/table/resources/assets/css/table.css";
-@import "./packages/navigation/resources/assets/css/tabs.css";
-@import "./packages/navigation/resources/assets/css/popup.min.css";
-@import "./packages/navigation/resources/assets/css/side-nav.css";
-@import "./packages/content/resources/assets/css/progress.css";
+@import "./packages/tab/resources/assets/css/tabs.css";
+@import "./packages/dropmenu/resources/assets/css/popup.min.css";
+@import "./packages/theme-switcher/resources/assets/css/side-nav.css";
+@import "./packages/progress/resources/assets/css/progress.css";
+@import "./packages/tooltip/resources/assets/css/tooltip.css";
+@import "./packages/popover/resources/assets/css/popover.css";
 @import "./packages/core/resources/assets/css/core.css";
 
 /* ── Theme ─────────────────────────────────────────────────────────────────── */
 @theme {
-    --color-primary-50:  oklch(97% 0.01 250);
+    --color-primary-50: oklch(97% 0.01 250);
     --color-primary-100: oklch(94% 0.03 250);
     --color-primary-200: oklch(88% 0.06 250);
     --color-primary-300: oklch(79% 0.10 250);
@@ -50,3 +56,4 @@
 /* ── Content scanning ──────────────────────────────────────────────────────── */
 @source "./packages/**/resources/views/**/*.blade.php";
 @source "./packages/**/public/**/*.js";
+@source not "./packages/core/public/css/**";

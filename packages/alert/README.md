@@ -2,9 +2,9 @@
 
 <img src="https://bladewindui.com/assets/images/bw-logo.png" height="30" alt="BladewindUI" />
 
-# Alert, Notification & Bell
+# Alert
 
-BladewindUI Alert, Notification, and Bell components.
+BladewindUI Alert component.
 
 ## Installation
 
