@@ -18,13 +18,13 @@
     ],
     "require": {
         "php": ">=8.1",
-        "mkocansey/bladewind-core": "^4.1",
-        "mkocansey/bladewind-icon": "^4.1",
-        "mkocansey/bladewind-script": "^4.1",
-        "mkocansey/bladewind-input": "^4.1",
-        "mkocansey/bladewind-checkbox": "^4.1",
-        "mkocansey/bladewind-avatar": "^4.1",
-        "mkocansey/bladewind-button": "^4.1"
+        "mkocansey/bladewind-core": "^4.2",
+        "mkocansey/bladewind-icon": "^4.2",
+        "mkocansey/bladewind-script": "^4.2",
+        "mkocansey/bladewind-input": "^4.2",
+        "mkocansey/bladewind-checkbox": "^4.2",
+        "mkocansey/bladewind-avatar": "^4.2",
+        "mkocansey/bladewind-button": "^4.2"
     },
     "autoload": {
         "psr-4": {
